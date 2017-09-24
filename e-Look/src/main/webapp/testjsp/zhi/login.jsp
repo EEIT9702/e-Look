@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 	<div id="div1">
 		<fieldset>
 			<legend>login</legend>
