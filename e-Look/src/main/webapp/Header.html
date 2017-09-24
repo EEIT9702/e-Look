@@ -16,10 +16,14 @@ top: 2px;
 left: 2px; 
 }  
 
-/*根據bootstrap.css內容加以複寫的方式*/
-.navbar-default .navbar-nav > li > a:hover{
+/*根據bootstrap.css內容加以覆寫的方式*/
+.navbar-default .navbar-nav li a:hover{
 color:#fc3a63;
 }
+/*至少要覆寫.navbar-default .navbar-nav 這兩個class才壓得過去*/
+.navbar-default .navbar-nav .GG:hover{color:#fff; }
+
+
 
 body{font-size:20px;}
 </style>
@@ -39,7 +43,7 @@ body{font-size:20px;}
 			</div>
 			 <div class="collapse navbar-collapse" id="myNavbar"><!--底下放要縮放的內容-->
 				<ul class="nav navbar-nav ">
-					<li><a data-toggle="tab" href="#menu1">Page 1</a></li>
+					<li><a class="GG" data-toggle="tab" href="#menu1">Page 1</a></li>
 					<li><a data-toggle="tab" href="#menu2">Page 2</a></li>
 					<li><a data-toggle="tab" href="#menu2">Page 3</a></li>
 					<li><a data-toggle="tab" href="#menu2">Page 4</a></li>
