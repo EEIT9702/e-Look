@@ -13,85 +13,63 @@
 <title>prelogin</title>
 </head>
 <body>
-	<a id="single_1"
-		href="http://farm9.staticflickr.com/8140/30366640446_eb359921c5_b.jpg"
-		title="Morning on Camaret (Tony N.)"> <img
-		src="http://farm9.staticflickr.com/8140/30366640446_eb359921c5_m.jpg"
-		alt="" />
-	</a>
-	<a id="single_2"
-		href="http://farm1.staticflickr.com/756/22625719192_fdc3369588_b.jpg"
-		title="Transparence (delphine.cury)"> <img
-		src="http://farm1.staticflickr.com/756/22625719192_fdc3369588_m.jpg"
-		alt="" />
-	</a>
-	<a id="single_3"
-		href="http://farm9.staticflickr.com/8542/29466009773_a809b99d19_b.jpg"
-		title="aletsch (|| | | gamma | | ||)"> <img
-		src="http://farm9.staticflickr.com/8542/29466009773_a809b99d19_m.jpg"
-		alt="" />
-	</a>
-	<a id="single_4"
-		href="images/21297023_340207436431101_8092181138325372928_n.jpg"
-		title="the forest at dawn (Luca-Anconetani)"> <img
-		src="images/21297023_340207436431101_8092181138325372928_n.jpg"
-		alt="" />
-	</a>
-	<a id="login" href="login2.html"> 登入 </a>
+<ul class="list">
+	<li>
+		<a class="various fancybox.ajax" href="http://fancyapps.com/demo/ajax.txt">Ajax</a>
+	</li>
+	<li>
+		<a class="various" data-fancybox-type="iframe" href="/demo/iframe.html">Iframe</a>
+	</li>
+	<li>
+		<a class="various" href="#inline">Inline</a>
+	</li>
+	<li>
+		<a class="various" href="http://www.adobe.com/jp/events/cs3_web_edition_tour/swfs/perform.swf">SWF</a>
+	</li>
+</ul>
 
+<ul class="list">
+	<li>
+		<a class="various fancybox.iframe" href="http://www.youtube.com/embed/L9szn1QQfas?autoplay=1">Youtube (iframe)</a>
+	</li>
+	<li>
+		<a class="various fancybox.iframe" href="http://maps.google.com/?output=embed&f=q&source=s_q&hl=en&geocode=&q=London+Eye,+County+Hall,+Westminster+Bridge+Road,+London,+United+Kingdom&hl=lv&ll=51.504155,-0.117749&spn=0.00571,0.016512&sll=56.879635,24.603189&sspn=10.280244,33.815918&vpsrc=6&hq=London+Eye&radius=15000&t=h&z=17">Google maps (iframe)</a>
+	</li>
+	<li>
+		<a class="various" href="/data/non_existing_image.jpg">Non-existing url</a>
+	</li>
+</ul>
+
+
+	<a id="login" class="various fancybox.iframe" href="login.txt"> 登入 </a>
 	<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="js/core.js"></script>
+	<script type="text/javascript" src="js/jquery.fancybox.min.js"></script>
 	<script type="text/javascript" src="js/fullscreen.js"></script>
 	<script type="text/javascript" src="js/guestures.js"></script>
 	<script type="text/javascript" src="js/hash.js"></script>
-	<script type="text/javascript" src="js/jquery.fancybox.min.js"></script>
 	<script type="text/javascript" src="js/media.js"></script>
 	<script type="text/javascript" src="js/slideshow.js"></script>
 	<script type="text/javascript" src="js/thumbs.js"></script>
+<!-- 	<script type="text/javascript" src="js/gulpfile.js"></script> -->
 	<script>
-		$("#single_1").fancybox({
-			helpers : {
-				title : {
-					type : 'float'
-				}
-			}
+	$(document).ready(function() {
+		$(".fancybox").fancybox();
+	});
+		$(".various").fancybox({
+			maxWidth	: 800,
+			maxHeight	: 600,
+			fitToView	: false,
+			width		: '70%',
+			height		: '70%',
+			autoSize	: false,
+			closeClick	: false,
+			openEffect	: 'none',
+			closeEffect	: 'none'
 		});
 
-		$("#single_2").fancybox({
-			openEffect : 'elastic',
-			closeEffect : 'elastic',
-
-			helpers : {
-				title : {
-					type : 'inside'
-				}
-			}
-		});
-
-		$("#single_3").fancybox({
-			openEffect : 'none',
-			closeEffect : 'none',
-			helpers : {
-				title : {
-					type : 'outside'
-				}
-			}
-		});
-
-		$("#single_4").fancybox({
-			helpers : {
-				title : {
-					type : 'over'
-				}
-			}
-		});
-		$("#login").fancybox({
-			helpers : {
-				title : {
-					type : 'over'
-				}
-			}
-		});
+	
+	
 	</script>
 </body>
 </html>
