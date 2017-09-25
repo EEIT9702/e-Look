@@ -22,7 +22,8 @@
         out.println(msg);
     } else {
         //設定上傳路徑
-        upload.setUploadDir(this.getServletContext().getRealPath("."));
+        //upload.setUploadDir(this.getServletContext().getRealPath("."));
+        upload.setUploadDir("C:\\");
         out.println("上傳到此路徑:"
                 + this.getServletContext().getRealPath(".") + "<br/>");
         
