@@ -9,7 +9,7 @@
 <link href="HeaderCssJs/bootstrap.min.css" rel="stylesheet">
 <script src="HeaderCssJs/jquery.js"></script>
 <script src="HeaderCssJs/bootstrap.min.js"></script>
-
+</head>
 <style>
 li a:hover {  
 color:#fc3a63; /* 當滑鼠經過時，超連結文字顏色變成桃紅色     ps.被bootstrap.css4518行複寫，所以顏色沒變更 */  
@@ -36,8 +36,7 @@ font-family: Microsoft JhengHei;}
 
 </style>
 
-</head>
-<body>
+
 	<nav class="nav navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header ">
@@ -67,5 +66,3 @@ font-family: Microsoft JhengHei;}
 			</div>
 		</div>
 	</nav>	
-</body>
-</html>
