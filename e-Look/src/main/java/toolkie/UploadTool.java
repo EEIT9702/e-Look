@@ -16,7 +16,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  
 public class UploadTool {
     private int buffersize = 4096;
-    private int SizeMax = 1024 * 1024;// 1Mbyte最大檔案大小
+    private int SizeMax = 1024 * 1024*1000;// 1Mbyte最大檔案大小
     private File tempfile = null;
     private String def_upload_dir = null;
  
@@ -139,11 +139,11 @@ public class UploadTool {
             String formatName = itename.substring(itename.length() - 4,
                     itename.length());
  
-            fileName = (fileName + formatName).toLowerCase();
+            fileName = (fileName).toLowerCase();
  
             System.out.println("上傳檔案檔案名稱:" + fileName);
  
-            File uploadedFile = new File(def_upload_dir + fileName);
+            File uploadedFile = new File(def_upload_dir+"/" + fileName);
             // 會產生 Exception
             try {
                 item.write(uploadedFile);
@@ -153,7 +153,7 @@ public class UploadTool {
                 str = "上傳失敗!";
             }
             // 會產生 Exception
- 
+            
         }
         return str;
     }
