@@ -51,6 +51,6 @@
 
 
 
-    upload.setUploadDir(this.getServletContext().getRealPath("/")+"data//");
-        out.println("上傳到此路徑:"
-                + this.getServletContext().getRealPath("/data") + "<br/>");
+<!--     upload.setUploadDir(this.getServletContext().getRealPath("/")+"data//"); -->
+<!--         out.println("上傳到此路徑:" -->
+<!--                 + this.getServletContext().getRealPath("/data") + "<br/>"); -->
