@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%
-    //§ârequest¶Ç¤JUploadTool¸Ì
+    //æŠŠrequestå‚³å…¥UploadToolè£¡
     toolkie.UploadTool upload = new toolkie.UploadTool(request);
 %>
 <html>
@@ -12,25 +12,25 @@
 <body>
     <table align="center">
 <tr><td align="center"><img src="http://localhost:8080/.galleria1.jpg"></td></tr>
-<tr><td align="center">´ú¸Õ1</td></tr>
+<tr><td align="center">æ¸¬è©¦1</td></tr>
 </table>
 
 <%
-    //¬d¸ß¬O§_¿ù»~
+    //æŸ¥è©¢æ˜¯å¦éŒ¯èª¤
     String msg = upload.checkUpload();
     if (msg.length() > 0) {
         out.println(msg);
     } else {
-        //³]©w¤W¶Ç¸ô®|
+        //è¨­å®šä¸Šå‚³è·¯å¾‘
         upload.setUploadDir(this.getServletContext().getRealPath("."));
-        out.println("¤W¶Ç¨ì¦¹¸ô®|:"
+        out.println("ä¸Šå‚³åˆ°æ­¤è·¯å¾‘:"
                 + this.getServletContext().getRealPath(".") + "<br/>");
         
         //out.println("<img src="+this.getServletContext().getRealPath(".")+">");            
                   
       
        
-        //¶}©l¤W¶Ç
+        //é–‹å§‹ä¸Šå‚³
         if (upload.isExtUpload("File1"))
             msg = upload.doUpload(upload.getUploadParameter("File1"));
         
@@ -38,7 +38,7 @@
         if (msg.length() > 0)
             out.println(msg);
         else
-            out.println("¤W¶Ç¦¨¥\" + "<br/>");
+            out.println("ä¸Šå‚³æˆåŠŸ" + "<br/>");
                 
                 
                 
@@ -52,5 +52,5 @@
 
 
     upload.setUploadDir(this.getServletContext().getRealPath("/")+"data//");
-        out.println("¤W¶Ç¨ì¦¹¸ô®|:"
+        out.println("ä¸Šå‚³åˆ°æ­¤è·¯å¾‘:"
                 + this.getServletContext().getRealPath("/data") + "<br/>");
