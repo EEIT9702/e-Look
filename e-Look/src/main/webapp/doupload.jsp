@@ -6,7 +6,7 @@
 %>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=BIG5">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
@@ -51,6 +51,6 @@
 
 
 
-    upload.setUploadDir(this.getServletContext().getRealPath("/")+"data//");
-        out.println("上傳到此路徑:"
-                + this.getServletContext().getRealPath("/data") + "<br/>");
+<!--     upload.setUploadDir(this.getServletContext().getRealPath("/")+"data//"); -->
+<!--         out.println("上傳到此路徑:" -->
+<!--                 + this.getServletContext().getRealPath("/data") + "<br/>"); -->
