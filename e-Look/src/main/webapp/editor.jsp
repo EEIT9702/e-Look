@@ -5,9 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="HeaderCssJs/bootstrap.css" rel="stylesheet">
-<script src="js/jquery-3.2.1.js"></script>
-<script	src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+<!-- <link href="HeaderCssJs/bootstrap.css" rel="stylesheet"> -->
+<!-- <script src="js/jquery-3.2.1.js"></script> -->
+<!-- <script src="HeaderCssJs/jquery.js"></script> -->
+<!-- <script	src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> -->
 <link href="dist/summernote.css" rel="stylesheet">
 <script src="dist/summernote.js"></script>
 <script src="dist/lang/summernote-zh-TW.js"></script>
@@ -15,8 +16,18 @@
 </head>
 
 <body>
-<%-- <jsp:include page="header.jsp" /> --%>
-	<div class="nav navbar-nav">
+<jsp:include page="header.jsp" />
+	
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 	<form>
 		<textarea name="summernote" id="summernote">
                 This is my textarea to be replaced with CKEditor.
@@ -34,6 +45,6 @@
 	    });
 		</script>
 	</form>
-	</div>
+	
 </body>
 </html>
