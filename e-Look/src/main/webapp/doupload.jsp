@@ -23,7 +23,7 @@
     } else {
         //設定上傳路徑
         //upload.setUploadDir(this.getServletContext().getRealPath("."));
-        upload.setUploadDir("C:\\");
+        upload.setUploadDir("D:\\");
         out.println("上傳到此路徑:"
                 + this.getServletContext().getRealPath(".") + "<br/>");
         
@@ -46,7 +46,13 @@
  
     }
 %>
- 
+ <video id="movie" preload controls loop poster="video/xxx.jpg">
+	<source src="video/Yif-Magic.mp4" type='video/mp4' />
+	<source src="video/Yif-Magic.ogv" type='video/ogg' />
+	<source src="video/Yif-Magic.webm" type='video/web' />
+	您的瀏覽器不支援HTML 5影片播放標籤格式。
+	Your browser does not support the video tag.
+</video>
 </body>
 </html>
 
