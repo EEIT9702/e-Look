@@ -5,9 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css" />
-<script	src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js" ></script> 
+
+<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" href="css/jquery.fancybox.min.css" />
+<script	src="js/jquery.fancybox.min.js" ></script> 
 
 <style>
 #hidden-content-b {
@@ -82,13 +83,11 @@
 		<p>#4 - Modal window</p>
 
 		<p>
-			<a data-fancybox
-				data-options='{"src": "#hidden-content-d", "modal": true}'
-				href="javascript:;" class="btn">登入在這裡</a>
+			<a data-fancybox data-options='{"src": "#hidden-content-d", "modal": true}' href="javascript:;" class="btn">登入在這裡</a>
 		</p>
 
 		<div style="display: none; max-width: 600px;" id="hidden-content-d">
-			<div id="div1">
+			<div id="div1" >
 				<fieldset>
 					<legend>login</legend>
 					<form action="" method="get">
@@ -99,6 +98,8 @@
 				</fieldset>
 			</div>
 		</div>
+
 	</div>
+	
 </body>
 </html>
