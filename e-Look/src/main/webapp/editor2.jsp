@@ -11,7 +11,13 @@
 </head>
 
 <body>
-
+<jsp:include page="header.jsp" />
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
     <form>
       <textarea id="editor1">
       Hello World! 這是 TinyMCE!
