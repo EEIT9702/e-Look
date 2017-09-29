@@ -8,7 +8,7 @@
 </head>
 <body>
 <form action="Upload" method="POST" enctype="multipart/form-data" >
-<input type="text" name="testtext" placeholder="111" >
+<!-- <input type="text" name="testtext" value="fjgifi" > -->
 <input type="file" name="myFile">
 <input type="submit">
 </form>
