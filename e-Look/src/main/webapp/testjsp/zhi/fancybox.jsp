@@ -26,8 +26,7 @@
 </head>
 
 <body>
-	
-	<div class="grid">
+
 
 		<p>#4 - Modal window</p>
 
@@ -35,8 +34,10 @@
 			<a data-fancybox data-options='{"src":login.html,"type":"html" }' >登入在這裡</a>
 		</p>
 
-		<!-- <div style="display: none; max-width: 600px;" id="hidden-content-d">
-			<div id="div1" >
+
+		<div style="display: none; max-width: 600px;" id="hidden-content-d">
+			<!-- <div id="div1" >
+
 				<fieldset>
 					<legend>login</legend>
 					<form action="" method="get">
@@ -45,10 +46,11 @@
 						<input type="submit"><br>
 					</form>
 				</fieldset>
-			</div>
-		</div> -->
 
-	</div>
+			</div> -->
+		</div>
+
+
 	
 </body>
 </html>
