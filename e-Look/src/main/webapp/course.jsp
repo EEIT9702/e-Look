@@ -4,9 +4,7 @@
 <html>
 <head>
 <style>
-a:hover{position: relative;
-top: 2px;  
-left: 2px; }
+#course:hover{-webkit-transform: scale(1.05);}
 #courseimg {
 	height: 200px;
 	width: 300px;
@@ -33,9 +31,9 @@ left: 2px; }
 <title>Insert title here</title>
 </head>
 <body bgcolor="#FFF7E8">
-	<div id="course"><a href="#">
+	<div id="course">
 		<div>
-			<div>
+			<div >
 				<img id="icon" src="video/icon.png">
 				<img id="courseimg"alt="course" src="video/test1.png">
 			</div>
@@ -57,7 +55,7 @@ left: 2px; }
 			</table>
 
 		</div>
-	</a></div>
+	</div>
 
 </body>
 </html>
