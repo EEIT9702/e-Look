@@ -4,12 +4,14 @@
     //把request傳入UploadTool裡
     toolkie.UploadTool upload = new toolkie.UploadTool(request);
 %>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<!-- body鎖右鍵功能 -->
+<body oncontextmenu="window.event.returnValue=false">
     <table align="center">
 <tr><td align="center"><img src="http://localhost:8080/.galleria1.jpg"></td></tr>
 <tr><td align="center">測試1</td></tr>
@@ -23,7 +25,7 @@
     } else {
         //設定上傳路徑
         //upload.setUploadDir(this.getServletContext().getRealPath("."));
-        upload.setUploadDir("C:\\");
+        upload.setUploadDir("D:\\");
         out.println("上傳到此路徑:"
                 + this.getServletContext().getRealPath(".") + "<br/>");
         
@@ -46,7 +48,13 @@
  
     }
 %>
- 
+ <video id="movie" preload controls poster="video/xxx.jpg">
+	<source src="video/Yif-Magic.mp4" type='video/mp4' />
+	<source src="video/Yif-Magic.ogv" type='video/ogg' />
+	<source src="video/Yif-Magic.webm" type='video/web' />
+	您的瀏覽器不支援HTML 5影片播放標籤格式。
+	Your browser does not support the video tag.
+</video>
 </body>
 </html>
 
