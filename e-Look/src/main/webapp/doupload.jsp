@@ -48,7 +48,7 @@
  
     }
 %>
- <video id="movie" preload  poster="video/xxx.jpg">
+ <video id="movie" preload controls poster="video/xxx.jpg">
 	<source src="video/Yif-Magic.mp4" type='video/mp4' />
 	<source src="video/Yif-Magic.ogv" type='video/ogg' />
 	<source src="video/Yif-Magic.webm" type='video/web' />
