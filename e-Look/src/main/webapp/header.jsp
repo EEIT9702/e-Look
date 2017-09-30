@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE >
 <html>
 <head>
@@ -60,6 +60,7 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar" >
 			<!--底下放要縮放的內容-->
+
 			<ul class="nav navbar-nav " id="padding" >
 				<li><a href="#menu1"><img src="HeaderCssJs/003-coins.png"height="30">募資</a></li>
 				<li><a href="#menu2"><img src="HeaderCssJs/002-team.png" height="30">線上課程</a></li>
@@ -74,5 +75,5 @@
 			</ul>
 		</div>
 	</div>
-
 </nav>
+
