@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>開課流程●步驟一</title>
 <link href="HeaderCssJs/bootstrap.css" rel="stylesheet">
-<!-- <link href="HeaderCssJs/bootstrap.min.css" rel="stylesheet"> -->
+<link href="HeaderCssJs/bootstrap.min.css" rel="stylesheet">
 <script src="HeaderCssJs/jquery.js"></script>
 <script src="HeaderCssJs/bootstrap.min.js"></script>
 
@@ -386,32 +386,32 @@ span.round-tab:hover {
                             	
                             <div class="row" style="height:500px">
                             <div class="col-md-6" style="margin-bottom: 25px">
-                                <label for="exampleInputEmail1">課程標題</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="First Name">
+                                <label for="exampleInputEmail1" style="font-size: 20pt">課程標題</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="請輸入您的課程標題">
                             </div>
 
                             <div class="col-md-6" style="margin-bottom: 40px">
-                                <label for="exampleInputEmail1">上傳課程封面</label>
+                                <label for="exampleInputEmail1" style="font-size: 20pt">上傳課程封面</label>
                                 <input type="file" id="wizard-picture">
                             </div>
 
                             <div class="col-md-6" style="margin-bottom: 25px">
-                                <label for="exampleInputEmail1">選擇課程類別(最多三項)</label>
+                                <label for="exampleInputEmail1" style="font-size: 20pt">選擇課程類別(最多三項)</label>
                                 <div >                               
-                                <div>
-                                	<FORM>
-									    <INPUT TYPE="checkbox"  NAME="check1">烹飪 
-									    <INPUT TYPE="checkbox"  NAME="check2">商業
-									    <INPUT TYPE="checkbox"  NAME="check3">程式
-									    <INPUT TYPE="checkbox"  NAME="check4">音樂<br>
-									    <INPUT TYPE="checkbox"  NAME="check5">手作
-									    <INPUT TYPE="checkbox"  NAME="check6">設計
-									    <INPUT TYPE="checkbox"  NAME="check7">語言
-									    <INPUT TYPE="checkbox"  NAME="check8">運動<br>
-									    <INPUT TYPE="checkbox"  NAME="check9">生活
-									    <INPUT TYPE="checkbox"  NAME="check10">影音
-									    <INPUT TYPE="checkbox"  NAME="check11">科技
-									    <INPUT TYPE="checkbox"  NAME="check12">其他
+                                <div style="font-size: 15pt">
+                                	<FORM method="post" action="">
+									    <INPUT TYPE="checkbox"  NAME="checkbox1" onClick="choose()">烹飪 
+									    <INPUT TYPE="checkbox"  NAME="checkbox2" onClick="choose()">商業
+									    <INPUT TYPE="checkbox"  NAME="checkbox3" onClick="choose()">程式
+									    <INPUT TYPE="checkbox"  NAME="checkbox4" onClick="choose()">音樂<br>
+									    <INPUT TYPE="checkbox"  NAME="checkbox5" onClick="choose()">手作
+									    <INPUT TYPE="checkbox"  NAME="checkbox6" onClick="choose()">設計
+									    <INPUT TYPE="checkbox"  NAME="checkbox7" onClick="choose()">語言
+									    <INPUT TYPE="checkbox"  NAME="checkbox8" onClick="choose()">運動<br>
+									    <INPUT TYPE="checkbox"  NAME="checkbox9" onClick="choose()">生活
+									    <INPUT TYPE="checkbox"  NAME="checkbox10" onClick="choose()">影音
+									    <INPUT TYPE="checkbox"  NAME="checkbox11" onClick="choose()">科技
+									    <INPUT TYPE="checkbox"  NAME="checkbox12" onClick="choose()">其他
 									 </FORM>   
                                 </div>
                             </div>
@@ -729,7 +729,27 @@ function readURL(input) {
     }
 }
 
-
+function choose() { 
+	   var n = 12; //checkbox的數量
+	   var limit = 3; //限制勾選的數量
+	   var j = 0; //已勾選的數量
+	   var f = document.forms[0];
+	   limit--;
+	   for (i=1; i<=n; i++) { 
+	      eval("t1 = f.checkbox" + i + ".checked"); 
+	      if (t1) j++; 
+	   } 
+	   if (j>limit) { 
+	      for (i=1; i<=n; i++) { 
+	         eval("t2 = f.checkbox" + i + ".checked"); 
+	         if (!t2) eval("f.checkbox" + i + ".disabled = true"); 
+	      } 
+	   } 
+	   else { 
+	      for (i=1; i<=n; i++) 
+	         eval("f.checkbox" + i + ".disabled = false"); 
+	   } 
+	} 
 </script>
 </body>
 
