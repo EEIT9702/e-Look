@@ -48,8 +48,7 @@
  
     }
 %>
-<img src="video/default-avatar.png" id="wizardPicturePreview" title="" />
- <video id="movie" preload controls poster="" id="wizardPicturePreview">
+ <video id="movie" preload controls poster="video/xxx.jpg">
 	<source src="video/Yif-Magic.mp4" type='video/mp4' />
 	<source src="video/Yif-Magic.ogv" type='video/ogg' />
 	<source src="video/Yif-Magic.webm" type='video/web' />
@@ -57,23 +56,6 @@
 	Your browser does not support the video tag.
 </video>
 </body>
-<script type="text/javascript">
-$("#fileupload").change(function(){
-    readURL(this);
-});
-
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-</script>
 </html>
 
 

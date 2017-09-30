@@ -54,7 +54,7 @@ abbr[title] {
 }
 b,
 strong {
-  font-weight: bold;
+/*   font-weight: bold; */
 }
 dfn {
   font-style: italic;
@@ -177,7 +177,7 @@ textarea {
   overflow: auto;
 }
 optgroup {
-  font-weight: bold;
+/*   font-weight: bold; */
 }
 table {
   border-spacing: 0;
@@ -1185,7 +1185,7 @@ h6,
 .h5,
 .h6 {
   font-family: inherit;
-  font-weight: 500;
+/*   font-weight: 500; */
   line-height: 1.1;
   color: inherit;
 }
@@ -1293,7 +1293,7 @@ p {
 .lead {
   margin-bottom: 20px;
   font-size: 16px;
-  font-weight: 300;
+/*   font-weight: 300; */
   line-height: 1.4;
 }
 @media (min-width: 768px) {
@@ -1447,7 +1447,7 @@ dd {
   line-height: 1.42857143;
 }
 dt {
-  font-weight: bold;
+/*   font-weight: bold; */
 }
 dd {
   margin-left: 0;
@@ -1553,7 +1553,7 @@ kbd {
 kbd kbd {
   padding: 0;
   font-size: 100%;
-  font-weight: bold;
+/*   font-weight: bold; */
   -webkit-box-shadow: none;
           box-shadow: none;
 }
@@ -2510,7 +2510,7 @@ label {
   display: inline-block;
   max-width: 100%;
   margin-bottom: 5px;
-  font-weight: bold;
+/*   font-weight: bold; */
 }
 input[type="search"] {
   -webkit-box-sizing: border-box;
@@ -4849,7 +4849,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   display: inline;
   padding: .2em .6em .3em;
   font-size: 75%;
-  font-weight: bold;
+/*   font-weight: bold; */
   line-height: 1;
   color: #fff;
   text-align: center;
@@ -4917,7 +4917,7 @@ a.label:focus {
   min-width: 10px;
   padding: 3px 7px;
   font-size: 12px;
-  font-weight: bold;
+/*   font-weight: bold; */
   line-height: 1;
   color: #fff;
   text-align: center;
@@ -5038,7 +5038,7 @@ a.thumbnail.active {
   color: inherit;
 }
 .alert .alert-link {
-  font-weight: bold;
+/*   font-weight: bold; */
 }
 .alert > p,
 .alert > ul {
@@ -5844,7 +5844,7 @@ button.list-group-item-danger.active:focus {
 .close {
   float: right;
   font-size: 21px;
-  font-weight: bold;
+/*   font-weight: bold; */
   line-height: 1;
   color: #000;
   text-shadow: 0 1px 0 #fff;
@@ -5996,7 +5996,7 @@ button.close {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12px;
   font-style: normal;
-  font-weight: normal;
+/*   font-weight: normal; */
   line-height: 1.42857143;
   text-align: left;
   text-align: start;
@@ -6115,7 +6115,7 @@ button.close {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   font-style: normal;
-  font-weight: normal;
+/*   font-weight: normal; */
   line-height: 1.42857143;
   text-align: left;
   text-align: start;

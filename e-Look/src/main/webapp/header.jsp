@@ -35,10 +35,7 @@ font-family: Microsoft JhengHei;}
 
 
 </style>
-
-</head>
-<body>
-	<nav class="nav navbar-default navbar-fixed-top">
+<nav class="nav navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header ">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -67,5 +64,8 @@ font-family: Microsoft JhengHei;}
 			</div>
 		</div>
 	</nav>	
+</head>
+<body>
+	
 </body>
 </html>
