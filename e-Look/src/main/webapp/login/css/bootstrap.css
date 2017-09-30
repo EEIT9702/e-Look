@@ -1,6 +1,6 @@
 /*!
- * Bootstrap v3.3.6 (http://getbootstrap.com)
- * Copyright 2011-2015 Twitter, Inc.
+ * Bootstrap v3.3.7 (http://getbootstrap.com)
+ * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
@@ -54,7 +54,7 @@ abbr[title] {
 }
 b,
 strong {
-/*   font-weight: bold; */
+  font-weight: bold;
 }
 dfn {
   font-style: italic;
@@ -177,7 +177,7 @@ textarea {
   overflow: auto;
 }
 optgroup {
-/*   font-weight: bold; */
+  font-weight: bold;
 }
 table {
   border-spacing: 0;
@@ -1106,7 +1106,6 @@ a:focus {
   text-decoration: underline;
 }
 a:focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -1185,7 +1184,7 @@ h6,
 .h5,
 .h6 {
   font-family: inherit;
-/*   font-weight: 500; */
+  font-weight: 500;
   line-height: 1.1;
   color: inherit;
 }
@@ -1293,7 +1292,7 @@ p {
 .lead {
   margin-bottom: 20px;
   font-size: 16px;
-/*   font-weight: 300; */
+  font-weight: 300;
   line-height: 1.4;
 }
 @media (min-width: 768px) {
@@ -1447,7 +1446,7 @@ dd {
   line-height: 1.42857143;
 }
 dt {
-/*   font-weight: bold; */
+  font-weight: bold;
 }
 dd {
   margin-left: 0;
@@ -1553,7 +1552,7 @@ kbd {
 kbd kbd {
   padding: 0;
   font-size: 100%;
-/*   font-weight: bold; */
+  font-weight: bold;
   -webkit-box-shadow: none;
           box-shadow: none;
 }
@@ -1595,17 +1594,12 @@ pre code {
 }
 @media (min-width: 992px) {
   .container {
-    width: 993px;
+    width: 970px;
   }
 }
 @media (min-width: 1200px) {
   .container {
     width: 1170px;
-  }
-}
-@media (min-width: 1500px) {
-  .container {
-    width: 1470px;
   }
 }
 .container-fluid {
@@ -2515,7 +2509,7 @@ label {
   display: inline-block;
   max-width: 100%;
   margin-bottom: 5px;
-/*   font-weight: bold; */
+  font-weight: bold;
 }
 input[type="search"] {
   -webkit-box-sizing: border-box;
@@ -2542,7 +2536,6 @@ select[size] {
 input[type="file"]:focus,
 input[type="radio"]:focus,
 input[type="checkbox"]:focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -3034,7 +3027,6 @@ select[multiple].input-lg {
 .btn.focus,
 .btn:active.focus,
 .btn.active.focus {
-  outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
@@ -4854,7 +4846,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   display: inline;
   padding: .2em .6em .3em;
   font-size: 75%;
-/*   font-weight: bold; */
+  font-weight: bold;
   line-height: 1;
   color: #fff;
   text-align: center;
@@ -4922,7 +4914,7 @@ a.label:focus {
   min-width: 10px;
   padding: 3px 7px;
   font-size: 12px;
-/*   font-weight: bold; */
+  font-weight: bold;
   line-height: 1;
   color: #fff;
   text-align: center;
@@ -5043,7 +5035,7 @@ a.thumbnail.active {
   color: inherit;
 }
 .alert .alert-link {
-/*   font-weight: bold; */
+  font-weight: bold;
 }
 .alert > p,
 .alert > ul {
@@ -5849,7 +5841,7 @@ button.list-group-item-danger.active:focus {
 .close {
   float: right;
   font-size: 21px;
-/*   font-weight: bold; */
+  font-weight: bold;
   line-height: 1;
   color: #000;
   text-shadow: 0 1px 0 #fff;
@@ -6001,7 +5993,7 @@ button.close {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12px;
   font-style: normal;
-/*   font-weight: normal; */
+  font-weight: normal;
   line-height: 1.42857143;
   text-align: left;
   text-align: start;
@@ -6120,7 +6112,7 @@ button.close {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   font-style: normal;
-/*   font-weight: normal; */
+  font-weight: normal;
   line-height: 1.42857143;
   text-align: left;
   text-align: start;
