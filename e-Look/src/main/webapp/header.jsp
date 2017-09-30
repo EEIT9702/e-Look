@@ -42,24 +42,20 @@
 
 </style>
 </head>
+<nav class="nav navbar-default navbar-fixed-top" id="headerdav">
+		<div class="container">
+			<div class="navbar-header ">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span> 
+                </button>
+                <a href="#" ><img src="HeaderCssJs/eLook_LOGO.png"  height="70" alt="e-Look"></a>			
+			</div>
+			
+			<div class="collapse navbar-collapse" id="myNavbar"><!--底下放要縮放的內容-->
+			
 
-
-<nav class="nav navbar-default navbar-fixed-top" id="headerdav" >
-
-	<div class="container" >
-		<div class="navbar-header " >
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target="#myNavbar">
-				<span class="icon-bar"></span> 
-				<span class="icon-bar"></span> 
-				<span class="icon-bar"></span>
-			</button>
-			<a href="#"><img src="HeaderCssJs/eLook_LOGO.png" height="75"
-				 alt="e-Look"></a>
-		</div>
-
-		<div class="collapse navbar-collapse" id="myNavbar" >
-			<!--底下放要縮放的內容-->
 			<ul class="nav navbar-nav " id="padding" >
 				<li><a href="#menu1"><img src="HeaderCssJs/003-coins.png"height="30">募資</a></li>
 				<li><a href="#menu2"><img src="HeaderCssJs/002-team.png" height="30">線上課程</a></li>
@@ -74,5 +70,5 @@
 			</ul>
 		</div>
 	</div>
-
 </nav>
+
