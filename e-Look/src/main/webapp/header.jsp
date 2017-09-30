@@ -57,7 +57,6 @@
 			<a href="#"><img src="HeaderCssJs/eLook_LOGO.png" height="75"
 				 alt="e-Look"></a>
 		</div>
-
 		<div class="collapse navbar-collapse" id="myNavbar" >
 			<!--底下放要縮放的內容-->
 			<ul class="nav navbar-nav " id="padding" >
