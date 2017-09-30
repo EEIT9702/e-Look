@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=BIG5">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Sales Countdown</title>
 <style>
 #left{
@@ -65,9 +65,10 @@
 </script>
 </head>
 <body onload="startCount()" style="text-align:center" bgcolor="#FFF7E8">
+
 	<div>
 		<h1 style="color:#9F35FF;text-shadow:5px -5px 5px #FFAF60" id="left"></h1>
 	</div>
-
+	
 </body>
 </html>
