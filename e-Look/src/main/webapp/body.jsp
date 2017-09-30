@@ -47,10 +47,10 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-	<div style="text-align:center">
-		<a href=""><span id="ads"></span></a>
-	</div>
-	<div class="container">
+		<div class="container">
+			<div style="text-align:center">
+			<a href=""><span id="ads"></span></a>
+		</div>
 		<!-- Projects Row -->
 		<div class="row">
 			<div class="item col-md-4 img-portfolio">
