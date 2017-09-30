@@ -49,10 +49,9 @@ public class Upload extends HttpServlet {
 		//以下參考基礎JAVA IO
 		InputStream is = part.getInputStream();
 		
-		
+		//建立資料夾		
 		//之後上傳檔案的路徑可以根據memberID和courseID動態變更		
 		//JAVA 路徑的兩種表示方式  由於\為跳脫字元 所以要打\\
-		//建立資料夾
 		//應該可省略判定資料夾是否存在，因為已經測試過傳不一樣名稱的檔案進去，這行並不會把原有的資料夾砍掉重建
 		new File("D:/eLookvideo/memberID").mkdirs();
 		
