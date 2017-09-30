@@ -45,7 +45,7 @@
 	window.onload = showAdPic;
 </script>	
 </head>
-<body style="margin-top:200px">
+<body>
 <jsp:include page="header.jsp"/>
 	<div style="text-align:center">
 		<a href=""><span id="ads"></span></a>
