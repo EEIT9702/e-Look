@@ -59,6 +59,21 @@ body {
 			alert("禁用滑鼠右鍵!");
 		}	
 	}
+	
+	/*展示廣告圖片*/
+	function showAdPic () {
+	//獲得廣告的DOM
+	var ads = document.getElementById("ads");
+	//直接在DOM中增加HTML原始程式來增加一個圖片的DOM
+	ads.innerHTML = '<img src="img/xmas video sale.jpg" width="1000" />';
+	//設定計時器,3秒以後關閉廣告圖片
+	setTimeout (function(){
+		var ads = document.getElementById("ads");
+		//隱藏圖片
+		ads.style.display = "none";
+		},3000)
+	}
+	window.onload = showAdPic;
 </script>	
 </head>
 <body>
@@ -95,6 +110,9 @@ body {
 			</div>
 		</div>
 	</nav>
+	<div style="text-align:center">
+		<a href=""><span id="ads"></span></a>
+	</div>
 	<div class="container">
 		<!-- Projects Row -->
 		<div class="row">
