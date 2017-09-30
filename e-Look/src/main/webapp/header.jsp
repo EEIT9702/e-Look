@@ -78,7 +78,7 @@ border:1px solid black;
 			</ul>
 			<ul class="nav navbar-nav navbar-right" id="nopadding">
 				<li><a href="#"><img src="HeaderCssJs/002-shopping-cart.png"height="30" /></a></li>
-				<li><a href="#"><img src="HeaderCssJs/001-login.png"height="30" />登入</a></li>
+				<li><a href="#"data-toggle="modal" data-toggle="modal" data-target="#myModal"data-target="#myModal"><img src="HeaderCssJs/001-login.png"height="30" />登入</a></li>
 			</ul>
 		</div>
 	</div>
