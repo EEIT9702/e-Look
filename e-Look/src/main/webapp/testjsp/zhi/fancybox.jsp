@@ -31,12 +31,12 @@
 		<p>#4 - Modal window</p>
 
 		<p>
-			<a data-fancybox data-options='{"src":login.html,"type":"html" }' >登入在這裡</a>
+			<a data-fancybox data-options='{"src": "#hidden-content-d", "modal": true}' href="javascript:;" class="btn">登入在這裡</a>
 		</p>
 
 
 		<div style="display: none; max-width: 600px;" id="hidden-content-d">
-			<!-- <div id="div1" >
+			<div id="div1" >
 
 				<fieldset>
 					<legend>login</legend>
@@ -47,7 +47,7 @@
 					</form>
 				</fieldset>
 
-			</div> -->
+			</div> 
 		</div>
 
 
