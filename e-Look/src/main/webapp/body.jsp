@@ -17,40 +17,7 @@
 <script src="HeaderCssJs/jquery.js"></script>
 <script src="HeaderCssJs/bootstrap.min.js"></script>
 
-<style>
-li a:hover {
-	color: #fc3a63;
-	/* 當滑鼠經過時，超連結文字顏色變成桃紅色     ps.被bootstrap.css4518行複寫，所以顏色沒變更 */
-	position: relative; /* 當滑鼠經過超連結時，超連結往右下位移2像素 */
-	top: 2px;
-	left: 2px;
-}
 
-/*根據bootstrap.css內容加以覆寫的方式*/
-.navbar-default .navbar-nav li a:hover {
-	color: #fc3a63;
-}
-
-.navbar-default .navbar-nav>li>a:active {
-	color: #000000;
-}
-
-.navbar-default .navbar-nav {
-	padding-left: 300px;
-}
-
-body {
-	font-size: 20px;
-	font-family: Microsoft JhengHei;
-}
-
-body {
-	font-size: 20px;
-}
-.container{
-	padding-top:60px;
-}
-</style>
 <script type="text/javascript">
 	//為文件的滑鼠按下事件定義回呼
 	document.onmousedown = function(event) {
@@ -78,7 +45,7 @@ body {
 	window.onload = showAdPic;
 </script>	
 </head>
-<body>
+<body style="margin-top:200px">
 <jsp:include page="header.jsp"/>
 	<div style="text-align:center">
 		<a href=""><span id="ads"></span></a>
@@ -124,8 +91,7 @@ body {
 				</a>
 				<h3>
 					<a href="portfolio-item.html">左二</a>
-				</h3>
-				<p>影片四影片四影片四影片四影片四影片四影片四影片四影片四影片四影片四影片四影片四影片四影片四影片四影片四影片四影片四影片四影片四</p>
+				</h3>				<p>影片四影片四影片四影片四影片四影片四影片四影片四影片四影片四影片四影片四影片四影片四影片四影片四影片四影片四影片四影片四影片四</p>
 			</div>
 			<div class="item col-md-4 img-portfolio">
 				<a href="portfolio-item.html"> <img
