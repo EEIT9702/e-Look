@@ -11,6 +11,9 @@
 }
 </style>
 <script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function () {
+	startCount();
+});
 	//開始倒數計時函數
 	function startCount() {
 		//開始一個timer,間隔為1秒
@@ -25,7 +28,7 @@
 			var str = getTimeTxt(time);
 			//修改left內容區域的內容
 			document.getElementById("left").innerHTML = "距離聖誕特賣活動結束還剩：" + str;
-		},1000);
+		});
 	}
 	//獲得時間表示行事的函數
 	function getTimeTxt(time) {
@@ -62,9 +65,10 @@
 		return str;
 	}
 
+
 </script>
 </head>
-<body onload="startCount()" style="text-align:center" bgcolor="#FFF7E8">
+<body style="text-align:center" bgcolor="#FFF7E8">
 
 	<div>
 		<h1 style="color:#9F35FF;text-shadow:5px -5px 5px #FFAF60" id="left"></h1>
