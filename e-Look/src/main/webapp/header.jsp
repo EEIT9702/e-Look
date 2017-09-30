@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="HeaderCssJs/bootstrap.css" rel="stylesheet">
-<link href="HeaderCssJs/bootstrap.min.css" rel="stylesheet">
+<!-- <link href="HeaderCssJs/bootstrap.min.css" rel="stylesheet"> -->
 <script src="HeaderCssJs/jquery.js"></script>
 <script src="HeaderCssJs/bootstrap.min.js"></script>
 
@@ -32,7 +32,10 @@ padding-left:300px;
 }
 body{font-size:20px;
 font-family: Microsoft JhengHei;}
+.navbar-default{
+background-color: #ffaaaa;
 
+}
 
 </style>
 
