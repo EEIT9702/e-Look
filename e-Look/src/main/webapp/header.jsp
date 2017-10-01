@@ -40,7 +40,9 @@
 #nopadding img {
 	margin-bottom: 5px;
 }
-
+body{
+	padding-top:100px;
+}
 </style>
 </head>
 
