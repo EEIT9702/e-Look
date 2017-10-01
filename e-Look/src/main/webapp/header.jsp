@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE >
 <html>
 <head>
+<jsp:useBean id="SYSTEM" class="init.GlobalService" scope="application"/>
+<link rel="Shortcut Icon" type="image/x-icon" href="${SYSTEM.iconUri}" />
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>${SYSTEM.systemName} </title>
 <link href="HeaderCssJs/bootstrap.css" rel="stylesheet">
 <!-- <link href="HeaderCssJs/bootstrap.min.css" rel="stylesheet"> -->
 <script src="HeaderCssJs/jquery.js"></script>

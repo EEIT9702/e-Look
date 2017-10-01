@@ -3,8 +3,8 @@
 <!DOCTYPE html ">
 <html>
 <head>
-
-
+<jsp:useBean id="SYSTEM" class="init.GlobalService" scope="application"/>
+<link rel="Shortcut Icon" type="image/x-icon" href="${SYSTEM.iconUri}" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="login/viewport" content="width=device-width, initial-scale=1">
 <link href="login/css/bootstrap.css" rel="stylesheet" type="text/css">
@@ -16,7 +16,7 @@
 <script  src="login/js/google_login.js" type="text/javascript"></script>
 <script  src="login/js/jquery-3.2.1 .js" type="text/javascript"></script>
 
-<title></title>
+
 </head>
 <body>
 <jsp:include page="header.jsp" />
@@ -108,9 +108,7 @@
 </div>
 <script>
 $('#quickRegisterbtn').click(function(){
-	$('#myModal').modal('hide')
-	
-	
+	$('#myModal').modal('hide')		
 })
 </script>
 
