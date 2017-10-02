@@ -118,6 +118,19 @@ h5 {
 .meta a:hover {
     color: rgba(0, 0, 0, .87);
 }
+
+
+.multi_ellipsis {
+overflow: hidden;
+display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 2;
+line-height: 30px;
+height: 90px;
+font-size:30px;
+}
+
+
 </style>
 </head>
 <body>
@@ -129,7 +142,7 @@ h5 {
                             <img src="Class Steps/imgs/eLook_LOGO1.png" class="profile-avatar" alt="">
                         </figure>
                         <div class="card-text">
-                        <p id="title" class="card-title mt-3" style="font-size: 25px;overflow:hidden;white-space:nowrap">這裡請輸入課程標題</p>                        	
+                        <p id="title" class="card-title mt-3 multi_ellipsis">這裡請輸入課程標題</p>                        	
                         </div>
                         <div>
                             	<p style="margin-top:40px;font-size: 18px">課程售價：xxx元</p>
