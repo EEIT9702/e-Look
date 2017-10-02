@@ -509,7 +509,7 @@ font-size:30px;
                             <div class="row" style="height:500px">
                             <div class="col-md-6" style="margin-bottom: 25px">
                                 <label for="exampleInputEmail1" style="font-size: 20pt">課程標題</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" value="輸入課程標題">
+                                <input type="text" onfocus="this.select()" class="form-control" id="exampleInputEmail1" value="輸入課程標題">
                                 
                             </div>
 
