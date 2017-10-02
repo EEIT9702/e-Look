@@ -126,7 +126,7 @@ display: -webkit-box;
 -webkit-box-orient: vertical;
 -webkit-line-clamp: 2;
 line-height: 30px;
-height: 90px;
+height: 60px;
 font-size:30px;
 }
 
