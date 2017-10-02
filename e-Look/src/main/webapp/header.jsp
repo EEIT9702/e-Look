@@ -29,7 +29,6 @@
 	font-size: 18px;
 	font-family: Microsoft JhengHei;
 	font-weight: bold;
-
 }
 
 
@@ -44,10 +43,10 @@
 </style>
 </head>
 
+<div class="container"  >
+<nav class="nav navbar-default navbar-fixed-top " id="headerdav" >
 
-<nav class="nav navbar-default navbar-fixed-top" id="headerdav" >
-
-	<div class="container" >
+	
 		<div class="navbar-header " >
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
 				data-target="#myNavbar">
@@ -74,6 +73,7 @@
 				
 			</ul>
 		</div>
-	</div>
+	
 </nav>
+</div>
 
