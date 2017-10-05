@@ -35,6 +35,8 @@
 </head>
 <body bgcolor="#FFF7E8">
 	<div id="course">
+	
+	
 		<div>
 			<div>
 				<img id="icon" src="video/icon.png"> <img id="courseimg"
