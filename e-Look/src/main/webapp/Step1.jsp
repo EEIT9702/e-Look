@@ -408,6 +408,17 @@ h5 {
     color: rgba(0, 0, 0, .87);
 }
 
+
+.multi_ellipsis {
+overflow: hidden;
+display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 2;
+line-height: 30px;
+height: 60px;
+font-size:30px;
+}
+
 </style>
 
 </head>
@@ -474,7 +485,7 @@ h5 {
                             <img src="Class Steps/imgs/eLook_LOGO1.png" class="profile-avatar" alt="">
                         </figure>
                         <div class="card-text">
-                        <p id="title" class="card-title mt-3" style="font-size: 40px;overflow:hidden;white-space:nowrap"></p>                        	
+                        <p id="title" class="card-title mt-3 multi_ellipsis"></p>                        	
                         </div>
                         <div>
                             	<p style="margin-top:40px;font-size: 18px">課程售價：xxx元</p>
@@ -498,7 +509,7 @@ h5 {
                             <div class="row" style="height:500px">
                             <div class="col-md-6" style="margin-bottom: 25px">
                                 <label for="exampleInputEmail1" style="font-size: 20pt">課程標題</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" value="輸入課程標題">
+                                <input type="text" onfocus="this.select()" class="form-control" id="exampleInputEmail1" value="輸入課程標題">
                                 
                             </div>
 
@@ -753,7 +764,7 @@ h5 {
 </div>
 
 
-<script type="text/javascript">
+<script>
 $(document).ready(function () {
     //Initialize tooltips
     $('.nav-tabs > li a[title]').tooltip();
