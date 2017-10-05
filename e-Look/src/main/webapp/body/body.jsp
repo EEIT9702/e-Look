@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -34,7 +35,7 @@
 	//獲得廣告的DOM
 	var ads = document.getElementById("ads");
 	//直接在DOM中增加HTML原始程式來增加一個圖片的DOM
-	ads.innerHTML = '<img src="img/xmas video sale.jpg" width="1000" />';
+	ads.innerHTML = "<img src='<%=request.getContextPath()%>/img/xmas video sale.jpg' width='1000' />";
 	//設定計時器,3秒以後關閉廣告圖片
 	setTimeout (function(){
 		var ads = document.getElementById("ads");
@@ -46,7 +47,7 @@
 </script>	
 </head>
 <body>
-<jsp:include page="header.jsp"/>
+<jsp:include page="/header.jsp"/>
 		<div class="container">
 			<div style="text-align:center">
 			<a href=""><span id="ads"></span></a>
@@ -55,7 +56,7 @@
 		<div class="row">
 			<div class="item col-md-4 img-portfolio">
 				<a href="portfolio-item.html"> <img
-					class="img-responsive img-hover" src="img/001.jpg" alt="">
+					class="img-responsive img-hover" src="<%=request.getContextPath()%>/img/001.jpg" alt="">
 				</a>
 				<h3>
 					<a href="portfolio-item.html">左一</a>
@@ -64,7 +65,7 @@
 			</div>
 			<div class="item col-md-4 img-portfolio">
 				<a href="portfolio-item.html"> <img
-					class="img-responsive img-hover" src="img/002.jpg" alt="">
+					class="img-responsive img-hover" src="<%=request.getContextPath()%>/img/002.jpg" alt="">
 				</a>
 				<h3>
 					<a href="portfolio-item.html">中一</a>
@@ -73,7 +74,7 @@
 			</div>
 			<div class="item col-md-4 img-portfolio">
 				<a href="portfolio-item.html"> <img
-					class="img-responsive img-hover" src="img/003.jpg" alt="">
+					class="img-responsive img-hover" src="<%=request.getContextPath()%>/img/003.jpg" alt="">
 				</a>
 				<h3>
 					<a href="portfolio-item.html">右一</a>
@@ -87,7 +88,7 @@
 		<div class="row">
 			<div class="item col-md-4 img-portfolio">
 				<a href="portfolio-item.html"> <img
-					class="img-responsive img-hover" src="img/004.jpg" alt="">
+					class="img-responsive img-hover" src="<%=request.getContextPath()%>/img/004.jpg" alt="">
 				</a>
 				<h3>
 					<a href="portfolio-item.html">左二</a>
@@ -95,7 +96,7 @@
 			</div>
 			<div class="item col-md-4 img-portfolio">
 				<a href="portfolio-item.html"> <img
-					class="img-responsive img-hover" src="img/005.jpg" alt="">
+					class="img-responsive img-hover" src="<%=request.getContextPath()%>/img/005.jpg" alt="">
 				</a>
 				<h3>
 					<a href="portfolio-item.html">中二</a>
@@ -104,7 +105,7 @@
 			</div>
 			<div class="item col-md-4 img-portfolio">
 				<a href="portfolio-item.html"> <img
-					class="img-responsive img-hover" src="img/006.jpg" alt="">
+					class="img-responsive img-hover" src="<%=request.getContextPath()%>/img/006.jpg" alt="">
 				</a>
 				<h3>
 					<a href="portfolio-item.html">右二</a>
@@ -117,7 +118,7 @@
 		<div class="row">
 			<div class="item col-md-4 img-portfolio">
 				<a href="portfolio-item.html"> <img
-					class="img-responsive img-hover" src="img/007.jpg" alt="">
+					class="img-responsive img-hover" src="<%=request.getContextPath()%>/img/007.jpg" alt="">
 				</a>
 				<h3>
 					<a href="portfolio-item.html">左三</a>
@@ -126,7 +127,7 @@
 			</div>
 			<div class="item col-md-4 img-portfolio">
 				<a href="portfolio-item.html"> <img
-					class="img-responsive img-hover" src="img/008.jpg" alt="">
+					class="img-responsive img-hover" src="<%=request.getContextPath()%>/img/008.jpg" alt="">
 				</a>
 				<h3>
 					<a href="portfolio-item.html">中三</a>
@@ -135,7 +136,7 @@
 			</div>
 			<div class="item col-md-4 img-portfolio">
 				<a href="portfolio-item.html"> <img
-					class="img-responsive img-hover" src="img/009.jpg" alt="">
+					class="img-responsive img-hover" src="<%=request.getContextPath()%>/img/009.jpg" alt="">
 				</a>
 				<h3>
 					<a href="portfolio-item.html">右三</a>
@@ -148,7 +149,7 @@
 		<div class="row">
 			<div class="item col-md-4 img-portfolio">
 				<a href="portfolio-item.html"> <img
-					class="img-responsive img-hover" src="img/001.jpg" alt="">
+					class="img-responsive img-hover" src="<%=request.getContextPath()%>/img/001.jpg" alt="">
 				</a>
 				<h3>
 					<a href="portfolio-item.html">左一</a>
@@ -157,7 +158,7 @@
 			</div>
 			<div class="item col-md-4 img-portfolio">
 				<a href="portfolio-item.html"> <img
-					class="img-responsive img-hover" src="img/002.jpg" alt="">
+					class="img-responsive img-hover" src="<%=request.getContextPath()%>/img/002.jpg" alt="">
 				</a>
 				<h3>
 					<a href="portfolio-item.html">中一</a>
@@ -166,7 +167,7 @@
 			</div>
 			<div class="item col-md-4 img-portfolio">
 				<a href="portfolio-item.html"> <img
-					class="img-responsive img-hover" src="img/003.jpg" alt="">
+					class="img-responsive img-hover" src="<%=request.getContextPath()%>/img/003.jpg" alt="">
 				</a>
 				<h3>
 					<a href="portfolio-item.html">右一</a>
@@ -180,7 +181,7 @@
 		<div class="row">
 			<div class="item col-md-4 img-portfolio">
 				<a href="portfolio-item.html"> <img
-					class="img-responsive img-hover" src="img/004.jpg" alt="">
+					class="img-responsive img-hover" src="<%=request.getContextPath()%>/img/004.jpg" alt="">
 				</a>
 				<h3>
 					<a href="portfolio-item.html">左二</a>
@@ -189,7 +190,7 @@
 			</div>
 			<div class="item col-md-4 img-portfolio">
 				<a href="portfolio-item.html"> <img
-					class="img-responsive img-hover" src="img/005.jpg" alt="">
+					class="img-responsive img-hover" src="<%=request.getContextPath()%>/img/005.jpg" alt="">
 				</a>
 				<h3>
 					<a href="portfolio-item.html">中二</a>
@@ -198,7 +199,7 @@
 			</div>
 			<div class="item col-md-4 img-portfolio">
 				<a href="portfolio-item.html"> <img
-					class="img-responsive img-hover" src="img/006.jpg" alt="">
+					class="img-responsive img-hover" src="<%=request.getContextPath()%>/img/006.jpg" alt="">
 				</a>
 				<h3>
 					<a href="portfolio-item.html">右二</a>
@@ -211,7 +212,7 @@
 		<div class="row">
 			<div class="item col-md-4 img-portfolio">
 				<a href="portfolio-item.html"> <img
-					class="img-responsive img-hover" src="img/007.jpg" alt="">
+					class="img-responsive img-hover" src="<%=request.getContextPath()%>/img/007.jpg" alt="">
 				</a>
 				<h3>
 					<a href="portfolio-item.html">左三</a>
@@ -220,7 +221,7 @@
 			</div>
 			<div class="item col-md-4 img-portfolio">
 				<a href="portfolio-item.html"> <img
-					class="img-responsive img-hover" src="img/008.jpg" alt="">
+					class="img-responsive img-hover" src="<%=request.getContextPath()%>/img/008.jpg" alt="">
 				</a>
 				<h3>
 					<a href="portfolio-item.html">中三</a>
@@ -229,7 +230,7 @@
 			</div>
 			<div class="item col-md-4 img-portfolio">
 				<a href="portfolio-item.html"> <img
-					class="img-responsive img-hover" src="img/009.jpg" alt="">
+					class="img-responsive img-hover" src="<%=request.getContextPath()%>/img/009.jpg" alt="">
 				</a>
 				<h3>
 					<a href="portfolio-item.html">右三</a>
@@ -242,7 +243,7 @@
 		<div class="row">
 			<div class="item col-md-4 img-portfolio">
 				<a href="portfolio-item.html"> <img
-					class="img-responsive img-hover" src="img/001.jpg" alt="">
+					class="img-responsive img-hover" src="<%=request.getContextPath()%>/img/001.jpg" alt="">
 				</a>
 				<h3>
 					<a href="portfolio-item.html">左一</a>
@@ -251,7 +252,7 @@
 			</div>
 			<div class="item col-md-4 img-portfolio">
 				<a href="portfolio-item.html"> <img
-					class="img-responsive img-hover" src="img/002.jpg" alt="">
+					class="img-responsive img-hover" src="<%=request.getContextPath()%>/img/002.jpg" alt="">
 				</a>
 				<h3>
 					<a href="portfolio-item.html">中一</a>
@@ -260,7 +261,7 @@
 			</div>
 			<div class="item col-md-4 img-portfolio">
 				<a href="portfolio-item.html"> <img
-					class="img-responsive img-hover" src="img/003.jpg" alt="">
+					class="img-responsive img-hover" src="<%=request.getContextPath()%>/img/003.jpg" alt="">
 				</a>
 				<h3>
 					<a href="portfolio-item.html">右一</a>
@@ -274,7 +275,7 @@
 		<div class="row">
 			<div class="item col-md-4 img-portfolio">
 				<a href="portfolio-item.html"> <img
-					class="img-responsive img-hover" src="img/004.jpg" alt="">
+					class="img-responsive img-hover" src="<%=request.getContextPath()%>/img/004.jpg" alt="">
 				</a>
 				<h3>
 					<a href="portfolio-item.html">左二</a>
@@ -283,7 +284,7 @@
 			</div>
 			<div class="item col-md-4 img-portfolio">
 				<a href="portfolio-item.html"> <img
-					class="img-responsive img-hover" src="img/005.jpg" alt="">
+					class="img-responsive img-hover" src="<%=request.getContextPath()%>/img/005.jpg" alt="">
 				</a>
 				<h3>
 					<a href="portfolio-item.html">中二</a>
@@ -292,7 +293,7 @@
 			</div>
 			<div class="item col-md-4 img-portfolio">
 				<a href="portfolio-item.html"> <img
-					class="img-responsive img-hover" src="img/006.jpg" alt="">
+					class="img-responsive img-hover" src="<%=request.getContextPath()%>/img/006.jpg" alt="">
 				</a>
 				<h3>
 					<a href="portfolio-item.html">右二</a>
@@ -305,7 +306,7 @@
 		<div class="row">
 			<div class="item col-md-4 img-portfolio">
 				<a href="portfolio-item.html"> <img
-					class="img-responsive img-hover" src="img/007.jpg" alt="">
+					class="img-responsive img-hover" src="<%=request.getContextPath()%>/img/007.jpg" alt="">
 				</a>
 				<h3>
 					<a href="portfolio-item.html">左三</a>
@@ -314,7 +315,7 @@
 			</div>
 			<div class="item col-md-4 img-portfolio">
 				<a href="portfolio-item.html"> <img
-					class="img-responsive img-hover" src="img/008.jpg" alt="">
+					class="img-responsive img-hover" src="<%=request.getContextPath()%>/img/008.jpg" alt="">
 				</a>
 				<h3>
 					<a href="portfolio-item.html">中三</a>
@@ -323,7 +324,7 @@
 			</div>
 			<div class="item col-md-4 img-portfolio">
 				<a href="portfolio-item.html"> <img
-					class="img-responsive img-hover" src="img/009.jpg" alt="">
+					class="img-responsive img-hover" src="<%=request.getContextPath()%>/img/009.jpg" alt="">
 				</a>
 				<h3>
 					<a href="portfolio-item.html">右三</a>
