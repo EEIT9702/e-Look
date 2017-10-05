@@ -11,7 +11,7 @@
 		var d = document.getElementById("rule");
 		var btn = document.getElementById("btn");
 		//判斷是否捲動到最底部
-		if(d.scrollTop + d.offsetHeight > 1500) {
+		if(d.scrollTop + d.offsetHeight > 800) {
 			//恢復按鈕可用
 			btn.disabled = false;
 			//測試效果用,沒到底不可點擊
@@ -19,7 +19,6 @@
 			btn.disabled = true;
 		}	
 	}
-	
 	//為文件的滑鼠按下事件定義回呼
 	document.onmousedown = function(event) {
 		//滑鼠事件：0 > 沒按鍵, 1 > 按左鍵, 2 > 按右鍵, 3 > 按左鍵&右鍵
@@ -35,10 +34,10 @@
 <body bgcolor="#FFF7E8">
 		<h2 style="text-align:center;font-size:40px;">加入會員</h2>
 		
-		<div style="background-color:#FFF2FF;width:800px;height:500px;overflow-y:scroll;
+		<div style="background-color:#FFF2FF;width:40%;height:500px;overflow-y:scroll;
 		margin:50px auto;border:1px solid black;" onscroll="doScroll()" id="rule">
 		<p style="text-align:center;font-size:35px;">會員規範的增訂、修改與終止</p>
-		<p style="font-size:26px;text-align:left;">以下文章詳述在&nbsp;e-Look&nbsp;提供您服務的同時，您必須瞭解的相關事項，請您在同意註冊成為會員前，詳細閱讀，
+		<p style="font-size:20px;text-align:left;">以下文章詳述在&nbsp;e-Look&nbsp;提供您服務的同時，您必須瞭解的相關事項，請您在同意註冊成為會員前，詳細閱讀，
 		尤其當您在線上點選「同意」鍵，表示：<br/><br/>
 		1.您了解本網站為本公司所經營之網站； <br/>
 		2.當您於本網站註冊成為會員後，即可使用本網站提供之服務； <br/>
