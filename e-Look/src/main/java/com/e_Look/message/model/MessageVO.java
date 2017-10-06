@@ -17,6 +17,7 @@ public class MessageVO implements Serializable {
 	private Byte status;
 	
 	public MessageVO(){}
+	
 
 	public Integer getMessageID() {
 		return messageID;
