@@ -10,7 +10,7 @@
 
 </head>
 
-<body style="margin:200px">
+<body >
 <jsp:include page="header.jsp" />
 
     <form>

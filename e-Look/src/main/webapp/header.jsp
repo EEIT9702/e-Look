@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> --%>
 <!DOCTYPE >
 <html>
 <head>
@@ -44,13 +44,17 @@
 body{
 	padding-top:100px;
 }
+.maincontainer {
+             max-width: 500px;
+             margin:0 auto;
+         }
 </style>
 </head>
+<div class="maincontainer">
 
-<div class="container"  >
 <nav class="nav navbar-default navbar-fixed-top " id="headerdav" >
 
-	
+	<div class="container"  >
 		<div class="navbar-header " >
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
 				data-target="#myNavbar">
@@ -77,7 +81,8 @@ body{
 				
 			</ul>
 		</div>
+	   </div>
 	
 </nav>
 </div>
-
+ 
