@@ -4,7 +4,7 @@
 <!DOCTYPE html ">
 <html>
 <head>
-<%-- <jsp:useBean id="SYSTEM" class="init.GlobalService" scope="application"/> --%>
+<jsp:useBean id="SYSTEM" class="init.GlobalService" scope="application"/>
 <link rel="Shortcut Icon" type="image/x-icon" href="${SYSTEM.iconUri}" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="login/viewport"
@@ -260,7 +260,7 @@ margin:2px auto;
 	</c:otherwise>
 	</c:choose>
 	<div style="margin-top:50px " class="modal ${regcla}" id="${regid}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	 <div class="container " style="max-width: 360px;">
+	 <div class="container " style="max-width: 420px;">
 	<div class="panel-body modal-content" >
 					<form method="POST" action="<%=request.getContextPath()%>/login.html" role="form">
 						<div class="modal-header text-center">
@@ -270,11 +270,11 @@ margin:2px auto;
 					</div>
 						<div class="form-group">
 							<label class="control-label" for="signupName">Your name</label><br><font style="color: red;"  size="-1">${regerr.errname}</font>
-							<input id="signupName" type="text" maxlength="50" name="mName" value="${param.Name}" class="form-control">
+							<input id="signupName" type="text" maxlength="50" name="mName" value="${Name}" class="form-control">
 						</div>
 						<div class="form-group">
 							<label class="control-label" for="signupEmail">Email</label><br><font style="color: red;"  size="-1">${regerr.erremail}</font>
-							<input id="signupEmail" type="text" maxlength="50" name="email" value="${param.mail}" class="form-control">
+							<input id="signupEmail" type="text" maxlength="50" name="email" value="${mail}" class="form-control">
 						</div>
 						<div class="form-group">
 							<label class="control-label" for="signupPassword">Password</label><br><font style="color: red;"size="-1">${regerr.errpwd}</font>
@@ -287,7 +287,7 @@ margin:2px auto;
 						<div class="form-group">
 							<label>verify code</label><br><font style="color: red;"  size="-1">${regerr.errcheck}</font><br>
 							<input type="text" name="check"class="form-inline" />
-							<img align="middle" width="50px" src="dyna_image.jpg" border="1" />
+							<img align="middle"  src="<%=request.getContextPath()%>/CheckCodeServlet.jpg" border="1" />
 						</div>
 						
 						<div class="form-group">
@@ -301,6 +301,8 @@ margin:2px auto;
 				</div>
 				</div>
 				<c:remove var="regerr" scope="session"/>
+				<c:remove var="Name" scope="session"/>
+				<c:remove var="mail" scope="session"/>
 	<!-- 以上是註冊畫面  -->
 	
 	<!-- 以下是會員規範  -->
