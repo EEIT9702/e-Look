@@ -26,7 +26,7 @@
 	color: #000000;
 }
 #headerdav {
-	font-size: 14px;
+	font-size: 18px;
 	font-family: Microsoft JhengHei;
 	font-weight: bold;
 }
@@ -37,17 +37,13 @@
 #nopadding img {
 	margin-bottom: 5px;
 }
-<<<<<<< HEAD
-
-=======
 body{
 	padding-top:100px;
 }
 .maincontainer {
              max-width: 500px;
              margin:0 auto;
-         }
->>>>>>> branch 'master' of https://github.com/EEIT9702/e-Look.git
+ }
 </style>
 </head>
 <div class="maincontainer">
