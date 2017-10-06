@@ -13,7 +13,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.e_Look.member.model.messageVO;
+
 
 public class MessageDAO implements MessageDAO_interface {
 	private static DataSource ds = null;
@@ -74,28 +74,18 @@ public class MessageDAO implements MessageDAO_interface {
 		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
-			if (update.equalsIgnoreCase("member")) {
-				pstmt = con.prepareStatement(UPDATE_MEMBER);
-				pstmt.setString(1, messageVO.getEmail());
-				pstmt.setString(2, messageVO.getmPassword());
-				pstmt.setString(3, messageVO.getmName());
-			//	pstmt.setBlob(4, messageVO.getmPhoto());
-				pstmt.setString(4, messageVO.getSkill());
-				pstmt.setString(5, messageVO.getHobby());
-				pstmt.setString(6, messageVO.getAddress());
-				pstmt.setInt(7, messageVO.getMemberID());
+			if (update.equalsIgnoreCase("message")) {
+				pstmt = con.prepareStatement(UPDATE_MESSAGE);
+				pstmt.setString(1, messageVO.getmContent());
+				pstmt.setDate(2, messageVO.getmTime());
+				pstmt.setInt(3, messageVO.getMessageID_response());
+			
 				pstmt.executeUpdate();
 			} else if (update.equalsIgnoreCase("status")) {
 				pstmt = con.prepareStatement(UPDATE_STATUS);
 				pstmt.setByte(1, messageVO.getStatus());
-				pstmt.setInt(2, messageVO.getMemberID());
 				pstmt.executeUpdate();
-			} else if (update.equalsIgnoreCase("count")) {
-				pstmt = con.prepareStatement(UPDATE_COUNT);
-				pstmt.setInt(1, messageVO.getCount());
-				pstmt.setInt(2, messageVO.getMemberID());
-				pstmt.executeUpdate();
-			}
+			} 
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -123,8 +113,8 @@ public class MessageDAO implements MessageDAO_interface {
 		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(DELETE_MEMBER);
-			pstmt.setInt(1, memberID);
+			pstmt = con.prepareStatement(DELETE_MESSAGE);
+			pstmt.setInt(1, messageID);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
@@ -149,28 +139,29 @@ public class MessageDAO implements MessageDAO_interface {
 
 	@Override
 	public MessageVO findByPrimaryKey(Integer messageID) {
-		messageVO messageVO = null;
+		MessageVO messageVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_ONE_MEMBER);
-			pstmt.setInt(1, memberID);
+			pstmt = con.prepareStatement(SELECT_ONE_MESSAGE);
+			pstmt.setInt(1, messageID);
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
-				messageVO = new messageVO();
-				messageVO.setMemberID(rs.getInt(1));
-				messageVO.setEmail(rs.getString(2));
-				messageVO.setmPassword(rs.getString(3));
-				messageVO.setmName(rs.getString(4));
-				messageVO.setmPhoto(rs.getBinaryStream(5));
-				messageVO.setSkill(rs.getString(6));
-				messageVO.setHobby(rs.getString(7));
-				messageVO.setRegisterDate(rs.getDate(8));
-				messageVO.setStatus(rs.getByte(9));
-				messageVO.setCount(rs.getInt(10));
-				messageVO.setAddress(rs.getString(11));
+				messageVO = new MessageVO();
+				messageVO.setMessageID(rs.getInt(1));
+				messageVO.setmContent(rs.getString(2));
+				messageVO.setmTime(rs.getDate(3));
+				messageVO.setMessageID_response(rs.getInt(4));
+				messageVO.setMemberID(rs.getInt(5));
+				messageVO.setCourseID(rs.getInt(6));
+				messageVO.setBought(rs.getLong(7));
+				messageVO.setStatus(rs.getByte(8));
+				
 			}
+			
+					
+			
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -195,27 +186,25 @@ public class MessageDAO implements MessageDAO_interface {
 
 	@Override
 	public List<MessageVO> getAll() {
-		List<messageVO> list = new LinkedList<messageVO>();
+		List<MessageVO> list = new LinkedList<MessageVO>();
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_ALL_MEMBER);
+			pstmt = con.prepareStatement(SELECT_ALL_MESSAGE);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				messageVO messageVO = new messageVO();
-				messageVO.setMemberID(rs.getInt(1));
-				messageVO.setEmail(rs.getString(2));
-				messageVO.setmPassword(rs.getString(3));
-				messageVO.setmName(rs.getString(4));
-				messageVO.setmPhoto(rs.getBinaryStream(5));
-				messageVO.setSkill(rs.getString(6));
-				messageVO.setHobby(rs.getString(7));
-				messageVO.setRegisterDate(rs.getDate(8));
-				messageVO.setStatus(rs.getByte(9));
-				messageVO.setCount(rs.getInt(10));
-				messageVO.setAddress(rs.getString(11));
+				MessageVO messageVO = new MessageVO();		
+				messageVO.setMessageID(rs.getInt(1));
+				messageVO.setmContent(rs.getString(2));
+				messageVO.setmTime(rs.getDate(3));
+				messageVO.setMessageID_response(rs.getInt(4));
+				messageVO.setMemberID(rs.getInt(5));
+				messageVO.setCourseID(rs.getInt(6));
+				messageVO.setBought(rs.getLong(7));
+				messageVO.setStatus(rs.getByte(8));
+				
 				list.add(messageVO);
 			}
 		} catch (SQLException e) {
