@@ -120,40 +120,7 @@
 	</div>
 	<!-- 以上是忘記密碼畫面  -->
 <!-- 以上是註冊畫面  -->
-<!-- <div class="container "> -->
-<!-- 		<div class="row"> -->
-<!-- 			<div class="panel panel-primary" > -->
-<!-- 				<div class="panel-body"> -->
-<!-- 					<form method="POST" action="#" class="" role="form"> -->
-<!-- 						<div class="form-group"> -->
-<!-- 							<h2>快速註冊</h2> -->
-<!-- 						</div> -->
-<!-- 						<div class="form-group" > -->
-<!-- 							<label class="control-label" for="signupName">Your name</label> -->
-<!-- 							<input id="signupName" type="text" maxlength="50" class="form-control" > -->
-<!-- 						</div> -->
-<!-- 						<div class="form-group"> -->
-<!-- 							<label class="control-label" for="signupEmail">Email</label> -->
-<!-- 							<input id="signupEmail" type="email" maxlength="50" class="form-control"> -->
-<!-- 						</div> -->
-<!-- 						<div class="form-group"> -->
-<!-- 							<label class="control-label" for="signupPassword">Password</label> -->
-<!-- 							<input id="signupPassword" type="password" maxlength="8" class="form-control" placeholder="至少輸入8位" > -->
-<!-- 						</div> -->
-<!-- 						<div class="form-group"> -->
-<!-- 							<label class="control-label" for="signupPasswordagain">Password again</label> -->
-<!-- 							<input id="signupPasswordagain" type="password" maxlength="25" class="form-control"> -->
-<!-- 						</div> -->
-<!-- 						<div class="form-group"> -->
-<!-- 							<button id="signupSubmit" type="submit" class="btn btn-info btn-block">Create your account</button> -->
-<!-- 						</div> -->
-<!-- 						<hr> -->
-<!-- 						<p>已經有帳號了? <a href="#">登入</a></p> -->
-<!-- 					</form> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
+
 <!-- 以上是註冊畫面  -->
 
 </body>
