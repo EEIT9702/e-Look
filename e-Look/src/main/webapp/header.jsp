@@ -28,12 +28,10 @@
 	color: #000000;
 }
 #headerdav {
-	font-size: 18px;
+	font-size: 14px;
 	font-family: Microsoft JhengHei;
 	font-weight: bold;
 }
-
-
 #padding img {
 	margin-bottom: 5px; 
 	padding-right: 10px;
