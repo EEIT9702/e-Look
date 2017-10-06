@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
 <%
     //把request傳入UploadTool裡
     toolkie.UploadTool upload = new toolkie.UploadTool(request);
@@ -23,11 +23,14 @@
     if (msg.length() > 0) {
         out.println(msg);
     } else {
+   
         //設定上傳路徑
-        //upload.setUploadDir(this.getServletContext().getRealPath("."));
-        upload.setUploadDir("D:\\");
+       upload.setUploadDir(this.getServletContext().getRealPath("."));
+       
+       // upload.setUploadDir("D:\\");
         out.println("上傳到此路徑:"
-                + this.getServletContext().getRealPath(".") + "<br/>");
+                 + this.getServletContext().getRealPath(".") + "<br/>");
+        //out.println("上傳到此路徑:"+"/src/main/webapp");
         
         //out.println("<img src="+this.getServletContext().getRealPath(".")+">");            
                   
