@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> --%>
 <!DOCTYPE >
 <html>
 <head>
@@ -29,7 +29,6 @@
 	font-size: 14px;
 	font-family: Microsoft JhengHei;
 	font-weight: bold;
-
 }
 #padding img {
 	margin-bottom: 5px; 
@@ -38,14 +37,24 @@
 #nopadding img {
 	margin-bottom: 5px;
 }
+<<<<<<< HEAD
 
+=======
+body{
+	padding-top:100px;
+}
+.maincontainer {
+             max-width: 500px;
+             margin:0 auto;
+         }
+>>>>>>> branch 'master' of https://github.com/EEIT9702/e-Look.git
 </style>
 </head>
+<div class="maincontainer">
 
+<nav class="nav navbar-default navbar-fixed-top " id="headerdav" >
 
-<nav class="nav navbar-default navbar-fixed-top" id="headerdav" >
-
-	<div class="container" >
+	<div class="container"  >
 		<div class="navbar-header " >
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
 				data-target="#myNavbar">
@@ -73,6 +82,8 @@
 
 			</ul>
 		</div>
-	</div>
+	   </div>
+	
 </nav>
-
+</div>
+ 
