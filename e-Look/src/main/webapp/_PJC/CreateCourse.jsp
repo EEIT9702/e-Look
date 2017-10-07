@@ -5,46 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>開課流程●步驟一</title>
-<link href="<%= request.getContextPath() %>/_PJC/css/bootstrap.css" rel="stylesheet">
-<script src="<%= request.getContextPath() %>/_PJC/js/jquery-3.2.1.js"></script>
-<script src="<%= request.getContextPath() %>/_PJC/js/bootstrap.min.js"></script>
+<link href="<%= request.getContextPath() %>/css/bootstrap.css" rel="stylesheet">
+<script src="<%= request.getContextPath() %>/js/jquery-3.2.1.js"></script>
+<script src="<%= request.getContextPath() %>/_PJC/js/bootstrap.js"></script>
 <style>
-#course:hover{-webkit-transform: scale(1.05);}
-#courseimg {
-	height: 200px;
-	width: 300px;
-}
-
-#course {
-	height: 400px;
-	width: 300px;
-	border: 1px #DEDEDE solid;
-	background-color: #FFF2FF;
-}
-
-#icon {
-	height: 50px;
-	width: 50px;
-	border-radius: 50px;
-	border: 1px solid;
-	z-index: 1;
-	position: absolute;
-}
 
 
-
-
-.wizard {
-    margin: 20px auto;
-    background: #fff;
-}
-
-    .wizard .nav-tabs {
-        position: relative;
-        margin: 40px auto;
-        margin-bottom: 0;
-        border-bottom-color: #e0e0e0;
-    }
+     .wizard .nav-tabs { 
+         position: relative; 
+         margin: 40px auto; 
+        margin-bottom: 0; 
+         border-bottom-color: #e0e0e0; 
+     } 
 
     .wizard > div.wizard-inner {
         position: relative;
@@ -475,9 +447,10 @@ font-size:30px;
 
 
 <!-- 預覽課程頁面圖 -->
-<div class="col-lg-3 pull-right" style="margin-right:150px;width: 341px">
+<div class="col-md-4 pull-right">
+                <div style="width: 310px">
                 <div class="card card-inverse">
-                    <img class="card-img-top" src="<%= request.getContextPath() %>/Class Steps/imgs/請上傳課程封面.png" alt="course" id="wizardPicturePreview" title="">
+                    <img class="card-img-top" src="<%= request.getContextPath() %>/Class Steps/imgs/請上傳課程封面.png" alt="您的圖片連結已失效" id="wizardPicturePreview" title="">
                     <div class="card-block">
                         <figure class="profile">
                             <img src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png" class="profile-avatar" alt="">
@@ -498,25 +471,25 @@ font-size:30px;
                     </div>
                 </div>
             </div>
-					
-							<div class="list-inline pull-right">
+					</div>
+							<div class="list-inline pull-right col-md-4">
                             <img alt="" src="<%= request.getContextPath() %>/Class Steps/imgs/預覽課程展示畫面.png" style="width:150px;height:250px;margin-right: 50px;margin-top: 50px">
                             </div>
                             
                             	
                             <div class="row" style="height:500px">
-                            <div class="col-md-6" style="margin-bottom: 25px">
+                            <div class="col-md-4" style="margin-bottom: 25px">
                                 <label for="exampleInputEmail1" style="font-size: 20pt">課程標題</label>
                                 <input type="text" onfocus="this.select()" class="form-control" id="exampleInputEmail1" value="輸入課程標題">
                                 
                             </div>
 
-                            <div class="col-md-6" style="margin-bottom: 40px">
+                            <div class="col-md-4" style="margin-bottom: 40px">
                                 <label for="exampleInputEmail1" style="font-size: 20pt">上傳課程封面</label>
                                 <input type="file" id="wizard-picture">
                             </div>
 
-                            <div class="col-md-6" style="margin-bottom: 25px">
+                            <div class="col-md-4" style="margin-bottom: 25px">
                                 <label for="exampleInputEmail1" style="font-size: 20pt">選擇課程類別(最多三項)</label>
                                 <div >                               
                                 <div style="font-size: 15pt">
