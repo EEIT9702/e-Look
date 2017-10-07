@@ -211,7 +211,7 @@ CREATE TABLE [dbo].[Member](
 	[hobby] [nvarchar](50) NULL,
 	[registerDate] [date] NOT NULL,
 	[status] [tinyint] NOT NULL,
-	[count] [int](10) NULL,
+	[count] [int] NULL,
 	[address] [varchar](50) NULL,
  CONSTRAINT [PK_Member] PRIMARY KEY CLUSTERED 
 (
