@@ -7,7 +7,7 @@
 <title>開課流程●步驟一</title>
 <link href="<%= request.getContextPath() %>/css/bootstrap.css" rel="stylesheet">
 <script src="<%= request.getContextPath() %>/js/jquery-3.2.1.js"></script>
-<script src="<%= request.getContextPath() %>/_PJC/js/bootstrap.js"></script>
+<script src="<%= request.getContextPath() %>/js/bootstrap.min.js"></script>
 <style>
 
 
@@ -406,7 +406,7 @@ font-size:30px;
                     <li role="presentation" class="active">
                         <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
                             <span class="round-tab">
-                                <i class="glyphicon glyphicon-folder-open"></i>
+                                <i class="glyphicon glyphicon-list"></i>
                             </span>
                         </a>
                     </li>
@@ -446,8 +446,45 @@ font-size:30px;
 
 
 
-<!-- 預覽課程頁面圖 -->
-<div class="col-md-4 pull-right">
+<!-- 預覽課程頁面圖 -->							                                                       	
+                            <div class="col-md-4">
+                            <div class="row" style="margin-bottom: 25px">
+                                <label for="exampleInputEmail1" style="font-size: 20pt">課程標題</label>
+                                <input type="text" onfocus="this.select()" class="form-control" id="exampleInputEmail1" value="輸入課程標題">
+                                
+                            </div>
+
+                            <div class="row" style="margin-bottom: 40px">
+                                <label for="exampleInputEmail1" style="font-size: 20pt">上傳課程封面</label>
+                                <input type="file" id="wizard-picture">
+                            </div>
+
+                            <div class="row" style="margin-bottom: 25px">
+                                <label for="exampleInputEmail1" style="font-size: 20pt">選擇課程類別(最多三項)</label>
+                                <div >                               
+                                <div style="font-size: 15pt">
+                                	<FORM method="post" action="">
+									    <INPUT TYPE="checkbox"  NAME="checkbox1" onClick="choose()">烹飪 
+									    <INPUT TYPE="checkbox"  NAME="checkbox2" onClick="choose()">商業
+									    <INPUT TYPE="checkbox"  NAME="checkbox3" onClick="choose()">程式
+									    <INPUT TYPE="checkbox"  NAME="checkbox4" onClick="choose()">音樂<br>
+									    <INPUT TYPE="checkbox"  NAME="checkbox5" onClick="choose()">手作
+									    <INPUT TYPE="checkbox"  NAME="checkbox6" onClick="choose()">設計
+									    <INPUT TYPE="checkbox"  NAME="checkbox7" onClick="choose()">語言
+									    <INPUT TYPE="checkbox"  NAME="checkbox8" onClick="choose()">運動<br>
+									    <INPUT TYPE="checkbox"  NAME="checkbox9" onClick="choose()">生活
+									    <INPUT TYPE="checkbox"  NAME="checkbox10" onClick="choose()">影音
+									    <INPUT TYPE="checkbox"  NAME="checkbox11" onClick="choose()">科技
+									    <INPUT TYPE="checkbox"  NAME="checkbox12" onClick="choose()">其他
+									 </FORM>   
+                                </div>
+                            </div>
+                            </div>
+							</div>
+							<div class="list-inline col-md-4">
+                            <img alt="" src="<%= request.getContextPath() %>/Class Steps/imgs/預覽課程展示畫面.png" style="width:150px;height:250px;margin-right: 50px;margin-top: 50px">
+                            </div>
+<div class="col-md-4">
                 <div style="width: 310px">
                 <div class="card card-inverse">
                     <img class="card-img-top" src="<%= request.getContextPath() %>/Class Steps/imgs/請上傳課程封面.png" alt="您的圖片連結已失效" id="wizardPicturePreview" title="">
@@ -472,53 +509,16 @@ font-size:30px;
                 </div>
             </div>
 					</div>
-							<div class="list-inline pull-right col-md-4">
-                            <img alt="" src="<%= request.getContextPath() %>/Class Steps/imgs/預覽課程展示畫面.png" style="width:150px;height:250px;margin-right: 50px;margin-top: 50px">
-                            </div>
-                            
-                            	
-                            <div class="row" style="height:500px">
-                            <div class="col-md-4" style="margin-bottom: 25px">
-                                <label for="exampleInputEmail1" style="font-size: 20pt">課程標題</label>
-                                <input type="text" onfocus="this.select()" class="form-control" id="exampleInputEmail1" value="輸入課程標題">
-                                
-                            </div>
-
-                            <div class="col-md-4" style="margin-bottom: 40px">
-                                <label for="exampleInputEmail1" style="font-size: 20pt">上傳課程封面</label>
-                                <input type="file" id="wizard-picture">
-                            </div>
-
-                            <div class="col-md-4" style="margin-bottom: 25px">
-                                <label for="exampleInputEmail1" style="font-size: 20pt">選擇課程類別(最多三項)</label>
-                                <div >                               
-                                <div style="font-size: 15pt">
-                                	<FORM method="post" action="">
-									    <INPUT TYPE="checkbox"  NAME="checkbox1" onClick="choose()">烹飪 
-									    <INPUT TYPE="checkbox"  NAME="checkbox2" onClick="choose()">商業
-									    <INPUT TYPE="checkbox"  NAME="checkbox3" onClick="choose()">程式
-									    <INPUT TYPE="checkbox"  NAME="checkbox4" onClick="choose()">音樂<br>
-									    <INPUT TYPE="checkbox"  NAME="checkbox5" onClick="choose()">手作
-									    <INPUT TYPE="checkbox"  NAME="checkbox6" onClick="choose()">設計
-									    <INPUT TYPE="checkbox"  NAME="checkbox7" onClick="choose()">語言
-									    <INPUT TYPE="checkbox"  NAME="checkbox8" onClick="choose()">運動<br>
-									    <INPUT TYPE="checkbox"  NAME="checkbox9" onClick="choose()">生活
-									    <INPUT TYPE="checkbox"  NAME="checkbox10" onClick="choose()">影音
-									    <INPUT TYPE="checkbox"  NAME="checkbox11" onClick="choose()">科技
-									    <INPUT TYPE="checkbox"  NAME="checkbox12" onClick="choose()">其他
-									 </FORM>   
-                                </div>
-                            </div>
-                            </div>
-							</div>
                             
 <!-- 包住step1填寫資料 --></div>                         
 <!-- step1最終確認按鈕 -->
+					
 						
-						<ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-primary next-step">儲存並前往下一步</button></li>
-                        </ul>
-                                                                       						
+                            <div class="col-md-4 pull-right" style="margin-top: 50px">
+                            <button type="button" class="btn btn-primary pull-right next-step">儲存並前往下一步</button>
+                            </div>
+                       
+                                                                   						
 <!-- 整個step1頁面 --></div>
                     
                     
