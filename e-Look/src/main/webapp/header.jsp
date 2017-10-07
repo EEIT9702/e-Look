@@ -8,10 +8,14 @@
 <link rel="Shortcut Icon" type="image/x-icon" href="${SYSTEM.iconUri}" />
 <meta charset="UTF-8">
 <title>${SYSTEM.systemName} </title>
-<link href="<%=request.getContextPath() %>/HeaderCssJs/bootstrap.css" rel="stylesheet">
+
+<link href="<%= request.getContextPath() %>/HeaderCssJs/bootstrap.css" rel="stylesheet">
+
 <!-- <link href="HeaderCssJs/bootstrap.min.css" rel="stylesheet"> -->
-<script src="<%=request.getContextPath() %>/HeaderCssJs/jquery.js"></script>
-<script src="<%=request.getContextPath() %>/HeaderCssJs/bootstrap.min.js"></script>
+
+<script src="<%= request.getContextPath() %>/HeaderCssJs/jquery.js"></script>
+<script src="<%= request.getContextPath() %>/HeaderCssJs/bootstrap.min.js"></script>
+
 <style>
 /*根據bootstrap.css內容加以覆寫的方式*/
 #myNavbar li a:hover {
@@ -60,22 +64,27 @@ body{
 				<span class="icon-bar"></span> 
 				<span class="icon-bar"></span>
 			</button>
-			<a href="#"><img src="<%=request.getContextPath() %>/HeaderCssJs/eLook_LOGO.png" height="75"
+
+			<a href="#"><img src="<%= request.getContextPath() %>/HeaderCssJs/eLook_LOGO.png" height="75"
 				 alt="e-Look"></a>
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar" >
 			<!--底下放要縮放的內容-->
 
 			<ul class="nav navbar-nav " id="padding" >
-				<li><a href="#menu1"><img src="<%=request.getContextPath() %>/HeaderCssJs/003-coins.png"height="30">募資</a></li>
-				<li><a href="#menu2"><img src="<%=request.getContextPath() %>/HeaderCssJs/002-team.png" height="30">線上課程</a></li>
-				<li><a href="#menu2"><img src="<%=request.getContextPath() %>/HeaderCssJs/004-gift.png"height="30">免費課程</a></li>
-				<li><a href="#menu2"><img src="<%=request.getContextPath() %>/HeaderCssJs/001-book.png" height="30">我要開課</a></li>
+				<li><a href="#menu1"><img src="<%= request.getContextPath() %>/HeaderCssJs/003-coins.png"height="30">募資</a></li>
+				<li><a href="#menu2"><img src="<%= request.getContextPath() %>/HeaderCssJs/002-team.png" height="30">線上課程</a></li>
+				<li><a href="#menu2"><img src="<%= request.getContextPath() %>/HeaderCssJs/004-gift.png"height="30">免費課程</a></li>
+				<li><a href="#menu2"><img src="<%= request.getContextPath() %>/HeaderCssJs/001-book.png" height="30">我要開課</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right" id="nopadding">
-				<li><a href="#"><img src="<%=request.getContextPath() %>/HeaderCssJs/002-shopping-cart.png"height="30" /></a></li>
+
+				<li><a href="#"><img src="<%= request.getContextPath() %>/HeaderCssJs/002-shopping-cart.png"height="30" /></a></li>
+
 				
-				<li><a href="#"data-toggle="modal" data-target="#myModal"><img src="<%=request.getContextPath() %>/HeaderCssJs/001-login.png"height="30" />登入</a></li>
+
+				<li><a href="#"data-toggle="modal" data-target="#myModal"><img src="<%= request.getContextPath() %>/HeaderCssJs/001-login.png"height="30" />登入</a></li>
+
 				
 			</ul>
 		</div>
