@@ -5,46 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>開課流程●步驟一</title>
-<link href="<%= request.getContextPath() %>/_PJC/css/bootstrap.css" rel="stylesheet">
-<script src="<%= request.getContextPath() %>/_PJC/js/jquery-3.2.1.js"></script>
-<script src="<%= request.getContextPath() %>/_PJC/js/bootstrap.min.js"></script>
+<link href="<%= request.getContextPath() %>/css/bootstrap.css" rel="stylesheet">
+<script src="<%= request.getContextPath() %>/js/jquery-3.2.1.js"></script>
+<script src="<%= request.getContextPath() %>/js/bootstrap.min.js"></script>
 <style>
-#course:hover{-webkit-transform: scale(1.05);}
-#courseimg {
-	height: 200px;
-	width: 300px;
-}
-
-#course {
-	height: 400px;
-	width: 300px;
-	border: 1px #DEDEDE solid;
-	background-color: #FFF2FF;
-}
-
-#icon {
-	height: 50px;
-	width: 50px;
-	border-radius: 50px;
-	border: 1px solid;
-	z-index: 1;
-	position: absolute;
-}
 
 
-
-
-.wizard {
-    margin: 20px auto;
-    background: #fff;
-}
-
-    .wizard .nav-tabs {
-        position: relative;
-        margin: 40px auto;
-        margin-bottom: 0;
-        border-bottom-color: #e0e0e0;
-    }
+     .wizard .nav-tabs { 
+         position: relative; 
+         margin: 40px auto; 
+        margin-bottom: 0; 
+         border-bottom-color: #e0e0e0; 
+     } 
 
     .wizard > div.wizard-inner {
         position: relative;
@@ -434,7 +406,7 @@ font-size:30px;
                     <li role="presentation" class="active">
                         <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
                             <span class="round-tab">
-                                <i class="glyphicon glyphicon-folder-open"></i>
+                                <i class="glyphicon glyphicon-list"></i>
                             </span>
                         </a>
                     </li>
@@ -474,49 +446,20 @@ font-size:30px;
 
 
 
-<!-- 預覽課程頁面圖 -->
-<div class="col-lg-3 pull-right" style="margin-right:150px;width: 341px">
-                <div class="card card-inverse">
-                    <img class="card-img-top" src="<%= request.getContextPath() %>/Class Steps/imgs/請上傳課程封面.png" alt="course" id="wizardPicturePreview" title="">
-                    <div class="card-block">
-                        <figure class="profile">
-                            <img src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png" class="profile-avatar" alt="">
-                        </figure>
-                        <div class="card-text">
-                        <p id="title" class="card-title mt-3 multi_ellipsis"></p>                        	
-                        </div>
-                        <div>
-                            	<p style="margin-top:40px;font-size: 18px">課程售價：xxx元</p>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                    <button class="btn-info btn-sm pull-right" style="margin-bottom: 5px;margin-top: 10px">加入書籤</button>
-                        <small>課程時間:yyy分鐘</small>
-                        <br>
-                        <small>購買人數:zzz人</small>
-                        
-                    </div>
-                </div>
-            </div>
-					
-							<div class="list-inline pull-right">
-                            <img alt="" src="<%= request.getContextPath() %>/Class Steps/imgs/預覽課程展示畫面.png" style="width:150px;height:250px;margin-right: 50px;margin-top: 50px">
-                            </div>
-                            
-                            	
-                            <div class="row" style="height:500px">
-                            <div class="col-md-6" style="margin-bottom: 25px">
+<!-- 預覽課程頁面圖 -->							                                                       	
+                            <div class="col-md-4">
+                            <div class="row" style="margin-bottom: 25px">
                                 <label for="exampleInputEmail1" style="font-size: 20pt">課程標題</label>
                                 <input type="text" onfocus="this.select()" class="form-control" id="exampleInputEmail1" value="輸入課程標題">
                                 
                             </div>
 
-                            <div class="col-md-6" style="margin-bottom: 40px">
+                            <div class="row" style="margin-bottom: 40px">
                                 <label for="exampleInputEmail1" style="font-size: 20pt">上傳課程封面</label>
                                 <input type="file" id="wizard-picture">
                             </div>
 
-                            <div class="col-md-6" style="margin-bottom: 25px">
+                            <div class="row" style="margin-bottom: 25px">
                                 <label for="exampleInputEmail1" style="font-size: 20pt">選擇課程類別(最多三項)</label>
                                 <div >                               
                                 <div style="font-size: 15pt">
@@ -538,14 +481,44 @@ font-size:30px;
                             </div>
                             </div>
 							</div>
+							<div class="list-inline col-md-4">
+                            <img alt="" src="<%= request.getContextPath() %>/Class Steps/imgs/預覽課程展示畫面.png" style="width:150px;height:250px;margin-right: 50px;margin-top: 50px">
+                            </div>
+<div class="col-md-4">
+                <div style="width: 310px">
+                <div class="card card-inverse">
+                    <img class="card-img-top" src="<%= request.getContextPath() %>/Class Steps/imgs/請上傳課程封面.png" alt="您的圖片連結已失效" id="wizardPicturePreview" title="">
+                    <div class="card-block">
+                        <figure class="profile">
+                            <img src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png" class="profile-avatar" alt="">
+                        </figure>
+                        <div class="card-text">
+                        <p id="title" class="card-title mt-3 multi_ellipsis"></p>                        	
+                        </div>
+                        <div>
+                            	<p style="margin-top:40px;font-size: 18px">課程售價：xxx元</p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                    <button class="btn-info btn-sm pull-right" style="margin-bottom: 5px;margin-top: 10px">加入書籤</button>
+                        <small>課程時間:yyy分鐘</small>
+                        <br>
+                        <small>購買人數:zzz人</small>
+                        
+                    </div>
+                </div>
+            </div>
+					</div>
                             
 <!-- 包住step1填寫資料 --></div>                         
 <!-- step1最終確認按鈕 -->
+					
 						
-						<ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-primary next-step">儲存並前往下一步</button></li>
-                        </ul>
-                                                                       						
+                            <div class="col-md-4 pull-right" style="margin-top: 50px">
+                            <button type="button" class="btn btn-primary pull-right next-step">儲存並前往下一步</button>
+                            </div>
+                       
+                                                                   						
 <!-- 整個step1頁面 --></div>
                     
                     

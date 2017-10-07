@@ -134,7 +134,7 @@ font-size:30px;
 </style>
 </head>
 <body>
-<div class="col-lg-3" style="width: 341px">
+<div class="col-md-4" style="width: 341px">
                 <div class="card card-inverse">
                     <img class="card-img-top" src="Class Steps/imgs/請上傳課程封面.png" alt="course" id="wizardPicturePreview" title="">
                     <div class="card-block">
