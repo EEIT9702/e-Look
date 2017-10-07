@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE >
 <html>
 <head>
@@ -11,12 +11,12 @@
 <link href="<%= request.getContextPath() %>/HeaderCssJs/bootstrap.css" rel="stylesheet">
 <!-- <link href="HeaderCssJs/bootstrap.min.css" rel="stylesheet"> -->
 <script src="<%= request.getContextPath() %>/HeaderCssJs/jquery.js"></script>
-<script src="<%= request.getContextPath() %>/HeaderCssJs/bootstrap.min.js"></script>
+<%-- <script src="<%= request.getContextPath() %>/HeaderCssJs/bootstrap.min.js"></script> --%>
 <style>
 /*根據bootstrap.css內容加以覆寫的方式*/
 #myNavbar li a:hover {
 	color: #fc3a63;
-	position: relative; /* 當滑鼠經過超連結時，超連結往右下位移2像素 */
+	position:relative; /* 當滑鼠經過超連結時，超連結往右下位移2像素 */
 	top: 2px;
 	left: 2px;
 }
