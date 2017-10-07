@@ -5,11 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>開課流程●步驟一</title>
-<link href="HeaderCssJs/bootstrap.css" rel="stylesheet">
-<link href="HeaderCssJs/bootstrap.min.css" rel="stylesheet">
-<script src="HeaderCssJs/jquery.js"></script>
-<script src="HeaderCssJs/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<link href="<%= request.getContextPath() %>/_PJC/css/bootstrap.css" rel="stylesheet">
+<script src="<%= request.getContextPath() %>/_PJC/js/jquery-3.2.1.js"></script>
+<script src="<%= request.getContextPath() %>/_PJC/js/bootstrap.min.js"></script>
 <style>
 #course:hover{-webkit-transform: scale(1.05);}
 #courseimg {
@@ -424,7 +422,7 @@ font-size:30px;
 </head>
 
 <body>
-<jsp:include page="header.jsp" />
+<jsp:include page="/header.jsp" flush="true"/>
 <div class="container" style="margin-top: 50px">
     <div class="row">
     	<section>
@@ -479,10 +477,10 @@ font-size:30px;
 <!-- 預覽課程頁面圖 -->
 <div class="col-lg-3 pull-right" style="margin-right:150px;width: 341px">
                 <div class="card card-inverse">
-                    <img class="card-img-top" src="Class Steps/imgs/請上傳課程封面.png" alt="course" id="wizardPicturePreview" title="">
+                    <img class="card-img-top" src="<%= request.getContextPath() %>/Class Steps/imgs/請上傳課程封面.png" alt="course" id="wizardPicturePreview" title="">
                     <div class="card-block">
                         <figure class="profile">
-                            <img src="Class Steps/imgs/eLook_LOGO1.png" class="profile-avatar" alt="">
+                            <img src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png" class="profile-avatar" alt="">
                         </figure>
                         <div class="card-text">
                         <p id="title" class="card-title mt-3 multi_ellipsis"></p>                        	
@@ -502,7 +500,7 @@ font-size:30px;
             </div>
 					
 							<div class="list-inline pull-right">
-                            <img alt="" src="Class Steps/imgs/預覽課程展示畫面.png" style="width:150px;height:250px;margin-right: 50px;margin-top: 50px">
+                            <img alt="" src="<%= request.getContextPath() %>/Class Steps/imgs/預覽課程展示畫面.png" style="width:150px;height:250px;margin-right: 50px;margin-top: 50px">
                             </div>
                             
                             	
