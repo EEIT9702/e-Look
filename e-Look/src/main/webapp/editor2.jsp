@@ -10,7 +10,8 @@
 
 </head>
 
-<body>
+<body >
+<jsp:include page="header.jsp" />
 
     <form>
       <textarea id="editor1">
