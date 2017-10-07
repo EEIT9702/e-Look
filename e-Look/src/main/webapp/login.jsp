@@ -7,19 +7,18 @@
 <link rel="Shortcut Icon" type="image/x-icon" href="${SYSTEM.iconUri}" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="login/viewport" content="width=device-width, initial-scale=1">
-<link href="login/css/bootstrap.css" rel="stylesheet" type="text/css">
-<link href="login/css/login.css" rel="stylesheet" type="text/css">
-<script  src="login/js/facebook_login.js" type="text/javascript"></script>
+<link href="<%=request.getContextPath() %>/login/css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="<%=request.getContextPath() %>/login/css/login.css" rel="stylesheet" type="text/css">
+<script  src="<%=request.getContextPath() %>/login/js/facebook_login.js" type="text/javascript"></script>
 <script src="https://apis.google.com/js/platform.js?onload=appStart" async defer>
 {lang: 'zh-TW'}
 </script>
-<script  src="login/js/google_login.js" type="text/javascript"></script>
-<script  src="login/js/jquery-3.2.1.js" type="text/javascript"></script>
-
-
+<script  src="<%=request.getContextPath() %>/login/js/google_login.js" type="text/javascript"></script>
+<script  src="<%=request.getContextPath() %>/login/js/jquery-3.2.1.js" type="text/javascript"></script>
+<title>${SYSTEM.systemName} </title>
 </head>
 <body>
-<jsp:include page="header.jsp" />
+<jsp:include page="/header.jsp" />
 <!-- 以下是login畫面 -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div  class="container modal-dialog" >
@@ -30,7 +29,7 @@
 					&times;
 			</button>
 				<h3 class="heading-desc">
-					<img style="margin: auto;" src="login/image/eLook_LOGO.png" width="100"
+					<img style="margin: auto;" src="<%=request.getContextPath() %>/login/image/eLook_LOGO.png" width="100"
 						class="img-rounded">
 				</h3>
 			</div>
@@ -39,7 +38,7 @@
 						<div class="col-md-12">
 							<button type="button" class="btn btn-primary btn-block"
 								onclick="myFacebookLogin()">
-								<img src="login/image/fbicon.png" class="img-rounded"><span>    Facebook 登入</span>
+								<img src="<%=request.getContextPath() %>/login/image/fbicon.png" class="img-rounded"><span>    Facebook 登入</span>
 							</button>
 						</div>
 					</div>
@@ -47,7 +46,7 @@
 						<div class="col-md-12">
 							<button id="google" type="button"
 								class="btn btn-danger btn-block">
-								<img src="login/image/sgicon.png" class="img-rounded"><span>     GOOGLE 登入</span> 
+								<img src="<%=request.getContextPath() %>/login/image/sgicon.png" class="img-rounded"><span>     GOOGLE 登入</span> 
 							</button>
 						</div>
 					</div>
