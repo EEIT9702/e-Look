@@ -36,7 +36,7 @@
 							+ '.');
 				});
 			} else {
-				alert("login out")
+//				alert("login out")
 			}
 		}, {
 			scope : 'public_profile,email'
