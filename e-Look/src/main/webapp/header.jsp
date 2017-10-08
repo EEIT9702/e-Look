@@ -81,7 +81,7 @@ body{
 			</ul>
 			<ul class="nav navbar-nav navbar-right" id="nopadding">
 
-				<li><a href="#"><img src="<%= request.getContextPath() %>/HeaderCssJs/002-shopping-cart.png"height="30" /></a></li>
+				<li><a href="#" data-toggle="modal" data-target="#ShoppingCar"><img src="<%= request.getContextPath() %>/HeaderCssJs/002-shopping-cart.png"height="30" /></a></li>
 
 				
 
