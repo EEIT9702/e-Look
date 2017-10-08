@@ -4,8 +4,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<jsp:useBean id="SYSTEM" class="init.GlobalService" scope="application"/>
+<link rel="Short Icon" type="image/x-icon" href="${SYSTEM.iconUri}" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>${SYSTEM.systemName}</title>
 <link href="HeaderCssJs/bootstrap.css" rel="stylesheet">
 <link href="HeaderCssJs/bootstrap.min.css" rel="stylesheet">
 <!-- Bootstrap Core CSS -->
@@ -85,7 +87,7 @@
 </script>	
 </head>
 <body onload="init()">
-<jsp:include page="${requestScope.contextPath}/header.jsp"/>
+<jsp:include page="${contextPath}/header.jsp"/>
 <%-- <jsp:include page="/header.jsp"/> --%>
 		<div class="container">
 			<div style="text-align:center">
