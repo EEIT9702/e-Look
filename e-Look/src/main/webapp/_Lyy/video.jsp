@@ -17,11 +17,10 @@
 <!-- <!-- Bootstrap Core JavaScript -->
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
 
-
-
 <style>
+
 video {
-	margin-top:-40px;
+	margin-top:-37px;
 	float: left;
 	width: 50%;
 	height: 450px;
@@ -31,14 +30,14 @@ video {
 	
 	background-color:#888888;
 	color:white;
-	
+	height:60px;
 }
 
 .listsize {
-width:35%;
+	width:35%;
 	float: left;
-		border-top-right-radius:2em;
-	border-bottom-right-radius:2em;
+	border-top-right-radius:2em;
+	font-size:20px;
 }
 
 #videoplay {
@@ -53,14 +52,18 @@ width:33%;
 border-bottom:2px solid orange;
 background-color:#FFFFBB;
 }
-/* .container>.nav>li>a:visit{ */
-/* border-top:1px solid #AAAAAA; */
-/* border-left:1px solid #AAAAAA; */
-/* border-right:1px solid #AAAAAA; */
-/* } */
+video::-internal-media-controls-download-button {
+    display:none;
+}
+video::-webkit-media-controls-enclosure {
+    overflow:hidden;
+}
+video::-webkit-media-controls-panel {
+    width: calc(100% + 30px); /* Adjust as needed */
+}
 </style>
 </head>
-<body>
+<body  oncontextmenu="window.event.returnValue=false">
 	<div class="container" id="videoplay">
 				<h2 align="center" >videoname</h2>
 				
