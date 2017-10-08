@@ -21,42 +21,72 @@
 
 <style>
 video {
-	margin-top:-50px;
+	margin-top:-40px;
 	float: left;
-	width: 700px;
-	height: 500px;
-
+	width: 50%;
+	height: 450px;
+	margin-left:95px;
 }
 .listsize>li {
-	width: 400px;	
+	
+	background-color:#888888;
+	color:white;
+	
 }
 
-ul {
-
+.listsize {
+width:35%;
 	float: left;
+		border-top-right-radius:2em;
+	border-bottom-right-radius:2em;
 }
 
-.container {
+#videoplay {
 	background: #e3e3e3;
-
+	width:100%;
 }
+.container>.nav>li{
+text-align:center;
+width:33%;
+}
+.container>.nav>li>a:hover{
+border-bottom:2px solid orange;
+background-color:#FFFFBB;
+}
+/* .container>.nav>li>a:visit{ */
+/* border-top:1px solid #AAAAAA; */
+/* border-left:1px solid #AAAAAA; */
+/* border-right:1px solid #AAAAAA; */
+/* } */
 </style>
 </head>
 <body>
-	<div class="container">
+	<div class="container" id="videoplay">
 				<h2 align="center" >videoname</h2>
 				
 					<video controls loop poster="poster.png">
 						<source src="rockman.mp4" type="video/mp4">
 					</video>
 					<ul class="list-group listsize ">
-						<li class="list-group-item">免费域名注册</li>
-						<li class="list-group-item">免费 Window 空间托管</li>
-						<li class="list-group-item">图像的数量</li>
-						<li class="list-group-item">24*7 支持</li>
-						<li class="list-group-item">每年更新成本</li>
-				</ul>
-				
+						<li class="list-group-item">first</li>
+						<li class="list-group-item">second</li>
+						<li class="list-group-item">third</li>
+						<li class="list-group-item">forth</li>
+						<li class="list-group-item">fifth</li>
+						<li class="list-group-item">sixth</li>
+						<li class="list-group-item">seventh</li>
+				</ul>			
+	</div>
+
+
+
+	<div class="container" >
+ 	<ul class="nav nav-tabs" role="tablist">
+	    <li ><a href="#">課程簡介</a></li>
+	    <li ><a href="#">課程評價</a></li>
+	    <li ><a href="#">問題討論</a></li>
+    
+ 	</ul>
 	</div>
 
 
