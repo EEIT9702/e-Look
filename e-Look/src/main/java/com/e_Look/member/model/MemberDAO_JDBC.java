@@ -1,7 +1,10 @@
 package com.e_Look.member.model;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -263,15 +266,15 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 	public static void main(String[] args) throws FileNotFoundException {
 		MemberDAO_JDBC dao = new MemberDAO_JDBC();
 //		//新增會員
-//		MemberVO memberVO1= new MemberVO();
-//		memberVO1.setmName("李XX");
-//		memberVO1.setEmail("abc852855230@yahyy.com.tw");
-//		memberVO1.setmPassword("XXXX");
-//		memberVO1.setRegisterDate(new Date(System.currentTimeMillis()));
-//		memberVO1.setStatus((byte) 0);
-//		memberVO1.setCount(1);
-//		memberVO1.setmPhoto(new FileInputStream(new File("src/main/webapp/img/imember_image.png")));
-//		dao.insert(memberVO1);
+		MemberVO memberVO1= new MemberVO();
+		memberVO1.setmName("李XX");
+		memberVO1.setEmail("abc852855230@yahyy.com.tw");
+		memberVO1.setmPassword("XXXX");
+		memberVO1.setRegisterDate(new Date(System.currentTimeMillis()));
+		memberVO1.setStatus((byte) 0);
+		memberVO1.setCount(1);
+		memberVO1.setmPhoto(new FileInputStream(new File("src/main/webapp/img/imember_image.png")));
+		dao.insert(memberVO1);
 //		//修改會員資料
 //		MemberVO memberVO2= new MemberVO();
 //		memberVO2.setMemberID(100001);
