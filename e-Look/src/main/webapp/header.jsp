@@ -25,6 +25,11 @@
 	position:relative; /* 當滑鼠經過超連結時，超連結往右下位移2像素 */
 	top: 2px;
 	left: 2px;
+	animation:myfirst 1s;
+}
+@keyframes myfirst{
+from {border-bottom:2px solid blue;}
+to {border-bottom:2px solid orange;}
 }
 #myNavbar li {
 	padding-top:5px;
