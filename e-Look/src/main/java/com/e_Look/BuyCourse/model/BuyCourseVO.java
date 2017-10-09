@@ -1,6 +1,10 @@
-package _zhi;
+package com.e_Look.BuyCourse.model;
 
-public class BuyCourseVO {
+import java.io.Serializable;
+
+public class BuyCourseVO implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private Integer memberID;
 	private Integer courseID;
 	private Integer score;
