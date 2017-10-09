@@ -22,7 +22,7 @@
 video {
 	margin-top:-37px;
 	float: left;
-	width: 50%;
+	width: 660px;
 	height: 450px;
 	margin-left:95px;
 }
@@ -78,21 +78,15 @@ video::-webkit-media-controls-panel {
 						<li class="list-group-item">fifth</li>
 						<li class="list-group-item">sixth</li>
 						<li class="list-group-item">seventh</li>
-				</ul>			
+					</ul>			
 	</div>
-
-
-
 	<div class="container" >
  	<ul class="nav nav-tabs" role="tablist">
 	    <li ><a href="#">課程簡介</a></li>
 	    <li ><a href="#">課程評價</a></li>
 	    <li ><a href="#">問題討論</a></li>
-    
  	</ul>
 	</div>
-
-
 
 </body>
 </html>
