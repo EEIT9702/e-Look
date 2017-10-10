@@ -7,10 +7,8 @@
 <title>Insert title here</title>
 <link href="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.css"
 	rel="stylesheet">
-
-<!-- <!-- Custom CSS -->
-<%-- <link href="<%=request.getContextPath()%>/HeaderCssJs/landing-page.css" --%>
-<!-- 	rel="stylesheet"> -->
+<link href="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.css"
+	rel="stylesheet">
 <!-- <!-- jQuery -->
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
 
@@ -34,7 +32,7 @@ video {
 }
 
 .listsize {
-	width:35%;
+	width:36%;
 	float: left;
 	border-top-right-radius:2em;
 	font-size:20px;
@@ -46,7 +44,7 @@ video {
 }
 .container>.nav>li{
 text-align:center;
-width:33%;
+width:33.2%;
 }
 .container>.nav>li>a:hover{
 border-bottom:2px solid orange;
@@ -61,6 +59,9 @@ video::-webkit-media-controls-enclosure {
 video::-webkit-media-controls-panel {
     width: calc(100% + 30px); /* Adjust as needed */
 }
+.col-sm-8{
+border-bottom:1px solid #DDDDDD;
+}
 </style>
 </head>
 <body  oncontextmenu="window.event.returnValue=false">
@@ -68,7 +69,7 @@ video::-webkit-media-controls-panel {
 				<h2 align="center" >videoname</h2>
 				
 					<video controls loop poster="poster.png">
-						<source src="rockman.mp4" type="video/mp4">
+						<source src="tri.mp4" type="video/mp4">
 					</video>
 					<ul class="list-group listsize ">
 						<li class="list-group-item">first</li>
@@ -78,14 +79,62 @@ video::-webkit-media-controls-panel {
 						<li class="list-group-item">fifth</li>
 						<li class="list-group-item">sixth</li>
 						<li class="list-group-item">seventh</li>
-					</ul>			
+					</ul>	
+					
+					
+							
 	</div>
 	<div class="container" >
- 	<ul class="nav nav-tabs" role="tablist">
-	    <li ><a href="#">課程簡介</a></li>
-	    <li ><a href="#">課程評價</a></li>
-	    <li ><a href="#">問題討論</a></li>
- 	</ul>
+			<div class="row" >
+				<div class="col-md-12" style="height:80px" >
+					<div class="col-md-2">
+					<img src="004-people.png" >	
+					<span>課程人數</span>
+							
+					</div>
+					<div class="col-md-2">
+					<img src="clock.png" height="64px">	
+					<span>課程時間</span>			
+					</div>
+					<div class="col-md-2">
+					<img src="002-question.png" height="64px">
+					<span>問題討論</span>					
+					</div>
+					<div class="col-md-2">
+					<img src="001-download.png" height="64px">	
+					<span>講義下載</span>				
+					</div>
+					<div class="col-md-2" style="height:64px">
+						 <small>課程售價</small>
+						 <h3 align="center">NT12312</h3>					 
+					</div>	
+					<div class="col-md-2" style="height:80px">
+						<h4>星星數量位置</h4>
+						<button type="button" class="btn btn-success" style="width:170px">購買課程</button> 
+					</div>	
+				</div>	
+			</div>
+					
+		 	<ul class="nav nav-tabs" role="tablist" style="margin-top:30px">
+			    <li ><a href="#"><b>課程簡介</b></a></li>
+			    <li ><a href="#"><b>課程評價</b></a></li>
+			    <li ><a href="#"><b>問題討論</b></a></li>
+		 	</ul>
+		 	
+		 	<div class="col-md-12">
+		 	<p>自我介紹</p>	
+		 	<p>自我介紹</p>	
+		 	<p>自我介紹</p>	
+		 	<p>自我介紹</p>	
+		 	<p>自我介紹</p>	
+		 	<p>自我介紹</p>	
+		 	<p>自我介紹</p>	
+		 	<p>自我介紹</p>	
+		 	<p>自我介紹</p>	
+		 	<p>自我介紹</p>	
+		 	<p>自我介紹</p>	
+		 	<p>自我介紹</p>	
+		 	</div>
 	</div>
 
 </body>
