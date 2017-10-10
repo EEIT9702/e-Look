@@ -17,7 +17,7 @@ public class BuyCourseDAO implements BuyCourseDAO_interface {
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/jdbc/eLookDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/eLookDB");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
