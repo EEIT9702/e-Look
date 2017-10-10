@@ -1,0 +1,66 @@
+body{
+    margin-top:10px;
+    background: #e0e0e0;
+}
+
+.update-nag{
+  display: inline-block;
+  font-size: 20px;
+  text-align: center;
+  background-color: #fff;
+  height: 60px;
+  -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+  margin-bottom: 10px;
+}
+
+.update-nag:hover{
+    cursor: pointer;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.4);
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,.3);
+}
+
+.update-nag > .update-split{
+  background: #337ab7;
+  width: 60px;
+  float: left;
+  color: #fff!important;
+  height: 100%;
+  text-align: center;
+}
+
+.update-nag > .update-split > .glyphicon{
+  position:relative;
+  top: calc(50% - 9px)!important; /* 50% - 3/4 of icon height */
+}
+.update-nag > .update-split.update-step1{
+  background: #ff8080!important;
+}
+.update-nag > .update-split.update-step2{
+  background: #ff8000!important;
+}
+.update-nag > .update-split.update-step3{
+  background: #f7e613!important;
+}
+.update-nag > .update-split.update-step4{
+  background: #6dd873!important;
+}
+.update-nag > .update-split.update-step5{
+  background: #5bc0de!important;
+}
+.update-nag > .update-split.update-step6{
+  background: #0080ff!important;
+}
+.update-nag > .update-split.update-step7{
+  background: #8080ff!important;
+}
+
+
+
+.update-text{
+  font-size: 20pt;
+  line-height: 20px;
+  padding-top: 20px;
+  padding-left: 110px;
+  padding-right: 20px;
+}
