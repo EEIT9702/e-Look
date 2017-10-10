@@ -1,7 +1,10 @@
 package com.e_Look.member.model;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
+@SuppressWarnings("unused")
 public class MemberDAO_JDBC implements MemberDAO_interface{
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=elook";
@@ -30,6 +34,8 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 		      "delete from Member where memberID= ?";
 	private static final String SELECT_ONE_MEMBER =
 		      "select memberID ,email,mPassword,mName,mPhoto,skill,hobby,registerDate,status,count,address from Member where memberID= ?";
+	private static final String SELECT_EMAIL_MEMBER =
+		      "select memberID ,email,mPassword,mName,mPhoto,skill,hobby,registerDate,status,count,address from Member where email= ?";
 	private static final String SELECT_ALL_MEMBER =
 		      "select memberID ,email,mPassword,mName,mPhoto,skill,hobby,registerDate,status,count,address from Member";
 	@Override
@@ -209,7 +215,54 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 		}
 		return memberVO;
 	}
-
+	@Override
+	public MemberVO findByPrimaryKey(String email) {
+		MemberVO memberVO=null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(SELECT_EMAIL_MEMBER);
+			pstmt.setString(1, email);
+			ResultSet  rs=pstmt.executeQuery();
+			if(rs.next()){
+				memberVO=new MemberVO();
+				memberVO.setMemberID(rs.getInt(1));
+				memberVO.setEmail(rs.getString(2));
+				memberVO.setmPassword(rs.getString(3));
+				memberVO.setmName(rs.getString(4));
+				memberVO.setmPhoto(rs.getBinaryStream(5));
+				memberVO.setSkill(rs.getString(6));
+				memberVO.setHobby(rs.getString(7));
+				memberVO.setRegisterDate(rs.getDate(8));
+				memberVO.setStatus(rs.getByte(9));
+				memberVO.setCount(rs.getInt(10));
+				memberVO.setAddress(rs.getString(11));
+			}
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. "
+					+ e.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return memberVO;
+	}
 	@Override
 	public List<MemberVO> getAll() {
 		List<MemberVO> list =new LinkedList<MemberVO>();
@@ -263,15 +316,32 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 	public static void main(String[] args) throws FileNotFoundException {
 		MemberDAO_JDBC dao = new MemberDAO_JDBC();
 //		//新增會員
-//		MemberVO memberVO1= new MemberVO();
-//		memberVO1.setmName("李XX");
-//		memberVO1.setEmail("abc852855230@yahyy.com.tw");
-//		memberVO1.setmPassword("XXXX");
-//		memberVO1.setRegisterDate(new Date(System.currentTimeMillis()));
-//		memberVO1.setStatus((byte) 0);
-//		memberVO1.setCount(1);
-//		memberVO1.setmPhoto(new FileInputStream(new File("src/main/webapp/img/imember_image.png")));
-//		dao.insert(memberVO1);
+		MemberVO memberVO1= new MemberVO();
+		memberVO1.setmName("李XX");
+		memberVO1.setEmail("abc852855230@yahyy.com.tw");
+		memberVO1.setmPassword("XXXX");
+		memberVO1.setRegisterDate(new Date(System.currentTimeMillis()));
+		memberVO1.setStatus((byte) 0);
+		memberVO1.setCount(1);
+		/*331行 是讀取硬碟路徑寫入資料庫方法*/
+		memberVO1.setmPhoto(new FileInputStream(new File("src/main/webapp/img/imember_image.png")));
+		/*333行~341行 是讀取網路圖片寫入資料庫方法*/
+//		try {
+//			HttpURLConnection con = (HttpURLConnection)(new URL("http://graph.facebook.com/106384896774920/picture?type=large").openConnection());
+//			String location = con.getHeaderField("Location");
+//			con.setInstanceFollowRedirects( false );
+//			con.connect();
+//			int responseCode = con.getResponseCode();
+//			System.out.println( responseCode );
+//			URL url  = new URL(location);
+//			memberVO1.setmPhoto(url.openStream());
+//			
+//		} catch (MalformedURLException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+		dao.insert(memberVO1);
 //		//修改會員資料
 //		MemberVO memberVO2= new MemberVO();
 //		memberVO2.setMemberID(100001);
@@ -303,21 +373,23 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 //		System.out.println(memberVO3.getCount());
 //		System.out.println(memberVO3.getAddress());
 		//查詢全部會員
-		List<MemberVO> list=dao.getAll();
-		for(MemberVO memberVO :list){
-			System.out.print(memberVO.getMemberID()+"  ");
-			System.out.print(memberVO.getEmail()+"  ");
-			System.out.print(memberVO.getmPassword()+"  ");
-			System.out.print(memberVO.getmName()+"  ");
-			System.out.print(memberVO.getmPhoto()+"  ");
-			System.out.print(memberVO.getSkill()+"  ");
-			System.out.print(memberVO.getHobby()+"  ");
-			System.out.print(memberVO.getRegisterDate()+"  ");
-			System.out.print(memberVO.getStatus()+"  ");
-			System.out.print(memberVO.getCount()+"  ");
-			System.out.println(memberVO.getAddress());
-		}
+//		List<MemberVO> list=dao.getAll();
+//		for(MemberVO memberVO :list){
+//			System.out.print(memberVO.getMemberID()+"  ");
+//			System.out.print(memberVO.getEmail()+"  ");
+//			System.out.print(memberVO.getmPassword()+"  ");
+//			System.out.print(memberVO.getmName()+"  ");
+//			System.out.print(memberVO.getmPhoto()+"  ");
+//			System.out.print(memberVO.getSkill()+"  ");
+//			System.out.print(memberVO.getHobby()+"  ");
+//			System.out.print(memberVO.getRegisterDate()+"  ");
+//			System.out.print(memberVO.getStatus()+"  ");
+//			System.out.print(memberVO.getCount()+"  ");
+//			System.out.println(memberVO.getAddress());
+//		}
 	}
+
+
 }
 
 
