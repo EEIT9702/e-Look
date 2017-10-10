@@ -76,6 +76,7 @@ body{
 				<li><a href="#"><img src="<%=request.getContextPath() %>/HeaderCssJs/002-shopping-cart.png"height="30" /></a></li>
 				<c:choose>
 				<c:when test="${!empty LoginOK}">
+				<li><a href="#"><img src="<%=request.getContextPath() %>/Image?MemberID=${LoginOK.memberID}"height="30" />${LoginOK.mName}</a></li>
 				</c:when>
 				<c:when test="${empty err}">
 				<li><a href="#"data-toggle="modal" data-target="#myModal"><img src="<%=request.getContextPath() %>/HeaderCssJs/001-login.png"height="30" />登入</a></li>
