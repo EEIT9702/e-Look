@@ -124,4 +124,11 @@ public class MemberVO implements Serializable {
 		this.address = address;
 	}
 
+	@Override
+	public String toString() {
+		return "MemberVO [memberID=" + memberID + ", email=" + email + ", mPassword=" + mPassword + ", mName=" + mName
+				+ ", mPhoto=" + mPhoto + ", skill=" + skill + ", hobby=" + hobby + ", registerDate=" + registerDate
+				+ ", status=" + status + ", count=" + count + ", address=" + address + "]";
+	}
+
 }

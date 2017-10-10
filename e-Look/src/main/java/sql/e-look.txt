@@ -202,9 +202,9 @@ SET ANSI_PADDING ON
 GO
 CREATE TABLE [dbo].[Member](
 	[memberID] [int] IDENTITY(100001,1) NOT NULL,
-	[email] [varchar](50) NOT NULL,
+	[email] [varchar](100) NOT NULL,
 	[mPassword] [varchar](10) NOT NULL,
-	[mName] [nvarchar](10) NULL,
+	[mName] [nvarchar](50) NULL,
 	[mPhoto] [varbinary](max) NULL,
 	[aboutme] [nvarchar](150) NULL,
 	[skill] [nvarchar](50) NULL,
