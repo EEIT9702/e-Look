@@ -91,37 +91,37 @@ a{
 		<ul>
 		<!-- <a href=""></a> -->
 			<li><a class="btn btn-primary" href=""><img lazy_style="-webkit-filter:grayscale(1)" style="" 
-				class="svgIcon" src="<%=request.getContextPath() %>/body/img/life.svg" onmousedown=""><br>生活</a>
+				class="svgIcon" src="<%=request.getContextPath() %>/alan/img/life.svg" onmousedown=""><br>生活</a>
 			</li>
 			<li><a class="btn btn-primary" href=""><img lazy_style="-webkit-filter:grayscale(1)" style="-webkit-filter:grayscale(0)" 
-				class="svgIcon" src="<%=request.getContextPath() %>/body/img/arts.svg"><br>藝術</a>
+				class="svgIcon" src="<%=request.getContextPath() %>/alan/img/arts.svg"><br>藝術</a>
 			</li>
 			<li><a class="btn btn-primary" href=""><img lazy_style="-webkit-filter:grayscale(1)" style="-webkit-filter:grayscale(0)" 
-				class="svgIcon" src="<%=request.getContextPath() %>/body/img/athletics.svg"><br>運動</a>
+				class="svgIcon" src="<%=request.getContextPath() %>/alan/img/athletics.svg"><br>運動</a>
 			</li>
 			<li><a class="btn btn-primary" href=""><img lazy_style="-webkit-filter:grayscale(1)" style="-webkit-filter:grayscale(0)" 
-				class="svgIcon" src="<%=request.getContextPath() %>/body/img/hand-made.svg"><br>手作</a>
+				class="svgIcon" src="<%=request.getContextPath() %>/alan/img/hand-made.svg"><br>手作</a>
 			</li>
 			<li><a href=""><img lazy_style="-webkit-filter:grayscale(1)" style="-webkit-filter:grayscale(0)" 
-				class="svgIcon" src="<%=request.getContextPath() %>/body/img/other.svg"><br>其他</a>
+				class="svgIcon" src="<%=request.getContextPath() %>/alan/img/other.svg"><br>其他</a>
 			</li>
 			<li><a href=""><img lazy_style="-webkit-filter:grayscale(1)" style="-webkit-filter:grayscale(0)" 
-				class="svgIcon" src="<%=request.getContextPath() %>/body/img/design.svg"><br>設計</a>
+				class="svgIcon" src="<%=request.getContextPath() %>/alan/img/design.svg"><br>設計</a>
 			</li>
 			<li><a href=""><img lazy_style="-webkit-filter:grayscale(1)" style="-webkit-filter:grayscale(0)" 
-				class="svgIcon" src="<%=request.getContextPath() %>/body/img/science.svg"><br>科技</a>
+				class="svgIcon" src="<%=request.getContextPath() %>/alan/img/science.svg"><br>科技</a>
 			</li>
 			<li><a href=""><img lazy_style="-webkit-filter:grayscale(1)" style="-webkit-filter:grayscale(0)" 
-				class="svgIcon" src="<%=request.getContextPath() %>/body/img/business.svg"><br>商業</a>
+				class="svgIcon" src="<%=request.getContextPath() %>/alan/img/business.svg"><br>商業</a>
 			</li>
 			<li><a href=""><img lazy_style="-webkit-filter:grayscale(1)" style="-webkit-filter:grayscale(0)" 
-				class="svgIcon" src="<%=request.getContextPath() %>/body/img/language.svg"><br>語言</a>
+				class="svgIcon" src="<%=request.getContextPath() %>/alan/img/language.svg"><br>語言</a>
 			</li>
 			<li><a href=""><img lazy_style="-webkit-filter:grayscale(1)" style="-webkit-filter:grayscale(0)" 
-				class="svgIcon" src="<%=request.getContextPath() %>/body/img/cooking.svg"><br>烹飪</a>
+				class="svgIcon" src="<%=request.getContextPath() %>/alan/img/cooking.svg"><br>烹飪</a>
 			</li>
 			<li><a href=""><img lazy_style="-webkit-filter:grayscale(1)" style="-webkit-filter:grayscale(0)" 
-				class="svgIcon" src="<%=request.getContextPath() %>/body/img/program.svg"><br>程式</a>
+				class="svgIcon" src="<%=request.getContextPath() %>/alan/img/program.svg"><br>程式</a>
 			</li>
 		</ul>
 	</div>

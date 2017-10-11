@@ -56,25 +56,25 @@
 <!-- 	<div style="text-align:center;"> -->
 	<div class="ndiv">
 		<ul>
-			<li><img class="svgIcon" src="<%=request.getContextPath() %>/body/img/life.svg"><br>生活</li>
-			<li><img class="svgIcon" src="<%=request.getContextPath() %>/body/img/arts.svg"><br>藝術</li>
-			<li><img class="svgIcon" src="<%=request.getContextPath() %>/body/img/athletics.svg"><br>運動</li>
-			<li><img class="svgIcon" src="<%=request.getContextPath() %>/body/img/hand-made.svg"><br>手作</li>
-			<li><img class="svgIcon" src="<%=request.getContextPath() %>/body/img/other.svg"><br>其他</li>
-			<li><img class="svgIcon" src="<%=request.getContextPath() %>/body/img/design.svg"><br>設計</li>
-			<li><img class="svgIcon" src="<%=request.getContextPath() %>/body/img/science.svg"><br>科技</li>
-			<li><img class="svgIcon" src="<%=request.getContextPath() %>/body/img/business.svg"><br>商業</li>
-			<li><img class="svgIcon" src="<%=request.getContextPath() %>/body/img/language.svg"><br>語言</li>
-			<li><img class="svgIcon" src="<%=request.getContextPath() %>/body/img/cooking.svg"><br>烹飪</li>
-			<li><img class="svgIcon" src="<%=request.getContextPath() %>/body/img/program.svg"><br>程式</li>
+			<li><img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/life.svg"><br>生活</li>
+			<li><img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/arts.svg"><br>藝術</li>
+			<li><img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/athletics.svg"><br>運動</li>
+			<li><img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/hand-made.svg"><br>手作</li>
+			<li><img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/other.svg"><br>其他</li>
+			<li><img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/design.svg"><br>設計</li>
+			<li><img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/science.svg"><br>科技</li>
+			<li><img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/business.svg"><br>商業</li>
+			<li><img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/language.svg"><br>語言</li>
+			<li><img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/cooking.svg"><br>烹飪</li>
+			<li><img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/program.svg"><br>程式</li>
 		</ul>
 	</div>
 
 
-<%-- 		<div><img class="svgIcon" src="<%=request.getContextPath() %>/body/img/life.svg"><a href="#category1">生活</a></div> --%>
-<%-- 		<div><img class="svgIcon" src="<%=request.getContextPath() %>/body/img/arts.svg"><a href="#category2">藝術</a></div> --%>
-<%-- 		<div><img class="svgIcon" src="<%=request.getContextPath() %>/body/img/athletics.svg"><a href="#category3">運動</a></div> --%>
-<%-- 		<div><img class="svgIcon" src="<%=request.getContextPath() %>/body/img/video.svg"><a href="#category4">影音</a></div> --%>
+<%-- 		<div><img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/life.svg"><a href="#category1">生活</a></div> --%>
+<%-- 		<div><img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/arts.svg"><a href="#category2">藝術</a></div> --%>
+<%-- 		<div><img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/athletics.svg"><a href="#category3">運動</a></div> --%>
+<%-- 		<div><img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/video.svg"><a href="#category4">影音</a></div> --%>
 		
 <!-- 		<ul class="menu" id="menu"> -->
 <!-- 			<li><a href="#">選單1</a></li> -->
@@ -82,5 +82,5 @@
 <!-- 			<li><a href="#">選單3</a></li> -->
 <!-- 			<li><a href="#">選單4</a></li> -->
 <!-- 		</ul> -->
-</body>
+</alan>
 </html>
