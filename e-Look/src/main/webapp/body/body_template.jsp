@@ -51,8 +51,8 @@ h5 {
 
 .card-img-top {
     display: block;
-    width: 310px;
-    height:200px;
+ 	width: 340px;
+/*  height:200px; */
     margin-top: 4px;
     margin-bottom: 4px;
 }
@@ -170,9 +170,14 @@ font-size:30px;
 		var ads = document.getElementById("ads");
 		//隱藏圖片
 		ads.style.display = "none";
-		},3000)
+		},800)
 	}
-	window.onload = showAdPic;
+	//window.onload = showAdPic;
+	
+	$(function(){
+		showAdPic();
+		init();
+	});
 	
 	/*延遲載入圖片*/
 	//初始化函數
@@ -213,7 +218,7 @@ font-size:30px;
 	}
 </script>	
 </head>
-<body onload="init()">
+<body>
 <jsp:include page="${contextPath}/header.jsp"/>
 <%-- <jsp:include page="/header.jsp"/> --%>
 	  <div class="container">
@@ -222,7 +227,7 @@ font-size:30px;
 			</div>
 		<!-- 1-4 Template row -->
 		<div class="row">
-			<div class="item col-md-3 img-portfolio" style="width: 341px">
+			<div class="item col-md-3 img-portfolio">
                 <div class="card card-inverse">
                     <img class="img-responsive img-hover card-img-top" src="img/001.jpg" alt="course" id="wizardPicturePreview" title="">
                     <div class="card-block">
@@ -244,7 +249,7 @@ font-size:30px;
                     </div>
                 </div>
             </div>
-            <div class="item col-md-3 img-portfolio" style="width: 341px">
+            <div class="item col-md-3 img-portfolio">
                 <div class="card card-inverse">
                     <img class="img-responsive img-hover card-img-top" src="img/002.jpg" alt="course" id="wizardPicturePreview" title="">
                     <div class="card-block">
@@ -266,7 +271,7 @@ font-size:30px;
                     </div>
                 </div>
             </div>
-            <div class="item col-md-3 img-portfolio" style="width: 341px">
+            <div class="item col-md-3 img-portfolio">
                 <div class="card card-inverse">
                     <img class="img-responsive img-hover card-img-top" src="img/003.jpg" alt="course" id="wizardPicturePreview" title="">
                     <div class="card-block">
@@ -288,7 +293,7 @@ font-size:30px;
                     </div>
                 </div>
             </div>
-            <div class="item col-md-3 img-portfolio" style="width: 341px">
+            <div class="item col-md-3 img-portfolio">
                 <div class="card card-inverse">
                     <img class="img-responsive img-hover card-img-top" src="img/004.jpg" alt="course" id="wizardPicturePreview" title="">
                     <div class="card-block">
@@ -315,7 +320,7 @@ font-size:30px;
 		<br>
 		<!-- 5-8 Template row -->
 		<div class="row">
-			<div class="item col-md-3 img-portfolio" style="width: 341px">
+			<div class="item col-md-3 img-portfolio" >
                 <div class="card card-inverse">
                     <img class="img-responsive img-hover card-img-top" src="" lazy_src="img/005.jpg" 
                     alt="course" id="wizardPicturePreview" title="">
@@ -338,7 +343,7 @@ font-size:30px;
                     </div>
                 </div>
             </div>
-            <div class="item col-md-3 img-portfolio" style="width: 341px">
+            <div class="item col-md-3 img-portfolio" >
                 <div class="card card-inverse">
                     <img class="img-responsive img-hover card-img-top" src="" lazy_src="img/006.jpg" 
                     alt="course" id="wizardPicturePreview" title="">
@@ -361,7 +366,7 @@ font-size:30px;
                     </div>
                 </div>
             </div>
-            <div class="item col-md-3 img-portfolio" style="width: 341px">
+            <div class="item col-md-3 img-portfolio" >
                 <div class="card card-inverse">
                     <img class="img-responsive img-hover card-img-top" src="" lazy_src="img/007.jpg" 
                     alt="course" id="wizardPicturePreview" title="">
@@ -384,7 +389,7 @@ font-size:30px;
                     </div>
                 </div>
             </div>
-            <div class="item col-md-3 img-portfolio" style="width: 341px">
+            <div class="item col-md-3 img-portfolio" >
                 <div class="card card-inverse">
                     <img class="img-responsive img-hover card-img-top" src="" lazy_src="img/008.jpg" 
                     alt="course" id="wizardPicturePreview" title="">
@@ -412,7 +417,7 @@ font-size:30px;
 		<br>
 		<!-- 9-12 Template row -->
 		<div class="row">
-			<div class="item col-md-3 img-portfolio" style="width: 341px">
+			<div class="item col-md-3 img-portfolio" >
                 <div class="card card-inverse">
                     <img class="img-responsive img-hover card-img-top" src="" lazy_src="img/009.jpg" 
                     alt="course" id="wizardPicturePreview" title="">
@@ -435,7 +440,7 @@ font-size:30px;
                     </div>
                 </div>
             </div>
-            <div class="item col-md-3 img-portfolio" style="width: 341px">
+            <div class="item col-md-3 img-portfolio" >
                 <div class="card card-inverse">
                     <img class="img-responsive img-hover card-img-top" src="" lazy_src="img/010.jpg" 
                     alt="course" id="wizardPicturePreview" title="">
@@ -458,7 +463,7 @@ font-size:30px;
                     </div>
                 </div>
             </div>
-            <div class="item col-md-3 img-portfolio" style="width: 341px">
+            <div class="item col-md-3 img-portfolio" >
                 <div class="card card-inverse">
                     <img class="img-responsive img-hover card-img-top" src="" lazy_src="img/011.jpg" 
                     alt="course" id="wizardPicturePreview" title="">
@@ -481,7 +486,7 @@ font-size:30px;
                     </div>
                 </div>
             </div>
-            <div class="item col-md-3 img-portfolio" style="width: 341px">
+            <div class="item col-md-3 img-portfolio" >
                 <div class="card card-inverse">
                     <img class="img-responsive img-hover card-img-top" src="" lazy_src="img/012.jpg" 
                     alt="course" id="wizardPicturePreview" title="">
@@ -509,7 +514,7 @@ font-size:30px;
 		<br>
 		<!-- 13-16 Template row -->
 		<div class="row">
-			<div class="item col-md-3 img-portfolio" style="width: 341px">
+			<div class="item col-md-3 img-portfolio" >
                 <div class="card card-inverse">
                     <img class="img-responsive img-hover card-img-top" src="" lazy_src="img/001.jpg" 
                     alt="course" id="wizardPicturePreview" title="">
@@ -532,7 +537,7 @@ font-size:30px;
                     </div>
                 </div>
             </div>
-            <div class="item col-md-3 img-portfolio" style="width: 341px">
+            <div class="item col-md-3 img-portfolio" >
                 <div class="card card-inverse">
                     <img class="img-responsive img-hover card-img-top" src="" lazy_src="img/002.jpg" 
                     alt="course" id="wizardPicturePreview" title="">
@@ -555,7 +560,7 @@ font-size:30px;
                     </div>
                 </div>
             </div>
-            <div class="item col-md-3 img-portfolio" style="width: 341px">
+            <div class="item col-md-3 img-portfolio" >
                 <div class="card card-inverse">
                     <img class="img-responsive img-hover card-img-top" src="" lazy_src="img/003.jpg" 
                     alt="course" id="wizardPicturePreview" title="">
@@ -578,7 +583,7 @@ font-size:30px;
                     </div>
                 </div>
             </div>
-            <div class="item col-md-3 img-portfolio" style="width: 341px">
+            <div class="item col-md-3 img-portfolio" >
                 <div class="card card-inverse">
                     <img class="img-responsive img-hover card-img-top" src="" lazy_src="img/004.jpg" 
                     alt="course" id="wizardPicturePreview" title="">
@@ -606,7 +611,7 @@ font-size:30px;
 		<br>
 		<!-- 17-20 Template row -->
 		<div class="row">
-			<div class="item col-md-3 img-portfolio" style="width: 341px">
+			<div class="item col-md-3 img-portfolio" >
                 <div class="card card-inverse">
                     <img class="img-responsive img-hover card-img-top" src="" lazy_src="img/005.jpg" 
                     alt="course" id="wizardPicturePreview" title="">
@@ -629,7 +634,7 @@ font-size:30px;
                     </div>
                 </div>
             </div>
-            <div class="item col-md-3 img-portfolio" style="width: 341px">
+            <div class="item col-md-3 img-portfolio" >
                 <div class="card card-inverse">
                     <img class="img-responsive img-hover card-img-top" src="" lazy_src="img/006.jpg" 
                     alt="course" id="wizardPicturePreview" title="">
@@ -652,7 +657,7 @@ font-size:30px;
                     </div>
                 </div>
             </div>
-            <div class="item col-md-3 img-portfolio" style="width: 341px">
+            <div class="item col-md-3 img-portfolio" >
                 <div class="card card-inverse">
                     <img class="img-responsive img-hover card-img-top" src="" lazy_src="img/007.jpg" 
                     alt="course" id="wizardPicturePreview" title="">
@@ -675,7 +680,7 @@ font-size:30px;
                     </div>
                 </div>
             </div>
-            <div class="item col-md-3 img-portfolio" style="width: 341px">
+            <div class="item col-md-3 img-portfolio" >
                 <div class="card card-inverse">
                     <img class="img-responsive img-hover card-img-top" src="" lazy_src="img/008.jpg" 
                     alt="course" id="wizardPicturePreview" title="">
@@ -703,7 +708,7 @@ font-size:30px;
 		<br>
 		<!-- 21-24 Template row -->
 		<div class="row">
-			<div class="item col-md-3 img-portfolio" style="width: 341px">
+			<div class="item col-md-3 img-portfolio" >
                 <div class="card card-inverse">
                     <img class="img-responsive img-hover card-img-top" src="" lazy_src="img/009.jpg" 
                     alt="course" id="wizardPicturePreview" title="">
@@ -726,7 +731,7 @@ font-size:30px;
                     </div>
                 </div>
             </div>
-            <div class="item col-md-3 img-portfolio" style="width: 341px">
+            <div class="item col-md-3 img-portfolio" >
                 <div class="card card-inverse">
                     <img class="img-responsive img-hover card-img-top" src="" lazy_src="img/010.jpg" 
                     alt="course" id="wizardPicturePreview" title="">
@@ -749,7 +754,7 @@ font-size:30px;
                     </div>
                 </div>
             </div>
-            <div class="item col-md-3 img-portfolio" style="width: 341px">
+            <div class="item col-md-3 img-portfolio" >
                 <div class="card card-inverse">
                     <img class="img-responsive img-hover card-img-top" src="" lazy_src="img/011.jpg" 
                     alt="course" id="wizardPicturePreview" title="">
@@ -772,7 +777,7 @@ font-size:30px;
                     </div>
                 </div>
             </div>
-            <div class="item col-md-3 img-portfolio" style="width: 341px">
+            <div class="item col-md-3 img-portfolio" >
                 <div class="card card-inverse">
                     <img class="img-responsive img-hover card-img-top" src="" lazy_src="img/012.jpg" 
                     alt="course" id="wizardPicturePreview" title="">
@@ -800,7 +805,7 @@ font-size:30px;
 		<br>
 		<!-- 25-28 Template row -->
 		<div class="row">
-			<div class="item col-md-3 img-portfolio" style="width: 341px">
+			<div class="item col-md-3 img-portfolio" >
                 <div class="card card-inverse">
                     <img class="img-responsive img-hover card-img-top" src="" lazy_src="img/001.jpg" 
                     alt="course" id="wizardPicturePreview" title="">
@@ -823,7 +828,7 @@ font-size:30px;
                     </div>
                 </div>
             </div>
-            <div class="item col-md-3 img-portfolio" style="width: 341px">
+            <div class="item col-md-3 img-portfolio" >
                 <div class="card card-inverse">
                     <img class="img-responsive img-hover card-img-top" src="" lazy_src="img/002.jpg" 
                     alt="course" id="wizardPicturePreview" title="">
@@ -846,7 +851,7 @@ font-size:30px;
                     </div>
                 </div>
             </div>
-            <div class="item col-md-3 img-portfolio" style="width: 341px">
+            <div class="item col-md-3 img-portfolio" >
                 <div class="card card-inverse">
                     <img class="img-responsive img-hover card-img-top" src="" lazy_src="img/003.jpg" 
                     alt="course" id="wizardPicturePreview" title="">
@@ -869,7 +874,7 @@ font-size:30px;
                     </div>
                 </div>
             </div>
-            <div class="item col-md-3 img-portfolio" style="width: 341px">
+            <div class="item col-md-3 img-portfolio">
                 <div class="card card-inverse">
                     <img class="img-responsive img-hover card-img-top" src="" lazy_src="img/004.jpg" 
                     alt="course" id="wizardPicturePreview" title="">
