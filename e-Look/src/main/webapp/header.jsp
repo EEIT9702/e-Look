@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE >
@@ -7,6 +8,7 @@
 <%-- <jsp:useBean id="SYSTEM" class="init.GlobalService" scope="application"/> --%>
 <%-- <link rel="Shortcut Icon" type="image/x-icon" href="${SYSTEM.iconUri}" /> --%>
 <meta charset="UTF-8">
+
 <%-- <title>${SYSTEM.systemName} </title> --%>
 <link href="<%=request.getContextPath() %>/HeaderCssJs/bootstrap.css" rel="stylesheet">
 <!-- <link href="HeaderCssJs/bootstrap.min.css" rel="stylesheet"> -->
@@ -28,7 +30,7 @@
 	color: #000000;
 }
 #headerdav {
-	font-size: 14px;
+	font-size: 18px;
 	font-family: Microsoft JhengHei;
 	font-weight: bold;
 }
@@ -45,7 +47,7 @@ body{
 .maincontainer {
              max-width: 500px;
              margin:0 auto;
-         }
+ }
 </style>
 </head>
 <div class="maincontainer">
@@ -87,6 +89,7 @@ body{
 				</c:choose>
 				
 				
+
 			</ul>
 		</div>
 	   </div>
