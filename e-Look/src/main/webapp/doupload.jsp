@@ -25,6 +25,7 @@
     } else {
    
         //設定上傳路徑
+
        upload.setUploadDir(this.getServletContext().getRealPath("."));
        
        // upload.setUploadDir("D:\\");
