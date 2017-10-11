@@ -47,7 +47,8 @@
 </script>	
 </head>
 <body>
-<jsp:include page="/header.jsp"/>
+<jsp:include page="${requestScope.contextPath}/header.jsp"/>
+<%-- <jsp:include page="/header.jsp"/> --%>
 		<div class="container">
 			<div style="text-align:center">
 			<a href=""><span id="ads"></span></a>
