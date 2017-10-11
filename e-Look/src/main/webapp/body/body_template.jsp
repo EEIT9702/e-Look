@@ -172,7 +172,12 @@ font-size:30px;
 		ads.style.display = "none";
 		},3000)
 	}
-	window.onload = showAdPic;
+	//window.onload = showAdPic;
+	
+	$(function(){
+		showAdPic();
+		init();
+	})
 	
 	/*延遲載入圖片*/
 	//初始化函數
@@ -213,7 +218,7 @@ font-size:30px;
 	}
 </script>	
 </head>
-<body onload="init()">
+<body>
 <jsp:include page="${contextPath}/header.jsp"/>
 <%-- <jsp:include page="/header.jsp"/> --%>
 	  <div class="container">
