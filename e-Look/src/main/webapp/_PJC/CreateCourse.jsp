@@ -13,11 +13,10 @@
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/_PJC/css/step3.css"
 	rel="stylesheet">
+
 <script src="<%=request.getContextPath()%>/js/jquery-3.2.1.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath()%>/_PJC/js/autosize.js"></script>
-<style>
-</style>
 
 </head>
 
@@ -277,7 +276,7 @@
 										</div>
 									</div>
 								</div>
-								
+
 								<div class="[ container ]">
 									<div class="[ row ]">
 										<div class="[ col-xs-12 ]">
@@ -286,15 +285,15 @@
 												學這堂課之前，學生需要具有哪些背景知識？</div>
 											<div class="[ form-group ][ form-group-textarea ]">
 												<textarea id="customStyle" name="customStyle"
-													placeholder="如果是比較進階的課程，建議先跟學生說明必備的知識，幫助學生了解這堂課" class="[ form-control ]"
-													data-toggle="floatLabel" data-value="no-js"
-													style="font-size: 18px"></textarea>
+													placeholder="如果是比較進階的課程，建議先跟學生說明必備的知識，幫助學生了解這堂課"
+													class="[ form-control ]" data-toggle="floatLabel"
+													data-value="no-js" style="font-size: 18px"></textarea>
 												<label for="customStyle" style="">(例：學過PS遮罩的概念)</label>
 											</div>
 										</div>
 									</div>
 								</div>
-								
+
 								<div class="[ container ]">
 									<div class="[ row ]">
 										<div class="[ col-xs-12 ]">
@@ -303,15 +302,15 @@
 												學完這堂課後，學生可以做出什麼東西？</div>
 											<div class="[ form-group ][ form-group-textarea ]">
 												<textarea id="customStyle" name="customStyle"
-													placeholder="最好是某種實質的東西：像是完成某種作品、達到哪種目標甚至是得到什麼結果" class="[ form-control ]"
-													data-toggle="floatLabel" data-value="no-js"
-													style="font-size: 18px"></textarea>
+													placeholder="最好是某種實質的東西：像是完成某種作品、達到哪種目標甚至是得到什麼結果"
+													class="[ form-control ]" data-toggle="floatLabel"
+													data-value="no-js" style="font-size: 18px"></textarea>
 												<label for="customStyle" style="">(例：可習得合成影像的基本技術)</label>
 											</div>
 										</div>
 									</div>
 								</div>
-								
+
 								<div class="[ container ]">
 									<div class="[ row ]">
 										<div class="[ col-xs-12 ]">
@@ -320,15 +319,15 @@
 												哪些人適合這堂課？</div>
 											<div class="[ form-group ][ form-group-textarea ]">
 												<textarea id="customStyle" name="customStyle"
-													placeholder="形容這堂課適合的學生族群，可以更讓學生了解課程內容的方向" class="[ form-control ]"
-													data-toggle="floatLabel" data-value="no-js"
-													style="font-size: 18px"></textarea>
+													placeholder="形容這堂課適合的學生族群，可以更讓學生了解課程內容的方向"
+													class="[ form-control ]" data-toggle="floatLabel"
+													data-value="no-js" style="font-size: 18px"></textarea>
 												<label for="customStyle" style="">(例：雜誌編輯、海報設計的美編人員等...)</label>
 											</div>
 										</div>
 									</div>
 								</div>
-								
+
 								<ul class="list-inline pull-right">
 									<li><button type="button"
 											class="btn btn-default prev-step">上一步</button></li>
@@ -338,19 +337,45 @@
 											class="btn btn-primary btn-info-full next-step">儲存並前往下一步</button></li>
 								</ul>
 							</div>
-							
+
 							<div class="tab-pane" role="tabpanel" id="step4">
-							
+								
+
+								<ul class="list-inline pull-right">
+									<li><button type="button"
+											class="btn btn-default prev-step">上一步</button></li>
+									<li><button type="button"
+											class="btn btn-primary btn-info-full next-step">儲存並前往下一步</button></li>
+								</ul>
 							</div>
 
+							<div class="tab-pane" role="tabpanel" id="step5">
 
+								<ul class="list-inline pull-right">
+									<li><button type="button"
+											class="btn btn-default prev-step">上一步</button></li>
+									<li><button type="button"
+											class="btn btn-primary btn-info-full next-step">儲存並前往下一步</button></li>
+								</ul>
+							</div>
+
+							<div class="tab-pane" role="tabpanel" id="step6">
+
+								<ul class="list-inline pull-right">
+									<li><button type="button"
+											class="btn btn-default prev-step">上一步</button></li>
+									<li><button type="button"
+											class="btn btn-primary btn-info-full next-step">儲存並前往下一步</button></li>
+								</ul>
+							</div>
 
 							<div class="tab-pane" role="tabpanel" id="complete">
-								<div class="step44">
-									<h5>Completed</h5>
-
-
-								</div>
+								<ul class="list-inline pull-right">
+									<li><button type="button"
+											class="btn btn-default prev-step">上一步</button></li>
+									<li><button type="button"
+											class="btn btn-primary btn-info-full next-step">完成課程編輯並送出審核</button></li>
+								</ul>
 							</div>
 							<div class="clearfix"></div>
 						</div>
@@ -498,7 +523,10 @@
 		$('#customStyle').each(function() {
 			autosize(this);
 		}).on('autosize:resized');
+
+		
 	</script>
+	
 
 </body>
 
