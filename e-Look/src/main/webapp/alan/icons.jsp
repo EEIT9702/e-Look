@@ -13,9 +13,9 @@
 <!--   CC 3.0 BY</a> -->
 <!--   </div> -->
 
-<img style="width:40px" src="img/life.svg" alt=""><br>
-<img style="width:40px" src="img/design.svg" alt=""><br>
-<img style="width:40px" src="img/life.svg" alt=""><br>
+<img style="width:40px" src="/alanimg/life.svg" alt=""><br>
+<img style="width:40px" src="/alanimg/design.svg" alt=""><br>
+<img style="width:40px" src="/alanimg/life.svg" alt=""><br>
 
 </body>
 </html>
