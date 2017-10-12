@@ -1,12 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE >
-<html>
-<head>
 <%-- <jsp:useBean id="SYSTEM" class="init.GlobalService" scope="application"/> --%>
 <%-- <link rel="Shortcut Icon" type="image/x-icon" href="${SYSTEM.iconUri}" /> --%>
-<meta charset="UTF-8">
 <%-- <title>${SYSTEM.systemName} </title> --%>
 <link href="<%=request.getContextPath() %>/HeaderCssJs/bootstrap.css" rel="stylesheet">
 <!-- <link href="HeaderCssJs/bootstrap.min.css" rel="stylesheet"> -->
@@ -39,9 +35,6 @@
 #nopadding img {
 	margin-bottom: 5px;
 }
-body{
-	padding-top:100px;
-}
 .maincontainer {
              max-width: 500px;
              margin:0 auto;
@@ -49,7 +42,6 @@ body{
 </style>
 </head>
 <div class="maincontainer">
-
 <nav class="nav navbar-default navbar-fixed-top " id="headerdav" >
 
 	<div class="container"  >
@@ -76,7 +68,7 @@ body{
 				<li><a href="#"><img src="<%=request.getContextPath() %>/HeaderCssJs/002-shopping-cart.png"height="30" /></a></li>
 				<c:choose>
 				<c:when test="${!empty LoginOK}">
-				<li><a href="#"><img src="<%=request.getContextPath() %>/Image?MemberID=${LoginOK.memberID}"height="30" />${LoginOK.mName}</a></li>
+				<li><a href="#"><img src="<%=request.getContextPath() %>/Image?MemberID=${LoginOK.memberID}"height="30" /></a></li>
 				</c:when>
 				<c:when test="${empty err}">
 				<li><a href="#"data-toggle="modal" data-target="#myModal"><img src="<%=request.getContextPath() %>/HeaderCssJs/001-login.png"height="30" />登入</a></li>
