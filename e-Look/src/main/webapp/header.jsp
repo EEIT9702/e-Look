@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+
 	pageEncoding="UTF-8"%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <%-- <jsp:useBean id="SYSTEM" class="init.GlobalService" scope="application"/> --%>
+
 <%-- <link rel="Shortcut Icon" type="image/x-icon" href="${SYSTEM.iconUri}" /> --%>
+
+
 <%-- <title>${SYSTEM.systemName} </title> --%>
 <link href="<%=request.getContextPath() %>/HeaderCssJs/bootstrap.css" rel="stylesheet">
 <!-- <link href="HeaderCssJs/bootstrap.min.css" rel="stylesheet"> -->
@@ -24,7 +30,7 @@
 	color: #000000;
 }
 #headerdav {
-	font-size: 14px;
+	font-size: 18px;
 	font-family: Microsoft JhengHei;
 	font-weight: bold;
 }
@@ -34,11 +40,17 @@
 }
 #nopadding img {
 	margin-bottom: 5px;
+<<<<<<< HEAD
+=======
+}
+body{
+	padding-top:100px;
+>>>>>>> branch 'master' of https://github.com/EEIT9702/e-Look.git
 }
 .maincontainer {
              max-width: 500px;
              margin:0 auto;
-         }
+ }
 </style>
 </head>
 <div class="maincontainer">
@@ -74,11 +86,12 @@
 				<li><a href="#"data-toggle="modal" data-target="#myModal"><img src="<%=request.getContextPath() %>/HeaderCssJs/001-login.png"height="30" />登入</a></li>
 				</c:when>
 				<c:otherwise>
-				<li><a href="#"data-toggle="modal" data-target="#myModal2"><img src="<%=request.getContextPath() %>/HeaderCssJs/001-login.png"height="30" />登入</a></li>
+				<li><a href="#"data-toggle="modal" data-target="#myModal2"><img src="<%=request.getContextPath() %>/HeaderCssJs/001-login.png"height="30" />登入<span class="caret"></span></a></li>
 				</c:otherwise>
 				</c:choose>
 				
 				
+
 			</ul>
 		</div>
 	   </div>

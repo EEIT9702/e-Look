@@ -34,7 +34,7 @@ body { background-color: rgb(230, 235, 240); }
 	font-size: 15px;
 }
 .form-group.form-group-textarea textarea {
-    height: 34px;
+    height: 100px;
 	resize: none;
 }
 .form-group.form-group-textarea label {
