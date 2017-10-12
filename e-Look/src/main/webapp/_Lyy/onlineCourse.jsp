@@ -18,7 +18,7 @@
 <style>
 /* 影片區塊 */
 video {
-	width: 1000px;
+	width: 100%;
 }
 
 .listsize>li {
@@ -36,8 +36,8 @@ video {
 }
 
 #videoplay {
-	background: #e3e3e3;
-	height: 650px;
+/* 	background: #e3e3e3; */
+/* 	height: 650px; */
 }
 
 video::-internal-media-controls-download-button {
@@ -59,6 +59,7 @@ video::-webkit-media-controls-panel {
 #infoIntrodction>.col-md-4:hover {
 	border-bottom: 2px solid orange;
 }
+
 </style>
 </head>
 
@@ -68,6 +69,7 @@ video::-webkit-media-controls-panel {
 		<div class="container">
 			<h2 align="center">videoname</h2>
 			<div class="row">
+			<div class="col-md-12" style="background-color:black">
 				<div class="col-md-8">
 					<video controls poster="poster.png">
 						<source src="tri.mp4" type="video/mp4">
@@ -95,6 +97,7 @@ video::-webkit-media-controls-panel {
 				<!-- 						</ul> -->
 				<!-- 					</div> -->
 				<!-- 				</div> -->
+				</div>
 			</div>
 		</div>
 	</div>
@@ -124,8 +127,8 @@ video::-webkit-media-controls-panel {
 				<div class="col-md-1">
 					<ul class="nav nav-pills">
 						<li role="presentation" class="dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" href="#"	role="button" aria-haspopup="true" aria-expanded="false">分享連結</a>
-							<ul class="dropdown-menu" style="width:40px">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">分享連結</a>
+							<ul class="dropdown-menu" >
 								<li style="border-bottom:1px solid 	#E0E0E0"><a href="#">google</a></li>
 								<li><a href="#">facebook</a></li>
 							</ul>
