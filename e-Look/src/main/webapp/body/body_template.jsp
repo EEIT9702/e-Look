@@ -178,6 +178,7 @@ font-size:30px;
 		showAdPic();
 		init();
 	});
+
 	
 	/*延遲載入圖片*/
 	//初始化函數

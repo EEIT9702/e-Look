@@ -71,20 +71,20 @@ a{
 
 	<div class="ndiv" id="categoryBar">
 		<ul>
-			<li><img id="?courseID=1" class="svgIcon" src="<%=request.getContextPath() %>/alan/img/life.svg"><br>生活</li>
-			<li><img id="?courseID=2" class="svgIcon" src="<%=request.getContextPath() %>/alan/img/arts.svg"><br>藝術</li>
-			<li><img id="?courseID=3" class="svgIcon" src="<%=request.getContextPath() %>/alan/img/athletics.svg"><br>運動</li>
-			<li><img id="?courseID=4" class="svgIcon" src="<%=request.getContextPath() %>/alan/img/hand-made.svg"><br>手作</li>
-			<li><img id="?courseID=5" class="svgIcon" src="<%=request.getContextPath() %>/alan/img/other.svg"><br>其他</li>
-			<li><img id="?courseID=6" class="svgIcon" src="<%=request.getContextPath() %>/alan/img/design.svg"><br>設計</li>
-			<li><img id="?courseID=7" class="svgIcon" src="<%=request.getContextPath() %>/alan/img/science.svg"><br>科技</li>
-			<li><img id="?courseID=8" class="svgIcon" src="<%=request.getContextPath() %>/alan/img/business.svg"><br>商業</li>
-			<li><img id="?courseID=9" class="svgIcon" src="<%=request.getContextPath() %>/alan/img/language.svg"><br>語言</li>
-			<li><img id="?courseID=10" class="svgIcon" src="<%=request.getContextPath() %>/alan/img/cooking.svg"><br>烹飪</li>
-			<li><img id="?courseID=11" class="svgIcon" src="<%=request.getContextPath() %>/alan/img/program.svg"><br>程式</li>
+			<li><a href="?courseClassID=1"><img style="<c:choose><c:when test='${param.courseClassID == 1 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>" class="svgIcon" src="<%=request.getContextPath() %>/alan/img/life.svg"><br>生活</a></li>
+			<li><a href="?courseClassID=2"><img style="<c:choose><c:when test='${param.courseClassID == 2 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>" class="svgIcon" src="<%=request.getContextPath() %>/alan/img/arts.svg"><br>藝術</a></li>
+			<li><a href="?courseClassID=3"><img style="<c:choose><c:when test='${param.courseClassID == 3 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>" class="svgIcon" src="<%=request.getContextPath() %>/alan/img/athletics.svg"><br>運動</a></li>
+			<li><a href="?courseClassID=4"><img style="<c:choose><c:when test='${param.courseClassID == 4 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>" class="svgIcon" src="<%=request.getContextPath() %>/alan/img/hand-made.svg"><br>手作</a></li>
+			<li><a href="?courseClassID=5"><img style="<c:choose><c:when test='${param.courseClassID == 5 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>" class="svgIcon" src="<%=request.getContextPath() %>/alan/img/other.svg"><br>其他</a></li>
+			<li><a href="?courseClassID=6"><img style="<c:choose><c:when test='${param.courseClassID == 6 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>" class="svgIcon" src="<%=request.getContextPath() %>/alan/img/design.svg"><br>設計</a></li>
+			<li><a href="?courseClassID=7"><img style="<c:choose><c:when test='${param.courseClassID == 7 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>" class="svgIcon" src="<%=request.getContextPath() %>/alan/img/science.svg"><br>科技</a></li>
+			<li><a href="?courseClassID=8"><img style="<c:choose><c:when test='${param.courseClassID == 8 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>" class="svgIcon" src="<%=request.getContextPath() %>/alan/img/business.svg"><br>商業</a></li>
+			<li><a href="?courseClassID=9"><img style="<c:choose><c:when test='${param.courseClassID == 9 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>" class="svgIcon" src="<%=request.getContextPath() %>/alan/img/language.svg"><br>語言</a></li>
+			<li><a href="?courseClassID=10"><img style="<c:choose><c:when test='${param.courseClassID == 10 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>" class="svgIcon" src="<%=request.getContextPath() %>/alan/img/cooking.svg"><br>烹飪</a></li>
+			<li><a href="?courseClassID=11"><img style="<c:choose><c:when test='${param.courseClassID == 11 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>" class="svgIcon" src="<%=request.getContextPath() %>/alan/img/program.svg"><br>程式</a></li>
 			
 		</ul>
-		${param.courseID.value}
+		${param.courseClassID}
 	</div>
 
 
