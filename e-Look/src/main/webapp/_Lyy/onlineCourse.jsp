@@ -36,8 +36,8 @@ video {
 }
 
 #videoplay {
-	background: #e3e3e3;
-	height: 500px;
+/* 	background: #e3e3e3; */
+/* 	height: 650px; */
 }
 
 video::-internal-media-controls-download-button {
@@ -52,18 +52,26 @@ video::-webkit-media-controls-panel {
 	width: calc(100% + 30px); /* Adjust as needed */
 }
 /* 簡介區塊 */
-#infoIntro>div{
-vertical-align:middle;
+#infoIntro>div {
+	vertical-align: middle;
 }
+
+#infoIntrodction>.col-md-4:hover {
+	border-bottom: 2px solid orange;
+}
+
 </style>
 </head>
+
 <body oncontextmenu="window.event.returnValue=false">
+<jsp:include  page="/header.jsp" />
 	<div class="container-fluid" id="videoplay">
 		<div class="container">
 			<h2 align="center">videoname</h2>
 			<div class="row">
+			<div class="col-md-12" style="background-color:black">
 				<div class="col-md-8">
-					<video controls loop poster="poster.png">
+					<video controls poster="poster.png">
 						<source src="tri.mp4" type="video/mp4">
 					</video>
 				</div>
@@ -89,13 +97,14 @@ vertical-align:middle;
 				<!-- 						</ul> -->
 				<!-- 					</div> -->
 				<!-- 				</div> -->
+				</div>
 			</div>
 		</div>
 	</div>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12" style="height: 80px" id="infoIntro">
-			
+
 				<div class="col-md-1">
 					<img src="004-people.png">
 				</div>
@@ -103,69 +112,77 @@ vertical-align:middle;
 					<h5>課程人數</h5>
 					<h5>534人</h5>
 				</div>
-				
+
 				<div class="col-md-1">
-					<img src="clock.png" height="64px"> 
+					<img src="clock.png" height="64px">
 				</div>
 				<div class="col-md-1">
 					<h5>課程時間</h5>
 					<h5>45min</h5>
 				</div>
-				
+
 				<div class="col-md-1">
-					<img src="002-question.png" height="64px">
+					<img src="share.png" height="64px">
 				</div>
 				<div class="col-md-1">
-					<h5>問題討論</h5>
+					<ul class="nav nav-pills">
+						<li role="presentation" class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">分享連結</a>
+							<ul class="dropdown-menu" >
+								<li style="border-bottom:1px solid 	#E0E0E0"><a href="#">google</a></li>
+								<li><a href="#">facebook</a></li>
+							</ul>
+						</li> 
+					</ul>
 				</div>
-				
+
 				<div class="col-md-1">
 					<img src="001-download.png" height="64px">
 				</div>
 				<div class="col-md-1">
-					<h5>講義下載</h5>
+					<h5><a href="#">講義下載</a></h5>
 				</div>
-				
-				<div class="col-md-1" style="height: 80px">
-				<img src="share.png" height="32px">
-					<h5>分享連結</h5>			
-				</div>
-				
-				<div class="col-md-1" style="height: 64px">
+
+
+
+				<div class="col-md-2" style="height: 64px">
 					<small>課程售價</small>
 					<h3>NT1230</h3>
 				</div>
-				
+
 				<div class="col-md-2" style="height: 80px">
 					<h6 align="center">星星數量位置</h6>
-					<button type="button" class="btn btn-success" style="width:160px">加入購物車</button>
+					<button type="button" class="btn btn-success" style="width: 160px">加入購物車</button>
 				</div>
-				
-<!-- 				課程簡介 -->
-				<div class="col-md-12" >
-					<div class="col-md-4" align="center"style="padding: 50px">
-						<a href="#"><b>課程簡介</b></a>				
-					</div>
-					<div class="col-md-4" align="center"style="padding: 50px">
+
+				<!-- 				課程簡介 -->
+				<div class="col-md-12" id="infoIntrodction">
+					<div class="col-md-4" align="center"
+						style="margin-top: 50px; padding: 10 0">
 						<a href="#"><b>課程簡介</b></a>
 					</div>
-					<div class="col-md-4" align="center"style="padding: 50px">
+					<div class="col-md-4" align="center"
+						style="margin-top: 50px; padding: 10 0">
+						<a href="#"><b>問題討論</b></a>
+					</div>
+					<div class="col-md-4" align="center"
+						style="margin-top: 50px; padding: 10 0">
 						<a href="#"><b>課程簡介</b></a>
 					</div>
 				</div>
-				<div class="col-md-12" >
-				<p>自我介紹</p>
-				<p>自我介紹</p>
-				<p>自我介紹</p>
-				<p>自我介紹</p>
-				<p>自我介紹</p>
-				<p>自我介紹</p>
-				<p>自我介紹</p>
-				<p>自我介紹</p>
-				<p>自我介紹</p>
-				<p>自我介紹</p>
-				<p>自我介紹</p>
-				<p>自我介紹</p>
+				<div class="col-md-12">
+					<p>自我介紹</p>
+					<p>自我介紹</p>
+					<p>自我介紹</p>
+					<p>自我介紹</p>
+					<p>自我介紹</p>
+					<p>自我介紹</p>
+					<p>自我介紹</p>
+					<p>自我介紹</p>
+					<p>自我介紹</p>
+					<p>自我介紹</p>
+					<p>自我介紹</p>
+					<p>自我介紹</p>
 				</div>
 			</div>
 		</div>
@@ -174,9 +191,9 @@ vertical-align:middle;
 
 
 
-			
-				
-			
+
+
+
 
 
 </body>
