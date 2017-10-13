@@ -43,6 +43,7 @@ video::-webkit-media-controls-panel {
 	float: left;
 	width: 1450px;
 	height: 100%;
+
 }
 
 #abgneBlock .list img {
