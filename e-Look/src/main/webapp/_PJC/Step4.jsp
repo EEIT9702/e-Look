@@ -30,63 +30,7 @@
             
             //alert(v);
         }
-        document.addEventListener("DOMContentLoaded", function () {
-            year();
-            month();
-            day();
-        });
-        function year() {
-            
-          
-            var x = new Date().getFullYear();
-            console.log(x);
-            for (i = x ; i <=x+5; i++) {
-
-                var opt = document.createElement("option");
-                opt.setAttribute("value", i);
-                var optTxt = document.createTextNode(i);
-                opt.appendChild(optTxt);
-                document.getElementById("se1").appendChild(opt);
-            }
-            document.getElementById("se1").addEventListener("change", day);
-            document.getElementById("se1").addEventListener("change", month);
-            //   document.getElementById("se1").addEventListener("change", print);
-
-        }
-        function month() {
-        //    if (this.value == new Date().getFullYear()) {
-           
-        //}else{
-        //        var x = 1;
-        //    }
-            var x = new Date().getMonth() + 1;
-            console.log(x);
-            document.getElementById("se2").innerHTML = "";
-            for (i = 1; i <= 12; i++) {
-                var opt = document.createElement("option");
-                opt.setAttribute("value", i);
-                var optTxt = document.createTextNode(i);
-                opt.appendChild(optTxt);
-                document.getElementById("se2").appendChild(opt);
-            }
-            document.getElementById("se2").addEventListener("change", day);
-         //   document.getElementById("se2").addEventListener("change", print);
-        }
-        function day() {
-            var y = parseInt(document.getElementById("se1").value);
-            var m = parseInt(document.getElementById("se2").value);
-            var d = new Date().getDate();
-            var d2 = new Date(y, m, 0).getDate();
-            document.getElementById("se3").innerHTML = "";
-            for (i = 1; i <= d2; i++) {
-                var opt = document.createElement("option");
-                opt.setAttribute("value", i);
-                var optTxt = document.createTextNode(i);
-                opt.appendChild(optTxt);
-                document.getElementById("se3").appendChild(opt);
-            }
-         //   document.getElementById("se3").addEventListener("change", print);
-        }
+        
     </script>
     <style>
    

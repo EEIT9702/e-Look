@@ -8,10 +8,12 @@
 <title>Insert title here</title>
 <style type="text/css">
 .ndiv{
-	width:800px;
+	height:120px;
+	width:1200px;
 	margin-left:auto;
 	margin-right:auto;
 	text-align:center;
+	border:1px solid black;
 }
 .ndiv li{
 	list-style-type:none;
@@ -22,55 +24,27 @@
 	width:48px;
 }
 
-/* #categoryBar li>a:active {  */
-/* 	-webkit-filter: grayscale(1);  */
-/* }  */
 a{
 	text-decoration:none;
 }
-/* 	.grey{ */
-/* 		-webkit-filter: grayscale(1);  /*沒有任何色彩的黑白影像*/ */
-/* 	} */
-/* 	.original{ */
-/* 		 -webkit-filter: grayscale(0);  /*顏色不變*/ */
-/* 	} */
+
+
+/* -webkit-filter: grayscale(1);  /*沒有任何色彩的黑白影像*/ */
+/* -webkit-filter: grayscale(0);  /*顏色不變*/ */
+
 
 </style>
 <script type="text/javascript">
 // 	document.addEventListener("DOMContentLoaded", function () {
-// 	    iconNum = document.querySelectorAll("img.svgIcon");
-// 	    iconLen = iconNum.length;
-// 	    console.log("iconNum = " + iconNum);
-// 	    console.log("iconLen = " + iconLen);
 
-// 	     for (var i = 0; i < iconLen; i++) {
-// 	    	 console.log("1 - onclick");
-// 	    	 iconNum[i].onclick = Click;
-// 	     }
 // 	 });
-	
-//   	 function Click() {
-//           for (i = 0; i < iconLen; i++) {
-//         	  console.log("2 - Click()");
-//         	  iconNum.className = "svgIcon grey";
-//         	  iconNum[i].className = "svgIcon original";
-//           }
-//       }
-
-// function chg1() {
-// 	var iconNum = document.querySelectorAll("img.svgIcon");
-// 	for(var i = 0; i < iconNum.length; i++) {
-// 		iconNum[i].getAttribute("lazy_style");
-// 	}
-// 	iconNum[0].getAttribute("style");
-// }
 
 </script>
 </head>
 <body>
-
-	<div class="ndiv" id="categoryBar">
-		<ul>
+<!-- 	<div class="ndiv" id="categoryBar"> -->
+	<div class="ndiv">
+		<ul style="">
 			<li><a href="?courseClassID=1"><img style="<c:choose><c:when test='${param.courseClassID == 1 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>" class="svgIcon" src="<%=request.getContextPath() %>/alan/img/life.svg"><br>生活</a></li>
 			<li><a href="?courseClassID=2"><img style="<c:choose><c:when test='${param.courseClassID == 2 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>" class="svgIcon" src="<%=request.getContextPath() %>/alan/img/arts.svg"><br>藝術</a></li>
 			<li><a href="?courseClassID=3"><img style="<c:choose><c:when test='${param.courseClassID == 3 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>" class="svgIcon" src="<%=request.getContextPath() %>/alan/img/athletics.svg"><br>運動</a></li>
@@ -82,22 +56,35 @@ a{
 			<li><a href="?courseClassID=9"><img style="<c:choose><c:when test='${param.courseClassID == 9 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>" class="svgIcon" src="<%=request.getContextPath() %>/alan/img/language.svg"><br>語言</a></li>
 			<li><a href="?courseClassID=10"><img style="<c:choose><c:when test='${param.courseClassID == 10 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>" class="svgIcon" src="<%=request.getContextPath() %>/alan/img/cooking.svg"><br>烹飪</a></li>
 			<li><a href="?courseClassID=11"><img style="<c:choose><c:when test='${param.courseClassID == 11 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>" class="svgIcon" src="<%=request.getContextPath() %>/alan/img/program.svg"><br>程式</a></li>
-			
+<!-- 			<li style="border:1px solid red;"> -->
+<!-- 				<form style="" id="Search" name="Search"  method="post"  action="" > -->
+<!-- 					<input style="border:1px solid green" type="text" id="" size="30" name="search" placeholder="Search" /> -->
+<%-- 									<input type="image" id="search-submit" name="search-submit" img src="<%=request.getContextPath() %>/alan/img/search.svg" onclick="document.Search.submit()" style="width:30px;border:1px solid gold"/> --%>
+<!-- 				</form> -->
+<!-- 			</li> -->
+
+
+<!-- 			<li><input type="text" id="" size="20" name="search" placeholder="Search" /></li> -->
+<%-- 			<li><button style="background-image:url(<%=request.getContextPath() %>/alan/img/search.svg);width:25px;height:25px;" type="submit" class=""></button></li> --%>
 		</ul>
-		${param.courseClassID}
-	</div>
+<%-- 		${param.courseClassID} --%>
+		<div style="margin-top:35x;border:1px solid blues;">
+	      <form class="navbar-form navbar-left" id="searchKey" method="get" action="" >
+		      <div class="input-group">
+		      <div style="border:1px solid orange;">
+		        <input type="text" class="form-control" placeholder="Search" style="margin-left:230px;border-radius:30px;height:30px;">
+		        <div style="float:right" class="input-group-btn">
+		          <input type="image" id="search-submit" name="search-submit" img src="<%=request.getContextPath() %>/alan/img/search.svg" onclick="document.Search.submit()" style="width:30px;border:1px solid gold"/>
+			 </div>
+<!-- 		          <button class="btn btn-default" type="submit" style="height:35px;width:35px;"> -->
+<%-- 		          	<img src="<%=request.getContextPath() %>/alan/img/search.svg" /> --%>
+
+<!-- 		          </button> -->
+	        </div>
+		      </div>
+	      </form>
+		</div>
+		</div>
 
 
-<%-- 		<div><img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/life.svg"><a href="#category1">生活</a></div> --%>
-<%-- 		<div><img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/arts.svg"><a href="#category2">藝術</a></div> --%>
-<%-- 		<div><img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/athletics.svg"><a href="#category3">運動</a></div> --%>
-<%-- 		<div><img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/video.svg"><a href="#category4">影音</a></div> --%>
-		
-<!-- 		<ul class="menu" id="menu"> -->
-<!-- 			<li><a href="#">選單1</a></li> -->
-<!-- 			<li><a href="#">選單2</a></li> -->
-<!-- 			<li><a href="#">選單3</a></li> -->
-<!-- 			<li><a href="#">選單4</a></li> -->
-<!-- 		</ul> -->
-</alan>
 </html>
