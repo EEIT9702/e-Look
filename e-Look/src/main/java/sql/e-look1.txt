@@ -1,6 +1,6 @@
 ﻿USE [master]
 GO
-/****** Object:  Database [eLook]    Script Date: 2017/10/9 上午 10:20:46 ******/
+/****** Object:  Database [eLook]    Script Date: 2017/10/13 上午 09:27:27 ******/
 CREATE DATABASE [eLook]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -77,7 +77,7 @@ EXEC sys.sp_db_vardecimal_storage_format N'eLook', N'ON'
 GO
 USE [eLook]
 GO
-/****** Object:  Table [dbo].[Ad]    Script Date: 2017/10/9 上午 10:20:46 ******/
+/****** Object:  Table [dbo].[Ad]    Script Date: 2017/10/13 上午 09:27:27 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -94,7 +94,7 @@ CREATE TABLE [dbo].[Ad](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[BuyCourse]    Script Date: 2017/10/9 上午 10:20:46 ******/
+/****** Object:  Table [dbo].[BuyCourse]    Script Date: 2017/10/13 上午 09:27:27 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -106,7 +106,7 @@ CREATE TABLE [dbo].[BuyCourse](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Course]    Script Date: 2017/10/9 上午 10:20:46 ******/
+/****** Object:  Table [dbo].[Course]    Script Date: 2017/10/13 上午 09:27:27 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -115,20 +115,20 @@ SET ANSI_PADDING ON
 GO
 CREATE TABLE [dbo].[Course](
 	[courseID] [int] IDENTITY(200001,1) NOT NULL,
-	[courseName] [nvarchar](20) NOT NULL,
-	[photoName] [varchar](50) NOT NULL,
-	[cPhoto] [varbinary](max) NOT NULL,
+	[courseName] [nvarchar](20) NULL,
+	[photoName] [varchar](50) NULL,
+	[cPhoto] [varbinary](max) NULL,
 	[preTool] [nvarchar](50) NULL,
 	[background] [nvarchar](50) NULL,
 	[ability] [nvarchar](50) NULL,
 	[targetgroup] [nvarchar](50) NULL,
-	[soldPrice] [int] NOT NULL,
+	[soldPrice] [int] NULL,
 	[courseLength] [int] NULL,
 	[targetStudentNumber] [int] NULL,
 	[fundStartDate] [date] NULL,
 	[fundEndDate] [date] NULL,
 	[courseStartDate] [date] NULL,
-	[courseVideopathway] [varchar](50) NOT NULL,
+	[courseVideopathway] [varchar](50) NULL,
 	[paper] [varbinary](max) NULL,
 	[status] [tinyint] NULL,
 	[courseContent] [varchar](max) NULL,
@@ -143,7 +143,7 @@ CREATE TABLE [dbo].[Course](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[CourseClass]    Script Date: 2017/10/9 上午 10:20:46 ******/
+/****** Object:  Table [dbo].[CourseClass]    Script Date: 2017/10/13 上午 09:27:27 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -159,7 +159,7 @@ CREATE TABLE [dbo].[CourseClass](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[CourseClassDetails]    Script Date: 2017/10/9 上午 10:20:46 ******/
+/****** Object:  Table [dbo].[CourseClassDetails]    Script Date: 2017/10/13 上午 09:27:27 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -170,7 +170,7 @@ CREATE TABLE [dbo].[CourseClassDetails](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[eLookEvent]    Script Date: 2017/10/9 上午 10:20:46 ******/
+/****** Object:  Table [dbo].[eLookEvent]    Script Date: 2017/10/13 上午 09:27:27 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -193,7 +193,7 @@ CREATE TABLE [dbo].[eLookEvent](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Member]    Script Date: 2017/10/9 上午 10:20:46 ******/
+/****** Object:  Table [dbo].[Member]    Script Date: 2017/10/13 上午 09:27:27 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -222,7 +222,7 @@ CREATE TABLE [dbo].[Member](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[MemberBookmarks]    Script Date: 2017/10/9 上午 10:20:46 ******/
+/****** Object:  Table [dbo].[MemberBookmarks]    Script Date: 2017/10/13 上午 09:27:27 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -233,7 +233,7 @@ CREATE TABLE [dbo].[MemberBookmarks](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[MemberSubscription]    Script Date: 2017/10/9 上午 10:20:46 ******/
+/****** Object:  Table [dbo].[MemberSubscription]    Script Date: 2017/10/13 上午 09:27:27 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -244,7 +244,7 @@ CREATE TABLE [dbo].[MemberSubscription](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Message]    Script Date: 2017/10/9 上午 10:20:46 ******/
+/****** Object:  Table [dbo].[Message]    Script Date: 2017/10/13 上午 09:27:27 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -265,7 +265,7 @@ CREATE TABLE [dbo].[Message](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Order]    Script Date: 2017/10/9 上午 10:20:46 ******/
+/****** Object:  Table [dbo].[Order]    Script Date: 2017/10/13 上午 09:27:27 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -282,7 +282,7 @@ CREATE TABLE [dbo].[Order](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[OrderDetails]    Script Date: 2017/10/9 上午 10:20:46 ******/
+/****** Object:  Table [dbo].[OrderDetails]    Script Date: 2017/10/13 上午 09:27:27 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -295,7 +295,7 @@ CREATE TABLE [dbo].[OrderDetails](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[ReportCourse]    Script Date: 2017/10/9 上午 10:20:46 ******/
+/****** Object:  Table [dbo].[ReportCourse]    Script Date: 2017/10/13 上午 09:27:27 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -314,7 +314,7 @@ CREATE TABLE [dbo].[ReportCourse](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[ReportMessage]    Script Date: 2017/10/9 上午 10:20:46 ******/
+/****** Object:  Table [dbo].[ReportMessage]    Script Date: 2017/10/13 上午 09:27:27 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -333,7 +333,7 @@ CREATE TABLE [dbo].[ReportMessage](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  Table [dbo].[Search]    Script Date: 2017/10/9 上午 10:20:46 ******/
+/****** Object:  Table [dbo].[Search]    Script Date: 2017/10/13 上午 09:27:27 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -349,7 +349,7 @@ CREATE TABLE [dbo].[Search](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Sponsor]    Script Date: 2017/10/9 上午 10:20:46 ******/
+/****** Object:  Table [dbo].[Sponsor]    Script Date: 2017/10/13 上午 09:27:27 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
