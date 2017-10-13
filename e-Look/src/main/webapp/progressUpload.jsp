@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-body, td, div {font-size: 12px; font-familly: 宋体; }
+/* body, td, div {font-size: 12px; font-familly: 宋体; } */
 #progressBar {width: 400px; height: 20px;  border: 1px solid black; padding: 1px;font-size:20px}
 #progressBarItem {width: 30%; height: 100%; }
 </style>
@@ -104,7 +104,7 @@ function callback(req){//更新進度條
 		
 		if(ss[0] >= 100){
 			_finished = true;
-			$('statusInfo').innerHTML += "<br/><br/><br/>上传已完成。"; 	
+			$('statusInfo').innerHTML += "<br/><br/><br/>上傳已完成。"; 	
 			$('btnSubmit').disabled = false;
 		}
 	}
