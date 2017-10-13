@@ -65,17 +65,43 @@ body{
 	float: right;
 	padding-right: 10px;
 }
+.cartrows{
+overflow-x:hide;
+overflow:auto; 
+max-height: 40vh;
+}
 .cartrow{
+width:90%;
 padding:20px;
+border-bottom: 1px solid #cccccc;
+margin: auto
 }
 .cartrow img{
   width: 30%;
-  height: 90px;
+  height: 70px;
   
 }
 .dropdown-menu{
 width: 465px;
 }
+.close{
+float:none;
+}
+ .cartcount{
+    position: absolute;
+    right: 5px;
+    border: 1px solid #FFF;
+    background: #F68867;
+    color: #FFF;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 15;
+    width: 20px;
+    height: 20px;
+}
+ 
  
 </style>
 </head>
@@ -103,41 +129,49 @@ width: 465px;
 				<li><a href="#menu2"><img src="<%=request.getContextPath() %>/HeaderCssJs/001-book.png" height="30">我要開課</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right" id="nopadding">
-				<li class="dropdown" ><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false"><img src="<%=request.getContextPath() %>/HeaderCssJs/002-shopping-cart.png" height="30" /></a>
+				<li class="dropdown" ><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false"><span class="cartcount">3</span><img src="<%=request.getContextPath() %>/HeaderCssJs/002-shopping-cart.png" height="30" /></a>
+<!-- 				以下為購物車內容 -->
 				<ul class="dropdown-menu">
-				<li class="dropdown-header" style="border-bottom:1px solid #aaaaaa; margin: auto 10px" ><h3>購物車</h3></li>
+				<li class="dropdown-header" style="border-bottom:1px solid #aaaaaa;" ><h3>購物車</h3></li>
 <!-- 				課程1 -->
+				<div class="cartrows">
 
-				<div class="cartrow" title="請上傳課程封面" ><div><span>Java線上學習1xxxxxxxxxxxxxxxxxx</span><button style="float:right" type="button" aria-hidden="true">&times;</button></div><img src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png">
-				<span style="clear:both" class="courseTitle">Java線上學習1xxxxxxxxxxxxxxxxxx<br>
+				<div class="cartrow" ><div style="text-align: right;"><div style="float: left; width: 80%; text-align: left;" ></div><button class="close" type="button" aria-hidden="true">&times;</button></div><img src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png">
+				<span class="courseTitle">Java線上學習1xxxxxxxxxxxxxxxxxx<br>
 				<span class="courseSubtitle" >科技,語言,IT</span>
-				<span class="courseDelete" ><button type="button" class="close" aria-hidden="true">&times;</button></span><br>
+				<span class="courseDelete" ></span><br>
 				<span class="courseDelete" >$800</span>
 				</span>
 				</div>			
 <!-- 				課程2 -->				
-				<div class="cartrow" title="請上傳課程封面" ><img src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png">
+<div class="cartrow" ><div style="text-align: right;"><div style="float: left; width: 80%; text-align: left;" ></div><button class="close" type="button" aria-hidden="true">&times;</button></div><img src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png">
 				<span class="courseTitle">Java線上學習2xxxx<br>
 				<span class="courseSubtitle" >科技,語言</span>
-				<span class="courseDelete" ><button type="button" class="close" aria-hidden="true">&times;</button></span><br>
-				<span class="courseDelete" >$800</span>
+				<span class="courseDelete" ></span><br>
+				<span class="courseDelete" >$70</span>
 				</span>
 				</div>	
 				
+				
+				<div class="cartrow" ><div style="text-align: right;"><div style="float: left; width: 80%; text-align: left;" ></div><button class="close" type="button" aria-hidden="true">&times;</button></div><img src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png">
+				<span class="courseTitle">Java線上學習2xxxx<br>
+				<span class="courseSubtitle" >科技,語言</span>
+				<span class="courseDelete" ></span><br>
+				<span class="courseDelete" >$70</span>
+				</span>
+				</div>	
+				
+				
+				</div>
 				<div class="modal-body text-right">
-				<div style="float:left;">共 2 筆課程</div><span>總金額：870元</span>
+				<div style="float:left;">共 3 筆課程</div><span>總金額：940元</span>
 				
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary">結帳</button>
+					<button type="button" class="btn btn-primary btn-block">前往結帳</button>
 				</div>
-				
-				
-				
-				
-				
-				
 				</ul>
+<!-- 				以上為購物車內容 -->
 				</li>
 				<c:choose>
 				<c:when test="${!empty LoginOK}">
