@@ -40,12 +40,9 @@
 }
 #nopadding img {
 	margin-bottom: 5px;
-<<<<<<< HEAD
-=======
 }
 body{
 	padding-top:100px;
->>>>>>> branch 'master' of https://github.com/EEIT9702/e-Look.git
 }
 .maincontainer {
              max-width: 500px;
