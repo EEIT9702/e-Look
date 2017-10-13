@@ -28,6 +28,7 @@ public class CourseVO implements Serializable {
 	private Integer memberID;
 	private Double avgScore;
 	
+	
 	public CourseVO(){
 		
 	};		
