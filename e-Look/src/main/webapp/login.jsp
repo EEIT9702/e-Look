@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html ">
+<!DOCTYPE html>
 <html>
 <head>
 <jsp:useBean id="SYSTEM" class="init.GlobalService" scope="application"/>
@@ -172,7 +172,7 @@ margin:2px auto;
 								<button type="button" class="btn btn-primary btn-block"
 									onclick="myFacebookLogin()">
 									<img src="<%=request.getContextPath()%>/login/image/fbicon.png"
-										class="img-rounded"><span> Facebook 登入</span>
+										class="img-rounded"><span> Facebook 登入 / 註冊</span>
 								</button>
 							</div>
 						</div>
@@ -181,7 +181,7 @@ margin:2px auto;
 								<button id="google" type="button" onclick="myGoogleLogin()"
 									class="btn btn-danger btn-block">
 									<img src="<%=request.getContextPath()%>/login/image/sgicon.png"
-										class="img-rounded"><span> GOOGLE 登入</span> 
+										class="img-rounded"><span> GOOGLE 登入 / 註冊</span> 
 								</button>
 							</div>
 						</div>
