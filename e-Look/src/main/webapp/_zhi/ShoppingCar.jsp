@@ -62,7 +62,7 @@
 </script>
 </head>
 <body>
-	<jsp:include page="${requestScope.contextPath}/header.jsp" />
+	<jsp:include page="${requestScope.contextPath}/_zhi/header.jsp" />
 
 	<div class="modal fade" id="ShoppingCar" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
