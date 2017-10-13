@@ -1,4 +1,4 @@
-package com.e_Look.BuyCourse.model;
+package com.e_Look.buyCourse.model;
 
 import java.util.List;
 
