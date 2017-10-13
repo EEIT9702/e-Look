@@ -6,7 +6,7 @@ public interface AdDAO_interface {
 	
 	public void insert(AdVO adVO);
 	public void update(AdVO adVO);
-	public void delete(AdVO adVO);
+	public void delete(Integer adID);
 	public AdVO findByAdID(Integer adID);
 	public List<AdVO> getAll();
 }

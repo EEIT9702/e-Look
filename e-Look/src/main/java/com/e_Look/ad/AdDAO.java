@@ -1,24 +1,27 @@
 package com.e_Look.ad;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdDAO_JDBC implements AdDAO_interface {
-	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=AVATAR";
-	String userid = "sa";
-	//第一組密碼
-	String passwd = "P@ssw0rd";
-	//第二組密碼
-	//String passwd = "123456";
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+public class AdDAO implements AdDAO_interface {
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/eLookDB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private static final String INSERT_Ad =
 			"INSERT INTO Ad (fileName, adFile, status) VALUES (?,?,?) ";
@@ -37,19 +40,16 @@ public class AdDAO_JDBC implements AdDAO_interface {
 	public void insert(AdVO adVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_Ad);
 			pstmt.setString(1, adVO.getFileName());
 			pstmt.setBlob(2, adVO.getAdFile());
 			pstmt.setByte(3, adVO.getStatus());
 			pstmt.executeUpdate();
 			
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -79,8 +79,7 @@ public class AdDAO_JDBC implements AdDAO_interface {
 		PreparedStatement pstmt = null;
 		try {
 			//"UPDATE Ad SET fileName=?, adFile=?, status=? WHERE adID=?";
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_Ad);
 			pstmt.setString(1, adVO.getFileName());
 			pstmt.setBlob(2, adVO.getAdFile());
@@ -88,10 +87,6 @@ public class AdDAO_JDBC implements AdDAO_interface {
 			pstmt.setInt(4, adVO.getAdID());
 			pstmt.executeUpdate();
 		
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -122,16 +117,11 @@ public class AdDAO_JDBC implements AdDAO_interface {
 		PreparedStatement pstmt = null;
 		try {
 			//"DELETE FROM Ad WHERE adID =?";
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt=con.prepareStatement(DELETE_Ad);
 			pstmt.setInt(1, adID);
 			pstmt.executeUpdate();
 			
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -160,17 +150,13 @@ public class AdDAO_JDBC implements AdDAO_interface {
 		AdVO adVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		
 		try {
 			//"SELECT adID, fileName, adFile, status FROM Ad WHERE adID=?";
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_ONE_Ad);
-
 			pstmt.setInt(1, adID);
-
-			rs = pstmt.executeQuery();
+			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				// adVO 也稱為 Domain objects
@@ -181,23 +167,12 @@ public class AdDAO_JDBC implements AdDAO_interface {
 				adVO.setStatus(rs.getByte("status"));
 			}
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
 		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
 			if (pstmt != null) {
 				try {
 					pstmt.close();
@@ -223,14 +198,12 @@ public class AdDAO_JDBC implements AdDAO_interface {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 
 		try {
 			//"SELECT adID, fileName, adFile, status FROM Ad";
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_ALL_Ad);
-			rs = pstmt.executeQuery();
+			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				// adVO 也稱為 Domain objects
@@ -242,23 +215,12 @@ public class AdDAO_JDBC implements AdDAO_interface {
 				list.add(adVO); // Store the row in the list
 			}
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
 		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
 			if (pstmt != null) {
 				try {
 					pstmt.close();
@@ -276,18 +238,4 @@ public class AdDAO_JDBC implements AdDAO_interface {
 		}
 		return list;
 	}
-
-	public static void main(String[] args) throws FileNotFoundException {
-		
-		AdDAO_JDBC dao = new AdDAO_JDBC();
-
-		// 新增
-		AdVO adVO1 = new AdVO();
-		adVO1.setFileName("聖誕大特賣");
-		adVO1.setAdFile(new FileInputStream(new File("src/main/webapp/body/img/xmas video sale.jpg")));
-		adVO1.setStatus((byte) 0);
-		dao.insert(adVO1);
-
-	}
-
 }
