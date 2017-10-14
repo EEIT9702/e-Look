@@ -12,8 +12,8 @@
 <%-- <title>${SYSTEM.systemName} </title> --%>
 <link href="<%=request.getContextPath() %>/HeaderCssJs/bootstrap.css" rel="stylesheet">
 <!-- <link href="HeaderCssJs/bootstrap.min.css" rel="stylesheet"> -->
-<script src="<%=request.getContextPath() %>/HeaderCssJs/jquery.js"></script>
-<script src="<%=request.getContextPath() %>/HeaderCssJs/bootstrap.min.js"></script>
+<%-- <script src="<%=request.getContextPath() %>/HeaderCssJs/jquery.js"></script> --%>
+<%-- <script src="<%=request.getContextPath() %>/HeaderCssJs/bootstrap.min.js"></script> --%>
 <style>
 /*根據bootstrap.css內容加以覆寫的方式*/
 #myNavbar li a:hover {

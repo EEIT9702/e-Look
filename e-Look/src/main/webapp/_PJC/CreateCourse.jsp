@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,8 +17,10 @@
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/bootstrap-datetimepicker.css"
 	rel="stylesheet">
+	
 
-<script src="<%=request.getContextPath()%>/js/jquery-3.2.1.js"></script>
+<script src="<%=request.getContextPath() %>/js/jquery.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath()%>/_PJC/js/autosize.js"></script>
 <script src="<%=request.getContextPath()%>/_PJC/js/bootstrap-datetimepicker.js"></script>
@@ -26,7 +29,7 @@
 </head>
 
 <body>
-	<jsp:include page="/header.jsp" flush="true" />
+	<jsp:include page="/header.jsp" flush="true" />	
 	<div class="container" style="margin-top: 50px">
 		<div class="row">
 			<section>
