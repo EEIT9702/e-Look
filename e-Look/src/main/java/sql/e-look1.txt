@@ -2,12 +2,7 @@
 GO
 /****** Object:  Database [eLook]    Script Date: 2017/10/13 上午 09:27:27 ******/
 CREATE DATABASE [eLook]
- CONTAINMENT = NONE
- ON  PRIMARY 
-( NAME = N'eLook', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\eLook.mdf' , SIZE = 5120KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
- LOG ON 
-( NAME = N'eLook_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\eLook_log.ldf' , SIZE = 1024KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
-GO
+
 ALTER DATABASE [eLook] SET COMPATIBILITY_LEVEL = 110
 GO
 IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
