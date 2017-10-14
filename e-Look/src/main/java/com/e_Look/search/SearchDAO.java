@@ -228,4 +228,5 @@ public class SearchDAO implements SearchDAO_interface {
 		return list;
 	}
 
+
 }

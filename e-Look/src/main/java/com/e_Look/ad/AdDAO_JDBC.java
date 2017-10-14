@@ -20,17 +20,17 @@ public class AdDAO_JDBC implements AdDAO_interface {
 	//第二組密碼
 	//String passwd = "123456";
 	
-	private static final String INSERT_Ad =
+	private static final String INSERT_AD =
 			"INSERT INTO Ad (fileName, adFile, status) VALUES (?,?,?) ";
-	private static final String UPDATE_Ad =
+	private static final String UPDATE_AD =
 			"UPDATE Ad SET fileName=?, adFile=?, status=? WHERE adID=?";
-//	private static final String UPDATE_STATUS =
-//		    "UPDATE Ad SET status=? WHERE adID=?";
-	private static final String DELETE_Ad =
+	private static final String UPDATE_STATUS =
+		    "UPDATE Ad SET status=? WHERE adID=?";
+	private static final String DELETE_AD =
 		    "DELETE FROM Ad WHERE adID =?";
-	private static final String SELECT_ONE_Ad =
+	private static final String SELECT_ONE_AD =
 			"SELECT adID, fileName, adFile, status FROM Ad WHERE adID=?";
-	private static final String SELECT_ALL_Ad =
+	private static final String SELECT_ALL_AD =
 			"SELECT adID, fileName, adFile, status FROM Ad";
 	
 	@Override
@@ -40,7 +40,7 @@ public class AdDAO_JDBC implements AdDAO_interface {
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(INSERT_Ad);
+			pstmt = con.prepareStatement(INSERT_AD);
 			pstmt.setString(1, adVO.getFileName());
 			pstmt.setBlob(2, adVO.getAdFile());
 			pstmt.setByte(3, adVO.getStatus());
@@ -81,7 +81,7 @@ public class AdDAO_JDBC implements AdDAO_interface {
 			//"UPDATE Ad SET fileName=?, adFile=?, status=? WHERE adID=?";
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(UPDATE_Ad);
+			pstmt = con.prepareStatement(UPDATE_AD);
 			pstmt.setString(1, adVO.getFileName());
 			pstmt.setBlob(2, adVO.getAdFile());
 			pstmt.setByte(3, adVO.getStatus());
@@ -117,6 +117,47 @@ public class AdDAO_JDBC implements AdDAO_interface {
 	}
 
 	@Override
+	public void updateStatus(Byte status, Integer adID){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			//"UPDATE Ad SET status=? WHERE adID=?";
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(UPDATE_STATUS);
+			pstmt.setByte(1, status);
+			pstmt.setInt(2, adID);
+			pstmt.executeUpdate();
+		
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+	
+	@Override
 	public void delete(Integer adID) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -124,7 +165,7 @@ public class AdDAO_JDBC implements AdDAO_interface {
 			//"DELETE FROM Ad WHERE adID =?";
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt=con.prepareStatement(DELETE_Ad);
+			pstmt=con.prepareStatement(DELETE_AD);
 			pstmt.setInt(1, adID);
 			pstmt.executeUpdate();
 			
@@ -166,7 +207,7 @@ public class AdDAO_JDBC implements AdDAO_interface {
 			//"SELECT adID, fileName, adFile, status FROM Ad WHERE adID=?";
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(SELECT_ONE_Ad);
+			pstmt = con.prepareStatement(SELECT_ONE_AD);
 
 			pstmt.setInt(1, adID);
 
@@ -229,7 +270,7 @@ public class AdDAO_JDBC implements AdDAO_interface {
 			//"SELECT adID, fileName, adFile, status FROM Ad";
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(SELECT_ALL_Ad);
+			pstmt = con.prepareStatement(SELECT_ALL_AD);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
