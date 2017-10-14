@@ -13,7 +13,7 @@ import java.util.List;
 
 public class AdDAO_JDBC implements AdDAO_interface {
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=AVATAR";
+	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=elook";
 	String userid = "sa";
 	//第一組密碼
 	String passwd = "P@ssw0rd";
