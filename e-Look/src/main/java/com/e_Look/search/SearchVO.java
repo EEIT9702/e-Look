@@ -35,8 +35,4 @@ public class SearchVO implements Serializable {
 	public void setTime(Date time) {
 		this.time = time;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 }
