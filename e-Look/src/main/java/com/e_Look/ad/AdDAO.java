@@ -23,17 +23,17 @@ public class AdDAO implements AdDAO_interface {
 		}
 	}
 	
-	private static final String INSERT_Ad =
+	private static final String INSERT_AD =
 			"INSERT INTO Ad (fileName, adFile, status) VALUES (?,?,?) ";
-	private static final String UPDATE_Ad =
+	private static final String UPDATE_AD =
 			"UPDATE Ad SET fileName=?, adFile=?, status=? WHERE adID=?";
-//	private static final String UPDATE_STATUS =
-//		    "UPDATE Ad SET status=? WHERE adID=?";
-	private static final String DELETE_Ad =
+	private static final String UPDATE_STATUS =
+		    "UPDATE Ad SET status=? WHERE adID=?";
+	private static final String DELETE_AD =
 		    "DELETE FROM Ad WHERE adID =?";
-	private static final String SELECT_ONE_Ad =
+	private static final String SELECT_ONE_AD =
 			"SELECT adID, fileName, adFile, status FROM Ad WHERE adID=?";
-	private static final String SELECT_ALL_Ad =
+	private static final String SELECT_ALL_AD =
 			"SELECT adID, fileName, adFile, status FROM Ad";
 	
 	@Override
@@ -44,7 +44,7 @@ public class AdDAO implements AdDAO_interface {
 		try {
 			
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_Ad);
+			pstmt = con.prepareStatement(INSERT_AD);
 			pstmt.setString(1, adVO.getFileName());
 			pstmt.setBlob(2, adVO.getAdFile());
 			pstmt.setByte(3, adVO.getStatus());
@@ -80,7 +80,7 @@ public class AdDAO implements AdDAO_interface {
 		try {
 			//"UPDATE Ad SET fileName=?, adFile=?, status=? WHERE adID=?";
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(UPDATE_Ad);
+			pstmt = con.prepareStatement(UPDATE_AD);
 			pstmt.setString(1, adVO.getFileName());
 			pstmt.setBlob(2, adVO.getAdFile());
 			pstmt.setByte(3, adVO.getStatus());
@@ -112,13 +112,49 @@ public class AdDAO implements AdDAO_interface {
 	}
 
 	@Override
+	public void updateStatus(Byte status, Integer adID){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			//"UPDATE Ad SET status=? WHERE adID=?";
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_STATUS);
+			pstmt.setByte(1, status);
+			pstmt.setInt(2, adID);
+			pstmt.executeUpdate();
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+	
+	@Override
 	public void delete(Integer adID) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			//"DELETE FROM Ad WHERE adID =?";
 			con = ds.getConnection();
-			pstmt=con.prepareStatement(DELETE_Ad);
+			pstmt=con.prepareStatement(DELETE_AD);
 			pstmt.setInt(1, adID);
 			pstmt.executeUpdate();
 			
@@ -154,7 +190,7 @@ public class AdDAO implements AdDAO_interface {
 		try {
 			//"SELECT adID, fileName, adFile, status FROM Ad WHERE adID=?";
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_ONE_Ad);
+			pstmt = con.prepareStatement(SELECT_ONE_AD);
 			pstmt.setInt(1, adID);
 			ResultSet rs = pstmt.executeQuery();
 
@@ -202,7 +238,7 @@ public class AdDAO implements AdDAO_interface {
 		try {
 			//"SELECT adID, fileName, adFile, status FROM Ad";
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_ALL_Ad);
+			pstmt = con.prepareStatement(SELECT_ALL_AD);
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
