@@ -164,7 +164,7 @@ h5 {
 	float: left;
  	margin-top:1%;
  	margin-left:1%;
- 	border:2px solid red;
+/*  border:2px solid red; */
  	width:5%;
 }
 
@@ -208,19 +208,18 @@ h5 {
 }
 .searchInput{
 	padding-left:2%;
-	border:2px solid purple;
 	border-radius:25px;
 	height:28px;
 }
 .searchSubmitIcon{
 	width:36px;
 	padding-right:2px;
-	border:1px solid blue;
+/* 	border:1px solid blue; */
 }
-/* 分類下課程 */
+/* 分類下課程,拿掉後瀏覽器縮太小時,模板不會一起縮放 */
 .videobox{
- 	width: 58%;
- 	margin:0 auto;
+  	width: 80%;
+  	margin:0 auto;
 }
 
 </style>

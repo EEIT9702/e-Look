@@ -380,7 +380,7 @@ h5 {
 	
 		<!-- 1-4 Template row -->
 		<div class="row">
-			<div class="item col-md-3 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
 						src="img/001.jpg" alt="course" id="wizardPicturePreview" title="">
@@ -402,7 +402,7 @@ h5 {
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
 						src="img/002.jpg" alt="course" id="wizardPicturePreview" title="">
@@ -424,7 +424,7 @@ h5 {
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
 						src="img/003.jpg" alt="course" id="wizardPicturePreview" title="">
@@ -446,7 +446,7 @@ h5 {
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
 						src="img/004.jpg" alt="course" id="wizardPicturePreview" title="">
