@@ -26,6 +26,6 @@ public class SearchVO implements Serializable {
 	public void setEnterTime(Date enterTime) {
 		this.enterTime = enterTime;
 	}
+}
 
 	
-}

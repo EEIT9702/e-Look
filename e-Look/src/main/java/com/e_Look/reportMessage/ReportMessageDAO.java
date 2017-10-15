@@ -1,21 +1,27 @@
 package com.e_Look.reportMessage;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
-	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=elook";
-	String userid = "sa";
-	//第一組密碼
-	String passwd = "P@ssw0rd";
-	//第二組密碼
-	//String passwd = "123456";
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+public class ReportMessageDAO implements ReportMessageDAO_interface {
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/eLookDB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private static final String INSERT_REPORTMESSAGE =
 			"INSERT INTO ReportMessage (reportMessageID, reportMemberID, reportContent, reportTime) VALUES (?,?,?,getDate())";
@@ -39,18 +45,13 @@ public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_REPORTMESSAGE);
 			pstmt.setInt(1, reportMessageVO.getReportMessageID());
 			pstmt.setInt(2, reportMessageVO.getReportMemberID());
 			pstmt.setString(3, reportMessageVO.getReportContent());
 			pstmt.executeUpdate();
 			
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -80,17 +81,12 @@ public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
 		PreparedStatement pstmt = null;
 		try {
 			//"UPDATE ReportMessage SET status=? WHERE reportId=?";
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_STATUS);
 			pstmt.setByte(1, reportMessageVO.getStatus());
 			pstmt.setInt(2, reportMessageVO.getReportId());
 			pstmt.executeUpdate();
 		
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -121,16 +117,11 @@ public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
 		PreparedStatement pstmt = null;
 		try {
 			//"DELETE FROM ReportMessage WHERE reportId =?";
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt=con.prepareStatement(DELETE_REPORTMESSAGE);
 			pstmt.setInt(1, reportID);
 			pstmt.executeUpdate();
-			
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
+
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -165,8 +156,7 @@ public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
 		try {
 			//"SELECT reportId, reportMessageID, reportMemberID, reportContent, reportTime
 			//, status FROM ReportMessage WHERE reportId=?";
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_ONE_REPORTMESSAGE);
 
 			pstmt.setInt(1, reportId);
@@ -184,10 +174,6 @@ public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
 				reportMessageVO.setStatus(rs.getByte("status"));
 			}
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -231,8 +217,7 @@ public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
 		try {
 			//"SELECT reportId, reportMessageID, reportMemberID, reportContent, reportTime
 			//, status FROM ReportMessage WHERE status=0";
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_NOTHANDLE_REPORTMESSAGE);
 			rs = pstmt.executeQuery();
 
@@ -248,10 +233,6 @@ public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
 				list.add(reportMessageVO); // Store the row in the list
 			}
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -295,8 +276,7 @@ public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
 		try {
 			//"SELECT reportId, reportMessageID, reportMemberID, reportContent, reportTime
 			//, status FROM ReportMessage";
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_ALL_REPORTMESSAGE);
 			rs = pstmt.executeQuery();
 
@@ -312,10 +292,6 @@ public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
 				list.add(reportMessageVO); // Store the row in the list
 			}
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
