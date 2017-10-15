@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-	<div class="videobox container">
 	
-		<!-- 1-4 Template row -->
-		<div class="row">
-			<div class="item col-md-3 img-portfolio">
+<!-- 		<div class="row"> -->
+			<!-- 1-4 Template row -->
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
 						src="img/001.jpg" alt="course" id="wizardPicturePreview" title="">
@@ -15,7 +13,7 @@
 							src="../Class Steps/imgs/eLook_LOGO1.png" class="profile-avatar"
 							alt=""> </figure>
 						<div class="card-text">
-							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題1</p>
+							<p id="title" class="card-title mt-3 multi_ellipsis">${param.rowValueY}</p>
 						</div>
 						<div>
 							<p style="margin-top: 40px; font-size: 18px">課程售價：免費</p>
@@ -28,7 +26,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
 						src="img/002.jpg" alt="course" id="wizardPicturePreview" title="">
@@ -50,7 +48,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
 						src="img/003.jpg" alt="course" id="wizardPicturePreview" title="">
@@ -72,7 +70,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
 						src="img/004.jpg" alt="course" id="wizardPicturePreview" title="">
@@ -94,12 +92,10 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<!-- end 1-4 Template -->
-		<br>
-		<!-- 5-8 Template row -->
-		<div class="row">
-			<div class="item col-md-3 img-portfolio">
+			<!-- end 1-4 Template -->
+			<!-- <br> -->
+			<!-- 5-8 Template row -->
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="img/005.jpg" alt="course" id="wizardPicturePreview"
@@ -122,7 +118,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="img/006.jpg" alt="course" id="wizardPicturePreview"
@@ -145,7 +141,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="img/007.jpg" alt="course" id="wizardPicturePreview"
@@ -168,7 +164,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="img/008.jpg" alt="course" id="wizardPicturePreview"
@@ -191,12 +187,10 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<!-- end 5-8 Template -->
-		<br>
-		<!-- 9-12 Template row -->
-		<div class="row">
-			<div class="item col-md-3 img-portfolio">
+			<!-- end 5-8 Template -->
+			<!-- <br> -->
+			<!-- 9-12 Template row -->
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="img/009.jpg" alt="course" id="wizardPicturePreview"
@@ -219,7 +213,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="img/010.jpg" alt="course" id="wizardPicturePreview"
@@ -242,7 +236,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="img/011.jpg" alt="course" id="wizardPicturePreview"
@@ -265,7 +259,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="img/012.jpg" alt="course" id="wizardPicturePreview"
@@ -288,12 +282,10 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<!-- end 9-12 Template -->
-		<br>
-		<!-- 13-16 Template row -->
-		<div class="row">
-			<div class="item col-md-3 img-portfolio">
+			<!-- end 9-12 Template -->
+			<!-- <br> -->
+			<!-- 13-16 Template row -->
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="img/001.jpg" alt="course" id="wizardPicturePreview"
@@ -316,7 +308,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="img/002.jpg" alt="course" id="wizardPicturePreview"
@@ -339,7 +331,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="img/003.jpg" alt="course" id="wizardPicturePreview"
@@ -362,7 +354,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="img/004.jpg" alt="course" id="wizardPicturePreview"
@@ -385,12 +377,10 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<!-- end 13-16 Template -->
-		<br>
-		<!-- 17-20 Template row -->
-		<div class="row">
-			<div class="item col-md-3 img-portfolio">
+			<!-- end 13-16 Template -->
+			<!-- <br> -->
+			<!-- 17-20 Template row -->
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="img/005.jpg" alt="course" id="wizardPicturePreview"
@@ -413,7 +403,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="img/006.jpg" alt="course" id="wizardPicturePreview"
@@ -436,7 +426,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="img/007.jpg" alt="course" id="wizardPicturePreview"
@@ -459,7 +449,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="img/008.jpg" alt="course" id="wizardPicturePreview"
@@ -482,12 +472,10 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<!-- end 17-20 Template -->
-		<br>
-		<!-- 21-24 Template row -->
-		<div class="row">
-			<div class="item col-md-3 img-portfolio">
+			<!-- end 17-20 Template -->
+			<!-- <br> -->
+			<!-- 21-24 Template row -->
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="img/009.jpg" alt="course" id="wizardPicturePreview"
@@ -510,7 +498,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="img/010.jpg" alt="course" id="wizardPicturePreview"
@@ -533,7 +521,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="img/011.jpg" alt="course" id="wizardPicturePreview"
@@ -556,7 +544,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="img/012.jpg" alt="course" id="wizardPicturePreview"
@@ -579,12 +567,10 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<!-- end 21-24 Template -->
-		<br>
-		<!-- 25-28 Template row -->
-		<div class="row">
-			<div class="item col-md-3 img-portfolio">
+			<!-- end 21-24 Template -->
+			<!-- <br> -->
+			<!-- 25-28 Template row -->
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="img/001.jpg" alt="course" id="wizardPicturePreview"
@@ -607,7 +593,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="img/002.jpg" alt="course" id="wizardPicturePreview"
@@ -630,7 +616,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="img/003.jpg" alt="course" id="wizardPicturePreview"
@@ -653,7 +639,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="img/004.jpg" alt="course" id="wizardPicturePreview"
@@ -676,8 +662,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<!-- end 25-28 Template -->
-
-		<!-- end of class="container" -->
-	</div>
+			<!-- end 25-28 Template -->
+			
+		<!-- end of row -->
+<!-- 		</div> -->

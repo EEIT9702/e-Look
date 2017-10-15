@@ -1,9 +1,11 @@
+<%@page import="com.e_Look.search.SearchDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
 <jsp:useBean id="SYSTEM" class="init.GlobalService" scope="application" />
 <link rel="Short Icon" type="image/x-icon" href="${SYSTEM.iconUri}" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -164,7 +166,7 @@ h5 {
 	float: left;
  	margin-top:1%;
  	margin-left:1%;
- 	border:2px solid red;
+/*  border:2px solid red; */
  	width:5%;
 }
 
@@ -208,21 +210,25 @@ h5 {
 }
 .searchInput{
 	padding-left:2%;
-	border:2px solid purple;
 	border-radius:25px;
 	height:28px;
 }
 .searchSubmitIcon{
 	width:36px;
 	padding-right:2px;
-	border:1px solid blue;
+/* 	border:1px solid blue; */
 }
-/* 分類下課程 */
+/* 分類下課程,拿掉後瀏覽器縮太小時,模板不會一起縮放 */
 .videobox{
- 	width: 58%;
- 	margin:0 auto;
+  	width: 80%;
+  	margin:0 auto;
 }
 
+.keyword{
+clear:both;
+color:red;
+
+}
 </style>
 <script type="text/javascript">
 	//為文件的滑鼠按下事件定義回呼
@@ -276,9 +282,9 @@ h5 {
 		$('a[href="#menu1"]').text(wst+"---"+dh+"---"+wh)
 		console.log(wst+"---"+dh+"---"+wh);
 		//判斷卷軸是否到底部
-		if(wst==(dh-wh) || dh==wd){
+		if(wst==(dh-wh) ){
 			rowValueX++;
-			$.get("body_data.jsp",{"rowValueY":rowValueX},function(data){
+			$.get("<%= request.getContextPath() %>/body/body_data.jsp",{"rowValueY":rowValueX},function(data){
 				$('#river').append(data);
 			});
 		}
@@ -325,7 +331,7 @@ h5 {
 </script>
 </head>
 <body>
-	<jsp:include page="${contextPath}/header.jsp" />
+<%-- 	<jsp:include page="${contextPath}/header.jsp" /> --%>
 	<jsp:include page="${contextPath}/login.jsp" />
 
 	<!-- 分類按鈕和搜索star -->
@@ -377,19 +383,25 @@ h5 {
 					src="<%=request.getContextPath() %>/alan/img/program.svg"><br>程式</a></li>
 			<li id="li_searchArea">
 				<form class="navbar-form navbar-left" id="searchKey" method="get"
-					action="">
+					action="<%=request.getContextPath() %>/SearchController">
 					<div class="input-group">
 						<div class="outsideBorder">
 							<div class="betweenOutAndInner">
 
-								<input type="text" class="form-control" placeholder="Search"
+								<input name="keyWord" type="text" class="form-control" placeholder="Search"
 									class="searchInput">
 
 								<div style="float:right" class="input-group-btn">
-									<input type="image" id="search-submit" name="search-submit" img
+									<input type="image" img
 										src="<%=request.getContextPath()%>/alan/img/search.svg"
 										onclick="document.Search.submit()"
 										class="searchSubmitIcon"/>
+								</div>
+								
+								<div class="keyword text-left">熱門關鍵字：
+								<c:forEach var="searchVO" items="<%= new SearchDAO().getKeywordRank(3) %>" >
+								${searchVO.keyWord }
+								</c:forEach>
 								</div>
 							</div>
 						</div>

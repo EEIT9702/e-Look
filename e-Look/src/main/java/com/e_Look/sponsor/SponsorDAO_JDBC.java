@@ -1,8 +1,5 @@
-package com.e_Look.ad;
+package com.e_Look.sponsor;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdDAO_JDBC implements AdDAO_interface {
+public class SponsorDAO_JDBC implements SponsorDAO_interface {
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=elook";
 	String userid = "sa";
@@ -20,30 +17,30 @@ public class AdDAO_JDBC implements AdDAO_interface {
 	//第二組密碼
 	//String passwd = "123456";
 	
-	private static final String INSERT_AD =
-			"INSERT INTO Ad (fileName, adFile, status) VALUES (?,?,?) ";
-	private static final String UPDATE_AD =
-			"UPDATE Ad SET fileName=?, adFile=?, status=? WHERE adID=?";
-	private static final String UPDATE_STATUS =
-		    "UPDATE Ad SET status=? WHERE adID=?";
-	private static final String DELETE_AD =
-		    "DELETE FROM Ad WHERE adID =?";
-	private static final String SELECT_ONE_AD =
-			"SELECT adID, fileName, adFile, status FROM Ad WHERE adID=?";
-	private static final String SELECT_ALL_AD =
-			"SELECT adID, fileName, adFile, status FROM Ad";
-	
+	private static final String INSERT_SPONSOR =
+			"INSERT INTO Sponsor (courseID, SponsorName, money) VALUES (?,?,?) ";
+	//寫著,但應該用不到
+	private static final String UPDATE_SPONSOR =
+			"UPDATE Sponsor SET SponsorName=?, money=? WHERE courseID=?";
+	//寫著,但應該用不到
+	private static final String DELETE_SPONSOR =
+		    "DELETE FROM Sponsor WHERE courseID =?";
+	private static final String SELECT_ONE_SPONSOR =
+			"SELECT courseID, SponsorName, money FROM Sponsor WHERE courseID=?";
+	private static final String SELECT_ALL_SPONSOR =
+			"SELECT courseID, SponsorName, money FROM Sponsor";
+
 	@Override
-	public void insert(AdVO adVO) {
+	public void insert(SponsorVO sponsorVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(INSERT_AD);
-			pstmt.setString(1, adVO.getFileName());
-			pstmt.setBlob(2, adVO.getAdFile());
-			pstmt.setByte(3, adVO.getStatus());
+			pstmt = con.prepareStatement(INSERT_SPONSOR);
+			pstmt.setInt(1, sponsorVO.getCourseID());
+			pstmt.setString(2, sponsorVO.getSponsorName());
+			pstmt.setInt(3, sponsorVO.getMoney());
 			pstmt.executeUpdate();
 			
 			// Handle any driver errors
@@ -74,18 +71,17 @@ public class AdDAO_JDBC implements AdDAO_interface {
 	}
 
 	@Override
-	public void update(AdVO adVO) {
+	public void update(SponsorVO sponsorVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			//"UPDATE Ad SET fileName=?, adFile=?, status=? WHERE adID=?";
+			//"UPDATE Sponsor SET SponsorName=?, money=? WHERE courseID=?";
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(UPDATE_AD);
-			pstmt.setString(1, adVO.getFileName());
-			pstmt.setBlob(2, adVO.getAdFile());
-			pstmt.setByte(3, adVO.getStatus());
-			pstmt.setInt(4, adVO.getAdID());
+			pstmt = con.prepareStatement(UPDATE_SPONSOR);
+			pstmt.setInt(1, sponsorVO.getCourseID());
+			pstmt.setString(2, sponsorVO.getSponsorName());
+			pstmt.setInt(3, sponsorVO.getMoney());
 			pstmt.executeUpdate();
 		
 			// Handle any driver errors
@@ -117,56 +113,15 @@ public class AdDAO_JDBC implements AdDAO_interface {
 	}
 
 	@Override
-	public void updateStatus(Byte status, Integer adID){
+	public void delete(Integer courseID) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			//"UPDATE Ad SET status=? WHERE adID=?";
+			//"DELETE FROM Sponsor WHERE courseID =?";
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(UPDATE_STATUS);
-			pstmt.setByte(1, status);
-			pstmt.setInt(2, adID);
-			pstmt.executeUpdate();
-		
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-
-	}
-	
-	@Override
-	public void delete(Integer adID) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			//"DELETE FROM Ad WHERE adID =?";
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt=con.prepareStatement(DELETE_AD);
-			pstmt.setInt(1, adID);
+			pstmt=con.prepareStatement(DELETE_SPONSOR);
+			pstmt.setInt(1, courseID);
 			pstmt.executeUpdate();
 			
 			// Handle any driver errors
@@ -197,29 +152,28 @@ public class AdDAO_JDBC implements AdDAO_interface {
 	}
 
 	@Override
-	public AdVO findByAdID(Integer adID) {
-		AdVO adVO = null;
+	public SponsorVO findByCourseID(Integer courseID) {
+		SponsorVO sponsorVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		try {
-			//"SELECT adID, fileName, adFile, status FROM Ad WHERE adID=?";
+			//"SELECT courseID, SponsorName, money FROM Sponsor WHERE courseID=?";
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(SELECT_ONE_AD);
+			pstmt = con.prepareStatement(SELECT_ONE_SPONSOR);
 
-			pstmt.setInt(1, adID);
+			pstmt.setInt(1, courseID);
 
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// adVO 也稱為 Domain objects
-				adVO = new AdVO();
-				adVO.setAdID(rs.getInt("adID"));
-				adVO.setFileName(rs.getString("fileName"));
-				adVO.setAdFile(rs.getBinaryStream("adFile"));
-				adVO.setStatus(rs.getByte("status"));
+				// sponsorVO 也稱為 Domain objects
+				sponsorVO = new SponsorVO();
+				sponsorVO.setCourseID(rs.getInt("courseID"));
+				sponsorVO.setSponsorName(rs.getString("sponsorName"));
+				sponsorVO.setMoney(rs.getInt("money"));
 			}
 
 			// Handle any driver errors
@@ -254,33 +208,32 @@ public class AdDAO_JDBC implements AdDAO_interface {
 				}
 			}
 		}
-		return adVO;
+		return sponsorVO;
 	}
 
 	@Override
-	public List<AdVO> getAll() {
-		List<AdVO> list = new ArrayList<AdVO>();
-		AdVO adVO = null;
+	public List<SponsorVO> getAll() {
+		List<SponsorVO> list = new ArrayList<SponsorVO>();
+		SponsorVO sponsorVO = null;
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
-			//"SELECT adID, fileName, adFile, status FROM Ad";
+			//"SELECT courseID, SponsorName, money FROM Sponsor";
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(SELECT_ALL_AD);
+			pstmt = con.prepareStatement(SELECT_ALL_SPONSOR);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// adVO 也稱為 Domain objects
-				adVO = new AdVO();
-				adVO.setAdID(rs.getInt("adID"));
-				adVO.setFileName(rs.getString("fileName"));
-				adVO.setAdFile(rs.getBinaryStream("adFile"));
-				adVO.setStatus(rs.getByte("status"));
-				list.add(adVO); // Store the row in the list
+				// sponsorVO 也稱為 Domain objects
+				sponsorVO = new SponsorVO();
+				sponsorVO.setCourseID(rs.getInt("courseID"));
+				sponsorVO.setSponsorName(rs.getString("sponsorName"));
+				sponsorVO.setMoney(rs.getInt("money"));
+				list.add(sponsorVO); // Store the row in the list
 			}
 
 			// Handle any driver errors
@@ -318,39 +271,37 @@ public class AdDAO_JDBC implements AdDAO_interface {
 		return list;
 	}
 
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) {
 		
-		AdDAO_JDBC dao = new AdDAO_JDBC();
-
+		SponsorDAO_JDBC dao = new SponsorDAO_JDBC();
+		
 		// 新增
-		AdVO adVO1 = new AdVO();
-		adVO1.setFileName("聖誕大特賣");
-		adVO1.setAdFile(new FileInputStream(new File("src/main/webapp/body/img/xmas video sale.jpg")));
-		adVO1.setStatus((byte) 0);
-		dao.insert(adVO1);
+		SponsorVO sponsorVO1 = new SponsorVO();
+		sponsorVO1.setCourseID(200001);
+		sponsorVO1.setSponsorName("王大明");
+		sponsorVO1.setMoney(1000);
+		dao.insert(sponsorVO1);
 		
 		//修改
-//		AdVO adVO2 = new AdVO();
-//		adVO2.setFileName("聖誕大特賣");
-//		adVO2.setAdFile(new FileInputStream(new File("src/main/webapp/body/img/xmas video sale.jpg")));
-//		adVO2.setStatus((byte) 1);
-//		dao.update(adVO2);
+//		SponsorVO sponsorVO2 = new SponsorVO();
+//		sponsorVO1.setCourseID(200001);
+//		sponsorVO1.setSponsorName("王大明");
+//		sponsorVO1.setMoney(500);
+//		dao.update(sponsorVO2);
 		
 		//查詢單一
-		AdVO adVO3 = dao.findByAdID(1001);
-		System.out.println(adVO3.getAdID());
-		System.out.println(adVO3.getFileName());
-		System.out.println(adVO3.getAdFile());
-		System.out.println(adVO3.getStatus());
+		SponsorVO sponsorVO3 = dao.findByCourseID(200001);
+		System.out.println(sponsorVO3.getCourseID());
+		System.out.println(sponsorVO3.getSponsorName());
+		System.out.println(sponsorVO3.getMoney());
 		System.out.println("---------------------------");
 		
 		//查詢全部
-		List<AdVO> list = dao.getAll();
-		for(AdVO adVO : list){
-			System.out.print(adVO.getAdID() + "  ");
-			System.out.print(adVO.getFileName() + "  ");
-			System.out.print(adVO.getAdFile() + "  ");
-			System.out.print(adVO.getStatus());
+		List<SponsorVO> list = dao.getAll();
+		for(SponsorVO sponsorVO : list){
+			System.out.print(sponsorVO.getCourseID() + "  ");
+			System.out.print(sponsorVO.getSponsorName() + "  ");
+			System.out.print(sponsorVO.getMoney());
 		}
 	}
 
