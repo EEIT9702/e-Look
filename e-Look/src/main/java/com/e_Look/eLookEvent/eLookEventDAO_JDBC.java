@@ -9,13 +9,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
-
-import com.e_Look.buyCourse.model.BuyCourseVO;
 
 public class eLookEventDAO_JDBC implements eLookEvent_interface {
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
@@ -238,38 +234,39 @@ public class eLookEventDAO_JDBC implements eLookEvent_interface {
 
 	public static void main(String[] args) {
 		//insert一筆資料
-		eLookEventDAO_JDBC daoJDBC=new eLookEventDAO_JDBC();
-		
+//		eLookEventDAO_JDBC daoJDBC=new eLookEventDAO_JDBC();
+//		
 //		eLookEventVO dao = new eLookEventVO();
 //		dao.setEventName("萬聖節派對");
-//		
-//		
-//		try {
-//			dao.seteStartDate(new Date(System.currentTimeMillis()));
-//			dao.seteEndDate(new Date(System.currentTimeMillis()));
-//			dao.setePhoto(new FileInputStream(new File("D:/A550/GRD/R0014769.JPG")));
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
+		
+		
+//		String datefirst="2017/10/20";
+//		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+//				sdf.parse(datefirst);
+				
+//		Date date=java.sql.Date.valueOf(startDate);
+	
+//		System.out.println(date);
+	
+		
 //		dao.setDiscount(0.8);
 //		daoJDBC.insert(dao);
 		
 		
 		//查單筆
-		eLookEventVO list1 = daoJDBC.findByPrimaryKey(1001);
-	
-			System.out.print(list1.getEventName()+",");
-			System.out.print(list1.getePhoto()+",");
-			System.out.print(list1.geteStartDate()+",");
-			System.out.print(list1.geteEndDate()+",");
-			System.out.print(list1.getDiscount()+",");
-			
+//		eLookEventVO list1 = daoJDBC.findByPrimaryKey(1003);
+//	
+//			System.out.print(list1.getEventName()+",");
+//			System.out.print(list1.getePhoto()+",");
+//			System.out.print(list1.geteStartDate()+",");
+//			System.out.print(list1.geteEndDate()+",");
+//			System.out.print(list1.getDiscount()+",");
+//			
 		//查全部
 //		List<eLookEventVO> list2 = daoJDBC.getAll();
 //		for(eLookEventVO eLookEventVO:list2){
 //			System.out.print(eLookEventVO.getEventName()+",");
+//			System.out.print(eLookEventVO.getePhoto()+",");
 //			System.out.print(eLookEventVO.geteStartDate()+",");
 //			System.out.print(eLookEventVO.geteEndDate()+",");
 //			System.out.print(eLookEventVO.getDiscount()+",");
