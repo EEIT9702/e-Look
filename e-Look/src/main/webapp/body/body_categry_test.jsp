@@ -152,8 +152,8 @@ h5 {
 	width: 76%;
 	margin:0 auto;
 	text-align: center;
- 	border-bottom: 1.5px solid black;
-/* 	border:1.5px solid black; */
+/* 	border-bottom: 1.5px solid black; */
+	border:1.5px solid black;
 	padding-top:0.6%;
 	padding-bottom:0.6%;
 	margin-bottom:1.2%;
