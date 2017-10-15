@@ -25,6 +25,8 @@
 	type="text/javascript"></script>
 <script src="<%=request.getContextPath()%>/login/js/jquery-3.2.1.js"
 	type="text/javascript"></script>
+<script src="<%=request.getContextPath()%>/login/js/bootstrap.js"
+type="text/javascript"></script>
 	<script>
  $(document).ready(function () {
 		$(this).click(function() {
