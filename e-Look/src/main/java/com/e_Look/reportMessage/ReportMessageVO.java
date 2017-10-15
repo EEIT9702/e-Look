@@ -60,8 +60,4 @@ public class ReportMessageVO implements Serializable {
 	public void setStatus(Byte status) {
 		this.status = status;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 }
