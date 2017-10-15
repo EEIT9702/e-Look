@@ -328,7 +328,30 @@ public class AdDAO_JDBC implements AdDAO_interface {
 		adVO1.setAdFile(new FileInputStream(new File("src/main/webapp/body/img/xmas video sale.jpg")));
 		adVO1.setStatus((byte) 0);
 		dao.insert(adVO1);
-
+		
+		//修改
+//		AdVO adVO2 = new AdVO();
+//		adVO2.setFileName("聖誕大特賣");
+//		adVO2.setAdFile(new FileInputStream(new File("src/main/webapp/body/img/xmas video sale.jpg")));
+//		adVO2.setStatus((byte) 1);
+//		dao.update(adVO2);
+		
+		//查詢單一
+		AdVO adVO3 = dao.findByAdID(1001);
+		System.out.println(adVO3.getAdID());
+		System.out.println(adVO3.getFileName());
+		System.out.println(adVO3.getAdFile());
+		System.out.println(adVO3.getStatus());
+		System.out.println("---------------------------");
+		
+		//查詢全部
+		List<AdVO> list = dao.getAll();
+		for(AdVO adVO : list){
+			System.out.print(adVO.getAdID() + "  ");
+			System.out.print(adVO.getFileName() + "  ");
+			System.out.print(adVO.getAdFile() + "  ");
+			System.out.print(adVO.getStatus());
+		}
 	}
 
 }

@@ -154,7 +154,7 @@ public class SearchDAO implements SearchDAO_interface {
 	}
 
 	@Override
-	public List<SearchVO> getKeywordRank() {
+	public List<SearchVO> getKeywordRank(Integer i) {
 		List<SearchVO> list = new ArrayList<SearchVO>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -162,11 +162,12 @@ public class SearchDAO implements SearchDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_SEARCH_RANK);
 			ResultSet rs = pstmt.executeQuery();
-			while (rs.next()) {
+			Integer i2 =1;
+			while (rs.next() && i2<=i) {
 				SearchVO searchVO = new SearchVO(); 
 				searchVO.setKeyWord(rs.getString("keyword"));
-				searchVO.setEnterTime(rs.getDate("enterTime"));
 				list.add(searchVO);
+				i2++;
 			}
 			
 

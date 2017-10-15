@@ -161,7 +161,7 @@ public class SearchDAO_JDBC implements SearchDAO_interface {
 	}
 
 	@Override
-	public List<SearchVO> getKeywordRank() {
+	public List<SearchVO> getKeywordRank(Integer i) {
 		List<SearchVO> list = new ArrayList<SearchVO>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -170,11 +170,12 @@ public class SearchDAO_JDBC implements SearchDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(SELECT_SEARCH_RANK);
 			ResultSet rs = pstmt.executeQuery();
-			while (rs.next()) {
+			Integer i2 =1;
+			while (rs.next() && i2<=i) {
 				SearchVO searchVO = new SearchVO(); 
 				searchVO.setKeyWord(rs.getString("keyword"));
-				//searchVO.setEnterTime(rs.getDate("enterTime"));
 				list.add(searchVO);
+				i2++;
 			}
 			
 			
@@ -253,19 +254,19 @@ public class SearchDAO_JDBC implements SearchDAO_interface {
 		//searchVO.getEnterTime()不會有值 
 		//印出來的是按照熱門程度排序的關鍵字
 		//這組DAO可能只能用JDBC來寫
-		List<SearchVO> list0=dao.getKeywordRank();
+		List<SearchVO> list0=dao.getKeywordRank(2);
 		for(SearchVO searchVO:list0){
 			System.out.println(searchVO.getKeyWord()+"\t");
 			
 		}
 
-		List<SearchVO> list = dao.getAll();
-		for(SearchVO searchVO1:list){
-			System.out.print(searchVO1.getKeyWord()+"\t");
-			System.out.println(searchVO1.getEnterTime());
-			
-		}
-		
+//		List<SearchVO> list = dao.getAll();
+//		for(SearchVO searchVO1:list){
+//			System.out.print(searchVO1.getKeyWord()+"\t");
+//			System.out.println(searchVO1.getEnterTime());
+//			
+//		}
+//		
 		
 	}
 

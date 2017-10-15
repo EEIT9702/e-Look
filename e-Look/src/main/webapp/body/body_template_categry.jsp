@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${SYSTEM.systemName}</title>
 <link href="HeaderCssJs/bootstrap.css" rel="stylesheet">
-<link href="HeaderCssJs/bootstrap.min.css" rel="stylesheet">
+<!-- <link href="HeaderCssJs/bootstrap.min.css" rel="stylesheet"> -->
 <!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom CSS -->
@@ -147,23 +147,27 @@ h5 {
 
 /* 分類按鈕 */
 .ndiv {
-	height: 100px;
-	width: 1100px;
-	margin-left: auto;
-	margin-right: auto;
+	height:130px;
+/* 	width: 1100px; */
+	width: 76%;
+	margin:0 auto;
 	text-align: center;
-	border-bottom: 1.5px solid black;
-	margin-bottom:20px;
+ 	border-bottom: 1.5px solid black;
+/* 	border:1.5px solid black; */
+	padding-top:0.6%;
+	padding-bottom:0.6%;
+	margin-bottom:1.2%;
 }
 
 .ndiv li {
 	list-style-type: none;
 	float: left;
-	margin: 8px;
+	margin-top:1%;
+	margin-left:2%;
 }
 
 .svgIcon {
-	width: 48px;
+	width: 50px;
 }
 
 .ndiv a {
@@ -172,6 +176,10 @@ h5 {
 	active: none;
 	font-size: 20px;
 	font-family: 微軟正黑體;
+}
+
+.ndiv a:hover{
+	text-decoration: none;
 }
 
 .ndiv a:link {
@@ -207,9 +215,13 @@ h5 {
 	padding-right:2px;
 }
 /* 分類下課程 */
+.videobox{
+	width: 58%;
+	margin:0 auto;
+}
 .row{
-	width: 1100px;
-	margin-left:200px;
+/* 	width: 1100px; */
+/* 	margin-left:200px; */
 }
 
 </style>
@@ -333,7 +345,7 @@ h5 {
 					style="<c:choose><c:when test='${param.courseClassID == 11 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
 					class="svgIcon"
 					src="<%=request.getContextPath() %>/alan/img/program.svg"><br>程式</a></li>
-			<li class="li_searchArea" style="margin-left:56px;margin-top:15px;" >
+			<li class="li_searchArea" style="margin-left:17%;margin-top:1.2%;" >
 				<form class="navbar-form navbar-left" id="searchKey" method="get"
 					action="">
 					<div class="input-group">
@@ -364,13 +376,11 @@ h5 {
 		<a href=""><span id="ads"></span></a>
 	</div>
 	<!-- 3秒消失廣告end -->
-	
-	<div style="width:1000px;margin-left:206px">
-	<div class="container">
+	<div class="videobox container">
 	
 		<!-- 1-4 Template row -->
 		<div class="row">
-			<div class="item col-md-3 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
 						src="img/001.jpg" alt="course" id="wizardPicturePreview" title="">
@@ -392,7 +402,7 @@ h5 {
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
 						src="img/002.jpg" alt="course" id="wizardPicturePreview" title="">
@@ -414,7 +424,7 @@ h5 {
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
 						src="img/003.jpg" alt="course" id="wizardPicturePreview" title="">
@@ -436,7 +446,7 @@ h5 {
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
 						src="img/004.jpg" alt="course" id="wizardPicturePreview" title="">
@@ -1045,7 +1055,7 @@ h5 {
 
 		<!-- end of class="container" -->
 	</div>
-	</div>
+
 
 </body>
 </html>

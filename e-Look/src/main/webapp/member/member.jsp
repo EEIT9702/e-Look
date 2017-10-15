@@ -170,17 +170,17 @@ font-size:30px;
                 <div class="col-md-12" style="border: 1px solid #c1bebe;box-shadow: 2px 2px #c7c4c4;">
                     <h3>關於我</h3> 
                     <hr />
-                    <p style="word-break:break-all; word-wrap:break-word">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p> 
+                    <p style="word-break:break-all; word-wrap:break-word">${LoginOK.aboutme}</p> 
                 </div>
                 <div style="border: 1px solid #c1bebe;box-shadow: 2px 2px #c7c4c4;" class="col-md-12">
                     <h3>專長</h3> 
                     <hr />
-                    <p style="word-break:break-all; word-wrap:break-word">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p> 
+                    <p style="word-break:break-all; word-wrap:break-word">${LoginOK.skill}</p> 
                 </div>
                 <div style="border: 1px solid #c1bebe;box-shadow: 2px 2px #c7c4c4;" class="col-md-12">
                     <h3>興趣</h3> 
                     <hr />
-                    <p style="word-break:break-all; word-wrap:break-word" class="text-justify">1111111111111111111111111111111111111111111111111111111111111111111111 Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.5555555555555555555555555555555555555555555555555555555555555555555555555</p> 
+                    <p style="word-break:break-all; word-wrap:break-word" >${LoginOK.hobby}</p> 
                 </div>                 
             </div>
             <div class="col-md-8 breadcrumb" data-pg-collapsed>
