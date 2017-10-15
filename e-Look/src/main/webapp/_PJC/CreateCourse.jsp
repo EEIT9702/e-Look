@@ -353,17 +353,17 @@
 									<div class="col-md-4">
 										<div class="col-md-6">
 											<div class="funkyradio">
-												<div class="radio-free" style="font-size: 20px;">
-													<input type="radio" name="radio" id="radio1" /> <label
-														for="radio1">免費課程</label>
+												<div class="radio-free" style="font-size: 20px;" id="CourseList" onchange="select()">																																																																								
+													<input type="radio" name="radio" id="radio1" value="radio1"/> 
+													<label for="radio1">免費課程</label>
 												</div>
 												<div class="radio-online" style="font-size: 20px;">
-													<input type="radio" name="radio" id="radio3" /> <label
+													<input type="radio" name="radio" id="radio3" value="radio3"/> <label
 														for="radio3">線上課程</label>
 												</div>
 												<div class="radio-proposal" style="font-size: 20px;">
-													<input type="radio" name="radio" id="radio2" /> <label
-														for="radio2">募資課程</label>
+													<input type="radio" name="radio" id="radio2" value="radio2"/> <label
+														for="radio2">募資課程</label>																																										
 												</div>
 											</div>
 										</div>
@@ -384,7 +384,7 @@
 
 									</div>
 								</div>
-								<div class="container" style="margin-top: 2em;">
+								<div class="container" style="margin-top: 2em;" id="ProposalCourse">
 									<div class="col-md-12">
 										<div class="form-group col-lg-3" style="font-size: 20px;">
 											<label>開課門檻人數(最低為10人)</label> <input type="text" name=""
@@ -394,25 +394,21 @@
 									<div class="col-md-12" style="margin-top: 2em;">
 										<div class="form-group col-lg-3" style="font-size: 20px;">
 											<label>募資起始日期</label> 
-											<div class="input-group date form_date" data-date=""
-												data-date-format="yyyy MM dd" data-link-field="dtp_input1"
+											<div class="input-group date" data-date=""
+												data-date-format="yyyy-mm-dd" data-link-field="dtp_input1"
 												data-link-format="yyyy-mm-dd">
 												<input class="form-control" style="font-size: 18px;" type="text" value=""
-													readonly size="18" id="starttime"><span
-													class="input-group-addon"><span
-													class="glyphicon glyphicon-calendar"></span></span>
+													readonly size="18" id="starttime">
 											</div>
 											<input type="hidden" id="dtp_input1" value="" /><br/>
 										</div>
 										<div class="form-group col-lg-3" style="font-size: 20px;">
 											<label>募資結束日期(最高天數為30天)</label> 
-											<div class="input-group date form_date" data-date=""
-												data-date-format="yyyy MM dd" data-link-field="dtp_input2"
+											<div class="input-group date" data-date=""
+												data-date-format="yyyy-mm-dd" data-link-field="dtp_input2"
 												data-link-format="yyyy-mm-dd">
 												<input class="form-control" style="font-size: 18px;" type="text" value=""
-													readonly size="18" id="endtime"><span
-													class="input-group-addon"><span
-													class="glyphicon glyphicon-calendar"></span></span>
+													readonly size="18" id="endtime">
 											</div>
 											<input type="hidden" id="dtp_input2" value="" /><br/>																																	
 										</div>
@@ -421,7 +417,12 @@
 										<div class="form-group col-lg-3" style="font-size: 20px;">
 											<label>募資結束後的備課天數</label> <label>(最高天數為60天)</label> 
 											<input type="text" name=""
-												class="form-control" id="" value="" style="font-size: 18px;">
+												class="form-control" id="prepareDate" value="" style="font-size: 18px;">
+										</div>
+										</div>
+										<div class="col-md-12" style="margin-top: 0.5em;">
+										<div class="form-group col-lg-3" style="font-size: 20px;">
+										<label>課程預計上線日期：</label><span id="endofproposal"></span>
 										</div>
 									</div>
 								</div>
@@ -623,11 +624,12 @@
 			var starttime=$("#starttime").val();  
 		    var endtime=$("#endtime").val(); 
 		    if(endtime<starttime){  
-		    	alert("起始日期不能大於結束日期");
 		    	return false;  
 		    }  
-		    return true;  
-		}  ;	
+		    else{
+		    	return true;	
+		    }  
+		};	
 		
 		
 		
@@ -641,7 +643,8 @@
 			todayHighlight: 1,
 			startView: 2,
 			minView: 2,
-			forceParse: 0
+			forceParse: 0,
+			format: 'yyyy-mm-dd'
 		}).on('changeDate',function(ev){
 			var starttime=$('#starttime').val();
 			$('#endtime').datetimepicker('setStartDate',starttime);
@@ -658,26 +661,53 @@
 			todayHighlight: 1,
 			startView: 2,
 			minView: 2,
-			forceParse: 0
+			forceParse: 0,
+			format: 'yyyy-mm-dd'
 		}).on('changeDate',function(ev){
 			var starttime=$('#starttime').val();
-			var endtime=$('endtime').val();
-			
-			
-			
+			var endtime=$('#endtime').val();
+									
 			if(starttime!=""&&endtime!=""){
 				if(!checkEndTime(starttime,endtime)){
 					$('endtime').val('');
 					alert("起始日期不能大於結束日期");
 					return;
 				}
-			}
-						
+			}									
 			$('#starttime').datetimepicker('setEndDate',endtime);
-			$('#starttime').datetimepicker('hide');
+			$('#starttime').datetimepicker('hide');					
 		});
 		
 	});
+	
+	
+	
+	$("#prepareDate").keyup(function() {
+		var endtime=$('#endtime').val();
+		var Dates = new Date(endtime);
+		var prepareDate = $(this).val();
+		Dates = Dates.valueOf();
+		Dates = Dates + (prepareDate * 24 * 60 * 60 * 1000); // 一天幾豪秒
+		Dates = new Date(Dates);
+		$("#endofproposal").text(Dates.getFullYear()+"-"+(Dates.getMonth()+1)+"-"+Dates.getDate());
+	});
+	
+	
+	
+	function select() {
+        var v = document.querySelector("#CourseList input:focus").value;
+        if (v === "radio1" || v === "radio3") {
+            document.querySelectorAll("#ProposalCourse input").forEach(function (el) {
+                el.setAttribute("readonly", "readonly");
+                el.style = "opacity: 0.4";
+            })                
+        } else if (v === "radio2") {    
+            document.querySelectorAll("#ProposalCourse input").forEach(function (el) {
+                el.removeAttribute("readonly");
+                el.style = "opacity: 1";
+            })
+        }               
+    };
 	</script>
 
 
