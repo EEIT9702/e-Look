@@ -1,14 +1,14 @@
 package com.e_Look.search;
 
+import java.sql.Date;
 import java.util.List;
 
 public interface SearchDAO_interface {
 	
-	public void insertKeyword(SearchVO searchVO);
-	//public void insertCountword(SearchVO searchVO);
-	//public void update(SearchVO searchVO);
-	//public void delete(SearchVO searchVO);
-	public List<SearchVO> getCountWord();
-	public SearchVO findByKeyWord(String keyWord);//search keyword
-	//public List<SearchVO> getAll();//search keyword and call trigger insert countword
+	public void insert(SearchVO searchVO);
+	public void update(SearchVO oldSearchVO,SearchVO newSearchVO);
+	public void delete(SearchVO searchVO);
+	public void dateDelete(Date date);
+	public List<SearchVO> getKeywordRank();
+	public List<SearchVO> getAll();
 }

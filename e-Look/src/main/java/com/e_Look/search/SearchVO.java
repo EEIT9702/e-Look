@@ -5,17 +5,14 @@ import java.sql.Date;
 
 public class SearchVO implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
 	private String keyWord;
-	private String countWord;
-	private Date time;
-	public SearchVO(){}
-	public SearchVO(String keyWord, String countWord, Date time){
-		this.keyWord = keyWord;
-		this.countWord = countWord;
-		this.time = time;
+	private Date enterTime;
+	public SearchVO(){
 	}
-	
+	public SearchVO(String keyWord,Date enterTime){
+		this.keyWord = keyWord;
+		this.enterTime = enterTime;
+	}	
 	
 	public String getKeyWord() {
 		return keyWord;
@@ -23,16 +20,12 @@ public class SearchVO implements Serializable {
 	public void setKeyWord(String keyWord) {
 		this.keyWord = keyWord;
 	}
-	public String getCountWord() {
-		return countWord;
+	public Date getEnterTime() {
+		return enterTime;
 	}
-	public void setCountWord(String countWord) {
-		this.countWord = countWord;
-	}
-	public Date getTime() {
-		return time;
-	}
-	public void setTime(Date time) {
-		this.time = time;
+	public void setEnterTime(Date enterTime) {
+		this.enterTime = enterTime;
 	}
 }
+
+	

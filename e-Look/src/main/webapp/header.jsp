@@ -12,8 +12,8 @@
 <%-- <title>${SYSTEM.systemName} </title> --%>
 <link href="<%=request.getContextPath() %>/HeaderCssJs/bootstrap.css" rel="stylesheet">
 <!-- <link href="HeaderCssJs/bootstrap.min.css" rel="stylesheet"> -->
-<script src="<%=request.getContextPath() %>/HeaderCssJs/jquery.js"></script>
-<script src="<%=request.getContextPath() %>/HeaderCssJs/bootstrap.min.js"></script>
+<%-- <script src="<%=request.getContextPath() %>/HeaderCssJs/jquery.js"></script> --%>
+<%-- <script src="<%=request.getContextPath() %>/HeaderCssJs/bootstrap.min.js"></script> --%>
 <style>
 /*根據bootstrap.css內容加以覆寫的方式*/
 #myNavbar li a:hover {
@@ -82,7 +82,16 @@ body{
 				<li><a href="#"><img src="<%=request.getContextPath() %>/HeaderCssJs/002-shopping-cart.png"height="30" /></a></li>
 				<c:choose>
 				<c:when test="${!empty LoginOK}">
-				<li><a href="#"><img src="<%=request.getContextPath() %>/Image?MemberID=${LoginOK.memberID}"height="30" /><span class="caret"></span></a></li>
+				<li  class="dropdown ">
+				<a href="#" class=" dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown"><img src="<%=request.getContextPath() %>/Image?MemberID=${LoginOK.memberID}"height="30" /><span class="caret"></span></a>
+				 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    				<li  class="text-center"><a href="<%=request.getContextPath() %>/member/member.jsp">會員中心</a></li>
+    				<li  style="padding-top:0px;" role="presentation" class="divider"></li>
+    				<li class="text-center"><a href="#"><img align="left"  src="<%=request.getContextPath() %>/HeaderCssJs/wallet.png" height="25">我的消費</a></li>
+    				<li  style="padding-top:0px;" role="presentation" class="divider"></li>
+    				<li class=" text-center"><a href="<%=request.getContextPath()%>/logout.do"><img align="left" src="<%=request.getContextPath() %>/HeaderCssJs/exit.png" height="30">登出</a></li>
+  					</ul>
+				</li>
 				</c:when>
 				<c:when test="${empty err}">
 				<li><a href="#"data-toggle="modal" data-target="#myModal"><img src="<%=request.getContextPath() %>/HeaderCssJs/001-login.png"height="30" />登入</a></li>

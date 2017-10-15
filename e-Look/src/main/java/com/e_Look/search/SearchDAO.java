@@ -1,52 +1,48 @@
 package com.e_Look.search;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 public class SearchDAO implements SearchDAO_interface {
-	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=elook";
-	String userid = "sa";
-	//第一組密碼
-	String passwd = "P@ssw0rd";
-	//第二組密碼
-	//String passwd = "123456";
-	
-	private static final String INSERT_SEARCH =
-			"INSERT INTO Search (keyWord, countWord, time) VALUES (?,?,?) ";
-	private static final String SELECT_COUNTWORD =
-			"SELECT TOP 5 FROM Search ORDER BY time";
-	private static final String SELECT_ALL_KEYWORD = 
-			"SELECT * FROM Search WHERE keyWord =?";
-	
-	
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/eLookDB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
+	private static final String INSERT_SEARCH = "insert into Search (keyWord,enterTime) values (?,getdate())";
+	// deprecated
+	private static final String UPDATE_SEARCH = "update Search set keyWord=? , enterTime=? where keyWord=? and enterTime=?";
+	private static final String DELETE_SEARCH = "delete from Search where keyWord=? and enterTime=?";
+	private static final String DELETE_DATE_SEARCH = "delete from Search where enterTime < ?";
+	private static final String SELECT_SEARCH_RANK = "select keyWord, count(*) as keywordcount from Search group by keyword order by keywordcount desc";
+	private static final String SELECT_ALL_SEARCH = "select keyWord,enterTime from Search";
+
 	@Override
-	public void insertKeyword(SearchVO searchVO) {
+	public void insert(SearchVO searchVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_SEARCH);
 			pstmt.setString(1, searchVO.getKeyWord());
-			pstmt.setString(2, searchVO.getCountWord());
-			pstmt.setDate(3, searchVO.getTime());
 			pstmt.executeUpdate();
-			
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
+
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -63,55 +59,125 @@ public class SearchDAO implements SearchDAO_interface {
 				}
 			}
 		}
-
 	}
 
 	@Override
-	public List<SearchVO> getCountWord() {
-		List<SearchVO> list = new ArrayList<SearchVO>();
-		SearchVO searchVO = null;
-
+	public void update(SearchVO oldSearchVO, SearchVO newSearchVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
 		try {
-			//"SELECT TOP 5 FROM Search ORDER BY time";
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(SELECT_COUNTWORD);
-			rs = pstmt.executeQuery();
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_SEARCH);
+			pstmt.setString(1, oldSearchVO.getKeyWord());
+			pstmt.setDate(2, oldSearchVO.getEnterTime());
+			pstmt.setString(3, newSearchVO.getKeyWord());
+			pstmt.setDate(4, newSearchVO.getEnterTime());
+			pstmt.executeUpdate();
 
-			while (rs.next()) {
-				// searchVO 也稱為 Domain objects
-				searchVO = new SearchVO();
-				searchVO.setCountWord(rs.getString("countWord"));
-
-				list.add(searchVO); // Store the row in the list
-			}
-
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
 			if (pstmt != null) {
 				try {
 					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+	}
+
+	@Override
+	public void delete(SearchVO searchVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(DELETE_SEARCH);
+			pstmt.setString(1, searchVO.getKeyWord());
+			pstmt.setDate(2, searchVO.getEnterTime());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+	}
+
+	@Override
+	public void dateDelete(Date date) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(DELETE_DATE_SEARCH);
+			pstmt.setDate(1, date);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+	}
+
+	@Override
+	public List<SearchVO> getKeywordRank() {
+		List<SearchVO> list = new ArrayList<SearchVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(SELECT_SEARCH_RANK);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				SearchVO searchVO = new SearchVO(); 
+				searchVO.setKeyWord(rs.getString("keyword"));
+				searchVO.setEnterTime(rs.getDate("enterTime"));
+				list.add(searchVO);
+			}
+			
+
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
 				}
 			}
 			if (con != null) {
@@ -126,52 +192,29 @@ public class SearchDAO implements SearchDAO_interface {
 	}
 
 	@Override
-	public SearchVO findByKeyWord(String keyWord) {
-		SearchVO searchVO = null;
+	public List<SearchVO> getAll() {
+		List<SearchVO> list = new ArrayList<SearchVO>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
 		try {
-			//"SELECT * FROM Search WHERE keyWord =?";
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(SELECT_ALL_KEYWORD);
-			pstmt.setString(1, keyWord);
-
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				// searchVO 也稱為 Domain objects
-				searchVO = new SearchVO();
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(SELECT_ALL_SEARCH);
+			ResultSet rs=pstmt.executeQuery();
+			while(rs.next()){
+				SearchVO searchVO=new SearchVO();
 				searchVO.setKeyWord(rs.getString("keyWord"));
-				searchVO.setCountWord(rs.getString("countWord"));
-				searchVO.setTime(rs.getDate("time"));
-
+				searchVO.setEnterTime(rs.getDate("enterTime"));
+				list.add(searchVO);
 			}
-
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
+			
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
 			if (pstmt != null) {
 				try {
 					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
 				}
 			}
 			if (con != null) {
@@ -182,6 +225,8 @@ public class SearchDAO implements SearchDAO_interface {
 				}
 			}
 		}
-		return searchVO;
+		return list;
 	}
+
+
 }
