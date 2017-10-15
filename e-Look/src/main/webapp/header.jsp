@@ -134,13 +134,14 @@ float:none;
 				<li><a href="#menu2"><img src="<%=request.getContextPath() %>/HeaderCssJs/001-book.png" height="30">我要開課</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right" id="nopadding">
+			<c:choose>
+				<c:when test="${!empty LoginOK}">
 				<li class="dropdown" ><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false"><span class="cartcount">3</span><img src="<%=request.getContextPath() %>/HeaderCssJs/002-shopping-cart.png" height="30" /></a>
 <!-- 				以下為購物車內容 -->
 				<ul class="dropdown-menu">
 				<li class="dropdown-header" style="border-bottom:1px solid #aaaaaa;" ><h3>購物車</h3></li>
 <!-- 				課程1 -->
 				<div class="cartrows">
-
 				<div class="cartrow" ><div style="text-align: right;"><div style="float: left; width: 80%; text-align: left;" ></div><button class="close" type="button" aria-hidden="true">&times;</button></div><img src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png">
 				<span class="courseTitle">Java線上學習1xxxxxxxxxxxxxxxxxx<br>
 				<span class="courseSubtitle" >科技,語言,IT</span>
@@ -149,15 +150,13 @@ float:none;
 				</span>
 				</div>			
 <!-- 				課程2 -->				
-<div class="cartrow" ><div style="text-align: right;"><div style="float: left; width: 80%; text-align: left;" ></div><button class="close" type="button" aria-hidden="true">&times;</button></div><img src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png">
+			<div class="cartrow" ><div style="text-align: right;"><div style="float: left; width: 80%; text-align: left;" ></div><button class="close" type="button" aria-hidden="true">&times;</button></div><img src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png">
 				<span class="courseTitle">Java線上學習2xxxx<br>
 				<span class="courseSubtitle" >科技,語言</span>
 				<span class="courseDelete" ></span><br>
 				<span class="courseDelete" >$70</span>
 				</span>
 				</div>	
-				
-				
 				<div class="cartrow" ><div style="text-align: right;"><div style="float: left; width: 80%; text-align: left;" ></div><button class="close" type="button" aria-hidden="true">&times;</button></div><img src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png">
 				<span class="courseTitle">Java線上學習2xxxx<br>
 				<span class="courseSubtitle" >科技,語言</span>
@@ -165,8 +164,6 @@ float:none;
 				<span class="courseDelete" >$70</span>
 				</span>
 				</div>	
-				
-				
 				</div>
 				<div class="modal-body text-right">
 				<div style="float:left;">共 3 筆課程</div><span>總金額：940元</span>
@@ -178,6 +175,12 @@ float:none;
 				</ul>
 <!-- 				以上為購物車內容 -->
 				</li>
+				</c:when>
+				<c:otherwise>
+				<li><a href="#"><img src="<%=request.getContextPath() %>/HeaderCssJs/002-shopping-cart.png"height="30" /></a></li>
+				</c:otherwise>
+				</c:choose>
+				
 				
 				
 				
