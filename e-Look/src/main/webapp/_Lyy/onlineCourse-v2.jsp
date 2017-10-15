@@ -29,7 +29,7 @@ video {
 }
 
 #vidoeArea>.col-md-12 {
-	height: 63%;
+	height: 65%;
 }
 
 #liststyle>li {
@@ -46,7 +46,7 @@ video {
 	width: 100%;
 	height: 85%;
 	overflow-y: scroll;
-	margin-left:-15px;
+	
 	
 }
 
@@ -155,7 +155,7 @@ body {
 </head>
 <!-- 影片區 -->
 <body oncontextmenu="window.event.returnValue=false">
-
+<jsp:include page="/header.jsp" flush="true" />	
 	<div class="container-fluid">
 		<div class="container" style="background-color: black">
 			<div class="row">
@@ -168,7 +168,7 @@ body {
 								<source src="tri.mp4" type="video/mp4">
 							</video>
 						</div>
-						<div class="col-md-4 col-xs-12">
+						<div class="col-md-4 col-xs-12" style="border:1px solid gray;height:99%;padding-left:-15px">
 							<div>
 								<h3
 									style="color: #BEBEBE; text-align: center; font-weight: bold;">推薦課程</h3>
