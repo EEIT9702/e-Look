@@ -6,10 +6,8 @@
 <hibernate-mapping>
     <class name="com.e_Look.shoppingCart.model.ShoppingCartVO" table="ShoppingCart" >
         <composite-id>
-            <key-many-to-one name="memberID" >
-                <column name="memberID"/>
-            </key-many-to-one>
-            <key-many-to-one name="courseID" >
+            <key-property name="memberID" column="memberID" />
+            <key-many-to-one name="courseID" class="com.e_Look.Course.CourseVO" >
                 <column name="courseID"/>
             </key-many-to-one>
         </composite-id>
