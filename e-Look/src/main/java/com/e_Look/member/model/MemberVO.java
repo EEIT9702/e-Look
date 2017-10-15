@@ -13,6 +13,7 @@ public class MemberVO implements Serializable {
 	private String mPassword;
 	private String mName;
 	private InputStream  mPhoto;
+	private String  aboutme;
 	private String skill;
 	private String hobby;
 	private Date registerDate;
@@ -21,13 +22,17 @@ public class MemberVO implements Serializable {
 	private String address;
 	public MemberVO(){};
 	
-	public MemberVO(Integer memberID, String email, String mPassword, String mName, InputStream mPhoto, String skill,
-			String hobby, Date registerDate, Byte status, Integer count, String address) {
+
+
+	public MemberVO(Integer memberID, String email, String mPassword, String mName, InputStream mPhoto, String aboutme,
+			String skill, String hobby, Date registerDate, Byte status, Integer count, String address) {
+		super();
 		this.memberID = memberID;
 		this.email = email;
 		this.mPassword = mPassword;
 		this.mName = mName;
 		this.mPhoto = mPhoto;
+		this.aboutme = aboutme;
 		this.skill = skill;
 		this.hobby = hobby;
 		this.registerDate = registerDate;
@@ -35,6 +40,8 @@ public class MemberVO implements Serializable {
 		this.count = count;
 		this.address = address;
 	}
+
+
 
 	public Integer getMemberID() {
 		return memberID;
@@ -124,11 +131,27 @@ public class MemberVO implements Serializable {
 		this.address = address;
 	}
 
+
+
+
+	public String getAboutme() {
+		return aboutme;
+	}
+
+
+
+	public void setAboutme(String aboutme) {
+		this.aboutme = aboutme;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "MemberVO [memberID=" + memberID + ", email=" + email + ", mPassword=" + mPassword + ", mName=" + mName
-				+ ", mPhoto=" + mPhoto + ", skill=" + skill + ", hobby=" + hobby + ", registerDate=" + registerDate
-				+ ", status=" + status + ", count=" + count + ", address=" + address + "]";
+				+ ", mPhoto=" + mPhoto + ", aboutme=" + aboutme + ", skill=" + skill + ", hobby=" + hobby
+				+ ", registerDate=" + registerDate + ", status=" + status + ", count=" + count + ", address=" + address
+				+ "]";
 	}
 
 }
