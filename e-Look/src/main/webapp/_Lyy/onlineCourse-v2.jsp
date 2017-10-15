@@ -25,29 +25,30 @@
 /* 影片區塊 */
 video {
 	width: 100%;
-	height: 100%
+	height: 100%;
+	padding-left: -15px;
+	padding-right: -15px;
 }
 
 #vidoeArea>.col-md-12 {
-	height: 63%;
+	height: 73%;
 }
 
-#liststyle>li {
+#vidoeliststyle>li {
 	height: 50px;
-	font-size: 25px;
+	font-size: 20px;
 	list-style-type: none;
-	
-	border-bottom:1px solid #8E8E8E;
-	
+	border-bottom: 1px solid #8E8E8E;
+	line-height: 50px;
 }
 
 #vidoeArea>div>div>ul {
-	color: 	#FCFCFC;
+	color: #FCFCFC;
 	width: 100%;
-	height: 85%;
+	height: 82%;
 	overflow-y: scroll;
-	margin-left:-15px;
-	
+	margin: 0;
+	padding: 0;
 }
 
 video::-internal-media-controls-download-button {
@@ -62,11 +63,23 @@ video::-webkit-media-controls-panel {
 	width: calc(100% + 30px); /* Adjust as needed */
 }
 
-a:hover, a:focus {
-	outline: none;
-	text-decoration: none;
+#vidoeDivListStyle {
+	border: 1px solid gray;
+	height: 99%;
+	padding-left: -15px;
+	padding-right: -15px;
+	background-color:rgba(0%,10%,20%,0.3);;
 }
 
+#vidoeDivListStyle>div>h3 {
+	color: #BEBEBE;
+	text-align: center;
+	font-weight: bold;
+}
+/* a:hover, a:focus { */
+/* 	outline: none; */
+/* 	text-decoration: none; */
+/* } */
 .tab .nav-tabs {
 	position: relative;
 	border-bottom: none;
@@ -143,21 +156,13 @@ a:hover, a:focus {
 	font-size: 24px;
 	margin-top: 0;
 }
-
-#introInfo {
-	
-}
-
-body {
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
 </style>
 </head>
 <!-- 影片區 -->
 <body oncontextmenu="window.event.returnValue=false">
-
+	<jsp:include page="/header.jsp" flush="true" />
 	<div class="container-fluid">
-		<div class="container" style="background-color: black">
+		<div class="container" style="background-color: gray">
 			<div class="row">
 
 				<div class="col-md-12 " id="vidoeArea">
@@ -168,12 +173,11 @@ body {
 								<source src="tri.mp4" type="video/mp4">
 							</video>
 						</div>
-						<div class="col-md-4 col-xs-12">
+						<div class="col-md-4 col-xs-12" id="vidoeDivListStyle">
 							<div>
-								<h3
-									style="color: #BEBEBE; text-align: center; font-weight: bold;">推薦課程</h3>
+								<h3>推薦課程</h3>
 							</div>
-							<ul id="liststyle">
+							<ul id="vidoeliststyle">
 								<li>線上課程</li>
 								<li>免費課程</li>
 								<li>我要開課</li>
@@ -197,7 +201,7 @@ body {
 	<!-- 人數、時間 等等-->
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12" id="introInfo">
+			<div class="col-md-12">
 
 
 				<div class="col-md-2 col-xs-3">
@@ -220,9 +224,6 @@ body {
 						<a href="#">講義下載</a>
 					</h5>
 				</div>
-
-
-
 				<div class="col-md-2 col-xs-6 ">
 					<small>課程售價</small>
 					<h3 style="text-align: center; font-weight: bold;">NT1230</h3>
@@ -240,15 +241,17 @@ body {
 	<div class="demo">
 		<div class="container" style="background: #efd391">
 			<div class="row">
-				<div class="col-md-8">
+				<div class="col-md-12">
 					<div class="tab" role="tabpanel">
 
 						<ul class="nav nav-tabs" role="tablist">
 							<li role="presentation" class="active"><a href="#Section1"
 								aria-controls="home" role="tab" data-toggle="tab">課程簡介</a></li>
-							<li role="presentation"><a href="#Section2"
-								aria-controls="profile" role="tab" data-toggle="tab">課程討論</a></li>
+							<li role="presentation" ><a href="#Section2"
+								aria-controls="home" role="tab" data-toggle="tab">講師簡介</a></li>
 							<li role="presentation"><a href="#Section3"
+								aria-controls="profile" role="tab" data-toggle="tab">課程討論</a></li>
+							<li role="presentation"><a href="#Section4"
 								aria-controls="messages" role="tab" data-toggle="tab">點評收藏</a></li>
 						</ul>
 
@@ -270,10 +273,16 @@ body {
 							<div role="tabpanel" class="tab-pane fade" id="Section2">
 
 								<p>本校為研究型大學，向以理工著稱，尤在電子、資通訊及光電等領域已佔世界頂尖領導之地位，另於優勢基礎
-								之上，發展管理與科技領域之結合、開拓人文社會新興領域及開展國際客家文化。近年更結合既有優勢領域進入新
-								興生醫電子領域並發展問題解決為取向之科技應用工程領域。.</p>
+									之上，發展管理與科技領域之結合、開拓人文社會新興領域及開展國際客家文化。近年更結合既有優勢領域進入新
+									興生醫電子領域並發展問題解決為取向之科技應用工程領域。.</p>
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="Section3">
+
+								<p>本校為研究型大學，向以理工著稱，尤在電子、資通訊及光電等領域已佔世界頂尖領導之地位，另於優勢基礎
+									之上，發展管理與科技領域之結合、開拓人文社會新興領域及開展國際客家文化。近年更結合既有優勢領域進入新
+									興生醫電子領域並發展問題解決為取向之科技應用工程領域。.</p>
+							</div>
+							<div role="tabpanel" class="tab-pane fade" id="Section4">
 
 								<p>喜歡的話記得幫我們評分還有收藏唷</p>
 							</div>
