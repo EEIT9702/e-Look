@@ -5,6 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="login/viewport"content="width=device-width, initial-scale=1">
+<link href="<%=request.getContextPath()%>/css/bootstrap.css"
+	rel="stylesheet">
+<script src="<%=request.getContextPath() %>/js/jquery.js"></script>
+<script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
 h5 {
@@ -140,7 +144,7 @@ font-size:30px;
 <!-- 	type="text/javascript"></script> -->
 <body>
 <jsp:include page="/login.jsp" />
-    <div class="container">
+    <div style="margin-top: 20px" class="container">
         <h2 class="text-center">會員中心</h2>
         <div class="row">
             <div class="col-md-4 text-center" >
@@ -295,7 +299,7 @@ font-size:30px;
                 </div>
                 <div class="col-md-12">
                     <h4> <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">我的追蹤講師</a></h4>
-                    <hr style="border:solid 0.3px #BEBEBE;"  /> 
+                    <hr style="border:solid 0.6px #BEBEBE;"  /> 
                     <div id="collapseFour" class=" collapse">
                     <p >Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p> 
                 </div> 

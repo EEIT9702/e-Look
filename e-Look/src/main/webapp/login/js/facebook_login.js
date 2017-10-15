@@ -37,7 +37,7 @@
 				       var name=response.name;
 				       var email=response.email;
 				       var picture="http://graph.facebook.com/"+response.id+"/picture?type=large";
-				       var url="login.do";
+				       var url="login.login";
 				       var xmlHttp=new XMLHttpRequest();
 				       xmlHttp.open("POST",url,false);
 				       xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
