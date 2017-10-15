@@ -89,7 +89,7 @@ body{
     				<li  style="padding-top:0px;" role="presentation" class="divider"></li>
     				<li class="text-center"><a href="#"><img align="left"  src="<%=request.getContextPath() %>/HeaderCssJs/wallet.png" height="25">我的消費</a></li>
     				<li  style="padding-top:0px;" role="presentation" class="divider"></li>
-    				<li class=" text-center"><a href="<%=request.getContextPath()%>/logout.do"><img align="left" src="<%=request.getContextPath() %>/HeaderCssJs/exit.png" height="30">登出</a></li>
+    				<li class=" text-center"><a onclick="signOut()" href="<%=request.getContextPath()%>/logout.do"><img align="left" src="<%=request.getContextPath() %>/HeaderCssJs/exit.png" height="30">登出</a></li>
   					</ul>
 				</li>
 				</c:when>
