@@ -136,6 +136,7 @@ h5 {
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
+
 <body id="body">
 	<jsp:include page="/header.jsp" />
 	<div class="container-fluid" style="background-color: black; margin:-50px">
@@ -353,5 +354,7 @@ h5 {
 					</div>
 				</div>
 			</div>
+			
+<jsp:include page="footer.jsp" />
 </body>
 </html>
