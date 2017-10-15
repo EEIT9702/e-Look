@@ -323,7 +323,7 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 //		//新增會員
 		MemberVO memberVO1= new MemberVO();
 		memberVO1.setmName("李XX");
-		memberVO1.setEmail("abc852855230@yahyy.com.tw");
+		memberVO1.setEmail("abc8512125230@yahyy.com.tw");
 		memberVO1.setmPassword("XXXX");
 		memberVO1.setRegisterDate(new Date(System.currentTimeMillis()));
 		memberVO1.setStatus((byte) 0);
@@ -378,20 +378,20 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 //		System.out.println(memberVO3.getCount());
 //		System.out.println(memberVO3.getAddress());
 		//查詢全部會員
-//		List<MemberVO> list=dao.getAll();
-//		for(MemberVO memberVO :list){
-//			System.out.print(memberVO.getMemberID()+"  ");
-//			System.out.print(memberVO.getEmail()+"  ");
-//			System.out.print(memberVO.getmPassword()+"  ");
-//			System.out.print(memberVO.getmName()+"  ");
-//			System.out.print(memberVO.getmPhoto()+"  ");
-//			System.out.print(memberVO.getSkill()+"  ");
-//			System.out.print(memberVO.getHobby()+"  ");
-//			System.out.print(memberVO.getRegisterDate()+"  ");
-//			System.out.print(memberVO.getStatus()+"  ");
-//			System.out.print(memberVO.getCount()+"  ");
-//			System.out.println(memberVO.getAddress());
-//		}
+		List<MemberVO> list=dao.getAll();
+		for(MemberVO memberVO :list){
+			System.out.print(memberVO.getMemberID()+"  ");
+			System.out.print(memberVO.getEmail()+"  ");
+			System.out.print(memberVO.getmPassword()+"  ");
+			System.out.print(memberVO.getmName()+"  ");
+			System.out.print(memberVO.getmPhoto()+"  ");
+			System.out.print(memberVO.getSkill()+"  ");
+			System.out.print(memberVO.getHobby()+"  ");
+			System.out.print(memberVO.getRegisterDate()+"  ");
+			System.out.print(memberVO.getStatus()+"  ");
+			System.out.print(memberVO.getCount()+"  ");
+			System.out.println(memberVO.getAddress());
+		}
 	}
 
 
