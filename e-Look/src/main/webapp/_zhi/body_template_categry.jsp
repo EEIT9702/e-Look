@@ -297,7 +297,7 @@ h5 {
 </script>
 </head>
 <body>
-	<jsp:include page="${contextPath}/header.jsp" />
+	<jsp:include page="${contextPath}/login.jsp" />
 
 		<!-- 分類按鈕和搜索star -->
 	<div class="ndiv">
