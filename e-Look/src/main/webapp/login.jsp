@@ -9,8 +9,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="login/viewport"
 	content="width=device-width, initial-scale=1">
-<link href="<%=request.getContextPath()%>/login/css/bootstrap.css"
-	rel="stylesheet" type="text/css">
+<%-- <link href="<%=request.getContextPath()%>/login/css/bootstrap.css" --%>
+<!-- 	rel="stylesheet" type="text/css"> -->
 <link href="<%=request.getContextPath()%>/login/css/login.css"
 	rel="stylesheet" type="text/css">
 <script src="<%=request.getContextPath()%>/login/js/facebook_login.js"
@@ -23,10 +23,10 @@
 </script>
 <script src="<%=request.getContextPath()%>/login/js/google_login.js"
 	type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/login/js/jquery-3.2.1.js"
-	type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/login/js/bootstrap.js"
-type="text/javascript"></script>
+<%-- <script src="<%=request.getContextPath()%>/login/js/jquery-3.2.1.js" --%>
+<!-- 	type="text/javascript"></script> -->
+<%-- <script src="<%=request.getContextPath()%>/login/js/bootstrap.js" --%>
+<!-- type="text/javascript"></script> -->
 	<script>
  $(document).ready(function () {
 		$(this).click(function() {
@@ -158,7 +158,7 @@ margin:2px auto;
 	<div class="modal ${cla}" id="${id}" tabindex="-1"  role="dialog"aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="container modal-dialog">
 			<div class="row ">
-				<form class="form-signin mg-btm modal-content" name="loginfrom" method="post" action="<%=request.getContextPath()%>/login.do">
+				<form class="form-signin mg-btm modal-content" name="loginfrom" method="post" action="<%=request.getContextPath()%>/login.login">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>

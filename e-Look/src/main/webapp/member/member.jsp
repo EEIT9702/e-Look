@@ -5,6 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="login/viewport"content="width=device-width, initial-scale=1">
+<link href="<%=request.getContextPath()%>/css/bootstrap.css"
+	rel="stylesheet">
+<script src="<%=request.getContextPath() %>/js/jquery.js"></script>
+<script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
 h5 {
