@@ -197,7 +197,7 @@ h5 {
   	margin-left:11%;
   	margin-top:1.3%;
   	width:20%;
-/*   	border:2px solid red; */
+/*  border:2px solid red; */
 }
 .outsideBorder{
 	border:3px solid orange;
@@ -225,14 +225,16 @@ h5 {
   	width: 80%;
   	margin:0 auto;
 }
-.keyword{
-	 text-align:center;
-	 color:blue;
+.hotkeyword{
+ 	padding-left:10%;
+	padding-top:2%;"
+/* 	text-align:center; */
+	color:blue;
 }
 
 .keyword{
-clear:both;
-color:red;
+ 	clear:both;
+	color:red;
 
 }
 </style>
@@ -404,17 +406,22 @@ color:red;
 										class="searchSubmitIcon"/>
 								</div>
 								
-								<div class="keyword text-left">熱門關鍵字：
-								<c:forEach var="searchVO" items="<%= new SearchDAO().getKeywordRank(3) %>" >
-								${searchVO.keyWord }
-								</c:forEach>
-								</div>
+<!-- 								<div class="keyword text-left">熱門關鍵字： -->
+<%-- 								<c:forEach var="searchVO" items="<%= new SearchDAO().getKeywordRank(3) %>" > --%>
+<%-- 								${searchVO.keyWord } --%>
+<%-- 								</c:forEach> --%>
+<!-- 								</div> -->
 							</div>
 						</div>
-						<p style="padding-left:4%;padding-top:2%;">熱門：
-						<span class="keyword" id="keyword1">學英文</span>&nbsp;
-						<span class="keyword" id="keyword1">簡單料理</span>&nbsp;
-						<span class="keyword" id="keyword1">健身</span>&nbsp;
+						<p class="hotkeyword text-left">熱門：
+						<span class="keyword">
+<%-- 							<c:forEach var="searchVO" items="<%= new SearchDAO().getKeywordRank(3) %>" > --%>
+<%-- 								${searchVO.keyWord } --%>
+<%-- 							</c:forEach> --%>
+						</span>
+<!-- 						<span class="keyword" id="keyword1">學英文</span>&nbsp; -->
+<!-- 						<span class="keyword" id="keyword1">簡單料理</span>&nbsp; -->
+<!-- 						<span class="keyword" id="keyword1">健身</span>&nbsp; -->
 						</p>
 					</div>
 				</form>
