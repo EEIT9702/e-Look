@@ -393,17 +393,24 @@
 									</div>
 									<div class="col-md-12" style="margin-top: 2em;">
 										<div class="form-group col-lg-3" style="font-size: 20px;">
-											<label>募資起始日期</label> <input type="text" name=""
-												class="form-control" id="" value="" style="font-size: 18px;">
+											<label>募資起始日期</label> 
+											<div class="input-group date form_date" data-date=""
+												data-date-format="yyyy MM dd" data-link-field="dtp_input1"
+												data-link-format="yyyy-mm-dd">
+												<input class="form-control" style="font-size: 18px;" type="text" value=""
+													readonly size="18" id="starttime"><span
+													class="input-group-addon"><span
+													class="glyphicon glyphicon-calendar"></span></span>
+											</div>
+											<input type="hidden" id="dtp_input1" value="" /><br/>
 										</div>
 										<div class="form-group col-lg-3" style="font-size: 20px;">
 											<label>募資結束日期(最高天數為30天)</label> 
 											<div class="input-group date form_date" data-date=""
-												data-date-format="dd MM yyyy" data-link-field="dtp_input2"
+												data-date-format="yyyy MM dd" data-link-field="dtp_input2"
 												data-link-format="yyyy-mm-dd">
-												<input class="form-control" size="18" type="text" value=""
-													readonly> <span class="input-group-addon"><span
-													class="glyphicon glyphicon-remove"></span></span> <span
+												<input class="form-control" style="font-size: 18px;" type="text" value=""
+													readonly size="18" id="endtime"><span
 													class="input-group-addon"><span
 													class="glyphicon glyphicon-calendar"></span></span>
 											</div>
@@ -609,8 +616,24 @@
 		}).on('autosize:resized');
 		
 		
-
-		$('.form_date').datetimepicker({
+		
+		
+		
+		function checkEndTime(starttime,endtime){
+			var starttime=$("#starttime").val();  
+		    var endtime=$("#endtime").val(); 
+		    if(endtime<starttime){  
+		    	alert("起始日期不能大於結束日期");
+		    	return false;  
+		    }  
+		    return true;  
+		}  ;	
+		
+		
+		
+	$(function(){		
+	
+		$('#starttime').datetimepicker({
 		    language:  'zh-TW',
 		    weekStart: 1,
 		    todayBtn:  1,
@@ -619,7 +642,42 @@
 			startView: 2,
 			minView: 2,
 			forceParse: 0
+		}).on('changeDate',function(ev){
+			var starttime=$('#starttime').val();
+			$('#endtime').datetimepicker('setStartDate',starttime);
+			$('#starttime').datetimepicker('hide');
 		});
+		
+		
+		
+		$('#endtime').datetimepicker({
+		    language:  'zh-TW',
+		    weekStart: 1,
+		    todayBtn:  1,
+			autoclose: 1,
+			todayHighlight: 1,
+			startView: 2,
+			minView: 2,
+			forceParse: 0
+		}).on('changeDate',function(ev){
+			var starttime=$('#starttime').val();
+			var endtime=$('endtime').val();
+			
+			
+			
+			if(starttime!=""&&endtime!=""){
+				if(!checkEndTime(starttime,endtime)){
+					$('endtime').val('');
+					alert("起始日期不能大於結束日期");
+					return;
+				}
+			}
+						
+			$('#starttime').datetimepicker('setEndDate',endtime);
+			$('#starttime').datetimepicker('hide');
+		});
+		
+	});
 	</script>
 
 
