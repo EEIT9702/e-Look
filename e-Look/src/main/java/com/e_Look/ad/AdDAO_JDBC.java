@@ -334,10 +334,11 @@ public class AdDAO_JDBC implements AdDAO_interface {
 //		adVO2.setFileName("聖誕大特賣");
 //		adVO2.setAdFile(new FileInputStream(new File("src/main/webapp/body/img/xmas video sale.jpg")));
 //		adVO2.setStatus((byte) 1);
+//		adVO2.setAdID(1001);
 //		dao.update(adVO2);
 		
 		//查詢單一
-		AdVO adVO3 = dao.findByAdID(1001);
+		AdVO adVO3 = dao.findByAdID(1002);
 		System.out.println(adVO3.getAdID());
 		System.out.println(adVO3.getFileName());
 		System.out.println(adVO3.getAdFile());

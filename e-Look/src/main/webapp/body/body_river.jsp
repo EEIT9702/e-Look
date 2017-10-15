@@ -192,8 +192,10 @@ h5 {
 	color: #9F35FF;
 }
 #li_searchArea{
-  	margin-left:13%;
+  	margin-left:11%;
   	margin-top:1.3%;
+  	width:20%;
+/*   	border:2px solid red; */
 }
 .outsideBorder{
 	border:3px solid orange;
@@ -220,6 +222,10 @@ h5 {
 .videobox{
   	width: 80%;
   	margin:0 auto;
+}
+.keyword{
+	 text-align:center;
+	 color:blue;
 }
 
 </style>
@@ -392,6 +398,11 @@ h5 {
 								</div>
 							</div>
 						</div>
+						<p style="padding-left:4%;padding-top:2%;">熱門：
+						<span class="keyword" id="keyword1">學英文</span>&nbsp;
+						<span class="keyword" id="keyword1">簡單料理</span>&nbsp;
+						<span class="keyword" id="keyword1">健身</span>&nbsp;
+						</p>
 					</div>
 				</form>
 			</li>
