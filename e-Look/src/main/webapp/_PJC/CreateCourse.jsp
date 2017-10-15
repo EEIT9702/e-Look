@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>開課流程</title>
 <link href="<%=request.getContextPath()%>/css/bootstrap.css"
 	rel="stylesheet">
@@ -13,15 +13,23 @@
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/_PJC/css/step3.css"
 	rel="stylesheet">
+<link href="<%=request.getContextPath()%>/_PJC/css/step4.css"
+	rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/bootstrap-datetimepicker.css"
+	rel="stylesheet">
+	
 
-<script src="<%=request.getContextPath()%>/js/jquery-3.2.1.js"></script>
+<script src="<%=request.getContextPath() %>/js/jquery.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath()%>/_PJC/js/autosize.js"></script>
+<script src="<%=request.getContextPath()%>/_PJC/js/bootstrap-datetimepicker.js"></script>
+<script src="<%=request.getContextPath()%>/_PJC/js/bootstrap-datetimepicker.zh-TW.js"></script>
 
 </head>
 
 <body>
-	<jsp:include page="/header.jsp" flush="true" />
+	<jsp:include page="/header.jsp" flush="true" />	
 	<div class="container" style="margin-top: 50px">
 		<div class="row">
 			<section>
@@ -180,11 +188,13 @@
 										<div class="row" style="margin-bottom: 25px">
 											<label for="exampleInputEmail1" style="font-size: 20pt">課程標題</label>
 											<input type="text" onfocus="this.select()"
-												class="form-control" id="CourseInput" value="輸入課程標題">
+												class="form-control" id="CourseInput" value="輸入課程標題"
+												style="font-size: 18px">
 										</div>
 										<div class="row" style="margin-bottom: 40px">
 											<label for="exampleInputEmail1" style="font-size: 20pt">上傳課程封面</label>
-											<input type="file" id="wizard-picture">
+											<input type="file" id="wizard-picture"
+												style="font-size: 18px">
 										</div>
 										<div class="row" style="margin-bottom: 25px">
 											<label for="exampleInputEmail1" style="font-size: 20pt">選擇課程類別(最多三項)</label>
@@ -267,7 +277,7 @@
 												學生會需要用到的工具（含種類、版本細節）</div>
 											<div class="[ form-group ][ form-group-textarea ]">
 												<textarea id="customStyle" name="customStyle"
-													placeholder="請輸入課程中，可能會使用到的工具" class="[ form-control ]"
+													placeholder="請輸入課程中，可能會使用到的工具" class="form-control"
 													data-toggle="floatLabel" data-value="no-js"
 													style="font-size: 18px"></textarea>
 												<label for="customStyle" style="">(例：Photoshop CC
@@ -286,7 +296,7 @@
 											<div class="[ form-group ][ form-group-textarea ]">
 												<textarea id="customStyle" name="customStyle"
 													placeholder="如果是比較進階的課程，建議先跟學生說明必備的知識，幫助學生了解這堂課"
-													class="[ form-control ]" data-toggle="floatLabel"
+													class="form-control" data-toggle="floatLabel"
 													data-value="no-js" style="font-size: 18px"></textarea>
 												<label for="customStyle" style="">(例：學過PS遮罩的概念)</label>
 											</div>
@@ -303,7 +313,7 @@
 											<div class="[ form-group ][ form-group-textarea ]">
 												<textarea id="customStyle" name="customStyle"
 													placeholder="最好是某種實質的東西：像是完成某種作品、達到哪種目標甚至是得到什麼結果"
-													class="[ form-control ]" data-toggle="floatLabel"
+													class="form-control" data-toggle="floatLabel"
 													data-value="no-js" style="font-size: 18px"></textarea>
 												<label for="customStyle" style="">(例：可習得合成影像的基本技術)</label>
 											</div>
@@ -320,7 +330,7 @@
 											<div class="[ form-group ][ form-group-textarea ]">
 												<textarea id="customStyle" name="customStyle"
 													placeholder="形容這堂課適合的學生族群，可以更讓學生了解課程內容的方向"
-													class="[ form-control ]" data-toggle="floatLabel"
+													class="form-control" data-toggle="floatLabel"
 													data-value="no-js" style="font-size: 18px"></textarea>
 												<label for="customStyle" style="">(例：雜誌編輯、海報設計的美編人員等...)</label>
 											</div>
@@ -339,7 +349,83 @@
 							</div>
 
 							<div class="tab-pane" role="tabpanel" id="step4">
-								
+								<div class="[ container ]">
+									<div class="col-md-4">
+										<div class="col-md-6">
+											<div class="funkyradio">
+												<div class="radio-free" style="font-size: 20px;">
+													<input type="radio" name="radio" id="radio1" /> <label
+														for="radio1">免費課程</label>
+												</div>
+												<div class="radio-online" style="font-size: 20px;">
+													<input type="radio" name="radio" id="radio3" /> <label
+														for="radio3">線上課程</label>
+												</div>
+												<div class="radio-proposal" style="font-size: 20px;">
+													<input type="radio" name="radio" id="radio2" /> <label
+														for="radio2">募資課程</label>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="container" style="margin-top: 2em;">
+									<div class="col-md-6">
+										<div class="form-group col-lg-6" style="font-size: 20px;">
+											<label>定價(最低售價為$10元)</label> <input type="text" name=""
+												class="form-control" id="" value="" style="font-size: 18px;">
+										</div>
+
+										<div class="form-group col-lg-6" style="font-size: 20px;">
+											<label>預計課程長度(以分鐘為單位)</label> <input type="text" name=""
+												class="form-control" id="" value="" style="font-size: 18px;">
+										</div>
+
+
+									</div>
+								</div>
+								<div class="container" style="margin-top: 2em;">
+									<div class="col-md-12">
+										<div class="form-group col-lg-3" style="font-size: 20px;">
+											<label>開課門檻人數(最低為10人)</label> <input type="text" name=""
+												class="form-control" id="" value="" style="font-size: 18px;">
+										</div>
+									</div>
+									<div class="col-md-12" style="margin-top: 2em;">
+										<div class="form-group col-lg-3" style="font-size: 20px;">
+											<label>募資起始日期</label> 
+											<div class="input-group date form_date" data-date=""
+												data-date-format="yyyy MM dd" data-link-field="dtp_input1"
+												data-link-format="yyyy-mm-dd">
+												<input class="form-control" style="font-size: 18px;" type="text" value=""
+													readonly size="18" id="starttime"><span
+													class="input-group-addon"><span
+													class="glyphicon glyphicon-calendar"></span></span>
+											</div>
+											<input type="hidden" id="dtp_input1" value="" /><br/>
+										</div>
+										<div class="form-group col-lg-3" style="font-size: 20px;">
+											<label>募資結束日期(最高天數為30天)</label> 
+											<div class="input-group date form_date" data-date=""
+												data-date-format="yyyy MM dd" data-link-field="dtp_input2"
+												data-link-format="yyyy-mm-dd">
+												<input class="form-control" style="font-size: 18px;" type="text" value=""
+													readonly size="18" id="endtime"><span
+													class="input-group-addon"><span
+													class="glyphicon glyphicon-calendar"></span></span>
+											</div>
+											<input type="hidden" id="dtp_input2" value="" /><br/>																																	
+										</div>
+									</div>
+									<div class="col-md-12" style="margin-top: 2em;">
+										<div class="form-group col-lg-3" style="font-size: 20px;">
+											<label>募資結束後的備課天數</label> <label>(最高天數為60天)</label> 
+											<input type="text" name=""
+												class="form-control" id="" value="" style="font-size: 18px;">
+										</div>
+									</div>
+								</div>
+
 
 								<ul class="list-inline pull-right">
 									<li><button type="button"
@@ -347,6 +433,7 @@
 									<li><button type="button"
 											class="btn btn-primary btn-info-full next-step">儲存並前往下一步</button></li>
 								</ul>
+
 							</div>
 
 							<div class="tab-pane" role="tabpanel" id="step5">
@@ -387,6 +474,10 @@
 
 
 	<script>
+		
+	
+	
+	
 		$(document).ready(function() {
 			//Initialize tooltips
 			$('.nav-tabs > li a[title]').tooltip();
@@ -523,10 +614,73 @@
 		$('#customStyle').each(function() {
 			autosize(this);
 		}).on('autosize:resized');
-
 		
-	</script>
+		
+		
+		
+		
+		function checkEndTime(starttime,endtime){
+			var starttime=$("#starttime").val();  
+		    var endtime=$("#endtime").val(); 
+		    if(endtime<starttime){  
+		    	alert("起始日期不能大於結束日期");
+		    	return false;  
+		    }  
+		    return true;  
+		}  ;	
+		
+		
+		
+	$(function(){		
 	
+		$('#starttime').datetimepicker({
+		    language:  'zh-TW',
+		    weekStart: 1,
+		    todayBtn:  1,
+			autoclose: 1,
+			todayHighlight: 1,
+			startView: 2,
+			minView: 2,
+			forceParse: 0
+		}).on('changeDate',function(ev){
+			var starttime=$('#starttime').val();
+			$('#endtime').datetimepicker('setStartDate',starttime);
+			$('#starttime').datetimepicker('hide');
+		});
+		
+		
+		
+		$('#endtime').datetimepicker({
+		    language:  'zh-TW',
+		    weekStart: 1,
+		    todayBtn:  1,
+			autoclose: 1,
+			todayHighlight: 1,
+			startView: 2,
+			minView: 2,
+			forceParse: 0
+		}).on('changeDate',function(ev){
+			var starttime=$('#starttime').val();
+			var endtime=$('endtime').val();
+			
+			
+			
+			if(starttime!=""&&endtime!=""){
+				if(!checkEndTime(starttime,endtime)){
+					$('endtime').val('');
+					alert("起始日期不能大於結束日期");
+					return;
+				}
+			}
+						
+			$('#starttime').datetimepicker('setEndDate',endtime);
+			$('#starttime').datetimepicker('hide');
+		});
+		
+	});
+	</script>
+
+
 
 </body>
 
