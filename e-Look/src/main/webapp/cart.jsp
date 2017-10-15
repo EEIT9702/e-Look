@@ -40,20 +40,15 @@
 }
 #nopadding img {
 	margin-bottom: 5px;
-
-
 }
 body{
 	padding-top:100px;
-
-
 }
 .maincontainer {
              max-width: 500px;
              margin:0 auto;
-             
  }
- .courseTitle{
+.courseTitle{
     font-size: 20px;
     color: #3e3d3e;
     width: 70%;
@@ -106,6 +101,7 @@ float:none;
     width: 20px;
     height: 20px;
 }
+ 
  
 </style>
 </head>
@@ -179,13 +175,13 @@ float:none;
 				</li>
 				<c:choose>
 				<c:when test="${!empty LoginOK}">
-				<li><a href="#"><img src="<%=request.getContextPath() %>/Image?MemberID=${LoginOK.memberID}"height="30" /><span class="caret"></span></a></li>
+				<li><a href="#"><img src="<%=request.getContextPath() %>/Image?MemberID=${LoginOK.memberID}"height="30" /></a></li>
 				</c:when>
 				<c:when test="${empty err}">
 				<li><a href="#"data-toggle="modal" data-target="#myModal"><img src="<%=request.getContextPath() %>/HeaderCssJs/001-login.png"height="30" />登入</a></li>
 				</c:when>
 				<c:otherwise>
-				<li><a href="#"data-toggle="modal" data-target="#myModal2"><img src="<%=request.getContextPath() %>/HeaderCssJs/001-login.png"height="30" />登入</a></li>
+				<li><a href="#"data-toggle="modal" data-target="#myModal2"><img src="<%=request.getContextPath() %>/HeaderCssJs/001-login.png"height="30" />登入<span class="cartet"></span></a></li>
 				</c:otherwise>
 				</c:choose>
 				

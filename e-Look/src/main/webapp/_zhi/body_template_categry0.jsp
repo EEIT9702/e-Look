@@ -8,19 +8,17 @@
 <link rel="Short Icon" type="image/x-icon" href="${SYSTEM.iconUri}" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${SYSTEM.systemName}</title>
-<link href="HeaderCssJs/bootstrap.css" rel="stylesheet">
-<!-- <link href="HeaderCssJs/bootstrap.min.css" rel="stylesheet"> -->
+<link href="<%= request.getContextPath() %>/css/bootstrap.css" rel="stylesheet">
 <!-- Bootstrap Core CSS -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom CSS -->
-<link href="css/modern-business.css" rel="stylesheet">
+<link href="<%= request.getContextPath() %>/css/modern-business.css" rel="stylesheet">
 <!-- Custom Fonts -->
-<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet"
+<link href="<%= request.getContextPath() %>/body/font-awesome/css/font-awesome.min.css" rel="stylesheet"
 	type="text/css">
 <!-- 載入課程模板css -->
 <!-- <link href="css/twmplate.css" rel="stylesheet"> -->
-<script src="HeaderCssJs/jquery.js"></script>
-<script src="HeaderCssJs/bootstrap.min.js"></script>
+<script src="<%= request.getContextPath() %>/js/jquery.js"></script>
+<script src="<%= request.getContextPath() %>/js/bootstrap.min.js"></script>
 
 <style type="text/css">
 /* 課程模板 */
@@ -147,27 +145,23 @@ h5 {
 
 /* 分類按鈕 */
 .ndiv {
-	height:130px;
-/* 	width: 1100px; */
-	width: 76%;
-	margin:0 auto;
+	height: 100px;
+	width: 1100px;
+	margin-left: auto;
+	margin-right: auto;
 	text-align: center;
- 	border-bottom: 1.5px solid black;
-/* 	border:1.5px solid black; */
-	padding-top:0.6%;
-	padding-bottom:0.6%;
-	margin-bottom:1.2%;
+	border-bottom: 1.5px solid black;
+	margin-bottom:20px;
 }
 
 .ndiv li {
 	list-style-type: none;
 	float: left;
-	margin-top:1%;
-	margin-left:2%;
+	margin: 8px;
 }
 
 .svgIcon {
-	width: 50px;
+	width: 48px;
 }
 
 .ndiv a {
@@ -176,10 +170,6 @@ h5 {
 	active: none;
 	font-size: 20px;
 	font-family: 微軟正黑體;
-}
-
-.ndiv a:hover{
-	text-decoration: none;
 }
 
 .ndiv a:link {
@@ -215,13 +205,9 @@ h5 {
 	padding-right:2px;
 }
 /* 分類下課程 */
-.videobox{
-	width: 58%;
-	margin:0 auto;
-}
 .row{
-/* 	width: 1100px; */
-/* 	margin-left:200px; */
+	width: 1100px;
+	margin-left:200px;
 }
 
 </style>
@@ -252,15 +238,29 @@ h5 {
 	//window.onload = showAdPic;
 
 	$(function() {
-		showAdPic();
-		init();
+		//showAdPic();
+		//init();
+		$(window).scroll(function(){
+			var wst = $(window).scrollTop();
+			var wh = $(window).height();
+			var dh =$(document).height();
+			$('a[href="#menu1"]').text(wst+"---"+dh+"---"+wh)
+			console.log(wst+"---"+dh+"---"+wh);
+			//判斷卷軸是否到底部
+			if(wst==(dh-wh)){
+				$('a[href="#menu1"]').text("到底了!!!")
+
+				
+				
+			}
+		});
 	});
 
 	/*延遲載入圖片*/
 	//初始化函數
 	function init() {
 		//開始計時器
-		setTimeout("checkHeight()", 1000);
+		//setTimeout("checkHeight()", 1000);
 	}
 	//計時器函數
 	function checkHeight() {
@@ -270,6 +270,7 @@ h5 {
 		//var pic = document.getElementById("pic");
 		//取得捲軸的位置
 		var sTop = document.documentElement.scrollTop;
+		console.log(sTop);
 		//取得可見區域高度
 		var cHeight = document.documentElement.clientHeight;
 
@@ -279,15 +280,15 @@ h5 {
 			//如果捲軸還未來到可見區域
 			if (sTop + cHeight < top) {
 				//計時器繼續工作
-				setTimeout("checkHeight()", 1500);
+				//setTimeout("checkHeight()", 1500);
 			} else {
 
 				var pics = rows[i].querySelectorAll("img");
 				for (var j = 0; j < pics.length; j++) {
-					pics[j].src = pics[j].getAttribute("lazy_src");
+					pics[j].src = pics[j].getAttribute("src");
 				}
 				//把延遲的值指定給src
-				//pics[i].src = pics[i].getAttribute("lazy_src");
+				//pics[i].src = pics[i].getAttribute("src");
 				//console.log(top);
 			}
 		}
@@ -296,7 +297,7 @@ h5 {
 </script>
 </head>
 <body>
-	<jsp:include page="${contextPath}/header.jsp" />
+	<jsp:include page="${contextPath}/login.jsp" />
 
 		<!-- 分類按鈕和搜索star -->
 	<div class="ndiv">
@@ -345,7 +346,7 @@ h5 {
 					style="<c:choose><c:when test='${param.courseClassID == 11 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
 					class="svgIcon"
 					src="<%=request.getContextPath() %>/alan/img/program.svg"><br>程式</a></li>
-			<li class="li_searchArea" style="margin-left:17%;margin-top:1.2%;" >
+			<li class="li_searchArea" style="margin-left:56px;margin-top:15px;" >
 				<form class="navbar-form navbar-left" id="searchKey" method="get"
 					action="">
 					<div class="input-group">
@@ -353,7 +354,7 @@ h5 {
 							<div class="betweenOutAndInner">
 
 								<input type="text" class="form-control" placeholder="Search"
-									class="searchInput">
+									name="keyWord" class="searchInput">
 
 								<div style="float:right" class="input-group-btn">
 									<input type="image" id="search-submit" name="search-submit" img
@@ -376,11 +377,13 @@ h5 {
 		<a href=""><span id="ads"></span></a>
 	</div>
 	<!-- 3秒消失廣告end -->
-	<div class="videobox container">
+	
+	<div style="width:1000px;margin-left:206px">
+	<div class="container">
 	
 		<!-- 1-4 Template row -->
 		<div class="row">
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
 						src="img/001.jpg" alt="course" id="wizardPicturePreview" title="">
@@ -402,7 +405,7 @@ h5 {
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
 						src="img/002.jpg" alt="course" id="wizardPicturePreview" title="">
@@ -424,7 +427,7 @@ h5 {
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
 						src="img/003.jpg" alt="course" id="wizardPicturePreview" title="">
@@ -446,7 +449,7 @@ h5 {
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
 						src="img/004.jpg" alt="course" id="wizardPicturePreview" title="">
@@ -475,12 +478,12 @@ h5 {
 		<div class="row">
 			<div class="item col-md-3 img-portfolio">
 				<div class="card card-inverse">
-					<img class="img-responsive img-hover card-img-top" src=""
-						lazy_src="img/005.jpg" alt="course" id="wizardPicturePreview"
+					<img class="img-responsive img-hover card-img-top"  
+						src="img/005.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
-						<figure class="profile"> <img src=""
-							lazy_src="../Class Steps/imgs/eLook_LOGO1.png"
+						<figure class="profile"> <img  
+							src="../Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題5</p>
@@ -498,12 +501,12 @@ h5 {
 			</div>
 			<div class="item col-md-3 img-portfolio">
 				<div class="card card-inverse">
-					<img class="img-responsive img-hover card-img-top" src=""
-						lazy_src="img/006.jpg" alt="course" id="wizardPicturePreview"
+					<img class="img-responsive img-hover card-img-top"  
+						src="img/006.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
-						<figure class="profile"> <img src=""
-							lazy_src="../Class Steps/imgs/eLook_LOGO1.png"
+						<figure class="profile"> <img  
+							src="../Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題6</p>
@@ -521,12 +524,12 @@ h5 {
 			</div>
 			<div class="item col-md-3 img-portfolio">
 				<div class="card card-inverse">
-					<img class="img-responsive img-hover card-img-top" src=""
-						lazy_src="img/007.jpg" alt="course" id="wizardPicturePreview"
+					<img class="img-responsive img-hover card-img-top"  
+						src="img/007.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
-						<figure class="profile"> <img src=""
-							lazy_src="../Class Steps/imgs/eLook_LOGO1.png"
+						<figure class="profile"> <img  
+							src="../Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題7</p>
@@ -544,12 +547,12 @@ h5 {
 			</div>
 			<div class="item col-md-3 img-portfolio">
 				<div class="card card-inverse">
-					<img class="img-responsive img-hover card-img-top" src=""
-						lazy_src="img/008.jpg" alt="course" id="wizardPicturePreview"
+					<img class="img-responsive img-hover card-img-top"  
+						src="img/008.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
-						<figure class="profile"> <img src=""
-							lazy_src="../Class Steps/imgs/eLook_LOGO1.png"
+						<figure class="profile"> <img  
+							src="../Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題8</p>
@@ -572,12 +575,12 @@ h5 {
 		<div class="row">
 			<div class="item col-md-3 img-portfolio">
 				<div class="card card-inverse">
-					<img class="img-responsive img-hover card-img-top" src=""
-						lazy_src="img/009.jpg" alt="course" id="wizardPicturePreview"
+					<img class="img-responsive img-hover card-img-top"  
+						src="img/009.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
-						<figure class="profile"> <img src=""
-							lazy_src="../Class Steps/imgs/eLook_LOGO1.png"
+						<figure class="profile"> <img  
+							src="../Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題9</p>
@@ -595,12 +598,12 @@ h5 {
 			</div>
 			<div class="item col-md-3 img-portfolio">
 				<div class="card card-inverse">
-					<img class="img-responsive img-hover card-img-top" src=""
-						lazy_src="img/010.jpg" alt="course" id="wizardPicturePreview"
+					<img class="img-responsive img-hover card-img-top"  
+						src="img/010.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
-						<figure class="profile"> <img src=""
-							lazy_src="../Class Steps/imgs/eLook_LOGO1.png"
+						<figure class="profile"> <img  
+							src="../Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題10</p>
@@ -618,12 +621,12 @@ h5 {
 			</div>
 			<div class="item col-md-3 img-portfolio">
 				<div class="card card-inverse">
-					<img class="img-responsive img-hover card-img-top" src=""
-						lazy_src="img/011.jpg" alt="course" id="wizardPicturePreview"
+					<img class="img-responsive img-hover card-img-top"  
+						src="img/011.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
-						<figure class="profile"> <img src=""
-							lazy_src="../Class Steps/imgs/eLook_LOGO1.png"
+						<figure class="profile"> <img  
+							src="../Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題11</p>
@@ -641,12 +644,12 @@ h5 {
 			</div>
 			<div class="item col-md-3 img-portfolio">
 				<div class="card card-inverse">
-					<img class="img-responsive img-hover card-img-top" src=""
-						lazy_src="img/012.jpg" alt="course" id="wizardPicturePreview"
+					<img class="img-responsive img-hover card-img-top"  
+						src="img/012.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
-						<figure class="profile"> <img src=""
-							lazy_src="../Class Steps/imgs/eLook_LOGO1.png"
+						<figure class="profile"> <img  
+							src="../Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題12</p>
@@ -669,12 +672,12 @@ h5 {
 		<div class="row">
 			<div class="item col-md-3 img-portfolio">
 				<div class="card card-inverse">
-					<img class="img-responsive img-hover card-img-top" src=""
-						lazy_src="img/001.jpg" alt="course" id="wizardPicturePreview"
+					<img class="img-responsive img-hover card-img-top"  
+						src="img/001.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
-						<figure class="profile"> <img src=""
-							lazy_src="../Class Steps/imgs/eLook_LOGO1.png"
+						<figure class="profile"> <img  
+							src="../Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題13</p>
@@ -692,12 +695,12 @@ h5 {
 			</div>
 			<div class="item col-md-3 img-portfolio">
 				<div class="card card-inverse">
-					<img class="img-responsive img-hover card-img-top" src=""
-						lazy_src="img/002.jpg" alt="course" id="wizardPicturePreview"
+					<img class="img-responsive img-hover card-img-top"  
+						src="img/002.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
-						<figure class="profile"> <img src=""
-							lazy_src="../Class Steps/imgs/eLook_LOGO1.png"
+						<figure class="profile"> <img  
+							src="../Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題14</p>
@@ -715,12 +718,12 @@ h5 {
 			</div>
 			<div class="item col-md-3 img-portfolio">
 				<div class="card card-inverse">
-					<img class="img-responsive img-hover card-img-top" src=""
-						lazy_src="img/003.jpg" alt="course" id="wizardPicturePreview"
+					<img class="img-responsive img-hover card-img-top"  
+						src="img/003.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
-						<figure class="profile"> <img src=""
-							lazy_src="../Class Steps/imgs/eLook_LOGO1.png"
+						<figure class="profile"> <img  
+							src="../Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題15</p>
@@ -738,12 +741,12 @@ h5 {
 			</div>
 			<div class="item col-md-3 img-portfolio">
 				<div class="card card-inverse">
-					<img class="img-responsive img-hover card-img-top" src=""
-						lazy_src="img/004.jpg" alt="course" id="wizardPicturePreview"
+					<img class="img-responsive img-hover card-img-top"  
+						src="img/004.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
-						<figure class="profile"> <img src=""
-							lazy_src="../Class Steps/imgs/eLook_LOGO1.png"
+						<figure class="profile"> <img  
+							src="../Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題16</p>
@@ -766,12 +769,12 @@ h5 {
 		<div class="row">
 			<div class="item col-md-3 img-portfolio">
 				<div class="card card-inverse">
-					<img class="img-responsive img-hover card-img-top" src=""
-						lazy_src="img/005.jpg" alt="course" id="wizardPicturePreview"
+					<img class="img-responsive img-hover card-img-top"  
+						src="img/005.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
-						<figure class="profile"> <img src=""
-							lazy_src="../Class Steps/imgs/eLook_LOGO1.png"
+						<figure class="profile"> <img  
+							src="../Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題17</p>
@@ -789,12 +792,12 @@ h5 {
 			</div>
 			<div class="item col-md-3 img-portfolio">
 				<div class="card card-inverse">
-					<img class="img-responsive img-hover card-img-top" src=""
-						lazy_src="img/006.jpg" alt="course" id="wizardPicturePreview"
+					<img class="img-responsive img-hover card-img-top"  
+						src="img/006.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
-						<figure class="profile"> <img src=""
-							lazy_src="../Class Steps/imgs/eLook_LOGO1.png"
+						<figure class="profile"> <img  
+							src="../Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題18</p>
@@ -812,12 +815,12 @@ h5 {
 			</div>
 			<div class="item col-md-3 img-portfolio">
 				<div class="card card-inverse">
-					<img class="img-responsive img-hover card-img-top" src=""
-						lazy_src="img/007.jpg" alt="course" id="wizardPicturePreview"
+					<img class="img-responsive img-hover card-img-top"  
+						src="img/007.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
-						<figure class="profile"> <img src=""
-							lazy_src="../Class Steps/imgs/eLook_LOGO1.png"
+						<figure class="profile"> <img  
+							src="../Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題19</p>
@@ -835,12 +838,12 @@ h5 {
 			</div>
 			<div class="item col-md-3 img-portfolio">
 				<div class="card card-inverse">
-					<img class="img-responsive img-hover card-img-top" src=""
-						lazy_src="img/008.jpg" alt="course" id="wizardPicturePreview"
+					<img class="img-responsive img-hover card-img-top"  
+						src="img/008.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
-						<figure class="profile"> <img src=""
-							lazy_src="../Class Steps/imgs/eLook_LOGO1.png"
+						<figure class="profile"> <img  
+							src="../Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題20</p>
@@ -863,12 +866,12 @@ h5 {
 		<div class="row">
 			<div class="item col-md-3 img-portfolio">
 				<div class="card card-inverse">
-					<img class="img-responsive img-hover card-img-top" src=""
-						lazy_src="img/009.jpg" alt="course" id="wizardPicturePreview"
+					<img class="img-responsive img-hover card-img-top"  
+						src="img/009.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
-						<figure class="profile"> <img src=""
-							lazy_src="../Class Steps/imgs/eLook_LOGO1.png"
+						<figure class="profile"> <img  
+							src="../Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題21</p>
@@ -886,12 +889,12 @@ h5 {
 			</div>
 			<div class="item col-md-3 img-portfolio">
 				<div class="card card-inverse">
-					<img class="img-responsive img-hover card-img-top" src=""
-						lazy_src="img/010.jpg" alt="course" id="wizardPicturePreview"
+					<img class="img-responsive img-hover card-img-top"  
+						src="img/010.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
-						<figure class="profile"> <img src=""
-							lazy_src="../Class Steps/imgs/eLook_LOGO1.png"
+						<figure class="profile"> <img  
+							src="../Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題22</p>
@@ -909,12 +912,12 @@ h5 {
 			</div>
 			<div class="item col-md-3 img-portfolio">
 				<div class="card card-inverse">
-					<img class="img-responsive img-hover card-img-top" src=""
-						lazy_src="img/011.jpg" alt="course" id="wizardPicturePreview"
+					<img class="img-responsive img-hover card-img-top"  
+						src="img/011.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
-						<figure class="profile"> <img src=""
-							lazy_src="../Class Steps/imgs/eLook_LOGO1.png"
+						<figure class="profile"> <img  
+							src="../Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題23</p>
@@ -932,12 +935,12 @@ h5 {
 			</div>
 			<div class="item col-md-3 img-portfolio">
 				<div class="card card-inverse">
-					<img class="img-responsive img-hover card-img-top" src=""
-						lazy_src="img/012.jpg" alt="course" id="wizardPicturePreview"
+					<img class="img-responsive img-hover card-img-top"  
+						src="img/012.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
-						<figure class="profile"> <img src=""
-							lazy_src="../Class Steps/imgs/eLook_LOGO1.png"
+						<figure class="profile"> <img  
+							src="../Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題24</p>
@@ -960,12 +963,12 @@ h5 {
 		<div class="row">
 			<div class="item col-md-3 img-portfolio">
 				<div class="card card-inverse">
-					<img class="img-responsive img-hover card-img-top" src=""
-						lazy_src="img/001.jpg" alt="course" id="wizardPicturePreview"
+					<img class="img-responsive img-hover card-img-top"  
+						src="img/001.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
-						<figure class="profile"> <img src=""
-							lazy_src="../Class Steps/imgs/eLook_LOGO1.png"
+						<figure class="profile"> <img  
+							src="../Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題25</p>
@@ -983,12 +986,12 @@ h5 {
 			</div>
 			<div class="item col-md-3 img-portfolio">
 				<div class="card card-inverse">
-					<img class="img-responsive img-hover card-img-top" src=""
-						lazy_src="img/002.jpg" alt="course" id="wizardPicturePreview"
+					<img class="img-responsive img-hover card-img-top"  
+						src="img/002.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
-						<figure class="profile"> <img src=""
-							lazy_src="../Class Steps/imgs/eLook_LOGO1.png"
+						<figure class="profile"> <img  
+							src="../Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題26</p>
@@ -1006,12 +1009,12 @@ h5 {
 			</div>
 			<div class="item col-md-3 img-portfolio">
 				<div class="card card-inverse">
-					<img class="img-responsive img-hover card-img-top" src=""
-						lazy_src="img/003.jpg" alt="course" id="wizardPicturePreview"
+					<img class="img-responsive img-hover card-img-top"  
+						src="img/003.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
-						<figure class="profile"> <img src=""
-							lazy_src="../Class Steps/imgs/eLook_LOGO1.png"
+						<figure class="profile"> <img  
+							src="../Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題27</p>
@@ -1029,12 +1032,12 @@ h5 {
 			</div>
 			<div class="item col-md-3 img-portfolio">
 				<div class="card card-inverse">
-					<img class="img-responsive img-hover card-img-top" src=""
-						lazy_src="img/004.jpg" alt="course" id="wizardPicturePreview"
+					<img class="img-responsive img-hover card-img-top"  
+						src="img/004.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
-						<figure class="profile"> <img src=""
-							lazy_src="../Class Steps/imgs/eLook_LOGO1.png"
+						<figure class="profile"> <img  
+							src="../Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題28</p>
@@ -1055,7 +1058,7 @@ h5 {
 
 		<!-- end of class="container" -->
 	</div>
-
+	</div>
 
 </body>
 </html>

@@ -23,9 +23,9 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 	//第二組密碼
 	//String passwd = "123456";
 	private static final String INSERT_MEMBER =
-		      "insert into Member ( email,mPassword,mName,mPhoto,skill,hobby,registerDate,status,count,address) values ( ?, ?, ?, ?, ?, ?,?, ?, ?, ?)";
+		      "insert into Member ( email,mPassword,mName,mPhoto,aboutme,skill,hobby,registerDate,status,count,address) values ( ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?)";
 	private static final String UPDATE_MEMBER =
-		      "update Member set email=?, mPassword=?, mName=?, mPhoto=?, skill=?, hobby=?, address=? where memberID= ?";
+		      "update Member set email=?, mPassword=?, mName=?, mPhoto=?,aboutme=?, skill=?, hobby=?, address=? where memberID= ?";
 	private static final String UPDATE_STATUS =
 		      "update Member set status=? where memberID= ?";
 	private static final String UPDATE_COUNT =
@@ -33,11 +33,11 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 	private static final String DELETE_MEMBER =
 		      "delete from Member where memberID= ?";
 	private static final String SELECT_ONE_MEMBER =
-		      "select memberID ,email,mPassword,mName,mPhoto,skill,hobby,registerDate,status,count,address from Member where memberID= ?";
+		      "select memberID ,email,mPassword,mName,mPhoto,aboutme,skill,hobby,registerDate,status,count,address from Member where memberID= ?";
 	private static final String SELECT_EMAIL_MEMBER =
-		      "select memberID ,email,mPassword,mName,mPhoto,skill,hobby,registerDate,status,count,address from Member where email= ?";
+		      "select memberID ,email,mPassword,mName,mPhoto,aboutme,skill,hobby,registerDate,status,count,address from Member where email= ?";
 	private static final String SELECT_ALL_MEMBER =
-		      "select memberID ,email,mPassword,mName,mPhoto,skill,hobby,registerDate,status,count,address from Member";
+		      "select memberID ,email,mPassword,mName,mPhoto,aboutme,skill,hobby,registerDate,status,count,address from Member";
 	@Override
 	public void insert(MemberVO memberVO) {
 		Connection con = null;
@@ -50,12 +50,13 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 			pstmt.setString(2,memberVO.getmPassword());
 			pstmt.setString(3,memberVO.getmName());
 			pstmt.setBlob(4,memberVO.getmPhoto());
-			pstmt.setString(5,memberVO.getSkill());
-			pstmt.setString(6,memberVO.getHobby());
-			pstmt.setDate(7,memberVO.getRegisterDate());
-			pstmt.setByte(8,memberVO.getStatus());
-			pstmt.setInt(9,memberVO.getCount());
-			pstmt.setString(10,memberVO.getAddress());
+			pstmt.setString(5,memberVO.getAboutme());
+			pstmt.setString(6,memberVO.getSkill());
+			pstmt.setString(7,memberVO.getHobby());
+			pstmt.setDate(8,memberVO.getRegisterDate());
+			pstmt.setByte(9,memberVO.getStatus());
+			pstmt.setInt(10,memberVO.getCount());
+			pstmt.setString(11,memberVO.getAddress());
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
@@ -95,10 +96,11 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 			pstmt.setString(2,memberVO.getmPassword());
 			pstmt.setString(3,memberVO.getmName());
 			pstmt.setBlob(4,memberVO.getmPhoto());
-			pstmt.setString(5,memberVO.getSkill());
-			pstmt.setString(6,memberVO.getHobby());
-			pstmt.setString(7,memberVO.getAddress());
-			pstmt.setInt(8,memberVO.getMemberID());
+			pstmt.setString(5,memberVO.getAboutme());
+			pstmt.setString(6,memberVO.getSkill());
+			pstmt.setString(7,memberVO.getHobby());
+			pstmt.setString(8,memberVO.getAddress());
+			pstmt.setInt(9,memberVO.getMemberID());
 			pstmt.executeUpdate();
 			}else if(update.equalsIgnoreCase("status")){
 				pstmt = con.prepareStatement(UPDATE_STATUS);
@@ -185,12 +187,13 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 				memberVO.setmPassword(rs.getString(3));
 				memberVO.setmName(rs.getString(4));
 				memberVO.setmPhoto(rs.getBinaryStream(5));
-				memberVO.setSkill(rs.getString(6));
-				memberVO.setHobby(rs.getString(7));
-				memberVO.setRegisterDate(rs.getDate(8));
-				memberVO.setStatus(rs.getByte(9));
-				memberVO.setCount(rs.getInt(10));
-				memberVO.setAddress(rs.getString(11));
+				memberVO.setAboutme(rs.getString(6));
+				memberVO.setSkill(rs.getString(7));
+				memberVO.setHobby(rs.getString(8));
+				memberVO.setRegisterDate(rs.getDate(9));
+				memberVO.setStatus(rs.getByte(10));
+				memberVO.setCount(rs.getInt(11));
+				memberVO.setAddress(rs.getString(12));
 			}
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
@@ -233,12 +236,13 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 				memberVO.setmPassword(rs.getString(3));
 				memberVO.setmName(rs.getString(4));
 				memberVO.setmPhoto(rs.getBinaryStream(5));
-				memberVO.setSkill(rs.getString(6));
-				memberVO.setHobby(rs.getString(7));
-				memberVO.setRegisterDate(rs.getDate(8));
-				memberVO.setStatus(rs.getByte(9));
-				memberVO.setCount(rs.getInt(10));
-				memberVO.setAddress(rs.getString(11));
+				memberVO.setAboutme(rs.getString(6));
+				memberVO.setSkill(rs.getString(7));
+				memberVO.setHobby(rs.getString(8));
+				memberVO.setRegisterDate(rs.getDate(9));
+				memberVO.setStatus(rs.getByte(10));
+				memberVO.setCount(rs.getInt(11));
+				memberVO.setAddress(rs.getString(12));
 			}
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
@@ -281,12 +285,13 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 				memberVO.setmPassword(rs.getString(3));
 				memberVO.setmName(rs.getString(4));
 				memberVO.setmPhoto(rs.getBinaryStream(5));
-				memberVO.setSkill(rs.getString(6));
-				memberVO.setHobby(rs.getString(7));
-				memberVO.setRegisterDate(rs.getDate(8));
-				memberVO.setStatus(rs.getByte(9));
-				memberVO.setCount(rs.getInt(10));
-				memberVO.setAddress(rs.getString(11));
+				memberVO.setAboutme(rs.getString(6));
+				memberVO.setSkill(rs.getString(7));
+				memberVO.setHobby(rs.getString(8));
+				memberVO.setRegisterDate(rs.getDate(9));
+				memberVO.setStatus(rs.getByte(10));
+				memberVO.setCount(rs.getInt(11));
+				memberVO.setAddress(rs.getString(12));
 				list.add(memberVO);
 			}
 		} catch (ClassNotFoundException e) {
@@ -318,7 +323,7 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 //		//新增會員
 		MemberVO memberVO1= new MemberVO();
 		memberVO1.setmName("李XX");
-		memberVO1.setEmail("abc852855230@yahyy.com.tw");
+		memberVO1.setEmail("abc8512125230@yahyy.com.tw");
 		memberVO1.setmPassword("XXXX");
 		memberVO1.setRegisterDate(new Date(System.currentTimeMillis()));
 		memberVO1.setStatus((byte) 0);
@@ -373,20 +378,20 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 //		System.out.println(memberVO3.getCount());
 //		System.out.println(memberVO3.getAddress());
 		//查詢全部會員
-//		List<MemberVO> list=dao.getAll();
-//		for(MemberVO memberVO :list){
-//			System.out.print(memberVO.getMemberID()+"  ");
-//			System.out.print(memberVO.getEmail()+"  ");
-//			System.out.print(memberVO.getmPassword()+"  ");
-//			System.out.print(memberVO.getmName()+"  ");
-//			System.out.print(memberVO.getmPhoto()+"  ");
-//			System.out.print(memberVO.getSkill()+"  ");
-//			System.out.print(memberVO.getHobby()+"  ");
-//			System.out.print(memberVO.getRegisterDate()+"  ");
-//			System.out.print(memberVO.getStatus()+"  ");
-//			System.out.print(memberVO.getCount()+"  ");
-//			System.out.println(memberVO.getAddress());
-//		}
+		List<MemberVO> list=dao.getAll();
+		for(MemberVO memberVO :list){
+			System.out.print(memberVO.getMemberID()+"  ");
+			System.out.print(memberVO.getEmail()+"  ");
+			System.out.print(memberVO.getmPassword()+"  ");
+			System.out.print(memberVO.getmName()+"  ");
+			System.out.print(memberVO.getmPhoto()+"  ");
+			System.out.print(memberVO.getSkill()+"  ");
+			System.out.print(memberVO.getHobby()+"  ");
+			System.out.print(memberVO.getRegisterDate()+"  ");
+			System.out.print(memberVO.getStatus()+"  ");
+			System.out.print(memberVO.getCount()+"  ");
+			System.out.println(memberVO.getAddress());
+		}
 	}
 
 

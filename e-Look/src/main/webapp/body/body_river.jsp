@@ -8,17 +8,19 @@
 <link rel="Short Icon" type="image/x-icon" href="${SYSTEM.iconUri}" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${SYSTEM.systemName}</title>
-<link href="<%= request.getContextPath() %>/css/bootstrap.css" rel="stylesheet">
+<link href="HeaderCssJs/bootstrap.css" rel="stylesheet">
+<!-- <link href="HeaderCssJs/bootstrap.min.css" rel="stylesheet"> -->
 <!-- Bootstrap Core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom CSS -->
-<link href="<%= request.getContextPath() %>/css/modern-business.css" rel="stylesheet">
+<link href="css/modern-business.css" rel="stylesheet">
 <!-- Custom Fonts -->
-<link href="<%= request.getContextPath() %>/body/font-awesome/css/font-awesome.min.css" rel="stylesheet"
+<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet"
 	type="text/css">
 <!-- 載入課程模板css -->
 <!-- <link href="css/twmplate.css" rel="stylesheet"> -->
-<script src="<%= request.getContextPath() %>/js/jquery.js"></script>
-<script src="<%= request.getContextPath() %>/js/bootstrap.min.js"></script>
+<script src="HeaderCssJs/jquery.js"></script>
+<script src="HeaderCssJs/bootstrap.min.js"></script>
 
 <style type="text/css">
 /* 課程模板 */
@@ -145,23 +147,29 @@ h5 {
 
 /* 分類按鈕 */
 .ndiv {
-	height: 100px;
-	width: 1100px;
-	margin-left: auto;
-	margin-right: auto;
+ 	height:130px;
+/* 	width: 1100px; */
+	width: 76%;
+	margin:0 auto;
 	text-align: center;
-	border-bottom: 1.5px solid black;
-	margin-bottom:20px;
+ 	border-bottom: 1.5px solid black;
+/* 	border:1.5px solid black; */
+	padding-top:0.6%;
+	padding-bottom:0.6%;
+	margin-bottom:1.2%;
 }
 
 .ndiv li {
 	list-style-type: none;
 	float: left;
-	margin: 8px;
+ 	margin-top:1%;
+ 	margin-left:1%;
+/*  border:2px solid red; */
+ 	width:5%;
 }
 
 .svgIcon {
-	width: 48px;
+	width: 50px;
 }
 
 .ndiv a {
@@ -172,6 +180,10 @@ h5 {
 	font-family: 微軟正黑體;
 }
 
+.ndiv a:hover{
+	text-decoration: none;
+}
+
 .ndiv a:link {
 	color: #9F35FF;
 }
@@ -179,35 +191,35 @@ h5 {
 .ndiv a:visited {
 	color: #9F35FF;
 }
-.li_searchArea{
-/* 	margin-left:80px; */
-/* 	margin-top:25px; */
+#li_searchArea{
+  	margin-left:13%;
+  	margin-top:1.3%;
 }
 .outsideBorder{
 	border:3px solid orange;
 	border-radius:25px;
-	height: 44px;
-	width:260px;
+	height:44px;
+	width:130%;
 }
 .betweenOutAndInner{
-	padding-left:10px;
-	padding-top:2px;
-	padding-bottom:2px;
+	padding-left:6%;
+	padding-top:0.8%;
+/* 	padding-bottom:0.8%; */
 }
 .searchInput{
-	padding-left:25px;
-	border:none;
+	padding-left:2%;
 	border-radius:25px;
 	height:28px;
 }
 .searchSubmitIcon{
-	width:30px;
+	width:36px;
 	padding-right:2px;
+/* 	border:1px solid blue; */
 }
-/* 分類下課程 */
-.row{
-	width: 1100px;
-	margin-left:200px;
+/* 分類下課程,拿掉後瀏覽器縮太小時,模板不會一起縮放 */
+.videobox{
+  	width: 80%;
+  	margin:0 auto;
 }
 
 </style>
@@ -236,35 +248,42 @@ h5 {
 		}, 1500)
 	}
 	//window.onload = showAdPic;
-
-		var rowValue = 0;
+	
+ 	/*瀑布流關鍵*/
+	var rowValueX = 0;
 	$(function() {
 		//showAdPic();
 		//init();
 		river();
+		//卷軸初載入高度為0
 		var	wst = $(window).scrollTop();
+		//視窗高度
 		var	wh = $(window).height();
+		//整份文件
 		var	dh =$(document).height();
 		console.log(wst+"---"+dh+"---"+wh);
 		$(window).scroll(river);
-			
-		});
+	});
+
 	function river(){
+		//卷軸初再入高度為0
 		var	wst = $(window).scrollTop();
+		//視窗高度
 		var	wh = $(window).height();
+		//整份文件
 		var	dh =$(document).height();
 		$('a[href="#menu1"]').text(wst+"---"+dh+"---"+wh)
 		console.log(wst+"---"+dh+"---"+wh);
 		//判斷卷軸是否到底部
 		if(wst==(dh-wh) || dh==wd){
-			rowValue++;
-			$.get("coursedata.jsp",{"rowValue":rowValue},function(data){
+			rowValueX++;
+			$.get("body_data.jsp",{"rowValueY":rowValueX},function(data){
 				$('#river').append(data);
 			});
 		}
 	}
 	
-
+	
 	/*延遲載入圖片*/
 	//初始化函數
 	function init() {
@@ -279,7 +298,6 @@ h5 {
 		//var pic = document.getElementById("pic");
 		//取得捲軸的位置
 		var sTop = document.documentElement.scrollTop;
-		console.log(sTop);
 		//取得可見區域高度
 		var cHeight = document.documentElement.clientHeight;
 
@@ -289,15 +307,15 @@ h5 {
 			//如果捲軸還未來到可見區域
 			if (sTop + cHeight < top) {
 				//計時器繼續工作
-				//setTimeout("checkHeight()", 1500);
+				setTimeout("checkHeight()", 1500);
 			} else {
 
 				var pics = rows[i].querySelectorAll("img");
 				for (var j = 0; j < pics.length; j++) {
-					pics[j].src = pics[j].getAttribute("src");
+					pics[j].src = pics[j].getAttribute("lazy_src");
 				}
 				//把延遲的值指定給src
-				//pics[i].src = pics[i].getAttribute("src");
+				//pics[i].src = pics[i].getAttribute("lazy_src");
 				//console.log(top);
 			}
 		}
@@ -306,9 +324,10 @@ h5 {
 </script>
 </head>
 <body>
+	<jsp:include page="${contextPath}/header.jsp" />
 	<jsp:include page="${contextPath}/login.jsp" />
 
-		<!-- 分類按鈕和搜索star -->
+	<!-- 分類按鈕和搜索star -->
 	<div class="ndiv">
 		<ul>
 			<li><a href="?courseClassID=1"><img
@@ -355,7 +374,7 @@ h5 {
 					style="<c:choose><c:when test='${param.courseClassID == 11 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
 					class="svgIcon"
 					src="<%=request.getContextPath() %>/alan/img/program.svg"><br>程式</a></li>
-			<li class="li_searchArea" style="margin-left:56px;margin-top:15px;" >
+			<li id="li_searchArea">
 				<form class="navbar-form navbar-left" id="searchKey" method="get"
 					action="">
 					<div class="input-group">
@@ -363,7 +382,7 @@ h5 {
 							<div class="betweenOutAndInner">
 
 								<input type="text" class="form-control" placeholder="Search"
-									name="keyWord" class="searchInput">
+									class="searchInput">
 
 								<div style="float:right" class="input-group-btn">
 									<input type="image" id="search-submit" name="search-submit" img
@@ -386,12 +405,14 @@ h5 {
 		<a href=""><span id="ads"></span></a>
 	</div>
 	<!-- 3秒消失廣告end -->
-	
-	<div style="width:1000px;margin-left:206px">
-	<div id="river" class="container">
-	
+
+	<div class="videobox container">
+		<div class="row" id="river">
+		
+		<!-- end of class="container" -->
+		</div>
 	</div>
-	</div>
+
 
 </body>
 </html>
