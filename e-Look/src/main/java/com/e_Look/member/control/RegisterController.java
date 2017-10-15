@@ -143,7 +143,7 @@ public class RegisterController extends HttpServlet {
 					service.insertMember(email, name, password, request.getServletContext().getRealPath(""));
 					MemberCheckEmail.sendmail(email, request.getRequestURL().toString());
 					session.setAttribute("registerOK", "請去信箱收取認證信");
-					response.sendRedirect(request.getContextPath() + "/login.jsp");
+					response.sendRedirect(request.getHeader("referer"));
 					return;
 
 				}
@@ -175,7 +175,7 @@ public class RegisterController extends HttpServlet {
 					service.updateMemberStatus(memberVO.getMemberID());
 					ResetPwdEmail.sendmail(memberVO.getmName(), email, memberVO.getmPassword());
 					session.setAttribute("registerOK", "已發送新密碼到信箱");
-					response.sendRedirect(request.getContextPath() + "/login.jsp");
+					response.sendRedirect(request.getHeader("referer"));
 					return;
 				}
 			}
