@@ -12,7 +12,7 @@
 </head>
 <style>
 #abgneBlock {
-	width: 1200px;
+	width: 1450px;
 	height: 350px;
 	position: relative;
 	overflow: hidden;
@@ -26,7 +26,7 @@
 }
 #abgneBlock ul.list li {
 	float: left;
-	width: 1200px;
+	width: 1450px;
 	height: 100%;
 }
 #abgneBlock .list img{
