@@ -87,9 +87,7 @@ margin: auto
   height: 70px;
   
 }
-.dropdown-menu{
-width: 465px;
-}
+
 .close{
 float:none;
 }
@@ -107,6 +105,9 @@ float:none;
     width: 20px;
     height: 20px;
 }
+ .dropdown-menu{
+           margin-left:calc(50% - 80px);
+           margin-right:calc(50% - 80px);}
 /*******ShoppingCartStyleEnd***********/
 </style>
 </head>
@@ -138,7 +139,7 @@ float:none;
 				<c:when test="${!empty LoginOK}">
 				<li class="dropdown" ><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false"><span class="cartcount">3</span><img src="<%=request.getContextPath() %>/HeaderCssJs/002-shopping-cart.png" height="30" /></a>
 <!-- 				以下為購物車內容 -->
-				<ul class="dropdown-menu">
+				<ul class="dropdown-menu" style="width: 465px;">
 				<li class="dropdown-header" style="border-bottom:1px solid #aaaaaa;" ><h3>購物車</h3></li>
 <!-- 				課程1 -->
 				<div class="cartrows">
@@ -189,7 +190,7 @@ float:none;
 				<li  class="dropdown ">
 				<a href="#" class=" dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown"><img src="<%=request.getContextPath() %>/Image?MemberID=${LoginOK.memberID}"height="30" /><span class="caret"></span></a>
 				 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    				<li  class="text-center"><a href="<%=request.getContextPath() %>/member/member.jsp">會員中心</a></li>
+    				<li  class="text-center"><a href="<%=request.getContextPath() %>/member/member.jsp"><img align="left"  src="<%=request.getContextPath() %>/HeaderCssJs/member.png" height="25">會員中心</a></li>
     				<li  style="padding-top:0px;" role="presentation" class="divider"></li>
     				<li class="text-center"><a href="#"><img align="left"  src="<%=request.getContextPath() %>/HeaderCssJs/wallet.png" height="25">我的消費</a></li>
     				<li  style="padding-top:0px;" role="presentation" class="divider"></li>
