@@ -25,7 +25,7 @@ maxRequestSize:該次請求所有檔案的大小限制。					default=unlimit(by
 fileSizeThreshold = 1024 * 1024, 
 maxFileSize = 1024 * 1024 * 1024* 2L , 
 maxRequestSize = 1024 * 1024 * 1024* 3L)
-@WebServlet("/fileupload/Upload")
+@WebServlet("/_zhi/Upload")
 public class Upload extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -53,10 +53,10 @@ public class Upload extends HttpServlet {
 		//之後上傳檔案的路徑可以根據memberID和courseID動態變更		
 		//JAVA 路徑的兩種表示方式  由於\為跳脫字元 所以要打\\
 		//應該可省略判定資料夾是否存在，因為已經測試過傳不一樣名稱的檔案進去，這行並不會把原有的資料夾砍掉重建
-		new File("D:/eLookvideo/memberID").mkdirs();
+		new File("D:/eLookvideo/courseID").mkdirs();
 		
 		
-		FileOutputStream fos = new FileOutputStream("D:\\eLookvideo\\memberID\\courseID"+subFileName);
+		FileOutputStream fos = new FileOutputStream("D:\\eLookvideo\\courseID\\courseID"+subFileName);
 		int data;
 		while((data=is.read())!=-1){
 			fos.write(data);

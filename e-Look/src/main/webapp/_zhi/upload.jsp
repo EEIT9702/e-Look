@@ -11,7 +11,7 @@
 <title>${SYSTEM.systemName}</title>
 </head>
 <body>
-<jsp:include page="${requestScope.contextPath}/_zhi/header.jsp"/>
+<jsp:include page="/header.jsp"/>
 <form action="Upload" method="POST" enctype="multipart/form-data" >
 <input type="file" name="myFile">
 <input type="submit">

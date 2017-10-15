@@ -105,9 +105,7 @@ float:none;
     width: 20px;
     height: 20px;
 }
- .dropdown-menu{
-           margin-left:calc(50% - 80px);
-           margin-right:calc(50% - 80px);}
+
 /*******ShoppingCartStyleEnd***********/
 </style>
 </head>
@@ -189,7 +187,7 @@ float:none;
 				<c:when test="${!empty LoginOK}">
 				<li  class="dropdown ">
 				<a href="#" class=" dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown"><img src="<%=request.getContextPath() %>/Image?MemberID=${LoginOK.memberID}"height="30" /><span class="caret"></span></a>
-				 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+				 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="margin-left:calc(50% - 80px);margin-right:calc(50% - 80px);">
     				<li  class="text-center"><a href="<%=request.getContextPath() %>/member/member.jsp"><img align="left"  src="<%=request.getContextPath() %>/HeaderCssJs/member.png" height="25">會員中心</a></li>
     				<li  style="padding-top:0px;" role="presentation" class="divider"></li>
     				<li class="text-center"><a href="#"><img align="left"  src="<%=request.getContextPath() %>/HeaderCssJs/wallet.png" height="25">我的消費</a></li>
