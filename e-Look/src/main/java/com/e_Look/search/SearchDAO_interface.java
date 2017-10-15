@@ -9,6 +9,6 @@ public interface SearchDAO_interface {
 	public void update(SearchVO oldSearchVO,SearchVO newSearchVO);
 	public void delete(SearchVO searchVO);
 	public void dateDelete(Date date);
-	public List<SearchVO> getKeywordRank();
+	public List<SearchVO> getKeywordRank(Integer i);
 	public List<SearchVO> getAll();
 }
