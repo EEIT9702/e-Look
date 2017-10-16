@@ -28,18 +28,9 @@ background-color:	#5599FF;
 font-weight:bold;
 }
 .mm-listview>li>a{padding:60px 10px 60px 20px;}
-.content {
-    padding:50px 50px 50px 50px;
+.header{
 
-}
-#name{
-font-size:25px;
-text-align:left;
-font-weight: bolder;
-}
-#eventname{
-width: 1600px;
-height: 35px;
+margin-bottom: 45px;
 }
 </style>
 <body>
@@ -48,22 +39,16 @@ height: 35px;
 				<a href="#menu"><span></span></a>
 				管理者介面
 			</div>
-			<div class="content">
-				<p><strong style="font-size: 50px">活動管理</strong></p><br/>
-				<br>
-				<br>
-			<div id="name">活動名稱:<input id="eventname">
-			
-			</div>
-			</div>
+		
 			<nav id="menu" style="font-size: 18px">
 				<ul >
-				<li><a href="#" style="background-color:#FFCCCC">管理員</a></li>
+					<li><a href="#" style="background-color:#FFCCCC">管理員</a></li>
 					<li><a href="#" style="background-color:#FFDDAA">活動管理</a></li>
 					<li><a href="#"style="background-color: #FFFFBB">輪播管理</a></li>
 			        <li><a href="#"style="background-color: #CCFF99">課程審查</a></li>
 					<li><a href="#"style="background-color: #BBFFEE	">收益報表</a></li>
 					<li><a href="#"style="background-color: #CCBBFF">檢舉管理</a></li>
+					
 				</ul>
 			</nav>
 		</div>

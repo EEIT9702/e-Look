@@ -40,13 +40,9 @@ public class Upload extends HttpServlet {
 		//取得MineType
 		String fileName = part.getSubmittedFileName();
 		System.out.println(fileName);
-		
-		
 		//取得副檔名".jpg"
 		String subFileName=fileName.substring(fileName.lastIndexOf("."));
 		System.out.println(subFileName);
-		
-		
 		//以下參考基礎JAVA IO
 		InputStream is = part.getInputStream();
 		
