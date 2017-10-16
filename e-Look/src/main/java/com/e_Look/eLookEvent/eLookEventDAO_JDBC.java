@@ -15,8 +15,6 @@ import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.e_Look.buyCourse.model.BuyCourseVO;
-
 public class eLookEventDAO_JDBC implements eLookEvent_interface {
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=elook";

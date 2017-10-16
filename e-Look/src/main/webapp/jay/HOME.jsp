@@ -134,7 +134,7 @@ h5 {
 </style>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<jsp:include page="/login.jsp"></jsp:include>
 </head>
 
 <body id="body">
