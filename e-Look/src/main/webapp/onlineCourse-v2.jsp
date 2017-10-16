@@ -55,7 +55,7 @@
 /* 影片區塊 */
 video {
 	width: 100%;
-	/* 	height: 83%; */
+	height: 69%; 
 	padding-left: -15px;
 	padding-right: -15px;
 }
@@ -78,8 +78,9 @@ video {
 }
 
 #videoArea>div>div>ul {
+	width: 100%;
 	color: white;
-	height: 83%;
+	height: 80%;
 	overflow-y: scroll;
 	margin: 0;
 	padding: 0;
@@ -99,7 +100,7 @@ video::-webkit-media-controls-panel {
 
 #videoDivListStyle {
 	border: 1px solid gray;
-	height: 84%;
+	height: 69%;
 	padding-left: -15px;
 	padding-right: -15px;
 	background-color: rgba(0%, 10%, 20%, 0.3);;
@@ -211,8 +212,7 @@ video::-webkit-media-controls-panel {
 					<h1 align="center" style="color: white">videoname</h1>
 					<div class="col-md-12">
 						<div class="col-md-8 col-xs-12">
-							<video controls
-								poster="<%=request.getContextPath()%>/_Lyy/poster.png">
+							<video controls	poster="<%=request.getContextPath()%>/_Lyy/poster.png">
 								<source src="<%=request.getContextPath()%>/_Lyy/tri.mp4"
 									type="video/mp4">
 							</video>
