@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<jsp:useBean id="SYSTEM" class="init.GlobalService" scope="application"/>
+<jsp:useBean id="SYSTEM" class="init.GlobalService" scope="application" />
 <title>開課流程</title>
 <link href="<%=request.getContextPath()%>/css/bootstrap.css"
 	rel="stylesheet">
@@ -96,8 +96,9 @@
 						</ul>
 					</div>
 
-					<form action="Upload" method="POST" name="formData" enctype="multipart/form-data" role="form" id="TotalContent">
-					
+					<form action="Upload" method="POST" name="formData"
+						enctype="multipart/form-data" role="form" id="TotalContent">
+
 						<div class="tab-content">
 							<!-- 整個step1頁面 -->
 							<div class="tab-pane active" role="tabpanel" id="step1">
@@ -111,8 +112,6 @@
 												</div>
 												<div class="update-text">
 													<strong>步驟一、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
-
-
 												</div>
 											</div>
 										</div>
@@ -146,6 +145,7 @@
 												</div>
 												<div class="update-text">
 													<strong>步驟四、</strong> 設定課程銷售方式
+
 												</div>
 											</div>
 										</div>
@@ -208,27 +208,26 @@
 										<div class="row" style="margin-bottom: 40px">
 											<label for="exampleInputEmail1" style="font-size: 20pt">上傳課程封面</label>
 											<input type="file" id="wizard-picture"
-												style="font-size: 18px">
+												style="font-size: 18px" name="picture">
 										</div>
 										<div class="row" style="margin-bottom: 25px">
 											<label for="exampleInputEmail1" style="font-size: 20pt">選擇課程類別(最多三項)</label>
 											<div>
 												<div style="font-size: 15pt">
-													<FORM method="post" action="">
-														<INPUT TYPE="checkbox" NAME="checkbox1" onClick="choose()">烹飪
-														<INPUT TYPE="checkbox" NAME="checkbox2" onClick="choose()">商業
-														<INPUT TYPE="checkbox" NAME="checkbox3" onClick="choose()">程式
-														<INPUT TYPE="checkbox" NAME="checkbox4" onClick="choose()">音樂<br>
-														<INPUT TYPE="checkbox" NAME="checkbox5" onClick="choose()">手作
-														<INPUT TYPE="checkbox" NAME="checkbox6" onClick="choose()">設計
-														<INPUT TYPE="checkbox" NAME="checkbox7" onClick="choose()">語言
-														<INPUT TYPE="checkbox" NAME="checkbox8" onClick="choose()">運動<br>
-														<INPUT TYPE="checkbox" NAME="checkbox9" onClick="choose()">生活
-														<INPUT TYPE="checkbox" NAME="checkbox10"
-															onClick="choose()">影音 <INPUT TYPE="checkbox"
-															NAME="checkbox11" onClick="choose()">科技 <INPUT
-															TYPE="checkbox" NAME="checkbox12" onClick="choose()">其他
-													</FORM>
+
+													<INPUT TYPE="checkbox" NAME="checkbox1" onClick="choose()">烹飪
+													<INPUT TYPE="checkbox" NAME="checkbox2" onClick="choose()">商業
+													<INPUT TYPE="checkbox" NAME="checkbox3" onClick="choose()">程式
+													<INPUT TYPE="checkbox" NAME="checkbox4" onClick="choose()">音樂<br>
+													<INPUT TYPE="checkbox" NAME="checkbox5" onClick="choose()">手作
+													<INPUT TYPE="checkbox" NAME="checkbox6" onClick="choose()">設計
+													<INPUT TYPE="checkbox" NAME="checkbox7" onClick="choose()">語言
+													<INPUT TYPE="checkbox" NAME="checkbox8" onClick="choose()">運動<br>
+													<INPUT TYPE="checkbox" NAME="checkbox9" onClick="choose()">生活
+													<INPUT TYPE="checkbox" NAME="checkbox10" onClick="choose()">影音
+													<INPUT TYPE="checkbox" NAME="checkbox11" onClick="choose()">科技
+													<INPUT TYPE="checkbox" NAME="checkbox12" onClick="choose()">其他
+
 												</div>
 											</div>
 										</div>
@@ -499,29 +498,22 @@
 												</div>
 												<div class="panel-body">
 													<div class="input-group image-preview">
-<!-- 														<input placeholder="" type="text" -->
-<!-- 															class="form-control image-preview-filename" -->
-<!-- 															disabled="disabled"> -->
-														<!-- don't give a name === doesn't send on POST/GET -->
-														<span> <!-- image-preview-clear button -->
-<!-- 															<button type="button" -->
-<!-- 																class="btn btn-default image-preview-clear" -->
-<!-- 																style="display: none;"> -->
-<!-- 																<span class="glyphicon glyphicon-remove"></span> Clear -->
-<!-- 															</button> image-preview-input -->
-															
-<!-- 															<div class="btn btn-default image-preview-input"> -->
-																<span class="glyphicon glyphicon-folder-open"></span>
-<!-- 																<span class="image-preview-input-title">選擇檔案</span> -->
 
-																<input type="file" name="input-file-preview"/>
-																<!-- 																accept="image/png, image/jpeg, image/gif" -->
+														<!-- don't give a name === doesn't send on POST/GET -->
+														<span> <!-- image-preview-clear button --> <span
+															id="filename"></span>
+															<div class="btn btn-default image-preview-input">
+																<span class="glyphicon glyphicon-folder-open"></span> <span
+																	class="image-preview-input-title">選擇檔案</span> <input
+																	type="file" name="input-file-preview"
+																	id="inputfilename" />
 																<!-- rename it -->
-<!-- 															</div> -->
+															</div>
 															<button type="submit" class="btn btn-labeled btn-primary">
-																<span class="btn-label"><i class="glyphicon glyphicon-upload"></i></span>上傳
+																<span class="btn-label"><i
+																	class="glyphicon glyphicon-upload"></i></span>上傳
 															</button>
-															
+
 														</span>
 													</div>
 													<!-- /input-group image-preview [TO HERE]-->
@@ -529,7 +521,7 @@
 													<br />
 
 													<!-- Drop Zone -->
-													
+
 													<!-- Progress Bar -->
 													<div class="progress">
 														<div id="progressBar" class="progress-bar"
@@ -538,6 +530,14 @@
 															60% <span class="sr-only">60% Complete</span>
 														</div>
 													</div>
+													
+													
+													
+
+													
+
+
+
 													<br />
 
 												</div>
@@ -679,7 +679,7 @@
 			var n = 12; //checkbox的數量
 			var limit = 3; //限制勾選的數量
 			var j = 0; //已勾選的數量
-			var f = document.forms[0];
+			var f = document.forms[3];
 			limit--;
 			for (i = 1; i <= n; i++) {
 				eval("t1 = f.checkbox" + i + ".checked");
@@ -803,9 +803,15 @@
 						})
 			}
 		};
-		
-		
 
+		$('#inputfilename').change(
+				function() {
+					$('#filename').attr("class",
+							"btn btn-default image-preview-input");
+					var value = $('#inputfilename').val();
+					console.log(value);
+					$('#filename').text(value);
+				})
 	</script>
 
 
