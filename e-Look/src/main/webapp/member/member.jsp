@@ -133,7 +133,27 @@ line-height: 30px;
 height: 60px;
 font-size:30px;
 }
-
+p{
+font-size:20px
+}
+span.round-tab {
+  width: 40px;
+    height: 40px;
+    line-height: 40px;
+    display: block;
+    border-radius: 100px;
+    background: #fff;
+    border: 2px solid #e0e0e0;
+    z-index: 2;
+    position: absolute;
+    text-align: center;
+    font-size: 20px;
+  left: 46%; 
+    top: 16.5%; 
+    bottom: 46%; 
+    right: 16.5%; 
+    
+}
 </style>
 </head>
 <%-- <link href="<%=request.getContextPath()%>/member/css/bootstrap.css" --%>
@@ -144,48 +164,45 @@ font-size:30px;
 <!-- 	type="text/javascript"></script> -->
 <body>
 <jsp:include page="/login.jsp" />
-    <div style="margin-top: 20px" class="container">
-        <h2 class="text-center">會員中心</h2>
+    <div  style="margin-top: 10px" class="container">
+        <h2 class="text-center" style=" margin-bottom: 30px;background-color: #929fba; color: white">會員中心</h2>
         <div class="row">
             <div class="col-md-4 text-center" >
-                <div style="box-shadow: 6px 8px 6px 0 #c4bebe;" class="thumbnail"> 
+                <div style="box-shadow: 6px 8px 6px 0 #c4bebe; background-color:#dff0d8;border: 2px solid #e0e0e0; border-radius: 25px;" class="thumbnail"> 
                     <img src="<%=request.getContextPath()%>/Image?MemberID=${LoginOK.memberID}" alt="" width="25%" class="img-circle" style="margin-top: 50px;">
-                    <figure>
-                        <a href="#"> 
-                            <img src="<%=request.getContextPath()%>/member/image/edit.png" width="30"> 
-                        </a>
-                    </figure>
-                    <div class="page-header">
+                 
+                    <span class="round-tab"> <i class="glyphicon glyphicon-pencil"></i>
+					</span><div class="page-header">
                         <h3 >${LoginOK.mName}</h3> 
                     </div>
                 </div>
-                <div class="thumbnail col-md-6" style="box-shadow: 5px 5px #b7b6b6;">
+                <div class="thumbnail col-md-6 " style="box-shadow: 5px 5px #b7b6b6; background-color:#fcf8e3;">
                     <h3>已參加</h3> 
                     <p>3堂課</p> 
                 </div>
-                <div class="thumbnail col-md-6" style="box-shadow: 5px 5px #b7b6b6;">
+                <div class="thumbnail col-md-6 " style="box-shadow: 5px 5px #b7b6b6; background-color:#fcf8e3; ">
                     <h3>已開設</h3> 
                     <p>3堂課</p> 
                 </div>
-                <div class="col-md-12" style="border: 1px solid #c1bebe;box-shadow: 2px 2px #c7c4c4;">
+                <div class="col-md-12 bg-info" style="border: 1px solid #c1bebe;box-shadow: 2px 2px #c7c4c4; ">
                     <h3>關於我</h3> 
-                    <hr />
+                    <hr style="border:solid 0.6px #BEBEBE;"/>
                     <p style="word-break:break-all; word-wrap:break-word">${LoginOK.aboutme}</p> 
                 </div>
-                <div style="border: 1px solid #c1bebe;box-shadow: 2px 2px #c7c4c4;" class="col-md-12">
+                <div style="border: 1px solid #c1bebe;box-shadow: 2px 2px #c7c4c4;" class="col-md-12 bg-info">
                     <h3>專長</h3> 
-                    <hr />
+                    <hr style="border:solid 0.6px #BEBEBE;"/>
                     <p style="word-break:break-all; word-wrap:break-word">${LoginOK.skill}</p> 
                 </div>
-                <div style="border: 1px solid #c1bebe;box-shadow: 2px 2px #c7c4c4;" class="col-md-12">
+                <div style="border: 1px solid #c1bebe;box-shadow: 2px 2px #c7c4c4;" class="col-md-12 bg-info">
                     <h3>興趣</h3> 
-                    <hr />
+                    <hr style="border:solid 0.6px #BEBEBE;"/>
                     <p style="word-break:break-all; word-wrap:break-word" >${LoginOK.hobby}</p> 
                 </div>                 
             </div>
-            <div class="col-md-8 breadcrumb" data-pg-collapsed>
+            <div class="col-md-8 breadcrumb " style="background-color: rgba(0, 150, 136, 0.1); padding-top: 40px;border: 2px solid #e0e0e0; border-radius: 25px;"">
                 <div class="col-md-12"> 
-                    <img src="<%=request.getContextPath()%>/member/image/learnMode.jpg"width="100%" height="270"> 
+                    <img  src="<%=request.getContextPath()%>/member/image/learnMode2.jpg"width="100%" > 
                 </div>
                 <div class="col-md-12">
               <h4> <a data-toggle="collapse" data-parent="#accordion" 
@@ -307,6 +324,7 @@ font-size:30px;
             </div>
         </div>
     </div>
+    <jsp:include page="/footer.jsp" />
 </body>
 <script type="text/javascript">
 

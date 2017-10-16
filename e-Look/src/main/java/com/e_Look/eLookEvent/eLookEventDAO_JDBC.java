@@ -4,12 +4,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,6 +17,7 @@ public class eLookEventDAO_JDBC implements eLookEvent_interface {
 	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=elook";
 	String userid = "sa";
 	// 第一組密碼
+	
 	String passwd = "P@ssw0rd";
 	// 第二組密碼
 	// String passwd = "123456";
@@ -234,26 +234,68 @@ public class eLookEventDAO_JDBC implements eLookEvent_interface {
 
 	public static void main(String[] args) {
 		//insert一筆資料
-//		eLookEventDAO_JDBC daoJDBC=new eLookEventDAO_JDBC();
-//		
-//		eLookEventVO dao = new eLookEventVO();
+
+		eLookEventDAO_JDBC daoJDBC=new eLookEventDAO_JDBC();
+		
+		eLookEventVO dao = new eLookEventVO();
+
 //		dao.setEventName("萬聖節派對");
-		
-		
-//		String datefirst="2017/10/20";
-//		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-//				sdf.parse(datefirst);
-				
-//		Date date=java.sql.Date.valueOf(startDate);
-	
-//		System.out.println(date);
-	
-		
+//		
+//			String dateFirst="2017/10/25";//日期輸入位置
+//			String dateSecond="2017/12/25";//日期輸入位置
+//			String eStartDate=null;
+//			String eEndDate=null;
+//			
+//			if(dateFirst.indexOf("/")!=-1){
+//				eStartDate=dateFirst.replace('/', '-');
+//			}
+//			if(dateSecond.indexOf("/")!=-1){
+//				
+//				eEndDate=dateSecond.replace('/', '-');
+//			}
+//			dao.seteStartDate(java.sql.Date.valueOf(eStartDate));
+//			dao.seteEndDate(java.sql.Date.valueOf(eEndDate));
+//	
+//			try {
+//				dao.setePhoto(new FileInputStream(new File("D:/1.png")));
+//			} catch (FileNotFoundException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 //		dao.setDiscount(0.8);
 //		daoJDBC.insert(dao);
 		
+		//刪除單筆
+//		eLookEventVO list1 = daoJDBC.findByPrimaryKey(1001);
+//		daoJDBC.delete(1001);		
 		
-		//查單筆
+		//更新資料
+//		dao.setEventID(1001);;
+//		dao.setEventName("生日派對");
+//		String dateFirst="2017/02/25";//日期輸入位置
+//		String dateSecond="2017/03/25";//日期輸入位置
+//		String eStartDate=null;
+//		String eEndDate=null;
+//		
+//		if(dateFirst.indexOf("/")!=-1){
+//			eStartDate=dateFirst.replace('/', '-');
+//		}
+//		if(dateSecond.indexOf("/")!=-1){
+//			
+//			eEndDate=dateSecond.replace('/', '-');
+//		}
+//		dao.seteStartDate(java.sql.Date.valueOf(eStartDate));
+//		dao.seteEndDate(java.sql.Date.valueOf(eEndDate));
+//
+//		try {
+//			dao.setePhoto(new FileInputStream(new File("D:/1.png")));
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		dao.setDiscount(0.5);
+//		daoJDBC.update(dao);
+
 //		eLookEventVO list1 = daoJDBC.findByPrimaryKey(1003);
 //	
 //			System.out.print(list1.getEventName()+",");
@@ -262,15 +304,18 @@ public class eLookEventDAO_JDBC implements eLookEvent_interface {
 //			System.out.print(list1.geteEndDate()+",");
 //			System.out.print(list1.getDiscount()+",");
 //			
+
 		//查全部
-//		List<eLookEventVO> list2 = daoJDBC.getAll();
-//		for(eLookEventVO eLookEventVO:list2){
-//			System.out.print(eLookEventVO.getEventName()+",");
-//			System.out.print(eLookEventVO.getePhoto()+",");
-//			System.out.print(eLookEventVO.geteStartDate()+",");
-//			System.out.print(eLookEventVO.geteEndDate()+",");
-//			System.out.print(eLookEventVO.getDiscount()+",");
-//		}
+
+		List<eLookEventVO> list2 = daoJDBC.getAll();
+		for(eLookEventVO eLookEventVO:list2){
+			System.out.print(eLookEventVO.getEventName()+",");
+			System.out.print(eLookEventVO.geteStartDate()+",");
+			System.out.print(eLookEventVO.getePhoto()+",");
+			System.out.print(eLookEventVO.geteEndDate()+",");
+			System.out.print(eLookEventVO.getDiscount()+",");
+		}
+
 	}
 
 }

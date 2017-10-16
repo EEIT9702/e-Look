@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html ">
+<!DOCTYPE html>
 <html>
 <head>
 <jsp:useBean id="SYSTEM" class="init.GlobalService" scope="application"/>
@@ -160,8 +160,8 @@ margin:2px auto;
 			<div class="row ">
 				<form class="form-signin mg-btm modal-content" name="loginfrom" method="post" action="<%=request.getContextPath()%>/login.login">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">&times;</button>
+						<button type="button" class="close pull-right" data-dismiss="modal"
+							aria-hidden="true" style="font-size: 35px;">&times;</button>
 						<h3 class="heading-desc">
 							<img style="margin: auto;"
 								src="<%=request.getContextPath()%>/login/image/eLook_LOGO.png"
@@ -174,7 +174,7 @@ margin:2px auto;
 								<button type="button" class="btn btn-primary btn-block"
 									onclick="myFacebookLogin()">
 									<img src="<%=request.getContextPath()%>/login/image/fbicon.png"
-										class="img-rounded"><span> Facebook 登入</span>
+										class="img-rounded"><span> Facebook 登入 / 註冊</span>
 								</button>
 							</div>
 						</div>
@@ -183,7 +183,7 @@ margin:2px auto;
 								<button id="google" type="button" onclick="myGoogleLogin()"
 									class="btn btn-danger btn-block">
 									<img src="<%=request.getContextPath()%>/login/image/sgicon.png"
-										class="img-rounded"><span> GOOGLE 登入</span> 
+										class="img-rounded"><span> GOOGLE 登入 / 註冊</span> 
 								</button>
 							</div>
 						</div>
@@ -223,8 +223,8 @@ margin:2px auto;
 				<form id="register-form" role="form" autocomplete="off" class="form"
 					method="post" action="<%=request.getContextPath()%>/login.html">
 					<div class="modal-header text-center">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">&times;</button>
+						<button type="button" class="close pull-right" data-dismiss="modal"
+							aria-hidden="true" style="font-size: 35px;">&times;</button>
 						<h2 class="text-center">忘記密碼</h2>
 						<p>系統會寄送一組新密碼</p>
 					</div>
@@ -266,8 +266,8 @@ margin:2px auto;
 	<div class="panel-body modal-content" >
 					<form method="POST" action="<%=request.getContextPath()%>/login.html" role="form">
 						<div class="modal-header text-center">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">&times;</button>
+						<button type="button" class="close pull-right" data-dismiss="modal"
+							aria-hidden="true" style="font-size: 35px;">&times;</button>
 							<h2>Create account</h2>
 					</div>
 						<div class="form-group">
@@ -313,8 +313,8 @@ margin:2px auto;
 			<div class="modal-content" >
 <!-- 			右上角X -->
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
+					<button type="button" class="close pull-right" data-dismiss="modal"
+						aria-hidden="true" style="font-size: 35px;">&times;</button>
 				</div>
 <!-- 				內容開始 -->
 					<div id="regulation">
@@ -364,8 +364,8 @@ margin:2px auto;
 			<div class="modal-content text-center" >
 <!-- 			右上角X -->
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
+					<button type="button" class="close pull-right" data-dismiss="modal"
+						aria-hidden="true" style="font-size: 35px;">&times;</button>
 				</div>
 					<h3>${registerOK}</h3>
 				<div  id="butfooter">

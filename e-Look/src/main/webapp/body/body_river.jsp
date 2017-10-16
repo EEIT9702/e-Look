@@ -194,8 +194,10 @@ h5 {
 	color: #9F35FF;
 }
 #li_searchArea{
-  	margin-left:13%;
+  	margin-left:4%;
   	margin-top:1.3%;
+  	width:20%;
+/*  border:2px solid red; */
 }
 .outsideBorder{
 	border:3px solid orange;
@@ -223,10 +225,16 @@ h5 {
   	width: 80%;
   	margin:0 auto;
 }
+.hotkeyword{
+ 	padding-left:10%;
+	padding-top:2%;"
+/* 	text-align:center; */
+/* 	color:blue; */
+}
 
 .keyword{
-clear:both;
-color:red;
+ 	clear:both;
+	color:blue;
 
 }
 </style>
@@ -279,8 +287,8 @@ color:red;
 		var	wh = $(window).height();
 		//整份文件
 		var	dh =$(document).height();
-		$('a[href="#menu1"]').text(wst+"---"+dh+"---"+wh)
-		console.log(wst+"---"+dh+"---"+wh);
+		//$('a[href="#menu1"]').text(wst+"---"+dh+"---"+wh)
+		//console.log(wst+"---"+dh+"---"+wh);
 		//判斷卷軸是否到底部
 		if(wst==(dh-wh) ){
 			rowValueX++;
@@ -333,6 +341,7 @@ color:red;
 <body>
 <%-- 	<jsp:include page="${contextPath}/header.jsp" /> --%>
 	<jsp:include page="${contextPath}/login.jsp" />
+	
 
 	<!-- 分類按鈕和搜索star -->
 	<div class="ndiv">
@@ -352,37 +361,41 @@ color:red;
 			<li><a href="?courseClassID=4"><img
 					style="<c:choose><c:when test='${param.courseClassID == 4 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
 					class="svgIcon"
-					src="<%=request.getContextPath() %>/alan/img/hand-made.svg"><br>手作</a></li>
+					src="<%=request.getContextPath() %>/alan/img/video.svg"><br>影音</a></li>
 			<li><a href="?courseClassID=5"><img
 					style="<c:choose><c:when test='${param.courseClassID == 5 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
 					class="svgIcon"
-					src="<%=request.getContextPath() %>/alan/img/other.svg"><br>其他</a></li>
+					src="<%=request.getContextPath() %>/alan/img/hand-made.svg"><br>手作</a></li>
 			<li><a href="?courseClassID=6"><img
 					style="<c:choose><c:when test='${param.courseClassID == 6 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
 					class="svgIcon"
-					src="<%=request.getContextPath() %>/alan/img/design.svg"><br>設計</a></li>
+					src="<%=request.getContextPath() %>/alan/img/other.svg"><br>其他</a></li>
 			<li><a href="?courseClassID=7"><img
 					style="<c:choose><c:when test='${param.courseClassID == 7 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
 					class="svgIcon"
-					src="<%=request.getContextPath() %>/alan/img/science.svg"><br>科技</a></li>
+					src="<%=request.getContextPath() %>/alan/img/design.svg"><br>設計</a></li>
 			<li><a href="?courseClassID=8"><img
 					style="<c:choose><c:when test='${param.courseClassID == 8 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
 					class="svgIcon"
-					src="<%=request.getContextPath() %>/alan/img/business.svg"><br>商業</a></li>
+					src="<%=request.getContextPath() %>/alan/img/science.svg"><br>科技</a></li>
 			<li><a href="?courseClassID=9"><img
 					style="<c:choose><c:when test='${param.courseClassID == 9 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
 					class="svgIcon"
-					src="<%=request.getContextPath() %>/alan/img/language.svg"><br>語言</a></li>
+					src="<%=request.getContextPath() %>/alan/img/business.svg"><br>商業</a></li>
 			<li><a href="?courseClassID=10"><img
 					style="<c:choose><c:when test='${param.courseClassID == 10 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
 					class="svgIcon"
-					src="<%=request.getContextPath() %>/alan/img/cooking.svg"><br>烹飪</a></li>
+					src="<%=request.getContextPath() %>/alan/img/language.svg"><br>語言</a></li>
 			<li><a href="?courseClassID=11"><img
 					style="<c:choose><c:when test='${param.courseClassID == 11 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
 					class="svgIcon"
+					src="<%=request.getContextPath() %>/alan/img/cooking.svg"><br>烹飪</a></li>
+			<li><a href="?courseClassID=12"><img
+					style="<c:choose><c:when test='${param.courseClassID == 12 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
+					class="svgIcon"
 					src="<%=request.getContextPath() %>/alan/img/program.svg"><br>程式</a></li>
 			<li id="li_searchArea">
-				<form class="navbar-form navbar-left" id="searchKey" method="get"
+				<form class="navbar-form navbar-left" id="searchKey" method="POST"
 					action="<%=request.getContextPath() %>/SearchController">
 					<div class="input-group">
 						<div class="outsideBorder">
@@ -397,14 +410,20 @@ color:red;
 										onclick="document.Search.submit()"
 										class="searchSubmitIcon"/>
 								</div>
-								
-								<div class="keyword text-left">熱門關鍵字：
-								<c:forEach var="searchVO" items="<%= new SearchDAO().getKeywordRank(3) %>" >
-								${searchVO.keyWord }
-								</c:forEach>
-								</div>
 							</div>
 						</div>
+						<p class="hotkeyword text-left">熱門：
+						<span class="keyword">
+							<c:forEach var="searchVO" items="<%= new SearchDAO().getKeywordRank(3) %>" >
+							<%-- <a href="<%= request.getRequestURI() + request.getQueryString() %>keyWord=">${searchVO.keyWord }</a> --%>
+									${searchVO.keyWord}
+
+							</c:forEach>
+						</span>
+<!-- 						<span class="keyword" id="keyword1">學英文</span>&nbsp; -->
+<!-- 						<span class="keyword" id="keyword2">簡單料理</span>&nbsp; -->
+<!-- 						<span class="keyword" id="keyword3">健身</span>&nbsp; -->
+						</p>
 					</div>
 				</form>
 			</li>
@@ -426,6 +445,6 @@ color:red;
 		</div>
 	</div>
 
-
+<jsp:include page="${contextPath}/footer.jsp" />
 </body>
 </html>

@@ -32,12 +32,13 @@ public class SearchController extends HttpServlet {
 		}
 //		response.sendRedirect(getServletContext().getContextPath()+"/body/body_river.jsp");
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/body/body_river.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/body/body_river2.jsp");
 		rd.forward(request, response);
 		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
 	}
 
 }

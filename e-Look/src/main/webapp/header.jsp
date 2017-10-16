@@ -39,12 +39,16 @@
 	padding-right: 10px;
 }
 #nopadding img {
+
 	margin-bottom: 5px;
+
 
 
 }
 body{
+
 	padding-top:100px;
+
 
 
 }
