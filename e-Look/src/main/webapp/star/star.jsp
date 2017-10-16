@@ -47,8 +47,7 @@
 		             var out = this.id.substr(6);
 		              for (u = 1; u <= out; u++) {
 		          document.getElementById("idstar" + u).className = "s";
-		               
-		               
+		      
 			//	$('div img:nth-child(u)').switchClass('n','s',1000);
 			}
 			}
