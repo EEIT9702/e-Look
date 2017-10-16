@@ -267,31 +267,31 @@ public class eLookEventDAO_JDBC implements eLookEvent_interface {
 //		daoJDBC.delete(1001);		
 		
 		//更新資料
-		dao.setEventName("萬聖節派對");
-		
-		String dateFirst="2017/10/25";//日期輸入位置
-		String dateSecond="2017/12/25";//日期輸入位置
-		String eStartDate=null;
-		String eEndDate=null;
-		
-		if(dateFirst.indexOf("/")!=-1){
-			eStartDate=dateFirst.replace('/', '-');
-		}
-		if(dateSecond.indexOf("/")!=-1){
-			
-			eEndDate=dateSecond.replace('/', '-');
-		}
-		dao.seteStartDate(java.sql.Date.valueOf(eStartDate));
-		dao.seteEndDate(java.sql.Date.valueOf(eEndDate));
-
-		try {
-			dao.setePhoto(new FileInputStream(new File("D:/1.png")));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	dao.setDiscount(0.8);
-		
+//		dao.setEventID(1001);;
+//		dao.setEventName("生日派對");
+//		String dateFirst="2017/02/25";//日期輸入位置
+//		String dateSecond="2017/03/25";//日期輸入位置
+//		String eStartDate=null;
+//		String eEndDate=null;
+//		
+//		if(dateFirst.indexOf("/")!=-1){
+//			eStartDate=dateFirst.replace('/', '-');
+//		}
+//		if(dateSecond.indexOf("/")!=-1){
+//			
+//			eEndDate=dateSecond.replace('/', '-');
+//		}
+//		dao.seteStartDate(java.sql.Date.valueOf(eStartDate));
+//		dao.seteEndDate(java.sql.Date.valueOf(eEndDate));
+//
+//		try {
+//			dao.setePhoto(new FileInputStream(new File("D:/1.png")));
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		dao.setDiscount(0.5);
+//		daoJDBC.update(dao);
 		
 		//查單筆
 //		eLookEventVO list1 = daoJDBC.findByPrimaryKey(1001);

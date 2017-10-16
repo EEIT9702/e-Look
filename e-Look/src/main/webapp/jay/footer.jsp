@@ -92,22 +92,22 @@ footer ul li a:hover{
         
         <div class="footer-top2"> 
            <div class="container">
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 text-center">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6 text-center">
                    <a href="#"><i class="fa fa-home fa-2x"></i>home</a>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 text-center">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6 text-center">
                    <a href="#"><i class="fa fa-graduation-cap fa-2x"></i>我要開課</a>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 text-center">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6 text-center">
                    <a href="#"><i class="fa fa-facebook fa-2x"></i>粉絲專頁</a>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 text-center">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6 text-center">
                     <a href="#"><i class="fa fa-envelope-o fa-2x"></i>聯絡我們</a>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 text-center">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6 text-center">
                     <a href="#"><i class="fa fa-users fa-2x"></i>關於我們</a>
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 text-center">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6 text-center">
                     <a href="#"><i class="fa fa-child fa-2x"></i>會員中心</a>
                 </div>
            </div> 
