@@ -165,7 +165,7 @@ video::-webkit-media-controls-panel {
 		<div class="container" style="background-color: gray">
 			<div class="row">
 
-				<div class="col-md-12 " id="vidoeArea">
+				<div class="col-md-12 " style="background-image: url('videobackground.jpg') ;background-size: cover;" id="vidoeArea">
 					<h1 align="center" style="color: white">videoname</h1>
 					<div class="col-md-12">
 						<div class="col-md-8 col-xs-12">

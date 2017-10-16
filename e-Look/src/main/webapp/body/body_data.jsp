@@ -7,10 +7,10 @@
 			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
-						src="img/001.jpg" alt="course" id="wizardPicturePreview" title="">
+						src="<%= request.getContextPath() %>/body/img/001.jpg" alt="course" id="wizardPicturePreview" title="">
 					<div class="card-block">
 						<figure class="profile"> <img
-							src="../Class Steps/imgs/eLook_LOGO1.png" class="profile-avatar"
+							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png" class="profile-avatar"
 							alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">${param.rowValueY}</p>
@@ -29,10 +29,10 @@
 			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
-						src="img/002.jpg" alt="course" id="wizardPicturePreview" title="">
+						src="<%= request.getContextPath() %>/body/img/002.jpg" alt="course" id="wizardPicturePreview" title="">
 					<div class="card-block">
 						<figure class="profile"> <img
-							src="../Class Steps/imgs/eLook_LOGO1.png" class="profile-avatar"
+							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png" class="profile-avatar"
 							alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題2</p>
@@ -51,10 +51,10 @@
 			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
-						src="img/003.jpg" alt="course" id="wizardPicturePreview" title="">
+						src="<%= request.getContextPath() %>/body/img/003.jpg" alt="course" id="wizardPicturePreview" title="">
 					<div class="card-block">
 						<figure class="profile"> <img
-							src="../Class Steps/imgs/eLook_LOGO1.png" class="profile-avatar"
+							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png" class="profile-avatar"
 							alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題3</p>
@@ -73,10 +73,10 @@
 			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
-						src="img/004.jpg" alt="course" id="wizardPicturePreview" title="">
+						src="<%= request.getContextPath() %>/body/img/004.jpg" alt="course" id="wizardPicturePreview" title="">
 					<div class="card-block">
 						<figure class="profile"> <img
-							src="../Class Steps/imgs/eLook_LOGO1.png" class="profile-avatar"
+							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png" class="profile-avatar"
 							alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題4</p>
@@ -98,11 +98,11 @@
 			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
-						src="img/005.jpg" alt="course" id="wizardPicturePreview"
+						src="<%= request.getContextPath() %>/body/img/005.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
 						<figure class="profile"> <img 
-							src="../Class Steps/imgs/eLook_LOGO1.png"
+							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題5</p>
@@ -121,11 +121,11 @@
 			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
-						src="img/006.jpg" alt="course" id="wizardPicturePreview"
+						src="<%= request.getContextPath() %>/body/img/006.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
 						<figure class="profile"> <img 
-							src="../Class Steps/imgs/eLook_LOGO1.png"
+							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題6</p>
@@ -144,11 +144,11 @@
 			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
-						src="img/007.jpg" alt="course" id="wizardPicturePreview"
+						src="<%= request.getContextPath() %>/body/img/007.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
 						<figure class="profile"> <img 
-							src="../Class Steps/imgs/eLook_LOGO1.png"
+							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題7</p>
@@ -167,11 +167,11 @@
 			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
-						src="img/008.jpg" alt="course" id="wizardPicturePreview"
+						src="<%= request.getContextPath() %>/body/img/008.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
 						<figure class="profile"> <img 
-							src="../Class Steps/imgs/eLook_LOGO1.png"
+							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題8</p>
@@ -193,11 +193,11 @@
 			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
-						src="img/009.jpg" alt="course" id="wizardPicturePreview"
+						src="<%= request.getContextPath() %>/body/img/009.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
 						<figure class="profile"> <img 
-							src="../Class Steps/imgs/eLook_LOGO1.png"
+							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題9</p>
@@ -216,11 +216,11 @@
 			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
-						src="img/010.jpg" alt="course" id="wizardPicturePreview"
+						src="<%= request.getContextPath() %>/body/img/010.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
 						<figure class="profile"> <img 
-							src="../Class Steps/imgs/eLook_LOGO1.png"
+							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題10</p>
@@ -239,11 +239,11 @@
 			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
-						src="img/011.jpg" alt="course" id="wizardPicturePreview"
+						src="<%= request.getContextPath() %>/body/img/011.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
 						<figure class="profile"> <img 
-							src="../Class Steps/imgs/eLook_LOGO1.png"
+							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題11</p>
@@ -262,11 +262,11 @@
 			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
-						src="img/012.jpg" alt="course" id="wizardPicturePreview"
+						src="<%= request.getContextPath() %>/body/img/012.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
 						<figure class="profile"> <img 
-							src="../Class Steps/imgs/eLook_LOGO1.png"
+							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題12</p>
@@ -288,11 +288,11 @@
 			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
-						src="img/001.jpg" alt="course" id="wizardPicturePreview"
+						src="<%= request.getContextPath() %>/body/img/001.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
 						<figure class="profile"> <img 
-							src="../Class Steps/imgs/eLook_LOGO1.png"
+							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題13</p>
@@ -311,11 +311,11 @@
 			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
-						src="img/002.jpg" alt="course" id="wizardPicturePreview"
+						src="<%= request.getContextPath() %>/body/img/002.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
 						<figure class="profile"> <img 
-							src="../Class Steps/imgs/eLook_LOGO1.png"
+							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題14</p>
@@ -334,11 +334,11 @@
 			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
-						src="img/003.jpg" alt="course" id="wizardPicturePreview"
+						src="<%= request.getContextPath() %>/body/img/003.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
 						<figure class="profile"> <img 
-							src="../Class Steps/imgs/eLook_LOGO1.png"
+							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題15</p>
@@ -357,11 +357,11 @@
 			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
-						src="img/004.jpg" alt="course" id="wizardPicturePreview"
+						src="<%= request.getContextPath() %>/body/img/004.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
 						<figure class="profile"> <img 
-							src="../Class Steps/imgs/eLook_LOGO1.png"
+							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題16</p>
@@ -383,11 +383,11 @@
 			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
-						src="img/005.jpg" alt="course" id="wizardPicturePreview"
+						src="<%= request.getContextPath() %>/body/img/005.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
 						<figure class="profile"> <img 
-							src="../Class Steps/imgs/eLook_LOGO1.png"
+							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題17</p>
@@ -406,11 +406,11 @@
 			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
-						src="img/006.jpg" alt="course" id="wizardPicturePreview"
+						src="<%= request.getContextPath() %>/body/img/006.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
 						<figure class="profile"> <img 
-							src="../Class Steps/imgs/eLook_LOGO1.png"
+							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題18</p>
@@ -429,11 +429,11 @@
 			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
-						src="img/007.jpg" alt="course" id="wizardPicturePreview"
+						src="<%= request.getContextPath() %>/body/img/007.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
 						<figure class="profile"> <img 
-							src="../Class Steps/imgs/eLook_LOGO1.png"
+							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題19</p>
@@ -452,11 +452,11 @@
 			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
-						src="img/008.jpg" alt="course" id="wizardPicturePreview"
+						src="<%= request.getContextPath() %>/body/img/008.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
 						<figure class="profile"> <img 
-							src="../Class Steps/imgs/eLook_LOGO1.png"
+							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題20</p>
@@ -478,11 +478,11 @@
 			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
-						src="img/009.jpg" alt="course" id="wizardPicturePreview"
+						src="<%= request.getContextPath() %>/body/img/009.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
 						<figure class="profile"> <img 
-							src="../Class Steps/imgs/eLook_LOGO1.png"
+							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題21</p>
@@ -501,11 +501,11 @@
 			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
-						src="img/010.jpg" alt="course" id="wizardPicturePreview"
+						src="<%= request.getContextPath() %>/body/img/010.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
 						<figure class="profile"> <img 
-							src="../Class Steps/imgs/eLook_LOGO1.png"
+							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題22</p>
@@ -524,11 +524,11 @@
 			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
-						src="img/011.jpg" alt="course" id="wizardPicturePreview"
+						src="<%= request.getContextPath() %>/body/img/011.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
 						<figure class="profile"> <img 
-							src="../Class Steps/imgs/eLook_LOGO1.png"
+							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題23</p>
@@ -547,11 +547,11 @@
 			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
-						src="img/012.jpg" alt="course" id="wizardPicturePreview"
+						src="<%= request.getContextPath() %>/body/img/012.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
 						<figure class="profile"> <img 
-							src="../Class Steps/imgs/eLook_LOGO1.png"
+							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題24</p>
@@ -573,11 +573,11 @@
 			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
-						src="img/001.jpg" alt="course" id="wizardPicturePreview"
+						src="<%= request.getContextPath() %>/body/img/001.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
 						<figure class="profile"> <img 
-							src="../Class Steps/imgs/eLook_LOGO1.png"
+							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題25</p>
@@ -596,11 +596,11 @@
 			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
-						src="img/002.jpg" alt="course" id="wizardPicturePreview"
+						src="<%= request.getContextPath() %>/body/img/002.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
 						<figure class="profile"> <img 
-							src="../Class Steps/imgs/eLook_LOGO1.png"
+							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題26</p>
@@ -619,11 +619,11 @@
 			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
-						src="img/003.jpg" alt="course" id="wizardPicturePreview"
+						src="<%= request.getContextPath() %>/body/img/003.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
 						<figure class="profile"> <img 
-							src="../Class Steps/imgs/eLook_LOGO1.png"
+							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題27</p>
@@ -642,11 +642,11 @@
 			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
-						src="img/004.jpg" alt="course" id="wizardPicturePreview"
+						src="<%= request.getContextPath() %>/body/img/004.jpg" alt="course" id="wizardPicturePreview"
 						title="">
 					<div class="card-block">
 						<figure class="profile"> <img 
-							src="../Class Steps/imgs/eLook_LOGO1.png"
+							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png"
 							class="profile-avatar" alt=""> </figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題28</p>

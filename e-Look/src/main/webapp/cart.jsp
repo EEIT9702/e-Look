@@ -144,7 +144,7 @@ float:none;
 				</span>
 				</div>			
 <!-- 				課程2 -->				
-<div class="cartrow" ><div style="text-align: right;"><div style="float: left; width: 80%; text-align: left;" ></div><button class="close" type="button" aria-hidden="true">&times;</button></div><img src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png">
+				<div class="cartrow" ><div style="text-align: right;"><div style="float: left; width: 80%; text-align: left;" ></div><button class="close" type="button" aria-hidden="true">&times;</button></div><img src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png">
 				<span class="courseTitle">Java線上學習2xxxx<br>
 				<span class="courseSubtitle" >科技,語言</span>
 				<span class="courseDelete" ></span><br>
