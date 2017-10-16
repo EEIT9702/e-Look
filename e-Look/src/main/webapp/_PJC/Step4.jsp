@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+<link rel="Short Icon" type="image/x-icon" href="${initParam.icon}" />
+<title>${initParam.systemName}</title>
 	<meta charset="utf-8" />
     <script>
         function test() {

@@ -10,9 +10,9 @@
 <title>${SYSTEM.systemName} </title>
 </head>
 <body>
-<form action="Upload" method="POST" enctype="multipart/form-data" >
+<form action="<%=request.getContextPath() %>/_PJC/Upload" method="POST" enctype="multipart/form-data" >
 <!-- <input type="text" name="testtext" value="fjgifi" > -->
-<input type="file" name="myFile">
+<input type="file" name="input-file-preview">
 <input type="submit">
 </form>
 </body>

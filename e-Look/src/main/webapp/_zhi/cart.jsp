@@ -4,14 +4,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%-- <jsp:useBean id="SYSTEM" class="init.GlobalService" scope="application"/> --%>
-
-<%-- <link rel="Shortcut Icon" type="image/x-icon" href="${SYSTEM.iconUri}" /> --%>
-
-
-<%-- <title>${SYSTEM.systemName} </title> --%>
 <link href="<%=request.getContextPath() %>/HeaderCssJs/bootstrap.css" rel="stylesheet">
-<!-- <link href="HeaderCssJs/bootstrap.min.css" rel="stylesheet"> -->
 <script src="<%=request.getContextPath() %>/HeaderCssJs/jquery.js"></script>
 <script src="<%=request.getContextPath() %>/HeaderCssJs/bootstrap.min.js"></script>
 <style>
