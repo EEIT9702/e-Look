@@ -26,7 +26,8 @@ background: url(../img/star.jpg) no-repeat;
 
 
 </style>
-<title>${SYSTEM.systemName}</title>
+<link rel="Short Icon" type="image/x-icon" href="${initParam.icon}" />
+<title>${initParam.systemName}</title>
 <script>
 
 $(document).ready(function(){    

@@ -15,4 +15,12 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <context-param>
+ 	 <param-name>systemName</param-name>
+ 	 <param-value>e-Look線上學習網</param-value>
+  </context-param>
+  <context-param>
+ 	 <param-name>icon</param-name>
+ 	 <param-value>/e-Look/img/eLook.icon</param-value>
+  </context-param>
 </web-app>
