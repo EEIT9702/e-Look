@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<jsp:useBean id="SYSTEM" class="init.GlobalService" scope="application"/>
 <title>開課流程</title>
 <link href="<%=request.getContextPath()%>/css/bootstrap.css"
 	rel="stylesheet">
@@ -15,6 +16,9 @@
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/_PJC/css/step4.css"
 	rel="stylesheet">
+<link href="<%=request.getContextPath()%>/_PJC/css/step6.css"
+	rel="stylesheet">
+
 <link
 	href="<%=request.getContextPath()%>/css/bootstrap-datetimepicker.css"
 	rel="stylesheet">
@@ -28,12 +32,10 @@
 	src="<%=request.getContextPath()%>/_PJC/js/bootstrap-datetimepicker.js"></script>
 <script
 	src="<%=request.getContextPath()%>/_PJC/js/bootstrap-datetimepicker.zh-TW.js"></script>
-<script
-	src="<%=request.getContextPath()%>/_PJC/tinymce/tinymce.min.js"></script>
-<script
-	src="<%=request.getContextPath()%>/_PJC/tinymce/init-tinymce.js"></script>
-<script
-	src="<%=request.getContextPath()%>/_PJC/js/getdata.js"></script>
+<script src="<%=request.getContextPath()%>/_PJC/tinymce/tinymce.min.js"></script>
+<script src="<%=request.getContextPath()%>/_PJC/tinymce/init-tinymce.js"></script>
+<script src="<%=request.getContextPath()%>/_PJC/js/getdata.js"></script>
+<script src="<%=request.getContextPath()%>/_PJC/js/upload.js"></script>
 
 </head>
 
@@ -94,7 +96,8 @@
 						</ul>
 					</div>
 
-					<form role="form" id="TotalContent">
+					<form action="Upload" method="POST" name="formData" enctype="multipart/form-data" role="form" id="TotalContent">
+					
 						<div class="tab-content">
 							<!-- 整個step1頁面 -->
 							<div class="tab-pane active" role="tabpanel" id="step1">
@@ -464,10 +467,11 @@
 											<div
 												style="font-size: 20px; font-weight: bold; background-color: #BBFFEE">
 												課程內容說明</div>
-												<div>趕緊來為你精心設計的課程做個介紹吧!請務必在文案中加上開課緣由、自我介紹、課程單元說明、教學方式、課程難易度、相關作品圖片、作品集網站…等資料，越詳細的內容將會提升學生對課程的信任感；而善用編輯排版功能，讓提案更加吸引人！ 
-												</div>
-											<div class="[ form-group ][ form-group-textarea ]" id="get-data-form">
-												<textarea class="tinymce" id="texteditor"></textarea>												
+											<div>趕緊來為你精心設計的課程做個介紹吧!請務必在文案中加上開課緣由、自我介紹、課程單元說明、教學方式、課程難易度、相關作品圖片、作品集網站…等資料，越詳細的內容將會提升學生對課程的信任感；而善用編輯排版功能，讓提案更加吸引人！
+											</div>
+											<div class="[ form-group ][ form-group-textarea ]"
+												id="get-data-form">
+												<textarea class="tinymce" id="texteditor"></textarea>
 											</div>
 										</div>
 									</div>
@@ -484,6 +488,71 @@
 							</div>
 
 							<div class="tab-pane" role="tabpanel" id="step6">
+								<div class="container">
+									<br />
+									<div class="row">
+
+										<div class="col-md-12">
+											<div class="panel panel-default">
+												<div class="panel-heading">
+													<strong>課程影片上傳</strong> <small> </small>
+												</div>
+												<div class="panel-body">
+													<div class="input-group image-preview">
+<!-- 														<input placeholder="" type="text" -->
+<!-- 															class="form-control image-preview-filename" -->
+<!-- 															disabled="disabled"> -->
+														<!-- don't give a name === doesn't send on POST/GET -->
+														<span> <!-- image-preview-clear button -->
+<!-- 															<button type="button" -->
+<!-- 																class="btn btn-default image-preview-clear" -->
+<!-- 																style="display: none;"> -->
+<!-- 																<span class="glyphicon glyphicon-remove"></span> Clear -->
+<!-- 															</button> image-preview-input -->
+															
+<!-- 															<div class="btn btn-default image-preview-input"> -->
+																<span class="glyphicon glyphicon-folder-open"></span>
+<!-- 																<span class="image-preview-input-title">選擇檔案</span> -->
+
+																<input type="file" name="input-file-preview"/>
+																<!-- 																accept="image/png, image/jpeg, image/gif" -->
+																<!-- rename it -->
+<!-- 															</div> -->
+															<button type="submit" class="btn btn-labeled btn-primary">
+																<span class="btn-label"><i class="glyphicon glyphicon-upload"></i></span>上傳
+															</button>
+															
+														</span>
+													</div>
+													<!-- /input-group image-preview [TO HERE]-->
+
+													<br />
+
+													<!-- Drop Zone -->
+													
+													<!-- Progress Bar -->
+													<div class="progress">
+														<div id="progressBar" class="progress-bar"
+															role="progressbar" aria-valuenow="0" aria-valuemin="0"
+															aria-valuemax="100" style="width: 0%;">
+															60% <span class="sr-only">60% Complete</span>
+														</div>
+													</div>
+													<br />
+
+												</div>
+											</div>
+										</div>
+
+
+
+									</div>
+								</div>
+
+
+
+								<!-- /container -->
+
 
 								<ul class="list-inline pull-right">
 									<li><button type="button"
@@ -734,6 +803,9 @@
 						})
 			}
 		};
+		
+		
+
 	</script>
 
 

@@ -10,22 +10,9 @@
 
         .n {-webkit-filter: grayscale(0); }
  </style>
-   
-</head>
-<body>
- <div>
-    <img id="idstar1" class="s" src="ystar.png" />
-    <img id="idstar2" class="s" src="ystar.png" />
-    <img id="idstar3" class="s" src="ystar.png" />
-    <img id="idstar4" class="s" src="ystar.png" />
-    <img id="idstar5" class="s" src="ystar.png" />
-    </div>
-    
-    <div id="starnum" style="font-size:3em;color:red"></div>
-    
-	<script src="js/jquery-1.12.3.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery-ui-effects.min.js"></script>
+   <script src="<%=request.getContextPath()%>/js/jquery-1.12.3.min.js"></script>
+<!-- 	<script src="js/bootstrap.min.js"></script> -->
+	<script src="<%=request.getContextPath()%>/js/jquery-ui-effects.min.js"></script>
 	<script>
 		$(function(){
 			var flag1 = false;
@@ -62,5 +49,18 @@
 			
 		})
 	</script>
+</head>
+<body>
+ <div>
+    <img id="idstar1" class="s" src="ystar.png" />
+    <img id="idstar2" class="s" src="ystar.png" />
+    <img id="idstar3" class="s" src="ystar.png" />
+    <img id="idstar4" class="s" src="ystar.png" />
+    <img id="idstar5" class="s" src="ystar.png" />
+    </div>
+    
+    <div id="starnum" style="font-size:3em;color:red"></div>
+    
+	
 </body>
 </html>
