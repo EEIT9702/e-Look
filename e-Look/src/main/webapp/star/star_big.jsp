@@ -14,11 +14,11 @@
 </head>
 <body>
  <div>
-    <img id="idstar1" class="s" src="ystar.png" />
-    <img id="idstar2" class="s" src="ystar.png" />
-    <img id="idstar3" class="s" src="ystar.png" />
-    <img id="idstar4" class="s" src="ystar.png" />
-    <img id="idstar5" class="s" src="ystar.png" />
+    <img id="idstar1" class="s" width="65" height="65" src="star.jpg" />
+    <img id="idstar2" class="s" width="65" height="65" src="star.jpg" />
+    <img id="idstar3" class="s" width="65" height="65" src="star.jpg" />
+    <img id="idstar4" class="s" width="65" height="65" src="star.jpg" />
+    <img id="idstar5" class="s" width="65" height="65" src="star.jpg" />
     </div>
     
     <div id="starnum" style="font-size:3em;color:red"></div>
@@ -56,7 +56,7 @@
 			$('img').click(function(){
 				
 				   if (!flag1) { flag1 = true};
-				   document.getElementById("starnum").innerHTML = "你給" + this.id.substr(6) + "顆星";
+	//			   document.getElementById("starnum").innerHTML = "你給" + this.id.substr(6) + "顆星";
 				   
 			//	   $.get("Buycourse",{"name":"score","score":this.id.substr(6)});
 		           

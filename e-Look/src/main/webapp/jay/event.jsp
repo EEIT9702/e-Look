@@ -28,6 +28,19 @@ background-color:	#5599FF;
 font-weight:bold;
 }
 .mm-listview>li>a{padding:60px 10px 60px 20px;}
+.content {
+    padding:50px 50px 50px 50px;
+
+}
+#name{
+font-size:25px;
+text-align:left;
+font-weight: bolder;
+}
+#eventname{
+width: 1600px;
+height: 35px;
+}
 </style>
 <body>
 		<div id="page">
@@ -36,27 +49,21 @@ font-weight:bold;
 				管理者介面
 			</div>
 			<div class="content">
-				<p><strong style="font-size: 50px">管理者介面</strong></p><br/>
+				<p><strong style="font-size: 50px">活動管理</strong></p><br/>
 				<br>
 				<br>
-				<br>
-					<p style="font-size:40px;line-height: 40px; font-weight: bolder;">管理人員須知：<br>
-					確認網站的重要資訊。再次確認一下網站標題和網站描述是否<br>
-					正確，不枉費你辛辛苦苦建立一個網站。網站描述不需要風花<br>
-					雪月假文青去寫網站創立目標之類的文字，只需要簡單說明貴<br>
-					公司所提供的產品或服務是哪些，通常這些文字也是主要的關<br>
-					關鍵字，認真寫好這些關鍵字有很大的幫助。<br>
-					</p>
+			<div id="name">活動名稱:<input id="eventname">
+			
+			</div>
 			</div>
 			<nav id="menu" style="font-size: 18px">
 				<ul >
-					<li><a href="#" style="background-color:#FFCCCC">管理員</a></li>
+				<li><a href="#" style="background-color:#FFCCCC">管理員</a></li>
 					<li><a href="#" style="background-color:#FFDDAA">活動管理</a></li>
 					<li><a href="#"style="background-color: #FFFFBB">輪播管理</a></li>
 			        <li><a href="#"style="background-color: #CCFF99">課程審查</a></li>
 					<li><a href="#"style="background-color: #BBFFEE	">收益報表</a></li>
 					<li><a href="#"style="background-color: #CCBBFF">檢舉管理</a></li>
-					
 				</ul>
 			</nav>
 		</div>

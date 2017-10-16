@@ -4,8 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="Short Icon" type="image/x-icon" href="${initParam.icon}" />
-<title>${initParam.systemName}</title>
+<title>Insert title here</title>
 <link href="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.css"
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.css"

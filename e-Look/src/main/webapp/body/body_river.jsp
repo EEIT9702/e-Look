@@ -341,6 +341,7 @@ h5 {
 <body>
 <%-- 	<jsp:include page="${contextPath}/header.jsp" /> --%>
 	<jsp:include page="${contextPath}/login.jsp" />
+	
 
 	<!-- 分類按鈕和搜索star -->
 	<div class="ndiv">
@@ -444,6 +445,6 @@ h5 {
 		</div>
 	</div>
 
-
+<jsp:include page="${contextPath}/footer.jsp" />
 </body>
 </html>

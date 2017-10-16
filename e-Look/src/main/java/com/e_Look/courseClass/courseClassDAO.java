@@ -27,7 +27,7 @@ public class courseClassDAO implements courseClass_interface{
 		}
 	}
 
-	private static final String INSERT_courseClass = "insert into courseClass (ccName,eventID) values (?,?)"; 
+	private static final String INSERT_courseClass = "insert into courseClass (ccName) values (?)"; 
 	private static final String UPDATE_courseClass = "update courseClass set ccName=? eventID=? where CourseClassID=?"; 
 	private static final String DELETE_courseClass = "delete from courseClass where CourseClassID=?"; 
 	private static final String SELECT_courseClass = "select CourseClassID,ccName,eventID from BuyCourse where CourseClassID=?";
@@ -42,8 +42,7 @@ public class courseClassDAO implements courseClass_interface{
 			
 			pstmt=conn.prepareStatement(INSERT_courseClass);
 			pstmt.setString(1,courseClassVO.getCcName());
-			pstmt.setInt(2,courseClassVO.getEventID());//在網頁中selected出eventID
-			//討論是否要在insert裡面加入eventID還是在update
+
 			pstmt.executeUpdate();
 			
 			
