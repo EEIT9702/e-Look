@@ -50,11 +50,13 @@ font-weight:bold;
 			</div>
 			<nav id="menu" style="font-size: 18px">
 				<ul >
-					<li><a href="#" style="background-color: #FFFFBB">管理員</a></li>
-					<li><a href="#" style="background-color:#CCFF99">活動管理</a></li>
-			        <li><a href="#"style="background-color: #BBFFEE">課程審查</a></li>
-					<li><a href="#"style="background-color: #CCBBFF">收益報表</a></li>
-					<li><a href="#"style="background-color: #F0BBFF">檢舉管理</a></li>
+					<li><a href="#" style="background-color:#FFCCCC">管理員</a></li>
+					<li><a href="#" style="background-color:#FFDDAA">活動管理</a></li>
+					<li><a href="#"style="background-color: #FFFFBB">輪播管理</a></li>
+			        <li><a href="#"style="background-color: #CCFF99">課程審查</a></li>
+					<li><a href="#"style="background-color: #BBFFEE	">收益報表</a></li>
+					<li><a href="#"style="background-color: #CCBBFF">檢舉管理</a></li>
+					
 				</ul>
 			</nav>
 		</div>
