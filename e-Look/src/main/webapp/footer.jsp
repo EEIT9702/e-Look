@@ -81,7 +81,7 @@ footer ul li a:hover{
 
 </style>
 <body>
-<footer style="margin-top:300px;">
+<footer style="margin-top:100px;">
         
         <div class="search-text"> 
             <div class="container">
