@@ -25,7 +25,7 @@
 /* 影片區塊 */
 video {
 	width: 100%;
-	height: 100%;
+	height: 83%;
 	padding-left: -15px;
 	padding-right: -15px;
 }
@@ -44,7 +44,7 @@ video {
 
 #vidoeArea>div>div>ul {
 	color: #FCFCFC;
-	width: 100%;
+	width: 99%;
 	height: 82%;
 	overflow-y: scroll;
 	margin: 0;
@@ -65,10 +65,10 @@ video::-webkit-media-controls-panel {
 
 #vidoeDivListStyle {
 	border: 1px solid gray;
-	height: 99%;
+	height: 84%;
 	padding-left: -15px;
 	padding-right: -15px;
-	background-color:rgba(0%,10%,20%,0.3);;
+	background-color: rgba(0%, 10%, 20%, 0.3);;
 }
 
 #vidoeDivListStyle>div>h3 {
@@ -213,10 +213,14 @@ video::-webkit-media-controls-panel {
 					<h5 class="text-center">課程時間</h5>
 				</div>
 				<div class="col-md-2 col-xs-3 ">
-					<img src="share.png" class="img-responsive center-block">
-					<h5 class="text-center">
-						<a href="#">分享連結</a>
-					</h5>
+					<img src="share.png" class="img-responsive center-block">				
+						<div class="dropdown text-center" style="margin:6px">
+							<a data-toggle="dropdown">分享連結 <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">FaceBook</a></li>
+								<li><a href="#">Google</a></li>
+							</ul>
+						</div>					
 				</div>
 				<div class="col-md-2 col-xs-3 ">
 					<img src="001-download.png" class="img-responsive center-block">
@@ -247,7 +251,7 @@ video::-webkit-media-controls-panel {
 						<ul class="nav nav-tabs" role="tablist">
 							<li role="presentation" class="active"><a href="#Section1"
 								aria-controls="home" role="tab" data-toggle="tab">課程簡介</a></li>
-							<li role="presentation" ><a href="#Section2"
+							<li role="presentation"><a href="#Section2"
 								aria-controls="home" role="tab" data-toggle="tab">講師簡介</a></li>
 							<li role="presentation"><a href="#Section3"
 								aria-controls="profile" role="tab" data-toggle="tab">課程討論</a></li>

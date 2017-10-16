@@ -6,78 +6,61 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
  <style>
-        .s {
-            -webkit-filter: grayscale(1); 
-        }
+        .s {-webkit-filter: grayscale(1); }
 
-        .n {
-            -webkit-filter: grayscale(0); 
-        }
-    </style>
-    <script>
-        flag = false;
-        document.addEventListener("DOMContentLoaded", function () {
-            //document.getElementById("idstar1").onmouseover = mouseOver;  
-            //document.getElementById("idstar").onmouseout = mouseOut;
-            //document.getElementById("idstar1").onclick = click;
-            var imgs = document.getElementsByTagName("img");
-            var imglen = imgs.length
-            for (i = 0; i < imglen; i++) {
-                imgs[i].onmouseover = mouseOver;
-                imgs[i].onmouseout = mouseOut;
-                imgs[i].onclick = click;
-            }
-
-        });
-        function click() {
-            var s=1 ;
-                  s++;
-                if (s = 2) {
-                    flag = true;}
-                s--;
-            
-            //click1();
-            document.getElementById("stsrnum").innerHTML = "*****你給" + this.id.substr(6) + "顆星*****";
-        }
-        function mouseOver() {
-            var movein = this.id.substr(6)
-            for (i = 1; i <= movein; i++) {
-                document.getElementById("idstar"+i).className = "n";
-            }
-            //document.getElementById(this.id).className = "n";
-            document.getElementById("stsrnum").innerHTML = "-----你給" + this.id.substr(6) + "顆星-----";
-
-
-        }
-
-        function mouseOut() {
-            if (!flag) {
-                var out = this.id.substr(6)
-                for (u = 1; u <= out; u++) {
-                    document.getElementById("idstar" + u).className = "s";
-                }
-                document.getElementById("stsrnum").innerHTML = "";
-            }
-        }
-        function click1() {
-            //document.write("你給" + this.id.substr(6) + "顆星");
-            //if (!flag1) { flag1 = true;}
-            //document.getElementById("stsrnum").innerHTML = "*****你給" + this.id.substr(6) + "顆星*****";
-                     
-        }
-
-
-    </script>
+        .n {-webkit-filter: grayscale(0); }
+ </style>
+   
 </head>
 <body>
-  <div>
-    <img id="idstar1" class="s" src="star.jpg" />
-    <img id="idstar2" class="s" src="star.jpg" />
-    <img id="idstar3" class="s" src="star.jpg" />
-    <img id="idstar4" class="s" src="star.jpg" />
-    <img id="idstar5" class="s" src="star.jpg" />
+ <div>
+    <img id="idstar1" class="s" src="ystar.png" />
+    <img id="idstar2" class="s" src="ystar.png" />
+    <img id="idstar3" class="s" src="ystar.png" />
+    <img id="idstar4" class="s" src="ystar.png" />
+    <img id="idstar5" class="s" src="ystar.png" />
     </div>
-    <hr/>
-    <div id="stsrnum" style="font-size:3em;color:red"></div>
+    
+    <div id="starnum" style="font-size:3em;color:red"></div>
+    
+	<script src="js/jquery-1.12.3.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-ui-effects.min.js"></script>
+	<script>
+		$(function(){
+			var flag1 = false;
+			$('img').hover(over,out);
+			
+			function over(){
+				 if (!flag1) {	
+				var movein = this.id.substr(6);
+	            for (i = 1; i <= movein; i++) {
+	          document.getElementById("idstar"+i).className = "n";
+			//	$('img:lt(i)').switchClass('s','n',1000);
+	        }				
+			}
+			}
+			
+			function out(){
+			  if (!flag1) {
+		             var out = this.id.substr(6);
+		              for (u = 1; u <= out; u++) {
+		          document.getElementById("idstar" + u).className = "s";
+		               
+		               
+			//	$('div img:nth-child(u)').switchClass('n','s',1000);
+			}
+			}
+			}
+			
+			$('img').click(function(){
+				
+				   if (!flag1) { flag1 = true};
+				   document.getElementById("starnum").innerHTML = "你給" + this.id.substr(6) + "顆星";
+		           
+			})
+			
+		})
+	</script>
 </body>
 </html>

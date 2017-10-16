@@ -11,6 +11,9 @@
 }
 </style>
 <style type="text/css">
+#title1{
+padding-top:30px;
+}
 h5 {
 	font-size: 1.28571429em;
 	font-weight: 700;
@@ -131,18 +134,21 @@ h5 {
 	height: 60px;
 	font-size: 30px;
 }
+#course{
+margin-top:20px
+}
 </style>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+
 </head>
 
 <body id="body">
-	<jsp:include page="/header.jsp" />
+	<jsp:include page="/login.jsp" />
 	<div class="container-fluid" style="background-color: black; margin:-50px">
 		<div class="row">
 			<div class="col-md-12">
-				<jsp:include page="advertising.jsp" />
+				<jsp:include page="/jay/advertising.jsp" />
 			</div>
 		</div>
 	</div>
@@ -157,13 +163,13 @@ h5 {
 	<div class="container">
 		<div class="row" style="padding-left:40px">
 			<!-- 	1 -->
-			<div class="col-md-4" style="width: 341px">
+			<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width: 341px">
 				<div class="card card-inverse" style="background-color: white;">
-					<img class="card-img-top" src="images/請上傳課程封面.png" alt="course"
+					<img class="card-img-top" src="<%=request.getContextPath()%>/img/請上傳課程封面.png" alt="course"
 						id="wizardPicturePreview" title="">
 					<div class="card-block">
 						<figure class="profile">
-							<img src="images/eLook_LOGO1.png" class="profile-avatar" alt="">
+							<img src="<%=request.getContextPath()%>/img/eLook_LOGO1.png" class="profile-avatar" alt="">
 						</figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">這裡請輸入課程標題</p>
@@ -180,13 +186,13 @@ h5 {
 				</div>
 			</div>
 			<!-- 2 -->
-			<div class="col-md-4" style="width: 341px ">
+			<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width: 341px ">
 				<div class="card card-inverse" style="background-color: white;">
-					<img class="card-img-top" src="images/請上傳課程封面.png" alt="course"
+					<img class="card-img-top" src="<%=request.getContextPath()%>/img/請上傳課程封面.png" alt="course"
 						id="wizardPicturePreview" title="">
 					<div class="card-block">
 						<figure class="profile">
-							<img src="images/eLook_LOGO1.png" class="profile-avatar" alt="">
+							<img src="<%=request.getContextPath()%>/img/eLook_LOGO1.png" class="profile-avatar" alt="">
 						</figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">這裡請輸入課程標題</p>
@@ -203,13 +209,13 @@ h5 {
 				</div>
 			</div>
 			<!-- 			3 -->
-			<div class="col-md-4" style="width: 341px">
+			<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width: 341px">
 				<div class="card card-inverse" style="background-color: white;">
-					<img class="card-img-top" src="images/請上傳課程封面.png" alt="course"
+					<img class="card-img-top" src="<%=request.getContextPath()%>/img/請上傳課程封面.png" alt="course"
 						id="wizardPicturePreview" title="">
 					<div class="card-block">
 						<figure class="profile">
-							<img src="images/eLook_LOGO1.png" class="profile-avatar" alt="">
+							<img src="<%=request.getContextPath()%>/img/eLook_LOGO1.png" class="profile-avatar" alt="">
 						</figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">這裡請輸入課程標題</p>
@@ -226,13 +232,13 @@ h5 {
 				</div>
 			</div>
 			<!-- 4 -->
-			<div class="col-md-4" style="width: 341px">
+			<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width: 341px">
 				<div class="card card-inverse" style="background-color: white;">
-					<img class="card-img-top" src="images/請上傳課程封面.png" alt="course"
+					<img class="card-img-top" src="<%=request.getContextPath()%>/img/請上傳課程封面.png" alt="course"
 						id="wizardPicturePreview" title="">
 					<div class="card-block">
 						<figure class="profile">
-							<img src="images/eLook_LOGO1.png" class="profile-avatar" alt="">
+							<img src="<%=request.getContextPath()%>/img/eLook_LOGO1.png" class="profile-avatar" alt="">
 						</figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">這裡請輸入課程標題</p>
@@ -261,13 +267,13 @@ h5 {
 			<div class="container">
 				<div class="row"style="padding-left:40px">
 					<!-- 	1 -->
-					<div class="col-md-4" style="width: 341px">
+					<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width: 341px">
 						<div class="card card-inverse" style="background-color: white;">
-							<img class="card-img-top" src="images/請上傳課程封面.png" alt="course"
+							<img class="card-img-top" src="<%=request.getContextPath()%>/img/請上傳課程封面.png" alt="course"
 								id="wizardPicturePreview" title="">
 							<div class="card-block">
 								<figure class="profile">
-									<img src="images/eLook_LOGO1.png" class="profile-avatar" alt="">
+									<img src="<%=request.getContextPath()%>/img/eLook_LOGO1.png" class="profile-avatar" alt="">
 								</figure>
 								<div class="card-text">
 									<p id="title" class="card-title mt-3 multi_ellipsis">這裡請輸入課程標題</p>
@@ -284,13 +290,13 @@ h5 {
 						</div>
 					</div>
 					<!-- 2 -->
-					<div class="col-md-4" style="width: 341px">
+					<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width: 341px">
 						<div class="card card-inverse" style="background-color: white;">
-							<img class="card-img-top" src="images/請上傳課程封面.png" alt="course"
+							<img class="card-img-top" src="<%=request.getContextPath()%>/img/請上傳課程封面.png" alt="course"
 								id="wizardPicturePreview" title="">
 							<div class="card-block">
 								<figure class="profile">
-									<img src="images/eLook_LOGO1.png" class="profile-avatar" alt="">
+									<img src="<%=request.getContextPath()%>/img/eLook_LOGO1.png" class="profile-avatar" alt="">
 								</figure>
 								<div class="card-text">
 									<p id="title" class="card-title mt-3 multi_ellipsis">這裡請輸入課程標題</p>
@@ -307,13 +313,13 @@ h5 {
 						</div>
 					</div>
 					<!-- 			3 -->
-					<div class="col-md-4" style="width: 341px">
+					<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width: 341px">
 						<div class="card card-inverse" style="background-color: white;">
-							<img class="card-img-top" src="images/請上傳課程封面.png" alt="course"
+							<img class="card-img-top" src="<%=request.getContextPath()%>/img/請上傳課程封面.png" alt="course"
 								id="wizardPicturePreview" title="">
 							<div class="card-block">
 								<figure class="profile">
-									<img src="images/eLook_LOGO1.png" class="profile-avatar" alt="">
+									<img src="<%=request.getContextPath()%>/img/eLook_LOGO1.png" class="profile-avatar" alt="">
 								</figure>
 								<div class="card-text">
 									<p id="title" class="card-title mt-3 multi_ellipsis">這裡請輸入課程標題</p>
@@ -330,13 +336,13 @@ h5 {
 						</div>
 					</div>
 					<!-- 4 -->
-					<div class="col-md-4" style="width: 341px">
+					<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width: 341px">
 						<div class="card card-inverse" style="background-color: white;">
-							<img class="card-img-top" src="images/請上傳課程封面.png" alt="course"
+							<img class="card-img-top" src="<%=request.getContextPath()%>/img/請上傳課程封面.png" alt="course"
 								id="wizardPicturePreview" title="">
 							<div class="card-block">
 								<figure class="profile">
-									<img src="images/eLook_LOGO1.png" class="profile-avatar" alt="">
+									<img src="<%=request.getContextPath()%>/img/eLook_LOGO1.png" class="profile-avatar" alt="">
 								</figure>
 								<div class="card-text">
 									<p id="title" class="card-title mt-3 multi_ellipsis">這裡請輸入課程標題</p>
@@ -355,6 +361,6 @@ h5 {
 				</div>
 			</div>
 			
-<jsp:include page="footer.jsp" />
+<jsp:include page="/footer.jsp" />
 </body>
 </html>
