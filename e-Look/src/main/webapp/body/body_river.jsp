@@ -6,10 +6,9 @@
 <html>
 <head>
 
-<jsp:useBean id="SYSTEM" class="init.GlobalService" scope="application" />
-<link rel="Short Icon" type="image/x-icon" href="${SYSTEM.iconUri}" />
+<link rel="Short Icon" type="image/x-icon" href="${initParam.icon}" />
+<title>${initParam.systemName}</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${SYSTEM.systemName}</title>
 <link href="HeaderCssJs/bootstrap.css" rel="stylesheet">
 <!-- <link href="HeaderCssJs/bootstrap.min.css" rel="stylesheet"> -->
 <!-- Bootstrap Core CSS -->

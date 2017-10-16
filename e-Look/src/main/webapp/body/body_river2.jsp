@@ -5,13 +5,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
-<jsp:useBean id="SYSTEM" class="init.GlobalService" scope="application" />
-<link rel="Short Icon" type="image/x-icon" href="${SYSTEM.iconUri}" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${SYSTEM.systemName}</title>
+<link rel="Short Icon" type="image/x-icon" href="${initParam.icon}" />
+<title>${initParam.systemName}</title>
 <link href="HeaderCssJs/bootstrap.css" rel="stylesheet">
-<!-- <link href="HeaderCssJs/bootstrap.min.css" rel="stylesheet"> -->
+<link href="HeaderCssJs/bootstrap.min.css" rel="stylesheet">
 <!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom CSS -->
@@ -22,7 +20,7 @@
 <!-- 載入課程模板css -->
 <!-- <link href="css/twmplate.css" rel="stylesheet"> -->
 <script src="HeaderCssJs/jquery.js"></script>
-<script src="HeaderCssJs/bootstrap.min.js"></script>
+<!-- <script src="HeaderCssJs/bootstrap.min.js"></script> -->
 
 <style type="text/css">
 /* 課程模板 */
@@ -166,10 +164,21 @@ h5 {
   	active: none;
   	font-size: 20px;
   	font-family: 微軟正黑體;
+  	cursor: pointer;
+}
+.formicon{
 }
 .formicon a:hover{
 	text-decoration: none;
 	color:#9F35FF;
+}
+.formicon div:hover{
+    top: 2px;
+    left: 2px;
+}
+.formicon div:ACTIVE{
+    top: 4px;
+    left: 4px;
 }
 .text-center{
  	width:50px; 
@@ -193,6 +202,8 @@ h5 {
 }
 .searchicon{
 	width:30px;
+}
+.searchicon img:HOVER{
 }
 .hotkeyword{
  	padding-left:10%;
@@ -243,9 +254,21 @@ $(function() {
 	var	dh =$(document).height();
 	console.log(wst+"---"+dh+"---"+wh);
 	$(window).scroll(river);
+	
+	$('.col-md-1 text-center').click(function(){
+		$(this).text("123");
+		
+	})
+	
+	
+	
 });
-
+function refreshRiver(){
+	$('#river').text("");
+	river();
+}
 function river(){
+	console.log("river()");
 	//卷軸初再入高度為0
 	var	wst = $(window).scrollTop();
 	//視窗高度
@@ -257,7 +280,7 @@ function river(){
 	//判斷卷軸是否到底部
 	if(wst==(dh-wh) ){
 		rowValueX++;
-		$.get("<%= request.getContextPath() %>/body/body_data.jsp",{"rowValueY":rowValueX},function(data){
+		$.get("<%= request.getContextPath() %>/body/body_data2.jsp",{"rowValueY":rowValueX},function(data){
 			$('#river').append(data);
 		});
 	}
@@ -313,47 +336,47 @@ function checkHeight() {
 	<div class="col-md-10 ">
 	<form class="formicon" action="">
 	
-		<div class="col-md-1 text-center">
-			<input style="<c:choose><c:when test='${param.courseClassID == 1 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>" class="iconWidth" type="image" src="<%=request.getContextPath() %>/alan/img/life.svg"><br><a class="iconA" href="?courseClassID=1">生活</a>
+		<div class="col-md-1 text-center" >
+			<input style="display:none;" type="checkbox" checked="checked" id="class1" ><label class="iconA" for="class1"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/life.svg"><br>生活</label>
 		</div>
 		<div class="col-md-1 text-center">
-			<input style="<c:choose><c:when test='${param.courseClassID == 2 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>" class="iconWidth" type="image" src="<%=request.getContextPath() %>/alan/img/arts.svg"><br><a class="iconA" href="?courseClassID=2">藝術</a>
+			<input style="display:none;" type="checkbox" checked="checked"  id="class2" ><label class="iconA" for="class2"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/arts.svg"><br>藝術</label>
 		</div>
 		<div class="col-md-1 text-center">
-			<input style="<c:choose><c:when test='${param.courseClassID == 3 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>" class="iconWidth" type="image" src="<%=request.getContextPath() %>/alan/img/athletics.svg"><br><a class="iconA" href="?courseClassID=3">運動</a>
+			<input style="display:none;" type="checkbox" checked="checked" id="class3" ><label class="iconA" for="class3"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/athletics.svg"><br>運動</label>
 		</div>
 		<div class="col-md-1 text-center">
-			<input style="<c:choose><c:when test='${param.courseClassID == 4 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>" class="iconWidth" type="image" src="<%=request.getContextPath() %>/alan/img/video.svg"><br><a class="iconA" href="?courseClassID=4">影音</a>
+			<input style="display:none;" type="checkbox" checked="checked" id="class4" ><label class="iconA" for="class4"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/video.svg"><br>影音</label>
 		</div>
 		<div class="col-md-1 text-center">
-			<input style="<c:choose><c:when test='${param.courseClassID == 5 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>" class="iconWidth" type="image" src="<%=request.getContextPath() %>/alan/img/hand-made.svg"><br><a class="iconA" href="?courseClassID=5">手作</a>
+			<input style="display:none;" type="checkbox" checked="checked" id="class5" ><label class="iconA" for="class5"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/hand-made.svg"><br>手作</label>
 		</div>
 		<div class="col-md-1 text-center">
-			<input style="<c:choose><c:when test='${param.courseClassID == 6 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>" class="iconWidth" type="image" src="<%=request.getContextPath() %>/alan/img/other.svg"><br><a class="iconA" href="?courseClassID=6">其他</a>
+			<input style="display:none;" type="checkbox" checked="checked" id="class6" ><label class="iconA" for="class6"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/other.svg"><br>其他</label>
 		</div>
 		<div class="col-md-1 text-center">
-			<input style="<c:choose><c:when test='${param.courseClassID == 7 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>" class="iconWidth" type="image" src="<%=request.getContextPath() %>/alan/img/design.svg"><br><a class="iconA" href="?courseClassID=7">設計</a>
+			<input style="display:none;" type="checkbox" checked="checked" id="class7" ><label class="iconA" for="class7"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/design.svg"><br>設計</label>
 		</div>
 		<div class="col-md-1 text-center">
-			<input style="<c:choose><c:when test='${param.courseClassID == 8 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>" class="iconWidth" type="image" src="<%=request.getContextPath() %>/alan/img/science.svg"><br><a class="iconA" href="?courseClassID=8">科技</a>
+			<input style="display:none;" type="checkbox" checked="checked" id="class8" ><label class="iconA" for="class8"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/science.svg"><br>科技</label>
 		</div>
 		<div class="col-md-1 text-center">
-			<input style="<c:choose><c:when test='${param.courseClassID == 9 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>" class="iconWidth" type="image" src="<%=request.getContextPath() %>/alan/img/business.svg"><br><a class="iconA" href="?courseClassID=9">商業</a>
+			<input style="display:none;" type="checkbox" checked="checked" id="class9" ><label class="iconA" for="class9"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/business.svg"><br>商業</label>
 		</div>
 		<div class="col-md-1 text-center">
-			<input style="<c:choose><c:when test='${param.courseClassID == 10 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>" class="iconWidth" type="image" src="<%=request.getContextPath() %>/alan/img/language.svg"><br><a class="iconA" href="?courseClassID=10">語言</a>
+			<input style="display:none;" type="checkbox" checked="checked" id="class10" ><label class="iconA" for="class10"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/language.svg"><br>語言</label>
 		</div>
 		<div class="col-md-1 text-center">
-			<input style="<c:choose><c:when test='${param.courseClassID == 11 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>" class="iconWidth" type="image" src="<%=request.getContextPath() %>/alan/img/cooking.svg"><br><a class="iconA" href="?courseClassID=11">烹飪</a>
+			<input style="display:none;" type="checkbox" checked="checked" id="class11" ><label class="iconA" for="class11"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/cooking.svg"><br>烹飪</label>
 		</div>
 		<div class="col-md-1 text-center">
-			<input style="<c:choose><c:when test='${param.courseClassID == 12 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>" class="iconWidth" type="image" src="<%=request.getContextPath() %>/alan/img/program.svg"><br><a class="iconA" href="?courseClassID=12">程式</a>
+			<input style="display:none;" type="checkbox" checked="checked" id="class12" ><label class="iconA" for="class12"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/program.svg"><br>程式</label>
 		</div>
 	
 	</form>
 	</div><!-- /col-md-10 -->
 	<div class="col-md-2">
-	<form class="navbar-form navbar-left" id="searchKey" method="get" action="<%=request.getContextPath() %>/SearchController">
+	<form class="navbar-form navbar-left" id="searchKey" method="get" action="">
 	
 		<div class="input-group outBorder" style="">
 
@@ -362,8 +385,8 @@ function checkHeight() {
 				<input name="keyWord" type="text" class="form-control inputarea" placeholder="Search" style="">
 				
 				<div class="input-group-btn searchImg" style="">
-				<input class="searchicon" style="" type="image" src="<%=request.getContextPath()%>/alan/img/search.svg"/>
-				
+<%-- 				<input id="searchsubmit" class="searchicon" style="" type="image" src="<%=request.getContextPath()%>/alan/img/search.svg" /> --%>
+				<img class="searchicon" src="<%=request.getContextPath()%>/alan/img/search.svg" >
 				</div>
 			</div>
 			
