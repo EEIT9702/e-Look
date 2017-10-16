@@ -10,19 +10,20 @@
 <title>Insert title here</title>
 <style type="text/css">
 /* body, td, div {font-size: 12px; font-familly: 宋体; } */
-#progressBar {width: 400px; height: 20px;  border: 1px solid black; padding: 1px;font-size:20px}
-#progressBarItem {width: 30%; height: 100%; }
+/* #progressBar {width: 400px; height: 20px;  border: 1px solid black; padding: 1px;font-size:20px} */
+/* #progressBarItem {width: 30%; height: 100%; } */
 </style>
 </head>
 
 <body>
 
-<iframe name=upload_iframe width=0 height=0></iframe>
+
 
 <form action="toolkie/ProgressUploadServlet" method="post" enctype="multipart/form-data" target="upload_iframe" onsubmit="showStatus(); ">
-
-<input type="file" name="file4" style="width: 350px; "> <input type="submit"
-	value="開始上傳 " id="btnSubmit"></form>
+<iframe name=upload_iframe width=0 height=0></iframe>
+<input type="file" name="input-file-preview"> 
+<input type="submit" value="開始上傳15" id="btnSubmit" >
+</form>
 
 <div id="status" style="display: none" >
 	上傳進度條：
@@ -39,13 +40,11 @@
 <br/>
 <br/>
 <br/>
-
-<script type="text/javascript">
-
+<script>
 var _finished = true; //是否上傳結束
-
-function $(obj){
-	return document.getElementById(obj);//傳回指定id的html
+//fuction $() = document.getElementById()
+function $(XXX){//XXX一定要給隨意的參數，且這個function有存在的必要，影響第52行的結果。
+	return document.getElementById(XXX);//傳回指定id的html
 }
 
 function showStatus(){//顯示進度條
@@ -64,6 +63,11 @@ function requestStatus(){//向伺服器請求上傳進度
 	var req = createRequest(); //獲得ajax請求
 	
 	req.open("GET", "toolkie/ProgressUploadServlet");//設定請求路徑
+	
+	
+	
+	
+		
 	req.onreadystatechange=function(){callback(req);}//請求完畢執行callback(req)
 	req.send(null);//發送請求
 	
@@ -109,13 +113,13 @@ function callback(req){//更新進度條
 		}
 	}
 }
-function _debug(obj){
+function _debug(bugInformation){//bugInformation跟進度百分比有關
 	var div = document.createElement("DIV");
-	div.innerHTML = "[debug]: " + obj;
+	div.innerHTML = "[debug]: "+bugInformation;
 	document.body.appendChild(div); 
 }
 
-</script>
 
+</script>
 </body>
 </html>

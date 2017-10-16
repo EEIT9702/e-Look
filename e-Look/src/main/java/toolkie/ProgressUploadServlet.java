@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
 @WebServlet("/toolkie/ProgressUploadServlet")
 public class ProgressUploadServlet extends HttpServlet {
 //  用途不明
@@ -53,10 +54,10 @@ public class ProgressUploadServlet extends HttpServlet {
 					System.out.println("File: " + item.getName());
 
 					//統一 Linux windows 路徑分格符號
-					String fileName = item.getName().replace("/", "\\");
-					fileName = fileName.substring(fileName.lastIndexOf("\\"));
+//					String fileName = item.getName().replace("/", "\\");
+//					fileName = fileName.substring(fileName.lastIndexOf("\\"));
 
-					File saved = new File("D:\\TEST", fileName);
+					File saved = new File("D:\\TEST", item.getName());
 					saved.getParentFile().mkdirs();
 
 					InputStream ins = item.getInputStream();
@@ -126,6 +127,12 @@ public class ProgressUploadServlet extends HttpServlet {
 				+ velocity + "||" + time + "||" + totalTime + "||" + timeLeft;
 
 		response.getWriter().println(value);
+		
+		
+		
+		
+		
+		
 	}
 
 }
