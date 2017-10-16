@@ -23,9 +23,9 @@
     
     <div id="starnum" style="font-size:3em;color:red"></div>
     
-	<script src="js/jquery-1.12.3.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery-ui-effects.min.js"></script>
+	<script src="<%=request.getContextPath() %>/js/jquery-1.12.3.min.js"></script>
+    <script src="<%=request.getContextPath() %>/js/bootstrap.min.js"></script>
+	<script src="<%=request.getContextPath() %>/js/jquery-ui-effects.min.js"></script>
 	<script>
 		$(function(){
 			var flag1 = false;
