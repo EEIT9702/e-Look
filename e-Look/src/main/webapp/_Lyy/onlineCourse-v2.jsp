@@ -25,17 +25,16 @@
 /* 影片區塊 */
 video {
 	width: 100%;
-/* 	height: 83%; */
+	/* 	height: 83%; */
 	padding-left: -15px;
 	padding-right: -15px;
 }
-#videoArea{
-background-image: url('videobackground.jpg') ;
-background-size: cover; 
-background-position: center;
-height:600px;
 
-
+#videoArea {
+	background-image: url('videobackground.jpg');
+	background-size: cover;
+	background-position: center;
+	height: 600px;
 }
 
 /* #videoArea>.col-md-12 { */
@@ -71,14 +70,14 @@ video::-webkit-media-controls-panel {
 
 #videoDivListStyle {
 	border: 1px solid gray;
-	height: 84%;
+	height: 85%;
 	padding-left: -15px;
 	padding-right: -15px;
 	background-color: rgba(0%, 10%, 20%, 0.3);;
 }
 
 #videoDivListStyle>div>h3 {
-	color: 	#5B5B5B;
+	color: #5B5B5B;
 	text-align: center;
 	font-weight: bold;
 }
@@ -162,7 +161,21 @@ video::-webkit-media-controls-panel {
 	font-size: 24px;
 	margin-top: 0;
 }
+/* video::-webkit-media-controls { */
+/*   display:none; */
+/* } */
 </style>
+<script>
+	function setControl() {
+		var video = document.getElementById("vidoeControl");
+
+		if (true) {
+			video.controls = true;
+		} else {
+			video.controls = none;
+		}
+	}
+</script>
 </head>
 <!-- 影片區 -->
 <body oncontextmenu="window.event.returnValue=false">
@@ -171,14 +184,15 @@ video::-webkit-media-controls-panel {
 		<div class="container" style="background-color: gray">
 			<div class="row">
 
-				<div class="col-md-12 "  id="videoArea">
+				<div class="col-md-12 " id="videoArea">
 					<h1 align="center" style="color: black">videoname</h1>
 					<div class="col-md-12">
 						<div class="col-md-8 col-xs-12">
-							<video controls poster="poster.png">
+					
+							<video controls poster="poster.png" id="vidoeControl">
 								<source src="tri.mp4" type="video/mp4">
 							</video>
-						</div>
+							</div>
 						<div class="col-md-4 col-xs-12" id="videoDivListStyle">
 							<div>
 								<h3>推薦課程</h3>
@@ -211,25 +225,29 @@ video::-webkit-media-controls-panel {
 
 
 				<div class="col-md-2 col-xs-3">
-					<img src="<%=request.getContextPath()%>/_Lyy/004-people.png" class="img-responsive center-block ">
+					<img src="<%=request.getContextPath()%>/_Lyy/004-people.png"
+						class="img-responsive center-block ">
 					<h5 class="text-center">課程人數</h5>
 				</div>
 				<div class="col-md-2 col-xs-3">
-					<img src="<%=request.getContextPath()%>/_Lyy/clock.png" class="img-responsive center-block">
+					<img src="<%=request.getContextPath()%>/_Lyy/clock.png"
+						class="img-responsive center-block">
 					<h5 class="text-center">課程時間</h5>
 				</div>
 				<div class="col-md-2 col-xs-3 ">
-					<img src="<%=request.getContextPath()%>/_Lyy/share.png" class="img-responsive center-block">				
-						<div class="dropdown text-center" style="margin:6px">
-							<a data-toggle="dropdown">分享連結 <span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">FaceBook</a></li>
-								<li><a href="#">Google</a></li>
-							</ul>
-						</div>					
+					<img src="<%=request.getContextPath()%>/_Lyy/share.png"
+						class="img-responsive center-block">
+					<div class="dropdown text-center" style="margin: 6px">
+						<a data-toggle="dropdown">分享連結 <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">FaceBook</a></li>
+							<li><a href="#">Google</a></li>
+						</ul>
+					</div>
 				</div>
 				<div class="col-md-2 col-xs-3 ">
-					<img src="<%=request.getContextPath()%>/_Lyy/001-download.png" class="img-responsive center-block">
+					<img src="<%=request.getContextPath()%>/_Lyy/001-download.png"
+						class="img-responsive center-block">
 					<h5 class="text-center">
 						<a href="#">講義下載</a>
 					</h5>
@@ -302,6 +320,6 @@ video::-webkit-media-controls-panel {
 			</div>
 		</div>
 	</div>
-<%-- 	<jsp:include page="jay/footer.jsp" /> --%>
+	<%-- 	<jsp:include page="jay/footer.jsp" /> --%>
 </body>
 </html>

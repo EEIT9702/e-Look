@@ -21,21 +21,49 @@
 		});
 	});
 </script>
+<script>
+	$(function() {
+		var flag1 = false;
+		$('img').hover(over, out);
+		function over() {
+			if (!flag1) {
+				var movein = this.id.substr(6);
+				for (i = 1; i <= movein; i++) {
+					document.getElementById("idstar" + i).className = "nstar";
+				//	$('img:lt(i)').switchClass('s','n',1000);
+				}
+			}
+		}
+		function out() {
+			if (!flag1) {
+				var out = this.id.substr(6);
+				for (u = 1; u <= out; u++) {
+					document.getElementById("idstar" + u).className = "star";
+				//	$('div img:nth-child(u)').switchClass('n','s',1000);
+				}
+			}
+		}
+		$('img').click(function() {
+			if (!flag1) {
+				flag1 = true};
+// 			 document.getElementById("starnum").innerHTML = "你給" + this.id.substr(6) + "顆星";
+//	       $.get("Buycourse",{"name":"score","score":this.id.substr(6)});
+		})
+	})
+</script>
 <style>
 /* 影片區塊 */
 video {
 	width: 100%;
-/* 	height: 83%; */
+	/* 	height: 83%; */
 	padding-left: -15px;
 	padding-right: -15px;
 }
-#videoArea{
-background-image: url('videobackground.jpg') ;
-background-size: cover; 
-background-position: center;
-height:600px;
 
-
+#videoArea {
+	background-size: cover;
+	background-position: center;
+	height: 600px;
 }
 
 /* #videoArea>.col-md-12 { */
@@ -78,7 +106,7 @@ video::-webkit-media-controls-panel {
 }
 
 #videoDivListStyle>div>h3 {
-	color: 	#5B5B5B;
+	color: #5B5B5B;
 	text-align: center;
 	font-weight: bold;
 }
@@ -162,21 +190,31 @@ video::-webkit-media-controls-panel {
 	font-size: 24px;
 	margin-top: 0;
 }
+.star {
+	-webkit-filter: grayscale(1);
+}
+
+.nstar {
+	-webkit-filter: grayscale(0);
+}
 </style>
 </head>
 <!-- 影片區 -->
 <body oncontextmenu="window.event.returnValue=false">
-	<jsp:include page="/header.jsp" flush="true" />
+	<jsp:include page="/login.jsp" flush="true" />
 	<div class="container-fluid">
-		<div class="container" style="background-color: gray">
+		<div class="container" >
 			<div class="row">
 
-				<div class="col-md-12 "  id="videoArea">
+				<div class="col-md-12 " id="videoArea"
+					style="background-image: url('<%=request.getContextPath()%>/_Lyy/videobackground.jpg')">
 					<h1 align="center" style="color: black">videoname</h1>
 					<div class="col-md-12">
 						<div class="col-md-8 col-xs-12">
-							<video controls poster="poster.png">
-								<source src="tri.mp4" type="video/mp4">
+							<video controls
+								poster="<%=request.getContextPath()%>/_Lyy/poster.png">
+								<source src="<%=request.getContextPath()%>/_Lyy/tri.mp4"
+									type="video/mp4">
 							</video>
 						</div>
 						<div class="col-md-4 col-xs-12" id="videoDivListStyle">
@@ -211,35 +249,45 @@ video::-webkit-media-controls-panel {
 
 
 				<div class="col-md-2 col-xs-3">
-					<img src="<%=request.getContextPath()%>/_Lyy/004-people.png" class="img-responsive center-block ">
+					<img src="<%=request.getContextPath()%>/_Lyy/004-people.png"
+						class="img-responsive center-block ">
 					<h5 class="text-center">課程人數</h5>
 				</div>
 				<div class="col-md-2 col-xs-3">
-					<img src="<%=request.getContextPath()%>/_Lyy/clock.png" class="img-responsive center-block">
+					<img src="<%=request.getContextPath()%>/_Lyy/clock.png"
+						class="img-responsive center-block">
 					<h5 class="text-center">課程時間</h5>
 				</div>
 				<div class="col-md-2 col-xs-3 ">
-					<img src="<%=request.getContextPath()%>/_Lyy/share.png" class="img-responsive center-block">				
-						<div class="dropdown text-center" style="margin:6px">
-							<a data-toggle="dropdown">分享連結 <span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">FaceBook</a></li>
-								<li><a href="#">Google</a></li>
-							</ul>
-						</div>					
+					<img src="<%=request.getContextPath()%>/_Lyy/share.png"
+						class="img-responsive center-block">
+					<div class="dropdown text-center" style="margin: 6px">
+						<a data-toggle="dropdown">分享連結 <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">FaceBook</a></li>
+							<li><a href="#">Google</a></li>
+						</ul>
+					</div>
 				</div>
 				<div class="col-md-2 col-xs-3 ">
-					<img src="<%=request.getContextPath()%>/_Lyy/001-download.png" class="img-responsive center-block">
+					<img src="<%=request.getContextPath()%>/_Lyy/001-download.png"
+						class="img-responsive center-block">
 					<h5 class="text-center">
 						<a href="#">講義下載</a>
 					</h5>
 				</div>
 				<div class="col-md-2 col-xs-6 ">
-					<small>課程售價</small>
-					<h3 style="text-align: center; font-weight: bold;">NT1230</h3>
+					<h5>課程售價</h5>
+					<h2 style="text-align: center; font-weight: bold;">NT1230</h2>
 				</div>
 				<div class="col-md-2 col-xs-6 center-block">
-					<h6 align="center">星星數量位置</h6>
+					<div style="width:70px;margin:0 auto">
+						<img id="idstar1" class="star" src="<%=request.getContextPath()%>/star/ystar.png" /> 
+						<img id="idstar2" class="star" src="<%=request.getContextPath()%>/star/ystar.png" /> 
+						<img id="idstar3" class="star " src="<%=request.getContextPath()%>/star/ystar.png" /> 
+						<img id="idstar4" class="star " src="<%=request.getContextPath()%>/star/ystar.png" /> 
+						<img id="idstar5" class="star " src="<%=request.getContextPath()%>/star/ystar.png" />
+					</div>
 					<button type="button" class="btn btn-success center-block"
 						style="width: 160px">加入購物車</button>
 				</div>
@@ -295,6 +343,7 @@ video::-webkit-media-controls-panel {
 							<div role="tabpanel" class="tab-pane fade" id="Section4">
 
 								<p>喜歡的話記得幫我們評分還有收藏唷</p>
+								
 							</div>
 						</div>
 					</div>
@@ -302,6 +351,6 @@ video::-webkit-media-controls-panel {
 			</div>
 		</div>
 	</div>
-<%-- 	<jsp:include page="jay/footer.jsp" /> --%>
+		<jsp:include page="/footer.jsp" />
 </body>
 </html>
