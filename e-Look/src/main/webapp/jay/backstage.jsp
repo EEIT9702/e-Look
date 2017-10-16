@@ -15,6 +15,20 @@
 <link type="text/css" rel="stylesheet" href="css/demo.css" />
 <link type="text/css" rel="stylesheet" href="css/jquery.mmenu.css" />
 </head>
+<style>
+nav li{
+	font-size: 18px;
+
+}
+.mm-navbar{
+background-color:	#5599FF;
+}
+.mm-menu .mm-navbar a{color:
+#FFFFFF;
+font-weight:bold;
+}
+.mm-listview>li>a{padding:60px 10px 60px 20px;}
+</style>
 <body>
 		<div id="page">
 			<div class="header">
@@ -22,8 +36,11 @@
 				管理者介面
 			</div>
 			<div class="content">
-				<p><strong>管理者介面</strong><br />
-					管理人員須知：<br>
+				<p><strong style="font-size: 50px">管理者介面</strong></p><br/>
+				<br>
+				<br>
+				<br>
+					<p style="font-size:40px;line-height: 40px; font-weight: bolder;">管理人員須知：<br>
 					確認網站的重要資訊。再次確認一下網站標題和網站描述是否<br>
 					正確，不枉費你辛辛苦苦建立一個網站。網站描述不需要風花<br>
 					雪月假文青去寫網站創立目標之類的文字，只需要簡單說明貴<br>
@@ -31,23 +48,15 @@
 					關鍵字，認真寫好這些關鍵字有很大的幫助。<br>
 					</p>
 			</div>
-			<nav id="menu">
-				<ul>
-					<li><a href="#">Home</a></li>
-					<li><span>About us</span>
-						<ul>
-							<li><a href="#about/history">History</a></li>
-							<li><span>The team</span>
-								<ul>
-									<li><a href="#about/team/management">Management</a></li>
-									<li><a href="#about/team/sales">Sales</a></li>
-									<li><a href="#about/team/development">Development</a></li>
-								</ul>
-							</li>
-							<li><a href="#about/address">Our address</a></li>
-						</ul>
-					</li>
-					<li><a href="#contact">Contact</a></li>
+			<nav id="menu" style="font-size: 18px">
+				<ul >
+					<li><a href="#" style="background-color:#FFCCCC">管理員</a></li>
+					<li><a href="#" style="background-color:#FFDDAA">活動管理</a></li>
+					<li><a href="#"style="background-color: #FFFFBB">輪播管理</a></li>
+			        <li><a href="#"style="background-color: #CCFF99">課程審查</a></li>
+					<li><a href="#"style="background-color: #BBFFEE	">收益報表</a></li>
+					<li><a href="#"style="background-color: #CCBBFF">檢舉管理</a></li>
+					
 				</ul>
 			</nav>
 		</div>

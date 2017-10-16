@@ -6,14 +6,14 @@
 <head>
 <jsp:useBean id="SYSTEM" class="init.GlobalService" scope="application"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="Shortcut Icon" type="image/x-icon" href="${SYSTEM.iconUri}" />
+<%-- <link rel="Shortcut Icon" type="image/x-icon" href="${SYSTEM.iconUri}" /> --%>
 
 <title>${SYSTEM.systemName}</title>
 </head>
 <body>
 <jsp:include page="/header.jsp"/>
 <form action="Upload" method="POST" enctype="multipart/form-data" >
-<input type="file" name="myFile">
+<input type="file" name="input-file-preview">
 <input type="submit">
 </form>
 </body>

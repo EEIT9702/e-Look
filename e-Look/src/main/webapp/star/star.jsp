@@ -10,7 +10,7 @@
 
         .n {-webkit-filter: grayscale(0); }
  </style>
-   
+
 </head>
 <body>
  <div>
@@ -23,9 +23,10 @@
     
     <div id="starnum" style="font-size:3em;color:red"></div>
     
-	<script src="js/jquery-1.12.3.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery-ui-effects.min.js"></script>
+	<script src="<%=request.getContextPath() %>/js/jquery-1.12.3.min.js"></script>
+    <script src="<%=request.getContextPath() %>/js/bootstrap.min.js"></script>
+	<script src="<%=request.getContextPath() %>/js/jquery-ui-effects.min.js"></script>
+
 	<script>
 		$(function(){
 			var flag1 = false;
@@ -46,8 +47,7 @@
 		             var out = this.id.substr(6);
 		              for (u = 1; u <= out; u++) {
 		          document.getElementById("idstar" + u).className = "s";
-		               
-		               
+		      
 			//	$('div img:nth-child(u)').switchClass('n','s',1000);
 			}
 			}
@@ -57,10 +57,13 @@
 				
 				   if (!flag1) { flag1 = true};
 				   document.getElementById("starnum").innerHTML = "你給" + this.id.substr(6) + "顆星";
+				   
+			//	   $.get("Buycourse",{"name":"score","score":this.id.substr(6)});
 		           
 			})
 			
 		})
 	</script>
+
 </body>
 </html>
