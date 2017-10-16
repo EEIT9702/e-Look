@@ -1,4 +1,4 @@
-package com.e_Look.courseClass;
+ package com.e_Look.courseClass;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,12 +27,12 @@ public class courseClassDAO implements courseClass_interface{
 		}
 	}
 
-	private static final String INSERT_courseClass = "insert into courseClass (ccName,eventID) values (?,?)"; 
+	private static final String INSERT_courseClass = "insert into courseClass (ccName) values (?)"; 
 	private static final String UPDATE_courseClass = "update courseClass set ccName=? eventID=? where CourseClassID=?"; 
 	private static final String DELETE_courseClass = "delete from courseClass where CourseClassID=?"; 
-	private static final String SELECT_courseClass = "select CourseClassID,ccName,eventID from BuyCourse where CourseClassID=?";
-	private static final String SELECT_event_courseClass = "select CourseClassID,ccName,eventID from BuyCourse where eventID=?";
-	private static final String SELECT_ALL_courseClass = "select CourseClassID,ccName,eventID from BuyCourse";
+	private static final String SELECT_courseClass = "select CourseClassID,ccName,eventID from courseClass where CourseClassID=?";
+	private static final String SELECT_event_courseClass = "select CourseClassID,ccName,eventID from courseClass where eventID=?";
+	private static final String SELECT_ALL_courseClass = "select CourseClassID,ccName,eventID from courseClass";
 	@Override
 	public void insert(courseClassVO courseClassVO) {
 		Connection conn =null;
@@ -42,8 +42,7 @@ public class courseClassDAO implements courseClass_interface{
 			
 			pstmt=conn.prepareStatement(INSERT_courseClass);
 			pstmt.setString(1,courseClassVO.getCcName());
-			pstmt.setInt(2,courseClassVO.getEventID());//在網頁中selected出eventID
-			//討論是否要在insert裡面加入eventID還是在update
+
 			pstmt.executeUpdate();
 			
 			
@@ -79,7 +78,6 @@ public class courseClassDAO implements courseClass_interface{
 			pstmt=conn.prepareStatement(DELETE_courseClass);
 			
 			pstmt.setInt(1,CourseClassID);
-			
 			pstmt.executeUpdate();
 			
 			
@@ -115,7 +113,7 @@ public class courseClassDAO implements courseClass_interface{
 			
 			pstmt.setString(1,courseClassVO.getCcName());
 			pstmt.setInt(2,courseClassVO.getEventID());
-			
+			pstmt.setInt(3,courseClassVO.getCourseClassID());
 			pstmt.executeUpdate();
 			
 			
