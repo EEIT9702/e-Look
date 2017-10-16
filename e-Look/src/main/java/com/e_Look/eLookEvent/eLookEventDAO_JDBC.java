@@ -4,24 +4,19 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
-
-import com.e_Look.buyCourse.model.BuyCourseVO;
 
 public class eLookEventDAO_JDBC implements eLookEvent_interface {
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=elook";
 	String userid = "sa";
 	// 第一組密碼
+	
 	String passwd = "P@ssw0rd";
 	// 第二組密碼
 	// String passwd = "123456";
@@ -240,40 +235,82 @@ public class eLookEventDAO_JDBC implements eLookEvent_interface {
 		//insert一筆資料
 		eLookEventDAO_JDBC daoJDBC=new eLookEventDAO_JDBC();
 		
-//		eLookEventVO dao = new eLookEventVO();
+		eLookEventVO dao = new eLookEventVO();
 //		dao.setEventName("萬聖節派對");
 //		
-//		
-//		try {
-//			dao.seteStartDate(new Date(System.currentTimeMillis()));
-//			dao.seteEndDate(new Date(System.currentTimeMillis()));
-//			dao.setePhoto(new FileInputStream(new File("D:/A550/GRD/R0014769.JPG")));
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
+//			String dateFirst="2017/10/25";//日期輸入位置
+//			String dateSecond="2017/12/25";//日期輸入位置
+//			String eStartDate=null;
+//			String eEndDate=null;
+//			
+//			if(dateFirst.indexOf("/")!=-1){
+//				eStartDate=dateFirst.replace('/', '-');
+//			}
+//			if(dateSecond.indexOf("/")!=-1){
+//				
+//				eEndDate=dateSecond.replace('/', '-');
+//			}
+//			dao.seteStartDate(java.sql.Date.valueOf(eStartDate));
+//			dao.seteEndDate(java.sql.Date.valueOf(eEndDate));
+//	
+//			try {
+//				dao.setePhoto(new FileInputStream(new File("D:/1.png")));
+//			} catch (FileNotFoundException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 //		dao.setDiscount(0.8);
 //		daoJDBC.insert(dao);
 		
+		//刪除單筆
+//		eLookEventVO list1 = daoJDBC.findByPrimaryKey(1001);
+//		daoJDBC.delete(1001);		
+		
+		//更新資料
+		dao.setEventName("萬聖節派對");
+		
+		String dateFirst="2017/10/25";//日期輸入位置
+		String dateSecond="2017/12/25";//日期輸入位置
+		String eStartDate=null;
+		String eEndDate=null;
+		
+		if(dateFirst.indexOf("/")!=-1){
+			eStartDate=dateFirst.replace('/', '-');
+		}
+		if(dateSecond.indexOf("/")!=-1){
+			
+			eEndDate=dateSecond.replace('/', '-');
+		}
+		dao.seteStartDate(java.sql.Date.valueOf(eStartDate));
+		dao.seteEndDate(java.sql.Date.valueOf(eEndDate));
+
+		try {
+			dao.setePhoto(new FileInputStream(new File("D:/1.png")));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	dao.setDiscount(0.8);
+		
 		
 		//查單筆
-		eLookEventVO list1 = daoJDBC.findByPrimaryKey(1001);
-	
-			System.out.print(list1.getEventName()+",");
-			System.out.print(list1.getePhoto()+",");
-			System.out.print(list1.geteStartDate()+",");
-			System.out.print(list1.geteEndDate()+",");
-			System.out.print(list1.getDiscount()+",");
+//		eLookEventVO list1 = daoJDBC.findByPrimaryKey(1001);
+//	
+//			System.out.print(list1.getEventName()+",");
+//			System.out.print(list1.getePhoto()+",");
+//			System.out.print(list1.geteStartDate()+",");
+//			System.out.print(list1.geteEndDate()+",");
+//			System.out.print(list1.getDiscount()+",");
 			
 		//查全部
-//		List<eLookEventVO> list2 = daoJDBC.getAll();
-//		for(eLookEventVO eLookEventVO:list2){
-//			System.out.print(eLookEventVO.getEventName()+",");
-//			System.out.print(eLookEventVO.geteStartDate()+",");
-//			System.out.print(eLookEventVO.geteEndDate()+",");
-//			System.out.print(eLookEventVO.getDiscount()+",");
-//		}
+		List<eLookEventVO> list2 = daoJDBC.getAll();
+		for(eLookEventVO eLookEventVO:list2){
+			System.out.print(eLookEventVO.getEventName()+",");
+			System.out.print(eLookEventVO.geteStartDate()+",");
+			System.out.print(eLookEventVO.getePhoto()+",");
+			System.out.print(eLookEventVO.geteEndDate()+",");
+			System.out.print(eLookEventVO.getDiscount()+",");
+		}
 	}
 
 }
