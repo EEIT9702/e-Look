@@ -10,7 +10,7 @@
 
         .n {-webkit-filter: grayscale(0); }
  </style>
-   
+
 </head>
 <body>
  <div>
@@ -26,6 +26,7 @@
 	<script src="<%=request.getContextPath() %>/js/jquery-1.12.3.min.js"></script>
     <script src="<%=request.getContextPath() %>/js/bootstrap.min.js"></script>
 	<script src="<%=request.getContextPath() %>/js/jquery-ui-effects.min.js"></script>
+
 	<script>
 		$(function(){
 			var flag1 = false;
@@ -64,5 +65,6 @@
 			
 		})
 	</script>
+
 </body>
 </html>

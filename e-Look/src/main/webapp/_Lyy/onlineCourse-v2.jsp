@@ -25,16 +25,23 @@
 /* 影片區塊 */
 video {
 	width: 100%;
-	height: 100%;
+/* 	height: 83%; */
 	padding-left: -15px;
 	padding-right: -15px;
 }
+#videoArea{
+background-image: url('videobackground.jpg') ;
+background-size: cover; 
+background-position: center;
+height:600px;
 
-#vidoeArea>.col-md-12 {
-	height: 73%;
+
 }
 
-#vidoeliststyle>li {
+/* #videoArea>.col-md-12 { */
+/* height: 100%; */
+/* } */
+#videoliststyle>li {
 	height: 50px;
 	font-size: 20px;
 	list-style-type: none;
@@ -42,10 +49,9 @@ video {
 	line-height: 50px;
 }
 
-#vidoeArea>div>div>ul {
+#videoArea>div>div>ul {
 	color: #FCFCFC;
-	width: 100%;
-	height: 82%;
+	height: 83%;
 	overflow-y: scroll;
 	margin: 0;
 	padding: 0;
@@ -63,16 +69,16 @@ video::-webkit-media-controls-panel {
 	width: calc(100% + 30px); /* Adjust as needed */
 }
 
-#vidoeDivListStyle {
+#videoDivListStyle {
 	border: 1px solid gray;
-	height: 99%;
+	height: 84%;
 	padding-left: -15px;
 	padding-right: -15px;
-	background-color:rgba(0%,10%,20%,0.3);;
+	background-color: rgba(0%, 10%, 20%, 0.3);;
 }
 
-#vidoeDivListStyle>div>h3 {
-	color: #BEBEBE;
+#videoDivListStyle>div>h3 {
+	color: 	#5B5B5B;
 	text-align: center;
 	font-weight: bold;
 }
@@ -165,19 +171,19 @@ video::-webkit-media-controls-panel {
 		<div class="container" style="background-color: gray">
 			<div class="row">
 
-				<div class="col-md-12 " id="vidoeArea">
-					<h1 align="center" style="color: white">videoname</h1>
+				<div class="col-md-12 "  id="videoArea">
+					<h1 align="center" style="color: black">videoname</h1>
 					<div class="col-md-12">
 						<div class="col-md-8 col-xs-12">
 							<video controls poster="poster.png">
 								<source src="tri.mp4" type="video/mp4">
 							</video>
 						</div>
-						<div class="col-md-4 col-xs-12" id="vidoeDivListStyle">
+						<div class="col-md-4 col-xs-12" id="videoDivListStyle">
 							<div>
 								<h3>推薦課程</h3>
 							</div>
-							<ul id="vidoeliststyle">
+							<ul id="videoliststyle">
 								<li>線上課程</li>
 								<li>免費課程</li>
 								<li>我要開課</li>
@@ -205,21 +211,25 @@ video::-webkit-media-controls-panel {
 
 
 				<div class="col-md-2 col-xs-3">
-					<img src="004-people.png" class="img-responsive center-block ">
+					<img src="<%=request.getContextPath()%>/_Lyy/004-people.png" class="img-responsive center-block ">
 					<h5 class="text-center">課程人數</h5>
 				</div>
 				<div class="col-md-2 col-xs-3">
-					<img src="clock.png" class="img-responsive center-block">
+					<img src="<%=request.getContextPath()%>/_Lyy/clock.png" class="img-responsive center-block">
 					<h5 class="text-center">課程時間</h5>
 				</div>
 				<div class="col-md-2 col-xs-3 ">
-					<img src="share.png" class="img-responsive center-block">
-					<h5 class="text-center">
-						<a href="#">分享連結</a>
-					</h5>
+					<img src="<%=request.getContextPath()%>/_Lyy/share.png" class="img-responsive center-block">				
+						<div class="dropdown text-center" style="margin:6px">
+							<a data-toggle="dropdown">分享連結 <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">FaceBook</a></li>
+								<li><a href="#">Google</a></li>
+							</ul>
+						</div>					
 				</div>
 				<div class="col-md-2 col-xs-3 ">
-					<img src="001-download.png" class="img-responsive center-block">
+					<img src="<%=request.getContextPath()%>/_Lyy/001-download.png" class="img-responsive center-block">
 					<h5 class="text-center">
 						<a href="#">講義下載</a>
 					</h5>
@@ -247,7 +257,7 @@ video::-webkit-media-controls-panel {
 						<ul class="nav nav-tabs" role="tablist">
 							<li role="presentation" class="active"><a href="#Section1"
 								aria-controls="home" role="tab" data-toggle="tab">課程簡介</a></li>
-							<li role="presentation" ><a href="#Section2"
+							<li role="presentation"><a href="#Section2"
 								aria-controls="home" role="tab" data-toggle="tab">講師簡介</a></li>
 							<li role="presentation"><a href="#Section3"
 								aria-controls="profile" role="tab" data-toggle="tab">課程討論</a></li>
@@ -292,5 +302,6 @@ video::-webkit-media-controls-panel {
 			</div>
 		</div>
 	</div>
+<%-- 	<jsp:include page="jay/footer.jsp" /> --%>
 </body>
 </html>

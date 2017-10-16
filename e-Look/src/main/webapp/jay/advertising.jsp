@@ -75,7 +75,7 @@ video::-webkit-media-controls-panel {
 	height: 14px;
 	cursor: pointer;
 	margin: 0px 2px;
-	background: url(images/rect_ctrl.png) no-repeat 0 0;
+	background: url(img/rect_ctrl.png) no-repeat 0 0;
 }
 
 #abgneBlock ul.playerControl li.current {
@@ -120,10 +120,10 @@ video::-webkit-media-controls-panel {
 		<div style="margin: 0px auto" id="abgneBlock">
 			<ul class="list">
 				<li ><video autoplay="autoplay" controls
-							src="images/Yif-Magic.mp4"></video></li>
-				<li><a target="_blank" href="#"><img src="images/04.jpg"></a></li>
-				<li><a target="_blank" href="#"><img src="images/02.jpg"></a></li>
-				<li><a target="_blank" href="#"><img src="images/03.jpg"></a></li>
+							src="<%=request.getContextPath()%>/img/Yif-Magic.mp4"></video></li>
+				<li><a target="_blank" href="#"><img src="<%=request.getContextPath()%>/img/04.jpg"></a></li>
+				<li><a target="_blank" href="#"><img src="<%=request.getContextPath()%>/img/02.jpg"></a></li>
+				<li><a target="_blank" href="#"><img src="<%=request.getContextPath()%>/img/03.jpg"></a></li>
 			</ul>
 		</div>
 	</div>
