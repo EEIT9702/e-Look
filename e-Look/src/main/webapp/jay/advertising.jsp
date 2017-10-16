@@ -4,9 +4,9 @@
 <!DOCTYPE>
 <html>
 <head>
-<script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script>
-<script
-	src="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.js"></script>
+<%-- <script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script> --%>
+<!-- <script -->
+<%-- 	src="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.js"></script> --%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
@@ -44,6 +44,7 @@ video::-webkit-media-controls-panel {
 	float: left;
 	width: 1450px;
 	height: 100%;
+
 }
 
 #abgneBlock .list img {

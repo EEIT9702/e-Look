@@ -4,9 +4,9 @@
 <!DOCTYPE>
 <html>
 <head>
-<script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script>  
-<script
-	src="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.js"></script>
+<%-- <script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script>   --%>
+<!-- <script -->
+<%-- 	src="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.js"></script> --%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">  
@@ -93,55 +93,26 @@ footer ul li a:hover{
         <div class="footer-top2"> 
            <div class="container">
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 text-center">
-                   <a href="#"><i class="fa fa-facebook fa-2x"></i>Facebook</a>
+                   <a href="#"><i class="fa fa-home fa-2x"></i>home</a>
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 text-center">
-                   <a href="#"><i class="fa fa-twitter fa-2x"></i>Twitter</a>
+                   <a href="#"><i class="fa fa-graduation-cap fa-2x"></i>我要開課</a>
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 text-center">
-                   <a href="#"><i class="fa fa-flickr fa-2x"></i>Flickr</a>
+                   <a href="#"><i class="fa fa-facebook fa-2x"></i>粉絲專頁</a>
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 text-center">
-                    <a href="#"><i class="fa fa-tumblr fa-2x"></i>Tumblr</a>
+                    <a href="#"><i class="fa fa-envelope-o fa-2x"></i>聯絡我們</a>
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 text-center">
-                    <a href="#"><i class="fa fa-github fa-2x"></i>Github</a>
+                    <a href="#"><i class="fa fa-users fa-2x"></i>關於我們</a>
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 text-center">
-                    <a href="#"><i class="fa fa-google-plus fa-2x"></i>Google</a>
+                    <a href="#"><i class="fa fa-child fa-2x"></i>會員中心</a>
                 </div>
            </div> 
         </div>  
         
-        <div class="container" style="border-top:1px solid grey;">
-            <div class="row text-center">   
-                <div class="col-lg-6 col-lg-offset-3">
-                      <ul class="menu">
-                                 
-                             <li>
-                                <a href="#">Home</a>
-                              </li>
-                                   
-                              <li>
-                                 <a href="#">About</a>
-                              </li>
-                                   
-                              <li>
-                                <a href="#">Blog</a>
-                              </li>
-                                   
-                              <li>
-                                 <a href="#">Gallery</a>
-                              </li>
-                                   
-                              <li>
-                                <a href="#">Contact</a>
-                             </li>
-                   
-                        </ul>
-                </div>
-            </div>
-        </div>
         
     </footer>
     
