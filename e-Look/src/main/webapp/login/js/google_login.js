@@ -43,7 +43,7 @@ var appStart = function() {
 					       var name=profile.getName();
 					       var email=profile.getEmail();
 					       var picture=profile.getImageUrl();
-					       var url="login.do";
+					       var url="login.login";
 					       var xmlHttp=new XMLHttpRequest();
 					       xmlHttp.open("POST",url,false);
 					       xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");

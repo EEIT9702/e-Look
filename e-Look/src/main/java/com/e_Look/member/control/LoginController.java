@@ -18,7 +18,7 @@ import com.e_Look.member.model.MemberVO;
 /**
  * Servlet implementation class Logincontroller
  */
-@WebServlet("/login.do")
+@WebServlet("*.login")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -93,7 +93,7 @@ public class LoginController extends HttpServlet {
 				
 				service.insertGoogleMember(email, mName, mPhoto);
 				memberVO = service.getMemberMail(email);
-//				System.out.println(memberVO);
+				System.out.println(memberVO);
 			}
 		}
 		session.setAttribute("LoginOK", memberVO);
