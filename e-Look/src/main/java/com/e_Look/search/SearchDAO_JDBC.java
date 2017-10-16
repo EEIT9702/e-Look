@@ -246,24 +246,24 @@ public class SearchDAO_JDBC implements SearchDAO_interface {
 	public static void main(String[] args) {
 		SearchDAO_JDBC dao=new SearchDAO_JDBC();
 		
-//		SearchVO searchVO=new SearchVO();
-//		searchVO.setKeyWord("Java");
-//		searchVO.setEnterTime(new Date(System.currentTimeMillis()));
-//		dao.insert(searchVO);
+		SearchVO searchVO=new SearchVO();
+		searchVO.setKeyWord("Java");
+		searchVO.setEnterTime(new Date(System.currentTimeMillis()));
+		dao.insert(searchVO);
 		
 		//searchVO.getEnterTime()不會有值 
 		//印出來的是按照熱門程度排序的關鍵字
 		//這組DAO可能只能用JDBC來寫
 		List<SearchVO> list0=dao.getKeywordRank(2);
-		for(SearchVO searchVO:list0){
-			System.out.println(searchVO.getKeyWord()+"\t");
+		for(SearchVO searchVO1:list0){
+			System.out.println(searchVO1.getKeyWord()+"\t");
 			
 		}
 
 //		List<SearchVO> list = dao.getAll();
-//		for(SearchVO searchVO1:list){
-//			System.out.print(searchVO1.getKeyWord()+"\t");
-//			System.out.println(searchVO1.getEnterTime());
+//		for(SearchVO searchVO2:list){
+//			System.out.print(searchVO2.getKeyWord()+"\t");
+//			System.out.println(searchVO2.getEnterTime());
 //			
 //		}
 //		

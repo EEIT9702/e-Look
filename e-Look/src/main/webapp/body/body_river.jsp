@@ -287,8 +287,8 @@ h5 {
 		var	wh = $(window).height();
 		//整份文件
 		var	dh =$(document).height();
-		$('a[href="#menu1"]').text(wst+"---"+dh+"---"+wh)
-		console.log(wst+"---"+dh+"---"+wh);
+		//$('a[href="#menu1"]').text(wst+"---"+dh+"---"+wh)
+		//console.log(wst+"---"+dh+"---"+wh);
 		//判斷卷軸是否到底部
 		if(wst==(dh-wh) ){
 			rowValueX++;
@@ -394,7 +394,7 @@ h5 {
 					class="svgIcon"
 					src="<%=request.getContextPath() %>/alan/img/program.svg"><br>程式</a></li>
 			<li id="li_searchArea">
-				<form class="navbar-form navbar-left" id="searchKey" method="get"
+				<form class="navbar-form navbar-left" id="searchKey" method="POST"
 					action="<%=request.getContextPath() %>/SearchController">
 					<div class="input-group">
 						<div class="outsideBorder">
@@ -409,18 +409,14 @@ h5 {
 										onclick="document.Search.submit()"
 										class="searchSubmitIcon"/>
 								</div>
-								
-<!-- 								<div class="keyword text-left">熱門關鍵字： -->
-<%-- 								<c:forEach var="searchVO" items="<%= new SearchDAO().getKeywordRank(3) %>" > --%>
-<%-- 								${searchVO.keyWord } --%>
-<%-- 								</c:forEach> --%>
-<!-- 								</div> -->
 							</div>
 						</div>
 						<p class="hotkeyword text-left">熱門：
 						<span class="keyword">
 							<c:forEach var="searchVO" items="<%= new SearchDAO().getKeywordRank(3) %>" >
-								${searchVO.keyWord }
+							<%-- <a href="<%= request.getRequestURI() + request.getQueryString() %>keyWord=">${searchVO.keyWord }</a> --%>
+									${searchVO.keyWord}
+
 							</c:forEach>
 						</span>
 <!-- 						<span class="keyword" id="keyword1">學英文</span>&nbsp; -->
