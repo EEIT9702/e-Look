@@ -57,6 +57,8 @@
 				
 				   if (!flag1) { flag1 = true};
 				   document.getElementById("starnum").innerHTML = "你給" + this.id.substr(6) + "顆星";
+				   
+			//	   $.get("Buycourse",{"name":"score","score":this.id.substr(6)});
 		           
 			})
 			
