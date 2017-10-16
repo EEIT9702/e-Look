@@ -78,7 +78,7 @@ video {
 }
 
 #videoArea>div>div>ul {
-	color: #FCFCFC;
+	color: white;
 	height: 83%;
 	overflow-y: scroll;
 	margin: 0;
@@ -106,7 +106,7 @@ video::-webkit-media-controls-panel {
 }
 
 #videoDivListStyle>div>h3 {
-	color: #5B5B5B;
+	color: white;
 	text-align: center;
 	font-weight: bold;
 }
@@ -207,8 +207,8 @@ video::-webkit-media-controls-panel {
 			<div class="row">
 
 				<div class="col-md-12 " id="videoArea"
-					style="background-image: url('<%=request.getContextPath()%>/_Lyy/videobackground.jpg')">
-					<h1 align="center" style="color: black">videoname</h1>
+					style="background-image: url('<%=request.getContextPath()%>/_Lyy/o.jpg')">
+					<h1 align="center" style="color: white">videoname</h1>
 					<div class="col-md-12">
 						<div class="col-md-8 col-xs-12">
 							<video controls
