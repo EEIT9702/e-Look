@@ -10,7 +10,7 @@
 <title>${SYSTEM.systemName} </title>
 </head>
 <body>
-<form action="<%=request.getContextPath() %>/Upload" method="POST" enctype="multipart/form-data" >
+<form action="<%=request.getContextPath() %>/Upload1" method="POST" enctype="multipart/form-data" >
 <!-- <input type="text" name="testtext" value="fjgifi" > -->
 <input type="file" name="myFile">
 <input type="submit">
