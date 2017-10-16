@@ -28,16 +28,20 @@ video {
 /* 	height: 83%; */
 	padding-left: -15px;
 	padding-right: -15px;
-	
-	
-	
+}
+#videoArea{
+background-image: url('videobackground.jpg') ;
+background-size: cover; 
+background-position: center;
+height:600px;
+
+
 }
 
-#vidoeArea>.col-md-12 {
-	height: 73%;
-}
-
-#vidoeliststyle>li {
+/* #videoArea>.col-md-12 { */
+/* height: 100%; */
+/* } */
+#videoliststyle>li {
 	height: 50px;
 	font-size: 20px;
 	list-style-type: none;
@@ -45,7 +49,7 @@ video {
 	line-height: 50px;
 }
 
-#vidoeArea>div>div>ul {
+#videoArea>div>div>ul {
 	color: #FCFCFC;
 	height: 83%;
 	overflow-y: scroll;
@@ -65,7 +69,7 @@ video::-webkit-media-controls-panel {
 	width: calc(100% + 30px); /* Adjust as needed */
 }
 
-#vidoeDivListStyle {
+#videoDivListStyle {
 	border: 1px solid gray;
 	height: 84%;
 	padding-left: -15px;
@@ -73,8 +77,8 @@ video::-webkit-media-controls-panel {
 	background-color: rgba(0%, 10%, 20%, 0.3);;
 }
 
-#vidoeDivListStyle>div>h3 {
-	color: #BEBEBE;
+#videoDivListStyle>div>h3 {
+	color: 	#5B5B5B;
 	text-align: center;
 	font-weight: bold;
 }
@@ -167,19 +171,19 @@ video::-webkit-media-controls-panel {
 		<div class="container" style="background-color: gray">
 			<div class="row">
 
-				<div class="col-md-12 " id="vidoeArea">
-					<h1 align="center" style="color: white">videoname</h1>
+				<div class="col-md-12 "  id="videoArea">
+					<h1 align="center" style="color: black">videoname</h1>
 					<div class="col-md-12">
 						<div class="col-md-8 col-xs-12">
 							<video controls poster="poster.png">
 								<source src="tri.mp4" type="video/mp4">
 							</video>
 						</div>
-						<div class="col-md-4 col-xs-12" id="vidoeDivListStyle">
+						<div class="col-md-4 col-xs-12" id="videoDivListStyle">
 							<div>
 								<h3>推薦課程</h3>
 							</div>
-							<ul id="vidoeliststyle">
+							<ul id="videoliststyle">
 								<li>線上課程</li>
 								<li>免費課程</li>
 								<li>我要開課</li>
