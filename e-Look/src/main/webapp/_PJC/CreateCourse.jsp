@@ -490,7 +490,6 @@
 								<div class="container">
 									<br />
 									<div class="row">
-
 										<div class="col-md-12">
 											<div class="panel panel-default">
 												<div class="panel-heading">
@@ -498,7 +497,6 @@
 												</div>
 												<div class="panel-body">
 													<div class="input-group image-preview">
-
 														<!-- don't give a name === doesn't send on POST/GET -->
 														<span> <!-- image-preview-clear button --> <span
 															id="filename"></span>
@@ -513,15 +511,11 @@
 																<span class="btn-label"><i
 																	class="glyphicon glyphicon-upload"></i></span>上傳
 															</button>
-
 														</span>
 													</div>
 													<!-- /input-group image-preview [TO HERE]-->
-
 													<br />
-
 													<!-- Drop Zone -->
-
 													<!-- Progress Bar -->
 													<div class="progress">
 														<div id="progressBar" class="progress-bar"
@@ -530,30 +524,13 @@
 															60% <span class="sr-only">60% Complete</span>
 														</div>
 													</div>
-													
-													
-													
-
-													
-
-
-
 													<br />
-
 												</div>
 											</div>
 										</div>
-
-
-
 									</div>
 								</div>
-
-
-
 								<!-- /container -->
-
-
 								<ul class="list-inline pull-right">
 									<li><button type="button"
 											class="btn btn-default prev-step">上一步</button></li>
