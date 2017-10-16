@@ -1,9 +1,13 @@
 package fileupload;
 
+
 import java.io.*;
 
 
+
 import javax.servlet.ServletException;
+
+
 
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -24,7 +28,7 @@ maxRequestSize:該次請求所有檔案的大小限制。					default=unlimit(by
 fileSizeThreshold = 1024 * 1024, 
 maxFileSize = 1024 * 1024 * 1024* 2L , 
 maxRequestSize = 1024 * 1024 * 1024* 3L)
-@WebServlet("/_PJC/Upload")
+@WebServlet("/Upload")
 public class Upload extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

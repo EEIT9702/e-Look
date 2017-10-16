@@ -45,7 +45,6 @@ nav:not(.mm-menu)
 {
 	display: none;
 }
-
 .header,
 .content,
 .footer
@@ -109,4 +108,7 @@ nav:not(.mm-menu)
 {
 	padding: 150px 50px 50px 50px;
 }
-.con
+body{background-image:url("/e-Look/jay/images/133.jpg");
+background-size:cover; 
+ }
+ 

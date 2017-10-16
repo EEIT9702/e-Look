@@ -22,7 +22,7 @@
 <form action="toolkie/ProgressUploadServlet" method="post" enctype="multipart/form-data" target="upload_iframe" onsubmit="showStatus(); ">
 <iframe name=upload_iframe width=0 height=0></iframe>
 <input type="file" name="input-file-preview"> 
-<input type="submit" value="開始上傳15" id="btnSubmit" >
+<input type="submit" value="開始上傳  " id="btnSubmit" >
 </form>
 
 <div id="status" style="display: none" >
