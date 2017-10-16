@@ -283,11 +283,9 @@ public class courseClassDAO_JDBC implements courseClass_interface{
 		
 //		查詢一筆
 //		courseClassVO courseClassVO = daoJdbc.findByCourseClassID(101);
-//		
 //			System.out.print(courseClassVO.getCourseClassID()+",");
 //			System.out.print(courseClassVO.getCcName()+",");
 //			System.out.print(courseClassVO.getEventID()+",");
-		
 //		}
 		
 //		查詢全部
