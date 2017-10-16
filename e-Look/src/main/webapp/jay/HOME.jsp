@@ -11,6 +11,9 @@
 }
 </style>
 <style type="text/css">
+#title1{
+padding-top:30px;
+}
 h5 {
 	font-size: 1.28571429em;
 	font-weight: 700;
@@ -131,10 +134,13 @@ h5 {
 	height: 60px;
 	font-size: 30px;
 }
+#course{
+margin-top:20px
+}
 </style>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<jsp:include page="/login.jsp"></jsp:include>
 </head>
 
 <body id="body">
@@ -157,7 +163,7 @@ h5 {
 	<div class="container">
 		<div class="row" style="padding-left:40px">
 			<!-- 	1 -->
-			<div class="col-md-4" style="width: 341px">
+			<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width: 341px">
 				<div class="card card-inverse" style="background-color: white;">
 					<img class="card-img-top" src="images/請上傳課程封面.png" alt="course"
 						id="wizardPicturePreview" title="">
@@ -180,7 +186,7 @@ h5 {
 				</div>
 			</div>
 			<!-- 2 -->
-			<div class="col-md-4" style="width: 341px ">
+			<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width: 341px ">
 				<div class="card card-inverse" style="background-color: white;">
 					<img class="card-img-top" src="images/請上傳課程封面.png" alt="course"
 						id="wizardPicturePreview" title="">
@@ -203,7 +209,7 @@ h5 {
 				</div>
 			</div>
 			<!-- 			3 -->
-			<div class="col-md-4" style="width: 341px">
+			<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width: 341px">
 				<div class="card card-inverse" style="background-color: white;">
 					<img class="card-img-top" src="images/請上傳課程封面.png" alt="course"
 						id="wizardPicturePreview" title="">
@@ -226,7 +232,7 @@ h5 {
 				</div>
 			</div>
 			<!-- 4 -->
-			<div class="col-md-4" style="width: 341px">
+			<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width: 341px">
 				<div class="card card-inverse" style="background-color: white;">
 					<img class="card-img-top" src="images/請上傳課程封面.png" alt="course"
 						id="wizardPicturePreview" title="">
@@ -261,7 +267,7 @@ h5 {
 			<div class="container">
 				<div class="row"style="padding-left:40px">
 					<!-- 	1 -->
-					<div class="col-md-4" style="width: 341px">
+					<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width: 341px">
 						<div class="card card-inverse" style="background-color: white;">
 							<img class="card-img-top" src="images/請上傳課程封面.png" alt="course"
 								id="wizardPicturePreview" title="">
@@ -284,7 +290,7 @@ h5 {
 						</div>
 					</div>
 					<!-- 2 -->
-					<div class="col-md-4" style="width: 341px">
+					<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width: 341px">
 						<div class="card card-inverse" style="background-color: white;">
 							<img class="card-img-top" src="images/請上傳課程封面.png" alt="course"
 								id="wizardPicturePreview" title="">
@@ -307,7 +313,7 @@ h5 {
 						</div>
 					</div>
 					<!-- 			3 -->
-					<div class="col-md-4" style="width: 341px">
+					<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width: 341px">
 						<div class="card card-inverse" style="background-color: white;">
 							<img class="card-img-top" src="images/請上傳課程封面.png" alt="course"
 								id="wizardPicturePreview" title="">
@@ -330,7 +336,7 @@ h5 {
 						</div>
 					</div>
 					<!-- 4 -->
-					<div class="col-md-4" style="width: 341px">
+					<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width: 341px">
 						<div class="card card-inverse" style="background-color: white;">
 							<img class="card-img-top" src="images/請上傳課程封面.png" alt="course"
 								id="wizardPicturePreview" title="">
