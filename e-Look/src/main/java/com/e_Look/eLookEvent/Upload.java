@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -25,7 +26,7 @@ maxRequestSize:該次請求所有檔案的大小限制。					default=unlimit(by
 fileSizeThreshold = 1024 * 1024, 
 maxFileSize = 1024 * 1024 * 1024* 2L , 
 maxRequestSize = 1024 * 1024 * 1024* 3L)
-@WebServlet("/Upload")
+@WebServlet("/Upload1")
 public class Upload extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -49,19 +50,30 @@ public class Upload extends HttpServlet {
 		//以下參考基礎JAVA IO
 		InputStream is = part.getInputStream();
 		
+		Double d = 0.8;
+		eLookEventVO vo=new eLookEventVO();
+		Date da=new Date(2017,10,16);
+		Date da1=new Date(2017,10,18);
+		vo.setEventName("ss");
+		vo.setePhoto(is);
+		vo.seteStartDate(da);
+		vo.seteEndDate(da1);
+		vo.setDiscount(d);
+		new eLookEventDAO().insert(vo);
+		
 		//建立資料夾		
 		//之後上傳檔案的路徑可以根據memberID和courseID動態變更		
 		//JAVA 路徑的兩種表示方式  由於\為跳脫字元 所以要打\\
 		//應該可省略判定資料夾是否存在，因為已經測試過傳不一樣名稱的檔案進去，這行並不會把原有的資料夾砍掉重建
 		
 		
-		FileOutputStream fos = new FileOutputStream("D:\\eLookvideo\\courseID\\courseID"+subFileName);
+/*		FileOutputStream fos = new FileOutputStream("D:\\eLookvideo\\courseID\\courseID"+subFileName);
 		int data;
 		while((data=is.read())!=-1){
 			fos.write(data);
 		}
 		fos.close();
-		is.close();		
+		is.close();	*/	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

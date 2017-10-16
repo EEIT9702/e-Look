@@ -54,7 +54,7 @@ font-weight:bold;
 					<li><a href="#" style="background-color:#FFDDAA">活動管理</a></li>
 					<li><a href="#"style="background-color: #FFFFBB">輪播管理</a></li>
 			        <li><a href="#"style="background-color: #CCFF99">課程審查</a></li>
-					<li><a href="#"style="background-color: #BBFFEE	">收益報表</a></li>
+					<li><a href="#"style="background-color: #BBFFEE">收益報表</a></li>
 					<li><a href="#"style="background-color: #CCBBFF">檢舉管理</a></li>
 					
 				</ul>
