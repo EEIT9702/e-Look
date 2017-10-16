@@ -28,7 +28,7 @@ public class Logout extends HttpServlet {
 		} catch (IllegalStateException  e) {
 			System.out.println(e.getMessage());
 		}
-		response.sendRedirect(request.getContextPath()+"/login.jsp");
+		response.sendRedirect(request.getContextPath()+"/HOME.jsp");
 		return;
 	}
 
