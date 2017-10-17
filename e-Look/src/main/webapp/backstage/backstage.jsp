@@ -3,17 +3,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE>
 <script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script>
-<script src="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.js"></script>
 <script type="text/javascript" src="css/jquery.mmenu.js"></script>
 		<script type="text/javascript">
 			$(function() {
 				$('nav#menu').mmenu();
 			});
 		</script>
+		<title>eLook後台管理系統</title>
 <html>
 <head>
 <link type="text/css" rel="stylesheet" href="css/demo.css" />
 <link type="text/css" rel="stylesheet" href="css/jquery.mmenu.css" />
+
 </head>
 <style>
 nav li{
