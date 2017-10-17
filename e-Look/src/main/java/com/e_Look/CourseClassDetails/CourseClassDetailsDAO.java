@@ -34,7 +34,7 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 	private static final String SELECT_ALL = "select CourseClassID,ccName,eventID from CourseClassDetails";
 
 	@Override
-	public void insert(CourseClassDetailsVO courseClassVO, CourseVO courseVO) {
+	public void insert(courseClassVO courseClassVO, CourseVO courseVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -66,7 +66,7 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 	}
 
 	@Override
-	public void update(CourseClassDetailsVO courseClassVO, CourseVO courseVO) {
+	public void update(courseClassVO courseClassVO, CourseVO courseVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -127,7 +127,7 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 	}
 
 	@Override
-	public List<CourseClassDetailsVO> findBycourseClassID(CourseClassDetailsVO CourseClassDetailsVO) {
+	public List<CourseClassDetailsVO> findBycourseClassID(Integer CourseClassID) {
 		List<CourseClassDetailsVO> findBycourseClassID = new LinkedList<CourseClassDetailsVO>();
 
 		Connection conn = null;
@@ -135,12 +135,11 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 
 		try {
 			pstmt = conn.prepareStatement(SELECT_findBycourseClassID);
-			pstmt.setInt(1, CourseClassDetailsVO.getCourseClassID());
+			pstmt.setInt(1, CourseClassID);
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// CourseClassDetailsVO CourseClassDetailsVO = new
-				// CourseClassDetailsVO();
+				CourseClassDetailsVO CourseClassDetailsVO = new CourseClassDetailsVO();
 				CourseClassDetailsVO.setCourseClassID(rs.getInt(1));
 				CourseClassDetailsVO.setCourseID(rs.getInt(2));
 				findBycourseClassID.add(CourseClassDetailsVO);
@@ -167,26 +166,59 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 	}
 
 	@Override
-	public List<CourseClassDetailsVO> findBycourseID(CourseVO CourseVO) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CourseClassDetailsVO> findBycourseID(Integer CourseID) {
+		List<CourseClassDetailsVO> findBycourseID = new LinkedList<CourseClassDetailsVO>();
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			pstmt = conn.prepareStatement(SELECT_findBycourseID);
+			pstmt.setInt(1, CourseID);
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				CourseClassDetailsVO CourseClassDetailsVO = new CourseClassDetailsVO();
+				CourseClassDetailsVO.setCourseClassID(rs.getInt(1));
+				CourseClassDetailsVO.setCourseID(rs.getInt(2));
+				findBycourseID.add(CourseClassDetailsVO);
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return findBycourseID;
 	}
 
 	@Override
 	public List<CourseClassDetailsVO> getAll() {
-List<CourseClassDetailsVO> getAll = new LinkedList<CourseClassDetailsVO>();
+		List<CourseClassDetailsVO> getAll = new LinkedList<CourseClassDetailsVO>();
 
-		Connection conn =null;
-		PreparedStatement pstmt=null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
 		try {
-			pstmt=conn.prepareStatement(SELECT_ALL);
-			ResultSet rs = pstmt.executeQuery();	
-			while(rs.next()){
+			pstmt = conn.prepareStatement(SELECT_ALL);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
 				CourseClassDetailsVO CourseClassDetailsVO = new CourseClassDetailsVO();
-				CourseClassDetailsVO.setCourseClassID(rs.getInt(1));	
-				CourseClassDetailsVO.setCourseID(rs.getInt(2));	
+				CourseClassDetailsVO.setCourseClassID(rs.getInt(1));
+				CourseClassDetailsVO.setCourseID(rs.getInt(2));
 				getAll.add(CourseClassDetailsVO);
-			}		
+			}
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -206,5 +238,11 @@ List<CourseClassDetailsVO> getAll = new LinkedList<CourseClassDetailsVO>();
 			}
 		}
 		return getAll;
+	}
+
+	@Override
+	public void delete(Integer courseID) {
+		// TODO Auto-generated method stub
+
 	}
 }
