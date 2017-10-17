@@ -1,4 +1,4 @@
-package com.e_Look.eLookEvent;
+package fileupload;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import com.e_Look.eLookEvent.eLookEventDAO;
+import com.e_Look.eLookEvent.eLookEventVO;
+
 /*@MultipartConfig 之屬性設定
 location:檔案上傳中，暫存時所存放的位置。若該資料夾不存在會丟出例外。	default=""
 fileSizeThreshold:暫存檔案的大小限制。						default=0(bytes)
@@ -27,7 +30,7 @@ fileSizeThreshold = 1024 * 1024,
 maxFileSize = 1024 * 1024 * 1024* 2L , 
 maxRequestSize = 1024 * 1024 * 1024* 3L)
 @WebServlet("/Upload1")
-public class Upload extends HttpServlet {
+public class Upload1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -40,13 +43,9 @@ public class Upload extends HttpServlet {
 		//取得MineType
 		String fileName = part.getSubmittedFileName();
 		System.out.println(fileName);
-		
-		
 		//取得副檔名".jpg"
 		String subFileName=fileName.substring(fileName.lastIndexOf("."));
 		System.out.println(subFileName);
-		
-		
 		//以下參考基礎JAVA IO
 		InputStream is = part.getInputStream();
 		

@@ -26,7 +26,8 @@ public class MessageDAO implements MessageDAO_interface {
 		}
 	}
 	private static final String INSERT_MESSAGE = "insert into Message ( mContent,mTime,messageID_response,memberID,courseID,bought,status) values ( ?, ?, ?, ?, ?, ?,?)";
-	private static final String UPDATE_MESSAGE = "update Message set mContent=?, mTime=?, messageID_response=? where messageID= ?";
+	private static final String UPDATE_MESSAGE = "update Message set mContent=?, mTime=? where messageID= ?";
+	private static final String UPDATE_MESSAGE_RESPONSE = "update Message set mContent=?, mTime=? where messageID_response= ?";
 	private static final String UPDATE_STATUS = "update Message set status=? where messageID= ?";
 	private static final String DELETE_MESSAGE = "delete from Message where messageID= ?";
 	private static final String SELECT_ONE_MESSAGE = "select messageID,mContent,mTime,messageID_response,memberID,courseID,bought,status from Message where messageID= ?";
@@ -84,6 +85,7 @@ public class MessageDAO implements MessageDAO_interface {
 			} else if (update.equalsIgnoreCase("status")) {
 				pstmt = con.prepareStatement(UPDATE_STATUS);
 				pstmt.setByte(1, messageVO.getStatus());
+				pstmt.setInt(2, messageVO.getMessageID());
 				pstmt.executeUpdate();
 			} 
 		} catch (SQLException e) {
