@@ -253,15 +253,21 @@ function river(){
 	//整份文件
 	var	dh =$(document).height();
 	//$('a[href="#menu1"]').text(wst+"---"+dh+"---"+wh)
-	//console.log(wst+"---"+dh+"---"+wh);
+	console.log(wst+"---"+dh+"---"+wh+","+wh+","+(dh-wh));
 	//判斷卷軸是否到底部
-	if(wst==(dh-wh) ){
+	//有時候卷軸會多0.5  改>=的寫法可以解決這個問題
+	if( wst>=(dh-wh) || rowValueX==0 ){
 		rowValueX++;
-		$.get("<%= request.getContextPath() %>/body/body_data.jsp",{"rowValueY":rowValueX},function(data){
+		$.get("<%= request.getContextPath() %>/body/body_data2.jsp",{"rowValueY":rowValueX},function(data){
 			$('#river').append(data);
 		});
 	}
 }
+
+	
+	
+
+
 
 
 /*延遲載入圖片*/
@@ -309,7 +315,7 @@ function checkHeight() {
 
 
 <!-- form按鈕圖式star -->
-<div class="formDiv" style="">
+<div class="formDiv container" style="">
 	<div class="col-md-10 ">
 	<form class="formicon" action="">
 	
