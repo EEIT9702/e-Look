@@ -5,16 +5,51 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Sales Countdown</title>
+<script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script>
 <style>
 #left{
 	margin-top:60px;
 }
 </style>
 <script type="text/javascript">
-document.addEventListener("DOMContentLoaded", function () {
-	startCount();
+$(document).ready(function(){
+	$(document).mousemove(function(e1) {
+		//開始取得滑鼠在螢幕中座標函數
+		getScreenCoordinates(e1);
+		//開始倒數計時函數
+		startCount();
+	});
+	$(document).mousemove(function(e2) {
+		//開始取得滑鼠在視窗客戶區中座標函數
+ 		getClientCoordinates(e2);
+	});
+	$(document).mousemove(function(e3) {
+		//開始取得滑鼠在視窗頁面中座標函數
+ 		getPageCoordinates(e3);
+	});
 });
-	//開始倒數計時函數
+//取得滑鼠在螢幕中座標
+function getScreenCoordinates(e1) {
+	x1 = e1.screenX;
+	y1 = e1.screenY;
+	$("#screen1").text("X:" + x1 + ", Y:" + y1)
+}
+
+function getClientCoordinates(e2) {
+	x2 = e2.clientX;
+	y2 = e2.clientY;
+	$("#screen2").text("X:" + x2 + ", Y:" + y2)
+}
+
+function getPageCoordinates(e3) {
+	x3 = e3.pageX;
+	y3 = e3.pageY;
+	$("#screen3").text("X:" + x3 + ", Y:" + y3)
+}
+// document.addEventListener("DOMContentLoaded", function () {
+// 	startCount();
+// });
+	/*開始倒數計時函數*/
 	function startCount() {
 		//開始一個timer,間隔為1秒
 		setInterval(function(){
@@ -70,9 +105,13 @@ document.addEventListener("DOMContentLoaded", function () {
 </head>
 <body style="text-align:center" bgcolor="#FFF7E8">
 
-	<div>
-		<h1 style="color:#9F35FF;text-shadow:5px -5px 5px #FFAF60" id="left"></h1>
+	<div style="margin-bottom:600px;">
+		<h1 style="color:#9F35FF;text-shadow:5px -5px 5px #FFAF60;" id="left"></h1>
 	</div>
-	
+	<div style="width:40%;height:600px;margin-left:auto;margin-right:auto;">
+		<h2 style="width:100%;">滑鼠目前的(整個)螢幕座標：<span id="screen1"></span>.</h2>
+		<h2 style="width:100%;">滑鼠目前的視窗(可視)客戶區座標：<span id="screen2"></span>.</h2>
+		<h2 style="width:100%;">滑鼠目前的視窗(實際)頁面座標：<span id="screen3"></span>.</h2>
+	</div>
 </body>
 </html>

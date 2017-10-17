@@ -134,7 +134,7 @@ float:none;
 				<li><a href="#menu1"><img src="<%=request.getContextPath() %>/HeaderCssJs/003-coins.png"height="30">募資</a></li>
 				<li><a href="#menu2"><img src="<%=request.getContextPath() %>/HeaderCssJs/002-team.png" height="30">線上課程</a></li>
 				<li><a href="#menu2"><img src="<%=request.getContextPath() %>/HeaderCssJs/004-gift.png"height="30">免費課程</a></li>
-				<li><a href="#menu2"><img src="<%=request.getContextPath() %>/HeaderCssJs/001-book.png" height="30">我要開課</a></li>
+				<li><a href="<%=request.getContextPath() %>/_PJC/CreateCourse.jsp"><img src="<%=request.getContextPath() %>/HeaderCssJs/001-book.png" height="30">我要開課</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right" id="nopadding">
 			<c:choose>
@@ -199,6 +199,9 @@ float:none;
     				<li class=" text-center"><a onclick="signOut()" href="<%=request.getContextPath()%>/logout.do"><img align="left" src="<%=request.getContextPath() %>/HeaderCssJs/exit.png" height="30">登出</a></li>
   					</ul>
 				</li>
+				</c:when>
+				<c:when test="${!empty loginerr}">
+				<li><a href="#"data-toggle="modal" data-target="#myModal2"><img src="<%=request.getContextPath() %>/HeaderCssJs/001-login.png"height="30" />登入</a></li>
 				</c:when>
 				<c:when test="${empty err}">
 				<li><a href="#"data-toggle="modal" data-target="#myModal"><img src="<%=request.getContextPath() %>/HeaderCssJs/001-login.png"height="30" />登入</a></li>

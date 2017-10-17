@@ -3,18 +3,16 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.emp.model.EmpVO" table="emp2" >
+    <class name="com.e_Look.eLookEvent.eLookEventVO" table="eLookEvent" >
         
-        <id name="empno" column="empno">
+        <id name="eventID" column="eventID">
             <generator class="identity"/>
         </id>
         
-        <property name="ename" column="ename" />
-        <property name="job" column="job" />
-        <property name="hiredate" column="hiredate" />
-        <property name="sal" column="sal" />
-        <property name="comm" column="comm" />
-        <property name="deptno" column="deptno" />
-        
+        <property name="eventName" column="eventName" />
+        <property name="ePhoto" column="ePhoto" />
+        <property name="eStartDate" column="eStartDate" />
+        <property name="eEndDate" column="eEndDate" />
+        <property name="discount" column="discount" />       
     </class>
 </hibernate-mapping>
