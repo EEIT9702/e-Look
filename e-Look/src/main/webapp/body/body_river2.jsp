@@ -148,8 +148,8 @@ h5 {
 }
 /* 分類icon */
 .formDiv{
-	width:78%;
-	height:12%;
+	/*width:78%;*/
+	height:100px;
 	margin-bottom:1%;
 	margin-left:auto;
 	margin-right:auto;
