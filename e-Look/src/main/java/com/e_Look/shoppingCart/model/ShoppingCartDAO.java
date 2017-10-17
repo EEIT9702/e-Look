@@ -2,6 +2,8 @@ package com.e_Look.shoppingCart.model;
 
 import java.util.List;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 
 import com.e_Look.Course.CourseVO;
@@ -50,8 +52,8 @@ public class ShoppingCartDAO implements ShoppingCartDAO_interface {
 	
 	
 	public static void main(String[] args){
-		
-		ShoppingCartDAO dao=new ShoppingCartDAO();
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config.xml");
+		ShoppingCartDAO_interface dao=(ShoppingCartDAO_interface) context.getBean("shoppingCartDAO");
 		List<CourseVO> list=dao.findByMemberID(100001);
 		
 		for(CourseVO courseVO:list ){
