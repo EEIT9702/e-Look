@@ -55,7 +55,7 @@
 /* 影片區塊 */
 video {
 	width: 100%;
-	/* 	height: 83%; */
+	height: 69%; 
 	padding-left: -15px;
 	padding-right: -15px;
 }
@@ -78,8 +78,9 @@ video {
 }
 
 #videoArea>div>div>ul {
-	color: #FCFCFC;
-	height: 83%;
+	width: 100%;
+	color: white;
+	height: 80%;
 	overflow-y: scroll;
 	margin: 0;
 	padding: 0;
@@ -99,14 +100,14 @@ video::-webkit-media-controls-panel {
 
 #videoDivListStyle {
 	border: 1px solid gray;
-	height: 84%;
+	height: 69%;
 	padding-left: -15px;
 	padding-right: -15px;
 	background-color: rgba(0%, 10%, 20%, 0.3);;
 }
 
 #videoDivListStyle>div>h3 {
-	color: #5B5B5B;
+	color: white;
 	text-align: center;
 	font-weight: bold;
 }
@@ -207,12 +208,11 @@ video::-webkit-media-controls-panel {
 			<div class="row">
 
 				<div class="col-md-12 " id="videoArea"
-					style="background-image: url('<%=request.getContextPath()%>/_Lyy/videobackground.jpg')">
-					<h1 align="center" style="color: black">videoname</h1>
+					style="background-image: url('<%=request.getContextPath()%>/_Lyy/o.jpg')">
+					<h1 align="center" style="color: white">videoname</h1>
 					<div class="col-md-12">
 						<div class="col-md-8 col-xs-12">
-							<video controls
-								poster="<%=request.getContextPath()%>/_Lyy/poster.png">
+							<video controls	poster="<%=request.getContextPath()%>/_Lyy/poster.png">
 								<source src="<%=request.getContextPath()%>/_Lyy/tri.mp4"
 									type="video/mp4">
 							</video>
