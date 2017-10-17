@@ -124,7 +124,7 @@ float:none;
 				<span class="icon-bar"></span> 
 				<span class="icon-bar"></span>
 			</button>
-			<a href="#"><img src="<%=request.getContextPath() %>/HeaderCssJs/eLook_LOGO.png" height="75"
+			<a href="<%=request.getContextPath() %>/HOME.jsp"><img src="<%=request.getContextPath() %>/HeaderCssJs/eLook_LOGO.png" height="75"
 				 alt="e-Look"></a>
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar" >
