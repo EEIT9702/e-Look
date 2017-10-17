@@ -19,17 +19,17 @@ public class MessageVO implements Serializable {
 	public MessageVO(){}
 	
 
-	public MessageVO(Integer messageID, String mContent, Date mTime, Integer messageID_response, Integer memberID,
-			Integer courseID, Long bought, Byte status) {
-		this.messageID = messageID;
-		this.mContent = mContent;
-		this.mTime = mTime;
-		this.messageID_response = messageID_response;
-		this.memberID = memberID;
-		this.courseID = courseID;
-		this.bought = bought;
-		this.status = status;
-	}
+//	public MessageVO(Integer messageID, String mContent, Date mTime, Integer messageID_response, Integer memberID,
+//			Integer courseID, Long bought, Byte status) {
+//		this.messageID = messageID;
+//		this.mContent = mContent;
+//		this.mTime = mTime;
+//		this.messageID_response = messageID_response;
+//		this.memberID = memberID;
+//		this.courseID = courseID;
+//		this.bought = bought;
+//		this.status = status;
+//	}
 
 
 	public Integer getMessageID() {
