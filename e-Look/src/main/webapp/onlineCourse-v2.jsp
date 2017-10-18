@@ -55,7 +55,7 @@
 /* 影片區塊 */
 video {
 	width: 100%;
-	height: 69%; 
+	height: 80%; 
 	padding-left: -15px;
 	padding-right: -15px;
 }
@@ -63,7 +63,8 @@ video {
 #videoArea {
 	background-size: cover;
 	background-position: center;
-	height: 600px;
+	height:75%;
+	
 }
 
 /* #videoArea>.col-md-12 { */
@@ -100,7 +101,7 @@ video::-webkit-media-controls-panel {
 
 #videoDivListStyle {
 	border: 1px solid gray;
-	height: 69%;
+	height: 80%;
 	padding-left: -15px;
 	padding-right: -15px;
 	background-color: rgba(0%, 10%, 20%, 0.3);;
@@ -198,23 +199,36 @@ video::-webkit-media-controls-panel {
 .nstar {
 	-webkit-filter: grayscale(0);
 }
+/* video::-webkit-media-controls { */
+/*   display:none; */
+/* } */
 </style>
+<script>
+	function setControl() {
+		var video = document.getElementById("vidoeControl");
+
+		if (true) {
+			video.controls = true;
+		} else {
+			video.controls = none;
+		}
+	}
+</script>
 </head>
 <!-- 影片區 -->
 <body oncontextmenu="window.event.returnValue=false">
 	<jsp:include page="/login.jsp" flush="true" />
 	<div class="container-fluid">
-		<div class="container" >
+		<div class="container"  style="background-color:gray;">
 			<div class="row">
 
-				<div class="col-md-12 " id="videoArea"
+				<div class="col-md-12 " id="videoArea" 
 					style="background-image: url('<%=request.getContextPath()%>/_Lyy/o.jpg')">
 					<h1 align="center" style="color: white">videoname</h1>
 					<div class="col-md-12">
 						<div class="col-md-8 col-xs-12">
-							<video controls	poster="<%=request.getContextPath()%>/_Lyy/poster.png">
-								<source src="<%=request.getContextPath()%>/_Lyy/tri.mp4"
-									type="video/mp4">
+							<video 	poster="<%=request.getContextPath()%>/_Lyy/poster.png" id="vidoeControl">
+								<source src="<%=request.getContextPath()%>/_Lyy/tri.mp4" type="video/mp4">
 							</video>
 						</div>
 						<div class="col-md-4 col-xs-12" id="videoDivListStyle">
@@ -266,6 +280,7 @@ video::-webkit-media-controls-panel {
 						<ul class="dropdown-menu">
 							<li><a href="#">FaceBook</a></li>
 							<li><a href="#">Google</a></li>
+							<li><a href=”#”>Line</a></li>
 						</ul>
 					</div>
 				</div>
