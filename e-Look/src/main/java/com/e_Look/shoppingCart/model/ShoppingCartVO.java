@@ -8,22 +8,23 @@ public class ShoppingCartVO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer memberID;
-	private CourseVO courseVO;
-
+	private Integer courseID;
 	public Integer getMemberID() {
 		return memberID;
 	}
-
 	public void setMemberID(Integer memberID) {
 		this.memberID = memberID;
 	}
-
-	public CourseVO getCourseVO() {
-		return courseVO;
+	public Integer getCourseID() {
+		return courseID;
+	}
+	public void setCourseID(Integer courseID) {
+		this.courseID = courseID;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
-	public void setCourseVO(CourseVO courseVO) {
-		this.courseVO = courseVO;
-	}
+
 
 }
