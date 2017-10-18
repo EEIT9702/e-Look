@@ -9,14 +9,11 @@
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.css"
 	rel="stylesheet">
+<!-- <!-- jQuery -->
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
+
+<!-- <!-- Bootstrap Core JavaScript -->
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
-
-
-<link href="<%=request.getContextPath()%>/css/documentation.css" />
-
-<script src="<%=request.getContextPath()%>/js/raphael.js"></script>
-<script src="<%=request.getContextPath()%>/js/jquery.classyled.min.js"></script>
 <script>
 	$(document).ready(function() {
 		$(".col-md-4 a").click(function() {
@@ -24,18 +21,70 @@
 		});
 	});
 </script>
-
+<script>
+	$(function() {
+		var flag1 = false;
+		$('img').hover(over, out);
+		function over() {
+			if (!flag1) {
+				var movein = this.id.substr(6);
+				for (i = 1; i <= movein; i++) {
+					document.getElementById("idstar" + i).className = "nstar";
+				//	$('img:lt(i)').switchClass('s','n',1000);
+				}
+			}
+		}
+		function out() {
+			if (!flag1) {
+				var out = this.id.substr(6);
+				for (u = 1; u <= out; u++) {
+					document.getElementById("idstar" + u).className = "star";
+				//	$('div img:nth-child(u)').switchClass('n','s',1000);
+				}
+			}
+		}
+		$('img').click(function() {
+			if (!flag1) {
+				flag1 = true};
+// 			 document.getElementById("starnum").innerHTML = "你給" + this.id.substr(6) + "顆星";
+//	       $.get("Buycourse",{"name":"score","score":this.id.substr(6)});
+		})
+	})
+</script>
 <style>
 /* 影片區塊 */
 video {
 	width: 100%;
-	height: 75%;
+	height: 80%; 
+	padding-left: -15px;
+	padding-right: -15px;
 }
 
 #videoArea {
 	background-size: cover;
 	background-position: center;
-	height: 600px;
+	height:75%;
+	
+}
+
+/* #videoArea>.col-md-12 { */
+/* height: 100%; */
+/* } */
+#videoliststyle>li {
+	height: 50px;
+	font-size: 20px;
+	list-style-type: none;
+	border-bottom: 1px solid #8E8E8E;
+	line-height: 50px;
+}
+
+#videoArea>div>div>ul {
+	width: 100%;
+	color: white;
+	height: 80%;
+	overflow-y: scroll;
+	margin: 0;
+	padding: 0;
 }
 
 video::-internal-media-controls-download-button {
@@ -52,23 +101,16 @@ video::-webkit-media-controls-panel {
 
 #videoDivListStyle {
 	border: 1px solid gray;
-	height: 75%;
+	height: 80%;
 	padding-left: -15px;
 	padding-right: -15px;
-	background-color: rgba(0%, 10%, 20%, 0.9);
+	background-color: rgba(0%, 10%, 20%, 0.3);;
 }
 
 #videoDivListStyle>div>h3 {
 	color: white;
 	text-align: center;
 	font-weight: bold;
-}
-
-#videoDivListStyle>div>div>p {
-	color: white;
-	font-weight: bold;
-	display: inline-block;
-	font-size: 20px;
 }
 /* a:hover, a:focus { */
 /* 	outline: none; */
@@ -150,7 +192,6 @@ video::-webkit-media-controls-panel {
 	font-size: 24px;
 	margin-top: 0;
 }
-
 .star {
 	-webkit-filter: grayscale(1);
 }
@@ -158,73 +199,56 @@ video::-webkit-media-controls-panel {
 .nstar {
 	-webkit-filter: grayscale(0);
 }
+/* video::-webkit-media-controls { */
+/*   display:none; */
+/* } */
 </style>
+<script>
+	function setControl() {
+		var video = document.getElementById("vidoeControl");
+
+		if (true) {
+			video.controls = true;
+		} else {
+			video.controls = none;
+		}
+	}
+</script>
 </head>
 <!-- 影片區 -->
 <body oncontextmenu="window.event.returnValue=false">
 	<jsp:include page="/login.jsp" flush="true" />
 	<div class="container-fluid">
-		<div class="container">
+		<div class="container"  style="background-color:gray;">
 			<div class="row">
 
-				<div class="col-md-12 " id="videoArea"
+				<div class="col-md-12 " id="videoArea" 
 					style="background-image: url('<%=request.getContextPath()%>/_Lyy/o.jpg')">
 					<h1 align="center" style="color: white">videoname</h1>
 					<div class="col-md-12">
 						<div class="col-md-8 col-xs-12">
-							<video poster="<%=request.getContextPath()%>/_Lyy/poster.png">
-								<source src="<%=request.getContextPath()%>/_Lyy/tri.mp4"
-									type="video/mp4">
+							<video 	poster="<%=request.getContextPath()%>/_Lyy/poster.png" id="vidoeControl">
+								<source src="<%=request.getContextPath()%>/_Lyy/tri.mp4" type="video/mp4">
 							</video>
 						</div>
 						<div class="col-md-4 col-xs-12" id="videoDivListStyle">
 							<div>
-								<h3>募資進行中</h3>
-								<div style="margin: 20px 0">
-									<div class="pull-left">
-										<p style="font-size: 20px; color: white">目標人數100人</p>
-									</div>
-									<div class="pull-right">
-										<p style="font-size: 20px; color: white">達成30%</p>
-									</div>
-									<div class="clearfix"></div>
-									<div class="progress progress-striped active">
-										<div class="progress-bar progress-bar-info" role="progressbar"
-											aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-											style="width: 30%;"></div>
-									</div>
-								</div>
-								<div style="margin: 20px 0">
-									<div style="text-align: center; color: white">
-										<p>剩餘時間</p>
-									</div>
-									<div class="led3  text-center "></div>
-								</div>
-
-								<div style="margin: 20px 0">
-									<div class="col-md-6 "
-										style="border-right: 1px solid white; border-left: 1px solid white">
-										<div class="text-left" style="font-size: 20px; color: white">原始價格
-										</div>
-										<div class="text-right" style="font-size: 20px; color: white">
-											<s>NT1234</s>
-										</div>
-									</div>
-									<div class="col-md-6"
-										style="border-right: 1px solid white; border-left: 1px solid white">
-										<div class="text-left" style="font-size: 20px; color: white">募資價格
-										</div>
-										<div class="text-right" style="font-size: 20px; color: white">NT1000</div>
-									</div>
-								</div>
-
-								<div style="margin: 20px 0">
-									<button type="button" class="btn-warning btn-lg"
-										style="width: 100%">我要加入募資</button>
-								</div>
-
-
+								<h3>推薦課程</h3>
 							</div>
+							<ul id="videoliststyle">
+								<li>線上課程</li>
+								<li>免費課程</li>
+								<li>我要開課</li>
+								<li>免費課程</li>
+								<li>我要開課</li>
+								<li>免費課程</li>
+								<li>我要開課</li>
+								<li>免費課程</li>
+								<li>我要開課</li>
+								<li>免費課程</li>
+								<li>我要開課</li>
+								<li>免費課程</li>
+							</ul>
 						</div>
 					</div>
 				</div>
@@ -239,14 +263,14 @@ video::-webkit-media-controls-panel {
 
 
 				<div class="col-md-2 col-xs-3">
-					<%-- 					<img src="<%=request.getContextPath()%>/_Lyy/004-people.png" --%>
-					<!-- 						class="img-responsive center-block "> -->
-					<!-- 					<h5 class="text-center">課程人數</h5> -->
+					<img src="<%=request.getContextPath()%>/_Lyy/004-people.png"
+						class="img-responsive center-block ">
+					<h5 class="text-center">課程人數</h5>
 				</div>
 				<div class="col-md-2 col-xs-3">
-					<%-- 					<img src="<%=request.getContextPath()%>/_Lyy/clock.png" --%>
-					<!-- 						class="img-responsive center-block"> -->
-					<!-- 					<h5 class="text-center">課程時間</h5> -->
+					<img src="<%=request.getContextPath()%>/_Lyy/clock.png"
+						class="img-responsive center-block">
+					<h5 class="text-center">課程時間</h5>
 				</div>
 				<div class="col-md-2 col-xs-3 ">
 					<img src="<%=request.getContextPath()%>/_Lyy/share.png"
@@ -256,30 +280,31 @@ video::-webkit-media-controls-panel {
 						<ul class="dropdown-menu">
 							<li><a href="#">FaceBook</a></li>
 							<li><a href="#">Google</a></li>
+							<li><a href=”#”>Line</a></li>
 						</ul>
 					</div>
 				</div>
 				<div class="col-md-2 col-xs-3 ">
-					<%-- 					<img src="<%=request.getContextPath()%>/_Lyy/001-download.png" --%>
-					<!-- 						class="img-responsive center-block"> -->
-					<!-- 					<h5 class="text-center"> -->
-					<!-- 						<a href="#">講義下載</a> -->
-					<!-- 					</h5> -->
+					<img src="<%=request.getContextPath()%>/_Lyy/001-download.png"
+						class="img-responsive center-block">
+					<h5 class="text-center">
+						<a href="#">講義下載</a>
+					</h5>
 				</div>
 				<div class="col-md-2 col-xs-6 ">
-					<!-- 					<h5>課程售價</h5> -->
-					<!-- 					<h2 style="text-align: center; font-weight: bold;">NT1230</h2> -->
+					<h5>課程售價</h5>
+					<h2 style="text-align: center; font-weight: bold;">Free</h2>
 				</div>
-				<div class="col-md-2 col-xs-6 center-block">
-					<!-- 					<div style="width:70px;margin:0 auto"> -->
-					<%-- 						<img id="idstar1" class="star" src="<%=request.getContextPath()%>/star/ystar.png" />  --%>
-					<%-- 						<img id="idstar2" class="star" src="<%=request.getContextPath()%>/star/ystar.png" />  --%>
-					<%-- 						<img id="idstar3" class="star " src="<%=request.getContextPath()%>/star/ystar.png" />  --%>
-					<%-- 						<img id="idstar4" class="star " src="<%=request.getContextPath()%>/star/ystar.png" />  --%>
-					<%-- 						<img id="idstar5" class="star " src="<%=request.getContextPath()%>/star/ystar.png" /> --%>
-					<!-- 					</div> -->
-					<!-- 					<button type="button" class="btn btn-success center-block" -->
-					<!-- 						style="width: 160px">加入購物車</button> -->
+				<div class="col-md-2 col-xs-6 center-block" style="margin-top:10px">
+					<div style="width:70px;margin:0 auto">
+						<img id="idstar1" class="star" src="<%=request.getContextPath()%>/star/ystar.png" /> 
+						<img id="idstar2" class="star" src="<%=request.getContextPath()%>/star/ystar.png" /> 
+						<img id="idstar3" class="star " src="<%=request.getContextPath()%>/star/ystar.png" /> 
+						<img id="idstar4" class="star " src="<%=request.getContextPath()%>/star/ystar.png" /> 
+						<img id="idstar5" class="star " src="<%=request.getContextPath()%>/star/ystar.png" />
+					</div>
+					<button type="button" class="btn btn-primary center-block"
+						style="width: 160px">贊助</button>
 				</div>
 			</div>
 		</div>
@@ -333,7 +358,7 @@ video::-webkit-media-controls-panel {
 							<div role="tabpanel" class="tab-pane fade" id="Section4">
 
 								<p>喜歡的話記得幫我們評分還有收藏唷</p>
-
+								
 							</div>
 						</div>
 					</div>
@@ -341,18 +366,6 @@ video::-webkit-media-controls-panel {
 			</div>
 		</div>
 	</div>
-	<jsp:include page="/footer.jsp" />
+		<jsp:include page="/footer.jsp" />
 </body>
-<script>
-
-	$('.led3').ClassyLED({
-		type : 'countdown',
-		format : 'ddd:hh:mm:ss',
-		countTo : '2017:10:30',
-		color : '#af0',
-		backgroundColor : '	#272727',
-		size : 4,
-		fontType : 2,
-	});
-</script>
 </html>
