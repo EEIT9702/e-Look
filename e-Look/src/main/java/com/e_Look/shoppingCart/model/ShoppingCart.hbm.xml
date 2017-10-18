@@ -5,11 +5,15 @@
 
 <hibernate-mapping>
     <class name="com.e_Look.shoppingCart.model.ShoppingCartVO" table="ShoppingCart" >
+        
+        
         <composite-id>
             <key-property name="memberID" column="memberID" />
-            <key-many-to-one name="courseID" class="com.e_Look.Course.CourseVO" >
-                <column name="courseID"/>
-            </key-many-to-one>
+            <key-property name="courseID" column="courseID" />
         </composite-id>
+        
+        
+        
+        
     </class>
 </hibernate-mapping>

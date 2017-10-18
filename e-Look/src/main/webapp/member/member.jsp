@@ -223,6 +223,9 @@ a.clickable:hover {
 	padding: 5px 10px 5px 10px;
 	border-radius: 27px;
 }
+.user-pad {
+    padding: 35px 0;
+}
 </style>
 
 </head>
@@ -231,6 +234,46 @@ a.clickable:hover {
 	<jsp:include page="/login.jsp" />
 
 	<div style="margin-top: 10px" class="container">
+	
+	<div class="col-md-4 user-details" style="padding-top: 20px;background-image: linear-gradient(180deg, #2af598 0%, #009efd 100%);">
+            <div class="row coralbg white" style="padding: 20px; background-color: #00a8b3;">
+
+                	<div class="col-md-6 no-pad">
+                  						<div class="profile-header-container">
+							<div class="profile-header-img">
+								<img class="img-circle"
+									src="<%=request.getContextPath()%>/Image?MemberID=${LoginOK.memberID}" />
+								<!-- badge -->
+								<div class="rank-label-container">
+									<button type="button" class="btn btn-info  btn-xs">
+										編輯 <span class="glyphicon glyphicon-edit"></span>
+									</button>
+								</div>
+							</div>
+						</div>
+                </div>
+                 <div class="col-md-6 no-pad">
+                    <div class="user-pad">
+                        <h3>${LoginOK.mName}</h3>
+                        <h4 class="white">${LoginOK.email}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row overview">
+                <div class="col-md-6 user-pad text-center">
+                <div class="hero-widget well  well-lg">
+                    <h3>已參加</h3>
+                    <h4>堂課</h4>
+                </div>
+                </div>
+                <div class="col-md-6 user-pad text-center">
+                <div class="hero-widget well  well-lg">
+                    <h3>已開設</h3>
+                    <h4>堂課</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 		<div class="row">
 			<div class="col-md-4 " style="padding-top: 20px;background-image: linear-gradient(180deg, #2af598 0%, #009efd 100%);">
