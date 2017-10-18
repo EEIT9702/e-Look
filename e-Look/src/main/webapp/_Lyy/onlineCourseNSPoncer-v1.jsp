@@ -9,11 +9,14 @@
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.css"
 	rel="stylesheet">
-<!-- <!-- jQuery -->
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
-
-<!-- <!-- Bootstrap Core JavaScript -->
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
+
+
+<link href="<%=request.getContextPath()%>/css/documentation.css" />
+
+<script src="<%=request.getContextPath()%>/js/raphael.js"></script>
+<script src="<%=request.getContextPath()%>/js/jquery.classyled.min.js"></script>
 <script>
 	$(document).ready(function() {
 		$(".col-md-4 a").click(function() {
@@ -27,7 +30,6 @@
 video {
 	width: 100%;
 	height: 75%;
-
 }
 
 #videoArea {
@@ -53,7 +55,7 @@ video::-webkit-media-controls-panel {
 	height: 75%;
 	padding-left: -15px;
 	padding-right: -15px;
-	background-color: rgba(0%, 10%, 20%, 0.7);;
+	background-color: rgba(0%, 10%, 20%, 0.9);
 }
 
 #videoDivListStyle>div>h3 {
@@ -61,12 +63,12 @@ video::-webkit-media-controls-panel {
 	text-align: center;
 	font-weight: bold;
 }
+
 #videoDivListStyle>div>div>p {
 	color: white;
 	font-weight: bold;
-display:inline-block;
-	
-	
+	display: inline-block;
+	font-size: 20px;
 }
 /* a:hover, a:focus { */
 /* 	outline: none; */
@@ -178,20 +180,51 @@ display:inline-block;
 						<div class="col-md-4 col-xs-12" id="videoDivListStyle">
 							<div>
 								<h3>募資進行中</h3>
-								<div class="pull-left"><p >目標人數100人</p></div>
-								<div class="pull-right"><p >達成30%</p></div>
-								<div class="clearfix" ></div>
-								<div class="progress progress-striped active">
-									<div class="progress-bar progress-bar-info" role="progressbar"
-										aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-										style="width: 30%;">
+								<div style="margin: 20px 0">
+									<div class="pull-left">
+										<p style="font-size: 20px; color: white">目標人數100人</p>
+									</div>
+									<div class="pull-right">
+										<p style="font-size: 20px; color: white">達成30%</p>
+									</div>
+									<div class="clearfix"></div>
+									<div class="progress progress-striped active">
+										<div class="progress-bar progress-bar-info" role="progressbar"
+											aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+											style="width: 30%;"></div>
 									</div>
 								</div>
-								
+								<div style="margin: 20px 0">
+									<div style="text-align: center; color: white">
+										<p>剩餘時間</p>
+									</div>
+									<div class="led3  text-center "></div>
+								</div>
+
+								<div style="margin: 20px 0">
+									<div class="col-md-6 "
+										style="border-right: 1px solid white; border-left: 1px solid white">
+										<div class="text-left" style="font-size: 20px; color: white">原始價格
+										</div>
+										<div class="text-right" style="font-size: 20px; color: white">
+											<s>NT1234</s>
+										</div>
+									</div>
+									<div class="col-md-6"
+										style="border-right: 1px solid white; border-left: 1px solid white">
+										<div class="text-left" style="font-size: 20px; color: white">募資價格
+										</div>
+										<div class="text-right" style="font-size: 20px; color: white">NT1000</div>
+									</div>
+								</div>
+
+								<div style="margin: 20px 0">
+									<button type="button" class="btn-warning btn-lg"
+										style="width: 100%">我要加入募資</button>
+								</div>
+
+
 							</div>
-
-
-
 						</div>
 					</div>
 				</div>
@@ -310,4 +343,16 @@ display:inline-block;
 	</div>
 	<jsp:include page="/footer.jsp" />
 </body>
+<script>
+
+	$('.led3').ClassyLED({
+		type : 'countdown',
+		format : 'ddd:hh:mm:ss',
+		countTo : '2017:10:30',
+		color : '#af0',
+		backgroundColor : '	#272727',
+		size : 4,
+		fontType : 2,
+	});
+</script>
 </html>
