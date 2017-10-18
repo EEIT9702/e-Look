@@ -9,8 +9,13 @@ public class CourseClassDetailsVO  implements Serializable{
 	
 	private Integer courseID;
 	private Integer CourseClassID;
+	private String courseName;
+	private String ccName;
 	private courseClassVO courseClassVO;
 	private CourseVO CourseVO;
+	
+	
+	
 	public CourseClassDetailsVO(){}
 	public CourseClassDetailsVO( Integer courseID,Integer CourseClassID){
 		this.CourseClassID=CourseClassID;
@@ -41,6 +46,18 @@ public class CourseClassDetailsVO  implements Serializable{
 	}
 	public void setCourseVO(CourseVO courseVO) {
 		CourseVO = courseVO;
+	}
+	public String getCourseName() {
+		return courseName;
+	}
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
+	public String getCcName() {
+		return ccName;
+	}
+	public void setCcName(String ccName) {
+		this.ccName = ccName;
 	}
 
 	

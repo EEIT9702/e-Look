@@ -27,6 +27,7 @@ public class CourseVO implements Serializable {
 	private String courseContent;
 	private Integer memberID;
 	private Double avgScore;
+	private String proposalVideopathway;
 	
 	
 	public CourseVO(){
@@ -36,7 +37,7 @@ public class CourseVO implements Serializable {
 	public CourseVO(Integer courseID, String courseName, String photoName, InputStream cPhoto, String preTool,
 			String background, String ability, String targetgroup, Integer soldPrice, Integer courseLength,
 			Integer targetStudentNumber, Date fundStartDate, Date fundEndDate, Date courseStartDate, String courseVideopathway,
-			InputStream paper, Integer status, String courseContent, Integer memberID, Double avgScore) {		
+			InputStream paper, Integer status, String courseContent, Integer memberID, Double avgScore, String proposalVideopathway) {		
 		this.courseID = courseID;
 		this.courseName = courseName;
 		this.photoName = photoName;
@@ -57,6 +58,7 @@ public class CourseVO implements Serializable {
 		this.courseContent = courseContent;
 		this.memberID = memberID;
 		this.avgScore = avgScore;
+		this.proposalVideopathway=proposalVideopathway;
 	}
 
 
@@ -227,5 +229,12 @@ public class CourseVO implements Serializable {
 		this.courseVideopathway = courseVideopathway;
 	};
 	
+	public String getProposalVideopathway() {
+		return proposalVideopathway;
+	}
+
+	public void setProposalVideopathway(String proposalVideopathway) {
+		this.proposalVideopathway = proposalVideopathway;
+	}
 	
 }

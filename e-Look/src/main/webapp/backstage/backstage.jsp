@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE>
-<script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script>
+<%-- <script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script> --%>
 <script type="text/javascript" src="css/jquery.mmenu.js"></script>
 		<script type="text/javascript">
 			$(function() {

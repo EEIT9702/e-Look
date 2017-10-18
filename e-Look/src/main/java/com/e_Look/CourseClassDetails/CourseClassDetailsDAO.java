@@ -25,13 +25,23 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 			e.printStackTrace();
 		}
 	}
-	private static final String INSERT_courseNClass = "insert into CourseClassDetails (courseID,CourseClassID) values (?,?)";
-	private static final String UPDATE_courseNClass = "update CourseClassDetails set CourseClassID=? where courseID=?";
-
-	private static final String DELETE_courseNClass = "delete from CourseClassDetails where courseID=?";
-	private static final String SELECT_findBycourseClassID = "select CourseClassID,courseID from CourseClassDetails where CourseClassID=?";
-	private static final String SELECT_findBycourseID = "select courseID,CourseClassID from CourseClassDetails where courseID=?";
-	private static final String SELECT_ALL = "select CourseClassID,ccName,eventID from CourseClassDetails";
+	private static final String INSERT_courseNClass = 
+			"insert into CourseClassDetails (courseID,courseName,CourseClassID,ccName) values (?,?,?,?)";
+	
+//	private static final String UPDATE_courseNClass = 
+//			"update CourseClassDetails set CourseClassID=? where courseID=?";
+	
+	private static final String DELETE_courseNClass = 
+			"delete from CourseClassDetails where courseID=?";
+	
+	private static final String SELECT_findBycourseClassID = 
+			"select CourseClassID,courseID from CourseClassDetails where CourseClassID=?";
+	
+	private static final String SELECT_findBycourseID = 
+			"select courseID,CourseClassID from CourseClassDetails where courseID=?";
+	
+	private static final String SELECT_ALL = 
+			"select CourseClassID,ccName,eventID from CourseClassDetails";
 
 	@Override
 	public void insert(courseClassVO courseClassVO, CourseVO courseVO) {
@@ -41,7 +51,9 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_courseNClass);
 			pstmt.setInt(1, courseVO.getCourseID());
-			pstmt.setInt(2, courseClassVO.getCourseClassID());
+			pstmt.setString(2, courseVO.getCourseName());
+			pstmt.setInt(3, courseClassVO.getCourseClassID());
+			pstmt.setString(4, courseClassVO.getCcName());
 
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -71,7 +83,7 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(UPDATE_courseNClass);
+//			pstmt = con.prepareStatement(UPDATE_courseNClass);
 
 			pstmt.setInt(1, courseClassVO.getCourseClassID());
 			pstmt.setInt(2, courseVO.getCourseID());
@@ -128,8 +140,8 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 
 	@Override
 	public List<CourseClassDetailsVO> findBycourseClassID(Integer CourseClassID) {
+		
 		List<CourseClassDetailsVO> findBycourseClassID = new LinkedList<CourseClassDetailsVO>();
-
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
