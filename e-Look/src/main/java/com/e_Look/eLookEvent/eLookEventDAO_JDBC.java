@@ -22,11 +22,17 @@ public class eLookEventDAO_JDBC implements eLookEvent_interface {
 	// 第二組密碼
 	// String passwd = "123456";
 
-	private static final String INSERT_ELOOKEVENT = "insert into eLookEvent (eventName,ePhoto,eStartDate,eEndDate,discount) values ( ?, ?, ?, ?, ?)";
-	private static final String UPDATE_ELOOKEVENT = "update eLookEvent set eventName=?, ePhoto=?, eStartDate=?, eEndDate=?, discount=? where eventID= ?";
+//	private static final String INSERT_ELOOKEVENT = "insert into eLookEvent (eventName,ePhoto,eStartDate,eEndDate,discount) values ( ?, ?, ?, ?, ?)";
+//	private static final String UPDATE_ELOOKEVENT = "update eLookEvent set eventName=?, ePhoto=?, eStartDate=?, eEndDate=?, discount=? where eventID= ?";
+//	private static final String DELETE_ELOOKEVENT = "delete from eLookEvent where eventID= ?";
+//	private static final String SELECT_ONE_ELOOKEVENT = "select eventID,eventName ,ePhoto,eStartDate,eEndDate,discount from eLookEvent where eventID= ?";
+//	private static final String SELECT_ALL_ELOOKEVENT = "select eventID,eventName ,ePhoto,eStartDate,eEndDate,discount from eLookEvent";
+
+	private static final String INSERT_ELOOKEVENT = "insert into eLookEvent (eventName,eStartDate,eEndDate,discount) values ( ?,?, ?, ?)";
+	private static final String UPDATE_ELOOKEVENT = "update eLookEvent set eventName=?, eStartDate=?, eEndDate=?, discount=? where eventID= ?";
 	private static final String DELETE_ELOOKEVENT = "delete from eLookEvent where eventID= ?";
-	private static final String SELECT_ONE_ELOOKEVENT = "select eventID,eventName ,ePhoto,eStartDate,eEndDate,discount from eLookEvent where eventID= ?";
-	private static final String SELECT_ALL_ELOOKEVENT = "select eventID,eventName ,ePhoto,eStartDate,eEndDate,discount from eLookEvent";
+	private static final String SELECT_ONE_ELOOKEVENT = "select eventID,eventName ,eStartDate,eEndDate,discount from eLookEvent where eventID= ?";
+	private static final String SELECT_ALL_ELOOKEVENT = "select eventID,eventName,eStartDate,eEndDate,discount from eLookEvent";
 
 	@Override
 	public void insert(eLookEventVO eLookEventVO) {
@@ -39,10 +45,10 @@ public class eLookEventDAO_JDBC implements eLookEvent_interface {
 
 			pstmt = con.prepareStatement(INSERT_ELOOKEVENT);
 			pstmt.setString(1, eLookEventVO.getEventName());
-			pstmt.setBlob(2, eLookEventVO.getePhoto());
-			pstmt.setDate(3, eLookEventVO.geteStartDate());
-			pstmt.setDate(4, eLookEventVO.geteEndDate());
-			pstmt.setDouble(5, eLookEventVO.getDiscount());
+//			pstmt.setBlob(2, eLookEventVO.getePhoto());
+			pstmt.setDate(2, eLookEventVO.geteStartDate());
+			pstmt.setDate(3, eLookEventVO.geteEndDate());
+			pstmt.setDouble(4, eLookEventVO.getDiscount());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
@@ -112,10 +118,10 @@ public class eLookEventDAO_JDBC implements eLookEvent_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE_ELOOKEVENT);
 			pstmt.setString(1, eLookEventVO.getEventName());
-			pstmt.setBlob(2, eLookEventVO.getePhoto());
-			pstmt.setDate(3, eLookEventVO.geteStartDate());
-			pstmt.setDate(4, eLookEventVO.geteEndDate());
-			pstmt.setDouble(5, eLookEventVO.getDiscount());
+//			pstmt.setBlob(2, eLookEventVO.getePhoto());
+			pstmt.setDate(2, eLookEventVO.geteStartDate());
+			pstmt.setDate(3, eLookEventVO.geteEndDate());
+			pstmt.setDouble(4, eLookEventVO.getDiscount());
 			pstmt.setInt(6, eLookEventVO.getEventID());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -157,10 +163,10 @@ public class eLookEventDAO_JDBC implements eLookEvent_interface {
 				eLookEventVO = new eLookEventVO();
 				eLookEventVO.setEventID(rs.getInt(1));
 				eLookEventVO.setEventName(rs.getString(2));
-				eLookEventVO.setePhoto(rs.getBinaryStream(3));
-				eLookEventVO.seteStartDate(rs.getDate(4));
-				eLookEventVO.seteEndDate(rs.getDate(5));
-				eLookEventVO.setDiscount(rs.getDouble(6));
+//				eLookEventVO.setePhoto(rs.getBinaryStream(3));
+				eLookEventVO.seteStartDate(rs.getDate(3));
+				eLookEventVO.seteEndDate(rs.getDate(4));
+				eLookEventVO.setDiscount(rs.getDouble(5));
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
@@ -202,10 +208,10 @@ public class eLookEventDAO_JDBC implements eLookEvent_interface {
 				eLookEventVO = new eLookEventVO();
 				eLookEventVO.setEventID(rs.getInt(1));
 				eLookEventVO.setEventName(rs.getString(2));
-				eLookEventVO.setePhoto(rs.getBinaryStream(3));
-				eLookEventVO.seteStartDate(rs.getDate(4));
-				eLookEventVO.seteEndDate(rs.getDate(5));
-				eLookEventVO.setDiscount(rs.getDouble(6));
+//				eLookEventVO.setePhoto(rs.getBinaryStream(3));
+				eLookEventVO.seteStartDate(rs.getDate(3));
+				eLookEventVO.seteEndDate(rs.getDate(4));
+				eLookEventVO.setDiscount(rs.getDouble(5));
 				list.add(eLookEventVO);
 			}
 		} catch (SQLException e) {
@@ -298,7 +304,7 @@ public class eLookEventDAO_JDBC implements eLookEvent_interface {
 		eLookEventVO list1 = daoJDBC.findByPrimaryKey(1004);
 	
 			System.out.print(list1.getEventName()+",");
-			System.out.print(list1.getePhoto()+",");
+//			System.out.print(list1.getePhoto()+",");
 			System.out.print(list1.geteStartDate()+",");
 			System.out.print(list1.geteEndDate()+",");
 			System.out.print(list1.getDiscount()+",");

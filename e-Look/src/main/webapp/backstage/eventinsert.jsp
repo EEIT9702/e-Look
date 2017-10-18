@@ -95,21 +95,21 @@ margin-right: 100px;
 
 <body><div>
 <jsp:include page="backstage.jsp"></jsp:include></div>
-<form action="<%=request.getContextPath()%>/Upload1" method="post" enctype="multipart/form-date">
+<form action="<%=request.getContextPath()%>/eLookEvent" method="post" enctype="multipart/form-date">
 <div class="event">
-活動名稱：<input id="inputevent">
+活動名稱：<input id="inputevent" name="eventName">
 </div>
 
  <div class="event">
-選擇起始日期 : <input id="thedate" type="text" />
-選擇結束日期 : <input id="thedate2" type="text" />
+選擇起始日期 : <input id="thedate" type="text" name="eStartDate"/>
+選擇結束日期 : <input id="thedate2" type="text" name="eEndDate"/>
  </div>
  <div class="event">
- 折扣優惠：<input id="discount">
+ 折扣優惠：<input id="discount" name="discount">
  </div>
 
 <div class="event">
-選擇優惠類別1：<select class="font courseclass">
+選擇優惠類別1：<select class="font courseclass" name="courseclass1">
 <option value="null">無</option>
 <option value="all">全部</option>
 <option value="life">生活</option>
@@ -125,7 +125,7 @@ margin-right: 100px;
 <option value="program">程式</option>
 </select>
 
-選擇優惠類別2：<select class="font courseclass" >
+選擇優惠類別2：<select class="font courseclass" name="courseclass2">
 <option value="null">無</option>
 <option value="all">全部</option>
 <option value="life">生活</option>
@@ -140,7 +140,7 @@ margin-right: 100px;
 <option value="cooking">烹飪</option>
 <option value="program">程式</option>
 </select>
-選擇優惠類別3：<select class="font courseclass">
+選擇優惠類別3：<select class="font courseclass" name="courseclass3">
 <option value="null">無</option>
 <option value="all">全部</option>
 <option value="life">生活</option>

@@ -54,7 +54,7 @@ public class Upload1 extends HttpServlet {
 		Date da=new Date(2017,10,16);
 		Date da1=new Date(2017,10,18);
 		vo.setEventName("ss");
-		vo.setePhoto(is);
+//		vo.setePhoto(is);
 		vo.seteStartDate(da);
 		vo.seteEndDate(da1);
 		vo.setDiscount(d);
