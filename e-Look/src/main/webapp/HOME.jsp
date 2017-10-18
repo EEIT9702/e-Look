@@ -4,6 +4,7 @@
 <!DOCTYPE>
 <script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.js"></script>
+<link rel="Shortcut Icon" type="image/x-icon" href="${SYSTEM.iconUri}" />
 <html>
 <style>
 #title1 {
