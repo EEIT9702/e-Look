@@ -55,7 +55,7 @@ public class ProgressUploadServlet extends HttpServlet {
 						// fileName =
 						// fileName.substring(fileName.lastIndexOf("\\"));
 
-						File saved = new File("E:\\TEST", item.getName());
+						File saved = new File("D:\\TEST", item.getName());
 						saved.getParentFile().mkdirs();
 
 						InputStream ins = item.getInputStream();
