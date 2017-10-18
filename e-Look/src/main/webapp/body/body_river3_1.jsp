@@ -21,7 +21,7 @@
 <!-- 載入課程模板css -->
 <!-- <link href="css/twmplate.css" rel="stylesheet"> -->
 <script src="HeaderCssJs/jquery.js"></script>
-<!-- <script src="HeaderCssJs/bootstrap.min.js"></script> -->
+<script src="HeaderCssJs/bootstrap.min.js"></script>
 
 <style type="text/css">
 /* 課程模板 */
@@ -147,25 +147,35 @@ h5 {
 }
 /* 分類icon */
 .formDiv{
-	/*width:78%;*/
-	height:100px;
+	width:78%;
+	height:12%;
 	margin-bottom:1%;
 	margin-left:auto;
 	margin-right:auto;
-	border-bottom:2px solid black;
+}
+.pstyle{
+	text-align:center;
+	font-size: 20px;
+  	font-family:微軟正黑體;
+  	cursor: pointer;
+  	color:#9F35FF;
 }
 .iconWidth{
 	width:50px;
 }
+.svgIcon{
+	width:50px;
+	cursor:pointer;
+}
 .iconA{
-	text-align:center;
-	text-decoration: none;
-  	color:#9F35FF;
-  	visited: none;
-  	active: none;
-  	font-size: 20px;
-  	font-family: 微軟正黑體;
-  	cursor: pointer;
+/* 	text-align:center; */
+/* 	text-decoration: none; */
+/*   	color:#9F35FF; */
+/*   	visited: none; */
+/*   	active: none; */
+/*   	font-size: 20px; */
+/*   	font-family: 微軟正黑體; */
+/*   	cursor: pointer; */
 }
 .formicon{
 }
@@ -181,39 +191,61 @@ h5 {
     top: 4px;
     left: 4px;
 }
-.text-center{
- 	width:50px; 
-}
+
 /* 熱門關鍵字 */
 .outBorder{
+/* 	margin-left:5%; */
+	width:220px;
+	height:40px;
 	border:3px solid orange;
 	border-radius:25px;
 }
 .middleborder{
-	padding-left:6%;
-	padding-top:1.5%;
-	padding-bottom:1.5%;
+	padding-left:14px;
+	padding-top:3px;
+	padding-bottom:3px;
 }
 .inputarea{
 	border:none !important;
-	width:80% !important;
+	width:160px !important;
 }
 .searchImg{
 	float:right;
 }
+.searchImg div:hover{
+/* 	top: 2px !important; */
+/* 	left: 2px !important; */
+}
+
 .searchicon{
 	width:30px;
+	cursor: pointer;
 }
-.searchicon img:HOVER{
-}
+
 .hotkeyword{
- 	padding-left:10%;
-	padding-top:2%;"
+	width:220px;
+ 	margin-left:30px;
+	padding-top:5px;"
 }
 .keyword{
  	clear:both;
 	color:blue;
+	width:190px;
 }
+.cclass div:hover{
+	top: 2px;
+	left: 2px;
+}
+.cclass div:ACTIVE{
+	top: 4px;
+	left: 4px;
+}
+.searchKey{
+ 	margin-left:20%;
+	
+}
+
+
 </style>
 <script type="text/javascript">
 //為文件的滑鼠按下事件定義回呼
@@ -291,9 +323,6 @@ function river(){
 	
 	
 
-
-
-
 /*延遲載入圖片*/
 //初始化函數
 function init() {
@@ -339,50 +368,63 @@ function checkHeight() {
 
 
 <!-- form按鈕圖式star -->
-<div class="formDiv container" style="">
-	<div class="col-md-10 ">
-	<form class="formicon" action="">
+<div class="formDiv container" >
+	<div class="row">
+	<div class="col-md-8 col-sm-10 col-xs-12 cclass">
+
+		<div class="col-md-1 col-sm-2 col-xs-3 text-center" style="" >
+			<img style="<c:choose><c:when test='${param.courseClassID == 1 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
+					class="svgIcon" src="<%=request.getContextPath() %>/alan/img/life.svg"><p class="pstyle">生活</p>
+		</div>
+		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
+				<img style="<c:choose><c:when test='${param.courseClassID == 2 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
+					class="svgIcon" src="<%=request.getContextPath() %>/alan/img/arts.svg"><p class="pstyle">藝術</p>
+		</div>
+		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
+			<img style="<c:choose><c:when test='${param.courseClassID == 3 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
+					class="svgIcon" src="<%=request.getContextPath() %>/alan/img/athletics.svg"><p class="pstyle">運動</p>
+		</div>
+		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
+			<img style="<c:choose><c:when test='${param.courseClassID == 4 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
+					class="svgIcon" src="<%=request.getContextPath() %>/alan/img/video.svg"><p class="pstyle">影音</p>
+		</div>
+		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
+			<img style="<c:choose><c:when test='${param.courseClassID == 5 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
+					class="svgIcon" src="<%=request.getContextPath() %>/alan/img/hand-made.svg"><p class="pstyle">手作</p>
+		</div>
+		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
+			<img style="<c:choose><c:when test='${param.courseClassID == 6 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
+					class="svgIcon" src="<%=request.getContextPath() %>/alan/img/other.svg"><p class="pstyle">其他</p>
+		</div>
+		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
+				<img style="<c:choose><c:when test='${param.courseClassID == 7 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
+					class="svgIcon" src="<%=request.getContextPath() %>/alan/img/design.svg"><p class="pstyle">設計</p>
+		</div>
+		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
+				<img style="<c:choose><c:when test='${param.courseClassID == 8 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
+					class="svgIcon" src="<%=request.getContextPath() %>/alan/img/science.svg"><p class="pstyle">科技</p>
+		</div>
+		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
+				<img style="<c:choose><c:when test='${param.courseClassID == 9 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
+					class="svgIcon" src="<%=request.getContextPath() %>/alan/img/business.svg"><p class="pstyle">商業</p>
+		</div>
+		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
+				<img style="<c:choose><c:when test='${param.courseClassID == 10 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
+					class="svgIcon" src="<%=request.getContextPath() %>/alan/img/language.svg"><p class="pstyle">語言</p>
+		</div>
+		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
+				<img style="<c:choose><c:when test='${param.courseClassID == 11 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
+					class="svgIcon" src="<%=request.getContextPath() %>/alan/img/cooking.svg"><p class="pstyle">烹飪</p>
+		</div>
+		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
+				<img style="<c:choose><c:when test='${param.courseClassID == 12 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
+					class="svgIcon" src="<%=request.getContextPath() %>/alan/img/program.svg"><p class="pstyle">程式</p>
+		</div>
 	
-		<div class="col-md-1 text-center" >
-			<input style="display:none;" type="checkbox" checked="checked" id="class1" ><label class="iconA" for="class1"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/life.svg"><br>生活</label>
-		</div>
-		<div class="col-md-1 text-center">
-			<input style="display:none;" type="checkbox" checked="checked"  id="class2" ><label class="iconA" for="class2"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/arts.svg"><br>藝術</label>
-		</div>
-		<div class="col-md-1 text-center">
-			<input style="display:none;" type="checkbox" checked="checked" id="class3" ><label class="iconA" for="class3"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/athletics.svg"><br>運動</label>
-		</div>
-		<div class="col-md-1 text-center">
-			<input style="display:none;" type="checkbox" checked="checked" id="class4" ><label class="iconA" for="class4"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/video.svg"><br>影音</label>
-		</div>
-		<div class="col-md-1 text-center">
-			<input style="display:none;" type="checkbox" checked="checked" id="class5" ><label class="iconA" for="class5"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/hand-made.svg"><br>手作</label>
-		</div>
-		<div class="col-md-1 text-center">
-			<input style="display:none;" type="checkbox" checked="checked" id="class6" ><label class="iconA" for="class6"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/other.svg"><br>其他</label>
-		</div>
-		<div class="col-md-1 text-center">
-			<input style="display:none;" type="checkbox" checked="checked" id="class7" ><label class="iconA" for="class7"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/design.svg"><br>設計</label>
-		</div>
-		<div class="col-md-1 text-center">
-			<input style="display:none;" type="checkbox" checked="checked" id="class8" ><label class="iconA" for="class8"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/science.svg"><br>科技</label>
-		</div>
-		<div class="col-md-1 text-center">
-			<input style="display:none;" type="checkbox" checked="checked" id="class9" ><label class="iconA" for="class9"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/business.svg"><br>商業</label>
-		</div>
-		<div class="col-md-1 text-center">
-			<input style="display:none;" type="checkbox" checked="checked" id="class10" ><label class="iconA" for="class10"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/language.svg"><br>語言</label>
-		</div>
-		<div class="col-md-1 text-center">
-			<input style="display:none;" type="checkbox" checked="checked" id="class11" ><label class="iconA" for="class11"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/cooking.svg"><br>烹飪</label>
-		</div>
-		<div class="col-md-1 text-center">
-			<input style="display:none;" type="checkbox" checked="checked" id="class12" ><label class="iconA" for="class12"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/program.svg"><br>程式</label>
-		</div>
-	
-	</form>
+
 	</div><!-- /col-md-10 -->
-	<div class="col-md-2">
+	<div class="col-md-2 col-sm-0 col-xs-0"></div>
+	<div class="col-md-2 col-sm-2 col-xs-6">
 	<form class="navbar-form navbar-left" id="searchKey" method="get" action="">
 	
 		<div class="input-group outBorder" style="">
@@ -393,12 +435,13 @@ function checkHeight() {
 				
 				<div class="input-group-btn searchImg" style="">
 <%-- 				<input id="searchsubmit" class="searchicon" style="" type="image" src="<%=request.getContextPath()%>/alan/img/search.svg" /> --%>
-				<img class="searchicon" src="<%=request.getContextPath()%>/alan/img/search.svg" >
+				<div id="searchicon" style=""><img style="" class="searchicon" src="<%=request.getContextPath()%>/alan/img/search.svg" ></div>
 				</div>
 			</div>
 			
 		</div>
 	</form>
+	<div class="col-md-12 col-sm-12 col-xs-12">
 	<p class="hotkeyword text-left">熱門：
 		<span class="keyword">
 			<c:forEach var="searchVO" items="<%= new SearchDAO().getKeywordRank(4) %>" >
@@ -406,7 +449,11 @@ function checkHeight() {
 			</c:forEach>
 		</span>
 	</p>
+	</div>
 	</div><!-- /col-md-2 -->
+	<!-- 黑分隔線 -->
+	<div class="col-md-12 col-sm-12 col-xs-12" style="border:1px solid black;margin-bottom:20px"></div>
+	</div>
 </div><!-- /width:78% -->
 
 <!-- 3秒消失廣告star -->

@@ -2,10 +2,13 @@ package com.e_Look.shoppingCart.model;
 
 import java.util.List;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.e_Look.Course.CourseVO;
-
+@Transactional(readOnly = false)
 public class ShoppingCartDAO implements ShoppingCartDAO_interface {
 	
 	
@@ -34,9 +37,9 @@ public class ShoppingCartDAO implements ShoppingCartDAO_interface {
 	@Override
 	public List<CourseVO> findByMemberID(Integer memberID) {
 		List<CourseVO> list = null;
-		final String GET_MEMBER_COURSE = "from ShoppingCartVO where memberID ="+memberID;
-		
-		list = (List<CourseVO>) hibernateTemplate.find("from ShoppingCartVO where memberID");
+//		final String GET_MEMBER_COURSE = "from ShoppingCartVO where memberID ="+memberID;
+//		
+//		list = (List<CourseVO>) hibernateTemplate.find("from ShoppingCartVO where memberID");
 		
 		return list;
 	}
@@ -50,13 +53,13 @@ public class ShoppingCartDAO implements ShoppingCartDAO_interface {
 	
 	
 	public static void main(String[] args){
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config.xml");
+		ShoppingCartDAO_interface dao=(ShoppingCartDAO_interface) context.getBean("shoppingCartDAO");
+		ShoppingCartVO vo=new ShoppingCartVO();
+		vo.setMemberID(100001);
+		vo.setCourseID(200001);
 		
-		ShoppingCartDAO dao=new ShoppingCartDAO();
-		List<CourseVO> list=dao.findByMemberID(100001);
-		
-		for(CourseVO courseVO:list ){
-			System.out.println(courseVO.getCourseID());	
-		}
+		dao.insert(vo);
 		
 	}
 	

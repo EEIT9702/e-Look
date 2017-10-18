@@ -145,6 +145,10 @@ margin:2px auto;
 	<jsp:include page="/header.jsp" />
 	<!-- 以下是login畫面 -->
 	<c:choose>
+		<c:when test="${!empty loginerr}">
+		<c:set var="id" value="myModal2"/>
+		<c:set var="id2" value="#myModal2"/>
+	</c:when>
 	<c:when test="${empty err}">
 		<c:set var="id" value="myModal"/>
 		<c:set var="id2" value="#myModal"/>
@@ -212,6 +216,7 @@ margin:2px auto;
 		</div>
 	</div>
 	<c:remove var="err" scope="session"/>
+	<c:remove var="loginerr" scope="session"/>
 	<!-- 以上是login畫面 -->
 
 

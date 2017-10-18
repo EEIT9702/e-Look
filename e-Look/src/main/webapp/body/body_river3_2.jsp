@@ -21,7 +21,7 @@
 <!-- 載入課程模板css -->
 <!-- <link href="css/twmplate.css" rel="stylesheet"> -->
 <script src="HeaderCssJs/jquery.js"></script>
-<!-- <script src="HeaderCssJs/bootstrap.min.js"></script> -->
+<script src="HeaderCssJs/bootstrap.min.js"></script>
 
 <style type="text/css">
 /* 課程模板 */
@@ -147,12 +147,13 @@ h5 {
 }
 /* 分類icon */
 .formDiv{
-	/*width:78%;*/
-	height:100px;
+	width:78%;
+/* 	height:12%; */
 	margin-bottom:1%;
 	margin-left:auto;
 	margin-right:auto;
-	border-bottom:2px solid black;
+/* 	border-bottom:2px solid black; */
+/* 	border:2px solid black; */
 }
 .iconWidth{
 	width:50px;
@@ -181,18 +182,20 @@ h5 {
     top: 4px;
     left: 4px;
 }
-.text-center{
+.col-md-1 .col-sm-2 .col-xs-3 .text-center{
  	width:50px; 
 }
 /* 熱門關鍵字 */
 .outBorder{
+	width:220px;
+	height:40px;
 	border:3px solid orange;
 	border-radius:25px;
 }
 .middleborder{
-	padding-left:6%;
-	padding-top:1.5%;
-	padding-bottom:1.5%;
+	padding-left:14px;
+	padding-top:3px;
+	padding-bottom:3px;
 }
 .inputarea{
 	border:none !important;
@@ -205,15 +208,23 @@ h5 {
 	width:30px;
 }
 .searchicon img:HOVER{
+
 }
 .hotkeyword{
- 	padding-left:10%;
-	padding-top:2%;"
+	width:220px;
+ 	margin-left:30px;
+	padding-top:5px;"
 }
 .keyword{
  	clear:both;
 	color:blue;
 }
+/*要長出課程和footer的div*/
+.bodysDiv{
+	width:78%;
+	height:88%;
+}
+
 </style>
 <script type="text/javascript">
 //為文件的滑鼠按下事件定義回呼
@@ -331,6 +342,28 @@ function checkHeight() {
 	}
 
 }
+
+function getPageCoordinates(e3) {
+	x3 = e3.pageX;
+	y3 = e3.pageY;
+	$("#screen3").text("X:" + x3 + ", Y:" + y3)
+}
+
+// $(document).ready(function(){
+//     $(window).resize(function() {
+//         wdth=$(window).width();
+//       $("#s1").text(wdth);
+//     });
+// });
+
+$(document).ready(function(){
+	$('.formDiv')resize(function() {
+		 var width=$(window).width();
+		if(width < 800){
+			$('.formDiv').css({'border':'none'})
+		}
+	});
+});
 </script>
 </head>
 <body>
@@ -340,49 +373,52 @@ function checkHeight() {
 
 <!-- form按鈕圖式star -->
 <div class="formDiv container" style="">
-	<div class="col-md-10 ">
+<div class="row">
+	<div class="col-md-8 col-sm-10 col-xs-12">
 	<form class="formicon" action="">
 	
-		<div class="col-md-1 text-center" >
+		<div class="col-md-1 col-sm-2 col-xs-3 text-center" >
 			<input style="display:none;" type="checkbox" checked="checked" id="class1" ><label class="iconA" for="class1"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/life.svg"><br>生活</label>
 		</div>
-		<div class="col-md-1 text-center">
+		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
 			<input style="display:none;" type="checkbox" checked="checked"  id="class2" ><label class="iconA" for="class2"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/arts.svg"><br>藝術</label>
 		</div>
-		<div class="col-md-1 text-center">
+		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
 			<input style="display:none;" type="checkbox" checked="checked" id="class3" ><label class="iconA" for="class3"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/athletics.svg"><br>運動</label>
 		</div>
-		<div class="col-md-1 text-center">
+		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
 			<input style="display:none;" type="checkbox" checked="checked" id="class4" ><label class="iconA" for="class4"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/video.svg"><br>影音</label>
 		</div>
-		<div class="col-md-1 text-center">
+		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
 			<input style="display:none;" type="checkbox" checked="checked" id="class5" ><label class="iconA" for="class5"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/hand-made.svg"><br>手作</label>
 		</div>
-		<div class="col-md-1 text-center">
+		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
 			<input style="display:none;" type="checkbox" checked="checked" id="class6" ><label class="iconA" for="class6"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/other.svg"><br>其他</label>
 		</div>
-		<div class="col-md-1 text-center">
+		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
 			<input style="display:none;" type="checkbox" checked="checked" id="class7" ><label class="iconA" for="class7"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/design.svg"><br>設計</label>
 		</div>
-		<div class="col-md-1 text-center">
+		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
 			<input style="display:none;" type="checkbox" checked="checked" id="class8" ><label class="iconA" for="class8"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/science.svg"><br>科技</label>
 		</div>
-		<div class="col-md-1 text-center">
+		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
 			<input style="display:none;" type="checkbox" checked="checked" id="class9" ><label class="iconA" for="class9"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/business.svg"><br>商業</label>
 		</div>
-		<div class="col-md-1 text-center">
+		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
 			<input style="display:none;" type="checkbox" checked="checked" id="class10" ><label class="iconA" for="class10"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/language.svg"><br>語言</label>
 		</div>
-		<div class="col-md-1 text-center">
+		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
 			<input style="display:none;" type="checkbox" checked="checked" id="class11" ><label class="iconA" for="class11"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/cooking.svg"><br>烹飪</label>
 		</div>
-		<div class="col-md-1 text-center">
+		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
 			<input style="display:none;" type="checkbox" checked="checked" id="class12" ><label class="iconA" for="class12"><img class="iconWidth" src="<%=request.getContextPath() %>/alan/img/program.svg"><br>程式</label>
 		</div>
-	
+
 	</form>
+		
 	</div><!-- /col-md-10 -->
-	<div class="col-md-2">
+	<div class="col-md-2 col-sm-0 col-xs-0"></div>
+	<div class="col-md-2 col-sm-3 col-xs-6">
 	<form class="navbar-form navbar-left" id="searchKey" method="get" action="">
 	
 		<div class="input-group outBorder" style="">
@@ -407,21 +443,31 @@ function checkHeight() {
 		</span>
 	</p>
 	</div><!-- /col-md-2 -->
+	<div class="col-md-12 col-sm-12 col-xs-12" style="border:1px solid black;"></div>
+	</div>
 </div><!-- /width:78% -->
 
-<!-- 3秒消失廣告star -->
-<div style="text-align:center">
-	<a href=""><span id="ads"></span></a>
-</div>
-<!-- 3秒消失廣告end -->
 
-<div class="videobox container">
+
+<!-- <span id="s1"></span> -->
+	<!-- 3秒消失廣告star -->
+	<div style="text-align:center">
+		<a href=""><span id="ads"></span></a>
+	</div>
+	<!-- 3秒消失廣告end -->
+
+<div class="bodysDiv container">
 	<div class="row" id="river">
+	
+
+	
+	
 	
 	<!-- end of class="container" -->
 	</div>
+	
 </div>
-
 <jsp:include page="${contextPath}/footer.jsp" />
+
 </body>
 </html>
