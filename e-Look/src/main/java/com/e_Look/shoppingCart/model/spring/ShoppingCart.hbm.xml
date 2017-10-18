@@ -4,7 +4,7 @@
 
 
 <hibernate-mapping>
-    <class name="com.e_Look.shoppingCart.model.ShoppingCartVO" table="ShoppingCart" >
+    <class name="com.e_Look.shoppingCart.model.spring.ShoppingCartVO" table="ShoppingCart" >
         
         
         <composite-id>

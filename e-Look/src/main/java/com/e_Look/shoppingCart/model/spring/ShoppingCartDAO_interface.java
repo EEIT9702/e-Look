@@ -1,4 +1,4 @@
-package com.e_Look.shoppingCart.model;
+package com.e_Look.shoppingCart.model.spring;
 
 import java.util.List;
 

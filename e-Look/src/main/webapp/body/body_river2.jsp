@@ -21,7 +21,7 @@
 <!-- 載入課程模板css -->
 <!-- <link href="css/twmplate.css" rel="stylesheet"> -->
 <script src="HeaderCssJs/jquery.js"></script>
-<!-- <script src="HeaderCssJs/bootstrap.min.js"></script> -->
+<script src="HeaderCssJs/bootstrap.min.js"></script>
 
 <style type="text/css">
 /* 課程模板 */

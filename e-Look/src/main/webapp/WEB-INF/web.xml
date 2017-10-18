@@ -23,4 +23,20 @@
  	 <param-name>icon</param-name>
  	 <param-value>/e-Look/img/eLook.icon</param-value>
   </context-param>
+  <!-- 以下是@MultipartConfig設定的xml版 -->
+	<!-- <servlet>
+		<servlet-name>Upload</servlet-name>
+		<servlet-class>zhi.Upload</servlet-class>
+		<multipart-config>
+			<location></location>			
+			<max-file-size>2147483648</max-file-size>
+			<max-request-size>2147483648</max-request-size>		
+			<file-size-threshold>1048576</file-size-threshold>	
+		</multipart-config>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Upload</servlet-name>
+		<url-pattern>/testjsp/zhi/Upload</url-pattern>
+	</servlet-mapping> -->
+  
 </web-app>

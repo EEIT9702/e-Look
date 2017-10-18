@@ -1,4 +1,4 @@
-package com.e_Look.shoppingCart.model;
+package com.e_Look.shoppingCart.model.spring;
 
 import java.util.List;
 
@@ -60,6 +60,7 @@ public class ShoppingCartDAO implements ShoppingCartDAO_interface {
 		vo.setCourseID(200001);
 		
 		dao.insert(vo);
+		dao.delete(vo);
 		
 	}
 	
