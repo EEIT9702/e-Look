@@ -99,11 +99,16 @@
 					<form action="Upload" method="POST" name="formData"
 						enctype="multipart/form-data" role="form" id="TotalContent">
 
+
+
 						<div class="tab-content">
 							<!-- 整個step1頁面 -->
 							<div class="tab-pane active" role="tabpanel" id="step1">
 								<div class="container">
 									<div class="row">
+
+
+
 
 										<div class="col-md-12">
 											<div class="update-nag">
@@ -518,8 +523,8 @@
 													<!-- Drop Zone -->
 													<!-- Progress Bar -->
 													<div class="progress">
-														<div id="progressBar" class="progress-bar"
-															role="progressbar" aria-valuenow="0" aria-valuemin="0"
+														<div id="progressBar1" class="progress-bar"
+															role="progressbar1" aria-valuenow="0" aria-valuemin="0"
 															aria-valuemax="100" style="width: 0%;">
 															60% <span class="sr-only">60% Complete</span>
 														</div>
@@ -528,6 +533,45 @@
 												</div>
 											</div>
 										</div>
+										
+<!-- 										<div class="col-md-12"> -->
+<!-- 											<div class="panel panel-default"> -->
+<!-- 												<div class="panel-heading"> -->
+<!-- 													<strong>課程講義上傳</strong> <small> </small> -->
+<!-- 												</div> -->
+<!-- 												<div class="panel-body"> -->
+<!-- 													<div class="input-group image-preview"> -->
+<!-- 														don't give a name === doesn't send on POST/GET -->
+<!-- 														<span> image-preview-clear button <span -->
+<!-- 															id="papername"></span> -->
+<!-- 															<div class="btn btn-default image-preview-input"> -->
+<!-- 																<span class="glyphicon glyphicon-folder-open"></span> <span -->
+<!-- 																	class="image-preview-input-title">選擇檔案</span> <input -->
+<!-- 																	type="file" name="input-paper-preview" -->
+<!-- 																	id="inputpapername" /> -->
+<!-- 																rename it -->
+<!-- 															</div> -->
+<!-- 															<button type="submit" class="btn btn-labeled btn-primary"> -->
+<!-- 																<span class="btn-label"><i -->
+<!-- 																	class="glyphicon glyphicon-upload"></i></span>上傳 -->
+<!-- 															</button> -->
+<!-- 														</span> -->
+<!-- 													</div> -->
+<!-- 													/input-group image-preview [TO HERE] -->
+<!-- 													<br /> -->
+<!-- 													Drop Zone -->
+<!-- 													Progress Bar -->
+<!-- 													<div class="progress"> -->
+<!-- 														<div id="progressBar2" class="progress-bar" -->
+<!-- 															role="progressbar" aria-valuenow="0" aria-valuemin="0" -->
+<!-- 															aria-valuemax="100" style="width: 0%;"> -->
+<!-- 															60% <span class="sr-only">60% Complete</span> -->
+<!-- 														</div> -->
+<!-- 													</div> -->
+<!-- 													<br /> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
 									</div>
 								</div>
 								<!-- /container -->
@@ -690,7 +734,7 @@
 					});
 				});
 
-		$('#customStyle').each(function() {
+		$('textarea').each(function() {
 			autosize(this);
 		}).on('autosize:resized');
 
