@@ -21,45 +21,13 @@
 		});
 	});
 </script>
-<script>
-	$(function() {
-		var flag1 = false;
-		$('img').hover(over, out);
-		function over() {
-			if (!flag1) {
-				var movein = this.id.substr(6);
-				for (i = 1; i <= movein; i++) {
-					document.getElementById("idstar" + i).className = "nstar";
-					//	$('img:lt(i)').switchClass('s','n',1000);
-				}
-			}
-		}
-		function out() {
-			if (!flag1) {
-				var out = this.id.substr(6);
-				for (u = 1; u <= out; u++) {
-					document.getElementById("idstar" + u).className = "star";
-					//	$('div img:nth-child(u)').switchClass('n','s',1000);
-				}
-			}
-		}
-		$('img').click(function() {
-			if (!flag1) {
-				flag1 = true
-			}
-			;
-			// 			 document.getElementById("starnum").innerHTML = "你給" + this.id.substr(6) + "顆星";
-			//	       $.get("Buycourse",{"name":"score","score":this.id.substr(6)});
-		})
-	})
-</script>
+
 <style>
 /* 影片區塊 */
 video {
 	width: 100%;
-	height: 67%;
-	padding-left: -15px;
-	padding-right: -15px;
+	height: 75%;
+
 }
 
 #videoArea {
@@ -82,7 +50,7 @@ video::-webkit-media-controls-panel {
 
 #videoDivListStyle {
 	border: 1px solid gray;
-	height: 67%;
+	height: 75%;
 	padding-left: -15px;
 	padding-right: -15px;
 	background-color: rgba(0%, 10%, 20%, 0.7);;
