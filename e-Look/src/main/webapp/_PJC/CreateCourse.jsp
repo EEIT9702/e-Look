@@ -35,8 +35,7 @@
 <script src="<%=request.getContextPath()%>/_PJC/tinymce/tinymce.min.js"></script>
 <script src="<%=request.getContextPath()%>/_PJC/tinymce/init-tinymce.js"></script>
 <script src="<%=request.getContextPath()%>/_PJC/js/getdata.js"></script>
-<script src="<%=request.getContextPath()%>/_PJC/js/upload.js"></script>
-
+<script src="<%=request.getContextPath()%>/_PJC/js/upload1.js"></script>
 </head>
 
 <body>
@@ -96,9 +95,9 @@
 						</ul>
 					</div>
 
-					<form action="Upload" method="POST" name="formData"
-						enctype="multipart/form-data" role="form" id="TotalContent">
-
+					<form action="<%=request.getContextPath()%>/toolkie/ProgressUploadServlet" method="POST" name="formData"
+						target="upload_iframe" enctype="multipart/form-data" role="form" id="TotalContent" onsubmit="showStatus()">
+						<iframe name=upload_iframe width=0 height=0></iframe>
 
 
 						<div class="tab-content">
@@ -512,7 +511,7 @@
 																	id="inputfilename" />
 																<!-- rename it -->
 															</div>
-															<button type="submit" class="btn btn-labeled btn-primary">
+															<button id="btnSubmit" type="submit" class="btn btn-labeled btn-primary">
 																<span class="btn-label"><i
 																	class="glyphicon glyphicon-upload"></i></span>上傳
 															</button>
