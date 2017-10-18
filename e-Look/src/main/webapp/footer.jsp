@@ -13,13 +13,13 @@
 </head>
 <style>
 body{
-  font-family: 'Raleway', sans-serif;
 }
 
 footer{
 	background-color:#222222;
     padding: 60px 0px;
     margin-top: 60px;
+  font-family: 'Raleway', sans-serif;
 }
 
 footer ul{

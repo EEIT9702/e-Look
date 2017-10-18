@@ -1,12 +1,16 @@
 package com.e_Look.message.model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
+
+import com.e_Look.member.model.MemberDAO_JDBC;
+import com.e_Look.member.model.MemberVO;
 
 public class MessageDAO_JDBC implements MessageDAO_interface {
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
@@ -16,8 +20,9 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 	String passwd = "P@ssw0rd";
 	//第二組密碼
 	//String passwd = "123456";
-	private static final String INSERT_MESSAGE = "insert into Message ( mContent,mTime,messageID_response,memberID,courseID,bought,status) values ( ?, ?, ?, ?, ?, ?,?)";
-	private static final String UPDATE_MESSAGE = "update Message set mContent=?, mTime=?, messageID_response=? where messageID= ?";
+	private static final String INSERT_MESSAGE = "insert into Message ( mContent,mTime,memberID,courseID,bought,status) values ( ?, ?, ?, ?, ?,?)";
+	private static final String UPDATE_MESSAGE = "update Message set mContent=?, mTime=? where messageID= ?";
+	private static final String UPDATE_MESSAGE_RESPONSE = "update Message set mContent=?, mTime=? where messageID_response= ?";
 	private static final String UPDATE_STATUS = "update Message set status=? where messageID= ?";
 	private static final String DELETE_MESSAGE = "delete from Message where messageID= ?";
 	private static final String SELECT_ONE_MESSAGE = "select messageID,mContent,mTime,messageID_response,memberID,courseID,bought,status from Message where messageID= ?";
@@ -35,11 +40,10 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 			pstmt = con.prepareStatement(INSERT_MESSAGE);
 			pstmt.setString(1, messageVO.getmContent());
 			pstmt.setDate(2, messageVO.getmTime());
-			pstmt.setInt(3, messageVO.getMessageID_response());
-			pstmt.setInt(4, messageVO.getMemberID());
-			pstmt.setInt(5, messageVO.getCourseID());
-			pstmt.setLong(6, messageVO.getBought());
-			pstmt.setByte(7, messageVO.getStatus());
+			pstmt.setInt(3, messageVO.getMemberID());
+			pstmt.setInt(4, messageVO.getCourseID());
+			pstmt.setLong(5, messageVO.getBought());
+			pstmt.setByte(6, messageVO.getStatus());
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
 					throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
@@ -79,12 +83,18 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 				pstmt = con.prepareStatement(UPDATE_MESSAGE);
 				pstmt.setString(1, messageVO.getmContent());
 				pstmt.setDate(2, messageVO.getmTime());
-				pstmt.setInt(3, messageVO.getMessageID_response());
-			
+				pstmt.setInt(3, messageVO.getMessageID());			
+				pstmt.executeUpdate();
+			} else if (update.equalsIgnoreCase("messageresponse")) {
+				pstmt = con.prepareStatement(UPDATE_MESSAGE_RESPONSE);
+				pstmt.setString(1, messageVO.getmContent());
+				pstmt.setDate(2, messageVO.getmTime());
+				pstmt.setInt(3, messageVO.getMessageID_response());		
 				pstmt.executeUpdate();
 			} else if (update.equalsIgnoreCase("status")) {
 				pstmt = con.prepareStatement(UPDATE_STATUS);
 				pstmt.setByte(1, messageVO.getStatus());
+				pstmt.setInt(2, messageVO.getMessageID());
 				pstmt.executeUpdate();
 			} 
 		} catch (ClassNotFoundException e) {
@@ -248,7 +258,68 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		MessageDAO_JDBC dao = new MessageDAO_JDBC();
+//		//新增
+//		MessageVO messageVO1= new MessageVO();
+//		
+//		messageVO1.setmContent("good1");
+//		messageVO1.setmTime(new Date(System.currentTimeMillis()));
+//		messageVO1.setMemberID(100001);
+//		messageVO1.setCourseID(200001);
+//		messageVO1.setBought((long) 123);
+//		messageVO1.setStatus((byte) 0);
+//				
+//		dao.insert(messageVO1);
+//		
+		//修改資料
+//		MessageVO messageVO2= new MessageVO();
+//		messageVO2.setmContent("good-good");
+//		messageVO2.setmTime(new Date(System.currentTimeMillis()));
+//		messageVO2.setMessageID(1006);
+//		dao.update(messageVO2, "message");
+		//修改資料response
+//		MessageVO messageVO2= new MessageVO();
+//		messageVO2.setmContent("good-good12");
+//		messageVO2.setmTime(new Date(System.currentTimeMillis()));
+//		messageVO2.setMessageID_response(1005);
+//		dao.update(messageVO2, "messageresponse");
+		//修改狀態
+		MessageVO messageVO2= new MessageVO();
+//		messageVO2.setStatus((byte) 1);
+//		messageVO2.setMessageID(1007);
+//		dao.update(messageVO2, "status");
+	
+
+		//刪除
+//		dao.delete(1007);
+		//查詢單一
+		MessageVO messageVO3= new MessageVO();
+		messageVO3=dao.findByPrimaryKey(1005);
+		System.out.println(messageVO3.getMessageID());
+		System.out.println(messageVO3.getmContent());
+		System.out.println(messageVO3.getmTime());
+		System.out.println(messageVO3.getMessageID_response());
+		System.out.println(messageVO3.getMemberID());
+		System.out.println(messageVO3.getCourseID());
+		System.out.println(messageVO3.getBought());
+		System.out.println(messageVO3.getStatus());
+
+		//查詢全部會員
+//		List<MessageVO> list=dao.getAll();
+//		for(MessageVO messageVO :list){
+//			System.out.print(messageVO.getMessageID()+"  ");
+//			System.out.print(messageVO.getmContent()+"  ");
+//			System.out.print(messageVO.getmTime()+"  ");
+//			System.out.print(messageVO.getMessageID_response()+"  ");
+//			System.out.print(messageVO.getMemberID()+"  ");
+//			System.out.print(messageVO.getCourseID()+"  ");
+//			System.out.print(messageVO.getBought()+"  ");
+//			System.out.print(messageVO.getStatus()+"  ");
+			
+//		}
+	
+
+
 
 	}
 
