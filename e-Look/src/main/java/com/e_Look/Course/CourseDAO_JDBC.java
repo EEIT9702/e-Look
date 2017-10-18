@@ -33,27 +33,27 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_Course);
-			pstmt.setString(1, "null");
-			pstmt.setString(2, "null");
-			pstmt.setString(3, "null");
-			pstmt.setString(4, "null");
-			pstmt.setString(5, "null");
-			pstmt.setString(6, "null");
-			pstmt.setString(7, "null");
-			pstmt.setString(8, "null");
-			pstmt.setString(9, "null");
-			pstmt.setString(10, "null");
-			pstmt.setString(11, "null");
-			pstmt.setString(12, "null");
-			pstmt.setString(13, "null");
-			pstmt.setString(14, "null");
-			pstmt.setString(15, "null");
-			pstmt.setString(16, "null");			
-			pstmt.setString(17, "null");
-			pstmt.setString(18, "null");
-			
-			
-			
+			pstmt.setString(1, courseVO.getCourseName());
+			pstmt.setString(2, courseVO.getPhotoName());
+			pstmt.setBlob(3, courseVO.getcPhoto());
+			pstmt.setString(4, courseVO.getPreTool());
+			pstmt.setString(5, courseVO.getBackground());
+			pstmt.setString(6, courseVO.getAbility());
+			pstmt.setString(7, courseVO.getTargetgroup());
+			pstmt.setInt(8, courseVO.getSoldPrice());
+//			pstmt.setString(9, courseVO.getCourseLength());
+//			pstmt.setString(10, courseVO.getTargetStudentNumber());
+//			pstmt.setString(11, courseVO.getFundStartDate());
+//			pstmt.setString(12, courseVO.getFundEndDate());
+//			pstmt.setString(13, courseVO.getCourseStartDate());
+//			pstmt.setString(14, courseVO.getCourseVideopathway());
+//			pstmt.setString(15, courseVO.getPaper());
+//			pstmt.setString(16, courseVO);			
+//			pstmt.setString(17, courseVO);
+//			pstmt.setString(18, courseVO);
+//			pstmt.setString(19, courseVO);
+//			pstmt.setString(20, courseVO);
+			pstmt.executeUpdate();
 		}catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
 		} catch (SQLException e) {
@@ -129,7 +129,9 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 	
 	
 	public static void main(String[] args) {
-		
+		CourseDAO_JDBC dao = new CourseDAO_JDBC();
+		CourseVO CourseVO1 =new CourseVO();
+		dao.insert(CourseVO1);
 
 	}
 
