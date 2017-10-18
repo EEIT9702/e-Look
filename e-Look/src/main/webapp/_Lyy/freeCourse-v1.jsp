@@ -293,9 +293,9 @@ video::-webkit-media-controls-panel {
 				</div>
 				<div class="col-md-2 col-xs-6 ">
 					<h5>課程售價</h5>
-					<h2 style="text-align: center; font-weight: bold;">NT1230</h2>
+					<h2 style="text-align: center; font-weight: bold;">Free</h2>
 				</div>
-				<div class="col-md-2 col-xs-6 center-block">
+				<div class="col-md-2 col-xs-6 center-block" style="margin-top:10px">
 					<div style="width:70px;margin:0 auto">
 						<img id="idstar1" class="star" src="<%=request.getContextPath()%>/star/ystar.png" /> 
 						<img id="idstar2" class="star" src="<%=request.getContextPath()%>/star/ystar.png" /> 
@@ -303,8 +303,8 @@ video::-webkit-media-controls-panel {
 						<img id="idstar4" class="star " src="<%=request.getContextPath()%>/star/ystar.png" /> 
 						<img id="idstar5" class="star " src="<%=request.getContextPath()%>/star/ystar.png" />
 					</div>
-					<button type="button" class="btn btn-success center-block"
-						style="width: 160px">加入購物車</button>
+					<button type="button" class="btn btn-primary center-block"
+						style="width: 160px">贊助</button>
 				</div>
 			</div>
 		</div>

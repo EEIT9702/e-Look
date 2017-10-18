@@ -20,7 +20,7 @@ $(document).ready(function() {
 
 						var percent = Math.round((e.loaded / e.total) * 100);
 
-						$('#progressBar').attr('aria-valuenow', percent).css('width', percent + '%').text(percent + '%');
+						$('#progressBar1').attr('aria-valuenow', percent).css('width', percent + '%').text(percent + '%');
 
 					}
 

@@ -61,7 +61,7 @@ public class LoginController extends HttpServlet {
 				if (email.trim() == null || email.trim().equals("")) {
 				} else {
 					if (memberVO != null && !password.equals(memberVO.getmPassword())) {
-						errMessage.put("errepwd", "密碼錯誤!!!");
+						errMessage.put("erremail", "帳號或密碼錯誤!!!");
 					}
 				}
 			}
