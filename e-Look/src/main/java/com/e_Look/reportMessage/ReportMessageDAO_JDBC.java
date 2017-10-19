@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.e_Look.message.model.MessageVO;
+
 public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=elook";
@@ -17,32 +19,45 @@ public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
 	//第二組密碼
 	//String passwd = "123456";
 	
-	private static final String INSERT_REPORTMESSAGE =
+	private static final String INSERT_REPORT_MESSAGE =
 			"INSERT INTO ReportMessage (reportMessageID, reportMemberID, reportContent, reportTime, status) VALUES (?,?,?,getDate(),0)";
 //	private static final String UPDATE_ReportMessage =
 //			"UPDATE ReportMessage SET reportContent=? WHERE reportId=?";
 	private static final String UPDATE_STATUS =
 		    "UPDATE ReportMessage SET status=? WHERE reportId=?";
 	//DELETE_REPORTMESSAGE寫著,但應該用不到
-	private static final String DELETE_REPORTMESSAGE =
+	private static final String DELETE_REPORT_MESSAGE =
 		    "DELETE FROM ReportMessage WHERE reportId =?";
-	private static final String SELECT_ONE_REPORTMESSAGE =
+	private static final String SELECT_ONE_REPORT_MESSAGE =
+			"SELECT m.messageID, m.mContent, rm.reportID, rm.reportMessageID, rm.reportMemberID, rm.reportContent, rm.reportTime, rm.status FROM Message m INNER JOIN ReportMessage rm ON m.messageID = rm.reportMessageID WHERE rm.reportId=?";
+	private static final String SELECT_NOT_HANDLE_REPORT_MESSAGE =
+			"SELECT m.messageID, m.mContent, rm.reportID, rm.reportMessageID, rm.reportMemberID, rm.reportContent, rm.reportTime, rm.status FROM Message m INNER JOIN ReportMessage rm ON m.messageID = rm.reportMessageID WHERE rm.status=0";
+	private static final String SELECT_ALL_REPORT_MESSAGE =
+			"SELECT m.messageID, m.mContent, rm.reportID, rm.reportMessageID, rm.reportMemberID, rm.reportContent, rm.reportTime, rm.status FROM Message m INNER JOIN ReportMessage rm ON m.messageID = rm.reportMessageID ";
+	/*
+	private static final String SELECT_ONE_REPORT_MESSAGE =
 			"SELECT reportId, reportMessageID, reportMemberID, reportContent, reportTime, status FROM ReportMessage WHERE reportId=?";
-	private static final String SELECT_NOTHANDLE_REPORTMESSAGE =
+	private static final String SELECT_NOT_HANDLE_REPORT_MESSAGE =
 			"SELECT reportId, reportMessageID, reportMemberID, reportContent, reportTime, status FROM ReportMessage WHERE status=0";
-	private static final String SELECT_ALL_REPORTMESSAGE =
+	private static final String SELECT_ALL_REPORT_MESSAGE =
 			"SELECT reportId, reportMessageID, reportMemberID, reportContent, reportTime, status FROM ReportMessage";
-	
+	查詢檢舉join留言內容的指令
+	SELECT m.messageID, m.mContent, rm.reportID, rm.reportMessageID, 
+	rm.reportMemberID, rm.reportContent, rm.reportTime, rm.status
+	FROM Message m INNER JOIN ReportMessage rm ON m.messageID = rm.reportMessageID
+	*/
 	
 	@Override
 	public void insert(ReportMessageVO reportMessageVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
+			//"INSERT INTO ReportMessage (reportMessageID, reportMemberID, reportContent, reportTime, status) VALUES (?,?,?,getDate(),0)";
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(INSERT_REPORTMESSAGE);
-			pstmt.setInt(1, reportMessageVO.getReportMessageID());
+			pstmt = con.prepareStatement(INSERT_REPORT_MESSAGE);
+//			pstmt.setInt(1, reportMessageVO.getReportMessageID());
+			pstmt.setInt(1, reportMessageVO.getMessageVO().getMessageID());
 			pstmt.setInt(2, reportMessageVO.getReportMemberID());
 			pstmt.setString(3, reportMessageVO.getReportContent());
 			pstmt.executeUpdate();
@@ -123,7 +138,7 @@ public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
 			//"DELETE FROM ReportMessage WHERE reportId =?";
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt=con.prepareStatement(DELETE_REPORTMESSAGE);
+			pstmt=con.prepareStatement(DELETE_REPORT_MESSAGE);
 			pstmt.setInt(1, reportID);
 			pstmt.executeUpdate();
 			
@@ -158,30 +173,37 @@ public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
 	@Override
 	public ReportMessageVO findByReportId(Integer reportId) {
 		ReportMessageVO reportMessageVO = null;
+		MessageVO messageVO = null;
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		try {
-			//"SELECT reportId, reportMessageID, reportMemberID, reportContent, reportTime
-			//, status FROM ReportMessage WHERE reportId=?";
+			//"SELECT m.messageID, m.mContent, rm.reportID, rm.reportMessageID, rm.reportMemberID,
+			//rm.reportContent, rm.reportTime, rm.status FROM Message m INNER JOIN ReportMessage rm 
+			//ON m.messageID = rm.reportMessageID WHERE reportId=?";
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(SELECT_ONE_REPORTMESSAGE);
+			pstmt = con.prepareStatement(SELECT_ONE_REPORT_MESSAGE);
 
 			pstmt.setInt(1, reportId);
 
 			rs = pstmt.executeQuery();
 
-			while (rs.next()) {
+			if (rs.next()) {
 				// reportMessageVO 也稱為 Domain objects
 				reportMessageVO = new ReportMessageVO();
-				reportMessageVO.setReportId(rs.getInt("reportId"));
-				reportMessageVO.setReportMessageID(rs.getInt("reportMessageID"));
-				reportMessageVO.setReportMemberID(rs.getInt("reportMemberID"));
-				reportMessageVO.setReportContent(rs.getString("reportContent"));
-				reportMessageVO.setReportTime(rs.getDate("reportContent"));
-				reportMessageVO.setStatus(rs.getByte("status"));
+				messageVO = new MessageVO();
+				messageVO.setMessageID(rs.getInt("m.messageID"));
+				messageVO.setmContent(rs.getString("m.mContent"));
+				reportMessageVO.setMessageVO(messageVO);
+				reportMessageVO.setReportId(rs.getInt("rm.reportId"));
+//				reportMessageVO.setReportMessageID(rs.getInt("reportMessageID"));
+				reportMessageVO.setReportMemberID(rs.getInt("rm.reportMemberID"));
+				reportMessageVO.setReportContent(rs.getString("rm.reportContent"));
+				reportMessageVO.setReportTime(rs.getDate("rm.reportContent"));
+				reportMessageVO.setStatus(rs.getByte("rm.status"));
 			}
 
 			// Handle any driver errors
@@ -223,28 +245,34 @@ public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
 	public List<ReportMessageVO> getNotHandle() {
 		List<ReportMessageVO> list = new ArrayList<ReportMessageVO>();
 		ReportMessageVO reportMessageVO = null;
-
+		MessageVO messageVO = null;
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
-			//"SELECT reportId, reportMessageID, reportMemberID, reportContent, reportTime
-			//, status FROM ReportMessage WHERE status=0";
+			//"SELECT m.messageID, m.mContent, rm.reportID, rm.reportMessageID, rm.reportMemberID, 
+			//rm.reportContent, rm.reportTime, rm.status FROM Message m INNER JOIN ReportMessage rm 
+			//ON m.messageID = rm.reportMessageID WHERE status=0";
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(SELECT_NOTHANDLE_REPORTMESSAGE);
+			pstmt = con.prepareStatement(SELECT_NOT_HANDLE_REPORT_MESSAGE);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				// reportMessageVO 也稱為 Domain objects
 				reportMessageVO = new ReportMessageVO();
-				reportMessageVO.setReportId(rs.getInt("reportId"));
-				reportMessageVO.setReportMessageID(rs.getInt("reportMessageID"));
-				reportMessageVO.setReportMemberID(rs.getInt("reportMemberID"));
-				reportMessageVO.setReportContent(rs.getString("reportContent"));
-				reportMessageVO.setReportTime(rs.getDate("reportTime"));
-				reportMessageVO.setStatus(rs.getByte("status"));
+				messageVO = new MessageVO();
+				messageVO.setMessageID(rs.getInt("m.messageID"));
+				messageVO.setmContent(rs.getString("m.mContent"));
+				reportMessageVO.setMessageVO(messageVO);
+				reportMessageVO.setReportId(rs.getInt("rm.reportId"));
+				//reportMessageVO.setReportMessageID(rs.getInt("reportMessageID"));
+				reportMessageVO.setReportMemberID(rs.getInt("rm.reportMemberID"));
+				reportMessageVO.setReportContent(rs.getString("rm.reportContent"));
+				reportMessageVO.setReportTime(rs.getDate("rm.reportTime"));
+				reportMessageVO.setStatus(rs.getByte("rm.status"));
 				list.add(reportMessageVO); // Store the row in the list
 			}
 
@@ -287,28 +315,34 @@ public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
 	public List<ReportMessageVO> getAll() {
 		List<ReportMessageVO> list = new ArrayList<ReportMessageVO>();
 		ReportMessageVO reportMessageVO = null;
+		MessageVO messageVO = null;
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
-			//"SELECT reportId, reportMessageID, reportMemberID, reportContent, reportTime
-			//, status FROM ReportMessage";
+			//"SELECT m.messageID, m.mContent, rm.reportID, rm.reportMessageID, rm.reportMemberID, 
+			//rm.reportContent, rm.reportTime, rm.status FROM Message m INNER JOIN ReportMessage rm 
+			//ON m.messageID = rm.reportMessageID ";
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(SELECT_ALL_REPORTMESSAGE);
+			pstmt = con.prepareStatement(SELECT_ALL_REPORT_MESSAGE);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				// reportMessageVO 也稱為 Domain objects
 				reportMessageVO = new ReportMessageVO();
-				reportMessageVO.setReportId(rs.getInt("reportId"));
-				reportMessageVO.setReportMessageID(rs.getInt("reportMessageID"));
-				reportMessageVO.setReportMemberID(rs.getInt("reportMemberID"));
-				reportMessageVO.setReportContent(rs.getString("reportContent"));
-				reportMessageVO.setReportTime(rs.getDate("reportTime"));
-				reportMessageVO.setStatus(rs.getByte("status"));
+				messageVO = new MessageVO();
+				messageVO.setMessageID(rs.getInt("m.messageID"));
+				messageVO.setmContent(rs.getString("m.mContent"));
+				reportMessageVO.setMessageVO(messageVO);
+				reportMessageVO.setReportId(rs.getInt("rm.reportId"));
+				//reportMessageVO.setReportMessageID(rs.getInt("reportMessageID"));
+				reportMessageVO.setReportMemberID(rs.getInt("rm.reportMemberID"));
+				reportMessageVO.setReportContent(rs.getString("rm.reportContent"));
+				reportMessageVO.setReportTime(rs.getDate("rm.reportTime"));
+				reportMessageVO.setStatus(rs.getByte("rm.status"));
 				list.add(reportMessageVO); // Store the row in the list
 			}
 
@@ -352,27 +386,34 @@ public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
 		ReportMessageDAO_JDBC dao = new ReportMessageDAO_JDBC();
 		
 		// 新增
-		ReportMessageVO reportMessageVO1 = new ReportMessageVO();
-		reportMessageVO1.setReportMessageID(1001);
-		reportMessageVO1.setReportMemberID(100001);
-		reportMessageVO1.setReportContent("太短了");
-		dao.insert(reportMessageVO1);
+//		ReportMessageVO reportMessageVO1 = new ReportMessageVO();
+//		MessageVO messageVO1 = new MessageVO();
+//		messageVO1.setMessageID(1001);
+//		reportMessageVO1.setMessageVO(messageVO1);
+//		//reportMessageVO1.setReportMessageID(1001);
+//		reportMessageVO1.setReportMemberID(100001);
+//		reportMessageVO1.setReportContent("太短了");
+//		dao.insert(reportMessageVO1);
 		
 		//修改
 //		ReportMessageVO reportMessageVO2 = new ReportMessageVO();
+//		MessageVO messageVO2 = new MessageVO();
+//		messageVO2.setMessageID(1001);
+//		reportMessageVO2.setMessageVO(messageVO2);
+//		//reportMessageVO2.setReportMessageID(1001);
 //		reportMessageVO2.setReportId(1001);
-//		/*
-//		reportMessageVO2.setReportMessageID(1001);
+//		
 //		reportMessageVO2.setReportMemberID(100001);
-//		*/
+//		
 //		reportMessageVO2.setReportContent("太短了~~~");
 //		reportMessageVO2.setStatus((byte) 1);
 //		dao.update(reportMessageVO2);
 		
 		//查詢單一
 		ReportMessageVO reportMessageVO3 = dao.findByReportId(1001);
+		//MessageVO messageVO3 = new MessageVO();
 		System.out.println(reportMessageVO3.getReportId());
-		System.out.println(reportMessageVO3.getReportMessageID());
+		System.out.println(reportMessageVO3.getMessageVO().getMessageID());
 		System.out.println(reportMessageVO3.getReportMemberID());
 		System.out.println(reportMessageVO3.getReportContent());
 		System.out.println(reportMessageVO3.getReportTime());
@@ -383,7 +424,7 @@ public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
 		List<ReportMessageVO> list = dao.getAll();
 		for(ReportMessageVO reportMessageVO : list) {
 			System.out.print(reportMessageVO.getReportId() + "  ");
-			System.out.print(reportMessageVO.getReportMessageID() + "  ");
+			System.out.print(reportMessageVO.getMessageVO().getMessageID() + "  ");
 			System.out.print(reportMessageVO.getReportMemberID() + "  ");
 			System.out.print(reportMessageVO.getReportContent() + "  ");
 			System.out.print(reportMessageVO.getReportTime() + "  ");

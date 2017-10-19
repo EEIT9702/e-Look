@@ -12,6 +12,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.e_Look.message.model.MessageVO;
+
 public class ReportMessageDAO implements ReportMessageDAO_interface {
 	private static DataSource ds = null;
 	static {
@@ -32,13 +34,24 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 	//DELETE_REPORTMESSAGE寫著,但應該用不到
 	private static final String DELETE_REPORTMESSAGE =
 		    "DELETE FROM ReportMessage WHERE reportId =?";
-	private static final String SELECT_ONE_REPORTMESSAGE =
+	private static final String SELECT_ONE_REPORT_MESSAGE =
+			"SELECT m.messageID, m.mContent, rm.reportID, rm.reportMessageID, rm.reportMemberID, rm.reportContent, rm.reportTime, rm.status FROM Message m INNER JOIN ReportMessage rm ON m.messageID = rm.reportMessageID WHERE reportId=?";
+	private static final String SELECT_NOT_HANDLE_REPORT_MESSAGE =
+			"SELECT m.messageID, m.mContent, rm.reportID, rm.reportMessageID, rm.reportMemberID, rm.reportContent, rm.reportTime, rm.status FROM Message m INNER JOIN ReportMessage rm ON m.messageID = rm.reportMessageID WHERE status=0";
+	private static final String SELECT_ALL_REPORT_MESSAGE =
+			"SELECT m.messageID, m.mContent, rm.reportID, rm.reportMessageID, rm.reportMemberID, rm.reportContent, rm.reportTime, rm.status FROM Message m INNER JOIN ReportMessage rm ON m.messageID = rm.reportMessageID ";
+	/*
+	private static final String SELECT_ONE_REPORT_MESSAGE =
 			"SELECT reportId, reportMessageID, reportMemberID, reportContent, reportTime, status FROM ReportMessage WHERE reportId=?";
-	private static final String SELECT_NOTHANDLE_REPORTMESSAGE =
+	private static final String SELECT_NOT_HANDLE_REPORT_MESSAGE =
 			"SELECT reportId, reportMessageID, reportMemberID, reportContent, reportTime, status FROM ReportMessage WHERE status=0";
-	private static final String SELECT_ALL_REPORTMESSAGE =
+	private static final String SELECT_ALL_REPORT_MESSAGE =
 			"SELECT reportId, reportMessageID, reportMemberID, reportContent, reportTime, status FROM ReportMessage";
-	
+	查詢檢舉join留言內容的指令
+	SELECT m.messageID, m.mContent, rm.reportID, rm.reportMessageID, 
+	rm.reportMemberID, rm.reportContent, rm.reportTime, rm.status
+	FROM Message m INNER JOIN ReportMessage rm ON m.messageID = rm.reportMessageID
+	*/	
 	
 	@Override
 	public void insert(ReportMessageVO reportMessageVO) {
@@ -47,7 +60,8 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_REPORTMESSAGE);
-			pstmt.setInt(1, reportMessageVO.getReportMessageID());
+			//pstmt.setInt(1, reportMessageVO.getReportMessageID());
+			pstmt.setInt(1, reportMessageVO.getMessageVO().getMessageID());
 			pstmt.setInt(2, reportMessageVO.getReportMemberID());
 			pstmt.setString(3, reportMessageVO.getReportContent());
 			pstmt.executeUpdate();
@@ -149,15 +163,18 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 	@Override
 	public ReportMessageVO findByReportId(Integer reportId) {
 		ReportMessageVO reportMessageVO = null;
+		MessageVO messageVO = null;
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		try {
-			//"SELECT reportId, reportMessageID, reportMemberID, reportContent, reportTime
-			//, status FROM ReportMessage WHERE reportId=?";
+			//"SELECT m.messageID, m.mContent, rm.reportID, rm.reportMessageID, rm.reportMemberID,
+			//rm.reportContent, rm.reportTime, rm.status FROM Message m INNER JOIN ReportMessage rm 
+			//ON m.messageID = rm.reportMessageID WHERE reportId=?";
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_ONE_REPORTMESSAGE);
+			pstmt = con.prepareStatement(SELECT_ONE_REPORT_MESSAGE);
 
 			pstmt.setInt(1, reportId);
 
@@ -166,8 +183,12 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 			while (rs.next()) {
 				// reportMessageVO 也稱為 Domain objects
 				reportMessageVO = new ReportMessageVO();
+				messageVO = new MessageVO();
+				messageVO.setMessageID(rs.getInt("m.messageID"));
+				messageVO.setmContent(rs.getString("m.mContent"));
+				reportMessageVO.setMessageVO(messageVO);
 				reportMessageVO.setReportId(rs.getInt("reportId"));
-				reportMessageVO.setReportMessageID(rs.getInt("reportMessageID"));
+				//reportMessageVO.setReportMessageID(rs.getInt("reportMessageID"));
 				reportMessageVO.setReportMemberID(rs.getInt("reportMemberID"));
 				reportMessageVO.setReportContent(rs.getString("reportContent"));
 				reportMessageVO.setReportTime(rs.getDate("reportContent"));
@@ -209,23 +230,29 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 	public List<ReportMessageVO> getNotHandle() {
 		List<ReportMessageVO> list = new ArrayList<ReportMessageVO>();
 		ReportMessageVO reportMessageVO = null;
-
+		MessageVO messageVO = null;
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
-			//"SELECT reportId, reportMessageID, reportMemberID, reportContent, reportTime
-			//, status FROM ReportMessage WHERE status=0";
+			//"SELECT m.messageID, m.mContent, rm.reportID, rm.reportMessageID, rm.reportMemberID, 
+			//rm.reportContent, rm.reportTime, rm.status FROM Message m INNER JOIN ReportMessage rm 
+			//ON m.messageID = rm.reportMessageID WHERE status=0";
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_NOTHANDLE_REPORTMESSAGE);
+			pstmt = con.prepareStatement(SELECT_NOT_HANDLE_REPORT_MESSAGE);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				// reportMessageVO 也稱為 Domain objects
 				reportMessageVO = new ReportMessageVO();
+				messageVO = new MessageVO();
+				messageVO.setMessageID(rs.getInt("m.messageID"));
+				messageVO.setmContent(rs.getString("m.mContent"));
+				reportMessageVO.setMessageVO(messageVO);
 				reportMessageVO.setReportId(rs.getInt("reportId"));
-				reportMessageVO.setReportMessageID(rs.getInt("reportMessageID"));
+				//reportMessageVO.setReportMessageID(rs.getInt("reportMessageID"));
 				reportMessageVO.setReportMemberID(rs.getInt("reportMemberID"));
 				reportMessageVO.setReportContent(rs.getString("reportContent"));
 				reportMessageVO.setReportTime(rs.getDate("reportTime"));
@@ -268,23 +295,29 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 	public List<ReportMessageVO> getAll() {
 		List<ReportMessageVO> list = new ArrayList<ReportMessageVO>();
 		ReportMessageVO reportMessageVO = null;
+		MessageVO messageVO = null;
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
-			//"SELECT reportId, reportMessageID, reportMemberID, reportContent, reportTime
-			//, status FROM ReportMessage";
+			//"SELECT m.messageID, m.mContent, rm.reportID, rm.reportMessageID, rm.reportMemberID, 
+			//rm.reportContent, rm.reportTime, rm.status FROM Message m INNER JOIN ReportMessage rm 
+			//ON m.messageID = rm.reportMessageID ";
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_ALL_REPORTMESSAGE);
+			pstmt = con.prepareStatement(SELECT_ALL_REPORT_MESSAGE);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				// reportMessageVO 也稱為 Domain objects
 				reportMessageVO = new ReportMessageVO();
+				messageVO = new MessageVO();
+				messageVO.setMessageID(rs.getInt("m.messageID"));
+				messageVO.setmContent(rs.getString("m.mContent"));
+				reportMessageVO.setMessageVO(messageVO);
 				reportMessageVO.setReportId(rs.getInt("reportId"));
-				reportMessageVO.setReportMessageID(rs.getInt("reportMessageID"));
+				//reportMessageVO.setReportMessageID(rs.getInt("reportMessageID"));
 				reportMessageVO.setReportMemberID(rs.getInt("reportMemberID"));
 				reportMessageVO.setReportContent(rs.getString("reportContent"));
 				reportMessageVO.setReportTime(rs.getDate("reportTime"));
@@ -321,11 +354,6 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 			}
 		}
 		return list;
-	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
 	}
 
 }
