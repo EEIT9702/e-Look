@@ -1,4 +1,4 @@
-package com.e_Look.sponsor.model;
+package com.e_Look.sponsor.control;
 
 import java.io.IOException;
 
@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.e_Look.sponsor.model.SponsorService;
+
 @WebServlet("/SponsorController")
-public class SponsorController extends HttpServlet {
+public class SponsorInserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

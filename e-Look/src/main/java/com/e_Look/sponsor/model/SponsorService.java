@@ -1,5 +1,7 @@
 package com.e_Look.sponsor.model;
 
+import java.util.List;
+
 public class SponsorService { 
 	private SponsorDAO_interface dao;
 	public SponsorService(){
@@ -13,6 +15,15 @@ public class SponsorService {
 		sponsorVO.setMoney(money);
 		
 		dao.insert(sponsorVO);
+	}
+	public int countMoney(Integer courseID){
+		int count=0;
+		List <SponsorVO> countMoney = dao.getCountMoney(courseID);
+		
+		for(SponsorVO Money:countMoney){
+			count+=Money.getMoney();
+		}
+		return count;
 	}
 	
 	

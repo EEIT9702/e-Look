@@ -150,11 +150,7 @@ public class SponsorDAO_JDBC implements SponsorDAO_interface {
 			}
 		}
 	}
-	@Override
-	public int findCountMoney(Integer courseID){
-		return courseID;
 
-	}
 	@Override
 	public SponsorVO findByCourseID(Integer courseID) {
 		SponsorVO sponsorVO = null;
@@ -215,6 +211,61 @@ public class SponsorDAO_JDBC implements SponsorDAO_interface {
 		return sponsorVO;
 	}
 	
+	@Override
+	public List<SponsorVO> getCountMoney(Integer courseID) {
+		// "SELECT courseID, SponsorName, money FROM Sponsor WHERE courseID=?";
+		List<SponsorVO> CountMoney = new ArrayList<SponsorVO>();
+		SponsorVO SponsorVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(SELECT_ONE_SPONSOR);
+			pstmt.setInt(1, courseID);
+			rs = pstmt.executeQuery();
+
+			
+			while (rs.next()) {
+				SponsorVO = new SponsorVO();
+				SponsorVO.setCourseID(rs.getInt("courseID"));
+				SponsorVO.setSponsorName(rs.getString("SponsorName"));
+				SponsorVO.setMoney(rs.getInt("money"));
+				CountMoney.add(SponsorVO);
+			}
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return CountMoney;
+
+	}
 	
 	@Override
 	public List<SponsorVO> getAll() {
@@ -281,11 +332,11 @@ public class SponsorDAO_JDBC implements SponsorDAO_interface {
 		SponsorDAO_JDBC dao = new SponsorDAO_JDBC();
 		
 		// 新增
-		SponsorVO sponsorVO1 = new SponsorVO();
-		sponsorVO1.setCourseID(200001);
-		sponsorVO1.setSponsorName("王大明");
-		sponsorVO1.setMoney(1000);
-		dao.insert(sponsorVO1);
+//		SponsorVO sponsorVO1 = new SponsorVO();
+//		sponsorVO1.setCourseID(200001);
+//		sponsorVO1.setSponsorName("王大明");
+//		sponsorVO1.setMoney(3000);
+//		dao.insert(sponsorVO1);
 		
 		//修改
 //		SponsorVO sponsorVO2 = new SponsorVO();
@@ -298,19 +349,32 @@ public class SponsorDAO_JDBC implements SponsorDAO_interface {
 //		dao.delete(200001);
 		
 		//查詢單一
-		SponsorVO sponsorVO3 = dao.findByCourseID(200001);
-		System.out.println(sponsorVO3.getCourseID());
-		System.out.println(sponsorVO3.getSponsorName());
-		System.out.println(sponsorVO3.getMoney());
-		System.out.println("---------------------------");
+//		SponsorVO sponsorVO3 = dao.findByCourseID(200001);
+//		System.out.println(sponsorVO3.getCourseID());
+//		System.out.println(sponsorVO3.getSponsorName());
+//		System.out.println(sponsorVO3.getMoney());
+//		System.out.println("---------------------------");
+		
+		
+		//查詢課程募款金額
+		List<SponsorVO> list = dao.getCountMoney(200001);
+		int count=0;
+		for(SponsorVO sponsorVO : list){
+//			System.out.print(sponsorVO.getCourseID() + "  ");
+//			System.out.print(sponsorVO.getSponsorName() + "  ");
+			System.out.print(sponsorVO.getMoney());
+			count+=sponsorVO.getMoney();
+		}
+		System.out.println(count);
+//		System.out.println("---------------------------");
 		
 		//查詢全部
-		List<SponsorVO> list = dao.getAll();
-		for(SponsorVO sponsorVO : list){
-			System.out.print(sponsorVO.getCourseID() + "  ");
-			System.out.print(sponsorVO.getSponsorName() + "  ");
-			System.out.print(sponsorVO.getMoney());
-		}
+//		List<SponsorVO> list = dao.getAll();
+//		for(SponsorVO sponsorVO : list){
+//			System.out.print(sponsorVO.getCourseID() + "  ");
+//			System.out.print(sponsorVO.getSponsorName() + "  ");
+//			System.out.println(sponsorVO.getMoney());
+//		}
 	}
 
 }
