@@ -30,7 +30,7 @@
 				var movein = this.id.substr(6);
 				for (i = 1; i <= movein; i++) {
 					document.getElementById("idstar" + i).className = "nstar";
-				//	$('img:lt(i)').switchClass('s','n',1000);
+					//	$('img:lt(i)').switchClass('s','n',1000);
 				}
 			}
 		}
@@ -39,15 +39,17 @@
 				var out = this.id.substr(6);
 				for (u = 1; u <= out; u++) {
 					document.getElementById("idstar" + u).className = "star";
-				//	$('div img:nth-child(u)').switchClass('n','s',1000);
+					//	$('div img:nth-child(u)').switchClass('n','s',1000);
 				}
 			}
 		}
 		$('img').click(function() {
 			if (!flag1) {
-				flag1 = true};
-// 			 document.getElementById("starnum").innerHTML = "你給" + this.id.substr(6) + "顆星";
-//	       $.get("Buycourse",{"name":"score","score":this.id.substr(6)});
+				flag1 = true
+			}
+			;
+			// 			 document.getElementById("starnum").innerHTML = "你給" + this.id.substr(6) + "顆星";
+			//	       $.get("Buycourse",{"name":"score","score":this.id.substr(6)});
 		})
 	})
 </script>
@@ -55,7 +57,7 @@
 /* 影片區塊 */
 video {
 	width: 100%;
-	height: 80%; 
+	height: 80%;
 	padding-left: -15px;
 	padding-right: -15px;
 }
@@ -63,8 +65,7 @@ video {
 #videoArea {
 	background-size: cover;
 	background-position: center;
-	height:75%;
-	
+	height: 75%;
 }
 
 /* #videoArea>.col-md-12 { */
@@ -192,6 +193,7 @@ video::-webkit-media-controls-panel {
 	font-size: 24px;
 	margin-top: 0;
 }
+
 .star {
 	-webkit-filter: grayscale(1);
 }
@@ -202,6 +204,12 @@ video::-webkit-media-controls-panel {
 /* video::-webkit-media-controls { */
 /*   display:none; */
 /* } */
+#mysponer>.modal-dialog>.modal-content>.modal-header{
+color: black; 
+background-color: #81C0C0; 
+border-top-left-radius: 8px; 
+border-top-right-radius: 8px
+}
 </style>
 <script>
 	function setControl() {
@@ -219,16 +227,18 @@ video::-webkit-media-controls-panel {
 <body oncontextmenu="window.event.returnValue=false">
 	<jsp:include page="/login.jsp" flush="true" />
 	<div class="container-fluid">
-		<div class="container"  style="background-color:gray;">
+		<div class="container" style="background-color: gray;">
 			<div class="row">
 
-				<div class="col-md-12 " id="videoArea" 
+				<div class="col-md-12 " id="videoArea"
 					style="background-image: url('<%=request.getContextPath()%>/_Lyy/o.jpg')">
 					<h1 align="center" style="color: white">videoname</h1>
 					<div class="col-md-12">
 						<div class="col-md-8 col-xs-12">
-							<video 	poster="<%=request.getContextPath()%>/_Lyy/poster.png" id="vidoeControl">
-								<source src="<%=request.getContextPath()%>/_Lyy/tri.mp4" type="video/mp4">
+							<video poster="<%=request.getContextPath()%>/_Lyy/poster.png"
+								id="vidoeControl">
+								<source src="<%=request.getContextPath()%>/_Lyy/tri.mp4"
+									type="video/mp4">
 							</video>
 						</div>
 						<div class="col-md-4 col-xs-12" id="videoDivListStyle">
@@ -295,16 +305,74 @@ video::-webkit-media-controls-panel {
 					<h5>課程售價</h5>
 					<h2 style="text-align: center; font-weight: bold;">Free</h2>
 				</div>
-				<div class="col-md-2 col-xs-6 center-block" style="margin-top:10px">
-					<div style="width:70px;margin:0 auto">
-						<img id="idstar1" class="star" src="<%=request.getContextPath()%>/star/ystar.png" /> 
-						<img id="idstar2" class="star" src="<%=request.getContextPath()%>/star/ystar.png" /> 
-						<img id="idstar3" class="star " src="<%=request.getContextPath()%>/star/ystar.png" /> 
-						<img id="idstar4" class="star " src="<%=request.getContextPath()%>/star/ystar.png" /> 
-						<img id="idstar5" class="star " src="<%=request.getContextPath()%>/star/ystar.png" />
+				<div class="col-md-2 col-xs-6 center-block" style="margin-top: 10px">
+					<div style="width: 70px; margin: 0 auto">
+						<img id="idstar1" class="star"
+							src="<%=request.getContextPath()%>/star/ystar.png" /> <img
+							id="idstar2" class="star"
+							src="<%=request.getContextPath()%>/star/ystar.png" /> <img
+							id="idstar3" class="star "
+							src="<%=request.getContextPath()%>/star/ystar.png" /> <img
+							id="idstar4" class="star "
+							src="<%=request.getContextPath()%>/star/ystar.png" /> <img
+							id="idstar5" class="star "
+							src="<%=request.getContextPath()%>/star/ystar.png" />
 					</div>
+		<!--贊助資訊 -->
 					<button type="button" class="btn btn-primary center-block"
-						style="width: 160px">贊助</button>
+						style="width: 160px" data-toggle="modal" data-target="#mysponer">贊助</button>
+					<div class="modal fade" id="mysponer" tabindex="-1" role="dialog"aria-labelledby="myModalLabel" aria-hidden="true">
+					
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header" >
+									<button type="button" class="close pull-right" data-dismiss="modal"
+										aria-hidden="true">x</button>
+									<h4 class="modal-title" id="myModalLabel">
+										<img
+											src="<%=request.getContextPath()%>/HeaderCssJs/eLook_LOGO.png"
+											width="60px">感謝您的贊助
+									</h4>
+								</div>
+
+								<form method="post" action="">
+									<div class="modal-body">
+										<div class="text-center">
+											<h4>請在下方填寫贊助相關資訊!</h4>
+										</div>
+
+										<table class="table">
+											<tbody>
+												<tr>
+													<td class="text-right">贊助者暱稱 :</td>
+													<td><input type="text" placeholder="請輸入暱稱"></td>
+												</tr>
+
+												<tr>
+													<td class="text-right">贊助金額 :</td>
+													<td><input type="text">單位:新台幣</td>
+												</tr>
+
+											</tbody>
+										</table>
+										<p>◎ 贊助金額最低為新台幣50元</p>
+										<small>Copyright © 2017 O'Pay Electronic Payment
+											Co.,Ltd.All rights reserved.<img
+											src="<%=request.getContextPath()%>/img/opay.png" width="80px">
+											第三方支付平台
+										</small>
+									</div>
+									<div class="modal-footer">
+
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">關閉</button>
+										<button type="submit" class="btn btn-primary">使用歐付寶付款</button>
+
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -358,7 +426,7 @@ video::-webkit-media-controls-panel {
 							<div role="tabpanel" class="tab-pane fade" id="Section4">
 
 								<p>喜歡的話記得幫我們評分還有收藏唷</p>
-								
+
 							</div>
 						</div>
 					</div>
@@ -366,6 +434,6 @@ video::-webkit-media-controls-panel {
 			</div>
 		</div>
 	</div>
-		<jsp:include page="/footer.jsp" />
+	<jsp:include page="/footer.jsp" />
 </body>
 </html>

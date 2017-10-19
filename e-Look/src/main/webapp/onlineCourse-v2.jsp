@@ -217,6 +217,7 @@ video::-webkit-media-controls-panel {
 </head>
 <!-- 影片區 -->
 <body oncontextmenu="window.event.returnValue=false">
+
 	<jsp:include page="/login.jsp" flush="true" />
 	<div class="container-fluid">
 		<div class="container"  style="background-color:gray;">

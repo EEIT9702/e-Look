@@ -23,6 +23,7 @@
 </script>
 <script src="<%=request.getContextPath()%>/login/js/google_login.js"
 	type="text/javascript"></script>
+<%-- <script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script> --%>
 <%-- <script src="<%=request.getContextPath()%>/login/js/jquery-3.2.1.js" --%>
 <!-- 	type="text/javascript"></script> -->
 <%-- <script src="<%=request.getContextPath()%>/login/js/bootstrap.js" --%>
@@ -142,7 +143,7 @@ margin:2px auto;
 <title>${SYSTEM.systemName}</title>
 </head>
 <body>
-	<jsp:include page="/header.jsp" />
+	<jsp:include page="/header-v2.jsp" />
 	<!-- 以下是login畫面 -->
 	<c:choose>
 		<c:when test="${!empty loginerr}">

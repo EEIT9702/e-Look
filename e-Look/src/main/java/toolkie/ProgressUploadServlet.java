@@ -45,7 +45,7 @@ public class ProgressUploadServlet extends HttpServlet {
 			for (Iterator it = itemList.iterator(); it.hasNext();) {// 檢查所有參數
 				FileItem item = (FileItem) it.next();
 				if (item.isFormField()) {// 如果是表單資料
-					System.out.println("FormField: " + item.getFieldName() + " = " + item.getString());
+					//System.out.println("FormField: " + item.getFieldName() + " = " + item.getString());
 				} else {// 否則上傳檔案
 					if (!item.getName().equals("")) {
 						System.out.println("File: " + item.getName());

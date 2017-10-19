@@ -1,15 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE>
-<link href="<%=request.getContextPath() %>/backstage/css/jquery-ui.min.css" rel="stylesheet">
-<script src="<%=request.getContextPath()%>/backstage/css/jquery.js"></script>
-<script src="<%=request.getContextPath()%>/backstage/css/jquery-ui.min.js"></script>
-
 <html>
 <head>
 <jsp:useBean id="SYSTEM" class="init.GlobalService" scope="application"/>
 <link rel="Shortcut Icon" type="image/x-icon" href="${SYSTEM.iconUri}" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="<%=request.getContextPath() %>/backstage/css/jquery-ui.min.css" rel="stylesheet">
+<script src="<%=request.getContextPath()%>/backstage/css/jquery.js"></script>
+<script src="<%=request.getContextPath()%>/backstage/css/jquery-ui.min.js"></script>
 <script type="text/javascript">
 $(function(){
 
@@ -53,7 +52,6 @@ $(function(){
 .event{
 padding-left:60px;
 font-size:50px;
-margin-bottom: 100px;
 }
 #inputevent{
 width:1500px;
@@ -90,24 +88,40 @@ margin-right: 100px;
 #submit{
 
 }
+.errormessage{
+font-size: 30px;
+color: red;
+padding-top: 35px;
+padding-bottom: 35px;
+padding-left:60px;
+
+}
 </style>
 
 
 <body><div>
-<jsp:include page="backstage.jsp"></jsp:include></div>
-<form action="<%=request.getContextPath()%>/eLookEvent" method="post" enctype="multipart/form-date">
+<jsp:include page="bheader.jsp"></jsp:include></div>
+<form action="<%=request.getContextPath()%>/backstage/elookeventinsert" method="post" enctype="multipart/form-date">
 <div class="event">
-活動名稱：<input id="inputevent" name="eventName">
+活動名稱：<input id="inputevent" name="eventName"><br>
 </div>
-
+<p class="errormessage">
+              ${ErrMsg.errName}
+           </p>
  <div class="event">
 選擇起始日期 : <input id="thedate" type="text" name="eStartDate"/>
-選擇結束日期 : <input id="thedate2" type="text" name="eEndDate"/>
+選擇結束日期 : <input id="thedate2" type="text" name="eEndDate"/><br>
  </div>
+  <p class="errormessage">
+              ${ErrMsg.errStartDate}
+               ${ErrMsg.errEndDate}
+           </p>
  <div class="event">
  折扣優惠：<input id="discount" name="discount">
  </div>
-
+<p class="errormessage">
+              ${ErrMsg.errCount}
+           </p>
 <div class="event">
 選擇優惠類別1：<select class="font courseclass" name="courseclass1">
 <option value="null">無</option>
@@ -156,9 +170,11 @@ margin-right: 100px;
 <option value="program">程式</option>
 </select>
 </div>
+
 <hr size="3px">
  <div class="event" id="submit" align="center">
-<input type="submit" class="file2" value="儲存">
+<input type="hidden" name="action" value="insert">
+<input type="submit" class="file2" value="儲存" >
 <input type="button" class="file2" value="取消">
 </div>
 </form>
