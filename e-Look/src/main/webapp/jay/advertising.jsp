@@ -120,7 +120,7 @@ video::-webkit-media-controls-panel {
 		<div style="margin: 0px auto" id="abgneBlock">
 			<ul class="list">
 				<li ><video autoplay="autoplay" controls
-							src="<%=request.getContextPath()%>/img/Yif-Magic.mp4"></video></li>
+							src="<%=request.getContextPath()%>/img/EEIT97(e_Look)第一版.mp4"></video></li>
 				<li><a target="_blank" href="#"><img src="<%=request.getContextPath()%>/img/04.jpg"></a></li>
 				<li><a target="_blank" href="#"><img src="<%=request.getContextPath()%>/img/02.jpg"></a></li>
 				<li><a target="_blank" href="#"><img src="<%=request.getContextPath()%>/img/03.jpg"></a></li>
