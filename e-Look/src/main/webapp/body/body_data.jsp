@@ -4,7 +4,7 @@
 	
 <!-- 		<div class="row"> -->
 			<!-- 1-4 Template row -->
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
 						src="<%= request.getContextPath() %>/body/img/001.jpg" alt="course" id="wizardPicturePreview" title="">
@@ -26,7 +26,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
 						src="<%= request.getContextPath() %>/body/img/002.jpg" alt="course" id="wizardPicturePreview" title="">
@@ -48,7 +48,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
 						src="<%= request.getContextPath() %>/body/img/003.jpg" alt="course" id="wizardPicturePreview" title="">
@@ -70,7 +70,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
 						src="<%= request.getContextPath() %>/body/img/004.jpg" alt="course" id="wizardPicturePreview" title="">
@@ -95,7 +95,7 @@
 			<!-- end 1-4 Template -->
 			<!-- <br> -->
 			<!-- 5-8 Template row -->
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="<%= request.getContextPath() %>/body/img/005.jpg" alt="course" id="wizardPicturePreview"
@@ -118,7 +118,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="<%= request.getContextPath() %>/body/img/006.jpg" alt="course" id="wizardPicturePreview"
@@ -141,7 +141,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="<%= request.getContextPath() %>/body/img/007.jpg" alt="course" id="wizardPicturePreview"
@@ -164,7 +164,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="<%= request.getContextPath() %>/body/img/008.jpg" alt="course" id="wizardPicturePreview"
@@ -190,7 +190,7 @@
 			<!-- end 5-8 Template -->
 			<!-- <br> -->
 			<!-- 9-12 Template row -->
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="<%= request.getContextPath() %>/body/img/009.jpg" alt="course" id="wizardPicturePreview"
@@ -213,7 +213,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="<%= request.getContextPath() %>/body/img/010.jpg" alt="course" id="wizardPicturePreview"
@@ -236,7 +236,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="<%= request.getContextPath() %>/body/img/011.jpg" alt="course" id="wizardPicturePreview"
@@ -259,7 +259,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="<%= request.getContextPath() %>/body/img/012.jpg" alt="course" id="wizardPicturePreview"
@@ -285,7 +285,7 @@
 			<!-- end 9-12 Template -->
 			<!-- <br> -->
 			<!-- 13-16 Template row -->
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="<%= request.getContextPath() %>/body/img/001.jpg" alt="course" id="wizardPicturePreview"
@@ -308,7 +308,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="<%= request.getContextPath() %>/body/img/002.jpg" alt="course" id="wizardPicturePreview"
@@ -331,7 +331,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="<%= request.getContextPath() %>/body/img/003.jpg" alt="course" id="wizardPicturePreview"
@@ -354,7 +354,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="<%= request.getContextPath() %>/body/img/004.jpg" alt="course" id="wizardPicturePreview"
@@ -380,7 +380,7 @@
 			<!-- end 13-16 Template -->
 			<!-- <br> -->
 			<!-- 17-20 Template row -->
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="<%= request.getContextPath() %>/body/img/005.jpg" alt="course" id="wizardPicturePreview"
@@ -403,7 +403,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="<%= request.getContextPath() %>/body/img/006.jpg" alt="course" id="wizardPicturePreview"
@@ -426,7 +426,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="<%= request.getContextPath() %>/body/img/007.jpg" alt="course" id="wizardPicturePreview"
@@ -449,7 +449,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="<%= request.getContextPath() %>/body/img/008.jpg" alt="course" id="wizardPicturePreview"
@@ -475,7 +475,7 @@
 			<!-- end 17-20 Template -->
 			<!-- <br> -->
 			<!-- 21-24 Template row -->
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="<%= request.getContextPath() %>/body/img/009.jpg" alt="course" id="wizardPicturePreview"
@@ -498,7 +498,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="<%= request.getContextPath() %>/body/img/010.jpg" alt="course" id="wizardPicturePreview"
@@ -521,7 +521,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="<%= request.getContextPath() %>/body/img/011.jpg" alt="course" id="wizardPicturePreview"
@@ -544,7 +544,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="<%= request.getContextPath() %>/body/img/012.jpg" alt="course" id="wizardPicturePreview"
@@ -570,7 +570,7 @@
 			<!-- end 21-24 Template -->
 			<!-- <br> -->
 			<!-- 25-28 Template row -->
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="<%= request.getContextPath() %>/body/img/001.jpg" alt="course" id="wizardPicturePreview"
@@ -593,7 +593,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="<%= request.getContextPath() %>/body/img/002.jpg" alt="course" id="wizardPicturePreview"
@@ -616,7 +616,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="<%= request.getContextPath() %>/body/img/003.jpg" alt="course" id="wizardPicturePreview"
@@ -639,7 +639,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top" 
 						src="<%= request.getContextPath() %>/body/img/004.jpg" alt="course" id="wizardPicturePreview"
