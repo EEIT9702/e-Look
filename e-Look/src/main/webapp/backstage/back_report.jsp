@@ -7,7 +7,7 @@
 <title>檢舉管理畫面</title>
 <script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script>
 <script type="text/javascript" src="css/jquery.mmenu.js"></script>
-<link rel="stylesheet" href="css/bootstrap1.min.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
 
 <style>
 .rtitle{
