@@ -94,8 +94,11 @@
 						</ul>
 					</div>
 
-					<form action="<%=request.getContextPath()%>/toolkie/ProgressUploadServlet" method="POST" name="formData"
-						target="upload_iframe" enctype="multipart/form-data" role="form" id="TotalContent" onsubmit="showStatus()">
+					<form
+						action="<%=request.getContextPath()%>/toolkie/ProgressUploadServlet"
+						method="POST" name="formData" target="upload_iframe"
+						enctype="multipart/form-data" role="form" id="TotalContent"
+						onsubmit="showStatus()">
 						<iframe name=upload_iframe width=0 height=0></iframe>
 
 
@@ -502,15 +505,17 @@
 													<div class="input-group image-preview">
 														<!-- don't give a name === doesn't send on POST/GET -->
 														<span> <!-- image-preview-clear button --> <span
-															id="filename"></span>
+															id="filename1"></span>
 															<div class="btn btn-default image-preview-input">
 																<span class="glyphicon glyphicon-folder-open"></span> <span
 																	class="image-preview-input-title">選擇檔案</span> <input
 																	type="file" name="input-file-preview"
-																	id="inputfilename" />
+																	id="inputfilename1" onclick="fileSelect()" />
 																<!-- rename it -->
 															</div>
-															<button id="btnSubmit" type="submit" class="btn btn-labeled btn-primary">
+															<button id="btnSubmit1" type="submit"
+																class="btn btn-labeled btn-primary"
+																onclick="bottonClick()">
 																<span class="btn-label"><i
 																	class="glyphicon glyphicon-upload"></i></span>上傳
 															</button>
@@ -524,52 +529,105 @@
 														<div id="progressBar1" class="progress-bar"
 															role="progressbar1" aria-valuenow="0" aria-valuemin="0"
 															aria-valuemax="100" style="width: 0%;">
-															60% <span class="sr-only">60% Complete</span>
+															<!-- 															60% <span class="sr-only">60% Complete</span> -->
 														</div>
 													</div>
 													<br />
 												</div>
 											</div>
 										</div>
-										
-<!-- 										<div class="col-md-12"> -->
-<!-- 											<div class="panel panel-default"> -->
-<!-- 												<div class="panel-heading"> -->
-<!-- 													<strong>課程講義上傳</strong> <small> </small> -->
-<!-- 												</div> -->
-<!-- 												<div class="panel-body"> -->
-<!-- 													<div class="input-group image-preview"> -->
-<!-- 														don't give a name === doesn't send on POST/GET -->
-<!-- 														<span> image-preview-clear button <span -->
-<!-- 															id="papername"></span> -->
-<!-- 															<div class="btn btn-default image-preview-input"> -->
-<!-- 																<span class="glyphicon glyphicon-folder-open"></span> <span -->
-<!-- 																	class="image-preview-input-title">選擇檔案</span> <input -->
-<!-- 																	type="file" name="input-paper-preview" -->
-<!-- 																	id="inputpapername" /> -->
-<!-- 																rename it -->
-<!-- 															</div> -->
-<!-- 															<button type="submit" class="btn btn-labeled btn-primary"> -->
-<!-- 																<span class="btn-label"><i -->
-<!-- 																	class="glyphicon glyphicon-upload"></i></span>上傳 -->
-<!-- 															</button> -->
-<!-- 														</span> -->
-<!-- 													</div> -->
-<!-- 													/input-group image-preview [TO HERE] -->
-<!-- 													<br /> -->
-<!-- 													Drop Zone -->
-<!-- 													Progress Bar -->
-<!-- 													<div class="progress"> -->
-<!-- 														<div id="progressBar2" class="progress-bar" -->
-<!-- 															role="progressbar" aria-valuenow="0" aria-valuemin="0" -->
-<!-- 															aria-valuemax="100" style="width: 0%;"> -->
-<!-- 															60% <span class="sr-only">60% Complete</span> -->
-<!-- 														</div> -->
-<!-- 													</div> -->
-<!-- 													<br /> -->
-<!-- 												</div> -->
-<!-- 											</div> -->
-<!-- 										</div> -->
+									</div>
+								</div>
+								<!-- /container -->
+								<div class="container">
+									<br />
+									<div class="row">
+										<div class="col-md-12">
+											<div class="panel panel-default">
+												<div class="panel-heading">
+													<strong>課程講義上傳</strong> <small> </small>
+												</div>
+												<div class="panel-body">
+													<div class="input-group image-preview">
+														<!-- don't give a name === doesn't send on POST/GET -->
+														<span> <!-- image-preview-clear button --> <span
+															id="filename2"></span>
+															<div class="btn btn-default image-preview-input">
+																<span class="glyphicon glyphicon-folder-open"></span> <span
+																	class="image-preview-input-title">選擇檔案</span> <input
+																	type="file" name="input-file-preview"
+																	id="inputfilename2" onclick="fileSelect()" />
+																<!-- rename it -->
+															</div>
+															<button id="btnSubmit2" type="submit"
+																class="btn btn-labeled btn-primary"
+																onclick="bottonClick()">
+																<span class="btn-label"><i
+																	class="glyphicon glyphicon-upload"></i></span>上傳
+															</button>
+														</span>
+													</div>
+													<!-- /input-group image-preview [TO HERE]-->
+													<br />
+													<!-- Drop Zone -->
+													<!-- Progress Bar -->
+													<div class="progress">
+														<div id="progressBar2" class="progress-bar"
+															role="progressbar2" aria-valuenow="0" aria-valuemin="0"
+															aria-valuemax="100" style="width: 0%;">
+															<!-- 															60% <span class="sr-only">60% Complete</span> -->
+														</div>
+													</div>
+													<br />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /container -->
+								<div class="container">
+									<br />
+									<div class="row">
+										<div class="col-md-12">
+											<div class="panel panel-default">
+												<div class="panel-heading">
+													<strong>募資影片上傳</strong> <small> </small>
+												</div>
+												<div class="panel-body">
+													<div class="input-group image-preview">
+														<!-- don't give a name === doesn't send on POST/GET -->
+														<span> <!-- image-preview-clear button --> <span
+															id="filename3"></span>
+															<div class="btn btn-default image-preview-input">
+																<span class="glyphicon glyphicon-folder-open"></span> <span
+																	class="image-preview-input-title">選擇檔案</span> <input
+																	type="file" name="input-file-preview"
+																	id="inputfilename3" onclick="fileSelect()" />
+																<!-- rename it -->
+															</div>
+															<button id="btnSubmit3" type="submit"
+																class="btn btn-labeled btn-primary"
+																onclick="bottonClick()">
+																<span class="btn-label"><i
+																	class="glyphicon glyphicon-upload"></i></span>上傳
+															</button>
+														</span>
+													</div>
+													<!-- /input-group image-preview [TO HERE]-->
+													<br />
+													<!-- Drop Zone -->
+													<!-- Progress Bar -->
+													<div class="progress">
+														<div id="progressBar3" class="progress-bar"
+															role="progressbar3" aria-valuenow="0" aria-valuemin="0"
+															aria-valuemax="100" style="width: 0%;">
+															<!-- 															60% <span class="sr-only">60% Complete</span> -->
+														</div>
+													</div>
+													<br />
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 								<!-- /container -->
@@ -823,13 +881,29 @@
 			}
 		};
 
-		$('#inputfilename').change(
+		$('#inputfilename1').change(
 				function() {
-					$('#filename').attr("class",
+					$('#filename1').attr("class",
 							"btn btn-default image-preview-input");
-					var value = $('#inputfilename').val();
+					var value = $('#inputfilename1').val();
 					console.log(value);
-					$('#filename').text(value);
+					$('#filename1').text(value);
+				})
+		$('#inputfilename2').change(
+				function() {
+					$('#filename2').attr("class",
+							"btn btn-default image-preview-input");
+					var value = $('#inputfilename2').val();
+					console.log(value);
+					$('#filename2').text(value);
+				})
+		$('#inputfilename3').change(
+				function() {
+					$('#filename3').attr("class",
+							"btn btn-default image-preview-input");
+					var value = $('#inputfilename3').val();
+					console.log(value);
+					$('#filename3').text(value);
 				})
 	</script>
 

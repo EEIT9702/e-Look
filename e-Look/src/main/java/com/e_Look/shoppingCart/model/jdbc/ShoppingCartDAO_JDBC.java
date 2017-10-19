@@ -8,24 +8,18 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.naming.spi.DirStateFactory.Result;
-import javax.sql.DataSource;
 
 import com.e_Look.Course.*;
 
-public class ShoppingCartDAO implements ShoppingCartDAO_interface {
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/eLookDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
+public class ShoppingCartDAO_JDBC implements ShoppingCartDAO_interface {
+	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=elook";
+	String userid = "sa";
+	// 第一組密碼
+	String passwd = "P@ssw0rd";
+	// 第二組密碼
+	// String passwd = "123456";
 	private static final String INSERT_SHOPPINGCART ="insert into Shoppingcart (memberID,courseID) values (?,?)";
 	private static final String UPDATE_SHOPPINGCART ="update Shoppingcart set memberID=? , courseID=? where memberID=? and courseID=?";
 	private static final String DELETE_SHOPPINGCART ="delete from Shoppingcart where memberID=? and courseID=?";
@@ -37,12 +31,14 @@ public class ShoppingCartDAO implements ShoppingCartDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt=con.prepareStatement(INSERT_SHOPPINGCART);
 			pstmt.setInt(1, shoppingCartVO.getMemberID());
 			pstmt.setInt(2, shoppingCartVO.getCourseVO().getCourseID());
 			pstmt.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -69,14 +65,16 @@ public class ShoppingCartDAO implements ShoppingCartDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt=con.prepareStatement(UPDATE_SHOPPINGCART);
 			pstmt.setInt(1,shoppingCartVO.getMemberID());
 			pstmt.setInt(2, shoppingCartVO.getCourseVO().getCourseID());
 			pstmt.setInt(3, shoppingCartVO2.getMemberID());
 			pstmt.setInt(4, shoppingCartVO2.getCourseVO().getCourseID());
 			pstmt.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -102,13 +100,15 @@ public class ShoppingCartDAO implements ShoppingCartDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt=con.prepareStatement(DELETE_SHOPPINGCART);
 			pstmt.setInt(1, shoppingCartVO.getMemberID());
 			pstmt.setInt(2, shoppingCartVO.getCourseVO().getCourseID());
 			pstmt.executeUpdate();
 			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -136,8 +136,8 @@ public class ShoppingCartDAO implements ShoppingCartDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt=con.prepareStatement(SELECT_MEMBER_SHOPPINGCART);
 			pstmt.setInt(1, memberID);
 			ResultSet rs=pstmt.executeQuery();
@@ -146,6 +146,9 @@ public class ShoppingCartDAO implements ShoppingCartDAO_interface {
 				CourseVO courseVO=new CourseDAO_JDBC().findByPrimaryKey(courseID);
 				list.add(courseVO);
 			}
+			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -174,8 +177,8 @@ public class ShoppingCartDAO implements ShoppingCartDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			 
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt=con.prepareStatement(SELECT_ALL_SHOPPINGCART);
 			ResultSet rs=pstmt.executeQuery();
 			while(rs.next()){
@@ -187,6 +190,8 @@ public class ShoppingCartDAO implements ShoppingCartDAO_interface {
 			}
 			
 			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -208,5 +213,24 @@ public class ShoppingCartDAO implements ShoppingCartDAO_interface {
 		return list;
 	}
 
+	public static void main(String[] args) {
+		ShoppingCartDAO_JDBC dao = new ShoppingCartDAO_JDBC();
+		
+//		ShoppingCartVO shoppingCartVO = new ShoppingCartVO();
+//		CourseVO courseVO=new CourseVO();
+//		courseVO.setCourseID(200001);
+//		shoppingCartVO.setMemberID(100001);
+//		shoppingCartVO.setCourseVO(courseVO);
+//		dao.insert(shoppingCartVO);
+		
+//		System.out.println("111");
+//		List<ShoppingCartVO> list = dao.getAll();
+//		for(ShoppingCartVO vo : list){
+//			System.out.print(vo.getMemberID());
+//		}
+		
+		
+		
+	}
 
 }

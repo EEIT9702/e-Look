@@ -289,6 +289,9 @@ public class SponsorDAO_JDBC implements SponsorDAO_interface {
 //		sponsorVO1.setMoney(500);
 //		dao.update(sponsorVO2);
 		
+		//刪除
+//		dao.delete(200001);
+		
 		//查詢單一
 		SponsorVO sponsorVO3 = dao.findByCourseID(200001);
 		System.out.println(sponsorVO3.getCourseID());
