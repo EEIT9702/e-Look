@@ -1,4 +1,6 @@
-﻿insert into courseClass (ccName) values ('烹飪')
+﻿drop table CourseClass
+create table CourseClass
+insert into courseClass (ccName) values ('烹飪')
 insert into courseClass (ccName) values ('商業')
 insert into courseClass (ccName) values ('程式')
 insert into courseClass (ccName) values ('音樂')

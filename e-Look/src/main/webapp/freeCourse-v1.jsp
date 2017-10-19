@@ -235,7 +235,9 @@ border-top-right-radius: 8px
 					<h1 align="center" style="color: white">videoname</h1>
 					<div class="col-md-12">
 						<div class="col-md-8 col-xs-12">
-							<video poster="<%=request.getContextPath()%>/_Lyy/poster.png"
+						
+						
+							<video controls poster="<%=request.getContextPath()%>/_Lyy/poster.png"
 								id="vidoeControl">
 								<source src="<%=request.getContextPath()%>/_Lyy/tri.mp4"
 									type="video/mp4">
@@ -334,8 +336,8 @@ border-top-right-radius: 8px
 											width="60px">感謝您的贊助
 									</h4>
 								</div>
-
-								<form method="post" action="">
+															
+								<form method="post" action="<%=request.getContextPath()%>/SponsorController">
 									<div class="modal-body">
 										<div class="text-center">
 											<h4>請在下方填寫贊助相關資訊!</h4>
@@ -345,12 +347,12 @@ border-top-right-radius: 8px
 											<tbody>
 												<tr>
 													<td class="text-right">贊助者暱稱 :</td>
-													<td><input type="text" placeholder="請輸入暱稱"></td>
+													<td><input type="text"name="SponsorName" placeholder="請輸入暱稱" ></td>
 												</tr>
 
 												<tr>
 													<td class="text-right">贊助金額 :</td>
-													<td><input type="text">單位:新台幣</td>
+													<td><input type="text" name="money">單位:新台幣</td>
 												</tr>
 
 											</tbody>
