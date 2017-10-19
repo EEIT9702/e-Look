@@ -14,4 +14,6 @@ public class SponsorService {
 		
 		dao.insert(sponsorVO);
 	}
+	
+	
 }
