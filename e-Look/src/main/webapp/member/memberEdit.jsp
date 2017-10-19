@@ -245,9 +245,12 @@ a.clickable:hover {
 						</div>
 						<div class=" col-md-12 ">
 							<div class=" col-md-4 " style="margin: 10px 0;">
-								<div class="form-group">
-									<label>密碼</label> <input type="text" class="form-control"
-										id="" <c:if test="${LoginOK.mPassword==''}">readonly</c:if>>
+								<div class="form-group input-group">
+									<label>密碼</label> <input type="password" class="form-control"
+										id="" readonly value="${LoginOK.mPassword}">
+										<span class="input-group-btn" style="padding-top: 27px">
+            <button class="btn  btn-info reveal" type="button"  <c:if test="${LoginOK.mPassword==''}">disabled="disabled"</c:if>><i class="glyphicon glyphicon-pencil"></i></button>
+         </span>      
 								</div>
 							</div>
 							<div class="col-md-8"></div>
