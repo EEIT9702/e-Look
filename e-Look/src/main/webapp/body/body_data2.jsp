@@ -58,7 +58,7 @@
 							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png" class="profile-avatar"
 							alt=""> </figure>
 						<div class="card-text">
-							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題3</p>
+							<p id="title" class="card-title mt-3 multi_ellipsis">${param.courseClass}</p>
 						</div>
 						<div>
 							<p style="margin-top: 40px; font-size: 18px">課程售價：免費</p>

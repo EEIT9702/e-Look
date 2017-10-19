@@ -277,8 +277,8 @@ function showAdPic() {
 
 	/*瀑布流關鍵*/
 var rowValueX = 0;
-var keyWord
-var slideDone = 1
+var keyWord;
+var courseClass;
 	//初載入 事件繫結
 $(function() {
 	//showAdPic();
@@ -298,8 +298,19 @@ $(function() {
 	$(window).scroll(river);
 	
 	$('.text-center').click(function(){
-		$('.text-center').children('img').addClass('gray1')
-		$(this).children('img').removeClass('gray1');
+		$('.text-center').children('img').toggleClass('gray1')
+		$(this).children('img').toggleClass('gray1');
+		
+		if($(this).children('img').hasClass('gray1')){
+			$('.text-center').children('img').addClass('gray1')
+			$(this).children('img').toggleClass('gray1');	
+		}
+
+		if($(this).children('p').text()==courseClass){
+			courseClass="";
+		}else{
+			courseClass=$(this).children('p').text()
+		}
 		
 		$('#river').slideUp(1000,refreshRiver);
 		setTimeout(function(){
@@ -324,6 +335,8 @@ function refreshRiver(){
 	rowValueX=0;
 	$('#river').html("");
 	river();
+	keyWord="";
+	$('#keyWord').val("");
 }
 function river(){
 	//卷軸初再入高度為0
@@ -338,9 +351,9 @@ function river(){
 	//有時候卷軸會多0.5  改>=的寫法可以解決這個問題
 	if( wst>=(dh-wh) || rowValueX==0 ){
 		rowValueX++;
-		$.get("<%= request.getContextPath() %>/body/body_data2.jsp",{"rowValueY":rowValueX,"keyWord":keyWord},function(data){
+		$.get("<%= request.getContextPath() %>/body/body_data2.jsp",{"rowValueY":rowValueX,"keyWord":keyWord,"courseClass":courseClass},function(data){
 			$('#river').append(data)
-			keyWord="";
+			
 		});
 	}
 }
