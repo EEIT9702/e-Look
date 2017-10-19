@@ -5,9 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script>
+<script type="text/javascript" src="css/jquery.mmenu.js"></script>
 </head>
 <body>
-<jsp:include page="backstage.jsp"></jsp:include>
+<jsp:include page="bheader.jsp"></jsp:include>
 	<div class="content">
 				<p><strong style="font-size: 50px">管理者介面</strong></p><br/>
 				<br>

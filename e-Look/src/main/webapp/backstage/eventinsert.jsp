@@ -94,8 +94,8 @@ margin-right: 100px;
 
 
 <body><div>
-<jsp:include page="backstage.jsp"></jsp:include></div>
-<form action="<%=request.getContextPath()%>/eLookEvent" method="post" enctype="multipart/form-date">
+<jsp:include page="bheader.jsp"></jsp:include></div>
+<form action="<%=request.getContextPath()%>/backstage/elookeventinsert" method="post" enctype="multipart/form-date">
 <div class="event">
 活動名稱：<input id="inputevent" name="eventName">
 </div>
@@ -156,9 +156,11 @@ margin-right: 100px;
 <option value="program">程式</option>
 </select>
 </div>
+
 <hr size="3px">
  <div class="event" id="submit" align="center">
-<input type="submit" class="file2" value="儲存">
+<input type="hidden" name="action" value="insert">
+<input type="submit" class="file2" value="儲存" >
 <input type="button" class="file2" value="取消">
 </div>
 </form>

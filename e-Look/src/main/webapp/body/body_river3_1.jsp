@@ -154,7 +154,7 @@ h5 {
 	margin-right:auto;
 }
 .pstyle{
-	text-align:center;
+ 	text-align:center;
 	font-size: 20px;
   	font-family:微軟正黑體;
   	cursor: pointer;

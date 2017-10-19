@@ -18,7 +18,6 @@
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/_PJC/css/step6.css"
 	rel="stylesheet">
-
 <link
 	href="<%=request.getContextPath()%>/css/bootstrap-datetimepicker.css"
 	rel="stylesheet">
