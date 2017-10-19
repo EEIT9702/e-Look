@@ -1,4 +1,13 @@
-﻿insert into courseClass (ccName) values ('烹飪')
+﻿drop table CourseClass
+CREATE TABLE [dbo].[CourseClass](
+	[CourseClassID] [int] IDENTITY(101,1) NOT NULL,
+	[ccName] [nvarchar](10) NOT NULL,
+	[eventID] [int] NULL,
+ CONSTRAINT [PK_CourseClass] PRIMARY KEY CLUSTERED 
+(
+	[CourseClassID] ASC
+)
+insert into courseClass (ccName) values ('烹飪')
 insert into courseClass (ccName) values ('商業')
 insert into courseClass (ccName) values ('程式')
 insert into courseClass (ccName) values ('音樂')

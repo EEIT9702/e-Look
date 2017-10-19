@@ -1,4 +1,4 @@
-package com.e_Look.sponsor;
+package com.e_Look.sponsor.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -33,6 +33,8 @@ public class SponsorDAO implements SponsorDAO_interface {
 		    "DELETE FROM Sponsor WHERE courseID =?";
 	private static final String SELECT_ONE_SPONSOR =
 			"SELECT courseID, SponsorName, money FROM Sponsor WHERE courseID=?";
+	private static final String SELECT_Count_Money=
+			"SELECT courseID,count(money) FROM Sponsor where courseID=? and group by courseID=?";
 	private static final String SELECT_ALL_SPONSOR =
 			"SELECT courseID, SponsorName, money FROM Sponsor";
 
@@ -196,7 +198,41 @@ public class SponsorDAO implements SponsorDAO_interface {
 		}
 		return sponsorVO;
 	}
+	@Override
+	public int findCountMoney(Integer courseID){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			//"DELETE FROM Sponsor WHERE courseID =?";
+			con = ds.getConnection();
+			pstmt=con.prepareStatement(SELECT_Count_Money);
+			pstmt.setInt(1, courseID);
+			pstmt.executeUpdate();
 
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return courseID;		
+	}
 	@Override
 	public List<SponsorVO> getAll() {
 		List<SponsorVO> list = new ArrayList<SponsorVO>();

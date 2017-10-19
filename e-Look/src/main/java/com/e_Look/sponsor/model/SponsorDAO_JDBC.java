@@ -1,4 +1,4 @@
-package com.e_Look.sponsor;
+package com.e_Look.sponsor.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -150,7 +150,11 @@ public class SponsorDAO_JDBC implements SponsorDAO_interface {
 			}
 		}
 	}
+	@Override
+	public int findCountMoney(Integer courseID){
+		return courseID;
 
+	}
 	@Override
 	public SponsorVO findByCourseID(Integer courseID) {
 		SponsorVO sponsorVO = null;
@@ -210,7 +214,8 @@ public class SponsorDAO_JDBC implements SponsorDAO_interface {
 		}
 		return sponsorVO;
 	}
-
+	
+	
 	@Override
 	public List<SponsorVO> getAll() {
 		List<SponsorVO> list = new ArrayList<SponsorVO>();
