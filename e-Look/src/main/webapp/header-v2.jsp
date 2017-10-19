@@ -153,7 +153,7 @@ font-size: 18px;
 									src="<%=request.getContextPath()%>/HeaderCssJs/004-gift.png"
 									height="16">免費課程</a></li>
 							<li><a
-								href="<%=request.getContextPath()%>/_PJC/CreateCourse.jsp"><img
+								href="<%=request.getContextPath()%>/CreateCourse.jsp"><img
 									src="<%=request.getContextPath()%>/HeaderCssJs/001-book.png"
 									height="16">我要開課</a></li>
 						</ul>
@@ -233,7 +233,7 @@ font-size: 18px;
 									<li class="dropdown "><a href="#" class=" dropdown-toggle"
 										id="dropdownMenu1" data-toggle="dropdown"><img
 											src="<%=request.getContextPath() %>/Image?MemberID=${LoginOK.memberID}"
-											height="16" /><span class="caret"></span></a>
+											height="40" /><span class="caret"></span></a>
 										<ul class="dropdown-menu" aria-labelledby="dropdownMenu1"
 											style="margin-left: calc(50% - 80px); margin-right: calc(50% - 80px);">
 											<li class="text-center"><a

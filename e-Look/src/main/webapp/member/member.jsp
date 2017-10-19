@@ -243,9 +243,9 @@ a.clickable:hover {
 									src="<%=request.getContextPath()%>/Image?MemberID=${LoginOK.memberID}" />
 								<!-- badge -->
 								<div class="rank-label-container">
-									<button type="button" class="btn btn-info  btn-xs">
+									<a href="<%=request.getContextPath()%>/member/memberEdit.jsp"><button type="button" class="btn btn-info  btn-xs">
 										編輯 <span class="glyphicon glyphicon-edit"></span>
-									</button>
+									</button></a>
 								</div>
 							</div>
 						</div>
