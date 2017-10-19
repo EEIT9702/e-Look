@@ -142,7 +142,7 @@ margin:2px auto;
 <title>${SYSTEM.systemName}</title>
 </head>
 <body>
-	<jsp:include page="/header.jsp" />
+	<jsp:include page="/header-v2.jsp" />
 	<!-- 以下是login畫面 -->
 	<c:choose>
 		<c:when test="${!empty loginerr}">
