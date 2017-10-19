@@ -244,7 +244,9 @@ h5 {
  	margin-left:20%;
 	
 }
-
+.gray1{
+-webkit-filter:grayscale(1);
+}
 
 </style>
 <script type="text/javascript">
@@ -275,10 +277,17 @@ function showAdPic() {
 
 	/*瀑布流關鍵*/
 var rowValueX = 0;
+var keyWord;
+var courseClass;
+	//初載入 事件繫結
 $(function() {
 	//showAdPic();
 	//init();
 	river();
+	$('#submit').click(function(e){
+		 e.preventDefault();
+		 clickSearch();
+	})
 	//卷軸初載入高度為0
 	var	wst = $(window).scrollTop();
 	//視窗高度
@@ -288,20 +297,48 @@ $(function() {
 	console.log(wst+"---"+dh+"---"+wh);
 	$(window).scroll(river);
 	
-	$('.col-md-1 text-center').click(function(){
-		$(this).text("123");
+	$('.text-center').click(function(){
+		$('.text-center').children('img').toggleClass('gray1')
+		$(this).children('img').toggleClass('gray1');
+		
+		if($(this).children('img').hasClass('gray1')){
+			$('.text-center').children('img').addClass('gray1')
+			$(this).children('img').toggleClass('gray1');	
+		}
+
+		if($(this).children('p').text()==courseClass){
+			courseClass="";
+		}else{
+			courseClass=$(this).children('p').text()
+		}
+		
+		$('#river').slideUp(1000,refreshRiver);
+		setTimeout(function(){
+		$('#river').slideDown(1000);
+		},1100)
 		
 	})
 	
-	
-	
+	$('#searchicon').click(clickSearch);
 });
+	
+	function clickSearch(){
+		keyWord=$('#keyWord').val();
+		$('#keyWord').val("");
+		$('#river').slideUp(1000,refreshRiver);
+		setTimeout(function(){
+		$('#river').slideDown(1000);
+		},1100)
+		
+	}
 function refreshRiver(){
-	$('#river').text("");
+	rowValueX=0;
+	$('#river').html("");
 	river();
+	keyWord="";
+	$('#keyWord').val("");
 }
 function river(){
-	console.log("river()");
 	//卷軸初再入高度為0
 	var	wst = $(window).scrollTop();
 	//視窗高度
@@ -309,13 +346,14 @@ function river(){
 	//整份文件
 	var	dh =$(document).height();
 	//$('a[href="#menu1"]').text(wst+"---"+dh+"---"+wh)
-	console.log(wst+"---"+dh+"---"+wh+","+wh+","+(dh-wh));
+	//console.log(wst+"---"+dh+"---"+wh+","+wh+","+(dh-wh));
 	//判斷卷軸是否到底部
 	//有時候卷軸會多0.5  改>=的寫法可以解決這個問題
 	if( wst>=(dh-wh) || rowValueX==0 ){
 		rowValueX++;
-		$.get("<%= request.getContextPath() %>/body/body_data2.jsp",{"rowValueY":rowValueX},function(data){
-			$('#river').append(data);
+		$.get("<%= request.getContextPath() %>/body/body_data2.jsp",{"rowValueY":rowValueX,"keyWord":keyWord,"courseClass":courseClass},function(data){
+			$('#river').append(data)
+			
 		});
 	}
 }
@@ -373,52 +411,40 @@ function checkHeight() {
 	<div class="col-md-8 col-sm-10 col-xs-12 cclass">
 
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center" style="" >
-			<img style="<c:choose><c:when test='${param.courseClassID == 1 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
-					class="svgIcon" src="<%=request.getContextPath() %>/alan/img/life.svg"><p class="pstyle">生活</p>
+			<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/life.svg"><p class="pstyle">生活</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-				<img style="<c:choose><c:when test='${param.courseClassID == 2 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
-					class="svgIcon" src="<%=request.getContextPath() %>/alan/img/arts.svg"><p class="pstyle">藝術</p>
+				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/arts.svg"><p class="pstyle">藝術</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-			<img style="<c:choose><c:when test='${param.courseClassID == 3 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
-					class="svgIcon" src="<%=request.getContextPath() %>/alan/img/athletics.svg"><p class="pstyle">運動</p>
+			<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/athletics.svg"><p class="pstyle">運動</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-			<img style="<c:choose><c:when test='${param.courseClassID == 4 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
-					class="svgIcon" src="<%=request.getContextPath() %>/alan/img/video.svg"><p class="pstyle">影音</p>
+			<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/video.svg"><p class="pstyle">影音</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-			<img style="<c:choose><c:when test='${param.courseClassID == 5 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
-					class="svgIcon" src="<%=request.getContextPath() %>/alan/img/hand-made.svg"><p class="pstyle">手作</p>
+			<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/hand-made.svg"><p class="pstyle">手作</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-			<img style="<c:choose><c:when test='${param.courseClassID == 6 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
-					class="svgIcon" src="<%=request.getContextPath() %>/alan/img/other.svg"><p class="pstyle">其他</p>
+			<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/other.svg"><p class="pstyle">其他</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-				<img style="<c:choose><c:when test='${param.courseClassID == 7 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
-					class="svgIcon" src="<%=request.getContextPath() %>/alan/img/design.svg"><p class="pstyle">設計</p>
+				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/design.svg"><p class="pstyle">設計</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-				<img style="<c:choose><c:when test='${param.courseClassID == 8 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
-					class="svgIcon" src="<%=request.getContextPath() %>/alan/img/science.svg"><p class="pstyle">科技</p>
+				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/science.svg"><p class="pstyle">科技</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-				<img style="<c:choose><c:when test='${param.courseClassID == 9 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
-					class="svgIcon" src="<%=request.getContextPath() %>/alan/img/business.svg"><p class="pstyle">商業</p>
+				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/business.svg"><p class="pstyle">商業</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-				<img style="<c:choose><c:when test='${param.courseClassID == 10 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
-					class="svgIcon" src="<%=request.getContextPath() %>/alan/img/language.svg"><p class="pstyle">語言</p>
+				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/language.svg"><p class="pstyle">語言</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-				<img style="<c:choose><c:when test='${param.courseClassID == 11 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
-					class="svgIcon" src="<%=request.getContextPath() %>/alan/img/cooking.svg"><p class="pstyle">烹飪</p>
+				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/cooking.svg"><p class="pstyle">烹飪</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-				<img style="<c:choose><c:when test='${param.courseClassID == 12 || empty param.courseClassID}'>-webkit-filter: grayscale(0)</c:when><c:otherwise>-webkit-filter: grayscale(1)</c:otherwise></c:choose>"
-					class="svgIcon" src="<%=request.getContextPath() %>/alan/img/program.svg"><p class="pstyle">程式</p>
+				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/program.svg"><p class="pstyle">程式</p>
 		</div>
 	
 
@@ -431,11 +457,12 @@ function checkHeight() {
 
 			<div class="middleborder" style="">
 			
-				<input name="keyWord" type="text" class="form-control inputarea" placeholder="Search" style="">
+				<input id="keyWord" name="keyWord" type="text" class="form-control inputarea" placeholder="Search" style="">
 				
 				<div class="input-group-btn searchImg" style="">
 <%-- 				<input id="searchsubmit" class="searchicon" style="" type="image" src="<%=request.getContextPath()%>/alan/img/search.svg" /> --%>
 				<div id="searchicon" style=""><img style="" class="searchicon" src="<%=request.getContextPath()%>/alan/img/search.svg" ></div>
+				<input type="submit" id="submit" style="display:none" />
 				</div>
 			</div>
 			
