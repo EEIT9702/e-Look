@@ -1,4 +1,4 @@
-package com.e_Look.sponsor;
+package com.e_Look.sponsor.model;
 
 public class SponsorService { 
 	private SponsorDAO_interface dao;
