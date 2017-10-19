@@ -11,24 +11,55 @@
 <title>Insert title here</title>
 </head>
 <body>
-<button  type="button" id="bnt"></button>
+<select name="city" id="select1"></select>
+<select name="district" id="select2"></select>
 </body>
 <script type="text/javascript">
-$("#bnt").click(function(){
-	$.getJSON( "json/AllData.json", function(data) {
-		 console.log(data);
-		 $.each( data, function( key, val ) {
-			 console.log(val.CityName);
-			 $.each( val.AreaList, function( key, val ) {
-				 console.log(val.AreaName);
-				
-				 
+$(function(){
+	init();
+	var data2;
+	function init(){
+		$.getJSON( "json/AllData.json", function(data) {
+			data2=data;
+			var fragment = $(document.createDocumentFragment());
+			 $.each( data, function( key, val ) {
+				 var cell1 = $('<option></option>').text(val.CityName).val(val.CityName)
+				 fragment.append(cell1);
 			 })
+			 $('#select1').html(fragment); 
+			 $.each( data, function( key, val1 ) {
+					if("臺北市"===val1.CityName){
+						var fragment = $(document.createDocumentFragment());
+						 $.each( val1.AreaList, function( key, val2 ) {
+							 var cell1 = $('<option></option>').text(val2.AreaName).val(val2.AreaName)
+							 fragment.append(cell1);
+		 				 })
+		 				$('#select2').html(fragment);
+					}
+
+				 })
+		})
+		
+
+	}
+	$("#select1").change(function(){
+		 var opt = $('#select1>:selected');
+		 var val = opt.val();
+		 $.each( data2, function( key, val1 ) {
+			if(val===val1.CityName){
+				var fragment = $(document.createDocumentFragment());
+				 $.each( val1.AreaList, function( key, val2 ) {
+					 var cell1 = $('<option></option>').text(val2.AreaName).val(val2.AreaName)
+					 fragment.append(cell1);
+ 				 })
+ 				$('#select2').html(fragment);
+			}
+
 		 })
-		 
 	})
-	
 })
+
+
 
 
 </script>
