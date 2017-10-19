@@ -57,6 +57,13 @@
 	color: #fff;
 	background: #fff;
 }
+body{
+padding-top:80px;
+}
+#headerTextStyle{
+font-family: Microsoft JhengHei;
+font-size: 18px;
+}
 /*******ShoppingCartStyleStart***********/
 .courseTitle {
 	font-size: 20px;
@@ -119,7 +126,7 @@
 </style>
 </head>
 
-	<div class="navbar-wrapper">
+	<div class="navbar-wrapper" id="headerTextStyle">
 		<div class="container-fluid">
 			<nav class="navbar navbar-fixed-top">
 				<div class="container">
@@ -155,9 +162,9 @@
 								<c:when test="${!empty LoginOK}">
 									<li class="dropdown"><a class="dropdown-toggle"
 										data-toggle="dropdown" aria-haspopup="false"
-										aria-expanded="false"><span class="cartcount">3</span><img
+										aria-expanded="false"><span class="cartcount">3</span><img style="margin-top:15px"
 											src="<%=request.getContextPath()%>/HeaderCssJs/002-shopping-cart.png"
-											height="16" /></a> <!-- 				以下為購物車內容 -->
+											height="16" />購物車</a> <!-- 				以下為購物車內容 -->
 										<ul class="dropdown-menu" style="width: 465px;">
 											<li class="dropdown-header"
 												style="border-bottom: 1px solid #aaaaaa;"><h3>購物車</h3></li>
@@ -217,7 +224,7 @@
 								<c:otherwise>
 									<li><a href="#"><img
 											src="<%=request.getContextPath()%>/HeaderCssJs/002-shopping-cart.png"
-											height="16" /></a></li>
+											height="16" />購物車</a></li>
 								</c:otherwise>
 							</c:choose>
 
