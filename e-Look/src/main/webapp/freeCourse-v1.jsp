@@ -371,7 +371,9 @@ border-top-right-radius: 8px
 										<button type="submit" class="btn btn-primary">使用歐付寶付款</button>
 
 									</div>
+									<input type="hidden" value="${courseVO.courseID}" name="courseID">
 								</form>
+								
 							</div>
 						</div>
 					</div>
