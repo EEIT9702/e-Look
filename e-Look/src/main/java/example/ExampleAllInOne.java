@@ -1,5 +1,6 @@
 ﻿package example;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Hashtable;
 
 import allPay.payment.integration.AllInOne;
@@ -25,7 +26,7 @@ import allPay.payment.integration.exception.AllPayException;
 
 public class ExampleAllInOne {
 	public static AllInOne all;
-	public static void main(String[] args) {
+	public static void main(String[] args) throws UnsupportedEncodingException {
 		initial();
 		System.out.println("compare CheckMacValue method testing result: " + cmprChkMacValue());
 		System.out.println("doAction: " + postDoAction());
@@ -46,7 +47,7 @@ public class ExampleAllInOne {
 		System.out.println("aioCheckOutTenpay: " + genAioCheckOutTenpay());
 		System.out.println("aioCheckOutTopUpUsed: " + genAioCheckOutTopUpUsed());
 	}
-	private static void initial(){
+	private static void initial() throws UnsupportedEncodingException{
 		all = new AllInOne("");
 	}
 	
