@@ -195,15 +195,15 @@ public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
 				// reportMessageVO 也稱為 Domain objects
 				reportMessageVO = new ReportMessageVO();
 				messageVO = new MessageVO();
-				messageVO.setMessageID(rs.getInt("m.messageID"));
-				messageVO.setmContent(rs.getString("m.mContent"));
+				messageVO.setMessageID(rs.getInt("messageID"));
+				messageVO.setmContent(rs.getString("mContent"));
 				reportMessageVO.setMessageVO(messageVO);
-				reportMessageVO.setReportId(rs.getInt("rm.reportId"));
+				reportMessageVO.setReportId(rs.getInt("reportId"));
 //				reportMessageVO.setReportMessageID(rs.getInt("reportMessageID"));
-				reportMessageVO.setReportMemberID(rs.getInt("rm.reportMemberID"));
-				reportMessageVO.setReportContent(rs.getString("rm.reportContent"));
-				reportMessageVO.setReportTime(rs.getDate("rm.reportContent"));
-				reportMessageVO.setStatus(rs.getByte("rm.status"));
+				reportMessageVO.setReportMemberID(rs.getInt("reportMemberID"));
+				reportMessageVO.setReportContent(rs.getString("reportContent"));
+				reportMessageVO.setReportTime(rs.getDate("reportTime"));
+				reportMessageVO.setStatus(rs.getByte("status"));
 			}
 
 			// Handle any driver errors
@@ -334,15 +334,15 @@ public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
 				// reportMessageVO 也稱為 Domain objects
 				reportMessageVO = new ReportMessageVO();
 				messageVO = new MessageVO();
-				messageVO.setMessageID(rs.getInt("m.messageID"));
-				messageVO.setmContent(rs.getString("m.mContent"));
+				messageVO.setMessageID(rs.getInt("messageID"));
+				messageVO.setmContent(rs.getString("mContent"));
 				reportMessageVO.setMessageVO(messageVO);
-				reportMessageVO.setReportId(rs.getInt("rm.reportId"));
+				reportMessageVO.setReportId(rs.getInt("reportId"));
 				//reportMessageVO.setReportMessageID(rs.getInt("reportMessageID"));
-				reportMessageVO.setReportMemberID(rs.getInt("rm.reportMemberID"));
-				reportMessageVO.setReportContent(rs.getString("rm.reportContent"));
-				reportMessageVO.setReportTime(rs.getDate("rm.reportTime"));
-				reportMessageVO.setStatus(rs.getByte("rm.status"));
+				reportMessageVO.setReportMemberID(rs.getInt("reportMemberID"));
+				reportMessageVO.setReportContent(rs.getString("reportContent"));
+				reportMessageVO.setReportTime(rs.getDate("reportTime"));
+				reportMessageVO.setStatus(rs.getByte("status"));
 				list.add(reportMessageVO); // Store the row in the list
 			}
 
@@ -411,7 +411,6 @@ public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
 		
 		//查詢單一
 		ReportMessageVO reportMessageVO3 = dao.findByReportId(1001);
-		//MessageVO messageVO3 = new MessageVO();
 		System.out.println(reportMessageVO3.getReportId());
 		System.out.println(reportMessageVO3.getMessageVO().getMessageID());
 		System.out.println(reportMessageVO3.getReportMemberID());

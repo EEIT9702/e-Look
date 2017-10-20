@@ -184,14 +184,14 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 				// reportMessageVO 也稱為 Domain objects
 				reportMessageVO = new ReportMessageVO();
 				messageVO = new MessageVO();
-				messageVO.setMessageID(rs.getInt("m.messageID"));
-				messageVO.setmContent(rs.getString("m.mContent"));
+				messageVO.setMessageID(rs.getInt("messageID"));
+				messageVO.setmContent(rs.getString("mContent"));
 				reportMessageVO.setMessageVO(messageVO);
 				reportMessageVO.setReportId(rs.getInt("reportId"));
 				//reportMessageVO.setReportMessageID(rs.getInt("reportMessageID"));
 				reportMessageVO.setReportMemberID(rs.getInt("reportMemberID"));
 				reportMessageVO.setReportContent(rs.getString("reportContent"));
-				reportMessageVO.setReportTime(rs.getDate("reportContent"));
+				reportMessageVO.setReportTime(rs.getDate("reportTime"));
 				reportMessageVO.setStatus(rs.getByte("status"));
 			}
 
@@ -248,8 +248,8 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 				// reportMessageVO 也稱為 Domain objects
 				reportMessageVO = new ReportMessageVO();
 				messageVO = new MessageVO();
-				messageVO.setMessageID(rs.getInt("m.messageID"));
-				messageVO.setmContent(rs.getString("m.mContent"));
+				messageVO.setMessageID(rs.getInt("messageID"));
+				messageVO.setmContent(rs.getString("mContent"));
 				reportMessageVO.setMessageVO(messageVO);
 				reportMessageVO.setReportId(rs.getInt("reportId"));
 				//reportMessageVO.setReportMessageID(rs.getInt("reportMessageID"));
@@ -313,8 +313,8 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 				// reportMessageVO 也稱為 Domain objects
 				reportMessageVO = new ReportMessageVO();
 				messageVO = new MessageVO();
-				messageVO.setMessageID(rs.getInt("m.messageID"));
-				messageVO.setmContent(rs.getString("m.mContent"));
+				messageVO.setMessageID(rs.getInt("messageID"));
+				messageVO.setmContent(rs.getString("mContent"));
 				reportMessageVO.setMessageVO(messageVO);
 				reportMessageVO.setReportId(rs.getInt("reportId"));
 				//reportMessageVO.setReportMessageID(rs.getInt("reportMessageID"));
