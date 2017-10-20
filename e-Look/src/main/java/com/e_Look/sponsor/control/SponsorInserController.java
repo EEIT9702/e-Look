@@ -1,6 +1,7 @@
 package com.e_Look.sponsor.control;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,28 +25,38 @@ public class SponsorInserController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String SponsorName=request.getParameter("SponsorName");
-		int money=Integer.parseInt(request.getParameter("money"));
-		int courseID=Integer.parseInt(request.getParameter("courseID"));
+		request.setCharacterEncoding("UTF-8");
 		
-		SimpleDateFormat sfd=new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
-		String sponosorDate=sfd.format(new Date());
+		String SponsorName=request.getParameter("SponsorName");
+		String money=request.getParameter("money");
+		int moneyInt=Integer.parseInt(money);
+		int courseID=Integer.parseInt("200002");
+		//用時間當oPay流水號
+		SimpleDateFormat sfd=new SimpleDateFormat("yyyyMMddHHmmss");
+		String MerchantTradeNo=sfd.format(new Date());
 		
 		HttpSession session = request.getSession();
 		List<Object> sponsor=new ArrayList<Object>();
 		sponsor.add(SponsorName);
-		sponsor.add(money);
+		sponsor.add(moneyInt);
 		sponsor.add(courseID);
-
 		session.setAttribute("sponosr", sponsor);
 		
 		
 		SponsorService SponsorService=new SponsorService();
-		SponsorService.addNameMoney(courseID,SponsorName,money);
+		String formElement=SponsorService.getOPay(MerchantTradeNo,"200002", money, "HOME.jsp");
+		System.out.println(formElement);
 		
+		PrintWriter out =response.getWriter();
 		
-		
-		
+		out.print("<html>");
+		out.print("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
+		out.print("<title>oPay</title>");
+		out.print("<body>");
+		out.print(formElement);
+		out.print("</body>");
+		out.print("</html>");
+		out.close();
 		
 		
 		

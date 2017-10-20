@@ -29,16 +29,16 @@ public class AllInOneBase {
 	protected static String fundingReconDetailUrl;
 	protected static String aioChargebackUrl;
 	protected static String[] ignorePayment;
-	public AllInOneBase(){
+	public AllInOneBase() throws UnsupportedEncodingException{
 		Document doc;
 		
 		/* when using web project, please use the following code with try/catch wrapped*/
-//			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-//			String configPath = URLDecoder.decode(classLoader.getResource("/payment_conf.xml").getPath(), "UTF-8");
-//			doc = AllPayFunction.xmlParser(configPath);
+			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+			String configPath = URLDecoder.decode(classLoader.getResource("/payment_conf.xml").getPath(), "UTF-8");
+			doc = AllPayFunction.xmlParser(configPath);
 		/* when using testing code*/
-		String paymentConfPath = "./src/main/resources/payment_conf.xml";
-		doc = AllPayFunction.xmlParser(paymentConfPath);
+//		String paymentConfPath = "./src/main/resources/payment_conf.xml";
+//		doc = AllPayFunction.xmlParser(paymentConfPath);
 		
 		doc.getDocumentElement().normalize();
 		//OperatingMode
