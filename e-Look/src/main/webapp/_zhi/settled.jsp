@@ -1,108 +1,361 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="Short Icon" type="image/x-icon" href="${initParam.icon}" />
-<link href="<%=request.getContextPath()%>/css/bootstrap.css" rel="stylesheet">
 <title>${initParam.systemName}</title>
-<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-3.2.1.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/js/bootstrap.js"></script>
+<link href="<%=request.getContextPath()%>/login/css/bootstrap.css"
+	rel="stylesheet">
+
+<link
+	href="<%=request.getContextPath()%>/css/bootstrap-datetimepicker.css"
+	rel="stylesheet">
+<style type="text/css">
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700)
+/* written by riliwan balogun http://www.facebook.com/riliwan.rabo*/
+.board{
+    width: 75%;
+margin: 60px auto;
+height: 500px;
+background: #fff;
+/*box-shadow: 10px 10px #ccc,-10px 20px #ddd;*/
+}
+
+
+.glyphicon{
+	top:17px !important;
+}
+
+.board .nav-tabs {
+    position: relative;
+    /* border-bottom: 0; */
+    /* width: 80%; */
+    margin: 40px auto;
+    margin-bottom: 0;
+    box-sizing: border-box;
+
+}
+
+.board > div.board-inner{
+    background: #fafafa url(http://subtlepatterns.com/patterns/geometry2.png);
+    background-size: 30%;
+}
+
+p.narrow{
+    width: 60%;
+    margin: 10px auto;
+}
+
+.liner{
+    height: 2px;
+    background: #ddd;
+    position: absolute;
+    width: 80%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 50%;
+    z-index: 1;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    color: #555555;
+    cursor: default;
+    /* background-color: #ffffff; */
+    border: 0;
+    border-bottom-color: transparent;
+}
+
+span.round-tabs{
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    display: inline-block;
+    border-radius: 100px;
+    background: white;
+    z-index: 2;
+    position: absolute;
+    left: 0;
+    text-align: center;
+    font-size: 25px;
+}
+
+span.round-tabs.one{
+    color: rgb(34, 194, 34);border: 2px solid rgb(34, 194, 34);
+}
+
+li.active span.round-tabs.one{
+    background: #fff !important;
+    border: 2px solid #ddd;
+    color: rgb(34, 194, 34);
+}
+
+span.round-tabs.two{
+    color: #febe29;border: 2px solid #febe29;
+}
+
+li.active span.round-tabs.two{
+    background: #fff !important;
+    border: 2px solid #ddd;
+    color: #febe29;
+}
+
+span.round-tabs.three{
+    color: #3e5e9a;border: 2px solid #3e5e9a;
+}
+
+li.active span.round-tabs.three{
+    background: #fff !important;
+    border: 2px solid #ddd;
+    color: #3e5e9a;
+}
+
+span.round-tabs.four{
+    color: #f1685e;border: 2px solid #f1685e;
+}
+
+li.active span.round-tabs.four{
+    background: #fff !important;
+    border: 2px solid #ddd;
+    color: #f1685e;
+}
+
+span.round-tabs.five{
+    color: #999;border: 2px solid #999;
+}
+
+li.active span.round-tabs.five{
+    background: #fff !important;
+    border: 2px solid #ddd;
+    color: #999;
+}
+
+.nav-tabs > li.active > a span.round-tabs{
+    background: #fafafa;
+}
+.nav-tabs > li {
+    width: 25%;
+}
+/*li.active:before {
+    content: " ";
+    position: absolute;
+    left: 45%;
+    opacity:0;
+    margin: 0 auto;
+    bottom: -2px;
+    border: 10px solid transparent;
+    border-bottom-color: #fff;
+    z-index: 1;
+    transition:0.2s ease-in-out;
+}*/
+.nav-tabs > li:after {
+    content: " ";
+    position: absolute;
+    left: 45%;
+   opacity:0;
+    margin: 0 auto;
+    bottom: 0px;
+    border: 5px solid transparent;
+    border-bottom-color: #ddd;
+    transition:0.1s ease-in-out;
+    
+}
+.nav-tabs > li.active:after {
+    content: " ";
+    position: absolute;
+    left: 45%;
+   opacity:1;
+    margin: 0 auto;
+    bottom: 0px;
+    border: 10px solid transparent;
+    border-bottom-color: #ddd;
+    
+}
+.nav-tabs > li a{
+   width: 70px;
+   height: 70px;
+   margin: 20px auto;
+   border-radius: 100%;
+   padding: 0;
+}
+
+.nav-tabs > li a:hover{
+    background: transparent;
+}
+
+.tab-content{
+}
+.tab-pane{
+   position: relative;
+padding-top: 50px;
+}
+.tab-content .head{
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 25px;
+    text-transform: uppercase;
+    padding-bottom: 10px;
+}
+.btn-outline-rounded{
+    padding: 10px 40px;
+    margin: 20px 0;
+    border: 2px solid transparent;
+    border-radius: 25px;
+}
+
+.btn.green{
+    background-color:#5cb85c;
+    /*border: 2px solid #5cb85c;*/
+    color: #ffffff;
+}
+
+
+
+@media( max-width : 585px ){
+    
+    .board {
+width: 90%;
+height:auto !important;
+}
+    span.round-tabs {
+        font-size:16px;
+width: 50px;
+height: 50px;
+line-height: 50px;
+    }
+    .tab-content .head{
+        font-size:20px;
+        }
+    .nav-tabs > li a {
+width: 50px;
+height: 50px;
+line-height:50px;
+}
+
+.nav-tabs > li.active:after {
+content: " ";
+position: absolute;
+left: 35%;
+}
+
+.btn-outline-rounded {
+    padding:12px 20px;
+    }
+}
+</style>
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/js/jquery-3.2.1.js"></script>
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/js/bootstrap.js"></script>
 </head>
 <body>
-<jsp:include page="${contextPath}/login.jsp"/>
+	<jsp:include page="${contextPath}/login.jsp" />
+	<section style="background:#efefe9;">
+        <div class="container">
+            <div class="row">
+                <div class="board">
+                    <!-- <h2>Welcome to IGHALO!<sup>™</sup></h2>-->
+                    <div class="board-inner">
+                    <ul class="nav nav-tabs" style="" id="myTab">
+                    <div class="liner"></div>
+                     <li class="active" >
+                     <a href="#home" data-toggle="tab" title="welcome">
+                      <span class="round-tabs one" ">
+                              <i class="glyphicon glyphicon-home"></i>
+                      </span> 
+                  </a></li>
 
+                  <li><a href="#profile" data-toggle="tab" title="profile">
+                     <span class="round-tabs two">
+                         <i class="glyphicon glyphicon-user"></i>
+                     </span> 
+           </a>
+                 </li>
+                 <li><a href="#messages" data-toggle="tab" title="bootsnipp goodies">
+                     <span class="round-tabs three">
+                          <i class="glyphicon glyphicon-gift"></i>
+                     </span> </a>
+                     </li>
 
-<div class="row shop-tracking-status">
-    
-    <div class="col-md-12">
-        <div class="well">
-    
-            <div class="form-horizontal">
-                <div class="form-group">
-                    <label for="inputOrderTrackingID" class="col-sm-2 control-label">Order id</label>
-                        <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputOrderTrackingID" value="" placeholder="# put your order id here">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="button" id="shopGetOrderStatusID" class="btn btn-success">Get status</button>
-                    </div>
-                </div>
-            </div>
-    
-            <h4>Your order status:</h4>
+                     <li><a href="#settings" data-toggle="tab" title="blah blah">
+                         <span class="round-tabs four">
+                              <i class="glyphicon glyphicon-comment"></i>
+                         </span> 
+                     </a></li>
 
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <span class="prefix">Date created:</span>
-                    <span class="label label-success">12.12.2013</span>
-                </li>
-                <li class="list-group-item">
-                    <span class="prefix">Last update:</span>
-                    <span class="label label-success">12.15.2013</span>
-                </li>
-                <li class="list-group-item">
-                    <span class="prefix">Comment:</span>
-                    <span class="label label-success">customer's comment goes here</span>
-                </li>
-                <li class="list-group-item">You can find out latest status of your order with the following link:</li>
-                <li class="list-group-item"><a href="//tracking/link/goes/here">//tracking/link/goes/here</a></li>
-            </ul>
+<!--                      <li><a href="#doner" data-toggle="tab" title="completed"> -->
+<!--                          <span class="round-tabs five"> -->
+<!--                               <i class="glyphicon glyphicon-ok"></i> -->
+<!--                          </span> </a> -->
+<!--                      </li> -->
+                     
+                     </ul></div>
 
-            <div class="order-status">
+                     <div class="tab-content">
+                      <div class="tab-pane fade in active" id="home">
 
-                <div class="order-status-timeline">
-                    <!-- class names: c0 c1 c2 c3 and c4 -->
-                    <div class="order-status-timeline-completion c4"></div>
-                </div>
-
-                <div class="image-order-status image-order-status-new active img-circle">
-                    <span class="status">Accepted</span>
-                    <div class="icon"></div>
-                </div>
-                <div class="image-order-status image-order-status-active active img-circle">
-                    <span class="status">In progress</span>
-                    <div class="icon"></div>
-                </div>
-                <div class="image-order-status image-order-status-intransit img-circle">
-                    <span class="status">Shipped</span>
-                    <div class="icon"></div>
-                </div>
-                <div class="image-order-status image-order-status-delivered img-circle">
-                    <span class="status">Delivered</span>
-                    <div class="icon"></div>
-                </div>
-                <div class="image-order-status image-order-status-completed img-circle">
-                    <span class="status">Completed</span>
-                    <div class="icon"></div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
+                          <h3 class="head text-center">Welcome to Bootsnipp<sup>™</sup> <span style="color:#f48260;">♥</span></h3>
+                          <p class="narrow text-center">
+                              Lorem ipsum dolor sit amet, his ea mollis fabellas principes. Quo mazim facilis tincidunt ut, utinam saperet facilisi an vim.
+                          </p>
+                          
+                          <p class="text-center">
+                    <a href="" class="btn btn-success btn-outline-rounded green"> start using bootsnipp <span style="margin-left:10px;" class="glyphicon glyphicon-send"></span></a>
+                </p>
+                      </div>
+                      <div class="tab-pane fade" id="profile">
+                          <h3 class="head text-center">Create a Bootsnipp<sup>™</sup> Profile</h3>
+                          <p class="narrow text-center">
+                              Lorem ipsum dolor sit amet, his ea mollis fabellas principes. Quo mazim facilis tincidunt ut, utinam saperet facilisi an vim.
+                          </p>
+                          
+                          <p class="text-center">
+                    <a href="" class="btn btn-success btn-outline-rounded green"> create your profile <span style="margin-left:10px;" class="glyphicon glyphicon-send"></span></a>
+                </p>
+                          
+                      </div>
+                      <div class="tab-pane fade" id="messages">
+                          <h3 class="head text-center">Bootsnipp goodies</h3>
+                          <p class="narrow text-center">
+                              Lorem ipsum dolor sit amet, his ea mollis fabellas principes. Quo mazim facilis tincidunt ut, utinam saperet facilisi an vim.
+                          </p>
+                          
+                          <p class="text-center">
+                    <a href="" class="btn btn-success btn-outline-rounded green"> start using bootsnipp <span style="margin-left:10px;" class="glyphicon glyphicon-send"></span></a>
+                </p>
+                      </div>
+                      <div class="tab-pane fade" id="settings">
+                          <h3 class="head text-center">Drop comments!</h3>
+                          <p class="narrow text-center">
+                              Lorem ipsum dolor sit amet, his ea mollis fabellas principes. Quo mazim facilis tincidunt ut, utinam saperet facilisi an vim.
+                          </p>
+                          
+                          <p class="text-center">
+                    <a href="" class="btn btn-success btn-outline-rounded green"> start using bootsnipp <span style="margin-left:10px;" class="glyphicon glyphicon-send"></span></a>
+                </p>
+                      </div>
+                      <div class="tab-pane fade" id="doner">
+  <div class="text-center">
+    <i class="img-intro icon-checkmark-circle"></i>
+</div>
+<h3 class="head text-center">thanks for staying tuned! <span style="color:#f48260;">♥</span> Bootstrap</h3>
+<p class="narrow text-center">
+  Lorem ipsum dolor sit amet, his ea mollis fabellas principes. Quo mazim facilis tincidunt ut, utinam saperet facilisi an vim.
+</p>
+</div>
+<div class="clearfix"></div>
 </div>
 
+</div>
+</div>
+</div>
+</section>
+                   
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<jsp:include page="${contextPath}/footer.jsp"/>
+	<script type="text/javascript">$(function(){
+		$('a[title]').tooltip();
+	});</script>
 
 </body>
 </html>
