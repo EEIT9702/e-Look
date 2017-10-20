@@ -39,6 +39,8 @@ public class SponsorService {
 		
 		SimpleDateFormat sfd=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String opayDate=sfd.format(new Date());
+		
+		
 		obj.setItemName(itemName);
 		obj.setMerchantTradeDate(opayDate);
 		obj.setTotalAmount(money);
