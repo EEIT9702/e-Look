@@ -10,25 +10,23 @@
 <%-- <script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script> --%>
 <%-- <script src="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.js"></script> --%>
 <style>
-.navbar, .dropdown-menu {
+.navbar {
 	background: rgba(255, 255, 255, 0.25);
 	border: none;
 	background: #8999A8;
 }
 
-.nav>li>a, .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover,
-	.dropdown-menu>li>a, .dropdown-menu>li {
+.nav>li>a {
 	border-bottom: 3px solid transparent;
 }
 
-.nav>li>a:focus, .nav>li>a:hover, .nav .open>a, .nav .open>a:focus, .nav .open>a:hover,
-	.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
+.nav>li>a:focus, .nav>li>a:hover, .nav .open>a, .nav .open>a:focus, .nav .open>a:hover
+	 {
 	border-bottom: 3px solid transparent;
 	background: none;
 }
 
-.navbar a, .dropdown-menu>li>a, .dropdown-menu>li>a:focus,
-	.dropdown-menu>li>a:hover, .navbar-toggle {
+.navbar a,  .navbar-toggle {
 	color: #fff;
 }
 
@@ -131,31 +129,32 @@ font-size: 18px;
 			<nav class="navbar navbar-fixed-top">
 				<div class="container">
 					<div class="navbar-header">
-						<button type="button" class="navbar-toggle collapsed"
+						<button type="button" class="navbar-toggle collapsed black-center"
 							data-toggle="collapse" data-target="#navbar"
 							aria-expanded="false" aria-controls="navbar">
+							
 							<span class="sr-only"></span> <span class="icon-bar"></span> <span
 								class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
 						<a href="<%=request.getContextPath()%>/HOME.jsp"><img
 							src="<%=request.getContextPath()%>/HeaderCssJs/eLook_LOGO.png"
-							height="56" alt="e-Look"></a>
+							height="77" alt="e-Look"></a>
 					</div>
-					<div id="navbar" class="navbar-collapse collapse">
+					<div id="navbar" class="navbar-collapse collapse" >
 						<ul class="nav navbar-nav">
-							<li><a href="#"><img
+							<li style="padding-top:12px"><a href="#"><img
 									src="<%=request.getContextPath()%>/HeaderCssJs/003-coins.png"
-									height="16">募資</a></li>
-							<li><a href="#"><img
+									height="28">募資</a></li>
+							<li style="padding-top:12px"><a href="#"><img
 									src="<%=request.getContextPath()%>/HeaderCssJs/002-team.png"
-									height="16">線上課程</a></li>
-							<li><a href="#"><img
+									height="28">線上課程</a></li>
+							<li style="padding-top:12px"><a href="#"><img
 									src="<%=request.getContextPath()%>/HeaderCssJs/004-gift.png"
-									height="16">免費課程</a></li>
-							<li><a
+									height="28">免費課程</a></li>
+							<li style="padding-top:12px"><a
 								href="<%=request.getContextPath()%>/CreateCourse.jsp"><img
 									src="<%=request.getContextPath()%>/HeaderCssJs/001-book.png"
-									height="16">我要開課</a></li>
+									height="28">我要開課</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<c:choose>
@@ -164,10 +163,10 @@ font-size: 18px;
 										data-toggle="dropdown" aria-haspopup="false"
 										aria-expanded="false"><span class="cartcount">3</span><img style="margin-top:15px"
 											src="<%=request.getContextPath()%>/HeaderCssJs/002-shopping-cart.png"
-											height="16" />購物車</a> <!-- 				以下為購物車內容 -->
+											height="26" /></a> <!-- 				以下為購物車內容 -->
 										<ul class="dropdown-menu" style="width: 465px;">
 											<li class="dropdown-header"
-												style="border-bottom: 1px solid #aaaaaa;"><h3>購物車</h3></li>
+												style="border-bottom: 1px solid #aaaaaa;"><h3></h3></li>
 											<!-- 				課程1 -->
 											<div class="cartrows">
 												<div class="cartrow">
@@ -222,9 +221,9 @@ font-size: 18px;
 										<!-- 				以上為購物車內容 --></li>
 								</c:when>
 								<c:otherwise>
-									<li><a href="#"><img
+									<li style="padding-top:12px"><a href="#"><img
 											src="<%=request.getContextPath()%>/HeaderCssJs/002-shopping-cart.png"
-											height="16" />購物車</a></li>
+											height="26" /></a></li>
 								</c:otherwise>
 							</c:choose>
 
@@ -234,41 +233,40 @@ font-size: 18px;
 										id="dropdownMenu1" data-toggle="dropdown"><img
 											src="<%=request.getContextPath() %>/Image?MemberID=${LoginOK.memberID}"
 											height="40" /><span class="caret"></span></a>
-										<ul class="dropdown-menu" aria-labelledby="dropdownMenu1"
-											style="margin-left: calc(50% - 80px); margin-right: calc(50% - 80px);">
+										<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 											<li class="text-center"><a
 												href="<%=request.getContextPath()%>/member/member.jsp"><img
 													align="left"
 													src="<%=request.getContextPath()%>/HeaderCssJs/member.png"
-													height="16">會員中心</a></li>
+													height="26">會員中心</a></li>
 											<li style="padding-top: 0px;" role="presentation"
 												class="divider"></li>
 											<li class="text-center"><a href="#"><img align="left"
 													src="<%=request.getContextPath()%>/HeaderCssJs/wallet.png"
-													height="16">我的消費</a></li>
+													height="26">我的消費</a></li>
 											<li style="padding-top: 0px;" role="presentation"
 												class="divider"></li>
 											<li class=" text-center"><a onclick="signOut()"
 												href="<%=request.getContextPath()%>/logout.do"><img
 													align="left"
 													src="<%=request.getContextPath()%>/HeaderCssJs/exit.png"
-													height="16">登出</a></li>
+													height="26">登出</a></li>
 										</ul></li>
 								</c:when>
 								<c:when test="${!empty loginerr}">
-									<li><a href="#" data-toggle="modal" data-target="#myModal2"><img
+									<li style="padding-top:12px"><a href="#" data-toggle="modal" data-target="#myModal2"><img
 											src="<%=request.getContextPath()%>/HeaderCssJs/001-login.png"
-											height="16" />登入</a></li>
+											height="26" />登入</a></li>
 								</c:when>
 								<c:when test="${empty err}">
-									<li><a href="#" data-toggle="modal" data-target="#myModal"><img
+									<li style="padding-top:12px"><a href="#" data-toggle="modal" data-target="#myModal"><img
 											src="<%=request.getContextPath()%>/HeaderCssJs/001-login.png"
-											height="16" />登入</a></li>
+											height="26" />登入</a></li>
 								</c:when>
 								<c:otherwise>
-									<li><a href="#" data-toggle="modal"	data-target="#myModal2"><img
+									<li style="padding-top:12px"><a href="#" data-toggle="modal"	data-target="#myModal2"><img
 											src="<%=request.getContextPath()%>/HeaderCssJs/001-login.png"
-											height="16" />登入</a></li>
+											height="26" />登入</a></li>
 								</c:otherwise>
 							</c:choose>
 						</ul>
