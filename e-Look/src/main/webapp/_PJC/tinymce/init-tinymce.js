@@ -9,7 +9,7 @@ tinymce.init({
 	/* width and height of the editor */
 	width: "100%",
 	height: 300,
-	
+	language: "zh_TW",
 	/* display statusbar */
 	statubar: true,
 	

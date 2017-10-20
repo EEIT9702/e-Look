@@ -221,9 +221,9 @@ font-size: 18px;
 										<!-- 				以上為購物車內容 --></li>
 								</c:when>
 								<c:otherwise>
-									<li style="padding-top:12px"><a href="#"><img
+									<li style="padding-top:13px"><a href="#"><img
 											src="<%=request.getContextPath()%>/HeaderCssJs/002-shopping-cart.png"
-											height="26" /></a></li>
+											height="24" /></a></li>
 								</c:otherwise>
 							</c:choose>
 
