@@ -34,11 +34,13 @@ public class SponsorService {
 	public String getOPay(String MerchantTradeNo,String itemName,String money,String url) throws UnsupportedEncodingException{
 		
 		all = new AllInOne("");//實體化(new) AllInOne類別參數內可放置log4j.properties的位置路徑
-		AioCheckOutALL obj = new AioCheckOutALL();
+		AioCheckOutOneTime obj = new AioCheckOutOneTime();
 		obj.setMerchantTradeNo(MerchantTradeNo+"s");
 		
 		SimpleDateFormat sfd=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String opayDate=sfd.format(new Date());
+		
+		
 		obj.setItemName(itemName);
 		obj.setMerchantTradeDate(opayDate);
 		obj.setTotalAmount(money);
@@ -48,6 +50,7 @@ public class SponsorService {
 		obj.setNeedExtraPaidInfo("N");
 		obj.setHoldTradeAMT("0");
 		obj.setUseRedeem("N");
+		obj.setRedeem("Y");
 		String form = all.aioCheckOut(obj, null);
 		return form;		
 		
