@@ -3,15 +3,16 @@
 <!DOCTYPE html >
 <html>
 <head>
+<link rel="Shortcut Icon" type="image/x-icon" href="${SYSTEM.iconUri}" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+
 <meta name="login/viewport"
 	content="width=device-width, initial-scale=1">
 <link href="<%=request.getContextPath()%>/css/bootstrap.css"
 	rel="stylesheet">
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
-<title>Insert title here</title>
+<title>${SYSTEM.systemName}</title>
 <style type="text/css">
 h5 {
 	font-size: 1.28571429em;
@@ -141,7 +142,6 @@ h5 {
 	border-bottom-right-radius: 3px;
 	border-bottom-left-radius: 3px;
 	top: 0%;
-	cursor: pointer;
 	opacity: 0.8;
 	color: white;
 	border: none;
@@ -196,7 +196,7 @@ a.clickable:hover {
 }
 
 .profile-header-img {
-	padding: 30px;
+	padding: 30px 0;
 }
 
 .profile-header-img>img.img-circle {
@@ -223,9 +223,7 @@ a.clickable:hover {
 	padding: 5px 10px 5px 10px;
 	border-radius: 27px;
 }
-.user-pad {
-    padding: 35px 0;
-}
+
 </style>
 
 </head>
@@ -234,32 +232,31 @@ a.clickable:hover {
 	<jsp:include page="/login.jsp" />
 
 	<div style="margin-top: 10px" class="container">
-	
-	<div class="col-md-4 user-details" style="padding-top: 20px;background-image: linear-gradient(180deg, #2af598 0%, #009efd 100%);">
-            <div class="row coralbg white" style="padding: 20px; background-color: #00a8b3;">
+		<div class="row">
+				<div class="col-md-4 " style="padding-top: 20px;background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);">
+            <div class=" panel-body" style="padding: 20px; background-image: linear-gradient(-225deg, #77FFD2 0%, #6297DB 48%, #1EECFF 100%);">
 
-                	<div class="col-md-6 no-pad">
+                	<div class="col-md-6 no-pad ">
                   						<div class="profile-header-container">
 							<div class="profile-header-img">
 								<img class="img-circle"
 									src="<%=request.getContextPath()%>/Image?MemberID=${LoginOK.memberID}" />
 								<!-- badge -->
 								<div class="rank-label-container">
-									<button type="button" class="btn btn-info  btn-xs">
+									<a href="<%=request.getContextPath()%>/member/memberEdit.jsp"><button type="button" class="btn btn-info  btn-xs">
 										編輯 <span class="glyphicon glyphicon-edit"></span>
-									</button>
+									</button></a>
 								</div>
 							</div>
 						</div>
                 </div>
-                 <div class="col-md-6 no-pad">
-                    <div class="user-pad">
-                        <h3>${LoginOK.mName}</h3>
-                        <h4 class="white">${LoginOK.email}</h4>
+                 <div class="col-md-6 no-pad text-center">
+                    <div class="user-pad" style="padding: 60px 0;">
+                        <h2 style="color: white;">${LoginOK.mName}</h2>
                     </div>
                 </div>
             </div>
-            <div class="row overview">
+            <div class="row overview panel-body" >
                 <div class="col-md-6 user-pad text-center">
                 <div class="hero-widget well  well-lg">
                     <h3>已參加</h3>
@@ -273,51 +270,7 @@ a.clickable:hover {
                     </div>
                 </div>
             </div>
-        </div>
-
-		<div class="row">
-			<div class="col-md-4 " style="padding-top: 20px;background-image: linear-gradient(180deg, #2af598 0%, #009efd 100%);">
-				<div class="panel panel-default text-center">
-					<div class="panel-body"
-						style="padding: 20px; background-color: #00a8b3;">
-						<div class="profile-header-container">
-							<div class="profile-header-img">
-								<img class="img-circle"
-									src="<%=request.getContextPath()%>/Image?MemberID=${LoginOK.memberID}" />
-								<!-- badge -->
-								<div class="rank-label-container">
-									<button type="button" class="btn btn-info  btn-xs">
-										編輯 <span class="glyphicon glyphicon-edit"></span>
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<h3
-						style="background-color: #41cac0; margin-top: 0; margin-bottom: 0; padding-top: 20px; padding-bottom: 20px; color: white;">${LoginOK.mName}</h3>
-				</div>
-				<div class="modal-footer ">
-					<div class="col-md-6 text-center">
-						<div class="hero-widget well  well-lg">
-							<div class="text">
-								<h4>已參加</h4>
-								<hr>
-								<div style="font-size: 18px; font-weight: bolder;">堂課</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 text-center">
-						<div class="hero-widget well  well-lg">
-							<div class="text">
-								<h4>已開設</h4>
-								<hr>
-								<div style="font-size: 18px; font-weight: bolder;">堂課</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-12">
+            <div class="col-md-12">
 					<div class="panel panel-success">
 						<div class="panel-heading">
 							<h4 class="text-center">關於我</h4>
@@ -337,7 +290,7 @@ a.clickable:hover {
 						<div class="panel-body text-center">
 							<p class="lead">
 							<p style="word-break: break-all; word-wrap: break-word">${LoginOK.skill}</p>
-							</p>
+							<p></p>
 						</div>
 					</div>
 				</div>
@@ -353,11 +306,9 @@ a.clickable:hover {
 						</div>
 					</div>
 				</div>
-
-
-			</div>
+        </div>
 			<!-- 會員左半邊-->
-			<div class="col-md-8 breadcrumb" style="padding-top: 40px;    ">
+			<div class="col-md-8 breadcrumb" style="padding-top: 50px;    ">
 				<div class="col-md-12" style="margin: 25px 0;">
 					<div class="panel panel-info">
 						<div class="panel-heading clickable panel-collapsed">
@@ -368,7 +319,7 @@ a.clickable:hover {
 						<div class="panel-body" style="display: none;">
 
 							<!-- 1 -->
-							<div class=" col-md-4 " style="width: 211px">
+							<div class=" col-md-4  col-sm-4" style="width: 211px">
 								<div class="card card-inverse">
 									<img class="card-img-top"
 										src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png"
@@ -391,7 +342,7 @@ a.clickable:hover {
 							</div>
 							<!-- 1 -->
 							<!-- 2 -->
-							<div class=" col-md-4 " style="width: 211px">
+							<div class=" col-md-4  col-sm-4" style="width: 211px">
 								<div class="card card-inverse">
 									<img class="card-img-top"
 										src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png"
@@ -414,7 +365,7 @@ a.clickable:hover {
 							</div>
 							<!-- 2 -->
 							<!-- 3 -->
-							<div class=" col-md-4 " style="width: 211px">
+							<div class=" col-md-4  col-sm-4" style="width: 211px">
 								<div class="card card-inverse">
 									<img class="card-img-top"
 										src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png"
@@ -437,7 +388,7 @@ a.clickable:hover {
 							</div>
 							<!-- 3 -->
 							<!-- 4 -->
-							<div class=" col-md-4 " style="width: 211px">
+							<div class=" col-md-4  col-sm-4" style="width: 211px">
 								<div class="card card-inverse">
 									<img class="card-img-top"
 										src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png"
@@ -472,7 +423,7 @@ a.clickable:hover {
 						<div class="panel-body" style="display: none;">
 
 
-							<div class=" col-md-4 " style="width: 211px">
+							<div class=" col-md-4  col-sm-4" style="width: 211px">
 								<div class="card card-inverse">
 									<img class="card-img-top"
 										src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png"
@@ -502,7 +453,7 @@ a.clickable:hover {
 						</div>
 						<div class="panel-body" style="display: none;">
 
-						 <div  class=" col-md-4 " style="width: 211px">
+						 <div  class=" col-md-4  col-sm-4" style="width: 211px">
                     <div class="card card-inverse">
                     <img class="card-img-top" src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png" alt="course" id="wizardPicturePreview" title="">
                     <div class="card-block">

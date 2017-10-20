@@ -22,7 +22,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
         <property name="dataSource" ref="dataSource"/> 
         <property name="mappingResources"> 
             <list> 
-                <value>com/e_Look/shoppingCart/model/ShoppingCart.hbm.xml</value> 
+                <value>com/e_Look/shoppingCart/model/spring/ShoppingCart.hbm.xml</value> 
             </list> 
         </property> 
         <property name="hibernateProperties"> 
@@ -40,7 +40,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
         <property name="sessionFactory" ref="sessionFactory"/> 
     </bean>    
          
-    <bean id="shoppingCartDAO" class="com.e_Look.shoppingCart.model.ShoppingCartDAO">
+    <bean id="shoppingCartDAO" class="com.e_Look.shoppingCart.model.spring.ShoppingCartDAO">
         <property name="hibernateTemplate" ref="hibernateTemplate"/> 
     </bean>
 

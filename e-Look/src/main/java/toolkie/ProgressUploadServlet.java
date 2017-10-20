@@ -20,11 +20,10 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 @WebServlet("/toolkie/ProgressUploadServlet")
 public class ProgressUploadServlet extends HttpServlet {
-//  用途不明
-//	private static final long serialVersionUID = -4935921396709035718L;
+	// 用途不明
+	// private static final long serialVersionUID = -4935921396709035718L;
 
-	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		// 上傳狀態
 		UploadStatus status = new UploadStatus();
@@ -35,45 +34,45 @@ public class ProgressUploadServlet extends HttpServlet {
 		// 將狀態放入Session裡
 		request.getSession(true).setAttribute("uploadStatus", status);
 
-		
-		ServletFileUpload upload = new ServletFileUpload(
-				new DiskFileItemFactory());
+		ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
 
-		//設定上傳listener
+		// 設定上傳listener
 		upload.setProgressListener(listener);
 
 		try {
-			List itemList = upload.parseRequest(request);//傳送所有參數
+			List itemList = upload.parseRequest(request);// 傳送所有參數
 
-			for (Iterator it = itemList.iterator(); it.hasNext();) {//檢查所有參數
+			for (Iterator it = itemList.iterator(); it.hasNext();) {// 檢查所有參數
 				FileItem item = (FileItem) it.next();
-				if (item.isFormField()) {//如果是表單資料
-					System.out.println("FormField: " + item.getFieldName()
-							+ " = " + item.getString());
-				} else {//否則上傳檔案
-					System.out.println("File: " + item.getName());
+				if (item.isFormField()) {// 如果是表單資料
+					//System.out.println("FormField: " + item.getFieldName() + " = " + item.getString());
+				} else {// 否則上傳檔案
+					if (!item.getName().equals("")) {
+						System.out.println("File: " + item.getName());
 
-					//統一 Linux windows 路徑分格符號
-//					String fileName = item.getName().replace("/", "\\");
-//					fileName = fileName.substring(fileName.lastIndexOf("\\"));
+						// 統一 Linux windows 路徑分格符號
+						// String fileName = item.getName().replace("/", "\\");
+						// fileName =
+						// fileName.substring(fileName.lastIndexOf("\\"));
 
-					File saved = new File("D:\\TEST", item.getName());
-					saved.getParentFile().mkdirs();
+						File saved = new File("D:\\TEST", item.getName());
+						saved.getParentFile().mkdirs();
 
-					InputStream ins = item.getInputStream();
-					OutputStream ous = new FileOutputStream(saved);
+						InputStream ins = item.getInputStream();
+						OutputStream ous = new FileOutputStream(saved);
 
-					byte[] tmp = new byte[1024];
-					int len = -1;
+						byte[] tmp = new byte[1024];
+						int len = -1;
 
-					while ((len = ins.read(tmp)) != -1) {
-						ous.write(tmp, 0, len);
+						while ((len = ins.read(tmp)) != -1) {
+							ous.write(tmp, 0, len);
+						}
+
+						ous.close();
+						ins.close();
+
+						response.getWriter().println("�w�x�s�ɮסG" + saved);
 					}
-
-					ous.close();
-					ins.close();
-
-					response.getWriter().println("�w�x�s�ɮסG" + saved);
 				}
 			}
 		} catch (Exception e) {
@@ -82,15 +81,13 @@ public class ProgressUploadServlet extends HttpServlet {
 		}
 	}
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		response.setHeader("Cache-Control", "no-store");
 		response.setHeader("Pragrma", "no-cache");
 		response.setDateHeader("Expires", 0);
 
-		UploadStatus status = (UploadStatus) request.getSession(true)
-				.getAttribute("uploadStatus");
+		UploadStatus status = (UploadStatus) request.getSession(true).getAttribute("uploadStatus");
 
 		if (status == null) {
 			response.getWriter().println("�S���W�Ǹ�T");
@@ -113,26 +110,20 @@ public class ProgressUploadServlet extends HttpServlet {
 		double timeLeft = totalTime - time;
 
 		// 已完成百分比
-		int percent = (int) (100 * (double) status.getBytesRead() / (double) status
-				.getContentLength());
+		int percent = (int) (100 * (double) status.getBytesRead() / (double) status.getContentLength());
 
 		// 已完成數
-		//double length = ((double) status.getBytesRead()) / 1024 / 1024;
+		// double length = ((double) status.getBytesRead()) / 1024 / 1024;
 
-		//總長度 
+		// 總長度
 		double totalLength = ((double) status.getContentLength()) / 1024 / 1024;
 
-		//百分比||檔案總長度||傳輸速度||已上傳的時間||估計時間||剩餘時間
-		String value = percent+ "||" + totalLength + "||"
-				+ velocity + "||" + time + "||" + totalTime + "||" + timeLeft;
+		// 百分比||檔案總長度||傳輸速度||已上傳的時間||估計時間||剩餘時間
+		String value = percent + "||" + totalLength + "||" + velocity + "||" + time + "||" + totalTime + "||"
+				+ timeLeft;
 
 		response.getWriter().println(value);
-		
-		
-		
-		
-		
-		
+
 	}
 
 }

@@ -8,24 +8,33 @@ public class eLookEventVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer eventID;
 	private String eventName;
-	private InputStream ePhoto;
+//	private InputStream ePhoto;
 	private Date eStartDate;
 	private Date eEndDate;
 	private Double discount;
 	
 	public eLookEventVO(){}
 	
-	public eLookEventVO(Integer eventID, String eventName,InputStream ePhoto,
-								Date eStartDate, Date eEndDate,Double discount){
-		this.eventID=eventID;
-		this.eventName=eventName;
-		this.ePhoto=ePhoto;
-		this.eStartDate=eStartDate;
-		this.eEndDate=eEndDate;
-		this.discount=discount;
-		
-	}
-	
+//	public eLookEventVO(Integer eventID, String eventName,InputStream ePhoto,
+//								Date eStartDate, Date eEndDate,Double discount){
+//		this.eventID=eventID;
+//		this.eventName=eventName;
+//		this.ePhoto=ePhoto;
+//		this.eStartDate=eStartDate;
+//		this.eEndDate=eEndDate;
+//		this.discount=discount;
+//		
+//	}
+	public eLookEventVO(Integer eventID, String eventName,
+			Date eStartDate, Date eEndDate,Double discount){
+this.eventID=eventID;
+this.eventName=eventName;
+this.eStartDate=eStartDate;
+this.eEndDate=eEndDate;
+this.discount=discount;
+
+}
+
 	
 	public Integer getEventID() {
 		return eventID;
@@ -39,12 +48,12 @@ public class eLookEventVO implements Serializable {
 	public void setEventName(String eventName) {
 		this.eventName = eventName;
 	}
-	public InputStream getePhoto() {
-		return ePhoto;
-	}
-	public void setePhoto(InputStream ePhoto) {
-		this.ePhoto = ePhoto;
-	}
+//	public InputStream getePhoto() {
+//		return ePhoto;
+//	}
+//	public void setePhoto(InputStream ePhoto) {
+//		this.ePhoto = ePhoto;
+//	}
 	public Date geteStartDate() {
 		return eStartDate;
 	}

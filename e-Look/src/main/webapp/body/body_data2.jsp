@@ -4,7 +4,7 @@
 	
 <!-- 		<div class="row"> -->
 			<!-- 1-4 Template row -->
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
 						src="<%= request.getContextPath() %>/body/img/001.jpg" alt="course" id="wizardPicturePreview" title="">
@@ -26,7 +26,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
 						src="<%= request.getContextPath() %>/body/img/002.jpg" alt="course" id="wizardPicturePreview" title="">
@@ -35,7 +35,7 @@
 							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png" class="profile-avatar"
 							alt=""> </figure>
 						<div class="card-text">
-							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題2</p>
+							<p id="title" class="card-title mt-3 multi_ellipsis">${param.keyWord}</p>
 						</div>
 						<div>
 							<p style="margin-top: 40px; font-size: 18px">課程售價：免費</p>
@@ -48,7 +48,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
 						src="<%= request.getContextPath() %>/body/img/003.jpg" alt="course" id="wizardPicturePreview" title="">
@@ -57,7 +57,7 @@
 							src="<%= request.getContextPath() %>/Class Steps/imgs/eLook_LOGO1.png" class="profile-avatar"
 							alt=""> </figure>
 						<div class="card-text">
-							<p id="title" class="card-title mt-3 multi_ellipsis">測試課程標題3</p>
+							<p id="title" class="card-title mt-3 multi_ellipsis">${param.courseClass}</p>
 						</div>
 						<div>
 							<p style="margin-top: 40px; font-size: 18px">課程售價：免費</p>
@@ -70,7 +70,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
 						src="<%= request.getContextPath() %>/body/img/004.jpg" alt="course" id="wizardPicturePreview" title="">
