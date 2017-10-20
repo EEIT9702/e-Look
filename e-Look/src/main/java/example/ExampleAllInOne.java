@@ -230,7 +230,7 @@ public class ExampleAllInOne {
 		String form = all.aioCheckOut(obj, null);
 		return form;
 	}
-	
+	//信用卡
 	public static String genAioCheckOutOneTime(){
 		AioCheckOutOneTime obj = new AioCheckOutOneTime();
 		obj.setMerchantTradeNo("testCompany0008");
@@ -239,6 +239,7 @@ public class ExampleAllInOne {
 		obj.setTradeDesc("test Description");
 		obj.setItemName("TestItem");
 		obj.setReturnURL("http://211.23.128.214:5000");
+		obj.setClientBackURL("");//導回頁面
 		obj.setNeedExtraPaidInfo("N");
 		obj.setHoldTradeAMT("0");
 		obj.setUseRedeem("N");

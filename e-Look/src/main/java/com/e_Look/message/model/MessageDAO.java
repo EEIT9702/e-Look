@@ -25,13 +25,13 @@ public class MessageDAO implements MessageDAO_interface {
 			e.printStackTrace();
 		}
 	}
-	private static final String INSERT_MESSAGE = "insert into Message ( mContent,mTime,messageID_response,memberID,courseID,bought,status) values ( ?, ?, ?, ?, ?, ?,?)";
+	private static final String INSERT_MESSAGE = "insert into Message ( mContent,mTime,memberID,courseID,bought,status) values ( ?, ?, ?, ?, ?,?)";
 	private static final String UPDATE_MESSAGE = "update Message set mContent=?, mTime=? where messageID= ?";
 	private static final String UPDATE_MESSAGE_RESPONSE = "update Message set mContent=?, mTime=? where messageID_response= ?";
 	private static final String UPDATE_STATUS = "update Message set status=? where messageID= ?";
 	private static final String DELETE_MESSAGE = "delete from Message where messageID= ?";
 	private static final String SELECT_ONE_MESSAGE = "select messageID,mContent,mTime,messageID_response,memberID,courseID,bought,status from Message where messageID= ?";
-	private static final String SELECT_ALL_MESSAGE = "select messageID,mContent,mTime,messageID_response,memberID,courseID,bought,status from Message";
+	private static final String SELECT_ALL_MESSAGE = "select messageID,mContent,mTime,messageID_response,memberID,courseID,bought,status from Message";	
 		
 	@Override
 	public void insert(MessageVO messageVO) {
@@ -42,11 +42,10 @@ public class MessageDAO implements MessageDAO_interface {
 			pstmt = con.prepareStatement(INSERT_MESSAGE);
 			pstmt.setString(1, messageVO.getmContent());
 			pstmt.setDate(2, messageVO.getmTime());
-			pstmt.setInt(3, messageVO.getMessageID_response());
-			pstmt.setInt(4, messageVO.getMemberID());
-			pstmt.setInt(5, messageVO.getCourseID());
-			pstmt.setLong(6, messageVO.getBought());
-			pstmt.setByte(7, messageVO.getStatus());
+			pstmt.setInt(3, messageVO.getMemberID());
+			pstmt.setInt(4, messageVO.getCourseID());
+			pstmt.setLong(5, messageVO.getBought());
+			pstmt.setByte(6, messageVO.getStatus());
 			
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -79,13 +78,21 @@ public class MessageDAO implements MessageDAO_interface {
 				pstmt = con.prepareStatement(UPDATE_MESSAGE);
 				pstmt.setString(1, messageVO.getmContent());
 				pstmt.setDate(2, messageVO.getmTime());
+				pstmt.setInt(3, messageVO.getMessageID());	
+				
+				pstmt.executeUpdate();
+			} else if (update.equalsIgnoreCase("messageresponse")) {
+				pstmt = con.prepareStatement(UPDATE_MESSAGE_RESPONSE);
+				pstmt.setString(1, messageVO.getmContent());
+				pstmt.setDate(2, messageVO.getmTime());
 				pstmt.setInt(3, messageVO.getMessageID_response());
-			
+				
 				pstmt.executeUpdate();
 			} else if (update.equalsIgnoreCase("status")) {
 				pstmt = con.prepareStatement(UPDATE_STATUS);
 				pstmt.setByte(1, messageVO.getStatus());
 				pstmt.setInt(2, messageVO.getMessageID());
+				
 				pstmt.executeUpdate();
 			} 
 		} catch (SQLException e) {
@@ -161,8 +168,6 @@ public class MessageDAO implements MessageDAO_interface {
 				messageVO.setStatus(rs.getByte(8));
 				
 			}
-			
-					
 			
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());

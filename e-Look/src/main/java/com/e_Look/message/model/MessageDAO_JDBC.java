@@ -204,7 +204,7 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 					}
 				}
 				
-		return null;
+		return messageVO;
 	}
 
 	@Override
@@ -254,22 +254,22 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 					}
 				}
 				
-		return null;
+		return list;
 	}
 
 	public static void main(String[] args) {
 		MessageDAO_JDBC dao = new MessageDAO_JDBC();
 //		//新增
-//		MessageVO messageVO1= new MessageVO();
-//		
-//		messageVO1.setmContent("good1");
-//		messageVO1.setmTime(new Date(System.currentTimeMillis()));
-//		messageVO1.setMemberID(100001);
-//		messageVO1.setCourseID(200001);
-//		messageVO1.setBought((long) 123);
-//		messageVO1.setStatus((byte) 0);
-//				
-//		dao.insert(messageVO1);
+		MessageVO messageVO1= new MessageVO();
+		
+		messageVO1.setmContent("good1");
+		messageVO1.setmTime(new Date(System.currentTimeMillis()));
+		messageVO1.setMemberID(100001);
+		messageVO1.setCourseID(200001);
+		messageVO1.setBought((long) 123);
+		messageVO1.setStatus((byte) 0);
+				
+		dao.insert(messageVO1);
 //		
 		//修改資料
 //		MessageVO messageVO2= new MessageVO();
@@ -284,7 +284,7 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 //		messageVO2.setMessageID_response(1005);
 //		dao.update(messageVO2, "messageresponse");
 		//修改狀態
-		MessageVO messageVO2= new MessageVO();
+		//MessageVO messageVO2= new MessageVO();
 //		messageVO2.setStatus((byte) 1);
 //		messageVO2.setMessageID(1007);
 //		dao.update(messageVO2, "status");
@@ -293,32 +293,30 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 		//刪除
 //		dao.delete(1007);
 		//查詢單一
-		MessageVO messageVO3= new MessageVO();
-		messageVO3=dao.findByPrimaryKey(1005);
-		System.out.println(messageVO3.getMessageID());
-		System.out.println(messageVO3.getmContent());
-		System.out.println(messageVO3.getmTime());
-		System.out.println(messageVO3.getMessageID_response());
-		System.out.println(messageVO3.getMemberID());
-		System.out.println(messageVO3.getCourseID());
-		System.out.println(messageVO3.getBought());
-		System.out.println(messageVO3.getStatus());
+//		MessageVO messageVO3=dao.findByPrimaryKey(1004);
+//		System.out.println(messageVO3.getMessageID());
+//		System.out.println(messageVO3.getmContent());
+//		System.out.println(messageVO3.getmTime());
+//		System.out.println(messageVO3.getMessageID_response());
+//		System.out.println(messageVO3.getMemberID());
+//		System.out.println(messageVO3.getCourseID());
+//		System.out.println(messageVO3.getBought());
+//		System.out.println(messageVO3.getStatus());
 
 		//查詢全部會員
 //		List<MessageVO> list=dao.getAll();
 //		for(MessageVO messageVO :list){
-//			System.out.print(messageVO.getMessageID()+"  ");
-//			System.out.print(messageVO.getmContent()+"  ");
-//			System.out.print(messageVO.getmTime()+"  ");
-//			System.out.print(messageVO.getMessageID_response()+"  ");
-//			System.out.print(messageVO.getMemberID()+"  ");
-//			System.out.print(messageVO.getCourseID()+"  ");
-//			System.out.print(messageVO.getBought()+"  ");
-//			System.out.print(messageVO.getStatus()+"  ");
-			
+//			System.out.println(messageVO.getMessageID()+"  ");
+//			System.out.println(messageVO.getmContent()+"  ");
+//			System.out.println(messageVO.getmTime()+"  ");
+//			System.out.println(messageVO.getMessageID_response()+"  ");
+//			System.out.println(messageVO.getMemberID()+"  ");
+//			System.out.println(messageVO.getCourseID()+"  ");
+//			System.out.println(messageVO.getBought()+"  ");
+//			System.out.println(messageVO.getStatus()+"  ");
+//			
 //		}
-	
-
+//	
 
 
 	}

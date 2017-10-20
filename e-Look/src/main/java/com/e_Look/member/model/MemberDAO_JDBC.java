@@ -321,15 +321,15 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 	public static void main(String[] args) throws FileNotFoundException {
 		MemberDAO_JDBC dao = new MemberDAO_JDBC();
 //		//新增會員
-		MemberVO memberVO1= new MemberVO();
-		memberVO1.setmName("李XX");
-		memberVO1.setEmail("abc8512125230@yahyy.com.tw");
-		memberVO1.setmPassword("XXXX");
-		memberVO1.setRegisterDate(new Date(System.currentTimeMillis()));
-		memberVO1.setStatus((byte) 0);
-		memberVO1.setCount(1);
+//		MemberVO memberVO1= new MemberVO();
+//		memberVO1.setmName("李XX");
+//		memberVO1.setEmail("abc8512125230@yahyy.com.tw");
+//		memberVO1.setmPassword("XXXX");
+//		memberVO1.setRegisterDate(new Date(System.currentTimeMillis()));
+//		memberVO1.setStatus((byte) 0);
+//		memberVO1.setCount(1);
 		/*331行 是讀取硬碟路徑寫入資料庫方法*/
-		memberVO1.setmPhoto(new FileInputStream(new File("src/main/webapp/img/imember_image.png")));
+//		memberVO1.setmPhoto(new FileInputStream(new File("src/main/webapp/img/imember_image.png")));
 		/*333行~341行 是讀取網路圖片寫入資料庫方法*/
 //		try {
 //			HttpURLConnection con = (HttpURLConnection)(new URL("http://graph.facebook.com/106384896774920/picture?type=large").openConnection());
@@ -346,7 +346,7 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 //		} catch (IOException e) {
 //			e.printStackTrace();
 //		}
-		dao.insert(memberVO1);
+//		dao.insert(memberVO1);
 //		//修改會員資料
 //		MemberVO memberVO2= new MemberVO();
 //		memberVO2.setMemberID(100001);
@@ -365,33 +365,33 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 		//刪除會員
 //		dao.delete(100008);
 		//查詢單一會員
-//		MemberVO memberVO3=dao.findByPrimaryKey(100003);
-//		System.out.println(memberVO3.getMemberID());
-//		System.out.println(memberVO3.getEmail());
-//		System.out.println(memberVO3.getmPassword());
-//		System.out.println(memberVO3.getmName());
-//		System.out.println(memberVO3.getmPhoto());
-//		System.out.println(memberVO3.getSkill());
-//		System.out.println(memberVO3.getHobby());
-//		System.out.println(memberVO3.getRegisterDate());
-//		System.out.println(memberVO3.getStatus());
-//		System.out.println(memberVO3.getCount());
-//		System.out.println(memberVO3.getAddress());
+		MemberVO memberVO3=dao.findByPrimaryKey(100003);
+		System.out.println(memberVO3.getMemberID());
+		System.out.println(memberVO3.getEmail());
+		System.out.println(memberVO3.getmPassword());
+		System.out.println(memberVO3.getmName());
+		System.out.println(memberVO3.getmPhoto());
+		System.out.println(memberVO3.getSkill());
+		System.out.println(memberVO3.getHobby());
+		System.out.println(memberVO3.getRegisterDate());
+		System.out.println(memberVO3.getStatus());
+		System.out.println(memberVO3.getCount());
+		System.out.println(memberVO3.getAddress());
 		//查詢全部會員
-		List<MemberVO> list=dao.getAll();
-		for(MemberVO memberVO :list){
-			System.out.print(memberVO.getMemberID()+"  ");
-			System.out.print(memberVO.getEmail()+"  ");
-			System.out.print(memberVO.getmPassword()+"  ");
-			System.out.print(memberVO.getmName()+"  ");
-			System.out.print(memberVO.getmPhoto()+"  ");
-			System.out.print(memberVO.getSkill()+"  ");
-			System.out.print(memberVO.getHobby()+"  ");
-			System.out.print(memberVO.getRegisterDate()+"  ");
-			System.out.print(memberVO.getStatus()+"  ");
-			System.out.print(memberVO.getCount()+"  ");
-			System.out.println(memberVO.getAddress());
-		}
+//		List<MemberVO> list=dao.getAll();
+//		for(MemberVO memberVO :list){
+//			System.out.print(memberVO.getMemberID()+"  ");
+//			System.out.print(memberVO.getEmail()+"  ");
+//			System.out.print(memberVO.getmPassword()+"  ");
+//			System.out.print(memberVO.getmName()+"  ");
+//			System.out.print(memberVO.getmPhoto()+"  ");
+//			System.out.print(memberVO.getSkill()+"  ");
+//			System.out.print(memberVO.getHobby()+"  ");
+//			System.out.print(memberVO.getRegisterDate()+"  ");
+//			System.out.print(memberVO.getStatus()+"  ");
+//			System.out.print(memberVO.getCount()+"  ");
+//			System.out.println(memberVO.getAddress());
+//		}
 	}
 
 

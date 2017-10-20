@@ -25,6 +25,14 @@ public class SponsorService {
 		}
 		return count;
 	}
-	
+	public String getOPay(String sponosorDate,int courseID,String SponsorName,int money){
+		
+		
+		
+		
+		return null;
+		
+		
+	} 
 	
 }
