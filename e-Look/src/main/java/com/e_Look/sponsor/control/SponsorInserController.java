@@ -46,7 +46,7 @@ public class SponsorInserController extends HttpServlet {
 		SponsorService SponsorService=new SponsorService();
 		String formElement=SponsorService.getOPay(MerchantTradeNo,"200002", money, "HOME.jsp");
 		System.out.println(formElement);
-		
+		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out =response.getWriter();
 		
 		out.print("<html>");
