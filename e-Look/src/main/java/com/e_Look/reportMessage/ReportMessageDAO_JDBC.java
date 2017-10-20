@@ -264,15 +264,15 @@ public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
 				// reportMessageVO 也稱為 Domain objects
 				reportMessageVO = new ReportMessageVO();
 				messageVO = new MessageVO();
-				messageVO.setMessageID(rs.getInt("m.messageID"));
-				messageVO.setmContent(rs.getString("m.mContent"));
+				messageVO.setMessageID(rs.getInt("messageID"));
+				messageVO.setmContent(rs.getString("mContent"));
 				reportMessageVO.setMessageVO(messageVO);
-				reportMessageVO.setReportId(rs.getInt("rm.reportId"));
+				reportMessageVO.setReportId(rs.getInt("reportId"));
 				//reportMessageVO.setReportMessageID(rs.getInt("reportMessageID"));
-				reportMessageVO.setReportMemberID(rs.getInt("rm.reportMemberID"));
-				reportMessageVO.setReportContent(rs.getString("rm.reportContent"));
-				reportMessageVO.setReportTime(rs.getDate("rm.reportTime"));
-				reportMessageVO.setStatus(rs.getByte("rm.status"));
+				reportMessageVO.setReportMemberID(rs.getInt("reportMemberID"));
+				reportMessageVO.setReportContent(rs.getString("reportContent"));
+				reportMessageVO.setReportTime(rs.getDate("reportTime"));
+				reportMessageVO.setStatus(rs.getByte("status"));
 				list.add(reportMessageVO); // Store the row in the list
 			}
 
