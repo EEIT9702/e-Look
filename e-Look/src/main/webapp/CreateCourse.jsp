@@ -21,6 +21,7 @@
 <link
 	href="<%=request.getContextPath()%>/css/bootstrap-datetimepicker.css"
 	rel="stylesheet">
+<link rel="Short Icon" type="image/x-icon" href="${initParam.icon}" />
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
