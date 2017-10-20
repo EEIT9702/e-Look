@@ -3,21 +3,24 @@ package com.e_Look.reportMessage;
 import java.io.Serializable;
 import java.sql.Date;
 
+import com.e_Look.message.model.MessageVO;
+
 public class ReportMessageVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer reportId;
-	private Integer reportMessageID;
+	//private Integer reportMessageId;
+	private MessageVO messageVO;
 	private Integer reportMemberID;
 	private String reportContent;
 	private Date reportTime;
 	private Byte status;
 	public ReportMessageVO(){};
 	
-	public ReportMessageVO(Integer reportId, Integer reportMessageID, Integer reportMemberID,
+	public ReportMessageVO(Integer reportId, MessageVO messageVO, Integer reportMemberID,
 			String reportContent, Date reportTime, Byte status){
 		this.reportId = reportId;
-		this.reportMessageID = reportMessageID;
+		this.messageVO = messageVO;
 		this.reportMemberID = reportMemberID;
 		this.reportContent = reportContent;
 		this.reportTime = reportTime;
@@ -30,11 +33,11 @@ public class ReportMessageVO implements Serializable {
 	public void setReportId(Integer reportId) {
 		this.reportId = reportId;
 	}
-	public Integer getReportMessageID() {
-		return reportMessageID;
+	public MessageVO getMessageVO() {
+		return messageVO;
 	}
-	public void setReportMessageID(Integer reportMessageID) {
-		this.reportMessageID = reportMessageID;
+	public void setMessageVO(MessageVO messageVO) {
+		this.messageVO = messageVO;
 	}
 	public Integer getReportMemberID() {
 		return reportMemberID;

@@ -1,4 +1,4 @@
-package com.e_Look.sponsor;
+package com.e_Look.sponsor.model;
 
 import java.io.Serializable;
 

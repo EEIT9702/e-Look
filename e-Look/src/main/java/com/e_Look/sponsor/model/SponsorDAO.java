@@ -1,4 +1,4 @@
-package com.e_Look.sponsor;
+package com.e_Look.sponsor.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,19 +22,16 @@ public class SponsorDAO implements SponsorDAO_interface {
 			e.printStackTrace();
 		}
 	}
+
+	private static final String INSERT_SPONSOR = "INSERT INTO Sponsor (courseID, SponsorName, money) VALUES (?,?,?) ";
+	// 寫著,但應該用不到
+	private static final String UPDATE_SPONSOR = "UPDATE Sponsor SET SponsorName=?, money=? WHERE courseID=?";
+	// 寫著,但應該用不到
+	private static final String DELETE_SPONSOR = "DELETE FROM Sponsor WHERE courseID =?";
 	
-	private static final String INSERT_SPONSOR =
-			"INSERT INTO Sponsor (courseID, SponsorName, money) VALUES (?,?,?) ";
-	//寫著,但應該用不到
-	private static final String UPDATE_SPONSOR =
-			"UPDATE Sponsor SET SponsorName=?, money=? WHERE courseID=?";
-	//寫著,但應該用不到
-	private static final String DELETE_SPONSOR =
-		    "DELETE FROM Sponsor WHERE courseID =?";
-	private static final String SELECT_ONE_SPONSOR =
-			"SELECT courseID, SponsorName, money FROM Sponsor WHERE courseID=?";
-	private static final String SELECT_ALL_SPONSOR =
-			"SELECT courseID, SponsorName, money FROM Sponsor";
+	private static final String SELECT_ONE_SPONSOR = "SELECT courseID, SponsorName, money FROM Sponsor WHERE courseID=?";
+
+	private static final String SELECT_ALL_SPONSOR = "SELECT courseID, SponsorName, money FROM Sponsor";
 
 	@Override
 	public void insert(SponsorVO sponsorVO) {
@@ -50,8 +47,7 @@ public class SponsorDAO implements SponsorDAO_interface {
 
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -76,7 +72,7 @@ public class SponsorDAO implements SponsorDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			//"UPDATE Sponsor SET SponsorName=?, money=? WHERE courseID=?";
+			// "UPDATE Sponsor SET SponsorName=?, money=? WHERE courseID=?";
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_SPONSOR);
 			pstmt.setInt(1, sponsorVO.getCourseID());
@@ -86,8 +82,7 @@ public class SponsorDAO implements SponsorDAO_interface {
 
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -113,16 +108,15 @@ public class SponsorDAO implements SponsorDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			//"DELETE FROM Sponsor WHERE courseID =?";
+			// "DELETE FROM Sponsor WHERE courseID =?";
 			con = ds.getConnection();
-			pstmt=con.prepareStatement(DELETE_SPONSOR);
+			pstmt = con.prepareStatement(DELETE_SPONSOR);
 			pstmt.setInt(1, courseID);
 			pstmt.executeUpdate();
 
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -144,13 +138,15 @@ public class SponsorDAO implements SponsorDAO_interface {
 
 	@Override
 	public SponsorVO findByCourseID(Integer courseID) {
+
 		SponsorVO sponsorVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
-			//"SELECT courseID, SponsorName, money FROM Sponsor WHERE courseID=?";
+			// "SELECT courseID, SponsorName, money FROM Sponsor WHERE
+			// courseID=?";
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_ONE_SPONSOR);
 
@@ -168,8 +164,7 @@ public class SponsorDAO implements SponsorDAO_interface {
 
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -198,6 +193,54 @@ public class SponsorDAO implements SponsorDAO_interface {
 	}
 
 	@Override
+	public List<SponsorVO> getCountMoney(Integer courseID) {
+		// "SELECT courseID, SponsorName, money FROM Sponsor WHERE courseID=?";
+		List<SponsorVO> CountMoney = new ArrayList<SponsorVO>();
+		SponsorVO SponsorVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(SELECT_ONE_SPONSOR);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				SponsorVO = new SponsorVO();
+				SponsorVO.setCourseID(rs.getInt("courseID"));
+				SponsorVO.setSponsorName(rs.getString("SponsorName"));
+				SponsorVO.setMoney(rs.getInt("money"));
+				CountMoney.add(SponsorVO);
+			}
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return CountMoney;
+
+	}
+
 	public List<SponsorVO> getAll() {
 		List<SponsorVO> list = new ArrayList<SponsorVO>();
 		SponsorVO sponsorVO = null;
@@ -207,7 +250,7 @@ public class SponsorDAO implements SponsorDAO_interface {
 		ResultSet rs = null;
 
 		try {
-			//"SELECT courseID, SponsorName, money FROM Sponsor";
+			// "SELECT courseID, SponsorName, money FROM Sponsor";
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_ALL_SPONSOR);
 			rs = pstmt.executeQuery();
@@ -223,8 +266,7 @@ public class SponsorDAO implements SponsorDAO_interface {
 
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -251,4 +293,5 @@ public class SponsorDAO implements SponsorDAO_interface {
 		}
 		return list;
 	}
+
 }

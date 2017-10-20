@@ -337,6 +337,9 @@ public class AdDAO_JDBC implements AdDAO_interface {
 //		adVO2.setAdID(1001);
 //		dao.update(adVO2);
 		
+		//刪除
+//		dao.delete(1001);
+		
 		//查詢單一
 		AdVO adVO3 = dao.findByAdID(1002);
 		System.out.println(adVO3.getAdID());

@@ -233,8 +233,8 @@ a.clickable:hover {
 
 	<div style="margin-top: 10px" class="container">
 		<div class="row">
-				<div class="col-md-4 " style="padding-top: 20px;background-image: linear-gradient(180deg, #2af598 0%, #009efd 100%);">
-            <div class=" panel-body" style="padding: 20px; background-color: #00a8b3;">
+				<div class="col-md-4 " style="padding-top: 20px;background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);">
+            <div class=" panel-body" style="padding: 20px; background-image: linear-gradient(-225deg, #77FFD2 0%, #6297DB 48%, #1EECFF 100%);">
 
                 	<div class="col-md-6 no-pad ">
                   						<div class="profile-header-container">
@@ -243,9 +243,9 @@ a.clickable:hover {
 									src="<%=request.getContextPath()%>/Image?MemberID=${LoginOK.memberID}" />
 								<!-- badge -->
 								<div class="rank-label-container">
-									<button type="button" class="btn btn-info  btn-xs">
+									<a href="<%=request.getContextPath()%>/member/memberEdit.jsp"><button type="button" class="btn btn-info  btn-xs">
 										編輯 <span class="glyphicon glyphicon-edit"></span>
-									</button>
+									</button></a>
 								</div>
 							</div>
 						</div>

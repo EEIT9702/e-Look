@@ -11,3 +11,4 @@ public interface ReportMessageDAO_interface {
 	public List<ReportMessageVO> getNotHandle();
 	public List<ReportMessageVO> getAll();
 }
+ 

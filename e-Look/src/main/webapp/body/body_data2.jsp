@@ -4,8 +4,7 @@
 	
 <!-- 		<div class="row"> -->
 			<!-- 1-4 Template row -->
-			<div> 
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
 						src="<%= request.getContextPath() %>/body/img/001.jpg" alt="course" id="wizardPicturePreview" title="">
@@ -27,7 +26,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
 						src="<%= request.getContextPath() %>/body/img/002.jpg" alt="course" id="wizardPicturePreview" title="">
@@ -49,7 +48,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
 						src="<%= request.getContextPath() %>/body/img/003.jpg" alt="course" id="wizardPicturePreview" title="">
@@ -71,7 +70,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item col-md-3 col-sm-6 col-xs-12 img-portfolio">
+			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<img class="img-responsive img-hover card-img-top"
 						src="<%= request.getContextPath() %>/body/img/004.jpg" alt="course" id="wizardPicturePreview" title="">
@@ -92,6 +91,6 @@
 						<small>課程時間:37分鐘</small> <br> <small>觀看人數:172人</small>
 					</div>
 				</div>
-			</div></div>
+			</div>
 			<!-- end 1-4 Template -->
 			
