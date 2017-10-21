@@ -29,12 +29,8 @@
 </head>
 
 <body>
-	<input id="datetimepicker1" type="text" />
-  <script>
-    $(document).ready(function(){ 
-      $('#datetimepicker1').datetimepicker();
-      });
-	</script>
+<!-- 	<video src="C:\Users\jacks\Desktop\EEIT網頁影像設計\EEIT97(e_Look)第一版.mp4"></video> -->
+	<video src="<%=request.getContextPath()%>/img/EEIT97(e_Look)第一版.mp4"></video>
 		
 	
 	
