@@ -21,8 +21,7 @@
 <link
 	href="<%=request.getContextPath()%>/css/bootstrap-datetimepicker.css"
 	rel="stylesheet">
-
-
+<link rel="Short Icon" type="image/x-icon" href="${initParam.icon}" />
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
@@ -49,8 +48,8 @@
 
 							<li role="presentation" class="active"><a href="#step1"
 								data-toggle="tab" aria-controls="step1" role="tab"
-								title="Step 1"> <span class="round-tab"> <i
-										class="glyphicon glyphicon-list"></i>
+								title="Step 1"> <span class="round-tab"> 
+								<i class="glyphicon glyphicon-list"></i>
 								</span>
 							</a></li>
 
