@@ -10,6 +10,7 @@ import java.net.URL;
 import java.sql.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
 
 import com.e_Look.emailSystem.MemberCheckEmail;
 
@@ -93,6 +94,21 @@ public class MemberService {
 	}
 	public void updateMember(MemberVO memberVO) {
 		dao.update(memberVO, "member");
+		
+	}
+	public void updateMemberImage(Integer memberID, Part part) {
+		
+		if(part.getSize()>0){
+			MemberVO memberVO1= new MemberVO();
+			memberVO1.setMemberID(memberID);
+			try {
+				memberVO1.setmPhoto(part.getInputStream());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			dao.updataimage(memberVO1);
+		}
 		
 	}
 }

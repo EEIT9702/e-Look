@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html >
 <html>
 <head>
@@ -229,8 +230,11 @@ a.clickable:hover {
 </head>
 
 <body>
+<c:if test="${empty LoginOK}">
+	<c:redirect url="/HOME.jsp"/>
+	</c:if>
 	<jsp:include page="/login.jsp" />
-
+	
 	<div style="margin-top: 10px" class="container">
 		<div class="row">
 				<div class="col-md-4 " style="padding-top: 20px;background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);">

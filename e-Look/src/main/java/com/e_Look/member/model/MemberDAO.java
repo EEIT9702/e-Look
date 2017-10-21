@@ -25,7 +25,9 @@ public class MemberDAO implements MemberDAO_interface {
 	private static final String INSERT_MEMBER =
 		      "insert into Member ( email,mPassword,mName,mPhoto,aboutme,skill,hobby,registerDate,status,count,address) values ( ?, ?,?, ?, ?, ?, ?,?, ?, ?, ?)";
 	private static final String UPDATE_MEMBER =
-		      "update Member set email=?, mPassword=?, mName=?, mPhoto=?,aboutme=?, skill=?, hobby=?, address=? where memberID= ?";
+		      "update Member set email=?, mPassword=?, mName=?,aboutme=?, skill=?, hobby=?, address=? where memberID= ?";
+	private static final String UPDATE_MEMBER_IMAGE =
+		      "update Member set  mPhoto=? where memberID= ?";
 	private static final String UPDATE_STATUS ="update Member set status=? where memberID= ?";
 	private static final String UPDATE_COUNT ="update Member set count=? where memberID= ?";
 	private static final String DELETE_MEMBER ="delete from Member where memberID= ?";
@@ -70,7 +72,39 @@ public class MemberDAO implements MemberDAO_interface {
 			}
 		}
 	}
+	@Override
+	public void updataimage(MemberVO memberVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ds.getConnection();
+			
+				pstmt = con.prepareStatement(UPDATE_MEMBER_IMAGE);
+				pstmt.setBlob(1, memberVO.getmPhoto());
+				pstmt.setInt(2, memberVO.getMemberID());
+				pstmt.executeUpdate();
+			
 
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
 	@Override
 	public void update(MemberVO memberVO, String update) {
 		Connection con = null;
@@ -286,5 +320,7 @@ public class MemberDAO implements MemberDAO_interface {
 		}
 		return list;
 	}
+
+	
 
 }
