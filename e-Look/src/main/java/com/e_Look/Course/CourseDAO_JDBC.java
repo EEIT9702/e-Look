@@ -35,10 +35,12 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 	private static final String SELECT_ALL_Course =
 			"select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore,proposalVideopathway from Course where memberID= ? and status= ?";
 	private static final String SELECT_STATUS_Course =
-			"select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore,proposalVideopathway from Course where status= ?";
-	
+			"select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore,proposalVideopathway from Course where status= ?";	
 	private static final String CHANGE_Course_Stage =
 			"update Course set status=? where courseID= ?";
+	
+	
+	
 	//以下為我要開課的功能
 	@Override
 	public void insert(CourseVO courseVO) {
@@ -247,7 +249,7 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 		return courseVO;
 	}
 
-	//會員後臺管理(選擇我的草稿、我開的課)、管理員後台審核
+	//會員後臺管理(選擇我的草稿、我開的課)、管理員後台待審核中的課程列表
 	public List<CourseVO> findBymemberID(Integer memberID,Integer status) {
 		List<CourseVO> CourseList = new LinkedList<CourseVO>();
 		Connection con = null;
@@ -308,10 +310,42 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 		return CourseList;
 	}
 
-
-
-
-
+	//管理員改變課程狀態(通過審核、下架等等....)
+	@Override
+	public void updateStatus(CourseVO courseVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try{
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(CHANGE_Course_Stage);
+			pstmt.setInt(1,courseVO.getStatus());
+			pstmt.setInt(2,courseVO.getCourseID());
+			pstmt.executeUpdate();
+			
+		}catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. "
+					+ e.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
 
 	
 	
@@ -320,14 +354,14 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 	public static void main(String[] args) throws FileNotFoundException {
 		CourseDAO_JDBC dao = new CourseDAO_JDBC();
 		//新增課程
-//		CourseVO CourseVO1 =new CourseVO();
-//		CourseVO1.setSoldPrice(0);
-//		CourseVO1.setCourseLength(0);
-//		CourseVO1.setTargetStudentNumber(0);
-//		CourseVO1.setStatus(0);
-//		CourseVO1.setMemberID(100001);
-//		CourseVO1.setAvgScore(0.0);
-//		dao.insert(CourseVO1);
+		CourseVO CourseVO1 =new CourseVO();
+		CourseVO1.setSoldPrice(0);
+		CourseVO1.setCourseLength(0);
+		CourseVO1.setTargetStudentNumber(0);
+		CourseVO1.setStatus(0);
+		CourseVO1.setMemberID(100001);
+		CourseVO1.setAvgScore(0.0);
+		dao.insert(CourseVO1);
 		
 		
 		//自動儲存草稿
@@ -358,28 +392,35 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 		
 		
 		//選擇草稿、選擇單一課程頁面
-		CourseVO CourseVO3 = dao.findByPrimaryKey(200003);
-		System.out.println(CourseVO3.getCourseID());
-		System.out.println(CourseVO3.getCourseName());
-		System.out.println(CourseVO3.getcPhoto());
-		System.out.println(CourseVO3.getPreTool());
-		System.out.println(CourseVO3.getBackground());
-		System.out.println(CourseVO3.getAbility());
-		System.out.println(CourseVO3.getTargetgroup());
-		System.out.println(CourseVO3.getSoldPrice());
-		System.out.println(CourseVO3.getCourseLength());
-		System.out.println(CourseVO3.getTargetStudentNumber());
-		System.out.println(CourseVO3.getFundStartDate());
-		System.out.println(CourseVO3.getFundEndDate());
-		System.out.println(CourseVO3.getCourseStartDate());
-		System.out.println(CourseVO3.getCourseVideopathway());
-		System.out.println(CourseVO3.getPaper());
-		System.out.println(CourseVO3.getStatus());
-		System.out.println(CourseVO3.getCourseContent());
-		System.out.println(CourseVO3.getMemberID());
-		System.out.println(CourseVO3.getAvgScore());
-		System.out.println(CourseVO3.getProposalVideopathway());
+//		CourseVO CourseVO3 = dao.findByPrimaryKey(200003);
+//		System.out.println(CourseVO3.getCourseID());
+//		System.out.println(CourseVO3.getCourseName());
+//		System.out.println(CourseVO3.getcPhoto());
+//		System.out.println(CourseVO3.getPreTool());
+//		System.out.println(CourseVO3.getBackground());
+//		System.out.println(CourseVO3.getAbility());
+//		System.out.println(CourseVO3.getTargetgroup());
+//		System.out.println(CourseVO3.getSoldPrice());
+//		System.out.println(CourseVO3.getCourseLength());
+//		System.out.println(CourseVO3.getTargetStudentNumber());
+//		System.out.println(CourseVO3.getFundStartDate());
+//		System.out.println(CourseVO3.getFundEndDate());
+//		System.out.println(CourseVO3.getCourseStartDate());
+//		System.out.println(CourseVO3.getCourseVideopathway());
+//		System.out.println(CourseVO3.getPaper());
+//		System.out.println(CourseVO3.getStatus());
+//		System.out.println(CourseVO3.getCourseContent());
+//		System.out.println(CourseVO3.getMemberID());
+//		System.out.println(CourseVO3.getAvgScore());
+//		System.out.println(CourseVO3.getProposalVideopathway());
 
+		
+		//管理員改變課程狀態
+//		CourseVO CourseVO4 = new CourseVO();
+//		CourseVO4.setStatus(5);
+//		CourseVO4.setCourseID(200003);
+//		dao.updateStatus(CourseVO4);
+		
 		
 		/*請勿刪除    這是測試將資料庫圖片寫出來的程式，後面可能會用到先寫起放 以備不時之需*/
 //		String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
