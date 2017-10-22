@@ -13,6 +13,23 @@
 <body>
 <select name="city" id="select1"></select>
 <select name="district" id="select2"></select>
+
+
+
+
+
+
+							<div class=" col-md-2">
+								<div class="form-group ">
+									<label>地址</label> <select class="form-control"style="text-align: center;"name="city" id="select1"></select>
+								</div>
+							</div>
+							<div class="col-md-2">
+							<div class="form-group ">
+								    <label style="margin:10px "></label><select  class="form-control"style="text-align: center;"name="district" id="select2"></select>
+							</div>
+							</div>
+
 </body>
 <script type="text/javascript">
 $(function(){

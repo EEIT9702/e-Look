@@ -163,13 +163,13 @@ public class RegisterController extends HttpServlet {
 								memberVO.setmPassword(newpassword);
 								service.updateMember(memberVO);
 							} else {
-								session.setAttribute("registerOK", "會員沒驗證無法寄送新密碼或未會員註冊");
+								session.setAttribute("registerOK", "1.您尚未驗證無法寄送新密碼<br>2.您目前尚未註冊<br>3.帳號身份錯誤");
 							}
 						}
 					}
 				}
 				if (session.getAttribute("registerOK") != null) {
-					response.sendRedirect(request.getContextPath() + "/login.jsp");
+					response.sendRedirect(request.getHeader("referer"));
 					return;
 				} else {
 					service.updateMemberStatus(memberVO.getMemberID());

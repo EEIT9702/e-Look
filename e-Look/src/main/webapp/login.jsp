@@ -366,13 +366,14 @@ margin:2px auto;
 	<!--以下是註冊成功要收信的彈跳式窗-->
 	<c:if test="${! empty registerOK}">
 	<div class="modal fade" id="registerOK" tabindex="-1" role="dialog"aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog"  style="width:300px">
+		<div class="modal-dialog"  style="width:350px">
 			<div class="modal-content text-center" >
 <!-- 			右上角X -->
 				<div class="modal-header">
 					<button type="button" class="close pull-right" data-dismiss="modal"
 						aria-hidden="true" style="font-size: 35px;">&times;</button>
 				</div>
+					<h3>您可能未符合下列條件之一</h3>
 					<h3>${registerOK}</h3>
 				<div  id="butfooter">
 					<button type="button" class="btn btn-primary" onclick="refresh()" data-dismiss="modal">OK</button>

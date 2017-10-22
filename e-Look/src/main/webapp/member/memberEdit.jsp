@@ -133,9 +133,12 @@ a.clickable:hover {
 </head>
 
 <body>
+<c:if test="${empty LoginOK}">
+	<c:redirect url="/HOME.jsp"/>
+	</c:if>
 	<jsp:include page="/login.jsp" />
 	<div style="margin-top: 10px" class="container">
-		<form action="" method="POST" name="formData" target="upload_iframe"
+		<form action="" method="POST" name="formData" id="formData"
 			enctype="multipart/form-data">
 			<input type="hidden" name="memberID" value="${LoginOK.memberID}">
 			<div class="row">
@@ -155,7 +158,7 @@ a.clickable:hover {
 										<span class="glyphicon glyphicon-folder-open"></span> <span
 											class="image-preview-input-title">編輯圖片</span> <input
 											type="file" accept="image/png, image/jpeg, image/gif"
-											id="wizard-picture" name="input-file-preview">
+											id="wizard-picture" name="memberphoto">
 										<!-- rename it -->
 									</div>
 								</div>
@@ -229,7 +232,7 @@ a.clickable:hover {
 							<div class=" col-md-4 " style="margin: 10px 0;">
 								<div class="form-group">
 									<label>名字</label> <input type="text" class="form-control" 
-										id="keyupname" value="${LoginOK.mName}">
+										id="keyupname" name="mName" value="${LoginOK.mName}">
 								</div>
 							</div>
 							<div class="col-md-8"></div>
@@ -238,7 +241,7 @@ a.clickable:hover {
 							<div class=" col-md-8 " style="margin: 10px 0;">
 								<div class="form-group">
 									<label>帳號(信箱)</label> <input type="text" class="form-control"
-										id="" value="${LoginOK.email}"<c:if test="${LoginOK.mPassword==''}">readonly</c:if>  >
+										id="" name="email" value="${LoginOK.email}"<c:if test="${LoginOK.mPassword==''}">readonly</c:if>  >
 								</div>
 							</div>
 							<div class="col-md-4"></div>
@@ -247,123 +250,173 @@ a.clickable:hover {
 							<div class=" col-md-4 " style="margin: 10px 0;">
 								<div class="form-group input-group">
 									<label>密碼</label> <input type="password" class="form-control"
-										id="" readonly value="${LoginOK.mPassword}">
-										<span class="input-group-btn" style="padding-top: 27px">
-            <button class="btn  btn-info reveal" type="button"  <c:if test="${LoginOK.mPassword==''}">disabled="disabled"</c:if>><i class="glyphicon glyphicon-pencil"></i></button>
+										id="mPassword" name="mPassword" readonly value="${LoginOK.mPassword}">
+										<span  class="input-group-btn" style="padding-top: 27px">
+            <button data-toggle="modal" data-target="#ChangePassword" class="btn  btn-info reveal" type="button"  <c:if test="${LoginOK.mPassword==''}">disabled="disabled"</c:if>><i class="glyphicon glyphicon-pencil"></i></button>
          </span>      
 								</div>
 							</div>
 							<div class="col-md-8"></div>
 						</div>
 						<div class=" col-md-12 ">
-							<div class=" col-md-2">
-								<div class="form-group ">
-									<label>地址</label> <select class="form-control"style="text-align: center;"name="city" id="select1"></select>
-								</div>
-							</div>
-							<div class="col-md-2">
-							<div class="form-group ">
-								    <label style="margin:10px "></label><select class="form-control"style="text-align: center;"name="district" id="select2"></select>
-							</div>
-							</div>
 							<div class="col-md-8">
 							<div class="form-group ">
-								    <label style="margin:10px "></label><input type="text" class="form-control"	id="" value="">
+								 <label>地址</label>    <label style="margin:10px "></label><input type="text" name="address" class="form-control"	id="" value="${LoginOK.address}">
 							</div>
 							</div>
 						</div>
 					</div>
 
-					<div class=" col-ms-12 " style="margin: 50px 0 25px 0;">
+					<div class=" col-ms-12 " style="margin: 40px 0 10px 0;">
 						<div class="panel panel-success">
 							<div class="panel-heading">關於我</div>
 							<div class=" form-group  form-group-textarea ">
-								<textarea id="customStyle" name="targetgroup"
+								<textarea id="customStyle" name="aboutme" form="formData"
 									class="form-control" data-toggle="floatLabel"
 									data-value="no-js" style="font-size: 18px">${LoginOK.aboutme}</textarea>
 							</div>
 						</div>
 					</div>
-					<div class=" col-ms-12 " style="margin: 45px 0;">
+					<div class=" col-ms-12 " style="margin: 40px 0;">
 						<div class="panel panel-info">
 							<div class="panel-heading">專長</div>
 							<div class=" form-group  form-group-textarea ">
-								<textarea id="customStyle1" name="targetgroup"
+								<textarea id="customStyle1" name="skill" form="formData"
 									class="form-control" data-toggle="floatLabel"
 									data-value="no-js" style="font-size: 18px">${LoginOK.skill}</textarea>
 							</div>
 						</div>
 					</div>
 
-					<div class=" col-ms-12 " style="margin: 45px 0;">
+					<div class=" col-ms-12 " style="margin: 40px 0;">
 						<div class="panel panel-warning">
 							<div class="panel-heading">興趣</div>
 							<div class=" form-group  form-group-textarea ">
-								<textarea id="customStyle2" name="targetgroup"
+								<textarea id="customStyle2" name="hobby" form="formData"
 									class="form-control" data-toggle="floatLabel"
 									data-value="no-js" style="font-size: 18px">${LoginOK.hobby}</textarea>
 							</div>
 						</div>
 					</div>
 							<div class="col-md-12 ">
-								<button type="button" class="btn btn-primary btn-product" style="margin: 0 auto;">確認</button>
-								<button type="button" class="btn btn-primary btn-danger ">取消</button> 
+								<button type="button" class="btn btn-primary btn-product" style="margin: 0 auto;" id="send">確認</button>
+								<a href="<%=request.getContextPath()%>/member/member.jsp"><button type="button" class="btn btn-primary btn-danger ">返回</button></a>
 							</div>
 
 				</div>
 			</div>
+			<!--密碼彈跳式窗 -->
 		</form>
+			<div class="modal fade" id="ChangePassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:100px ">
+	<div class="modal-dialog" style="width: 300px;">
+		<div class="modal-content">
+
+			<div class="modal-header">
+				<button type="button" class="close pull-right" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4 class="modal-title" id="">修改密碼</h4>
+			</div> <!-- /.modal-header -->
+
+			<div class="modal-body">
+				
+					<div class="form-group " >
+					 <label id="oldpwd">舊密碼</label>
+						<div class="input-group">
+							<input type="password" maxlength="10" class="form-control" id="oldpwd1" >
+							<label style=""  class="input-group-addon glyphicon glyphicon-question-sign"></label>
+						</div>
+					</div>
+					<div class="form-group " >
+					 <label id="newpwd">新密碼</label>
+						<div class="input-group">
+							<input type="password" maxlength="10" class="form-control" id="newpwd1" >
+							<label style=""  class="input-group-addon glyphicon  glyphicon-question-sign"></label>
+						</div>
+					</div>
+					<div class="form-group " >
+					 <label id="angpwd">密碼確認</label>
+						<div class="input-group">
+							<input type="password"  maxlength="10"class="form-control" id="angpwd1" >
+							<label style=""  class="input-group-addon glyphicon  glyphicon-question-sign"></label>
+						</div>
+					</div>
+			<button  class=" btn btn-primary  btn-lg btn-block" disabled="disabled" id="ok">確認</button>
+
+			</div> <!-- /.modal-body -->
+
+
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+	
+</div>
+	<!-- 密碼彈跳式窗 -->
+	
+		<!-- 彈跳式窗 -->
+<div class="modal fade" id="sendOK" tabindex="-1" role="dialog"aria-labelledby="myModalLabel" aria-hidden="true" >
+		<div class="modal-dialog"  style="width:300px">
+			<div class="modal-content text-center" >
+<!-- 			右上角X -->
+				<div class="modal-header">
+					<button type="button" class="close pull-right" data-dismiss="modal"
+						aria-hidden="true" style="font-size: 35px;">&times;</button>
+				</div>
+				
+					<h3></h3>
+				<div  id="butfooter">
+				</div>
+				</div>
+				</div>
+				</div>	
 	</div>
 	<jsp:include page="/footer.jsp" />
 	<script >
 $(function() {
-init();
-var data2;
-function init() {
-	$.getJSON("json/AllData.json", function(data) {
-		data2 = data;
-		var fragment = $(document.createDocumentFragment());
-		var cell2 = $('<option></option>').text("請選擇").val("")
-		fragment.append(cell2);
-		$.each(data, function(key, val) {
-			var cell1 = $('<option></option>').text(val.CityName).val(val.CityName)
-			fragment.append(cell1);
-		})
-		$('#select1').html(fragment);
-		$.each(data, function(key, val1) {
-			if ("臺北市" === val1.CityName) {
-				var fragment = $(document.createDocumentFragment());
-				var cell2 = $('<option></option>').text("請選擇").val("")
-				fragment.append(cell2);
-				$('#select2').html(fragment);
-			}
+//init();
+// var data2;
+// function init() {
+// 	$.getJSON("json/AllData.json", function(data) {
+// 		data2 = data;
+// 		var fragment = $(document.createDocumentFragment());
+// 		var cell2 = $('<option></option>').text("請選擇").val("")
+// 		fragment.append(cell2);
+// 		$.each(data, function(key, val) {
+// 			var cell1 = $('<option></option>').text(val.CityName).val(val.CityName)
+// 			fragment.append(cell1);
+// 		})
+// 		$('#select1').html(fragment);
+// 		$.each(data, function(key, val1) {
+// 			if ("臺北市" === val1.CityName) {
+// 				var fragment = $(document.createDocumentFragment());
+// 				var cell2 = $('<option></option>').text("請選擇").val("")
+// 				fragment.append(cell2);
+// 				$('#select2').html(fragment);
+// 			}
 
-		})
-	})
+// 		})
+// 	})
 
-}
-$("#select1").change(
-		function() {
-			var opt = $('#select1>:selected');
-			var val = opt.val();
-			$.each(data2,
-					function(key, val1) {
-						if (val === val1.CityName) {
-							var fragment = $(document.createDocumentFragment());
-							var cell2 = $('<option></option>').text("請選擇").val("");
-							fragment.append(cell2);
-							$.each(val1.AreaList, function(key, val2) {
-								var cell1 = $('<option></option>').text(val2.AreaName).val(val2.AreaName)
-								fragment.append(cell1);
-							})
-							$('#select2').html(fragment);
-						}else if(val === ""){
+// }
+// $("#select1").change(
+// 		function() {
+// 			var opt = $('#select1>:selected');
+// 			var val = opt.val();
+// 			$.each(data2,
+// 					function(key, val1) {
+// 						if (val === val1.CityName) {
+// 							var fragment = $(document.createDocumentFragment());
+// 							var cell2 = $('<option></option>').text("請選擇").val("");
+// 							fragment.append(cell2);
+// 							$.each(val1.AreaList, function(key, val2) {
+// 								var cell1 = $('<option></option>').text(val2.AreaName).val(val2.AreaName)
+// 								fragment.append(cell1);
+// 							})
+// 							$('#select2').html(fragment);
+// 						}else if(val === ""){
 							
-							init();
-						}
+// 							init();
+// 						}
 
-					})
-	})
+// 					})
+// 	})
 })
 
 	$('textarea').each(function() {
@@ -383,7 +436,7 @@ $("#select1").change(
 		$("#keyuphobby").text(value);
 	});
 	
-	$('input').keyup(function() {
+	$('#keyupname').keyup(function() {
 		var value = $(this).val();
 		$("#readname").text(value);
 	});
@@ -403,6 +456,134 @@ $("#select1").change(
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
+	$("#send").click(function(){
+		var formData = new FormData($('form')[3]);
+		//console.log(formData);
+		$.ajax({
+			type : 'POST',
+			url : 'MemberDataContrlloer',
+			data :formData,
+			processData : false,
+			contentType : false,
+			success: function(){
+				
+				$('#sendOK').modal()
+				$('#sendOK h3').text("更新成功")
+				setTimeout(function(){
+			        $("#sendOK").modal('hide');
+			        }, 1000);
+            }
+		})
+	})
+	
+	var chkoldpwd;
+	var chknewpwd;
+	var chkangpwd;
+	$("input[type=password]").keyup(function(){
+		
+		
+		
+	})
+	$("#oldpwd1").keyup(function(){
+		var mPassword=$("#mPassword").val();
+		var oldpwd=$("#oldpwd1").val();
+		if(mPassword===oldpwd){
+			chkoldpwd=true;
+			$("#oldpwd1+label").removeClass().addClass("input-group-addon glyphicon glyphicon-ok").css("color","green");
+				
+		}else{
+			chkoldpwd=false;
+			$("#oldpwd1+label").removeClass().addClass(" input-group-addon glyphicon glyphicon-remove").css("color","red");
+			$("#ok").prop("disabled",true)
+		}
+		if(chkoldpwd&&chknewpwd&&chkangpwd){
+			$("#ok").prop("disabled",false)
+		}else{
+			$("#ok").prop("disabled",true)
+		}
+		
+	})
+	
+	$("#newpwd1").keyup(function(){
+		var angpwd=$("#angpwd1").val();
+		
+		var newpwd=$("#newpwd1").val();
+		if(angpwd===newpwd){
+			chkangpwd=true;	
+			$("#angpwd1+label").removeClass().addClass("input-group-addon glyphicon glyphicon-ok").css("color","green");
+		}else{
+			chkangpwd=false;
+			$("#angpwd1+label").removeClass().addClass(" input-group-addon glyphicon glyphicon-remove").css("color","red");
+			
+		}
+		
+		if(chkoldpwd&&chknewpwd&&chkangpwd){
+			$("#ok").prop("disabled",false)
+		}else{
+			$("#ok").prop("disabled",true)
+		}
+		var re = new RegExp("^.*(?=.{8,10})(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).*$");
+
+		var newpwd=$("#newpwd1").val();
+		
+		if(re.test(newpwd)){
+			chknewpwd=true;	
+			$("#newpwd1+label").removeClass().addClass("input-group-addon glyphicon glyphicon-ok").css("color","green");
+			
+		}else{
+			chknewpwd=false;
+			$("#newpwd1+label").removeClass().addClass(" input-group-addon glyphicon glyphicon-remove").css("color","red");
+			
+		}
+		
+		if(chkoldpwd&&chknewpwd&&chkangpwd){
+			$("#ok").prop("disabled",false)
+		}else{
+			$("#ok").prop("disabled",true)
+		}
+		
+	})
+	
+	$("#angpwd1").keyup(function(){
+		var angpwd=$("#angpwd1").val();
+		
+		var newpwd=$("#newpwd1").val();
+		if(angpwd===newpwd){
+			chkangpwd=true;	
+			$("#angpwd1+label").removeClass().addClass("input-group-addon glyphicon glyphicon-ok").css("color","green");
+		}else{
+			chkangpwd=false;
+			$("#angpwd1+label").removeClass().addClass(" input-group-addon glyphicon glyphicon-remove").css("color","red");
+			
+		}
+		if(chkoldpwd&&chknewpwd&&chkangpwd){
+			$("#ok").prop("disabled",false)
+		}else{
+			$("#ok").prop("disabled",true)
+		}
+	})
+	$("#ok").click(function(){
+		var newpwd=$("#newpwd1").val();
+		$("#mPassword").val(newpwd);
+		 $("#ChangePassword").modal('hide');
+		 $.post('MemberDataContrlloer',	{'change':'pwd','mPassword':newpwd},function(){
+					$('#sendOK').modal()
+					$('#sendOK h3').text("密碼更新成功")
+					setTimeout(function(){
+				        $("#sendOK").modal('hide');
+				        }, 1000);
+	            }
+			)
+		
+		$('#ChangePassword').on('hidden.bs.modal', function(){
+			$("#oldpwd1+label").removeClass().addClass("input-group-addon glyphicon  glyphicon-question-sign").css("color","black");
+			$("#newpwd1+label").removeClass().addClass("input-group-addon glyphicon  glyphicon-question-sign").css("color","black");
+			$("#angpwd1+label").removeClass().addClass("input-group-addon glyphicon  glyphicon-question-sign").css("color","black");
+			$("#oldpwd1").val("")
+			$("#newpwd1").val("")
+			$("#angpwd1").val("")
+			})
+	})
 </script>
 </body>
 

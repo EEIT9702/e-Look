@@ -7,5 +7,6 @@ public interface CourseDAO_interface {
 	public void update(CourseVO courseVO);
 	public void delete(Integer courseID);
 	public CourseVO findByPrimaryKey(Integer courseID);
-	public List<CourseVO> getAll();
+	public List<CourseVO> findBymemberID(Integer memberID,Integer status);
+	
 }

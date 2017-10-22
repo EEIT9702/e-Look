@@ -30,6 +30,8 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 		      "update Member set status=? where memberID= ?";
 	private static final String UPDATE_COUNT =
 		      "update Member set count=? where memberID= ?";
+	private static final String UPDATE_MEMBER_IMAGE =
+		      "update Member set  mPhoto=?, where memberID= ?";
 	private static final String DELETE_MEMBER =
 		      "delete from Member where memberID= ?";
 	private static final String SELECT_ONE_MEMBER =
@@ -81,7 +83,43 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 		}
 		
 	}
+	@Override
+	public void updataimage(MemberVO memberVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			
+				pstmt = con.prepareStatement(UPDATE_MEMBER_IMAGE);
+				pstmt.setBlob(1, memberVO.getmPhoto());
+				pstmt.setInt(2, memberVO.getMemberID());
+				pstmt.executeUpdate();
+			
 
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
 	@Override
 	public void update(MemberVO memberVO,String update) {
 		Connection con = null;
@@ -393,6 +431,8 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 //			System.out.println(memberVO.getAddress());
 //		}
 	}
+
+
 
 
 }
