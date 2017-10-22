@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.e_Look.eLookEvent.eLookEventVO" table="eLookEvent" >
+        
+        <id name="eventID" column="eventID">
+            <generator class="identity"/>
+        </id>
+        
+        <property name="eventName" column="eventName" />
+        <property name="ePhoto" column="ePhoto" />
+        <property name="eStartDate" column="eStartDate" />
+        <property name="eEndDate" column="eEndDate" />
+        <property name="discount" column="discount" />       
+    </class>
+</hibernate-mapping>
