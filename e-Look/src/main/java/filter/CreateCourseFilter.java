@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.e_Look.Course.CourseService;
 import com.e_Look.Course.CourseVO;
 import com.e_Look.member.model.MemberVO;
 
@@ -42,8 +43,9 @@ public class CreateCourseFilter implements Filter {
 					session.setAttribute("loginerr", "123");
 					response.sendRedirect(request.getHeader("referer"));
 				}else{
-					
-					
+					CourseService courseService = new CourseService();
+					Integer CourseID = courseService.CreateNewCourse();
+					request.setAttribute("CourseID", CourseID);
 					chain.doFilter(request, response);
 				}
 			}else { 
