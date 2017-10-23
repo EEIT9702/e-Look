@@ -1,5 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="java.util.*,java.text.*"%>
+	pageEncoding="UTF-8" import="java.util.*,java.text.*,com.e_Look.Course.*,com.e_Look.member.model.*,com.e_Look.memberBookmarks.model.*"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+		String courseID=request.getParameter("CourseID");
+	if(courseID!=null){
+		CourseDAO dao= new CourseDAO();
+		CourseVO courseVO= dao.findByPrimaryKey(Integer.valueOf(courseID));
+		MemberService service=new MemberService();
+		MemberVO memberVo=service.getMember(courseVO.getMemberID());
+		
+		MemberBookmarksService memberBookmarksService=new MemberBookmarksService();
+		List<MemberBookmarksVO> memberBookmarksVO=memberBookmarksService.findPrimaryMemberBookmarks(courseVO.getMemberID());
+		
+		pageContext.setAttribute("memberBookmarksVOList",memberBookmarksVO);
+	//	pageContext.setAttribute("list",list);
+		pageContext.setAttribute("courseVO",courseVO);
+		pageContext.setAttribute("memberVo",memberVo);
+		
+	}
+	%>
 <!DOCTYPE >
 <html>
 <head>
@@ -244,32 +263,37 @@ video::-webkit-media-controls-panel {
 		<div class="row">
 			<div class="col-md-12">
 
-				<div class="col-md-1 "></div>
-				<div class="col-md-1 col-xs-4">
+				<div class="col-md-1 " style="padding-top: 15px"></div>
+				<div class="col-md-1 col-xs-4" style="padding-top: 13px">
 					<img src="<%=request.getContextPath()%>/_Lyy/004-people.png"
 						class="img-responsive center-block ">
 					<h5 class="text-center">課程人數</h5>
 				</div>
-				<div class="col-md-1 col-xs-4">
+				<div class="col-md-1 col-xs-4" style="padding-top: 13px">
 					<img src="<%=request.getContextPath()%>/_Lyy/clock.png"
 						class="img-responsive center-block">
-					<h5 class="text-center">課程時間為min</h5>
+					<h5 class="text-center">課程時間為</h5>
 				</div>
-				<form method="post" action="">
-					<div class="col-md-1 col-xs-4">
-						<a href=”#”> <img
-							src="<%=request.getContextPath()%>/img/favorite.png"
-							class="img-responsive center-block">
-							<h5 class="text-center">加到最愛</h5>
-					<input type="hidden" value="${courseVO.courseID}" name="courseID_favorite">
-					</div>
-					</a>
-				</form>
+					<c:choose>
+					<c:when test="${courseVO.courseID==memberBookmsrksVO.courseID}">
+					<c:set var="favor" value="favoriteclick1" />
+					</c:when>
+					<c:otherwise>
+					<c:set var="favor" value="favoriteclick2" />
+					</c:otherwise>
+					</c:choose>
+				<div class="col-md-1 col-xs-4" style="padding-top: 13px">
+					<img src="<%=request.getContextPath()%>/img/favorite.png"
+						class="img-responsive center-block"> 
+						<a href="#"	id="${favor}"><h5 class="text-center">加到最愛</h5></a>
+				</div>
+				<input type="hidden" value="${courseVO.courseID}" id="mbcourseID" >
+				<input type="hidden" value="${LoginOK.memberID}" id="mbmemberID" > 
 				<div class="col-md-1 col-xs-4 ">
 					<img src="<%=request.getContextPath()%>/_Lyy/share.png"
 						class="img-responsive center-block">
 					<div class="dropdown text-center" style="margin: 6px">
-						<a data-toggle="dropdown">分享連結 <span class="caret"></a></span>
+						<a data-toggle="dropdown">分享連結 <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="#">FaceBook</a></li>
 							<li><a href="#">Google</a></li>
@@ -547,8 +571,6 @@ video::-webkit-media-controls-panel {
 												</div>
 											</div>
 										</div>
-
-
 										<!-- 			<!--回應輸入表格-->
 										<div class="col-md-12">
 											<div class="panel-group">
@@ -629,6 +651,35 @@ video::-webkit-media-controls-panel {
 				//	       $.get("Buycourse",{"name":"score","score":this.id.substr(6)});
 			})
 		})
+	</script>
+	<script>
+		//判斷是否加入過最愛
+// 		var xmlHttp=new XMLHttpRequest();
+// 			if(xmlHttp!=null){
+// 				var url = "/eLook/com/e_Look/memberBookmarks/control/MemberBookmarksInsertController";
+// 				xml.open("POST",url);
+// 				xmlHttp.addEvertListener("readystatechange");
+// 				xmlHttp.send("courseID=200001&memberID=100002")
+// 			}
+		
+		
+		
+		$('#favoriteclick1').click(function() {
+			alert('已經加入過囉');
+		})
+		$('#favoriteclick2').click(function() {
+			alert('已經加到你的最愛囉');
+			//$("#mbcourseID").val();
+			//$("#mbmemberID").val();
+			console.log($("#mbcourseID").val())
+			console.log($("#mbmemberID").val())
+// 			$.ajax({
+				
+				
+// 			})
+		})
+		
+		
 	</script>
 </body>
 </html>

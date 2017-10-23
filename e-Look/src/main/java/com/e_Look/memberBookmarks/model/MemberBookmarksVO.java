@@ -1,4 +1,4 @@
-package com.e_Look.memberBookmarks;
+package com.e_Look.memberBookmarks.model;
 
 import java.io.Serializable;
 
