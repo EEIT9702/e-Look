@@ -359,15 +359,15 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 	public static void main(String[] args) throws FileNotFoundException {
 		MemberDAO_JDBC dao = new MemberDAO_JDBC();
 //		//新增會員
-//		MemberVO memberVO1= new MemberVO();
-//		memberVO1.setmName("李XX");
-//		memberVO1.setEmail("abc8512125230@yahyy.com.tw");
-//		memberVO1.setmPassword("XXXX");
-//		memberVO1.setRegisterDate(new Date(System.currentTimeMillis()));
-//		memberVO1.setStatus((byte) 0);
-//		memberVO1.setCount(1);
+		MemberVO memberVO1= new MemberVO();
+		memberVO1.setmName("李XX");
+		memberVO1.setEmail("abc8512125230@yahyy.com.tw");
+		memberVO1.setmPassword("XXXX");
+		memberVO1.setRegisterDate(new Date(System.currentTimeMillis()));
+		memberVO1.setStatus((byte) 0);
+		memberVO1.setCount(1);
 		/*331行 是讀取硬碟路徑寫入資料庫方法*/
-//		memberVO1.setmPhoto(new FileInputStream(new File("src/main/webapp/img/imember_image.png")));
+		memberVO1.setmPhoto(new FileInputStream(new File("src/main/webapp/img/imember_image.png")));
 		/*333行~341行 是讀取網路圖片寫入資料庫方法*/
 //		try {
 //			HttpURLConnection con = (HttpURLConnection)(new URL("http://graph.facebook.com/106384896774920/picture?type=large").openConnection());
@@ -384,7 +384,7 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 //		} catch (IOException e) {
 //			e.printStackTrace();
 //		}
-//		dao.insert(memberVO1);
+		dao.insert(memberVO1);
 //		//修改會員資料
 //		MemberVO memberVO2= new MemberVO();
 //		memberVO2.setMemberID(100001);
