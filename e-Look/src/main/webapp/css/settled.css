@@ -1,6 +1,6 @@
 
 .wizard .nav-tabs > li {
-    width: 25%;
+    width: 33.33%;
 }
 .wizard .nav-tabs { 
          position: relative; 
@@ -21,7 +21,7 @@
     height: 2px;
     background: #e0e0e0;
     position: absolute;
-    width: 80%;
+    width: 70%;
     margin: 0 auto;
     left: 0;
     right: 0;
@@ -91,7 +91,7 @@ span.round-tab:hover {
 }
 
 .wizard .nav-tabs > li a {
-    width: 70px;
+    width: 85px;
     height: 70px;
     margin: 20px auto;
     border-radius: 100%;
