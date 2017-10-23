@@ -6,7 +6,7 @@
     <%	
     
     
-    ShoppingCartDAO scdao=new ShoppingCartDAO(); 
+    
 
 	
 	
@@ -179,7 +179,7 @@ font-size: 18px;
 												style="border-bottom: 1px solid #aaaaaa;"><h3></h3></li>
 											<!-- 				課程1 -->
 										
-											<c:forEach var="courseVO" items="shoppingCartList">
+<%-- 											<c:forEach var="courseVO" items="shoppingCartList"> --%>
 											<div class="cartrows">
 												<div class="cartrow">
 													<div style="text-align: right;">
@@ -187,14 +187,14 @@ font-size: 18px;
 														<button class="close" type="button" aria-hidden="true">&times;</button>
 													</div>
 													<img
-														src="${courseVO.cPhoto }">
-													<span class="courseTitle"><c:out value="${courseVO.cName }"/><br>
+														src="<%=request.getContextPath()%>/HeaderCssJs/002-shopping-cart.png">
+													<span class="courseTitle"><c:out value="${courseVO.cName}"/><br>
 														<span class="courseSubtitle">科技,語言,IT</span> <span
 														class="courseDelete"></span><br> <span
 														class="courseDelete">$800</span>
 													</span>
 												</div>
-												</c:forEach>
+<%-- 												</c:forEach> --%>
 												<!-- 				課程2 -->
 												<div class="cartrow">
 													<div style="text-align: right;">
