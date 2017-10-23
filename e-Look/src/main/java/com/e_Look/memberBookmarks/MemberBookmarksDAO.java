@@ -12,6 +12,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.e_Look.Course.CourseVO;
+import com.e_Look.member.model.MemberVO;
+
 public class MemberBookmarksDAO implements MemberBookmarksDAO_interface {
 	private static DataSource ds = null;
 	static {
@@ -37,13 +40,15 @@ public class MemberBookmarksDAO implements MemberBookmarksDAO_interface {
 	
 	
 	@Override
-	public void insert(MemberBookmarksVO memberBookmarksVO) {
+	public void insert(MemberBookmarksVO MemberBookmarksVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_MEMBERBOOKMARKS);
-			pstmt.setInt(1, memberBookmarksVO.getCourseID());
+			pstmt.setInt(1,MemberBookmarksVO.getMemberID());
+			pstmt.setInt(2,MemberBookmarksVO.getCourseID());
+			
 			pstmt.executeUpdate();
 
 			// Handle any SQL errors
@@ -70,15 +75,16 @@ public class MemberBookmarksDAO implements MemberBookmarksDAO_interface {
 	}
 
 	@Override
-	public void update(MemberBookmarksVO memberBookmarksVO) {
+	public void update(MemberBookmarksVO MemberBookmarksVO) {
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			//"UPDATE MemberBookmarks SET courseID=? WHERE memberID=?";
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_MEMBERBOOKMARKS);
-			pstmt.setInt(1, memberBookmarksVO.getCourseID());
-			pstmt.setInt(2, memberBookmarksVO.getMemberID());
+			pstmt.setInt(2, MemberBookmarksVO.getMemberID());
+			pstmt.setInt(1,MemberBookmarksVO.getCourseID());
 			pstmt.executeUpdate();
 
 			// Handle any SQL errors
