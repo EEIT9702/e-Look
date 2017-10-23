@@ -1,24 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="java.util.*,java.text.*,com.e_Look.Course.*,com.e_Look.member.model.*,com.e_Look.memberBookmarks.model.*"%>
+	pageEncoding="UTF-8"
+	import="java.util.*,java.text.*,com.e_Look.Course.*,com.e_Look.member.model.*,com.e_Look.memberBookmarks.model.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
-		String courseID=request.getParameter("CourseID");
-	if(courseID!=null){
-		CourseDAO dao= new CourseDAO();
-		CourseVO courseVO= dao.findByPrimaryKey(Integer.valueOf(courseID));
-		MemberService service=new MemberService();
-		MemberVO memberVo=service.getMember(courseVO.getMemberID());
-		
-		MemberBookmarksService memberBookmarksService=new MemberBookmarksService();
-		List<MemberBookmarksVO> memberBookmarksVO=memberBookmarksService.findPrimaryMemberBookmarks(courseVO.getMemberID());
-		
-		pageContext.setAttribute("memberBookmarksVOList",memberBookmarksVO);
-	//	pageContext.setAttribute("list",list);
-		pageContext.setAttribute("courseVO",courseVO);
-		pageContext.setAttribute("memberVo",memberVo);
-		
+	String courseID = request.getParameter("CourseID");
+	if (courseID != null) {
+		CourseDAO dao = new CourseDAO();
+		CourseVO courseVO = dao.findByPrimaryKey(Integer.valueOf(courseID));
+		MemberService service = new MemberService();
+		MemberVO memberVo = service.getMember(courseVO.getMemberID());
+
+		MemberBookmarksService memberBookmarksService = new MemberBookmarksService();
+		List<MemberBookmarksVO> memberBookmarksVO = memberBookmarksService.findPrimaryMemberBookmarks(courseVO.getMemberID());
+
+		pageContext.setAttribute("memberBookmarksVOList", memberBookmarksVO);
+		pageContext.setAttribute("courseVO", courseVO);
+		pageContext.setAttribute("memberVo", memberVo);
+
 	}
-	%>
+%>
 <!DOCTYPE >
 <html>
 <head>
@@ -274,21 +274,23 @@ video::-webkit-media-controls-panel {
 						class="img-responsive center-block">
 					<h5 class="text-center">課程時間為</h5>
 				</div>
-					<c:choose>
-					<c:when test="${courseVO.courseID==memberBookmsrksVO.courseID}">
-					<c:set var="favor" value="favoriteclick1" />
-					</c:when>
-					<c:otherwise>
-					<c:set var="favor" value="favoriteclick2" />
-					</c:otherwise>
+				<c:forEach  items="${memberBookmarksVOList}" var="memberBookmsrks" >
+					<c:choose>		
+						<c:when test="${courseVO.courseID==memberBookmsrks.courseID}">
+							<c:set var="favor" value="favoriteclick1" />
+						</c:when>					
+						<c:otherwise>
+							<c:set var="favor" value="favoriteclick2" />
+						</c:otherwise>
 					</c:choose>
+				</c:forEach>
 				<div class="col-md-1 col-xs-4" style="padding-top: 13px">
 					<img src="<%=request.getContextPath()%>/img/favorite.png"
-						class="img-responsive center-block"> 
-						<a href="#"	id="${favor}"><h5 class="text-center">加到最愛</h5></a>
+						class="img-responsive center-block"> <a href="#"
+						id="${favor}"><h5 class="text-center">加到最愛</h5></a>
 				</div>
-				<input type="hidden" value="${courseVO.courseID}" id="mbcourseID" >
-				<input type="hidden" value="${LoginOK.memberID}" id="mbmemberID" > 
+				<input type="hidden" value="${courseVO.courseID}" id="mbcourseID">
+				<input type="hidden" value="${LoginOK.memberID}" id="mbmemberID">
 				<div class="col-md-1 col-xs-4 ">
 					<img src="<%=request.getContextPath()%>/_Lyy/share.png"
 						class="img-responsive center-block">
@@ -653,33 +655,22 @@ video::-webkit-media-controls-panel {
 		})
 	</script>
 	<script>
-		//判斷是否加入過最愛
-// 		var xmlHttp=new XMLHttpRequest();
-// 			if(xmlHttp!=null){
-// 				var url = "/eLook/com/e_Look/memberBookmarks/control/MemberBookmarksInsertController";
-// 				xml.open("POST",url);
-// 				xmlHttp.addEvertListener("readystatechange");
-// 				xmlHttp.send("courseID=200001&memberID=100002")
-// 			}
-		
-		
-		
+		//判斷是否加入過最愛		
+
 		$('#favoriteclick1').click(function() {
 			alert('已經加入過囉');
 		})
 		$('#favoriteclick2').click(function() {
-			alert('已經加到你的最愛囉');
-			//$("#mbcourseID").val();
-			//$("#mbmemberID").val();
+
 			console.log($("#mbcourseID").val())
 			console.log($("#mbmemberID").val())
-// 			$.ajax({
-				
-				
-// 			})
+			$.post('MemberBookmarksInsertController', {
+				'courseID' : $("#mbcourseID").val(),
+				'memberID' : $("#mbmemberID").val()
+			}, function() {
+				alert('已經加到你的最愛囉');
+			})
 		})
-		
-		
 	</script>
 </body>
 </html>
