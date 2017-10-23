@@ -373,7 +373,7 @@ margin:2px auto;
 					<button type="button" class="close pull-right" data-dismiss="modal"
 						aria-hidden="true" style="font-size: 35px;">&times;</button>
 				</div>
-					<h3>您可能未符合下列條件之一</h3>
+				
 					<h3>${registerOK}</h3>
 				<div  id="butfooter">
 					<button type="button" class="btn btn-primary" onclick="refresh()" data-dismiss="modal">OK</button>

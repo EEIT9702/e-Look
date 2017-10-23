@@ -9,4 +9,5 @@ public interface CourseDAO_interface {
 	public CourseVO findByPrimaryKey(Integer courseID);
 	public List<CourseVO> findBymemberID(Integer memberID,Integer status);
 	public void updateStatus(CourseVO courseVO);
+	public List<CourseVO> getAllonlineCourse();
 }

@@ -25,6 +25,7 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 	String passwd = "P@ssw0rd";
 	//第二組密碼
 //	String passwd = "123456";
+
 	private static final String INSERT_Course = 
 			"insert into Course (courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore,proposalVideopathway) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String UPDATE_Course = 
@@ -361,13 +362,18 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 		
 	}
 
-	
+	@Override
+	public List<CourseVO> getAllonlineCourse() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	
 	public static void main(String[] args) throws FileNotFoundException {
 		CourseDAO_JDBC dao = new CourseDAO_JDBC();
 		//新增課程
+
 //		CourseVO CourseVO1 =new CourseVO();
 //		CourseVO1.setSoldPrice(0);
 //		CourseVO1.setCourseLength(0);
@@ -377,28 +383,29 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 //		CourseVO1.setAvgScore(0.0);
 //		Integer CourseID= dao.insert(CourseVO1);
 //		System.out.println(CourseID);
+
 		
 		
 		//自動儲存草稿
-//		CourseVO CourseVO2 = new CourseVO();
-//		CourseVO2.setCourseName("AE的基本功能介紹");//課程名稱
-//		CourseVO2.setcPhoto(new FileInputStream(new File("src/main/webapp/img/cPhoto.jpg")));
-//		CourseVO2.setPreTool("需要安裝Adobe CC 2017的版本");
-//		CourseVO2.setBackground("無限制");
-//		CourseVO2.setAbility("需要基本的美術觀念");
-//		CourseVO2.setTargetgroup("影像後製特效師、剪接師");
-//		CourseVO2.setSoldPrice(1500);
-//		CourseVO2.setCourseLength(15);
-//		CourseVO2.setTargetStudentNumber(20);
-//		CourseVO2.setFundStartDate(null);
-//		CourseVO2.setFundEndDate(java.sql.Date.valueOf("2017-10-24"));
-//		CourseVO2.setCourseStartDate(java.sql.Date.valueOf("2017-10-26"));
-//		CourseVO2.setCourseVideopathway("img/EEIT97(e_Look)第一版.mp4");
-//		CourseVO2.setPaper(new FileInputStream(new File("src/main/webapp/img/AE教學.pdf")));
-//		CourseVO2.setCourseContent("第一次使用 After Effects 將會出現歡迎對話框，您可以選擇 New Composition 建立新的合成，或是選擇 Open Project 開啟已儲存的 After Effects 專案。若是以後不需要顯示此歡迎對話框，只要將下方的「Show Welcome Screen at startup」取消勾選即可。");
-//		CourseVO2.setProposalVideopathway("");
-//		CourseVO2.setCourseID(200003);
-//		dao.update(CourseVO2);
+		CourseVO CourseVO2 = new CourseVO();
+		CourseVO2.setCourseName("java的基本功能介紹");//課程名稱
+		CourseVO2.setcPhoto(new FileInputStream(new File("src/main/webapp/img/04.jpg")));
+		CourseVO2.setPreTool("需要安裝Adobe CC 2017的版本");
+		CourseVO2.setBackground("無限制");
+		CourseVO2.setAbility("需要基本的美術觀念");
+		CourseVO2.setTargetgroup("影像後製特效師、剪接師");
+		CourseVO2.setSoldPrice(1000);
+		CourseVO2.setCourseLength(10);
+		CourseVO2.setTargetStudentNumber(20);
+		CourseVO2.setFundStartDate(null);
+		CourseVO2.setFundEndDate(java.sql.Date.valueOf("2017-10-24"));
+		CourseVO2.setCourseStartDate(java.sql.Date.valueOf("2017-10-26"));
+		CourseVO2.setCourseVideopathway("img/EEIT97(e_Look)第一版.mp4");
+		CourseVO2.setPaper(new FileInputStream(new File("src/main/webapp/img/AE教學.pdf")));
+		CourseVO2.setCourseContent("第一次使用 After Effects 將會出現歡迎對話框，您可以選擇 New Composition 建立新的合成，或是選擇 Open Project 開啟已儲存的 After Effects 專案。若是以後不需要顯示此歡迎對話框，只要將下方的「Show Welcome Screen at startup」取消勾選即可。");
+		CourseVO2.setProposalVideopathway("");
+		CourseVO2.setCourseID(200003);
+		dao.update(CourseVO2);
 		
 		
 		
@@ -487,5 +494,12 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 		
 		
 	}
+
+
+
+
+
+
+
 
 }

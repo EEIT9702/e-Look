@@ -127,13 +127,13 @@ CREATE TABLE [dbo].[Course](
 	[fundStartDate] [date] NULL,
 	[fundEndDate] [date] NULL,
 	[courseStartDate] [date] NULL,
-	[courseVideopathway] [varchar](50) NULL,
+	[courseVideopathway] [varchar](500) NULL,
 	[paper] [varbinary](max) NULL,
 	[status] [tinyint] NULL,
 	[courseContent] [varchar](max) NULL,
 	[memberID] [int] NOT NULL,
 	[avgScore] [decimal](2, 1) NULL,
-	[proposalVideopathway] [varchar](50) NULL,
+	[proposalVideopathway] [varchar](500) NULL,
  CONSTRAINT [PK_Course] PRIMARY KEY CLUSTERED 
 (
 	[courseID] ASC
