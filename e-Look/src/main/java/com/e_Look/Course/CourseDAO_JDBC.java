@@ -374,17 +374,15 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 		CourseDAO_JDBC dao = new CourseDAO_JDBC();
 		//新增課程
 
-
-		CourseVO CourseVO1 =new CourseVO();
-		CourseVO1.setSoldPrice(0);
-		CourseVO1.setCourseLength(0);
-		CourseVO1.setTargetStudentNumber(0);
-		CourseVO1.setStatus(0);
-		CourseVO1.setMemberID(100001);
-		CourseVO1.setAvgScore(0.0);
-//		dao.insert(CourseVO1);
-		Integer CourseID= dao.insert(CourseVO1);
-		System.out.println(CourseID);
+//		CourseVO CourseVO1 =new CourseVO();
+//		CourseVO1.setSoldPrice(0);
+//		CourseVO1.setCourseLength(0);
+//		CourseVO1.setTargetStudentNumber(0);
+//		CourseVO1.setStatus(0);
+//		CourseVO1.setMemberID(100001);
+//		CourseVO1.setAvgScore(0.0);
+//		Integer CourseID= dao.insert(CourseVO1);
+//		System.out.println(CourseID);
 
 		
 		
@@ -416,27 +414,27 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 		
 		
 		//選擇草稿、選擇單一課程頁面
-//		CourseVO CourseVO3 = dao.findByPrimaryKey(200003);
-//		System.out.println(CourseVO3.getCourseID());
-//		System.out.println(CourseVO3.getCourseName());
-//		System.out.println(CourseVO3.getcPhoto());
-//		System.out.println(CourseVO3.getPreTool());
-//		System.out.println(CourseVO3.getBackground());
-//		System.out.println(CourseVO3.getAbility());
-//		System.out.println(CourseVO3.getTargetgroup());
-//		System.out.println(CourseVO3.getSoldPrice());
-//		System.out.println(CourseVO3.getCourseLength());
-//		System.out.println(CourseVO3.getTargetStudentNumber());
-//		System.out.println(CourseVO3.getFundStartDate());
-//		System.out.println(CourseVO3.getFundEndDate());
-//		System.out.println(CourseVO3.getCourseStartDate());
-//		System.out.println(CourseVO3.getCourseVideopathway());
-//		System.out.println(CourseVO3.getPaper());
-//		System.out.println(CourseVO3.getStatus());
-//		System.out.println(CourseVO3.getCourseContent());
-//		System.out.println(CourseVO3.getMemberID());
-//		System.out.println(CourseVO3.getAvgScore());
-//		System.out.println(CourseVO3.getProposalVideopathway());
+		CourseVO CourseVO3 = dao.findByPrimaryKey(200003);
+		System.out.println(CourseVO3.getCourseID());
+		System.out.println(CourseVO3.getCourseName());
+		System.out.println(CourseVO3.getcPhoto());
+		System.out.println(CourseVO3.getPreTool());
+		System.out.println(CourseVO3.getBackground());
+		System.out.println(CourseVO3.getAbility());
+		System.out.println(CourseVO3.getTargetgroup());
+		System.out.println(CourseVO3.getSoldPrice());
+		System.out.println(CourseVO3.getCourseLength());
+		System.out.println(CourseVO3.getTargetStudentNumber());
+		System.out.println(CourseVO3.getFundStartDate());
+		System.out.println(CourseVO3.getFundEndDate());
+		System.out.println(CourseVO3.getCourseStartDate());
+		System.out.println(CourseVO3.getCourseVideopathway());
+		System.out.println(CourseVO3.getPaper());
+		System.out.println(CourseVO3.getStatus());
+		System.out.println(CourseVO3.getCourseContent());
+		System.out.println(CourseVO3.getMemberID());
+		System.out.println(CourseVO3.getAvgScore());
+		System.out.println(CourseVO3.getProposalVideopathway());
 
 		
 		//管理員改變課程狀態

@@ -2,6 +2,7 @@ package com.e_Look.member.control;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -12,8 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.e_Look.Course.CourseVO;
 import com.e_Look.member.model.MemberService;
 import com.e_Look.member.model.MemberVO;
+import com.e_Look.shoppingCart.model.jdbc.ShoppingCartDAO;
 
 /**
  * Servlet implementation class Logincontroller
@@ -72,6 +75,11 @@ public class LoginController extends HttpServlet {
 				return;
 			}
 			session.setAttribute("LoginOK", memberVO);
+			
+			ShoppingCartDAO dao = new ShoppingCartDAO();
+			List<CourseVO> shoppingCartList =dao.findByMemberID(memberVO.getMemberID());
+			session.setAttribute("shoppingCartList", shoppingCartList);
+			
 			response.sendRedirect(request.getHeader("referer"));
 			//System.out.println("5");
 			return;
@@ -97,6 +105,10 @@ public class LoginController extends HttpServlet {
 			}
 		}
 		session.setAttribute("LoginOK", memberVO);
+		
+		ShoppingCartDAO dao = new ShoppingCartDAO();
+		List<CourseVO> shoppingCartList =dao.findByMemberID(memberVO.getMemberID());
+		session.setAttribute("shoppingCartList", shoppingCartList);
 		
 
 	}
