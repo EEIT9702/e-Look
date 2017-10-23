@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script>
-<script type="text/javascript" src="css/jquery.mmenu.js"></script>
+<script type="text/javascript" src="js/jquery.mmenu.js"></script>
 </head>
 <body>
 <jsp:include page="bheader.jsp"></jsp:include>

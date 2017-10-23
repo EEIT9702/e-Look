@@ -7,8 +7,10 @@
 <title>Insert title here</title>
 <link href="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.css"
 	rel="stylesheet">
-<link href="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.css"
+<link href="<%=request.getContextPath()%>/css/bootstrap.css"
 	rel="stylesheet">
+<%-- <link href="<%=request.getContextPath()%>/font-awesome/css/font-awesome.min.css" --%>
+<!-- 	rel="stylesheet"> -->
 <!-- <!-- jQuery -->
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
 
@@ -81,14 +83,13 @@ video::-webkit-media-controls-panel {
 	border-bottom: none;
 }
 
-.tab .nav-tabs li {
-	text-align: center;
-	margin-right: 10px;
-}
-
+/* .tab .nav-tabs li { */
+/* 	text-align: center; */
+/* 	margin-right: 10px; */
+/* } */
 .tab .nav-tabs li a {
 	display: block;
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: 600;
 	color: #444;
 	padding: 10px 15px;
@@ -172,7 +173,8 @@ video::-webkit-media-controls-panel {
 
 #messageHeader {
 	border: 1px solid black;
-	border-radius: 15px
+	border-radius: 15px;
+	font-size: 18px;
 }
 
 #messageHeader>img {
@@ -183,7 +185,7 @@ video::-webkit-media-controls-panel {
 	function setControl() {
 		var video = document.getElementById("vidoeControl");
 
-		if (true) {
+		if (false) {
 			video.controls = true;
 		} else {
 			video.controls = none;
@@ -357,12 +359,13 @@ video::-webkit-media-controls-panel {
 	<!--內容 -->
 
 	<div class="demo">
-		<div class="container" style="background: white">
+		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="tab" role="tabpanel">
 
-						<ul class="nav nav-tabs" role="tablist">
+						<ul class="nav nav-tabs" role="tablist"
+							style="background-color: #efd391">
 							<li role="presentation" class="active"><a href="#Section1"
 								aria-controls="home" role="tab" data-toggle="tab">課程簡介</a></li>
 							<li role="presentation"><a href="#Section2"
@@ -372,10 +375,10 @@ video::-webkit-media-controls-panel {
 							<li role="presentation"><a href="#Section4"
 								aria-controls="messages" role="tab" data-toggle="tab">點評收藏</a></li>
 						</ul>
-<!-- 課程簡介 -->
+						<!-- 課程簡介 -->
 						<div class="tab-content tabs">
 							<div role="tabpanel" class="tab-pane fade in active"
-								id="Section1">
+								id="Section1" style="font-size: 20px">
 
 								<p>黑松企業是1925年由張氏家族所創立，創辦人張文杞先生受家庭環境影響，自小即有做生意的願望。
 									1924年末於台北後火車站，鄭州路附近一家生產彈珠汽水的「尼可尼可」（ニコニコラムネ）商會有意出
@@ -387,15 +390,16 @@ video::-webkit-media-controls-panel {
 									，在飲料的專業領域不斷創新及提升品質，並致力於經銷通路的經營，同時長期投入環保綠色行動，成為善
 									盡社會責任、對環境友善的績優企業。</p>
 							</div>
-<!-- 講師簡介 -->
-							<div role="tabpanel" class="tab-pane fade" id="Section2">
+							<!-- 講師簡介 -->
+							<div role="tabpanel" class="tab-pane fade" id="Section2"
+								style="font-size: 20px">
 
 								<div>本校為研究型大學，向以理工著稱，尤在電子、資通訊及光電等領域已佔世界頂尖領導之地位，另於優勢基礎
 									之上，發展管理與科技領域之結合、開拓人文社會新興領域及開展國際客家文化。近年更結合既有優勢領域進入新
 									興生醫電子領域並發展問題解決為取向之科技應用工程領域。.</div>
 							</div>
-<!-- 留言板 -->
-							<div role="tabpanel" class="tab-pane fade" id="Section3" >
+							<!-- 留言板 -->
+							<div role="tabpanel" class="tab-pane fade" id="Section3">
 								<div class="col-md-12" id="messageHeader">
 									<div class="col-md-1">
 										<img src="<%=request.getContextPath()%>/img/imember_image.png"
@@ -411,7 +415,17 @@ video::-webkit-media-controls-panel {
 												SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 												out.print("<span align=\"center\">" + ft.format(dNow) + "</span>");
 											%>
-											<span class="pull-right"><a>檢舉</a></span>
+											<div class="dropdown pull-right">
+												<button class="btn dropdown-toggle btn-default "
+													type="button" data-toggle="dropdown" style="height: 30px">
+													<span class="glyphicon glyphicon-option-horizontal"></span>
+												</button>
+												<ul class="dropdown-menu">
+													<li><a href="#">檢舉</a></li>
+													<li><a href="#">修改</a></li>
+													<li><a href="#">刪除</a></li>
+												</ul>
+											</div>
 
 										</div>
 
@@ -445,7 +459,6 @@ video::-webkit-media-controls-panel {
 																<img
 																	src="<%=request.getContextPath()%>/img/imember_image.png"
 																	class="img-thumbnail pull-left">
-
 															</div>
 															<div class="col-md-11 "
 																style="border-bottom: 1px solid black">
@@ -453,7 +466,18 @@ video::-webkit-media-controls-panel {
 																<%
 																	out.print("<span align=\"center\">" + ft.format(dNow) + "</span>");
 																%>
-																<span class="pull-right"><a>檢舉</a></span>
+																<div class="dropdown pull-right">
+																	<button class="btn dropdown-toggle btn-default "
+																		type="button" data-toggle="dropdown"
+																		style="height: 30px">
+																		<span class="glyphicon glyphicon-option-horizontal"></span>
+																	</button>
+																	<ul class="dropdown-menu">
+																		<li><a href="#">檢舉</a></li>
+																		<li><a href="#">修改</a></li>
+																		<li><a href="#">刪除</a></li>
+																	</ul>
+																</div>
 																<p>With Bootstrap 2, we added optional mobile
 																	friendly styles for key aspects of the framework. With
 																	Bootstrap 3, we've rewritten the project to be mobile
@@ -478,7 +502,18 @@ video::-webkit-media-controls-panel {
 																<%
 																	out.print("<span align=\"center\">" + ft.format(dNow) + "</span>");
 																%>
-																<span class="pull-right"><a>檢舉</a></span>
+																<div class="dropdown pull-right">
+																	<button class="btn dropdown-toggle btn-default "
+																		type="button" data-toggle="dropdown"
+																		style="height: 30px">
+																		<span class="glyphicon glyphicon-option-horizontal"></span>
+																	</button>
+																	<ul class="dropdown-menu">
+																		<li><a href="#">檢舉</a></li>
+																		<li><a href="#">修改</a></li>
+																		<li><a href="#">刪除</a></li>
+																	</ul>
+																</div>
 																<p>With Bootstrap 2, we added optional mobile
 																	friendly styles for key aspects of the framework. With
 																	Bootstrap 3, we've rewritten the project to be mobile
@@ -523,13 +558,10 @@ video::-webkit-media-controls-panel {
 										</div>
 									</div>
 								</div>
-
-
-
-
-<!-- 點評收藏 -->
+								<!-- 點評收藏 -->
 							</div>
-							<div role="tabpanel" class="tab-pane fade" id="Section4">
+							<div role="tabpanel" class="tab-pane fade" id="Section4"
+								style="font-size: 20px">
 
 								<p>喜歡的話記得幫我們評分還有收藏唷</p>
 

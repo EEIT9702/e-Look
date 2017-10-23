@@ -6,9 +6,10 @@
 <jsp:useBean id="SYSTEM" class="init.GlobalService" scope="application"/>
 <link rel="Shortcut Icon" type="image/x-icon" href="${SYSTEM.iconUri}" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="<%=request.getContextPath() %>/backstage/css/jquery-ui.min.css" rel="stylesheet">
-<script src="<%=request.getContextPath()%>/backstage/css/jquery.js"></script>
-<script src="<%=request.getContextPath()%>/backstage/css/jquery-ui.min.js"></script>
+<link href="<%=request.getContextPath()%>/backstage/css/jquery-ui.min.css" rel="stylesheet">
+<script src="<%=request.getContextPath()%>/backstage/js/jquery.js"></script>
+<script src="<%=request.getContextPath()%>/backstage/js/jquery-ui.min.js"></script>
+
 <script type="text/javascript">
 $(function(){
 
@@ -28,60 +29,45 @@ $(function(){
 
 	$.datepicker.setDefaults({ dateFormat: 'yy-mm-dd' }); //全局設置日期格式
 
-// $(function(){
 
-//     $('#thedate').datepicker({
-//    	 		dateFormat: 'yy-mm-dd',
-//         minDate: 0  , //限制最小日期，從今天開始。過去不可選。
-//     });
-
-// });
-
-// $(function(){
-
-//     $('#thedate2').datepicker({
-//    	 		dateFormat: 'yy-mm-dd',
-//         minDate: 0  , //限制最小日期，從今天開始。過去不可選。
-//     });
-
-// });
 </script>  
 
 </head>
 <style>
 .event{
 padding-left:60px;
-font-size:50px;
+font-size:30px;
+ 
 }
 #inputevent{
-width:1500px;
-font-size: 50px;
+width:1000px;
+font-size: 30px;
 
 }
 .file1{
-font-size:50px;
+font-size:30px;
 autofocus;
 background-color: white;
 border:1px black solid;
-width:1500px;       
+width:1000px;       
 
 }
-.file2{font-size:40px;}
+.file2{font-size:30px;}
 
-#thedate{font-size:50px;
-width:450px;
+#thedate{font-size:30px;
+width:947px;
 margin-right: 150px;
 }
-#thedate2{font-size:50px;
-width:450px;
+#thedate2{font-size:30px;
+width:947px;
 }
-#discount{width:1500px;
-font-size: 50px;
+#discount{width:1000px;
+font-size: 30px;
 }
 .select1{
-font-size: 50px;
+font-size: 30px;
 }
-.font{font-size: 40px;}
+.font{font-size: 30px;}
 .courseclass{
 margin-right: 100px;
 }
@@ -96,34 +82,49 @@ padding-bottom: 35px;
 padding-left:60px;
 
 }
+#body{
+margin:auto auto;
+background:#FFF0F5;
+
+padding-top: 30px;
+width: 1370px;
+border:solid black 1px;
+border-radius: 30px;
+}
+
+.hr1{margin: 50px;}
 </style>
 
 
-<body><div>
+<body><div id="all">
 <jsp:include page="bheader.jsp"></jsp:include></div>
+<div id="body">
 <form action="<%=request.getContextPath()%>/backstage/elookeventinsert" method="post" enctype="multipart/form-date">
 <div class="event">
-活動名稱：<input id="inputevent" name="eventName"><br>
+活動名稱：<input type="text" id="inputevent" name="eventName">
 </div>
 <p class="errormessage">
               ${ErrMsg.errName}
            </p>
  <div class="event">
-選擇起始日期 : <input id="thedate" type="text" name="eStartDate"/>
-選擇結束日期 : <input id="thedate2" type="text" name="eEndDate"/><br>
+選擇起始日期 : <input id="thedate" type="text" name="eStartDate" readonly="readonly"/>
+ </div>
+   <p class="errormessage">
+              ${ErrMsg.errStartDate}</p>
+ <div class="event">
+ 選擇結束日期 : <input id="thedate2" type="text" name="eEndDate" readonly="readonly"/>
  </div>
   <p class="errormessage">
-              ${ErrMsg.errStartDate}
                ${ErrMsg.errEndDate}
            </p>
  <div class="event">
- 折扣優惠：<input id="discount" name="discount">
+ 折扣優惠：<input type="text" id="discount" name="discount">
  </div>
 <p class="errormessage">
               ${ErrMsg.errCount}
            </p>
 <div class="event">
-選擇優惠類別1：<select class="font courseclass" name="courseclass1">
+選擇優惠類別1：<select class="font courseclass" name="courseClass1">
 <option value="null">無</option>
 <option value="all">全部</option>
 <option value="life">生活</option>
@@ -139,7 +140,7 @@ padding-left:60px;
 <option value="program">程式</option>
 </select>
 
-選擇優惠類別2：<select class="font courseclass" name="courseclass2">
+選擇優惠類別2：<select class="font courseclass" name="courseClass2">
 <option value="null">無</option>
 <option value="all">全部</option>
 <option value="life">生活</option>
@@ -154,7 +155,7 @@ padding-left:60px;
 <option value="cooking">烹飪</option>
 <option value="program">程式</option>
 </select>
-選擇優惠類別3：<select class="font courseclass" name="courseclass3">
+選擇優惠類別3：<select class="font courseclass" name="courseClass3">
 <option value="null">無</option>
 <option value="all">全部</option>
 <option value="life">生活</option>
@@ -171,12 +172,13 @@ padding-left:60px;
 </select>
 </div>
 
-<hr size="3px">
+<hr size="3px" class="hr1">
  <div class="event" id="submit" align="center">
 <input type="hidden" name="action" value="insert">
 <input type="submit" class="file2" value="儲存" >
 <input type="button" class="file2" value="取消">
 </div>
 </form>
+</div>
 </body>
 </html>
