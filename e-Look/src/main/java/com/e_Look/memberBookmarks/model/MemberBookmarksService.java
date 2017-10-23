@@ -9,8 +9,8 @@ public class MemberBookmarksService {
 		dao = new MemberBookmarksDAO();
 	}
 
-	public void insertMemberBookmarks(MemberBookmarksVO MemberBookmarksVO) {
-		dao.insert(MemberBookmarksVO);
+	public void insertMemberBookmarks(Integer memberID,Integer courseID) {
+		dao.insert(memberID,courseID);
 		
 	}
 

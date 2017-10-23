@@ -40,14 +40,14 @@ public class MemberBookmarksDAO implements MemberBookmarksDAO_interface {
 	
 	
 	@Override
-	public void insert(MemberBookmarksVO MemberBookmarksVO) {
+	public void insert(Integer memberID,Integer courseID) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_MEMBERBOOKMARKS);
-			pstmt.setInt(1,MemberBookmarksVO.getMemberID());
-			pstmt.setInt(2,MemberBookmarksVO.getCourseID());
+			pstmt.setInt(1,memberID);
+			pstmt.setInt(2,courseID);
 			
 			pstmt.executeUpdate();
 
@@ -168,7 +168,7 @@ public class MemberBookmarksDAO implements MemberBookmarksDAO_interface {
 				// memberSubscriptionVO 也稱為 Domain objects
 				memberBookmarksVO = new MemberBookmarksVO();
 				memberBookmarksVO.setMemberID(rs.getInt("memberID"));
-				memberBookmarksVO.setCourseID(rs.getInt(""));
+				memberBookmarksVO.setCourseID(rs.getInt("courseID"));
 				list.add(memberBookmarksVO); // Store the row in the list
 			}
 

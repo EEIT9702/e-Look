@@ -17,9 +17,12 @@ public class MemberBookmarksInsertController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Integer memberID= Integer.valueOf(request.getParameter("memberID"));
+		Integer courseID= Integer.valueOf(request.getParameter("courseID"));
+		
 		
 		MemberBookmarksService memberBookmarksService =new MemberBookmarksService();
-	
+		memberBookmarksService.insertMemberBookmarks(memberID, courseID);
 	}
 
 }
