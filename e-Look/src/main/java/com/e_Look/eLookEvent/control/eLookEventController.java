@@ -41,7 +41,7 @@ public class eLookEventController extends HttpServlet {
 					String eventName = req.getParameter("eventName");
 					if (eventName == null || eventName.trim().length() == 0) {
 						//errorMsgs.add("活動名稱: 請勿空白");
-						errorMsgs.put("errName", "請勿空白");
+						errorMsgs.put("errName", "請輸入活動名稱!");
 					}
 					//以下練習正則(規)表示式(regular-expression)
 
@@ -67,7 +67,7 @@ public class eLookEventController extends HttpServlet {
 					try {
 						discount = new Double(req.getParameter("discount").trim());
 					} catch (NumberFormatException e) {
-						errorMsgs.put("errCount","折扣優惠請填數字");
+						errorMsgs.put("errCount","請輸入折扣優惠!");
 					}
 					
 					
