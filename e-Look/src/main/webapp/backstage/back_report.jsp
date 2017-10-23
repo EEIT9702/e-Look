@@ -1,5 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.e_Look.reportMessage.model.*"%>
+<%@ page import="com.e_Look.message.model.*"%>
+<%
+	ReportMessageDAO dao = new ReportMessageDAO();
+
+    List<ReportMessageVO> list = dao.getNotHandle(0);
+    pageContext.setAttribute("list",list);
+    
+// 	MessageDAO dao2 = new MessageDAO();
+// 	List<MessageVO> list2 = dao2.getAll();
+// 	pageContext.setAttribute("list2",list2);
+
+%>
 <!DOCTYPE>
 <html>
 <head>
@@ -66,23 +81,26 @@
                     </tr>
                  </thead>
                  <tbody>
-                 </tbody>
-                    <tr><td>1001</td><td>我不爽</td><td>ox@!*/</td><td>2017/10/28</td><td>0</td><td>
-	                    <button class="btn btn-primary">確認</button>
+                <c:forEach var="reportMessageVO" items="${list}">
+                    <tr><td>${reportMessageVO.reportId}</td><td>${reportMessageVO.reportContent}</td><td>${reportMessageVO.messageVO.mContent}</td>
+                    <td>${reportMessageVO.reportTime}</td><td>${reportMessageVO.status}</td><td>
+	                    <button id="" class="btn btn-primary">確認</button>
 	                    <button class="btn btn-warning">不處理</button></td>
                     </tr>
-                    <tr><td>1002</td><td>我不喜歡</td><td>x@o!*x/</td><td>2017/10/29</td><td>0</td><td>
-	                    <button class="btn btn-primary">確認</button>
-	                    <button class="btn btn-warning">不處理</button></td>
-                    </tr>
-                    <tr><td>1003</td><td>我不喜歡</td><td>~@o!*x/</td><td>2017/10/30</td><td>0</td><td>
-	                    <button class="btn btn-primary">確認</button>
-	                    <button class="btn btn-warning">不處理</button></td>
-                    </tr>
-                   	<tr><td>1004</td><td>我討厭</td><td>-^%@!*/</td><td>2017/10/31</td><td>0</td><td>
-	                    <button class="btn btn-primary">確認</button>
-	                    <button class="btn btn-warning">不處理</button></td>
-                    </tr>
+<!--                     <tr><td>1002</td><td>我不喜歡</td><td>x@o!*x/</td><td>2017/10/29</td><td>0</td><td> -->
+<!-- 	                    <button class="btn btn-primary">確認</button> -->
+<!-- 	                    <button class="btn btn-warning">不處理</button></td> -->
+<!--                     </tr> -->
+<!--                     <tr><td>1003</td><td>我不喜歡</td><td>~@o!*x/</td><td>2017/10/30</td><td>0</td><td> -->
+<!-- 	                    <button class="btn btn-primary">確認</button> -->
+<!-- 	                    <button class="btn btn-warning">不處理</button></td> -->
+<!--                     </tr> -->
+<!--                    	<tr><td>1004</td><td>我討厭</td><td>-^%@!*/</td><td>2017/10/31</td><td>0</td><td> -->
+<!-- 	                    <button class="btn btn-primary">確認</button> -->
+<!-- 	                    <button class="btn btn-warning">不處理</button></td> -->
+<!--                     </tr> -->
+                </c:forEach>
+                  </tbody>
 <!--                  <tfoot> -->
 <!--                  <form name="reportForm"> -->
 <!--                  <tr> -->
@@ -99,5 +117,52 @@
 		</div>
 
 	</div>
+	<script>
+		$(function(){
+			
+			//帶入0到loadReportMessage方法裡
+		    loadReportMessage(0);
+			
+			//找td底下按鈕的第一個子元素-刪除鈕
+			//$('#productTable td>button:nth-child(1)').click(function(){
+			$('#reportTable>tbody').on('click','td>button:nth-child(1)',function(){
+				//用nth-child找父元素,因為往上不只一層,所以要用有s的,往上找到'tr',在往下撈所有的'td'
+				var id = $(this).parents('tr').find('td:nth-child(1)').text();
+				//alert(id);
+				$.get('ProductsDelete',{'status':id},function(data){
+					alert(data);
+					//刪除完要再重新載入
+					loadReportMessage(0);
+				})
+			})
+			
+		    //讀取檢舉
+		    //讀取到剛剛觸發帶入的值放入id
+		   function loadReportMessage(id){
+		    $.getJSON('ReportMessages',{"status":id},function(datas){
+		    	//datas = [] array
+		    	//建一個fragment容器,並加上$()轉成jQuery物件去裝迴圈裡產生的物件
+		    	var fragment = $(document.createDocumentFragment());
+		    	$.each(datas,function(idx,report){
+		    		//product = {}
+		    		var cell1 = $('<td></td>').text(report.reportID);
+		    		var cell2 = $('<td></td>').text(report.reportMessageID);
+		    		var cell3 = $('<td></td>').text(report.reportMemberID);
+		    		var cell4 = $('<td></td>').text(report.reportContent);
+		    		var cell5 = $('<td></td>').text(report.reportTime);
+		    		var cell6 = $('<td></td>').text(report.status);
+		    		var cell7 = $('<td></td>').html('<button class="btn btn-primary">確認</button><button class="btn btn-warning">不處理</button></td>');
+		    		//<tr><td>
+		    		var row = $('<tr></tr>').append([cell1,cell2,cell3,cell4,cell5,cell6,cell7]);
+		    		//放到容器裡
+		    		fragment.append(row);
+		    	})
+		    	$('#reportTable>tbody').html(fragment);
+		     })
+	    	}
+		
+		})
+		<!-- end of readyfunction -->
+	</script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package com.e_Look.memberBookmarks;
+package com.e_Look.memberBookmarks.model;
 
 import java.io.Serializable;
 
@@ -8,7 +8,7 @@ public class MemberBookmarksVO implements Serializable {
 	
 	private Integer memberID;
 	private Integer courseID;
-	public MemberBookmarksVO(){};
+	public MemberBookmarksVO(){}
 	
 	public MemberBookmarksVO(Integer memberID, Integer courseID){
 		this.memberID = memberID;
