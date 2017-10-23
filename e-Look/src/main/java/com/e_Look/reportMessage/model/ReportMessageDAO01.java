@@ -227,7 +227,7 @@ public class ReportMessageDAO01 implements ReportMessageDAO_interface {
 	}
 
 	@Override
-	public List<ReportMessageVO> getNotHandle(Integer status) {
+	public List<ReportMessageVO> getNotHandle() {
 		List<ReportMessageVO> list = new ArrayList<ReportMessageVO>();
 		ReportMessageVO reportMessageVO = null;
 		MessageVO messageVO = null;
