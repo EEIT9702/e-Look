@@ -391,35 +391,52 @@ public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
 //		messageVO1.setMessageID(1001);
 //		reportMessageVO1.setMessageVO(messageVO1);
 //		reportMessageVO1.setReportMemberID(100001);
-//		reportMessageVO1.setReportContent("太短了5");
+//		reportMessageVO1.setReportContent("太短了7");
 //		dao.insert(reportMessageVO1);
 //		
 		//修改
 //		ReportMessageVO reportMessageVO2 = new ReportMessageVO();
-//		reportMessageVO2.setReportId(1003);
-//		reportMessageVO2.setStatus((byte) 0);
+//		reportMessageVO2.setReportId(1005);
+//		reportMessageVO2.setStatus((byte) 1);
 //		dao.update(reportMessageVO2);
 		
 		//查詢單一
 		ReportMessageVO reportMessageVO3 = dao.findByReportId(1001);
 		System.out.println(reportMessageVO3.getReportId());
 		System.out.println(reportMessageVO3.getMessageVO().getMessageID());
+		System.out.println(reportMessageVO3.getMessageVO().getmContent());
 		System.out.println(reportMessageVO3.getReportMemberID());
 		System.out.println(reportMessageVO3.getReportContent() + " ");
 		System.out.println(reportMessageVO3.getReportTime());
 		System.out.println(reportMessageVO3.getStatus());
 		System.out.println("---------------------------");
+		System.out.println("getAll()");
 		
 		//查詢全部
 		List<ReportMessageVO> list = dao.getAll();
 		for(ReportMessageVO reportMessageVO : list) {
 			System.out.print(reportMessageVO.getReportId() + "  ");
 			System.out.print(reportMessageVO.getMessageVO().getMessageID() + "  ");
+			System.out.print(reportMessageVO3.getMessageVO().getmContent() + " ");
 			System.out.print(reportMessageVO.getReportMemberID() + "  ");
 			System.out.print(reportMessageVO.getReportContent() + "  ");
 			System.out.print(reportMessageVO.getReportTime() + "  ");
 			System.out.print(reportMessageVO.getStatus() + "\n");
 		}
+		
+		System.out.println("---------------------------");
+		System.out.println("getNotHandle(0)");
+		List<ReportMessageVO> list1 =dao.getNotHandle(0);
+		for(ReportMessageVO reportMessageVO : list1) {
+			System.out.print(reportMessageVO.getReportId() + "  ");
+			System.out.print(reportMessageVO.getMessageVO().getMessageID() + "  ");
+			System.out.print(reportMessageVO3.getMessageVO().getmContent() + " ");
+			System.out.print(reportMessageVO.getReportMemberID() + "  ");
+			System.out.print(reportMessageVO.getReportContent() + "  ");
+			System.out.print(reportMessageVO.getReportTime() + "  ");
+			System.out.print(reportMessageVO.getStatus() + "\n");
+		}
+		
 		
 	}
 

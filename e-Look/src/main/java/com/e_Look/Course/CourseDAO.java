@@ -13,6 +13,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.e_Look.member.model.MemberVO;
+
 public class CourseDAO implements CourseDAO_interface {
 	private static DataSource ds = null;
 	static {
@@ -24,7 +26,9 @@ public class CourseDAO implements CourseDAO_interface {
 		}
 	}
 	private static final String INSERT_Course = "insert into Course (courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore,proposalVideopathway) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	private static final String UPDATE_Course = "update Course set courseName=?,cPhoto=?,preTool=?,background=?,ability=?,targetgroup=?,soldPrice=?,courseLength=?,targetStudentNumber=?,fundStartDate=?,fundEndDate=?,courseStartDate=?,courseVideopathway=?,paper=?,courseContent=?,proposalVideopathway=? where courseID= ?";
+	private static final String UPDATE_Course = "update Course set courseName=?,preTool=?,background=?,ability=?,targetgroup=?,soldPrice=?,courseLength=?,targetStudentNumber=?,fundStartDate=?,fundEndDate=?,courseStartDate=?,courseVideopathway=?,courseContent=?,proposalVideopathway=? where courseID= ?";
+	private static final String UPDATE_Course_IMAGE ="update Course set cPhoto=? where courseID= ?";
+	private static final String UPDATE_Course_PAPER ="update Course set paper=? where courseID= ?";
 	private static final String DELETE_Course = "delete from Course where courseID= ?";
 	private static final String SELECT_ONE_Course = "select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore,proposalVideopathway from Course where courseID= ?";
 	private static final String SELECT_ALL_Course = "select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore,proposalVideopathway from Course where memberID= ? and status= ?";
@@ -35,7 +39,6 @@ public class CourseDAO implements CourseDAO_interface {
 	public Integer insert(CourseVO courseVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		PreparedStatement pstmtCourseID = null;
 		ResultSet generatedKeys = null;
 		int id = 0;
 		try {
@@ -62,7 +65,7 @@ public class CourseDAO implements CourseDAO_interface {
 			pstmt.setString(19, courseVO.getProposalVideopathway());// 募資影片
 			pstmt.executeUpdate();
 			
-			generatedKeys = pstmt.getGeneratedKeys();
+			generatedKeys = pstmt.getGeneratedKeys();//取得SQL資料庫自動產生的流水號(課程ID)
 			
 			if (generatedKeys.next()) {
 				id = generatedKeys.getInt(1);
@@ -100,22 +103,22 @@ public class CourseDAO implements CourseDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_Course);
 			pstmt.setString(1, courseVO.getCourseName());// 課程名稱
-			pstmt.setBlob(2, courseVO.getcPhoto());// 課程封面照片
-			pstmt.setString(3, courseVO.getPreTool());// 準備工具
-			pstmt.setString(4, courseVO.getBackground());// 背景知識
-			pstmt.setString(5, courseVO.getAbility());// 先備能力
-			pstmt.setString(6, courseVO.getTargetgroup());// 適合學習的族群
-			pstmt.setInt(7, courseVO.getSoldPrice());// 課程售價
-			pstmt.setInt(8, courseVO.getCourseLength());// 影片時間長度
-			pstmt.setInt(9, courseVO.getTargetStudentNumber());// 募資人數
-			pstmt.setDate(10, courseVO.getFundStartDate());// 募資開始日期
-			pstmt.setDate(11, courseVO.getFundEndDate());// 募資結束日期
-			pstmt.setDate(12, courseVO.getCourseStartDate());// 課程開始上線日期
-			pstmt.setString(13, courseVO.getCourseVideopathway());// 課程影片
-			pstmt.setBlob(14, courseVO.getPaper());// 課程講義
-			pstmt.setString(15, courseVO.getCourseContent());// 課程介紹內容
-			pstmt.setString(16, courseVO.getProposalVideopathway());// 募資影片
-			pstmt.setInt(17, courseVO.getCourseID());// 課程ID
+//			pstmt.setBlob(2, courseVO.getcPhoto());// 課程封面照片
+			pstmt.setString(2, courseVO.getPreTool());// 準備工具
+			pstmt.setString(3, courseVO.getBackground());// 背景知識
+			pstmt.setString(4, courseVO.getAbility());// 先備能力
+			pstmt.setString(5, courseVO.getTargetgroup());// 適合學習的族群
+			pstmt.setInt(6, courseVO.getSoldPrice());// 課程售價
+			pstmt.setInt(7, courseVO.getCourseLength());// 影片時間長度
+			pstmt.setInt(8, courseVO.getTargetStudentNumber());// 募資人數
+			pstmt.setDate(9, courseVO.getFundStartDate());// 募資開始日期
+			pstmt.setDate(10, courseVO.getFundEndDate());// 募資結束日期
+			pstmt.setDate(11, courseVO.getCourseStartDate());// 課程開始上線日期
+			pstmt.setString(12, courseVO.getCourseVideopathway());// 課程影片
+//			pstmt.setBlob(13, courseVO.getPaper());// 課程講義
+			pstmt.setString(13, courseVO.getCourseContent());// 課程介紹內容
+			pstmt.setString(14, courseVO.getProposalVideopathway());// 募資影片
+			pstmt.setInt(15, courseVO.getCourseID());// 課程ID
 			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -137,6 +140,76 @@ public class CourseDAO implements CourseDAO_interface {
 			}
 		}
 	}
+	
+	@Override
+	public void updateimage(CourseVO courseVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ds.getConnection();
+			
+				pstmt = con.prepareStatement(UPDATE_Course_IMAGE);
+				pstmt.setBlob(1, courseVO.getcPhoto());
+				pstmt.setInt(2, courseVO.getCourseID());
+				pstmt.executeUpdate();
+			
+
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
+	
+	
+	@Override
+	public void updatepaper(CourseVO courseVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ds.getConnection();
+			
+				pstmt = con.prepareStatement(UPDATE_Course_PAPER);
+				pstmt.setBlob(1, courseVO.getPaper());
+				pstmt.setInt(2, courseVO.getCourseID());
+				pstmt.executeUpdate();
+			
+
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
+	
 
 	@Override
 	public void delete(Integer courseID) {

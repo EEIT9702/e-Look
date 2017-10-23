@@ -98,7 +98,7 @@
 					</div>
 
 					<form
-						action="<%=request.getContextPath()%>/toolkie/ProgressUploadServlet"
+						action=""
 						method="POST" name="formData" target="upload_iframe"
 						enctype="multipart/form-data" role="form" id="TotalContent"
 						onsubmit="showStatus()">
@@ -212,7 +212,7 @@
 											<label for="exampleInputEmail1" style="font-size: 20pt">課程標題</label>
 											<input type="text" onfocus="this.select()"
 												class="form-control" id="CourseInput" value="輸入課程標題"
-												style="font-size: 18px">
+												style="font-size: 18px" name="courseName">
 										</div>
 										<div class="row" style="margin-bottom: 40px">
 											<label for="exampleInputEmail1" style="font-size: 20pt">上傳課程封面</label>
@@ -394,12 +394,12 @@
 								<div class="container" style="margin-top: 2em;">
 									<div class="col-md-6">
 										<div class="form-group col-lg-6" style="font-size: 20px;">
-											<label>定價(最低售價為$10元)</label> <input type="text" name=""
+											<label>定價(最低售價為$10元)</label> <input type="text" name="soldPrice"
 												class="form-control" id="" value="" style="font-size: 18px;">
 										</div>
 
 										<div class="form-group col-lg-6" style="font-size: 20px;">
-											<label>預計課程長度(以分鐘為單位)</label> <input type="text" name=""
+											<label>預計課程長度(以分鐘為單位)</label> <input type="text" name="courseLength"
 												class="form-control" id="" value="" style="font-size: 18px;">
 										</div>
 
@@ -410,7 +410,7 @@
 									id="ProposalCourse">
 									<div class="col-md-12">
 										<div class="form-group col-lg-4" style="font-size: 20px;">
-											<label>開課門檻人數(最低為10人)</label> <input type="text" name=""
+											<label>開課門檻人數(最低為10人)</label> <input type="text" name="targetStudentNumber"
 												class="form-control" id="" value="" style="font-size: 18px;">
 										</div>
 									</div>
@@ -421,7 +421,7 @@
 												data-date-format="yyyy-mm-dd" data-link-field="dtp_input1"
 												data-link-format="yyyy-mm-dd">
 												<input class="form-control" style="font-size: 18px;"
-													type="text" value="" readonly size="18" id="starttime"><span
+													type="text" value="" readonly size="18" id="starttime" name="fundStartDate"><span
 													class="input-group-addon"> <span
 													class="glyphicon glyphicon-calendar"></span>
 												</span>
@@ -436,7 +436,7 @@
 												data-date-format="yyyy-mm-dd" data-link-field="dtp_input2"
 												data-link-format="yyyy-mm-dd">
 												<input class="form-control" style="font-size: 18px;"
-													type="text" value="" readonly size="18" id="endtime"><span
+													type="text" value="" readonly size="18" id="endtime" name="fundEndDate"><span
 													class="input-group-addon"> <span
 													class="glyphicon glyphicon-calendar"></span>
 												</span>
@@ -448,12 +448,12 @@
 										<div class="form-group col-lg-6" style="font-size: 20px;">
 											<label>募資結束後的備課天數</label> <label>(最高天數為60天)</label> <input
 												type="text" name="" class="form-control" id="prepareDate"
-												value="" style="font-size: 18px;">
+												value="" style="font-size: 18px" name="courseStartDate">
 										</div>
 									</div>
 									<div class="col-md-12" style="margin-top: 0.5em;">
 										<div class="form-group col-lg-6" style="font-size: 20px;">
-											<label>課程預計上線日期：</label><span id="endofproposal"></span>
+											<label>課程預計上線日期：</label><input type="hidden" id="endofproposal" name="courseStartDate" value=""><span></span>
 										</div>
 									</div>
 								</div>
@@ -507,8 +507,9 @@
 												<div class="panel-body">
 													<div class="input-group image-preview">
 														<!-- don't give a name === doesn't send on POST/GET -->
-														<span> <!-- image-preview-clear button --> <span
-															id="filename1"></span>
+														<span> <!-- image-preview-clear button --> 
+														<input type="hidden"id="filename1" value="">
+														<span></span>
 															<div class="btn btn-default image-preview-input">
 																<span class="glyphicon glyphicon-folder-open"></span> <span
 																	class="image-preview-input-title">選擇檔案</span> <input
@@ -860,7 +861,9 @@
 					Dates = Dates.valueOf();
 					Dates = Dates + (prepareDate * 24 * 60 * 60 * 1000); // 一天幾豪秒
 					Dates = new Date(Dates);
-					$("#endofproposal").text(
+					$("#endofproposal").val(Dates.getFullYear() + "-" + (Dates.getMonth() + 1)
+							+ "-" + Dates.getDate());
+					$("#endofproposal+span").text(
 							Dates.getFullYear() + "-" + (Dates.getMonth() + 1)
 									+ "-" + Dates.getDate());
 				});
@@ -890,7 +893,8 @@
 							"btn btn-default image-preview-input");
 					var value = $('#inputfilename1').val();
 					console.log(value);
-					$('#filename1').text(value);
+					$('#filename1').val(value);
+					$('#filename1+span').text(value);
 				})
 		$('#inputfilename2').change(
 				function() {
@@ -908,6 +912,10 @@
 					console.log(value);
 					$('#filename3').text(value);
 				})
+				
+				
+				
+
 	</script>
 
 
