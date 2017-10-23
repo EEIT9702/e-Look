@@ -21,9 +21,9 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=eLook";
 	String userid = "sa";
 	//第一組密碼
-//	String passwd = "P@ssw0rd";
+	String passwd = "P@ssw0rd";
 	//第二組密碼
-	String passwd = "123456";
+//	String passwd = "123456";
 	private static final String INSERT_Course = 
 			"insert into Course (courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore,proposalVideopathway) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String UPDATE_Course = 
