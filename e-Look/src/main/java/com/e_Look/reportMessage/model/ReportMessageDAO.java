@@ -1,4 +1,4 @@
-package com.e_Look.reportMessage;
+package com.e_Look.reportMessage.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -227,7 +227,7 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 	}
 
 	@Override
-	public List<ReportMessageVO> getNotHandle() {
+	public List<ReportMessageVO> getNotHandle(Integer status) {
 		List<ReportMessageVO> list = new ArrayList<ReportMessageVO>();
 		ReportMessageVO reportMessageVO = null;
 		MessageVO messageVO = null;
