@@ -1,38 +1,31 @@
 package com.e_Look.eLookEvent;
 
-import java.io.InputStream;
 import java.io.Serializable;
 import java.sql.Date;
+
+import javax.print.DocFlavor.STRING;
 public class eLookEventVO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	private Integer eventID;
 	private String eventName;
-//	private InputStream ePhoto;
 	private Date eStartDate;
 	private Date eEndDate;
 	private Double discount;
-	
+	private String courseClass1;
+	private String courseClass2;
+	private String courseClass3;
 	public eLookEventVO(){}
-	
-//	public eLookEventVO(Integer eventID, String eventName,InputStream ePhoto,
-//								Date eStartDate, Date eEndDate,Double discount){
-//		this.eventID=eventID;
-//		this.eventName=eventName;
-//		this.ePhoto=ePhoto;
-//		this.eStartDate=eStartDate;
-//		this.eEndDate=eEndDate;
-//		this.discount=discount;
-//		
-//	}
 	public eLookEventVO(Integer eventID, String eventName,
-			Date eStartDate, Date eEndDate,Double discount){
+			Date eStartDate, Date eEndDate,Double discount,String courseClass1,String courseClass2,String courseClass3){
 this.eventID=eventID;
 this.eventName=eventName;
 this.eStartDate=eStartDate;
 this.eEndDate=eEndDate;
 this.discount=discount;
-
+this.courseClass1=courseClass1;
+this.courseClass2=courseClass2;
+this.courseClass3=courseClass3;
 }
 
 	
@@ -48,12 +41,6 @@ this.discount=discount;
 	public void setEventName(String eventName) {
 		this.eventName = eventName;
 	}
-//	public InputStream getePhoto() {
-//		return ePhoto;
-//	}
-//	public void setePhoto(InputStream ePhoto) {
-//		this.ePhoto = ePhoto;
-//	}
 	public Date geteStartDate() {
 		return eStartDate;
 	}
@@ -66,6 +53,30 @@ this.discount=discount;
 	public void seteEndDate(Date eEndDate) {
 		this.eEndDate = eEndDate;
 	}
+	public String getCourseClass1() {
+		return courseClass1;
+	}
+
+	public void setCourseClass1(String courseClass1) {
+		this.courseClass1 = courseClass1;
+	}
+
+	public String getCourseClass2() {
+		return courseClass2;
+	}
+
+	public void setCourseClass2(String courseClass2) {
+		this.courseClass2 = courseClass2;
+	}
+
+	public String getCourseClass3() {
+		return courseClass3;
+	}
+
+	public void setCourseClass3(String courseClass3) {
+		this.courseClass3 = courseClass3;
+	}
+
 	public Double getDiscount() {
 		return discount;
 	}
