@@ -5,7 +5,8 @@
 <html>
 <head>
 <jsp:useBean id="SYSTEM" class="init.GlobalService" scope="application" />
-<title>開課流程</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>${SYSTEM.systemName}</title>
 <link href="<%=request.getContextPath()%>/css/bootstrap.css"
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/_PJC/css/step1.css"
@@ -21,7 +22,10 @@
 <link
 	href="<%=request.getContextPath()%>/css/bootstrap-datetimepicker.css"
 	rel="stylesheet">
+	
+<!-- 顯示分頁上e-look的小圖示	 -->
 <link rel="Short Icon" type="image/x-icon" href="${initParam.icon}" />
+
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
@@ -99,7 +103,7 @@
 						enctype="multipart/form-data" role="form" id="TotalContent"
 						onsubmit="showStatus()">
 						<iframe name=upload_iframe width=0 height=0></iframe>
-
+						<input type="hidden" value="${CourseID}" name="CourseID">
 
 						<div class="tab-content">
 							<!-- 整個step1頁面 -->

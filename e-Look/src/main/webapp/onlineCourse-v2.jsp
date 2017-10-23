@@ -1,5 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="java.util.*,java.text.*"%>
+	pageEncoding="UTF-8" import="java.util.*,java.text.*,com.e_Look.Course.*,com.e_Look.member.model.*"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	<%
+		String courseID=request.getParameter("CourseID");
+	if(courseID!=null){
+		CourseDAO dao= new CourseDAO();
+		CourseVO courseVO= dao.findByPrimaryKey(Integer.valueOf(courseID));
+		MemberService service=new MemberService();
+		MemberVO memberVo=service.getMember(courseVO.getMemberID());
+		List<CourseVO> list =dao.findBymemberID(courseVO.getMemberID(),2);
+		pageContext.setAttribute("list",list);
+		pageContext.setAttribute("courseVO",courseVO);
+		pageContext.setAttribute("memberVo",memberVo);
+		
+	}
+	%>
 <!DOCTYPE >
 <html>
 <head>
@@ -213,6 +228,9 @@ video::-webkit-media-controls-panel {
 #messageHeader>img {
 	width: 50px;
 }
+a:HOVER {
+	color:white;
+}
 </style>
 <script>
 	function setControl() {
@@ -235,8 +253,8 @@ video::-webkit-media-controls-panel {
 			<div class="row">
 
 				<div class="col-md-12 " id="videoArea"
-					style="background-image: url('<%=request.getContextPath()%>/_Lyy/o.jpg')">
-					<h1 align="center" style="color: white">videoname</h1>
+					style="background-image: url('<%=request.getContextPath() %>/CourseImage?CourseID=${courseVO.courseID}')">
+					<h1 align="center" style="color: white">${courseVO.courseName}</h1>
 					<div class="col-md-12">
 						<div class="col-md-8 col-xs-12">
 							<video poster="<%=request.getContextPath()%>/_Lyy/poster.png"
@@ -250,18 +268,26 @@ video::-webkit-media-controls-panel {
 								<h3>推薦課程</h3>
 							</div>
 							<ul id="videoliststyle">
-								<li>線上課程</li>
-								<li>免費課程</li>
-								<li>我要開課</li>
-								<li>免費課程</li>
-								<li>我要開課</li>
-								<li>免費課程</li>
-								<li>我要開課</li>
-								<li>免費課程</li>
-								<li>我要開課</li>
-								<li>免費課程</li>
-								<li>我要開課</li>
-								<li>免費課程</li>
+							<c:forEach var="course"  items='${list}'>
+								<c:if test="${course.soldPrice>0}">
+								<li><a style="color: white;text-decoration: none;" href="<%=request.getContextPath() %>/onlineCourse-v2.jsp?CourseID=${course.courseID}">${course.courseName}</a></li>
+								</c:if>
+								<c:if test="${course.soldPrice==0}">
+								<li><a style="color: white;text-decoration: none;" href="<%=request.getContextPath() %>/freeCourse-v1.jsp?CourseID=${course.courseID}">course.courseName</a></li>
+								</c:if>
+								</c:forEach>
+<!-- 								<li>線上課程</li> -->
+<!-- 								<li>免費課程</li> -->
+<!-- 								<li>我要開課</li> -->
+<!-- 								<li>免費課程</li> -->
+<!-- 								<li>我要開課</li> -->
+<!-- 								<li>免費課程</li> -->
+<!-- 								<li>我要開課</li> -->
+<!-- 								<li>免費課程</li> -->
+<!-- 								<li>我要開課</li> -->
+<!-- 								<li>免費課程</li> -->
+<!-- 								<li>我要開課</li> -->
+<!-- 								<li>免費課程</li> -->
 							</ul>
 						</div>
 					</div>
@@ -276,38 +302,57 @@ video::-webkit-media-controls-panel {
 			<div class="col-md-12">
 
 
-				<div class="col-md-2 col-xs-3">
+				<div class="col-md-1 "></div>
+				<div class="col-md-1 col-xs-4" style="padding-top:15px">
 					<img src="<%=request.getContextPath()%>/_Lyy/004-people.png"
 						class="img-responsive center-block ">
 					<h5 class="text-center">課程人數</h5>
 				</div>
-				<div class="col-md-2 col-xs-3">
+				<div class="col-md-1 col-xs-4" style="padding-top:15px">
 					<img src="<%=request.getContextPath()%>/_Lyy/clock.png"
 						class="img-responsive center-block">
-					<h5 class="text-center">課程時間</h5>
+					<h5 class="text-center">課程時間為</h5>
 				</div>
-				<div class="col-md-2 col-xs-3 ">
+				<form method="post" action="">
+					<div class="col-md-1 col-xs-4" style="padding-top:15px">
+						<a href=”#”> <img
+							src="<%=request.getContextPath()%>/img/favorite.png"
+							class="img-responsive center-block">
+							<h5 class="text-center">加到最愛</h5>
+					<input type="hidden" value="${courseVO.courseID}" name="courseID_favorite">
+					</div>
+					</a>
+				</form>
+				<div class="col-md-1 col-xs-4 ">
 					<img src="<%=request.getContextPath()%>/_Lyy/share.png"
 						class="img-responsive center-block">
 					<div class="dropdown text-center" style="margin: 6px">
-						<a data-toggle="dropdown">分享連結 <span class="caret"></span></a>
+						<a data-toggle="dropdown">分享連結 <span class="caret"></a></span>
 						<ul class="dropdown-menu">
 							<li><a href="#">FaceBook</a></li>
 							<li><a href="#">Google</a></li>
 							<li><a href=”#”>Line</a></li>
 						</ul>
 					</div>
+
 				</div>
-				<div class="col-md-2 col-xs-3 ">
-					<img src="<%=request.getContextPath()%>/_Lyy/001-download.png"
+				<div class="col-md-1 col-xs-4 ">
+					<a href="#"> <img
+						src="<%=request.getContextPath()%>/_Lyy/001-download.png"
 						class="img-responsive center-block">
-					<h5 class="text-center">
-						<a href="#">講義下載</a>
-					</h5>
+						<h5 class="text-center">講義下載</h5>
+					</a>
+				</div>
+				<div class="col-md-1 col-xs-4">
+					<a href="#"> <img
+						src="<%=request.getContextPath()%>/img/warning.png"
+						class="img-responsive center-block">
+						<h5 class="text-center">影片檢舉</h5>
+					</a>
 				</div>
 				<div class="col-md-2 col-xs-6 ">
 					<h5>課程售價</h5>
-					<h2 style="text-align: center; font-weight: bold;">NT1230</h2>
+					<h2 style="text-align: center; font-weight: bold;">NT${courseVO.soldPrice}</h2>
 				</div>
 				<div class="col-md-2 col-xs-6 center-block">
 					<div style="width: 70px; margin: 0 auto">
@@ -351,24 +396,70 @@ video::-webkit-media-controls-panel {
 						<div class="tab-content tabs">
 							<div role="tabpanel" class="tab-pane fade in active"
 								id="Section1" style="font-size: 20px">
-
-								<p>黑松企業是1925年由張氏家族所創立，創辦人張文杞先生受家庭環境影響，自小即有做生意的願望。
-									1924年末於台北後火車站，鄭州路附近一家生產彈珠汽水的「尼可尼可」（ニコニコラムネ）商會有意出
-									讓，文杞先生遂興起作汽水的念頭。於是文杞先生籌措大部分資金，買下「尼可尼可」商會設備，七位堂兄
-									弟合股於1925年組成「進馨商會」，首創以「山型」為商標的「富士牌」汽水、及以三兄弟聯手創業圖案
-									為商標的「三手牌」彈珠汽水，種下黑松企業的幼苗，當時由張文杞先生從事開發生產，其弟張有盛先生負
-									責推銷業務，兄弟分工為汽水事業打拼，奠定黑松企業發展的基石。時序至今，黑松公司屹立台灣飲料市場
-									近百年，始終秉持著創業第一代的經營理念，即為「誠實服務」，以核心的研發生產能力及良好的企業文化
-									，在飲料的專業領域不斷創新及提升品質，並致力於經銷通路的經營，同時長期投入環保綠色行動，成為善
-									盡社會責任、對環境友善的績優企業。</p>
+								<c:if test="${!empty courseVO.preTool}">
+								<strong>需要用到的工具（含種類、版本細節）</strong>
+								<p>${courseVO.preTool}</p>	
+								</c:if>
+								<c:if test="${!empty courseVO.background}">
+								<strong>需要具有哪些背景知識？</strong>
+								<p>${courseVO.background}</p>	
+								</c:if>
+								<c:if test="${!empty courseVO.ability}">
+								<strong>上完課後，學生可以學到並做出的東西</strong>
+								<p>${courseVO.ability}</p>	
+								</c:if>
+								<c:if test="${!empty courseVO.targetgroup}">
+								<strong>哪些人適合這堂課？</strong>
+								<p>${courseVO.targetgroup}</p>	
+								</c:if>
+							<c:if test="${!empty courseVO.courseContent}">
+								<strong>課程簡介</strong>
+								<p>${courseVO.courseContent}</p>	
+								</c:if>
+									
+<!-- 								<p>黑松企業是1925年由張氏家族所創立，創辦人張文杞先生受家庭環境影響，自小即有做生意的願望。 -->
+<!-- 									1924年末於台北後火車站，鄭州路附近一家生產彈珠汽水的「尼可尼可」（ニコニコラムネ）商會有意出 -->
+<!-- 									讓，文杞先生遂興起作汽水的念頭。於是文杞先生籌措大部分資金，買下「尼可尼可」商會設備，七位堂兄 -->
+<!-- 									弟合股於1925年組成「進馨商會」，首創以「山型」為商標的「富士牌」汽水、及以三兄弟聯手創業圖案 -->
+<!-- 									為商標的「三手牌」彈珠汽水，種下黑松企業的幼苗，當時由張文杞先生從事開發生產，其弟張有盛先生負 -->
+<!-- 									責推銷業務，兄弟分工為汽水事業打拼，奠定黑松企業發展的基石。時序至今，黑松公司屹立台灣飲料市場 -->
+<!-- 									近百年，始終秉持著創業第一代的經營理念，即為「誠實服務」，以核心的研發生產能力及良好的企業文化 -->
+<!-- 									，在飲料的專業領域不斷創新及提升品質，並致力於經銷通路的經營，同時長期投入環保綠色行動，成為善 -->
+<!-- 									盡社會責任、對環境友善的績優企業。</p> -->
 							</div>
 							<!-- 講師簡介 -->
 							<div role="tabpanel" class="tab-pane fade" id="Section2"
 								style="font-size: 20px">
-
-								<div>本校為研究型大學，向以理工著稱，尤在電子、資通訊及光電等領域已佔世界頂尖領導之地位，另於優勢基礎
-									之上，發展管理與科技領域之結合、開拓人文社會新興領域及開展國際客家文化。近年更結合既有優勢領域進入新
-									興生醫電子領域並發展問題解決為取向之科技應用工程領域。.</div>
+								<c:if test="${!empty memberVo.memberID}">
+								<div class="col-md-1">
+								<figure>
+								<img
+								src="<%=request.getContextPath() %>/Image?MemberID=${memberVo.memberID}"
+								class="img-thumbnail pull-left">
+								<div style="text-align: center;">${memberVo.mName}</div>
+								</figure>
+								</div>
+								</c:if>
+								<div class="dropdown pull-right">
+										<c:if test="${!empty memberVo.aboutme}">
+										<strong>關於我</strong>
+										<p>${memberVo.aboutme}</p>
+										<hr>	
+										</c:if>
+										<c:if test="${!empty memberVo.skill}">
+										<strong>專長</strong>
+										<p>${memberVo.skill}</p>
+										<hr>	
+										</c:if>
+										<c:if test="${!empty memberVo.hobby}">
+										<strong>興趣</strong>
+										<p>${memberVo.hobby}</p>	
+										</c:if>
+								</div>
+							
+<!-- 								<div>本校為研究型大學，向以理工著稱，尤在電子、資通訊及光電等領域已佔世界頂尖領導之地位，另於優勢基礎 -->
+<!-- 									之上，發展管理與科技領域之結合、開拓人文社會新興領域及開展國際客家文化。近年更結合既有優勢領域進入新 -->
+<!-- 									興生醫電子領域並發展問題解決為取向之科技應用工程領域。.</div> -->
 							</div>
 							<!-- 留言板 -->
 							<div role="tabpanel" class="tab-pane fade" id="Section3">
