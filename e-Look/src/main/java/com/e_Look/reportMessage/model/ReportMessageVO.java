@@ -1,4 +1,4 @@
-package com.e_Look.reportMessage;
+package com.e_Look.reportMessage.model;
 
 import java.io.Serializable;
 import java.sql.Date;

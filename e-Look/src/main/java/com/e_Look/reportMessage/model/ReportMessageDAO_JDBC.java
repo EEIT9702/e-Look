@@ -1,4 +1,4 @@
-package com.e_Look.reportMessage;
+package com.e_Look.reportMessage.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -242,7 +242,7 @@ public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
 	}
 
 	@Override
-	public List<ReportMessageVO> getNotHandle() {
+	public List<ReportMessageVO> getNotHandle(Integer status) {
 		List<ReportMessageVO> list = new ArrayList<ReportMessageVO>();
 		ReportMessageVO reportMessageVO = null;
 		MessageVO messageVO = null;
@@ -390,23 +390,14 @@ public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
 //		MessageVO messageVO1 = new MessageVO();
 //		messageVO1.setMessageID(1001);
 //		reportMessageVO1.setMessageVO(messageVO1);
-//		//reportMessageVO1.setReportMessageID(1001);
 //		reportMessageVO1.setReportMemberID(100001);
-//		reportMessageVO1.setReportContent("太短了");
+//		reportMessageVO1.setReportContent("太短了5");
 //		dao.insert(reportMessageVO1);
-		
+//		
 		//修改
 //		ReportMessageVO reportMessageVO2 = new ReportMessageVO();
-//		MessageVO messageVO2 = new MessageVO();
-//		messageVO2.setMessageID(1001);
-//		reportMessageVO2.setMessageVO(messageVO2);
-//		//reportMessageVO2.setReportMessageID(1001);
-//		reportMessageVO2.setReportId(1001);
-//		
-//		reportMessageVO2.setReportMemberID(100001);
-//		
-//		reportMessageVO2.setReportContent("太短了~~~");
-//		reportMessageVO2.setStatus((byte) 1);
+//		reportMessageVO2.setReportId(1003);
+//		reportMessageVO2.setStatus((byte) 0);
 //		dao.update(reportMessageVO2);
 		
 		//查詢單一
@@ -414,7 +405,7 @@ public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
 		System.out.println(reportMessageVO3.getReportId());
 		System.out.println(reportMessageVO3.getMessageVO().getMessageID());
 		System.out.println(reportMessageVO3.getReportMemberID());
-		System.out.println(reportMessageVO3.getReportContent());
+		System.out.println(reportMessageVO3.getReportContent() + " ");
 		System.out.println(reportMessageVO3.getReportTime());
 		System.out.println(reportMessageVO3.getStatus());
 		System.out.println("---------------------------");
@@ -427,7 +418,7 @@ public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
 			System.out.print(reportMessageVO.getReportMemberID() + "  ");
 			System.out.print(reportMessageVO.getReportContent() + "  ");
 			System.out.print(reportMessageVO.getReportTime() + "  ");
-			System.out.print(reportMessageVO.getStatus());
+			System.out.print(reportMessageVO.getStatus() + "\n");
 		}
 		
 	}
