@@ -103,7 +103,7 @@
 						enctype="multipart/form-data" role="form" id="TotalContent"
 						onsubmit="showStatus()">
 						<iframe name=upload_iframe width=0 height=0></iframe>
-
+						<input type="hidden" value="${CourseID}" name="CourseID">
 
 						<div class="tab-content">
 							<!-- 整個step1頁面 -->
