@@ -7,7 +7,7 @@
 <%
 	ReportMessageDAO dao = new ReportMessageDAO();
 
-    List<ReportMessageVO> list = dao.getNotHandle(0);
+    List<ReportMessageVO> list = dao.getNotHandle();
     pageContext.setAttribute("list",list);
     
 // 	MessageDAO dao2 = new MessageDAO();

@@ -1,23 +1,30 @@
 package com.e_Look.reportMessage.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+import com.e_Look.message.model.MessageDAO;
 import com.e_Look.message.model.MessageVO;
 
 public class ReportMessageDAO implements ReportMessageDAO_interface {
-	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=elook";
-	String userid = "sa";
-	//第一組密碼
-	String passwd = "P@ssw0rd";
-	//第二組密碼
-	//String passwd = "123456";
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/eLookDB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private static final String INSERT_REPORT_MESSAGE =
 			"INSERT INTO ReportMessage (reportMessageID, reportMemberID, reportContent, reportTime, status) VALUES (?,?,?,getDate(),0)";
@@ -29,18 +36,18 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 	private static final String DELETE_REPORT_MESSAGE =
 		    "DELETE FROM ReportMessage WHERE reportId =?";
 	private static final String SELECT_ONE_REPORT_MESSAGE =
-			"SELECT m.messageID, m.mContent, rm.reportID, rm.reportMessageID, rm.reportMemberID, rm.reportContent, rm.reportTime, rm.status FROM Message m INNER JOIN ReportMessage rm ON m.messageID = rm.reportMessageID WHERE rm.reportId=?";
-	private static final String SELECT_NOT_HANDLE_REPORT_MESSAGE =
-			"SELECT m.messageID, m.mContent, rm.reportID, rm.reportMessageID, rm.reportMemberID, rm.reportContent, rm.reportTime, rm.status FROM Message m INNER JOIN ReportMessage rm ON m.messageID = rm.reportMessageID WHERE rm.status=0";
-	private static final String SELECT_ALL_REPORT_MESSAGE =
-			"SELECT m.messageID, m.mContent, rm.reportID, rm.reportMessageID, rm.reportMemberID, rm.reportContent, rm.reportTime, rm.status FROM Message m INNER JOIN ReportMessage rm ON m.messageID = rm.reportMessageID ";
-	/*
-	private static final String SELECT_ONE_REPORT_MESSAGE =
 			"SELECT reportId, reportMessageID, reportMemberID, reportContent, reportTime, status FROM ReportMessage WHERE reportId=?";
 	private static final String SELECT_NOT_HANDLE_REPORT_MESSAGE =
 			"SELECT reportId, reportMessageID, reportMemberID, reportContent, reportTime, status FROM ReportMessage WHERE status=0";
 	private static final String SELECT_ALL_REPORT_MESSAGE =
 			"SELECT reportId, reportMessageID, reportMemberID, reportContent, reportTime, status FROM ReportMessage";
+	/*
+	private static final String SELECT_ONE_REPORT_MESSAGE =
+			"SELECT m.messageID, m.mContent, rm.reportID, rm.reportMessageID, rm.reportMemberID, rm.reportContent, rm.reportTime, rm.status FROM Message m INNER JOIN ReportMessage rm ON m.messageID = rm.reportMessageID WHERE rm.reportId=?";
+	private static final String SELECT_NOT_HANDLE_REPORT_MESSAGE =
+			"SELECT m.messageID, m.mContent, rm.reportID, rm.reportMessageID, rm.reportMemberID, rm.reportContent, rm.reportTime, rm.status FROM Message m INNER JOIN ReportMessage rm ON m.messageID = rm.reportMessageID WHERE rm.status=0";
+	private static final String SELECT_ALL_REPORT_MESSAGE =
+			"SELECT m.messageID, m.mContent, rm.reportID, rm.reportMessageID, rm.reportMemberID, rm.reportContent, rm.reportTime, rm.status FROM Message m INNER JOIN ReportMessage rm ON m.messageID = rm.reportMessageID ";
 	查詢檢舉join留言內容的指令
 	SELECT m.messageID, m.mContent, rm.reportID, rm.reportMessageID, 
 	rm.reportMemberID, rm.reportContent, rm.reportTime, rm.status
@@ -53,8 +60,7 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 		PreparedStatement pstmt = null;
 		try {
 			//"INSERT INTO ReportMessage (reportMessageID, reportMemberID, reportContent, reportTime, status) VALUES (?,?,?,getDate(),0)";
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_REPORT_MESSAGE);
 //			pstmt.setInt(1, reportMessageVO.getReportMessageID());
 			pstmt.setInt(1, reportMessageVO.getMessageVO().getMessageID());
@@ -62,10 +68,6 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 			pstmt.setString(3, reportMessageVO.getReportContent());
 			pstmt.executeUpdate();
 			
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -95,17 +97,12 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 		PreparedStatement pstmt = null;
 		try {
 			//"UPDATE ReportMessage SET status=? WHERE reportId=?";
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_STATUS);
 			pstmt.setByte(1, reportMessageVO.getStatus());
 			pstmt.setInt(2, reportMessageVO.getReportId());
 			pstmt.executeUpdate();
-		
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
+
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -136,16 +133,11 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 		PreparedStatement pstmt = null;
 		try {
 			//"DELETE FROM ReportMessage WHERE reportId =?";
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt=con.prepareStatement(DELETE_REPORT_MESSAGE);
 			pstmt.setInt(1, reportID);
 			pstmt.executeUpdate();
-			
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
+
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -177,52 +169,41 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		
 		try {
-			//"SELECT m.messageID, m.mContent, rm.reportID, rm.reportMessageID, rm.reportMemberID,
-			//rm.reportContent, rm.reportTime, rm.status FROM Message m INNER JOIN ReportMessage rm 
-			//ON m.messageID = rm.reportMessageID WHERE reportId=?";
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			//"SELECT reportId, reportMessageID, reportMemberID, reportContent, reportTime,
+			//status FROM ReportMessage WHERE reportId=?";
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_ONE_REPORT_MESSAGE);
 
 			pstmt.setInt(1, reportId);
 
-			rs = pstmt.executeQuery();
+			ResultSet rs = pstmt.executeQuery();
 
 			if (rs.next()) {
 				// reportMessageVO 也稱為 Domain objects
 				reportMessageVO = new ReportMessageVO();
 				messageVO = new MessageVO();
-				messageVO.setMessageID(rs.getInt("messageID"));
-				messageVO.setmContent(rs.getString("mContent"));
+				
+				MessageDAO messageDAO = new MessageDAO();
+				Integer messageID = rs.getInt("reportMessageID");
+				messageVO = (messageDAO.findByPrimaryKey(messageID));
+				
 				reportMessageVO.setMessageVO(messageVO);
+				
 				reportMessageVO.setReportId(rs.getInt("reportId"));
-//				reportMessageVO.setReportMessageID(rs.getInt("reportMessageID"));
 				reportMessageVO.setReportMemberID(rs.getInt("reportMemberID"));
 				reportMessageVO.setReportContent(rs.getString("reportContent"));
 				reportMessageVO.setReportTime(rs.getDate("reportTime"));
 				reportMessageVO.setStatus(rs.getByte("status"));
 			}
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
 		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
 			if (pstmt != null) {
 				try {
 					pstmt.close();
@@ -242,33 +223,33 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 	}
 
 	@Override
-	public List<ReportMessageVO> getNotHandle(Integer status) {
+	public List<ReportMessageVO> getNotHandle() {
 		List<ReportMessageVO> list = new ArrayList<ReportMessageVO>();
 		ReportMessageVO reportMessageVO = null;
 		MessageVO messageVO = null;
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 
 		try {
-			//"SELECT m.messageID, m.mContent, rm.reportID, rm.reportMessageID, rm.reportMemberID, 
-			//rm.reportContent, rm.reportTime, rm.status FROM Message m INNER JOIN ReportMessage rm 
-			//ON m.messageID = rm.reportMessageID WHERE status=0";
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			//"SELECT reportId, reportMessageID, reportMemberID, reportContent, reportTime,
+			//status FROM ReportMessage WHERE status=0";
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_NOT_HANDLE_REPORT_MESSAGE);
-			rs = pstmt.executeQuery();
+			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				// reportMessageVO 也稱為 Domain objects
 				reportMessageVO = new ReportMessageVO();
 				messageVO = new MessageVO();
-				messageVO.setMessageID(rs.getInt("messageID"));
-				messageVO.setmContent(rs.getString("mContent"));
+				
+				MessageDAO messageDAO = new MessageDAO();
+				Integer messageID = rs.getInt("reportMessageID");
+				messageVO = (messageDAO.findByPrimaryKey(messageID));
+				
 				reportMessageVO.setMessageVO(messageVO);
+				
 				reportMessageVO.setReportId(rs.getInt("reportId"));
-				//reportMessageVO.setReportMessageID(rs.getInt("reportMessageID"));
 				reportMessageVO.setReportMemberID(rs.getInt("reportMemberID"));
 				reportMessageVO.setReportContent(rs.getString("reportContent"));
 				reportMessageVO.setReportTime(rs.getDate("reportTime"));
@@ -276,23 +257,12 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 				list.add(reportMessageVO); // Store the row in the list
 			}
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
 		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
 			if (pstmt != null) {
 				try {
 					pstmt.close();
@@ -319,26 +289,26 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 
 		try {
-			//"SELECT m.messageID, m.mContent, rm.reportID, rm.reportMessageID, rm.reportMemberID, 
-			//rm.reportContent, rm.reportTime, rm.status FROM Message m INNER JOIN ReportMessage rm 
-			//ON m.messageID = rm.reportMessageID ";
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			//"SELECT reportId, reportMessageID, reportMemberID, reportContent, reportTime,
+			//status FROM ReportMessage";
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_ALL_REPORT_MESSAGE);
-			rs = pstmt.executeQuery();
+			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				// reportMessageVO 也稱為 Domain objects
 				reportMessageVO = new ReportMessageVO();
 				messageVO = new MessageVO();
-				messageVO.setMessageID(rs.getInt("messageID"));
-				messageVO.setmContent(rs.getString("mContent"));
+				
+				MessageDAO messageDAO = new MessageDAO();
+				Integer messageID = rs.getInt("reportMessageID");
+				messageVO = (messageDAO.findByPrimaryKey(messageID));
+				
 				reportMessageVO.setMessageVO(messageVO);
+				
 				reportMessageVO.setReportId(rs.getInt("reportId"));
-				//reportMessageVO.setReportMessageID(rs.getInt("reportMessageID"));
 				reportMessageVO.setReportMemberID(rs.getInt("reportMemberID"));
 				reportMessageVO.setReportContent(rs.getString("reportContent"));
 				reportMessageVO.setReportTime(rs.getDate("reportTime"));
@@ -346,23 +316,12 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 				list.add(reportMessageVO); // Store the row in the list
 			}
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
 		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
 			if (pstmt != null) {
 				try {
 					pstmt.close();
