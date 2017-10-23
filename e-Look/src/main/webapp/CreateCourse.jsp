@@ -120,7 +120,7 @@
 													<i class="glyphicon glyphicon-list"></i>
 												</div>
 												<div class="update-text">
-													<strong>步驟一、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
+													<strong>步驟一555、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
 												</div>
 											</div>
 										</div>
@@ -479,7 +479,7 @@
 											</div>
 											<div class="[ form-group ][ form-group-textarea ]"
 												id="get-data-form">
-												<textarea class="tinymce" id="texteditor"></textarea>
+												<textarea class="tinymce" id="texteditor" name="courseContent" value=""></textarea>
 											</div>
 										</div>
 									</div>
@@ -512,9 +512,9 @@
 														<span></span>
 															<div class="btn btn-default image-preview-input">
 																<span class="glyphicon glyphicon-folder-open"></span> <span
-																	class="image-preview-input-title">選擇檔案</span> <input
-																	type="file" name="input-file-preview"
-																	id="inputfilename1" onclick="fileSelect()" />
+																	class="image-preview-input-title">選擇檔案</span>
+																	<input type="file" name="input-file-preview"
+																	id="inputfilename1" onclick="fileSelect()"/>
 																<!-- rename it -->
 															</div>
 															<button id="btnSubmit1" type="submit"
@@ -554,8 +554,9 @@
 												<div class="panel-body">
 													<div class="input-group image-preview">
 														<!-- don't give a name === doesn't send on POST/GET -->
-														<span> <!-- image-preview-clear button --> <span
-															id="filename2"></span>
+														<span> <!-- image-preview-clear button --> 
+														<input type="hidden"id="filename2" value="">
+														<span></span>
 															<div class="btn btn-default image-preview-input">
 																<span class="glyphicon glyphicon-folder-open"></span> <span
 																	class="image-preview-input-title">選擇檔案</span> <input
@@ -600,8 +601,9 @@
 												<div class="panel-body">
 													<div class="input-group image-preview">
 														<!-- don't give a name === doesn't send on POST/GET -->
-														<span> <!-- image-preview-clear button --> <span
-															id="filename3"></span>
+														<span> <!-- image-preview-clear button --> 
+														<input type="hidden"id="filename3" value="">
+														<span></span>
 															<div class="btn btn-default image-preview-input">
 																<span class="glyphicon glyphicon-folder-open"></span> <span
 																	class="image-preview-input-title">選擇檔案</span> <input
@@ -902,7 +904,8 @@
 							"btn btn-default image-preview-input");
 					var value = $('#inputfilename2').val();
 					console.log(value);
-					$('#filename2').text(value);
+					$('#filename2').val(value);
+					$('#filename2+span').text(value);
 				})
 		$('#inputfilename3').change(
 				function() {
@@ -910,7 +913,8 @@
 							"btn btn-default image-preview-input");
 					var value = $('#inputfilename3').val();
 					console.log(value);
-					$('#filename3').text(value);
+					$('#filename3').val(value);
+					$('#filename3+span').text(value);
 				})
 				
 				
