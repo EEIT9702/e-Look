@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.e_Look.message.model.MessageDAO;
 import com.e_Look.message.model.MessageVO;
 
 public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
@@ -264,6 +265,12 @@ public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
 				// reportMessageVO 也稱為 Domain objects
 				reportMessageVO = new ReportMessageVO();
 				messageVO = new MessageVO();
+				MessageDAO messageDAO=new MessageDAO();
+				
+				Integer messageID=rs.getInt(1);
+				//messageDAO.findByPrimaryKey(messageID);
+				reportMessageVO.setMessageVO(messageDAO.findByPrimaryKey(messageID));
+				
 				messageVO.setMessageID(rs.getInt("messageID"));
 				messageVO.setmContent(rs.getString("mContent"));
 				reportMessageVO.setMessageVO(messageVO);

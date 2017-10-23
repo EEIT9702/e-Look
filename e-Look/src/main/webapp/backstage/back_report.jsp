@@ -129,9 +129,9 @@
 				//用nth-child找父元素,因為往上不只一層,所以要用有s的,往上找到'tr',在往下撈所有的'td'
 				var id = $(this).parents('tr').find('td:nth-child(1)').text();
 				//alert(id);
-				$.get('ProductsDelete',{'status':id},function(data){
-					alert(data);
-					//刪除完要再重新載入
+				$.get('ReportConfirm',{'reportId':id},function(data){
+					//alert(data);
+					//檢舉狀態更改完要再重新載入
 					loadReportMessage(0);
 				})
 			})
@@ -140,6 +140,8 @@
 		    //讀取到剛剛觸發帶入的值放入id
 		   function loadReportMessage(id){
 		    $.getJSON('ReportMessages',{"status":id},function(datas){
+		    	console.log(datas)
+
 		    	//datas = [] array
 		    	//建一個fragment容器,並加上$()轉成jQuery物件去裝迴圈裡產生的物件
 		    	var fragment = $(document.createDocumentFragment());
@@ -161,8 +163,9 @@
 		     })
 	    	}
 		
+		//end of readyfunction
 		})
-		<!-- end of readyfunction -->
+		
 	</script>
 </body>
 </html>
