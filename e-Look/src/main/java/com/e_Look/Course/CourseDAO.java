@@ -29,7 +29,7 @@ public class CourseDAO implements CourseDAO_interface {
 	private static final String SELECT_ALL_Course = "select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore,proposalVideopathway from Course where memberID= ? and status= ?";
 	private static final String SELECT_STATUS_Course = "select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore,proposalVideopathway from Course where status= ?";
 	private static final String CHANGE_Course_Stage = "update Course set status=? where courseID= ?";
-
+	private static final String SELECT_ALL_ONLINECourse = "select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore,proposalVideopathway from Course where  status= 2";
 	@Override
 	public void insert(CourseVO courseVO) {
 		Connection con = null;
@@ -262,7 +262,7 @@ public class CourseDAO implements CourseDAO_interface {
 		}
 		return CourseList;
 	}
-
+	
 	@Override
 	public void updateStatus(CourseVO courseVO) {
 		Connection con = null;
@@ -293,4 +293,61 @@ public class CourseDAO implements CourseDAO_interface {
 			}
 		}
 	}
+
+	@Override
+	public List<CourseVO> getAllonlineCourse() {
+		List<CourseVO> CourseList = new LinkedList<CourseVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try{
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(SELECT_ALL_ONLINECourse);
+			ResultSet  rs=pstmt.executeQuery();
+			while(rs.next()){
+				CourseVO courseVO=new CourseVO();
+				courseVO.setCourseID(rs.getInt(1));
+				courseVO.setCourseName(rs.getString(2));
+				courseVO.setcPhoto(rs.getBinaryStream(3));
+				courseVO.setPreTool(rs.getString(4));
+				courseVO.setBackground(rs.getString(5));
+				courseVO.setAbility(rs.getString(6));
+				courseVO.setTargetgroup(rs.getString(7));
+				courseVO.setSoldPrice(rs.getInt(8));
+				courseVO.setCourseLength(rs.getInt(9));
+				courseVO.setTargetStudentNumber(rs.getInt(10));
+				courseVO.setFundStartDate(rs.getDate(11));
+				courseVO.setFundEndDate(rs.getDate(12));
+				courseVO.setCourseStartDate(rs.getDate(13));
+				courseVO.setCourseVideopathway(rs.getString(14));
+				courseVO.setPaper(rs.getBinaryStream(15));
+				courseVO.setStatus(rs.getInt(16));
+				courseVO.setCourseContent(rs.getString(17));
+				courseVO.setMemberID(rs.getInt(18));
+				courseVO.setAvgScore(rs.getDouble(19));
+				courseVO.setProposalVideopathway(rs.getString(20));
+				CourseList.add(courseVO);			
+		}
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return CourseList;
+	}
+
+	
+	
 }
