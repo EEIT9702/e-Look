@@ -2,8 +2,6 @@ package com.e_Look.eLookEvent.control;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -12,6 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.http.impl.entity.StrictContentLengthStrategy;
+import org.hibernate.type.descriptor.sql.NCharTypeDescriptor;
 
 import com.e_Look.eLookEvent.eLookEventService;
 import com.e_Look.eLookEvent.eLookEventVO;
@@ -34,18 +35,15 @@ public class eLookEventController extends HttpServlet {
 		req.setAttribute("ErrMsg", errorMsgs);
 
 		
-		 if ("insert".equals(action)) { // 來自addEmp.jsp的請求  
+		 if ("insert".equals(action)) { // 來自eLookEvent.jsp的請求  
 				
 				try {
 					/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 					String eventName = req.getParameter("eventName");
 					if (eventName == null || eventName.trim().length() == 0) {
-						//errorMsgs.add("活動名稱: 請勿空白");
 						errorMsgs.put("errName", "請輸入活動名稱!");
 					}
 					//以下練習正則(規)表示式(regular-expression)
-
-					
 					java.sql.Date eStartDate = null;
 					try {
 						eStartDate = java.sql.Date.valueOf(req.getParameter("eStartDate").trim());
@@ -69,14 +67,51 @@ public class eLookEventController extends HttpServlet {
 					} catch (NumberFormatException e) {
 						errorMsgs.put("errCount","請輸入折扣優惠!");
 					}
-					
-					
-					
+					String courseClass1="null";
+					try {
+						courseClass1 = new String(req.getParameter("courseClass1").trim());
+					}
+					catch (Exception e) {
+			
+					}
+					String courseClass2="null";
+					try {
+					 courseClass2 = new String(req.getParameter("courseClass2").trim());
+					}
+					catch (Exception e) {
+			
+					}
+					String courseClass3="null";
+					try {
+						courseClass3 = new String(req.getParameter("courseClass3").trim());
+					}
+					catch (Exception e) {
+			
+					}
+//					Integer courseClass1 = new Integer(req.getParameter("courseClass1").trim());
+//
+//					Integer courseClass2 = new Integer(req.getParameter("courseClass2").trim());
+//
+//					Integer courseClass3 = new Integer(req.getParameter("courseClass3").trim());
+//				
 					eLookEventVO eLookEventVO = new eLookEventVO();
 					eLookEventVO.setEventName(eventName);
 					eLookEventVO.seteStartDate(eStartDate);
 					eLookEventVO.seteEndDate(eEndDate);
 					eLookEventVO.setDiscount(discount);
+					if(eLookEventVO.getCourseClass1()==null)
+					{       }
+					else {
+					eLookEventVO.setCourseClass1(courseClass1);}
+					if(eLookEventVO.getCourseClass2()==null)
+					{       }
+					else {
+					eLookEventVO.setCourseClass2(courseClass2);}
+					if(eLookEventVO.getCourseClass3()==null)
+					{       }
+					else {
+					eLookEventVO.setCourseClass3(courseClass3);}
+					
 					// Send the use back to the form, if there were errors
 					if (!errorMsgs.isEmpty()) {
 						req.setAttribute("eLookEventVO", eLookEventVO); // 含有輸入格式錯誤的eLookEventVO物件,也存入req
@@ -88,7 +123,7 @@ public class eLookEventController extends HttpServlet {
 					
 					/***************************2.開始新增資料***************************************/
 					eLookEventService eLookEventSvc = new eLookEventService();
-					eLookEventVO = eLookEventSvc.addEmp(eventName, eStartDate, eEndDate, discount);
+					eLookEventVO = eLookEventSvc.addEmp(eventName, eStartDate, eEndDate, discount,courseClass1,courseClass2,courseClass3);
 					
 					/***************************3.新增完成,準備轉交(Send the Success view)***********/
 					RequestDispatcher successView = req.getRequestDispatcher("backHome.jsp"); // 新增成功後轉交listAllEmp.jsp
@@ -96,7 +131,7 @@ public class eLookEventController extends HttpServlet {
 					
 					/***************************其他可能的錯誤處理**********************************/
 				} catch (Exception e) {
-					errorMsgs.put("",e.getMessage());
+					e.printStackTrace();
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("eventinsert.jsp");
 					failureView.forward(req, res);

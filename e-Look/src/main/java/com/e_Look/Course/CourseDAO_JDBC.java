@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,7 +24,8 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 	//第一組密碼
 	String passwd = "P@ssw0rd";
 	//第二組密碼
-	//String passwd = "123456";
+//	String passwd = "123456";
+
 	private static final String INSERT_Course = 
 			"insert into Course (courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore,proposalVideopathway) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String UPDATE_Course = 
@@ -43,33 +45,45 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 	
 	//以下為我要開課的功能
 	@Override
-	public void insert(CourseVO courseVO) {
+	public Integer insert(CourseVO courseVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		PreparedStatement pstmtCourseID = null;
+		ResultSet generatedKeys = null;
+		int id = 0;
 		try{
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(INSERT_Course);
-			pstmt.setString(1, courseVO.getCourseName());//課程名稱
-			pstmt.setBlob(2, courseVO.getcPhoto());//課程封面照片
-			pstmt.setString(3, courseVO.getPreTool());//準備工具
-			pstmt.setString(4, courseVO.getBackground());//背景知識
-			pstmt.setString(5, courseVO.getAbility());//先備能力
-			pstmt.setString(6, courseVO.getTargetgroup());//適合學習的族群
-			pstmt.setInt(7, courseVO.getSoldPrice());//課程售價
-			pstmt.setInt(8, courseVO.getCourseLength());//影片時間長度
-			pstmt.setInt(9, courseVO.getTargetStudentNumber());//募資人數
-			pstmt.setDate(10, courseVO.getFundStartDate());//募資開始日期
-			pstmt.setDate(11, courseVO.getFundEndDate());//募資結束日期
-			pstmt.setDate(12, courseVO.getCourseStartDate());//課程開始上線日期
-			pstmt.setString(13, courseVO.getCourseVideopathway());//課程影片
-			pstmt.setBlob(14, courseVO.getPaper());//課程講義
-			pstmt.setInt(15, courseVO.getStatus());//課程狀態(草稿、上線、下架等...)			
-			pstmt.setString(16, courseVO.getCourseContent());//課程介紹內容
-			pstmt.setInt(17, courseVO.getMemberID());//會員編號
-			pstmt.setDouble(18, courseVO.getAvgScore());//課程平均分數
-			pstmt.setString(19, courseVO.getProposalVideopathway());//募資影片
+			pstmt = con.prepareStatement(INSERT_Course,Statement.RETURN_GENERATED_KEYS);			
+			pstmt.setString(1, courseVO.getCourseName());// 課程名稱
+			pstmt.setBlob(2, courseVO.getcPhoto());// 課程封面照片
+			pstmt.setString(3, courseVO.getPreTool());// 準備工具
+			pstmt.setString(4, courseVO.getBackground());// 背景知識
+			pstmt.setString(5, courseVO.getAbility());// 先備能力
+			pstmt.setString(6, courseVO.getTargetgroup());// 適合學習的族群
+			pstmt.setInt(7, courseVO.getSoldPrice());// 課程售價
+			pstmt.setInt(8, courseVO.getCourseLength());// 影片時間長度
+			pstmt.setInt(9, courseVO.getTargetStudentNumber());// 募資人數
+			pstmt.setDate(10, courseVO.getFundStartDate());// 募資開始日期
+			pstmt.setDate(11, courseVO.getFundEndDate());// 募資結束日期
+			pstmt.setDate(12, courseVO.getCourseStartDate());// 課程開始上線日期
+			pstmt.setString(13, courseVO.getCourseVideopathway());// 課程影片
+			pstmt.setBlob(14, courseVO.getPaper());// 課程講義
+			pstmt.setInt(15, courseVO.getStatus());// 課程狀態(草稿、上線、下架等...)
+			pstmt.setString(16, courseVO.getCourseContent());// 課程介紹內容
+			pstmt.setInt(17, courseVO.getMemberID());// 會員編號
+			pstmt.setDouble(18, courseVO.getAvgScore());// 課程平均分數
+			pstmt.setString(19, courseVO.getProposalVideopathway());// 募資影片
 			pstmt.executeUpdate();
+			
+			generatedKeys = pstmt.getGeneratedKeys();
+			
+			if (generatedKeys.next()) {
+				id = generatedKeys.getInt(1);
+			} else {
+				throw new SQLException(
+						"Creating user failed, no generated key obtained.");
+			}
 		}catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
 		} catch (SQLException e) {
@@ -91,6 +105,7 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 				}
 			}
 		}
+		return id;
 	}
 
 
@@ -358,14 +373,19 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 	public static void main(String[] args) throws FileNotFoundException {
 		CourseDAO_JDBC dao = new CourseDAO_JDBC();
 		//新增課程
-//		CourseVO CourseVO1 =new CourseVO();
-//		CourseVO1.setSoldPrice(0);
-//		CourseVO1.setCourseLength(0);
-//		CourseVO1.setTargetStudentNumber(0);
-//		CourseVO1.setStatus(0);
-//		CourseVO1.setMemberID(100001);
-//		CourseVO1.setAvgScore(0.0);
+
+
+		CourseVO CourseVO1 =new CourseVO();
+		CourseVO1.setSoldPrice(0);
+		CourseVO1.setCourseLength(0);
+		CourseVO1.setTargetStudentNumber(0);
+		CourseVO1.setStatus(0);
+		CourseVO1.setMemberID(100001);
+		CourseVO1.setAvgScore(0.0);
 //		dao.insert(CourseVO1);
+		Integer CourseID= dao.insert(CourseVO1);
+		System.out.println(CourseID);
+
 		
 		
 		//自動儲存草稿

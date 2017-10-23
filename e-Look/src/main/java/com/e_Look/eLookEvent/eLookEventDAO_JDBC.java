@@ -28,11 +28,11 @@ public class eLookEventDAO_JDBC implements eLookEvent_interface {
 //	private static final String SELECT_ONE_ELOOKEVENT = "select eventID,eventName ,ePhoto,eStartDate,eEndDate,discount from eLookEvent where eventID= ?";
 //	private static final String SELECT_ALL_ELOOKEVENT = "select eventID,eventName ,ePhoto,eStartDate,eEndDate,discount from eLookEvent";
 
-	private static final String INSERT_ELOOKEVENT = "insert into eLookEvent (eventName,eStartDate,eEndDate,discount) values ( ?,?, ?, ?)";
-	private static final String UPDATE_ELOOKEVENT = "update eLookEvent set eventName=?, eStartDate=?, eEndDate=?, discount=? where eventID= ?";
+	private static final String INSERT_ELOOKEVENT = "insert into eLookEvent (eventName,eStartDate,eEndDate,discount,courseClass1,courseClass2,courseClass3) values ( ?,  ?, ?, ?,?,?,?)";
+	private static final String UPDATE_ELOOKEVENT = "update eLookEvent set eventName=?,  eStartDate=?, eEndDate=?, discount=?,courseClass1=?,courseClass2=?,courseClass3=? where eventID= ?";
 	private static final String DELETE_ELOOKEVENT = "delete from eLookEvent where eventID= ?";
-	private static final String SELECT_ONE_ELOOKEVENT = "select eventID,eventName ,eStartDate,eEndDate,discount from eLookEvent where eventID= ?";
-	private static final String SELECT_ALL_ELOOKEVENT = "select eventID,eventName,eStartDate,eEndDate,discount from eLookEvent";
+	private static final String SELECT_ONE_ELOOKEVENT = "select eventID,eventName ,eStartDate,eEndDate,discount,courseClass1,courseClass2,courseClass3 from eLookEvent where eventID= ?";
+	private static final String SELECT_ALL_ELOOKEVENT = "select eventID,eventName,eStartDate,eEndDate,discount,courseClass1,courseClass2,courseClass3 from eLookEvent";
 
 	@Override
 	public void insert(eLookEventVO eLookEventVO) {
@@ -49,6 +49,9 @@ public class eLookEventDAO_JDBC implements eLookEvent_interface {
 			pstmt.setDate(2, eLookEventVO.geteStartDate());
 			pstmt.setDate(3, eLookEventVO.geteEndDate());
 			pstmt.setDouble(4, eLookEventVO.getDiscount());
+			pstmt.setString(5,eLookEventVO.getCourseClass1());
+			pstmt.setString(6,eLookEventVO.getCourseClass2());
+			pstmt.setString(7,eLookEventVO.getCourseClass3());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
@@ -122,7 +125,10 @@ public class eLookEventDAO_JDBC implements eLookEvent_interface {
 			pstmt.setDate(2, eLookEventVO.geteStartDate());
 			pstmt.setDate(3, eLookEventVO.geteEndDate());
 			pstmt.setDouble(4, eLookEventVO.getDiscount());
-			pstmt.setInt(6, eLookEventVO.getEventID());
+//			pstmt.setInt(6, eLookEventVO.getEventID());
+			pstmt.setString(5,eLookEventVO.getCourseClass1());
+			pstmt.setString(6,eLookEventVO.getCourseClass2());
+			pstmt.setString(7,eLookEventVO.getCourseClass3());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
@@ -167,6 +173,9 @@ public class eLookEventDAO_JDBC implements eLookEvent_interface {
 				eLookEventVO.seteStartDate(rs.getDate(3));
 				eLookEventVO.seteEndDate(rs.getDate(4));
 				eLookEventVO.setDiscount(rs.getDouble(5));
+				eLookEventVO.setCourseClass1(rs.getString(6));
+				eLookEventVO.setCourseClass2(rs.getString(7));
+				eLookEventVO.setCourseClass3(rs.getString(8));
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
@@ -212,6 +221,9 @@ public class eLookEventDAO_JDBC implements eLookEvent_interface {
 				eLookEventVO.seteStartDate(rs.getDate(3));
 				eLookEventVO.seteEndDate(rs.getDate(4));
 				eLookEventVO.setDiscount(rs.getDouble(5));
+				eLookEventVO.setCourseClass1(rs.getString(6));
+				eLookEventVO.setCourseClass2(rs.getString(7));
+				eLookEventVO.setCourseClass3(rs.getString(8));
 				list.add(eLookEventVO);
 			}
 		} catch (SQLException e) {
@@ -308,6 +320,10 @@ public class eLookEventDAO_JDBC implements eLookEvent_interface {
 			System.out.print(list1.geteStartDate()+",");
 			System.out.print(list1.geteEndDate()+",");
 			System.out.print(list1.getDiscount()+",");
+			System.out.print(list1.getCourseClass1()+",");
+			System.out.print(list1.getCourseClass2()+",");
+			System.out.print(list1.getCourseClass3()+",");
+			
 //			
 
 		//查全部

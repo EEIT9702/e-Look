@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -31,12 +32,15 @@ public class CourseDAO implements CourseDAO_interface {
 	private static final String CHANGE_Course_Stage = "update Course set status=? where courseID= ?";
 	private static final String SELECT_ALL_ONLINECourse = "select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore,proposalVideopathway from Course where  status= 2 ";
 	@Override
-	public void insert(CourseVO courseVO) {
+	public Integer insert(CourseVO courseVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		PreparedStatement pstmtCourseID = null;
+		ResultSet generatedKeys = null;
+		int id = 0;
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_Course);
+			pstmt = con.prepareStatement(INSERT_Course,Statement.RETURN_GENERATED_KEYS);						
 			pstmt.setString(1, courseVO.getCourseName());// 課程名稱
 			pstmt.setBlob(2, courseVO.getcPhoto());// 課程封面照片
 			pstmt.setString(3, courseVO.getPreTool());// 準備工具
@@ -57,6 +61,16 @@ public class CourseDAO implements CourseDAO_interface {
 			pstmt.setDouble(18, courseVO.getAvgScore());// 課程平均分數
 			pstmt.setString(19, courseVO.getProposalVideopathway());// 募資影片
 			pstmt.executeUpdate();
+			
+			generatedKeys = pstmt.getGeneratedKeys();
+			
+			if (generatedKeys.next()) {
+				id = generatedKeys.getInt(1);
+			} else {
+				throw new SQLException(
+						"Creating user failed, no generated key obtained.");
+			}
+			
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -75,6 +89,7 @@ public class CourseDAO implements CourseDAO_interface {
 				}
 			}
 		}
+		return id;
 	}
 
 	@Override

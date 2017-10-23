@@ -124,7 +124,7 @@ border-radius: 30px;
               ${ErrMsg.errCount}
            </p>
 <div class="event">
-選擇優惠類別1：<select class="font courseclass" name="courseclass1">
+選擇優惠類別1：<select class="font courseclass" name="courseClass1">
 <option value="null">無</option>
 <option value="all">全部</option>
 <option value="life">生活</option>
@@ -140,7 +140,7 @@ border-radius: 30px;
 <option value="program">程式</option>
 </select>
 
-選擇優惠類別2：<select class="font courseclass" name="courseclass2">
+選擇優惠類別2：<select class="font courseclass" name="courseClass2">
 <option value="null">無</option>
 <option value="all">全部</option>
 <option value="life">生活</option>
@@ -155,7 +155,7 @@ border-radius: 30px;
 <option value="cooking">烹飪</option>
 <option value="program">程式</option>
 </select>
-選擇優惠類別3：<select class="font courseclass" name="courseclass3">
+選擇優惠類別3：<select class="font courseclass" name="courseClass3">
 <option value="null">無</option>
 <option value="all">全部</option>
 <option value="life">生活</option>
