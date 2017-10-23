@@ -29,7 +29,7 @@ public class CourseDAO implements CourseDAO_interface {
 	private static final String SELECT_ALL_Course = "select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore,proposalVideopathway from Course where memberID= ? and status= ?";
 	private static final String SELECT_STATUS_Course = "select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore,proposalVideopathway from Course where status= ?";
 	private static final String CHANGE_Course_Stage = "update Course set status=? where courseID= ?";
-	private static final String SELECT_ALL_ONLINECourse = "select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore,proposalVideopathway from Course where  status= 2";
+	private static final String SELECT_ALL_ONLINECourse = "select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore,proposalVideopathway from Course where  status= 2 ";
 	@Override
 	public void insert(CourseVO courseVO) {
 		Connection con = null;

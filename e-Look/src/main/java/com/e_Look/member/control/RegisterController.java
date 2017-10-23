@@ -50,12 +50,12 @@ public class RegisterController extends HttpServlet {
 				}
 			}
 			if (session.getAttribute("registerOK") != null) {
-				response.sendRedirect(request.getContextPath() + "/login.jsp");
+				response.sendRedirect(request.getContextPath() + "/HOME.jsp");
 				return;
 			} else {
 				service.updateMemberStatus(memberVO.getMemberID());
 				session.setAttribute("registerOK", "完成認證，您可以登入了");
-				response.sendRedirect(request.getContextPath() + "/login.jsp");
+				response.sendRedirect(request.getContextPath() + "/HOME.jsp");
 				return;
 			}
 		}

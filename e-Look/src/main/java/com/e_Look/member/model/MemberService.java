@@ -22,6 +22,9 @@ public class MemberService {
 	public MemberVO getMemberMail(String email){ 
 		return dao.findByPrimaryKey(email);
 	}
+	public MemberVO getMember(Integer MemberID ){ 
+		return dao.findByPrimaryKey(MemberID);
+	}
 	public  void insertFBMember(String email ,String mName,String mPhoto){
 		MemberVO memberVO1= new MemberVO();
 		memberVO1.setmName(mName);
