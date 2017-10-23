@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 	String passwd = "P@ssw0rd";
 	//第二組密碼
 //	String passwd = "123456";
+
 	private static final String INSERT_Course = 
 			"insert into Course (courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore,proposalVideopathway) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String UPDATE_Course = 
@@ -43,33 +45,45 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 	
 	//以下為我要開課的功能
 	@Override
-	public void insert(CourseVO courseVO) {
+	public Integer insert(CourseVO courseVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		PreparedStatement pstmtCourseID = null;
+		ResultSet generatedKeys = null;
+		int id = 0;
 		try{
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(INSERT_Course);
-			pstmt.setString(1, courseVO.getCourseName());//課程名稱
-			pstmt.setBlob(2, courseVO.getcPhoto());//課程封面照片
-			pstmt.setString(3, courseVO.getPreTool());//準備工具
-			pstmt.setString(4, courseVO.getBackground());//背景知識
-			pstmt.setString(5, courseVO.getAbility());//先備能力
-			pstmt.setString(6, courseVO.getTargetgroup());//適合學習的族群
-			pstmt.setInt(7, courseVO.getSoldPrice());//課程售價
-			pstmt.setInt(8, courseVO.getCourseLength());//影片時間長度
-			pstmt.setInt(9, courseVO.getTargetStudentNumber());//募資人數
-			pstmt.setDate(10, courseVO.getFundStartDate());//募資開始日期
-			pstmt.setDate(11, courseVO.getFundEndDate());//募資結束日期
-			pstmt.setDate(12, courseVO.getCourseStartDate());//課程開始上線日期
-			pstmt.setString(13, courseVO.getCourseVideopathway());//課程影片
-			pstmt.setBlob(14, courseVO.getPaper());//課程講義
-			pstmt.setInt(15, courseVO.getStatus());//課程狀態(草稿、上線、下架等...)			
-			pstmt.setString(16, courseVO.getCourseContent());//課程介紹內容
-			pstmt.setInt(17, courseVO.getMemberID());//會員編號
-			pstmt.setDouble(18, courseVO.getAvgScore());//課程平均分數
-			pstmt.setString(19, courseVO.getProposalVideopathway());//募資影片
+			pstmt = con.prepareStatement(INSERT_Course,Statement.RETURN_GENERATED_KEYS);			
+			pstmt.setString(1, courseVO.getCourseName());// 課程名稱
+			pstmt.setBlob(2, courseVO.getcPhoto());// 課程封面照片
+			pstmt.setString(3, courseVO.getPreTool());// 準備工具
+			pstmt.setString(4, courseVO.getBackground());// 背景知識
+			pstmt.setString(5, courseVO.getAbility());// 先備能力
+			pstmt.setString(6, courseVO.getTargetgroup());// 適合學習的族群
+			pstmt.setInt(7, courseVO.getSoldPrice());// 課程售價
+			pstmt.setInt(8, courseVO.getCourseLength());// 影片時間長度
+			pstmt.setInt(9, courseVO.getTargetStudentNumber());// 募資人數
+			pstmt.setDate(10, courseVO.getFundStartDate());// 募資開始日期
+			pstmt.setDate(11, courseVO.getFundEndDate());// 募資結束日期
+			pstmt.setDate(12, courseVO.getCourseStartDate());// 課程開始上線日期
+			pstmt.setString(13, courseVO.getCourseVideopathway());// 課程影片
+			pstmt.setBlob(14, courseVO.getPaper());// 課程講義
+			pstmt.setInt(15, courseVO.getStatus());// 課程狀態(草稿、上線、下架等...)
+			pstmt.setString(16, courseVO.getCourseContent());// 課程介紹內容
+			pstmt.setInt(17, courseVO.getMemberID());// 會員編號
+			pstmt.setDouble(18, courseVO.getAvgScore());// 課程平均分數
+			pstmt.setString(19, courseVO.getProposalVideopathway());// 募資影片
 			pstmt.executeUpdate();
+			
+			generatedKeys = pstmt.getGeneratedKeys();
+			
+			if (generatedKeys.next()) {
+				id = generatedKeys.getInt(1);
+			} else {
+				throw new SQLException(
+						"Creating user failed, no generated key obtained.");
+			}
 		}catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
 		} catch (SQLException e) {
@@ -91,6 +105,7 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 				}
 			}
 		}
+		return id;
 	}
 
 
@@ -347,43 +362,50 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 		
 	}
 
-	
+	@Override
+	public List<CourseVO> getAllonlineCourse() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	
 	public static void main(String[] args) throws FileNotFoundException {
 		CourseDAO_JDBC dao = new CourseDAO_JDBC();
 		//新增課程
-		CourseVO CourseVO1 =new CourseVO();
-		CourseVO1.setSoldPrice(0);
-		CourseVO1.setCourseLength(0);
-		CourseVO1.setTargetStudentNumber(0);
-		CourseVO1.setStatus(0);
-		CourseVO1.setMemberID(100001);
-		CourseVO1.setAvgScore(0.0);
-		dao.insert(CourseVO1);
+
+//		CourseVO CourseVO1 =new CourseVO();
+//		CourseVO1.setSoldPrice(0);
+//		CourseVO1.setCourseLength(0);
+//		CourseVO1.setTargetStudentNumber(0);
+//		CourseVO1.setStatus(0);
+//		CourseVO1.setMemberID(100001);
+//		CourseVO1.setAvgScore(0.0);
+//		Integer CourseID= dao.insert(CourseVO1);
+//		System.out.println(CourseID);
+
 		
 		
 		//自動儲存草稿
-//		CourseVO CourseVO2 = new CourseVO();
-//		CourseVO2.setCourseName("AE的基本功能介紹");//課程名稱
-//		CourseVO2.setcPhoto(new FileInputStream(new File("src/main/webapp/img/cPhoto.jpg")));
-//		CourseVO2.setPreTool("需要安裝Adobe CC 2017的版本");
-//		CourseVO2.setBackground("無限制");
-//		CourseVO2.setAbility("需要基本的美術觀念");
-//		CourseVO2.setTargetgroup("影像後製特效師、剪接師");
-//		CourseVO2.setSoldPrice(1500);
-//		CourseVO2.setCourseLength(15);
-//		CourseVO2.setTargetStudentNumber(20);
-//		CourseVO2.setFundStartDate(null);
-//		CourseVO2.setFundEndDate(java.sql.Date.valueOf("2017-10-24"));
-//		CourseVO2.setCourseStartDate(java.sql.Date.valueOf("2017-10-26"));
-//		CourseVO2.setCourseVideopathway("img/EEIT97(e_Look)第一版.mp4");
-//		CourseVO2.setPaper(new FileInputStream(new File("src/main/webapp/img/AE教學.pdf")));
-//		CourseVO2.setCourseContent("第一次使用 After Effects 將會出現歡迎對話框，您可以選擇 New Composition 建立新的合成，或是選擇 Open Project 開啟已儲存的 After Effects 專案。若是以後不需要顯示此歡迎對話框，只要將下方的「Show Welcome Screen at startup」取消勾選即可。");
-//		CourseVO2.setProposalVideopathway("");
-//		CourseVO2.setCourseID(200003);
-//		dao.update(CourseVO2);
+		CourseVO CourseVO2 = new CourseVO();
+		CourseVO2.setCourseName("java的基本功能介紹");//課程名稱
+		CourseVO2.setcPhoto(new FileInputStream(new File("src/main/webapp/img/04.jpg")));
+		CourseVO2.setPreTool("需要安裝Adobe CC 2017的版本");
+		CourseVO2.setBackground("無限制");
+		CourseVO2.setAbility("需要基本的美術觀念");
+		CourseVO2.setTargetgroup("影像後製特效師、剪接師");
+		CourseVO2.setSoldPrice(1000);
+		CourseVO2.setCourseLength(10);
+		CourseVO2.setTargetStudentNumber(20);
+		CourseVO2.setFundStartDate(null);
+		CourseVO2.setFundEndDate(java.sql.Date.valueOf("2017-10-24"));
+		CourseVO2.setCourseStartDate(java.sql.Date.valueOf("2017-10-26"));
+		CourseVO2.setCourseVideopathway("img/EEIT97(e_Look)第一版.mp4");
+		CourseVO2.setPaper(new FileInputStream(new File("src/main/webapp/img/AE教學.pdf")));
+		CourseVO2.setCourseContent("第一次使用 After Effects 將會出現歡迎對話框，您可以選擇 New Composition 建立新的合成，或是選擇 Open Project 開啟已儲存的 After Effects 專案。若是以後不需要顯示此歡迎對話框，只要將下方的「Show Welcome Screen at startup」取消勾選即可。");
+		CourseVO2.setProposalVideopathway("");
+		CourseVO2.setCourseID(200003);
+		dao.update(CourseVO2);
 		
 		
 		
@@ -392,27 +414,27 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 		
 		
 		//選擇草稿、選擇單一課程頁面
-//		CourseVO CourseVO3 = dao.findByPrimaryKey(200003);
-//		System.out.println(CourseVO3.getCourseID());
-//		System.out.println(CourseVO3.getCourseName());
-//		System.out.println(CourseVO3.getcPhoto());
-//		System.out.println(CourseVO3.getPreTool());
-//		System.out.println(CourseVO3.getBackground());
-//		System.out.println(CourseVO3.getAbility());
-//		System.out.println(CourseVO3.getTargetgroup());
-//		System.out.println(CourseVO3.getSoldPrice());
-//		System.out.println(CourseVO3.getCourseLength());
-//		System.out.println(CourseVO3.getTargetStudentNumber());
-//		System.out.println(CourseVO3.getFundStartDate());
-//		System.out.println(CourseVO3.getFundEndDate());
-//		System.out.println(CourseVO3.getCourseStartDate());
-//		System.out.println(CourseVO3.getCourseVideopathway());
-//		System.out.println(CourseVO3.getPaper());
-//		System.out.println(CourseVO3.getStatus());
-//		System.out.println(CourseVO3.getCourseContent());
-//		System.out.println(CourseVO3.getMemberID());
-//		System.out.println(CourseVO3.getAvgScore());
-//		System.out.println(CourseVO3.getProposalVideopathway());
+		CourseVO CourseVO3 = dao.findByPrimaryKey(200003);
+		System.out.println(CourseVO3.getCourseID());
+		System.out.println(CourseVO3.getCourseName());
+		System.out.println(CourseVO3.getcPhoto());
+		System.out.println(CourseVO3.getPreTool());
+		System.out.println(CourseVO3.getBackground());
+		System.out.println(CourseVO3.getAbility());
+		System.out.println(CourseVO3.getTargetgroup());
+		System.out.println(CourseVO3.getSoldPrice());
+		System.out.println(CourseVO3.getCourseLength());
+		System.out.println(CourseVO3.getTargetStudentNumber());
+		System.out.println(CourseVO3.getFundStartDate());
+		System.out.println(CourseVO3.getFundEndDate());
+		System.out.println(CourseVO3.getCourseStartDate());
+		System.out.println(CourseVO3.getCourseVideopathway());
+		System.out.println(CourseVO3.getPaper());
+		System.out.println(CourseVO3.getStatus());
+		System.out.println(CourseVO3.getCourseContent());
+		System.out.println(CourseVO3.getMemberID());
+		System.out.println(CourseVO3.getAvgScore());
+		System.out.println(CourseVO3.getProposalVideopathway());
 
 		
 		//管理員改變課程狀態
@@ -472,5 +494,12 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 		
 		
 	}
+
+
+
+
+
+
+
 
 }

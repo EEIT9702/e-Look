@@ -244,35 +244,53 @@ video::-webkit-media-controls-panel {
 		<div class="row">
 			<div class="col-md-12">
 
-
-				<div class="col-md-2 col-xs-3">
+				<div class="col-md-1 "></div>
+				<div class="col-md-1 col-xs-4">
 					<img src="<%=request.getContextPath()%>/_Lyy/004-people.png"
 						class="img-responsive center-block ">
 					<h5 class="text-center">課程人數</h5>
 				</div>
-				<div class="col-md-2 col-xs-3">
+				<div class="col-md-1 col-xs-4">
 					<img src="<%=request.getContextPath()%>/_Lyy/clock.png"
 						class="img-responsive center-block">
-					<h5 class="text-center">課程時間</h5>
+					<h5 class="text-center">課程時間為min</h5>
 				</div>
-				<div class="col-md-2 col-xs-3 ">
+				<form method="post" action="">
+					<div class="col-md-1 col-xs-4">
+						<a href=”#”> <img
+							src="<%=request.getContextPath()%>/img/favorite.png"
+							class="img-responsive center-block">
+							<h5 class="text-center">加到最愛</h5>
+					<input type="hidden" value="${courseVO.courseID}" name="courseID_favorite">
+					</div>
+					</a>
+				</form>
+				<div class="col-md-1 col-xs-4 ">
 					<img src="<%=request.getContextPath()%>/_Lyy/share.png"
 						class="img-responsive center-block">
 					<div class="dropdown text-center" style="margin: 6px">
-						<a data-toggle="dropdown">分享連結 <span class="caret"></span></a>
+						<a data-toggle="dropdown">分享連結 <span class="caret"></a></span>
 						<ul class="dropdown-menu">
 							<li><a href="#">FaceBook</a></li>
 							<li><a href="#">Google</a></li>
 							<li><a href=”#”>Line</a></li>
 						</ul>
 					</div>
+
 				</div>
-				<div class="col-md-2 col-xs-3 ">
-					<img src="<%=request.getContextPath()%>/_Lyy/001-download.png"
+				<div class="col-md-1 col-xs-4 ">
+					<a href="#"> <img
+						src="<%=request.getContextPath()%>/_Lyy/001-download.png"
 						class="img-responsive center-block">
-					<h5 class="text-center">
-						<a href="#">講義下載</a>
-					</h5>
+						<h5 class="text-center">講義下載</h5>
+					</a>
+				</div>
+				<div class="col-md-1 col-xs-4">
+					<a href="#"> <img
+						src="<%=request.getContextPath()%>/img/warning.png"
+						class="img-responsive center-block">
+						<h5 class="text-center">影片檢舉</h5>
+					</a>
 				</div>
 				<div class="col-md-2 col-xs-6 ">
 					<h5>課程售價</h5>

@@ -24,4 +24,13 @@
     <param-name>icon</param-name>
     <param-value>/e-Look/img/eLook.icon</param-value>
   </context-param>
+  <filter-mapping>
+  <filter-name>DisableCacheFilter</filter-name>
+  <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  <filter-name>CreateCourseFilter</filter-name>
+  <url-pattern>/CreateCourse.jsp</url-pattern>
+  </filter-mapping>
+  
 </web-app>
