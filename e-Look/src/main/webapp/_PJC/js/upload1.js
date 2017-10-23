@@ -3,15 +3,7 @@ var _finished = true; //是否上傳結束
 //function $(XXX){//XXX一定要給隨意的參數，且這個function有存在的必要，影響第52行的結果。
 //	return document.getElementById(XXX);//傳回指定id的html
 //}
-var clickId;
 
-function bottonClick(){	
-	var obj = event.srcElement; 
-	if(obj.type=="submit"){
-		clickId = obj.id;
-	}
-	
-}
 
 var selectId;
 function fileSelect(){
@@ -34,11 +26,42 @@ function fileSelect(){
 	console.log(selectId);
 }
 
+var clickId;
+
+function bottonClick(){	
+	var obj = event.srcElement; 
+	if(obj.type=="submit"){
+		clickId = obj.id;
+	}
+	
+	
+	var formData = new FormData($('form')[3]);
+	//console.log("5555555555");
+	$.ajax({
+		type : 'POST',
+		url : '/e-Look/toolkie/ProgressUploadServlet',
+		data :formData,
+		processData : false,
+		contentType : false,
+//		success: function(){
+//			
+//			$('#sendOK').modal()
+//			$('#sendOK h3').text("更新成功")
+//			setTimeout(function(){
+//		        $("#sendOK").modal('hide');
+//		        }, 1000);
+//        }
+	})
+	
+}
+
+
+
 function showStatus(){//顯示進度條
 	_finished = false;
 //	$('#status').css("display" , 'block')//將隱藏進度條顯示 
 			
-	console.log(clickId);
+	//console.log("1234567890");
 	
 	if(clickId==="btnSubmit1"){
 		$('#progressBar1').attr('aria-valuenow', "0").css("width" , '1%').text("0%");; //設定進度條初始為1%
@@ -55,6 +78,12 @@ function showStatus(){//顯示進度條
 	
 	setTimeout("requestStatus()", 1000); //一秒後執行requestStatus()方法 更新上傳進度
 }
+
+
+
+
+
+
 
 function requestStatus(){//向伺服器請求上傳進度
 

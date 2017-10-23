@@ -33,13 +33,12 @@ public class CourseVO implements Serializable {
 		
 	};		
 
-	public CourseVO(Integer courseID, String courseName, InputStream cPhoto, String preTool,
+	public CourseVO(Integer courseID, String courseName, String preTool,
 			String background, String ability, String targetgroup, Integer soldPrice, Integer courseLength,
 			Integer targetStudentNumber, Date fundStartDate, Date fundEndDate, Date courseStartDate, String courseVideopathway,
-			InputStream paper, Integer status, String courseContent, Integer memberID, Double avgScore, String proposalVideopathway) {		
+			Integer status, String courseContent, Integer memberID, Double avgScore, String proposalVideopathway) {		
 		this.courseID = courseID;
 		this.courseName = courseName;
-		this.cPhoto = cPhoto;
 		this.preTool = preTool;
 		this.background = background;
 		this.ability = ability;
@@ -51,7 +50,6 @@ public class CourseVO implements Serializable {
 		this.fundEndDate = fundEndDate;
 		this.courseStartDate = courseStartDate;
 		this.courseVideopathway = courseVideopathway;
-		this.paper = paper;
 		this.status = status;
 		this.courseContent = courseContent;
 		this.memberID = memberID;
