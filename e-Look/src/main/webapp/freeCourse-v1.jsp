@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"
 	import="java.util.*,java.text.*,com.e_Look.Course.*,com.e_Look.member.model.*,com.e_Look.memberBookmarks.model.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <!DOCTYPE >
 <html>
 <head>
@@ -16,7 +15,6 @@
 <!-- 	rel="stylesheet"> -->
 <!-- <!-- jQuery -->
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
-
 <!-- <!-- Bootstrap Core JavaScript -->
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
 
@@ -24,7 +22,7 @@
 /* 影片區塊 */
 video {
 	width: 100%;
-	height: 80%;
+	height: 90%;
 	padding-left: -15px;
 	padding-right: -15px;
 }
@@ -32,12 +30,9 @@ video {
 #videoArea {
 	background-size: cover;
 	background-position: center;
-	height: 75%;
+	height: 60%;
 }
 
-/* #videoArea>.col-md-12 { */
-/* height: 100%; */
-/* } */
 #videoliststyle>li {
 	height: 50px;
 	font-size: 20px;
@@ -67,12 +62,17 @@ video::-webkit-media-controls-panel {
 	width: calc(100% + 30px); /* Adjust as needed */
 }
 
+#videoTitle {
+	background-color: rgba(0%, 10%, 20%, 0.3);
+	color: white;
+}
+
 #videoDivListStyle {
 	border: 1px solid gray;
-	height: 80%;
+	height: 90.3%;
 	padding-left: -15px;
 	padding-right: -15px;
-	background-color: rgba(0%, 10%, 20%, 0.3);;
+	background-color: rgba(0%, 10%, 20%, 0.3);
 }
 
 #videoDivListStyle>div>h3 {
@@ -184,36 +184,24 @@ video::-webkit-media-controls-panel {
 	width: 50px;
 }
 </style>
-<script>
-	function setControl() {
-		var video = document.getElementById("vidoeControl");
-
-		if (false) {
-			video.controls = true;
-		} else {
-			video.controls = none;
-		}
-	}
-</script>
 </head>
 <!-- 影片區 -->
 <body oncontextmenu="window.event.returnValue=false">
 	<jsp:include page="/login.jsp" flush="true" />
 	<div class="container-fluid">
-		<div class="container" style="background-color: gray;">
+		<div class="container">
 			<div class="row">
-
+				<h1 align="center" id="videoTitle">${courseVO.courseName}</h1>
 				<div class="col-md-12 " id="videoArea"
-					style="background-image: url('<%=request.getContextPath()%>/_Lyy/o.jpg')">
-					<h1 align="center" style="color: white">videoname</h1>
+					style="background-color: gray"
+					style="background-image: url('<%=request.getContextPath() %>/CourseImage?CourseID=${courseVO.courseID}')">
+
 					<div class="col-md-12">
 						<div class="col-md-8 col-xs-12">
 
-
-							<video controls
-								poster="<%=request.getContextPath()%>/_Lyy/poster.png"
-								id="vidoeControl">
-								<source src="<%=request.getContextPath()%>/_Lyy/tri.mp4"
+							<video controls="controls" id="vidoeControl">
+								<source
+									src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}"
 									type="video/mp4">
 							</video>
 						</div>
@@ -222,8 +210,16 @@ video::-webkit-media-controls-panel {
 								<h3>推薦課程</h3>
 							</div>
 							<ul id="videoliststyle">
-								<li>線上課程</li>
-					
+								<c:forEach var="course" items='${list}'>
+									<c:if test="${course.soldPrice>0}">
+										<li><a style="color: white; text-decoration: none;"
+											href="<%=request.getContextPath() %>/onlineCourse-v2.jsp?CourseID=${course.courseID}">${course.courseName}</a></li>
+									</c:if>
+									<c:if test="${course.soldPrice==0}">
+										<li><a style="color: white; text-decoration: none;"
+											href="<%=request.getContextPath() %>/freeCourse-v1.jsp?CourseID=${course.courseID}">${course.courseName}</a></li>
+									</c:if>
+								</c:forEach>
 							</ul>
 						</div>
 					</div>
@@ -237,7 +233,7 @@ video::-webkit-media-controls-panel {
 		<div class="row">
 			<div class="col-md-12">
 
-				<div class="col-md-1" ></div>
+				<div class="col-md-1"></div>
 				<div class="col-md-1 col-xs-4">
 					<img src="<%=request.getContextPath()%>/_Lyy/004-people.png"
 						class="img-responsive center-block ">
@@ -246,13 +242,13 @@ video::-webkit-media-controls-panel {
 				<div class="col-md-1 col-xs-4">
 					<img src="<%=request.getContextPath()%>/_Lyy/clock.png"
 						class="img-responsive center-block">
-					<h5 class="text-center">課程時間為</h5>
+					<h5 class="text-center">課程時間為 ${courseVO.courseLength}min</h5>
 				</div>
-				<c:forEach  items="${memberBookmarksVOList}" var="memberBookmsrks" >
-					<c:choose>		
+				<c:forEach items="${memberBookmarksVOList}" var="memberBookmsrks">
+					<c:choose>
 						<c:when test="${courseVO.courseID==memberBookmsrks.courseID}">
 							<c:set var="favor" value="favoriteclick1" />
-						</c:when>					
+						</c:when>
 						<c:otherwise>
 							<c:set var="favor" value="favoriteclick2" />
 						</c:otherwise>
@@ -263,6 +259,8 @@ video::-webkit-media-controls-panel {
 						class="img-responsive center-block"> <a href="#"
 						id="${favor}"><h5 class="text-center">加到最愛</h5></a>
 				</div>
+
+
 				<input type="hidden" value="${courseVO.courseID}" id="mbcourseID">
 				<input type="hidden" value="${LoginOK.memberID}" id="mbmemberID">
 				<div class="col-md-1 col-xs-4 ">
@@ -273,11 +271,11 @@ video::-webkit-media-controls-panel {
 						<ul class="dropdown-menu">
 							<li><a href="#">FaceBook</a></li>
 							<li><a href="#">Google</a></li>
-							<li><a href=”#”>Line</a></li>
+							<li><a href="#">Line</a></li>
 						</ul>
 					</div>
-
 				</div>
+
 				<div class="col-md-1 col-xs-4 ">
 					<a href="#"> <img
 						src="<%=request.getContextPath()%>/_Lyy/001-download.png"
@@ -350,6 +348,7 @@ video::-webkit-media-controls-panel {
 											</tbody>
 										</table>
 										<p>◎ 贊助金額最低為新台幣50元</p>
+										<p>◎ 贊助金額最高為新台幣20000元</p>
 										<small>Copyright © 2017 O'Pay Electronic Payment
 											Co.,Ltd.All rights reserved.<img
 											src="<%=request.getContextPath()%>/img/opay.png" width="80px">
@@ -398,196 +397,231 @@ video::-webkit-media-controls-panel {
 							<div role="tabpanel" class="tab-pane fade in active"
 								id="Section1" style="font-size: 20px">
 
-								<p>黑松企業是1925年由張氏家族所創立，創辦人張文杞先生受家庭環境影響，自小即有做生意的願望。
-									1924年末於台北後火車站，鄭州路附近一家生產彈珠汽水的「尼可尼可」（ニコニコラムネ）商會有意出
-									讓，文杞先生遂興起作汽水的念頭。於是文杞先生籌措大部分資金，買下「尼可尼可」商會設備，七位堂兄
-									弟合股於1925年組成「進馨商會」，首創以「山型」為商標的「富士牌」汽水、及以三兄弟聯手創業圖案
-									為商標的「三手牌」彈珠汽水，種下黑松企業的幼苗，當時由張文杞先生從事開發生產，其弟張有盛先生負
-									責推銷業務，兄弟分工為汽水事業打拼，奠定黑松企業發展的基石。時序至今，黑松公司屹立台灣飲料市場
-									近百年，始終秉持著創業第一代的經營理念，即為「誠實服務」，以核心的研發生產能力及良好的企業文化
-									，在飲料的專業領域不斷創新及提升品質，並致力於經銷通路的經營，同時長期投入環保綠色行動，成為善
-									盡社會責任、對環境友善的績優企業。</p>
+								<c:if test="${!empty courseVO.preTool}">
+									<strong>需要用到的工具（含種類、版本細節）</strong>
+									<p>${courseVO.preTool}</p>
+								</c:if>
+								<c:if test="${!empty courseVO.background}">
+									<strong>需要具有哪些背景知識？</strong>
+									<p>${courseVO.background}</p>
+								</c:if>
+								<c:if test="${!empty courseVO.ability}">
+									<strong>上完課後，學生可以學到並做出的東西</strong>
+									<p>${courseVO.ability}</p>
+								</c:if>
+								<c:if test="${!empty courseVO.targetgroup}">
+									<strong>哪些人適合這堂課？</strong>
+									<p>${courseVO.targetgroup}</p>
+								</c:if>
+								<c:if test="${!empty courseVO.courseContent}">
+									<strong>課程簡介</strong>
+									<p>${courseVO.courseContent}</p>
+								</c:if>
 							</div>
 							<!-- 講師簡介 -->
 							<div role="tabpanel" class="tab-pane fade" id="Section2"
 								style="font-size: 20px">
-
-								<div>本校為研究型大學，向以理工著稱，尤在電子、資通訊及光電等領域已佔世界頂尖領導之地位，另於優勢基礎
-									之上，發展管理與科技領域之結合、開拓人文社會新興領域及開展國際客家文化。近年更結合既有優勢領域進入新
-									興生醫電子領域並發展問題解決為取向之科技應用工程領域。.</div>
-							</div>
-							<!-- 留言板 -->
-							<div role="tabpanel" class="tab-pane fade" id="Section3">
-								<div class="col-md-12" id="messageHeader">
+								<c:if test="${!empty memberVo.memberID}">
 									<div class="col-md-1">
-										<img src="<%=request.getContextPath()%>/img/imember_image.png"
-											class="img-thumbnail pull-left">
+										<figure>
+											<img
+												src="<%=request.getContextPath() %>/Image?MemberID=${memberVo.memberID}"
+												class="img-thumbnail pull-left">
+											<div style="text-align: center;">${memberVo.mName}</div>
+										</figure>
 									</div>
-									<div class="col-md-11">
-
-										<div>
-											<span class="text-left">吳永志</span>
-
-											<%
-												Date dNow = new Date();
-												SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-												out.print("<span align=\"center\">" + ft.format(dNow) + "</span>");
-											%>
-											<div class="dropdown pull-right">
-												<button class="btn dropdown-toggle btn-default "
-													type="button" data-toggle="dropdown" style="height: 30px">
-													<span class="glyphicon glyphicon-option-horizontal"></span>
-												</button>
-												<ul class="dropdown-menu">
-													<li><a href="#">檢舉</a></li>
-													<li><a href="#">修改</a></li>
-													<li><a href="#">刪除</a></li>
-												</ul>
-											</div>
-
-										</div>
-
-										<div style="border-bottom: 1px solid black">
-
-											<p>With Bootstrap 2, we added optional mobile friendly
-												styles for key aspects of the framework. With Bootstrap 3,
-												we've rewritten the project to be mobile friendly from the
-												start. Instead of adding on optional mobile styles, they're
-												baked right into the core. In fact, Bootstrap is mobile
-												first. Mobile first styles can be found throughout the
-												entire library instead of in separate files. To ensure
-												proper rendering and touch zooming, add the viewport meta
-												tag to your</p>
-										</div>
-
-
-										<div class="col-md-12">
-
-											<div class="panel-group">
-												<div class="panel">
-													<div class="panel-heading">
-														<h4 class="panel-title " style="padding-bottom: 10px">
-															<a data-toggle="collapse" href="#collapse1">回應記錄</a>
-														</h4>
-													</div>
-													<div id="collapse1" class="panel-collapse collapse ">
-														<!--第一個回應 -->
-														<div>
-															<div class="col-md-1">
-																<img
-																	src="<%=request.getContextPath()%>/img/imember_image.png"
-																	class="img-thumbnail pull-left">
-															</div>
-															<div class="col-md-11 "
-																style="border-bottom: 1px solid black">
-																<span>吳永志</span>
-																<%
-																	out.print("<span align=\"center\">" + ft.format(dNow) + "</span>");
-																%>
-																<div class="dropdown pull-right">
-																	<button class="btn dropdown-toggle btn-default "
-																		type="button" data-toggle="dropdown"
-																		style="height: 30px">
-																		<span class="glyphicon glyphicon-option-horizontal"></span>
-																	</button>
-																	<ul class="dropdown-menu">
-																		<li><a href="#">檢舉</a></li>
-																		<li><a href="#">修改</a></li>
-																		<li><a href="#">刪除</a></li>
-																	</ul>
-																</div>
-																<p>With Bootstrap 2, we added optional mobile
-																	friendly styles for key aspects of the framework. With
-																	Bootstrap 3, we've rewritten the project to be mobile
-																	friendly from the start. Instead of adding on optional
-																	mobile styles, they're baked right into the core. In
-																	fact, Bootstrap is mobile first. Mobile first styles
-																	can be found throughout the entire library instead of
-																	in separate files. To ensure proper rendering and touch
-																	zooming, add the viewport meta tag to your</p>
-															</div>
-														</div>
-														<!--第二個回應 -->
-														<div>
-															<div class="col-md-1">
-																<img
-																	src="<%=request.getContextPath()%>/img/imember_image.png"
-																	class="img-thumbnail pull-left">
-															</div>
-															<div class="col-md-11 "
-																style="border-bottom: 1px solid black">
-																<span>吳永志</span>
-																<%
-																	out.print("<span align=\"center\">" + ft.format(dNow) + "</span>");
-																%>
-																<div class="dropdown pull-right">
-																	<button class="btn dropdown-toggle btn-default "
-																		type="button" data-toggle="dropdown"
-																		style="height: 30px">
-																		<span class="glyphicon glyphicon-option-horizontal"></span>
-																	</button>
-																	<ul class="dropdown-menu">
-																		<li><a href="#">檢舉</a></li>
-																		<li><a href="#">修改</a></li>
-																		<li><a href="#">刪除</a></li>
-																	</ul>
-																</div>
-																<p>With Bootstrap 2, we added optional mobile
-																	friendly styles for key aspects of the framework. With
-																	Bootstrap 3, we've rewritten the project to be mobile
-																	friendly from the start. Instead of adding on optional
-																	mobile styles, they're baked right into the core. In
-																	fact, Bootstrap is mobile first. Mobile first styles
-																	can be found throughout the entire library instead of
-																	in separate files. To ensure proper rendering and touch
-																	zooming, add the viewport meta tag to your</p>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- 			<!--回應輸入表格-->
-										<div class="col-md-12">
-											<div class="panel-group">
-												<div class="panel">
-													<div class="panel-heading">
-														<h4 class="panel-title ">
-															<a data-toggle="collapse" href="#collapse2">我要回應</a>
-														</h4>
-													</div>
-													<div id="collapse2" class="panel-collapse collapse ">
-														<div>
-															<p>內容:</p>
-															<form action="" method="post">
-																<div class="form-group">
-																	<textarea class="form-control" rows="5" id="comment"></textarea>
-																</div>
-																<div class="text-right">
-																	<input type="submit">
-																</div>
-															</form>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
+								</c:if>
+								<div class="pull-right">
+									<c:if test="${!empty memberVo.aboutme}">
+										<strong>關於我</strong>
+										<p>${memberVo.aboutme}</p>
+										<hr>
+									</c:if>
+									<c:if test="${!empty memberVo.skill}">
+										<strong>專長</strong>
+										<p>${memberVo.skill}</p>
+										<hr>
+									</c:if>
+									<c:if test="${!empty memberVo.hobby}">
+										<strong>興趣</strong>
+										<p>${memberVo.hobby}</p>
+									</c:if>
 								</div>
-								<!-- 點評收藏 -->
-							</div>
-							<div role="tabpanel" class="tab-pane fade" id="Section4"
-								style="font-size: 20px">
+								</div>
+								<!-- 留言板 -->
+								<div role="tabpanel" class="tab-pane fade" id="Section3">
+									<div class="col-md-12" id="messageHeader">
+										<div class="col-md-1">
+											<img src="<%=request.getContextPath()%>/img/imember_image.png"
+												class="img-thumbnail pull-left">
+										</div>
+										<div class="col-md-11">
 
-								<p>喜歡的話記得幫我們評分還有收藏唷</p>
+											<div>
+												<span class="text-left">吳永志</span>
 
+												<%
+													Date dNow = new Date();
+													SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+													out.print("<span align=\"center\">" + ft.format(dNow) + "</span>");
+												%>
+												<div class="dropdown pull-right">
+													<button class="btn dropdown-toggle btn-default "
+														type="button" data-toggle="dropdown" style="height: 30px">
+														<span class="glyphicon glyphicon-option-horizontal"></span>
+													</button>
+													<ul class="dropdown-menu">
+														<li><a href="#">檢舉</a></li>
+														<li><a href="#">修改</a></li>
+														<li><a href="#">刪除</a></li>
+													</ul>
+												</div>
+
+											</div>
+
+											<div style="border-bottom: 1px solid black">
+
+												<p>With Bootstrap 2, we added optional mobile friendly
+													styles for key aspects of the framework. With Bootstrap 3,
+													we've rewritten the project to be mobile friendly from the
+													start. Instead of adding on optional mobile styles, they're
+													baked right into the core. In fact, Bootstrap is mobile
+													first. Mobile first styles can be found throughout the
+													entire library instead of in separate files. To ensure
+													proper rendering and touch zooming, add the viewport meta
+													tag to your</p>
+											</div>
+
+
+											<div class="col-md-12">
+
+												<div class="panel-group">
+													<div class="panel">
+														<div class="panel-heading">
+															<h4 class="panel-title " style="padding-bottom: 10px">
+																<a data-toggle="collapse" href="#collapse1">回應記錄</a>
+															</h4>
+														</div>
+														<div id="collapse1" class="panel-collapse collapse ">
+															<!--第一個回應 -->
+															<div>
+																<div class="col-md-1">
+																	<img
+																		src="<%=request.getContextPath()%>/img/imember_image.png"
+																		class="img-thumbnail pull-left">
+																</div>
+																<div class="col-md-11 "
+																	style="border-bottom: 1px solid black">
+																	<span>吳永志</span>
+																	<%
+																		out.print("<span align=\"center\">" + ft.format(dNow) + "</span>");
+																	%>
+																	<div class="dropdown pull-right">
+																		<button class="btn dropdown-toggle btn-default "
+																			type="button" data-toggle="dropdown"
+																			style="height: 30px">
+																			<span class="glyphicon glyphicon-option-horizontal"></span>
+																		</button>
+																		<ul class="dropdown-menu">
+																			<li><a href="#">檢舉</a></li>
+																			<li><a href="#">修改</a></li>
+																			<li><a href="#">刪除</a></li>
+																		</ul>
+																	</div>
+																	<p>With Bootstrap 2, we added optional mobile
+																		friendly styles for key aspects of the framework. With
+																		Bootstrap 3, we've rewritten the project to be mobile
+																		friendly from the start. Instead of adding on optional
+																		mobile styles, they're baked right into the core. In
+																		fact, Bootstrap is mobile first. Mobile first styles
+																		can be found throughout the entire library instead of
+																		in separate files. To ensure proper rendering and
+																		touch zooming, add the viewport meta tag to your</p>
+																</div>
+															</div>
+															<!--第二個回應 -->
+															<div>
+																<div class="col-md-1">
+																	<img
+																		src="<%=request.getContextPath()%>/img/imember_image.png"
+																		class="img-thumbnail pull-left">
+																</div>
+																<div class="col-md-11 "
+																	style="border-bottom: 1px solid black">
+																	<span>吳永志</span>
+																	<%
+																		out.print("<span align=\"center\">" + ft.format(dNow) + "</span>");
+																	%>
+																	<div class="dropdown pull-right">
+																		<button class="btn dropdown-toggle btn-default "
+																			type="button" data-toggle="dropdown"
+																			style="height: 30px">
+																			<span class="glyphicon glyphicon-option-horizontal"></span>
+																		</button>
+																		<ul class="dropdown-menu">
+																			<li><a href="#">檢舉</a></li>
+																			<li><a href="#">修改</a></li>
+																			<li><a href="#">刪除</a></li>
+																		</ul>
+																	</div>
+																	<p>With Bootstrap 2, we added optional mobile
+																		friendly styles for key aspects of the framework. With
+																		Bootstrap 3, we've rewritten the project to be mobile
+																		friendly from the start. Instead of adding on optional
+																		mobile styles, they're baked right into the core. In
+																		fact, Bootstrap is mobile first. Mobile first styles
+																		can be found throughout the entire library instead of
+																		in separate files. To ensure proper rendering and
+																		touch zooming, add the viewport meta tag to your</p>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- 			<!--回應輸入表格-->
+											<div class="col-md-12">
+												<div class="panel-group">
+													<div class="panel">
+														<div class="panel-heading">
+															<h4 class="panel-title ">
+																<a data-toggle="collapse" href="#collapse2">我要回應</a>
+															</h4>
+														</div>
+														<div id="collapse2" class="panel-collapse collapse ">
+															<div>
+																<p>內容:</p>
+																<form action="" method="post">
+																	<div class="form-group">
+																		<textarea class="form-control" rows="5" id="comment"></textarea>
+																	</div>
+																	<div class="text-right">
+																		<input type="submit">
+																	</div>
+																</form>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- 點評收藏 -->
+								</div>
+								<div role="tabpanel" class="tab-pane fade" id="Section4"
+									style="font-size: 20px">
+
+									<p>喜歡的話記得幫我們評分還有收藏唷</p>
+
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+
+
 	<jsp:include page="/footer.jsp" />
 	<script>
 		$(document).ready(function() {
