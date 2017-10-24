@@ -2,6 +2,7 @@ package com.e_Look.reportMessage.model;
 
 import java.util.List;
 
+import com.e_Look.message.model.MessageDAO;
 import com.e_Look.message.model.MessageVO;
 
 public class ReportMessageService {
@@ -21,6 +22,26 @@ public class ReportMessageService {
 		reportMessageVO.setReportContent(reportContent);
 		dao.insert(reportMessageVO);
 		
+	}
+	
+	public String getJSON(Integer status) {
+		return dao.getJSON(status);
+	}
+	
+	public void judeMessage(Integer reportID,int status) {
+		//使用Message欄位
+		MessageDAO mdao = new MessageDAO(); 
+		//用reportID及ReportMessageDAO去拿出rmVO物件
+		ReportMessageVO rmVO = dao.findByReportId(reportID);
+		//將ReportMessage的狀態設為1,已處理
+		rmVO.setStatus((byte) 1);
+		dao.update(rmVO);
+		//
+		MessageVO mVO = rmVO.getMessageVO();
+		//將傳進來的status訊息狀態設定進去Message裡
+		mVO.setStatus((byte)status);
+		//DAO裡有判斷式,使用符合status的update
+		mdao.update(rmVO.getMessageVO(), "status");
 	}
 	
 	public List<ReportMessageVO>findNotHandle() {

@@ -16,11 +16,14 @@ public class OrderDAO_JDBC implements OrderDAO_interface {
 	String passwd = "P@ssw0rd";
 	//第二組密碼
 	//String passwd = "123456";
-	private static final String INSERT_Order = "insert into Order (memberID,receiptNO,orderTime) values (?,?,?)"; 
-	private static final String UPDATE_Order = "update Order set memberID=? receiptNO=? orderTime=? where OrderID=?"; 
-	private static final String DELETE_Order = "delete from Order where OrderID=?"; 
-	private static final String SELECT_Order = "select OrderID,memberID,receiptNO,orderTime from Order where OrderID=?";
-	private static final String SELECT_ALL_Order = "select OrderID,memberID,receiptNO,orderTime from Order";
+	private static final String INSERT_Order = "insert into [Order] (memberID,orderTime) values (?,?)"; 
+	private static final String UPDATE_Order = "update [Order] set memberID=? orderTime=? where OrderID=?"; 
+	private static final String DELETE_Order = "delete from [Order] where OrderID=?"; 
+	private static final String SELECT_Order = "select OrderID,memberID,orderTime from [Order] where OrderID=?";
+	private static final String SELECT_ALL_Order = "select OrderID,memberID,orderTime from [Order]";
+	private static final String SELECT_MEMBER_UNCHECK_Order = "select OrderID,memberID,orderTime from [Order] where memberID=? and orderTime=null";
+	
+	
 	@Override
 	public void insert(OrderVO orderVO) {
 		Connection con = null;
@@ -30,8 +33,7 @@ public class OrderDAO_JDBC implements OrderDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);		
 			pstmt=con.prepareStatement(INSERT_Order);
 			pstmt.setInt(1,orderVO.getMemberID());
-			pstmt.setString(2,orderVO.getReceiptNO());
-			pstmt.setDate(3,orderVO.getOrderTime());
+			pstmt.setDate(2,orderVO.getOrderTime());
 			pstmt.executeUpdate();
 			
 		} catch (ClassNotFoundException e) {
@@ -66,8 +68,7 @@ public class OrderDAO_JDBC implements OrderDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);		
 			pstmt=con.prepareStatement(UPDATE_Order);
 			pstmt.setInt(1,orderVO.getMemberID());
-			pstmt.setString(2,orderVO.getReceiptNO());
-			pstmt.setDate(3,orderVO.getOrderTime());
+			pstmt.setDate(2,orderVO.getOrderTime());
 			pstmt.executeUpdate();
 			
 		} catch (ClassNotFoundException e) {
@@ -145,8 +146,7 @@ public class OrderDAO_JDBC implements OrderDAO_interface {
 				orderVO = new OrderVO();
 				orderVO.setOrderID(rs.getInt(1));
 				orderVO.setMemberID(rs.getInt(2));
-				orderVO.setReceiptNO(rs.getString(3));
-				orderVO.setOrderTime(rs.getDate(4));
+				orderVO.setOrderTime(rs.getDate(3));
 			}
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
@@ -188,8 +188,7 @@ public class OrderDAO_JDBC implements OrderDAO_interface {
 				OrderVO orderVO= new OrderVO();
 				orderVO.setOrderID(rs.getInt(1));
 				orderVO.setMemberID(rs.getInt(2));
-				orderVO.setReceiptNO(rs.getString(3));
-				orderVO.setOrderTime(rs.getDate(4));
+				orderVO.setOrderTime(rs.getDate(3));
 				list.add(orderVO);
 			}	
 		} catch (ClassNotFoundException e) {
@@ -215,16 +214,61 @@ public class OrderDAO_JDBC implements OrderDAO_interface {
 		}
 			return list;
 	}
+	@Override
+	public OrderVO findMemberUncheckOrder(Integer memberID) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		OrderVO orderVO = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);	
+			pstmt = con.prepareStatement(SELECT_MEMBER_UNCHECK_Order);
+			pstmt.setInt(1, memberID);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()){
+				orderVO=new OrderVO();
+				orderVO.setOrderID(rs.getInt(1));
+				orderVO.setMemberID(rs.getInt(2));
+				orderVO.setOrderTime(rs.getDate(3));
+			}
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. "
+					+ e.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+		return orderVO;
+	}
 
 	public static void main(String[] args) {
 		
 		OrderDAO_JDBC dao=new OrderDAO_JDBC();
-		OrderVO vo=new OrderVO();
+		OrderVO orderVO=new OrderVO();
+		orderVO.setMemberID(100001);
+		orderVO.setOrderTime(null);
 		
+		dao.insert(orderVO);
 		
 		
 		
 		
 		
 	}
+
 }

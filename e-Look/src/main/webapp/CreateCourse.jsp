@@ -36,7 +36,6 @@
 	src="<%=request.getContextPath()%>/_PJC/js/bootstrap-datetimepicker.zh-TW.js"></script>
 <script src="<%=request.getContextPath()%>/_PJC/tinymce/tinymce.min.js"></script>
 <script src="<%=request.getContextPath()%>/_PJC/tinymce/init-tinymce.js"></script>
-<script src="<%=request.getContextPath()%>/_PJC/js/getdata.js"></script>
 <script src="<%=request.getContextPath()%>/_PJC/js/upload1.js"></script>
 </head>
 
@@ -120,7 +119,7 @@
 													<i class="glyphicon glyphicon-list"></i>
 												</div>
 												<div class="update-text">
-													<strong>步驟一、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
+													<strong>步驟一456、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
 												</div>
 											</div>
 										</div>
@@ -298,7 +297,7 @@
 												style="font-size: 20px; font-weight: bold; background-color: #BBFFEE">
 												學生會需要用到的工具（含種類、版本細節）</div>
 											<div class="[ form-group ][ form-group-textarea ]">
-												<textarea id="customStyle" name="preTool"
+												<textarea name="preTool"
 													placeholder="請輸入課程中，可能會使用到的工具" class="form-control"
 													data-toggle="floatLabel" data-value="no-js"
 													style="font-size: 18px" form="TotalContent"></textarea>
@@ -316,7 +315,7 @@
 												style="font-size: 20px; font-weight: bold; background-color: #BBFFEE">
 												學這堂課之前，學生需要具有哪些背景知識？</div>
 											<div class="[ form-group ][ form-group-textarea ]">
-												<textarea id="customStyle" name="background"
+												<textarea name="background"
 													placeholder="如果是比較進階的課程，建議先跟學生說明必備的知識，幫助學生了解這堂課"
 													class="form-control" data-toggle="floatLabel"
 													data-value="no-js" style="font-size: 18px" form="TotalContent"></textarea>
@@ -333,7 +332,7 @@
 												style="font-size: 20px; font-weight: bold; background-color: #BBFFEE">
 												學完這堂課後，學生可以做出什麼東西？</div>
 											<div class="[ form-group ][ form-group-textarea ]">
-												<textarea id="customStyle" name="ability"
+												<textarea name="ability"
 													placeholder="最好是某種實質的東西：像是完成某種作品、達到哪種目標甚至是得到什麼結果"
 													class="form-control" data-toggle="floatLabel"
 													data-value="no-js" style="font-size: 18px" form="TotalContent"></textarea>
@@ -350,7 +349,7 @@
 												style="font-size: 20px; font-weight: bold; background-color: #BBFFEE">
 												哪些人適合這堂課？</div>
 											<div class="[ form-group ][ form-group-textarea ]">
-												<textarea id="customStyle" name="targetgroup"
+												<textarea name="targetgroup"
 													placeholder="形容這堂課適合的學生族群，可以更讓學生了解課程內容的方向"
 													class="form-control" data-toggle="floatLabel"
 													data-value="no-js" style="font-size: 18px" form="TotalContent"></textarea>
@@ -740,15 +739,15 @@
 			$("#title").text(value);
 		});
 
-// 		$(document).ready(
-// 				function() {
-// 					// Floating Labels
-// 					//==============================================================
-// 					$('[data-toggle="floatLabel"]').attr('data-value',
-// 							$(this).val()).on('keyup change', function() {
-// 						$(this).attr('data-value', $(this).val());
-// 					});
-// 				});
+		$(document).ready(
+				function() {
+					// Floating Labels
+					//==============================================================
+					$('[data-toggle="floatLabel"]').attr('data-value',
+							$(this).val()).on('keyup change', function() {
+						$(this).attr('data-value', $(this).val());
+					});
+				});
 
 		$('textarea').each(function() {
 			autosize(this);
@@ -888,7 +887,28 @@
 		
 	
 	
-	
+	$('textarea').keyup(function(){
+			 
+			 var formData = new FormData($('form')[3]);
+				//console.log("5555555555");
+				$.ajax({
+					type : 'POST',
+					url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
+					data :formData,
+					processData : false,
+					contentType : false,
+//					success: function(){
+//						
+//						$('#sendOK').modal()
+//						$('#sendOK h3').text("更新成功")
+//						setTimeout(function(){
+//					        $("#sendOK").modal('hide');
+//					        }, 1000);
+//			        }
+				})
+			 
+			 
+		 })
 					
 
 	</script>
