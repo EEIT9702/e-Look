@@ -218,7 +218,7 @@ public class ShoppingCartDAO_JDBC implements ShoppingCartDAO_interface {
 		
 		ShoppingCartVO shoppingCartVO = new ShoppingCartVO();
 		CourseVO courseVO=new CourseVO();
-		courseVO.setCourseID(200003);
+		courseVO.setCourseID(200002);
 		//courseVO.setMemberID(100001);
 		shoppingCartVO.setMemberID(100001);
 		shoppingCartVO.setCourseVO(courseVO);
