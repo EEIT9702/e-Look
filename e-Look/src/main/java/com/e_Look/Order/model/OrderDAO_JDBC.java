@@ -22,16 +22,16 @@ public class OrderDAO_JDBC implements OrderDAO_interface {
 	private static final String SELECT_Order = "select OrderID,memberID,receiptNO,orderTime from Order where OrderID=?";
 	private static final String SELECT_ALL_Order = "select OrderID,memberID,receiptNO,orderTime from Order";
 	@Override
-	public void insert(OrderVO OrderVO) {
+	public void insert(OrderVO orderVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);		
 			pstmt=con.prepareStatement(INSERT_Order);
-			pstmt.setInt(1,OrderVO.getMemberID());
-			pstmt.setString(2,OrderVO.getReceiptNO());
-			pstmt.setDate(3,OrderVO.getOrderTime());
+			pstmt.setInt(1,orderVO.getMemberID());
+			pstmt.setString(2,orderVO.getReceiptNO());
+			pstmt.setDate(3,orderVO.getOrderTime());
 			pstmt.executeUpdate();
 			
 		} catch (ClassNotFoundException e) {
@@ -58,16 +58,16 @@ public class OrderDAO_JDBC implements OrderDAO_interface {
 	}
 
 	@Override
-	public void update(OrderVO OrderVO) {
+	public void update(OrderVO orderVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);		
 			pstmt=con.prepareStatement(UPDATE_Order);
-			pstmt.setInt(1,OrderVO.getMemberID());
-			pstmt.setString(2,OrderVO.getReceiptNO());
-			pstmt.setDate(3,OrderVO.getOrderTime());
+			pstmt.setInt(1,orderVO.getMemberID());
+			pstmt.setString(2,orderVO.getReceiptNO());
+			pstmt.setDate(3,orderVO.getOrderTime());
 			pstmt.executeUpdate();
 			
 		} catch (ClassNotFoundException e) {
@@ -185,12 +185,12 @@ public class OrderDAO_JDBC implements OrderDAO_interface {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				
-				OrderVO OrderVO= new OrderVO();
-				OrderVO.setOrderID(rs.getInt(1));
-				OrderVO.setMemberID(rs.getInt(2));
-				OrderVO.setReceiptNO(rs.getString(3));
-				OrderVO.setOrderTime(rs.getDate(4));
-				list.add(OrderVO);
+				OrderVO orderVO= new OrderVO();
+				orderVO.setOrderID(rs.getInt(1));
+				orderVO.setMemberID(rs.getInt(2));
+				orderVO.setReceiptNO(rs.getString(3));
+				orderVO.setOrderTime(rs.getDate(4));
+				list.add(orderVO);
 			}	
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
@@ -217,6 +217,14 @@ public class OrderDAO_JDBC implements OrderDAO_interface {
 	}
 
 	public static void main(String[] args) {
+		
+		OrderDAO_JDBC dao=new OrderDAO_JDBC();
+		OrderVO vo=new OrderVO();
+		
+		
+		
+		
+		
 		
 	}
 }
