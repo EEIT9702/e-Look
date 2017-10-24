@@ -216,7 +216,6 @@ e.printStackTrace();
 				eLookEventVO = new eLookEventVO();
 				eLookEventVO.setEventID(rs.getInt(1));
 				eLookEventVO.setEventName(rs.getString(2));
-				// eLookEventVO.setePhoto(rs.getBinaryStream(3));
 				eLookEventVO.seteStartDate(rs.getDate(3));
 				eLookEventVO.seteEndDate(rs.getDate(4));
 				eLookEventVO.setDiscount(rs.getDouble(5));

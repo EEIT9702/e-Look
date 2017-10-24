@@ -3,18 +3,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE>
 <%-- <script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script> --%>
-<script type="text/javascript" src="js/jquery.mmenu.js"></script>
-		<script type="text/javascript">
-			$(function() {
-				$('nav#menu').mmenu();
-			});
-		</script>
 		<title>eLook後台管理系統</title>
 <html>
 <head>
 <link type="text/css" rel="stylesheet" href="css/demo.css" />
 <link type="text/css" rel="stylesheet" href="css/jquery.mmenu.css" />
-
 </head>
 <style>
 nav li{
@@ -43,8 +36,8 @@ margin-bottom: 45px;
 		
 			<nav id="menu" style="font-size: 18px">
 				<ul >
-					<li><a href="#" style="background-color:#FFCCCC">管理員</a></li>
-					<li><a href="#" style="background-color:#FFDDAA">活動管理</a></li>
+					<li><a href="#" style="background-color:#FFCCCC">管理員</a></li>	
+					<li><a href="event.jsp" style="background-color:#FFDDAA">活動管理</a></li>
 					<li><a href="#"style="background-color: #FFFFBB">輪播管理</a></li>
 			        <li><a href="#"style="background-color: #CCFF99">課程審查</a></li>
 					<li><a href="#"style="background-color: #BBFFEE	">收益報表</a></li>
@@ -53,5 +46,11 @@ margin-bottom: 45px;
 				</ul>
 			</nav>
 		</div>
+		<script type="text/javascript" src="js/jquery.mmenu.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$('nav#menu').mmenu();
+			});
+		</script>
 </body>
 </html>
