@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.e_Look.Course.CourseVO;
-import com.e_Look.shoppingCart.model.jdbc.ShoppingCartDAO;
+import com.e_Look.shoppingCart.model.jdbc.*;
 
 import net.minidev.json.JSONValue;
 
@@ -22,17 +22,32 @@ public class LoadShoppingCart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integer memberID = Integer.parseInt(request.getParameter("memberID"));
-		response.setCharacterEncoding("UTF-8");
-		ShoppingCartDAO dao = new ShoppingCartDAO();
-		List<CourseVO> courseVOs = dao.findByMemberID(memberID);
-		String jsonString = JSONValue.toJSONString(courseVOs);  
-		response.getWriter().print(jsonString);
-		
+		System.out.println("不合法的請求");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		try{
+			Integer courseID = Integer.parseInt(request.getParameter("courseID"));
+			Integer memberID = Integer.parseInt(request.getParameter("memberID"));
+			ShoppingCartDAO dao = new ShoppingCartDAO();
+			ShoppingCartVO shoppingCartVO=new ShoppingCartVO();
+			CourseVO courseVO=new CourseVO();
+			
+			courseVO.setCourseID(courseID);
+			shoppingCartVO.setMemberID(memberID);
+			shoppingCartVO.setCourseVO(courseVO);
+			dao.delete(shoppingCartVO);
+			System.out.println("會員："+memberID+",刪除了購物車中的課程："+courseID);
+		}catch(NumberFormatException e){
+			Integer memberID = Integer.parseInt(request.getParameter("memberID"));
+			response.setCharacterEncoding("UTF-8");
+			ShoppingCartDAO dao = new ShoppingCartDAO();
+			List<CourseVO> courseVOs = dao.findByMemberID(memberID);
+			String jsonString = JSONValue.toJSONString(courseVOs);  
+			response.getWriter().print(jsonString);
+		}
+		
+		
 	}
 
 }

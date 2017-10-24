@@ -491,6 +491,7 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 
 		//測試用：自動儲存草稿
 		CourseVO CourseVO2 = new CourseVO();
+
 //		CourseVO2.setCourseName("java的基本功能介紹");//課程名稱
 //		CourseVO2.setPreTool("需要安裝Adobe CC 2017的版本");
 //		CourseVO2.setBackground("無限制");
