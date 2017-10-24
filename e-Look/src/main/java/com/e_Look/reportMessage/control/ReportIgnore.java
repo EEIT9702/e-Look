@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ProductsInsert
  */
-@WebServlet("/backstage/ReportConfirm")
-public class ReportConfirm extends HttpServlet {
+@WebServlet("/backstage/ReportIgnore")
+public class ReportIgnore extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -35,7 +35,7 @@ public class ReportConfirm extends HttpServlet {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String url = "jdbc:sqlserver://localhost:1433;DatabaseName=eLook";
-		String query = "UPDATE ReportMessage SET status=1 WHERE reportId=?";
+		String query = "UPDATE ReportMessage SET status=0 WHERE reportId=?";
 		try {
 			DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 			con = DriverManager.getConnection(url, "sa", "P@ssw0rd");
@@ -43,9 +43,9 @@ public class ReportConfirm extends HttpServlet {
 			pstmt.setInt(1, reportId);
 			int i = pstmt.executeUpdate();
 			if (i > 0)
-				out.println("檢舉確認成功");
+				out.println("確認不予處理成功");
 			else
-				out.println("確認失敗");
+				out.println("處理失敗");
 		} catch (Exception e) {
 			out.println(e);
 		}
