@@ -32,4 +32,8 @@
     <filter-name>CreateCourseFilter</filter-name>
     <url-pattern>/CreateCourse.jsp</url-pattern>
   </filter-mapping>
+  <filter-mapping>
+    <filter-name>MemberBookmarksFilter</filter-name>
+    <url-pattern>/freeCourse-v1.jsp</url-pattern>
+  </filter-mapping>
 </web-app>

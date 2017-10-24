@@ -29,6 +29,8 @@ public class CourseService {
 	public void updateCourseContent(CourseVO courseVO) {
 		dao.update(courseVO);
 	}
+	
+	
 
 	public void updateCourseImage(Integer CourseID, Part part) {
 
