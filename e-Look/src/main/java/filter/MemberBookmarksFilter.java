@@ -20,7 +20,7 @@ import com.e_Look.member.model.MemberVO;
 import com.e_Look.memberBookmarks.model.MemberBookmarksService;
 import com.e_Look.memberBookmarks.model.MemberBookmarksVO;
 
-@WebFilter("/MemberBookmarksFilter")
+@WebFilter(filterName ="MemberBookmarksFilter")
 public class MemberBookmarksFilter implements Filter {
 
 	public MemberBookmarksFilter() {
@@ -51,9 +51,13 @@ public class MemberBookmarksFilter implements Filter {
 				request.setAttribute("memberBookmarksVOList", memberBookmarksVO);
 				request.setAttribute("courseVO", courseVO);
 				request.setAttribute("memberVo", memberVo);
+				chain.doFilter(request, response);
+			}else{
+				response.sendRedirect(request.getContextPath()+request.getServletPath()+"?CourseID=200001");
+				
 			}
 
-			chain.doFilter(request, response);
+			
 		}
 
 	}

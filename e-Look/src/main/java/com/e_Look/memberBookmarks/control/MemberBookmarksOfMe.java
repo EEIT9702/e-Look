@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import com.e_Look.member.model.MemberVO;
 import com.e_Look.memberBookmarks.model.MemberBookmarksService;
 
-@WebServlet("/MemberBookmarksInsertController")
+@WebServlet("/MemberBookmarksOfMe")
 public class MemberBookmarksOfMe extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

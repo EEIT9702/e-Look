@@ -34,6 +34,6 @@
   </filter-mapping>
   <filter-mapping>
     <filter-name>MemberBookmarksFilter</filter-name>
-    <url-pattern>/MemberBookmarksFilter</url-pattern>
+    <url-pattern>/freeCourse-v1.jsp</url-pattern>
   </filter-mapping>
 </web-app>
