@@ -25,16 +25,17 @@ public class CourseDAO implements CourseDAO_interface {
 			e.printStackTrace();
 		}
 	}
-	private static final String INSERT_Course = "insert into Course (courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore,proposalVideopathway) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	private static final String UPDATE_Course = "update Course set courseName=?,preTool=?,background=?,ability=?,targetgroup=?,soldPrice=?,courseLength=?,targetStudentNumber=?,fundStartDate=?,fundEndDate=?,courseStartDate=?,courseVideopathway=?,courseContent=?,proposalVideopathway=? where courseID= ?";
+	private static final String INSERT_Course = "insert into Course (courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String UPDATE_Course = "update Course set courseName=?,preTool=?,background=?,ability=?,targetgroup=?,soldPrice=?,courseLength=?,targetStudentNumber=?,fundStartDate=?,fundEndDate=?,courseStartDate=?,courseContent=? where courseID= ?";
 	private static final String UPDATE_Course_IMAGE ="update Course set cPhoto=? where courseID= ?";
 	private static final String UPDATE_Course_PAPER ="update Course set paper=? where courseID= ?";
+	private static final String UPDATE_Course_CourseVideopathway ="update Course set CourseVideopathway=? where courseID= ?";
 	private static final String DELETE_Course = "delete from Course where courseID= ?";
-	private static final String SELECT_ONE_Course = "select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore,proposalVideopathway from Course where courseID= ?";
-	private static final String SELECT_ALL_Course = "select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore,proposalVideopathway from Course where memberID= ? and status= ?";
-	private static final String SELECT_STATUS_Course = "select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore,proposalVideopathway from Course where status= ?";
+	private static final String SELECT_ONE_Course = "select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore from Course where courseID= ?";
+	private static final String SELECT_ALL_Course = "select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore from Course where memberID= ? and status= ?";
+	private static final String SELECT_STATUS_Course = "select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore from Course where status= ?";
 	private static final String CHANGE_Course_Stage = "update Course set status=? where courseID= ?";
-	private static final String SELECT_ALL_ONLINECourse = "select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore,proposalVideopathway from Course where  status= 2 ";
+	private static final String SELECT_ALL_ONLINECourse = "select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore from Course where  status= 2 ";
 	@Override
 	public Integer insert(CourseVO courseVO) {
 		Connection con = null;
@@ -62,7 +63,6 @@ public class CourseDAO implements CourseDAO_interface {
 			pstmt.setString(16, courseVO.getCourseContent());// 課程介紹內容
 			pstmt.setInt(17, courseVO.getMemberID());// 會員編號
 			pstmt.setDouble(18, courseVO.getAvgScore());// 課程平均分數
-			pstmt.setString(19, courseVO.getProposalVideopathway());// 募資影片
 			pstmt.executeUpdate();
 			
 			generatedKeys = pstmt.getGeneratedKeys();//取得SQL資料庫自動產生的流水號(課程ID)
@@ -114,11 +114,10 @@ public class CourseDAO implements CourseDAO_interface {
 			pstmt.setDate(9, courseVO.getFundStartDate());// 募資開始日期
 			pstmt.setDate(10, courseVO.getFundEndDate());// 募資結束日期
 			pstmt.setDate(11, courseVO.getCourseStartDate());// 課程開始上線日期
-			pstmt.setString(12, courseVO.getCourseVideopathway());// 課程影片
+//			pstmt.setString(12, courseVO.getCourseVideopathway());// 課程影片路徑
 //			pstmt.setBlob(13, courseVO.getPaper());// 課程講義
-			pstmt.setString(13, courseVO.getCourseContent());// 課程介紹內容
-			pstmt.setString(14, courseVO.getProposalVideopathway());// 募資影片
-			pstmt.setInt(15, courseVO.getCourseID());// 課程ID
+			pstmt.setString(12, courseVO.getCourseContent());// 課程介紹內容
+			pstmt.setInt(13, courseVO.getCourseID());// 課程ID
 			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -212,6 +211,41 @@ public class CourseDAO implements CourseDAO_interface {
 	
 
 	@Override
+	public void updatecourseVideopathway(CourseVO courseVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ds.getConnection();
+			
+				pstmt = con.prepareStatement(UPDATE_Course_CourseVideopathway);
+				pstmt.setString(1, courseVO.getCourseVideopathway());
+				pstmt.setInt(2, courseVO.getCourseID());
+				pstmt.executeUpdate();
+			
+
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
+	
+	
+	@Override
 	public void delete(Integer courseID) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -272,7 +306,6 @@ public class CourseDAO implements CourseDAO_interface {
 				courseVO.setCourseContent(rs.getString(17));
 				courseVO.setMemberID(rs.getInt(18));
 				courseVO.setAvgScore(rs.getDouble(19));
-				courseVO.setProposalVideopathway(rs.getString(20));
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
@@ -327,7 +360,6 @@ public class CourseDAO implements CourseDAO_interface {
 				courseVO.setCourseContent(rs.getString(17));
 				courseVO.setMemberID(rs.getInt(18));
 				courseVO.setAvgScore(rs.getDouble(19));
-				courseVO.setProposalVideopathway(rs.getString(20));
 				CourseList.add(courseVO);			
 		}
 		} catch (SQLException e) {
@@ -412,7 +444,6 @@ public class CourseDAO implements CourseDAO_interface {
 				courseVO.setCourseContent(rs.getString(17));
 				courseVO.setMemberID(rs.getInt(18));
 				courseVO.setAvgScore(rs.getDouble(19));
-				courseVO.setProposalVideopathway(rs.getString(20));
 				CourseList.add(courseVO);			
 		}
 		} catch (SQLException e) {

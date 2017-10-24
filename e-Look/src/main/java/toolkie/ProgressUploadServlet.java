@@ -56,6 +56,8 @@ public class ProgressUploadServlet extends HttpServlet {
 						// fileName.substring(fileName.lastIndexOf("\\"));
 
 						File saved = new File("D:\\TEST", item.getName());
+						System.out.println("D:\\TEST\\"+ item.getName());
+						String courseVideopathway = "D:\\TEST\\"+ item.getName();
 						saved.getParentFile().mkdirs();
 
 						InputStream ins = item.getInputStream();
@@ -70,7 +72,7 @@ public class ProgressUploadServlet extends HttpServlet {
 
 						ous.close();
 						ins.close();
-
+						
 						response.getWriter().println("�w�x�s�ɮסG" + saved);
 					}
 				}

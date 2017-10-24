@@ -502,7 +502,7 @@
 										<div class="col-md-12">
 											<div class="panel panel-default">
 												<div class="panel-heading">
-													<strong>課程影片上傳</strong> <small> </small>
+													<strong>影片上傳</strong> <small> </small>
 												</div>
 												<div class="panel-body">
 													<div class="input-group image-preview">
@@ -590,53 +590,7 @@
 									</div>
 								</div>
 								<!-- /container -->
-								<div class="container">
-									<br />
-									<div class="row">
-										<div class="col-md-12">
-											<div class="panel panel-default">
-												<div class="panel-heading">
-													<strong>募資影片上傳</strong> <small> </small>
-												</div>
-												<div class="panel-body">
-													<div class="input-group image-preview">
-														<!-- don't give a name === doesn't send on POST/GET -->
-														<span> <!-- image-preview-clear button --> 
-														<input type="hidden"id="filename3" value="">
-														<span></span>
-															<div class="btn btn-default image-preview-input">
-																<span class="glyphicon glyphicon-folder-open"></span> <span
-																	class="image-preview-input-title">選擇檔案</span> <input
-																	type="file" name="input-file-preview"
-																	id="inputfilename3" onclick="fileSelect()" />
-																<!-- rename it -->
-															</div>
-															<button id="btnSubmit3" type="submit"
-																class="btn btn-labeled btn-primary"
-																onclick="bottonClick()">
-																<span class="btn-label"><i
-																	class="glyphicon glyphicon-upload"></i></span>上傳
-															</button>
-														</span>
-													</div>
-													<!-- /input-group image-preview [TO HERE]-->
-													<br />
-													<!-- Drop Zone -->
-													<!-- Progress Bar -->
-													<div class="progress">
-														<div id="progressBar3" class="progress-bar"
-															role="progressbar3" aria-valuenow="0" aria-valuemin="0"
-															aria-valuemax="100" style="width: 0%;">
-															<!-- 															60% <span class="sr-only">60% Complete</span> -->
-														</div>
-													</div>
-													<br />
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!-- /container -->
+								
 								<ul class="list-inline pull-right">
 									<li><button type="button"
 											class="btn btn-default prev-step">上一步</button></li>
