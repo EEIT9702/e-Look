@@ -22,20 +22,13 @@
 /* 影片區塊 */
 video {
 	width: 100%;
-	height: 90%;
-	padding-left: -15px;
-	padding-right: -15px;
+	height: 100%;
 }
 
 #videoArea {
 	background-size: cover;
 	background-position: center;
 	height: 60%;
-}
-
-#videoTitle {
-	background-color: rgba(0%, 10%, 20%, 0.3);
-	color: white;
 }
 
 #videoliststyle>li {
@@ -49,7 +42,7 @@ video {
 #videoArea>div>div>ul {
 	width: 100%;
 	color: white;
-	height: 80%;
+	height: 83.2%;
 	overflow-y: scroll;
 	margin: 0;
 	padding: 0;
@@ -67,11 +60,13 @@ video::-webkit-media-controls-panel {
 	width: calc(100% + 30px); /* Adjust as needed */
 }
 
+#videoTitle {
+	background-color: rgba(0%, 10%, 20%, 0.3);
+	color: white;
+}
 #videoDivListStyle {
 	border: 1px solid gray;
-	height: 90.3%;
-	padding-left: -15px;
-	padding-right: -15px;
+	height: 100%;
 	background-color: rgba(0%, 10%, 20%, 0.3);;
 }
 
@@ -184,7 +179,6 @@ a:HOVER {
 </head>
 <!-- 影片區 -->
 <body oncontextmenu="window.event.returnValue=false">
-
 	<jsp:include page="/login.jsp" flush="true" />
 	<div class="container-fluid">
 		<div class="container">
@@ -194,7 +188,7 @@ a:HOVER {
 					style="background-image: url('<%=request.getContextPath() %>/CourseImage?CourseID=${courseVO.courseID}')">
 
 					<div class="col-md-12">
-						<div class="col-md-8 col-xs-12">
+						<div class="col-md-8 col-xs-12"  style="margin-right:-15px">
 
 							<c:choose>
 								<c:when test="${LoginOK.memberID==courseVO.memberID}">
@@ -278,11 +272,14 @@ a:HOVER {
 						class="img-responsive center-block">
 					<h5 class="text-center">課程時間為 ${courseVO.courseLength}min</h5>
 				</div>
-				<c:if test="${!empty mBookmarkList} ">
+				<c:if test="${!empty mBookmarkList}">
 						<c:forEach items="${mBookmarkList}" var="memberBookmsrks">
 							<c:choose>
 								<c:when test="${courseVO.courseID==memberBookmsrks.courseID}">
 									<c:set var="favor" value="favoriteclick1" />
+									<c:set var="favor1" value="ture" />
+								</c:when>
+								<c:when test="${!empty favor1}">
 								</c:when>
 								<c:otherwise>
 									<c:set var="favor" value="favoriteclick2" />
@@ -290,14 +287,18 @@ a:HOVER {
 							</c:choose>
 						</c:forEach>
 				</c:if>
-				<c:set var="favor" value="favoriteclick2" />
+				
+				<c:if test="${empty mBookmarkList}">
+					<c:set var="favor" value="favoriteclick2"/>
+				</c:if>
+				
 				<div class="col-md-1 col-xs-4">
 					<img src="<%=request.getContextPath()%>/img/favorite.png"
 						class="img-responsive center-block"><a href="#"
 						id="${favor}"><h5 class="text-center">加到最愛</h5> </a>
 				</div>
-				<input type="hidden" value="${courseVO.courseID}" id="mbcourseID">
-				<input type="hidden" value="${LoginOK.memberID}" id="mbmemberID">
+				<input type="hidden" value="${courseVO.courseID}" id="mbcourseID" name="courseID">
+				<input type="hidden" value="${LoginOK.memberID}" id="mbmemberID" name="memberID">
 
 				<div class="col-md-1 col-xs-4 ">
 					<img src="<%=request.getContextPath()%>/_Lyy/share.png"

@@ -53,23 +53,19 @@ public class OnlineCourse implements Filter {
 				HttpSession session = request.getSession();
 				MemberVO memberVoOK = (MemberVO) session.getAttribute("LoginOK");
 				List<BuyCourseVO> list2 = null;
+				List<MemberBookmarksVO> mBookmarkList = null;
+				MemberBookmarksService memberBookmarksService=new MemberBookmarksService();
 				if (memberVoOK != null) {
 				
 						list2 = dao2.findByMemberID(memberVoOK.getMemberID());
+						mBookmarkList=memberBookmarksService.findPrimaryMemberBookmarks(memberVoOK.getMemberID());
+						
+						
 				}
-				List<MemberBookmarksVO> mBookmarkList = null;
-				MemberBookmarksService memberBookmarksService=new MemberBookmarksService();
-				mBookmarkList=memberBookmarksService.findPrimaryMemberBookmarks(memberVoOK.getMemberID());
+				
 				if(mBookmarkList!=null){
-					
 					request.setAttribute("mBookmarkList", mBookmarkList);
-					
 				}
-				
-				
-				
-				
-					
 					request.setAttribute("list", list);
 					request.setAttribute("list2", list2);
 					request.setAttribute("courseVO", courseVO);
