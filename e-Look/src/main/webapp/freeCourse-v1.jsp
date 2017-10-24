@@ -223,17 +223,7 @@ video::-webkit-media-controls-panel {
 							</div>
 							<ul id="videoliststyle">
 								<li>線上課程</li>
-								<li>免費課程</li>
-								<li>我要開課</li>
-								<li>免費課程</li>
-								<li>我要開課</li>
-								<li>免費課程</li>
-								<li>我要開課</li>
-								<li>免費課程</li>
-								<li>我要開課</li>
-								<li>免費課程</li>
-								<li>我要開課</li>
-								<li>免費課程</li>
+					
 							</ul>
 						</div>
 					</div>

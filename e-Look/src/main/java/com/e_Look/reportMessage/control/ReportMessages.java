@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.minidev.json.JSONValue;
+import org.json.simple.JSONValue;
 
 /**
  * Servlet implementation class ReportMessages
@@ -64,6 +64,9 @@ public class ReportMessages extends HttpServlet {
 			con = DriverManager.getConnection(url, "sa", "P@ssw0rd");
 			
 			pstmt = con.prepareStatement(query);
+			pstmt.setString(1,status);
+			 rs = pstmt.executeQuery();
+			
 			
 			 List  l1 = new LinkedList();
 			 while (rs.next()) {
@@ -71,6 +74,7 @@ public class ReportMessages extends HttpServlet {
 				 m1.put("messageID", rs.getString(1));   
 				 m1.put("mContent", rs.getString(2));  
 				 m1.put("reportID", rs.getString(3));   
+				 m1.put("reportMessageID", rs.getString(4)); 
 				 m1.put("reportMemberID", rs.getString(5)); 
 				 m1.put("reportContent", rs.getString(6));
 				 m1.put("reportTime", rs.getString(7));

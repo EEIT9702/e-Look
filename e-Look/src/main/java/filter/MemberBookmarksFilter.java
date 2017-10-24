@@ -59,8 +59,7 @@ public class MemberBookmarksFilter implements Filter {
 				request.setAttribute("courseVO", courseVO);
 				request.setAttribute("memberVo", memberVO);
 				chain.doFilter(request, response);
-			}else{
-				
+			}else{	
 				response.sendRedirect(request.getContextPath()+request.getServletPath()+"?CourseID=200003");
 				
 			}
