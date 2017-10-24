@@ -12,6 +12,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.e_Look.Course.CourseDAO;
 import com.e_Look.Course.CourseVO;
@@ -37,27 +38,32 @@ public class MemberBookmarksFilter implements Filter {
 			HttpServletRequest request = (HttpServletRequest) req;
 			HttpServletResponse response = (HttpServletResponse) resp;
 
-			String courseID = request.getParameter("CourseID");//why可以取
+			String courseID = request.getParameter("CourseID");
 			if (courseID != null) {
 				CourseDAO dao = new CourseDAO();
 				CourseVO courseVO = dao.findByPrimaryKey(Integer.valueOf(courseID));
-				MemberService service = new MemberService();
-				MemberVO memberVo = service.getMember(courseVO.getMemberID());
+				
+				HttpSession session = request.getSession();
+				MemberVO memberVO=(MemberVO)session.getAttribute("LoginOK");
+					if(memberVO==null){
+						session.setAttribute("loginerr", "123");
+						response.sendRedirect(request.getHeader("referer"));
+						return;
+					}
 
 				MemberBookmarksService memberBookmarksService = new MemberBookmarksService();
 				List<MemberBookmarksVO> memberBookmarksVO = memberBookmarksService
-						.findPrimaryMemberBookmarks(courseVO.getMemberID());
-
+						.findPrimaryMemberBookmarks(memberVO.getMemberID());
+				
 				request.setAttribute("memberBookmarksVOList", memberBookmarksVO);
 				request.setAttribute("courseVO", courseVO);
-				request.setAttribute("memberVo", memberVo);
+				request.setAttribute("memberVo", memberVO);
 				chain.doFilter(request, response);
 			}else{
-				response.sendRedirect(request.getContextPath()+request.getServletPath()+"?CourseID=200001");
+				
+				response.sendRedirect(request.getContextPath()+request.getServletPath()+"?CourseID=200003");
 				
 			}
-
-			
 		}
 
 	}

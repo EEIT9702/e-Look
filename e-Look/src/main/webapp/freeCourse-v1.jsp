@@ -2,22 +2,7 @@
 	pageEncoding="UTF-8"
 	import="java.util.*,java.text.*,com.e_Look.Course.*,com.e_Look.member.model.*,com.e_Look.memberBookmarks.model.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%
-	String courseID = request.getParameter("CourseID");
-	if (courseID != null) {
-		CourseDAO dao = new CourseDAO();
-		CourseVO courseVO = dao.findByPrimaryKey(Integer.valueOf(courseID));
-		MemberService service = new MemberService();
-		MemberVO memberVo = service.getMember(courseVO.getMemberID());
 
-		MemberBookmarksService memberBookmarksService = new MemberBookmarksService();
-		List<MemberBookmarksVO> memberBookmarksVO = memberBookmarksService.findPrimaryMemberBookmarks(courseVO.getMemberID());
-
-		pageContext.setAttribute("memberBookmarksVOList", memberBookmarksVO);
-		pageContext.setAttribute("courseVO", courseVO);
-		pageContext.setAttribute("memberVo", memberVo);
-	}
-%>
 <!DOCTYPE >
 <html>
 <head>

@@ -147,7 +147,7 @@ a:HOVER {
 
 </head>
 
-<body id="body">
+<body id="body" style="margin-top:50px">
 	<jsp:include page="/login.jsp" />
 	<jsp:useBean id="course" scope="page" class="com.e_Look.Course.CourseDAO"/>
 	
