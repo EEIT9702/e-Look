@@ -172,7 +172,7 @@ a:HOVER {
 		<div class="row" style="padding-left:40px">
 		<!--for each  -->
 		 <c:forEach var='listcourse' items='${course.allonlineCourse}'>
-		
+		<c:if test="${listcourse.soldPrice>0}">
 		<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width: 341px">
 		 <a style="text-decoration: none; color:black"; href="<%=request.getContextPath() %>/onlineCourse-v2.jsp?CourseID=${listcourse.courseID}">
 				<div class="card card-inverse" style="background-color: white;">
@@ -196,9 +196,35 @@ a:HOVER {
 						<small>課程時間:${listcourse.courseLength}分鐘</small> <br> <small>購買人數:zzz人</small>
 					</div>
 				</div>
-				
 			</div>
+			</c:if>
 			
+			<c:if test="${listcourse.soldPrice==0}">
+		<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width: 341px">
+		 <a style="text-decoration: none; color:black"; href="<%=request.getContextPath() %>/freeCourse-v1.jsp?CourseID=${listcourse.courseID}">
+				<div class="card card-inverse" style="background-color: white;">
+					<img class="card-img-top" src="<%=request.getContextPath() %>/CourseImage?CourseID=${listcourse.courseID}" alt="course"
+						id="wizardPicturePreview" title="">
+					<div class="card-block">
+						<figure class="profile">
+							<img src="<%=request.getContextPath() %>/Image?MemberID=${listcourse.memberID}" class="profile-avatar" alt="">
+						</figure>
+						<div class="card-text">
+							<p id="title" class="card-title mt-3 multi_ellipsis">${listcourse.courseName}</p>
+						</div>
+			</a>
+						<div>
+							<p style="margin-top: 40px; font-size: 18px">課程售價：${listcourse.soldPrice}</p>
+						</div>
+					</div>
+					<div class="card-footer">
+						<button class="btn-info btn-sm pull-right"
+							style="margin-bottom: 5px; margin-top: 10px">加入書籤</button>
+						<small>課程時間:${listcourse.courseLength}分鐘</small> <br> <small>購買人數:zzz人</small>
+					</div>
+				</div>
+			</div>
+			</c:if>
 			</c:forEach>
 		<!--for each  -->
 

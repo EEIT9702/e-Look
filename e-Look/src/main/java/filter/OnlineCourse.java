@@ -21,6 +21,8 @@ import com.e_Look.buyCourse.model.BuyCourseDAO;
 import com.e_Look.buyCourse.model.BuyCourseVO;
 import com.e_Look.member.model.MemberService;
 import com.e_Look.member.model.MemberVO;
+import com.e_Look.memberBookmarks.model.MemberBookmarksService;
+import com.e_Look.memberBookmarks.model.MemberBookmarksVO;
 
 /**
  * Servlet Filter implementation class OnlineCourse
@@ -54,8 +56,20 @@ public class OnlineCourse implements Filter {
 				if (memberVoOK != null) {
 				
 						list2 = dao2.findByMemberID(memberVoOK.getMemberID());
+				}
+				List<MemberBookmarksVO> mBookmarkList = null;
+				MemberBookmarksService memberBookmarksService=new MemberBookmarksService();
+				mBookmarkList=memberBookmarksService.findPrimaryMemberBookmarks(memberVoOK.getMemberID());
+				if(mBookmarkList!=null){
+					
+					request.setAttribute("mBookmarkList", mBookmarkList);
 					
 				}
+				
+				
+				
+				
+					
 					request.setAttribute("list", list);
 					request.setAttribute("list2", list2);
 					request.setAttribute("courseVO", courseVO);

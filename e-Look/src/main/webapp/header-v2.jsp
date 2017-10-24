@@ -167,7 +167,8 @@ font-size: 18px;
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<c:choose>
-								<c:when test="${!empty LoginOK && !empty shoppingCartList}">
+								<c:when test="${!empty LoginOK}">
+								<input id="gbmemberID" type="hidden" value="${LoginOK.memberID}"/>
 									<li class="dropdown"><a class="dropdown-toggle"
 										data-toggle="dropdown" aria-haspopup="false"
 										aria-expanded="false"><span class="cartcount"></span><img style="margin-top:15px"
@@ -201,7 +202,7 @@ font-size: 18px;
 												<span id="totalPrice">總金額：0元</span>
 											</div>
 											<div class="modal-footer">
-												<a href="<%= request.getContextPath() %>/settled/settled.jsp">
+												<a href="<%= request.getContextPath() %>/ShoppingCartIntoOrder">
 												<button type="button" class="btn btn-primary btn-block">前往結帳</button>
 												</a>
 											</div>
@@ -265,12 +266,15 @@ font-size: 18px;
 	</div>
 <script>
 $(function(){
-	if(${LoginOK.memberID}>1){
+	var memberID=$('#gbmemberID').val();
+	
+	
+	if(memberID>1){
 		loadShoppingCart();
 	}
 	
 	function loadShoppingCart(){
-		$.post('<%=request.getContextPath() %>/LoadShoppingCart',{"memberID":${LoginOK.memberID}},function(datas){
+		$.post('<%=request.getContextPath() %>/LoadShoppingCart',{"memberID":memberID},function(datas){
 			var fg = $(document.createDocumentFragment());
 			$('.cartrows').empty();
 			var totalPrice = 0
@@ -302,15 +306,10 @@ $(function(){
 	}
 	function deleteShoppingCart(){
 		var courseID=$(this).attr('name');
-		$.post('<%=request.getContextPath() %>/LoadShoppingCart',{"memberID":${LoginOK.memberID},"courseID":courseID},function(datas){
-			
-			
-			
+		$.post('<%=request.getContextPath() %>/LoadShoppingCart',{"memberID":memberID,"courseID":courseID},function(datas){
+			loadShoppingCart();
 		})
 	}
-	
-	
-	
 	
 })
 </script>
