@@ -28,12 +28,14 @@ video {
 #videoArea {
 	background-size: cover;
 	background-position: center;
-	height:60%;
+	height: 60%;
 }
-#videoTitle{
-background-color: rgba(0%, 10%, 20%, 0.3);
-color:white;
+
+#videoTitle {
+	background-color: rgba(0%, 10%, 20%, 0.3);
+	color: white;
 }
+
 #videoliststyle>li {
 	height: 50px;
 	font-size: 20px;
@@ -183,12 +185,12 @@ a:HOVER {
 
 	<jsp:include page="/login.jsp" flush="true" />
 	<div class="container-fluid">
-		<div class="container" >
+		<div class="container">
 			<div class="row">
-			<h1 align="center"id="videoTitle">${courseVO.courseName}</h1>
+				<h1 align="center" id="videoTitle">${courseVO.courseName}</h1>
 				<div class="col-md-12 " id="videoArea"
 					style="background-image: url('<%=request.getContextPath() %>/CourseImage?CourseID=${courseVO.courseID}')">
-					
+
 					<div class="col-md-12">
 						<div class="col-md-8 col-xs-12">
 
@@ -274,16 +276,19 @@ a:HOVER {
 						class="img-responsive center-block">
 					<h5 class="text-center">課程時間為 ${courseVO.courseLength}min</h5>
 				</div>
-				<c:forEach items="${memberBookmarksVOList}" var="memberBookmsrks">
-					<c:choose>
-						<c:when test="${courseVO.courseID==memberBookmsrks.courseID}">
-							<c:set var="favor" value="favoriteclick1" />
-						</c:when>
-						<c:otherwise>
-							<c:set var="favor" value="favoriteclick2" />
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
+				<c:if test="${!empty mBookmarkList} ">
+						<c:forEach items="${mBookmarkList}" var="memberBookmsrks">
+							<c:choose>
+								<c:when test="${courseVO.courseID==memberBookmsrks.courseID}">
+									<c:set var="favor" value="favoriteclick1" />
+								</c:when>
+								<c:otherwise>
+									<c:set var="favor" value="favoriteclick2" />
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+				</c:if>
+				<c:set var="favor" value="favoriteclick2" />
 				<div class="col-md-1 col-xs-4">
 					<img src="<%=request.getContextPath()%>/img/favorite.png"
 						class="img-responsive center-block"><a href="#"
@@ -291,7 +296,7 @@ a:HOVER {
 				</div>
 				<input type="hidden" value="${courseVO.courseID}" id="mbcourseID">
 				<input type="hidden" value="${LoginOK.memberID}" id="mbmemberID">
-				
+
 				<div class="col-md-1 col-xs-4 ">
 					<img src="<%=request.getContextPath()%>/_Lyy/share.png"
 						class="img-responsive center-block">

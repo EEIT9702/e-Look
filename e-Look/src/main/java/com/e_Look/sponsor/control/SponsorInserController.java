@@ -40,6 +40,7 @@ public class SponsorInserController extends HttpServlet {
 		sponsor.add(SponsorName);
 		sponsor.add(moneyInt);
 		sponsor.add(courseID);
+		sponsor.add(request.getHeaders("referer"));
 		session.setAttribute("sponosr", sponsor);
 		
 		

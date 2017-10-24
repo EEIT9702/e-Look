@@ -278,7 +278,7 @@ public class MemberBookmarksDAO_JDBC implements MemberBookmarksDAO_interface {
 		//"INSERT INTO MemberBookmarks (memberID, courseID) VALUES (?,?) ";
 		//新增
 
-//		dao.insert(100002,200002);
+		dao.insert(100002,200002);
 		
 		//"UPDATE MemberBookmarks SET courseID=? WHERE memberID=?";
 		//修改沒意義不寫了
