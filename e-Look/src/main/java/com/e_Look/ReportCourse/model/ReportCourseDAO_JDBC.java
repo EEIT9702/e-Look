@@ -343,8 +343,8 @@ public class ReportCourseDAO_JDBC implements ReportCourseDAO_interface {
 		ReportCourseVO reportCourseVO = new ReportCourseVO();
 		
 		// 新增	
-//		reportCourseVO.setReportCourseID(200002);
-//		reportCourseVO.setReportMemberID(100001);
+//		reportCourseVO.setReportCourseID(200006);
+//		reportCourseVO.setReportMemberID(100005);
 //		reportCourseVO.setReportContent("太長了");
 //		dao.insert(reportCourseVO);
 		
