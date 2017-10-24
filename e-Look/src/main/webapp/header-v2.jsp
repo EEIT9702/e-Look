@@ -276,11 +276,11 @@ $(function(){
 			var totalPrice = 0
 			var courseCount = 0
 			$.each(datas,function(idx,courseVO){
-				var cell1 = $('<div></div>').addClass('cartrow');
+				var cell1 = $('<div></div>').addClass('cartrow').val(courseVO.courseID);
 				var cell2 = $('<div></div>').css('text-align','right');
 				var cell3 = $('<div></div>').css(['float','left','width','80%','text-align','left']);
 				var cell4 = $('<button></button>').css('color','red').addClass('close glyphicon glyphicon-remove').attr('type','button');
-				var cell5 = $('<img>').attr('src','<%=request.getContextPath() %>/CourseImage?CourseID='+courseVO.courseID);
+				var cell5 = $('<img>').attr({'src':'<%=request.getContextPath() %>/CourseImage?CourseID='+courseVO.courseID,'alt':'<%= request.getContextPath()%>/img/請上傳課程封面.png'});
 				var cell6 = $('<span></span>').addClass('courseTitle').text(courseVO.courseName);
 				var cell7 = $('<br>')
 				var cell8 = $('<span></span>').addClass('courseSubtitle').text('類別1,類別2');
@@ -298,6 +298,9 @@ $(function(){
 			$('#courseCount').text('共'+courseCount+'筆課程');
 			$('.cartcount').text(courseCount);
 		})
-	}	
+	}
+	
+	
+	
 })
 </script>
