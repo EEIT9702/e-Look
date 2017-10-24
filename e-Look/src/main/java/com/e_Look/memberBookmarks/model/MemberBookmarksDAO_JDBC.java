@@ -1,27 +1,25 @@
-package com.e_Look.memberBookmarks;
+package com.e_Look.memberBookmarks.model;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
+import com.e_Look.Course.CourseVO;
+import com.e_Look.member.model.MemberVO;
 
-public class MemberBookmarksDAO implements MemberBookmarksDAO_interface {
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/eLookDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
+public class MemberBookmarksDAO_JDBC implements MemberBookmarksDAO_interface {
+	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=elook";
+	String userid = "sa";
+	
+	//第一組密碼
+	String passwd = "P@ssw0rd";
+	//第二組密碼
+	//String passwd = "123456";
 	
 	private static final String INSERT_MEMBERBOOKMARKS =
 			"INSERT INTO MemberBookmarks (memberID, courseID) VALUES (?,?) ";
@@ -37,13 +35,16 @@ public class MemberBookmarksDAO implements MemberBookmarksDAO_interface {
 	
 	
 	@Override
-	public void insert(MemberBookmarksVO memberBookmarksVO) {
+	public void insert(Integer memberID,Integer courseID) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_MEMBERBOOKMARKS);
-			pstmt.setInt(1, memberBookmarksVO.getCourseID());
+			pstmt.setInt(1,memberID);
+			pstmt.setInt(2,courseID);
+			
 			pstmt.executeUpdate();
 
 			// Handle any SQL errors
@@ -51,6 +52,9 @@ public class MemberBookmarksDAO implements MemberBookmarksDAO_interface {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -70,15 +74,17 @@ public class MemberBookmarksDAO implements MemberBookmarksDAO_interface {
 	}
 
 	@Override
-	public void update(MemberBookmarksVO memberBookmarksVO) {
+	public void update(MemberBookmarksVO MemberBookmarksVO) {
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			//"UPDATE MemberBookmarks SET courseID=? WHERE memberID=?";
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE_MEMBERBOOKMARKS);
-			pstmt.setInt(1, memberBookmarksVO.getCourseID());
-			pstmt.setInt(2, memberBookmarksVO.getMemberID());
+			pstmt.setInt(2, MemberBookmarksVO.getMemberID());
+			pstmt.setInt(1,MemberBookmarksVO.getCourseID());
 			pstmt.executeUpdate();
 
 			// Handle any SQL errors
@@ -86,6 +92,9 @@ public class MemberBookmarksDAO implements MemberBookmarksDAO_interface {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -111,7 +120,8 @@ public class MemberBookmarksDAO implements MemberBookmarksDAO_interface {
 		PreparedStatement pstmt = null;
 		try {
 			//"DELETE FROM MemberBookmarks WHERE memberID =? and courseID =?";
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt=con.prepareStatement(DELETE_MEMBERBOOKMARKS);
 			pstmt.setInt(1, memberID);
 			pstmt.setInt(2, courseID);
@@ -122,6 +132,9 @@ public class MemberBookmarksDAO implements MemberBookmarksDAO_interface {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -151,7 +164,8 @@ public class MemberBookmarksDAO implements MemberBookmarksDAO_interface {
 		
 		try {
 			//"SELECT memberID, courseID FROM MemberBookmarks WHERE memberID=?";
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(SELECT_ONE_MEMBERBOOKMARKS);
 
 			pstmt.setInt(1, memberID);
@@ -162,7 +176,7 @@ public class MemberBookmarksDAO implements MemberBookmarksDAO_interface {
 				// memberSubscriptionVO 也稱為 Domain objects
 				memberBookmarksVO = new MemberBookmarksVO();
 				memberBookmarksVO.setMemberID(rs.getInt("memberID"));
-				memberBookmarksVO.setCourseID(rs.getInt(""));
+				memberBookmarksVO.setCourseID(rs.getInt("CourseID"));
 				list.add(memberBookmarksVO); // Store the row in the list
 			}
 
@@ -171,6 +185,9 @@ public class MemberBookmarksDAO implements MemberBookmarksDAO_interface {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {
@@ -208,7 +225,8 @@ public class MemberBookmarksDAO implements MemberBookmarksDAO_interface {
 
 		try {
 			//"SELECT memberID, courseID FROM MemberBookmarks";
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(SELECT_ALL_MEMBERBOOKMARKS);
 			rs = pstmt.executeQuery();
 
@@ -225,6 +243,9 @@ public class MemberBookmarksDAO implements MemberBookmarksDAO_interface {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {
@@ -249,6 +270,38 @@ public class MemberBookmarksDAO implements MemberBookmarksDAO_interface {
 			}
 		}
 		return list;
+	}
+	public static void main(String[] args) {
+		MemberBookmarksDAO_JDBC dao=new MemberBookmarksDAO_JDBC();
+		MemberBookmarksVO MemberBookmarksVO=new MemberBookmarksVO();
+		
+		//"INSERT INTO MemberBookmarks (memberID, courseID) VALUES (?,?) ";
+		//新增
+
+//		dao.insert(100002,200002);
+		
+		//"UPDATE MemberBookmarks SET courseID=? WHERE memberID=?";
+		//修改沒意義不寫了
+		
+		//"DELETE FROM MemberBookmarks WHERE memberID =? and courseID =?";
+		//刪除
+//		dao.delete(100002, 200002);
+		
+		
+		//"SELECT memberID, courseID FROM MemberBookmarks WHERE memberID=?";
+		//一筆資料
+//		List<MemberBookmarksVO> MemberBookmarks=dao.findByMemberID(100002);
+//		for(MemberBookmarksVO list:MemberBookmarks){
+//			System.out.print(list.getMemberID()+"  ");
+//			System.out.println(list.getCourseID());
+//		}
+		//"SELECT memberID, courseID FROM MemberBookmarks"
+		//多筆資料
+//		List<MemberBookmarksVO> MemberBookmarks=dao.getAll();
+//		for(MemberBookmarksVO list:MemberBookmarks){
+//			System.out.print(list.getMemberID()+"  ");
+//			System.out.println(list.getCourseID());
+//		}		
 	}
 
 }

@@ -8,7 +8,7 @@ public interface ReportMessageDAO_interface {
 	public void update(ReportMessageVO reportMessageVO);//update status
 	public void delete(Integer reportID);
 	public ReportMessageVO findByReportId(Integer reportId);
-	public List<ReportMessageVO> getNotHandle(Integer status);
+	public List<ReportMessageVO> getNotHandle();
 	public List<ReportMessageVO> getAll();
 }
  

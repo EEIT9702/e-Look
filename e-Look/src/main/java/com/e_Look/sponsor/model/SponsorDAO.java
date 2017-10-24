@@ -75,9 +75,9 @@ public class SponsorDAO implements SponsorDAO_interface {
 			// "UPDATE Sponsor SET SponsorName=?, money=? WHERE courseID=?";
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_SPONSOR);
-			pstmt.setInt(1, sponsorVO.getCourseID());
-			pstmt.setString(2, sponsorVO.getSponsorName());
-			pstmt.setInt(3, sponsorVO.getMoney());
+			pstmt.setInt(3, sponsorVO.getCourseID());
+			pstmt.setString(1, sponsorVO.getSponsorName());
+			pstmt.setInt(2, sponsorVO.getMoney());
 			pstmt.executeUpdate();
 
 			// Handle any SQL errors
