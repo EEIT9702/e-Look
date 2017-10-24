@@ -224,9 +224,10 @@ public class OrderDetailsDAO_JDBC implements OrderDetailsDAO_interface {
 	
 	public static void main(String[] args){
 		OrderDetailsDAO_JDBC dao = new OrderDetailsDAO_JDBC();
-//		OrderDetailsVO vo=new OrderDetailsVO(1001, 200001, 10, 10);
+//		OrderDetailsVO vo=new OrderDetailsVO();
+//		
 //		dao.insert(vo);
-		
+//		
 		
 		
 		List<OrderDetailsVO> list=dao.getAll();
