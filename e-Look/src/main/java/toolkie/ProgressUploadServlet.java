@@ -27,10 +27,10 @@ public class ProgressUploadServlet extends HttpServlet {
 	// private static final long serialVersionUID = -4935921396709035718L;
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		request.setCharacterEncoding("UTF-8");
 		CourseService service = null;
-		CourseVO course = null;
-//		Integer courseID = new Integer(request.getParameter("CourseID"));
+		CourseVO courseVO = null;
+	Integer courseID = null;
 		
 		String courseVideopathway= null;
 		// 上傳狀態
@@ -49,11 +49,14 @@ public class ProgressUploadServlet extends HttpServlet {
 		
 		try {
 			List itemList = upload.parseRequest(request);// 傳送所有參數
-
+				System.out.println(itemList);
 			for (Iterator it = itemList.iterator(); it.hasNext();) {// 檢查所有參數
 				FileItem item = (FileItem) it.next();
 				if (item.isFormField()) {// 如果是表單資料
-					System.out.println("FormField: " + item.getFieldName() + " = " + item.getString());
+					if(item.getFieldName().equals("CourseID")){
+						 courseID=new Integer(item.getString());
+					}
+					//System.out.println("FormField: " + item.getFieldName() + " = " + item.getString());
 				} else {// 否則上傳檔案
 					if (!item.getName().equals("")) {
 						System.out.println("File: " + item.getName());
@@ -63,9 +66,9 @@ public class ProgressUploadServlet extends HttpServlet {
 						// fileName =
 						// fileName.substring(fileName.lastIndexOf("\\"));
 
-						File saved = new File("D:\\TEST", item.getName());
+						File saved = new File(request.getServletContext().getRealPath("")+"\\video", item.getName());
 						System.out.println("D:\\TEST\\"+ item.getName());
-						courseVideopathway = "D:\\TEST\\"+ item.getName();
+						courseVideopathway ="video\\"+item.getName();
 						saved.getParentFile().mkdirs();
 											 
 
@@ -86,11 +89,13 @@ public class ProgressUploadServlet extends HttpServlet {
 					}
 				}
 			}
-			System.out.println(request.getParameter("CourseID"));
+			
+			System.out.println(courseID);
 			service = new CourseService();
-			course= new CourseVO();
-//			course.setCourseID(courseID);
-			course.setCourseVideopathway(courseVideopathway);
+			courseVO= new CourseVO();
+			courseVO.setCourseVideopathway(courseVideopathway);
+			courseVO.setCourseID(courseID);
+			service.updateCourseVideoPathway(courseVO);
 			
 			
 			
