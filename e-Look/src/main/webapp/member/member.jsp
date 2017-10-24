@@ -320,7 +320,7 @@ a:HOVER {
 				</div>
         </div>
 			<!-- 會員左半邊-->
-			<div class="col-md-8 breadcrumb" style="padding-top: 50px;    ">
+			<div class="col-md-8 breadcrumb" style="padding-top: 50px;   ">
 				<div class="col-md-12" style="margin: 25px 0;">
 					<div class="panel panel-info">
 						<div class="panel-heading clickable panel-collapsed">

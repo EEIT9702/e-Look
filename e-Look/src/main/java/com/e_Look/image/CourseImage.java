@@ -48,7 +48,6 @@ public class CourseImage extends HttpServlet {
 			pstmt = con.prepareStatement("select cPhoto from Course where CourseID=? ");
 			pstmt.setInt(1, Integer.valueOf(CourseID));
 			ResultSet  rs=pstmt.executeQuery();
-			
 			if(rs.next()){
 				 is= rs.getBinaryStream(1);
 				 response.setContentType("image/jpeg");
