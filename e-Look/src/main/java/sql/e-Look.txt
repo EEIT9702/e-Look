@@ -133,7 +133,6 @@ CREATE TABLE [dbo].[Course](
 	[courseContent] [varchar](max) NULL,
 	[memberID] [int] NOT NULL,
 	[avgScore] [decimal](2, 1) NULL,
-	[proposalVideopathway] [varchar](500) NULL,
  CONSTRAINT [PK_Course] PRIMARY KEY CLUSTERED 
 (
 	[courseID] ASC

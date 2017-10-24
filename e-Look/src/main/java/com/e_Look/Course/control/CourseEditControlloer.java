@@ -47,7 +47,6 @@ public class CourseEditControlloer extends HttpServlet {
 		Date fundStartDate =  Date.valueOf(request.getParameter("fundStartDate"));
 		Date fundEndDate =  Date.valueOf(request.getParameter("fundEndDate"));
 		Date courseStartDate =  Date.valueOf(request.getParameter("courseStartDate"));
-		String courseVideopathway = request.getParameter("courseVideopathway");
 		Integer status = 0;
 		String courseContent =request.getParameter("courseContent");
 		Integer memberID = new Integer(request.getParameter("memberID"));
