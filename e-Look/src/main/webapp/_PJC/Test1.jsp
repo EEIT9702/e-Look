@@ -9,7 +9,7 @@
 		<form id="get-data-form" method="post">
 
 			<textarea class="tinymce" id="texteditor"></textarea>
-			<input type="submit" value="Get Data">
+			<input type="button" id="click" value="請點擊">
 			<input type="hidden" value="" id="courseContent">
 		</form>
 
@@ -23,7 +23,7 @@
 		<script type="text/javascript">
 		$(document).ready(function(){
 
-			$("#get-data-form").submit(function(e){
+			$("#texteditor").on('keyup',function(e){
 
 				var content = tinymce.get("texteditor").getContent();
 				alert(content);
