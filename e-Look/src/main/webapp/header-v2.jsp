@@ -64,7 +64,7 @@ if(shoppingCartList != null){
 	background: #fff;
 }
 body{
-padding-top:80px;
+padding-top:75px;
 }
 #headerTextStyle{
 font-family: Microsoft JhengHei;
