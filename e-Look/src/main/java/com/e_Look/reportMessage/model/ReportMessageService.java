@@ -23,8 +23,8 @@ public class ReportMessageService {
 		
 	}
 	
-	public List<ReportMessageVO>findNotHandle(Integer status) {
-		return dao.getNotHandle(status);
+	public List<ReportMessageVO>findNotHandle() {
+		return dao.getNotHandle();
 	}
 
 	public void updateReportMessageStatus(Integer reportId, Byte status) {

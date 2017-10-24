@@ -3,8 +3,6 @@
 <!DOCTYPE>
 <html>
 <head>
-<jsp:useBean id="SYSTEM" class="init.GlobalService" scope="application"/>
-<link rel="Shortcut Icon" type="image/x-icon" href="${SYSTEM.iconUri}" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="<%=request.getContextPath()%>/backstage/css/jquery-ui.min.css" rel="stylesheet">
 <script src="<%=request.getContextPath()%>/backstage/js/jquery.js"></script>
@@ -126,49 +124,52 @@ border-radius: 30px;
 <div class="event">
 選擇優惠類別1：<select class="font courseclass" name="courseClass1">
 <option value="null">無</option>
-<option value="all">全部</option>
-<option value="life">生活</option>
-<option value="athletics">運動</option>
-<option value="video">影音</option>
-<option value="hand-made">手作</option>
-<option value="other">其他</option>
-<option value="design">設計</option>
-<option value="science">科技</option>
-<option value="business">商業</option>
-<option value="language">語言</option>
-<option value="cooking">烹飪</option>
-<option value="program">程式</option>
+<option value="全部">全部</option>
+<option value="生活">生活</option>
+<option value="運動">運動</option>
+<option value="影音">影音</option>
+<option value="手作">手作</option>
+<option value="其他">其他</option>
+<option value="設計">設計</option>
+<option value="科技">科技</option>
+<option value="商業">商業</option>
+<option value="語言">語言</option>
+<option value="烹飪">烹飪</option>
+<option value="程式">程式</option>
+<option value="音樂">音樂</option>
 </select>
 
 選擇優惠類別2：<select class="font courseclass" name="courseClass2">
 <option value="null">無</option>
-<option value="all">全部</option>
-<option value="life">生活</option>
-<option value="athletics">運動</option>
-<option value="video">影音</option>
-<option value="hand-made">手作</option>
-<option value="other">其他</option>
-<option value="design">設計</option>
-<option value="science">科技</option>
-<option value="business">商業</option>
-<option value="language">語言</option>
-<option value="cooking">烹飪</option>
-<option value="program">程式</option>
+<option value="全部">全部</option>
+<option value="生活">生活</option>
+<option value="運動">運動</option>
+<option value="影音">影音</option>
+<option value="手作">手作</option>
+<option value="其他">其他</option>
+<option value="設計">設計</option>
+<option value="科技">科技</option>
+<option value="商業">商業</option>
+<option value="語言">語言</option>
+<option value="烹飪">烹飪</option>
+<option value="程式">程式</option>
+<option value="音樂">音樂</option>
 </select>
 選擇優惠類別3：<select class="font courseclass" name="courseClass3">
 <option value="null">無</option>
-<option value="all">全部</option>
-<option value="life">生活</option>
-<option value="athletics">運動</option>
-<option value="video">影音</option>
-<option value="hand-made">手作</option>
-<option value="other">其他</option>
-<option value="design">設計</option>
-<option value="science">科技</option>
-<option value="business">商業</option>
-<option value="language">語言</option>
-<option value="cooking">烹飪</option>
-<option value="program">程式</option>
+<option value="全部">全部</option>
+<option value="生活">生活</option>
+<option value="運動">運動</option>
+<option value="影音">影音</option>
+<option value="手作">手作</option>
+<option value="其他">其他</option>
+<option value="設計">設計</option>
+<option value="科技">科技</option>
+<option value="商業">商業</option>
+<option value="語言">語言</option>
+<option value="烹飪">烹飪</option>
+<option value="程式">程式</option>
+<option value="音樂">音樂</option>
 </select>
 </div>
 

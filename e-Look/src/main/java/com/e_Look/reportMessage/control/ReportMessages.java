@@ -23,7 +23,7 @@ import net.minidev.json.JSONValue;
 /**
  * Servlet implementation class ReportMessages
  */
-@WebServlet("/ReportMessages")
+@WebServlet("/backstage/ReportMessages")
 public class ReportMessages extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -68,10 +68,10 @@ public class ReportMessages extends HttpServlet {
 			 List  l1 = new LinkedList();
 			 while (rs.next()) {
 				 Map m1 = new HashMap();  
-				 m1.put("messageID",rs.getString(1));   
-				 m1.put("mContent",rs.getString(2));  
-				 m1.put("reportID",rs.getString(3));   
-				 m1.put("reportMemberID",rs.getString(5)); 
+				 m1.put("messageID", rs.getString(1));   
+				 m1.put("mContent", rs.getString(2));  
+				 m1.put("reportID", rs.getString(3));   
+				 m1.put("reportMemberID", rs.getString(5)); 
 				 m1.put("reportContent", rs.getString(6));
 				 m1.put("reportTime", rs.getString(7));
 				 m1.put("status", rs.getString(8));

@@ -71,7 +71,7 @@ public class ReportMessageControl extends HttpServlet {
 				Integer status = new Integer(request.getParameter("status"));
 				/***************************2.開始查詢資料*****************************************/
 				ReportMessageService rmService = new ReportMessageService();
-				List<ReportMessageVO> reportMessageVO = rmService.findNotHandle(status);
+				List<ReportMessageVO> reportMessageVO = rmService.findNotHandle();
 				
 				if (reportMessageVO == null) {
 					errorMsgs.add("查無資料");

@@ -403,7 +403,7 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 		//刪除會員
 //		dao.delete(100008);
 		//查詢單一會員
-		MemberVO memberVO3=dao.findByPrimaryKey(100003);
+		MemberVO memberVO3=dao.findByPrimaryKey(100001);
 		System.out.println(memberVO3.getMemberID());
 		System.out.println(memberVO3.getEmail());
 		System.out.println(memberVO3.getmPassword());
