@@ -400,7 +400,7 @@ function checkHeight() {
 }
 </script>
 </head>
-<body>
+<body style="margin-top:15px">
 <%-- <jsp:include page="${contextPath}/header.jsp" /> --%>
 <jsp:include page="${contextPath}/login.jsp" />
 

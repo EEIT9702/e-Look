@@ -7,8 +7,12 @@ public class ReportCourseService {
 	public ReportCourseService (){
 		dao= new ReportCourseDAO();
 	}
-	public void insertReportCourse(Integer courseID,Integer memberID,String reportCon,Date reportDate){
-		
-		
+	public void insertReportCourse(Integer courseID,Integer memberID,String reportContent){
+			ReportCourseVO reportCourseVO =new ReportCourseVO();
+			reportCourseVO.setReportCourseID(courseID);
+			reportCourseVO.setReportMemberID(memberID);
+			reportCourseVO.setReportContent(reportContent);
+			dao.insert(reportCourseVO);
 	}
+	
 }
