@@ -27,7 +27,7 @@
 <link rel="Short Icon" type="image/x-icon" href="${initParam.icon}" />
 
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="<%=request.getContextPath()%>/_PJC/js/jquery-ui.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath()%>/_PJC/js/autosize.js"></script>
 <script
@@ -119,7 +119,7 @@
 													<i class="glyphicon glyphicon-list"></i>
 												</div>
 												<div class="update-text">
-													<strong>步驟一456、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
+													<strong>步驟一、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
 												</div>
 											</div>
 										</div>
@@ -862,10 +862,10 @@
 				})
 
 				
-		 $('input[type!="file"]').keyup(function(){
+		 $('input[type!="file"]').keyup(function(e){
 			 
 			 var formData = new FormData($('form')[3]);
-				//console.log("5555555555");
+				console.log("從input欄位送資料到資料庫囉!");
 				$.ajax({
 					type : 'POST',
 					url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
@@ -887,10 +887,10 @@
 		
 	
 	
-	$('textarea').keyup(function(){
+	$('textarea').keyup(function(e){
 			 
 			 var formData = new FormData($('form')[3]);
-				//console.log("5555555555");
+				console.log("從textarea欄位送資料到資料庫囉!");
 				$.ajax({
 					type : 'POST',
 					url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
@@ -909,6 +909,8 @@
 			 
 			 
 		 })
+		 
+		 		 
 					
 
 	</script>
