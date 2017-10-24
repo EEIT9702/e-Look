@@ -320,7 +320,7 @@
 												<textarea id="customStyle" name="background"
 													placeholder="如果是比較進階的課程，建議先跟學生說明必備的知識，幫助學生了解這堂課"
 													class="form-control" data-toggle="floatLabel"
-													data-value="no-js" style="font-size: 18px"></textarea>
+													data-value="no-js" style="font-size: 18px" form="TotalContent"></textarea>
 												<label for="customStyle" style="">(例：學過PS遮罩的概念)</label>
 											</div>
 										</div>
@@ -337,7 +337,7 @@
 												<textarea id="customStyle" name="ability"
 													placeholder="最好是某種實質的東西：像是完成某種作品、達到哪種目標甚至是得到什麼結果"
 													class="form-control" data-toggle="floatLabel"
-													data-value="no-js" style="font-size: 18px"></textarea>
+													data-value="no-js" style="font-size: 18px" form="TotalContent"></textarea>
 												<label for="customStyle" style="">(例：可習得合成影像的基本技術)</label>
 											</div>
 										</div>
@@ -354,7 +354,7 @@
 												<textarea id="customStyle" name="targetgroup"
 													placeholder="形容這堂課適合的學生族群，可以更讓學生了解課程內容的方向"
 													class="form-control" data-toggle="floatLabel"
-													data-value="no-js" style="font-size: 18px"></textarea>
+													data-value="no-js" style="font-size: 18px" form="TotalContent"></textarea>
 												<label for="customStyle" style="">(例：雜誌編輯、海報設計的美編人員等...)</label>
 											</div>
 										</div>
@@ -449,7 +449,7 @@
 										<div class="form-group col-lg-6" style="font-size: 20px;">
 											<label>募資結束後的備課天數</label> <label>(最高天數為60天)</label> <input
 												type="text" name="" class="form-control" id="prepareDate"
-												value="" style="font-size: 18px" name="courseStartDate">
+												value="" style="font-size: 18px">
 										</div>
 									</div>
 									<div class="col-md-12" style="margin-top: 0.5em;">
@@ -480,7 +480,7 @@
 											</div>
 											<div class="[ form-group ][ form-group-textarea ]"
 												id="get-data-form">
-												<textarea class="tinymce" id="texteditor" name="courseContent" value=""></textarea>
+												<textarea class="tinymce" id="texteditor" name="courseContent"  form="TotalContent"></textarea>
 											</div>
 										</div>
 									</div>
@@ -741,15 +741,15 @@
 			$("#title").text(value);
 		});
 
-		$(document).ready(
-				function() {
-					// Floating Labels
-					//==============================================================
-					$('[data-toggle="floatLabel"]').attr('data-value',
-							$(this).val()).on('keyup change', function() {
-						$(this).attr('data-value', $(this).val());
-					});
-				});
+// 		$(document).ready(
+// 				function() {
+// 					// Floating Labels
+// 					//==============================================================
+// 					$('[data-toggle="floatLabel"]').attr('data-value',
+// 							$(this).val()).on('keyup change', function() {
+// 						$(this).attr('data-value', $(this).val());
+// 					});
+// 				});
 
 		$('textarea').each(function() {
 			autosize(this);
@@ -864,8 +864,33 @@
 				})
 
 				
-				
-				
+		 $('input[type!="file"]').keyup(function(){
+			 
+			 var formData = new FormData($('form')[3]);
+				//console.log("5555555555");
+				$.ajax({
+					type : 'POST',
+					url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
+					data :formData,
+					processData : false,
+					contentType : false,
+//					success: function(){
+//						
+//						$('#sendOK').modal()
+//						$('#sendOK h3').text("更新成功")
+//						setTimeout(function(){
+//					        $("#sendOK").modal('hide');
+//					        }, 1000);
+//			        }
+				})
+			 
+			 
+		 })
+		
+	
+	
+	
+					
 
 	</script>
 
