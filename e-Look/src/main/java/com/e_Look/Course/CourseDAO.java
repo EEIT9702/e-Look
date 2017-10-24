@@ -94,7 +94,7 @@ public class CourseDAO implements CourseDAO_interface {
 		}
 		return id;
 	}
-
+	//以下為自動儲存草稿的功能
 	@Override
 	public void update(CourseVO courseVO) {
 		Connection con = null;
@@ -139,7 +139,7 @@ public class CourseDAO implements CourseDAO_interface {
 			}
 		}
 	}
-	
+	//以下為更新圖片的功能
 	@Override
 	public void updateimage(CourseVO courseVO) {
 		Connection con = null;
@@ -174,7 +174,7 @@ public class CourseDAO implements CourseDAO_interface {
 		
 	}
 	
-	
+	//以下為更新講義的功能
 	@Override
 	public void updatepaper(CourseVO courseVO) {
 		Connection con = null;
@@ -209,7 +209,7 @@ public class CourseDAO implements CourseDAO_interface {
 		
 	}
 	
-
+	//以下為更新影片路徑的功能
 	@Override
 	public void updatecourseVideopathway(CourseVO courseVO) {
 		Connection con = null;
@@ -244,7 +244,7 @@ public class CourseDAO implements CourseDAO_interface {
 		
 	}
 	
-	
+	//以下為刪除功能
 	@Override
 	public void delete(Integer courseID) {
 		Connection con = null;
@@ -274,7 +274,7 @@ public class CourseDAO implements CourseDAO_interface {
 		}
 
 	}
-
+	//選擇草稿、選擇單一課程頁面
 	@Override
 	public CourseVO findByPrimaryKey(Integer courseID) {
 		CourseVO courseVO = null;
@@ -327,7 +327,7 @@ public class CourseDAO implements CourseDAO_interface {
 		}
 		return courseVO;
 	}
-
+	//會員後臺管理(選擇我的草稿、我開的課)、管理員後台待審核中的課程列表
 	@Override
 	public List<CourseVO> findBymemberID(Integer memberID, Integer status) {
 		List<CourseVO> CourseList = new LinkedList<CourseVO>();
@@ -382,7 +382,7 @@ public class CourseDAO implements CourseDAO_interface {
 		}
 		return CourseList;
 	}
-	
+	//管理員改變課程狀態(通過審核、下架等等....)
 	@Override
 	public void updateStatus(CourseVO courseVO) {
 		Connection con = null;
