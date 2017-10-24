@@ -1,21 +1,30 @@
-package com.e_Look.memberBookmarks;
+package com.e_Look.memberBookmarks.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MemberBookmarksDAO_JDBC implements MemberBookmarksDAO_interface {
-	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=elook";
-	String userid = "sa";
-	//第一組密碼
-	String passwd = "P@ssw0rd";
-	//第二組密碼
-	//String passwd = "123456";
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+import com.e_Look.Course.CourseVO;
+import com.e_Look.member.model.MemberVO;
+
+public class MemberBookmarksDAO implements MemberBookmarksDAO_interface {
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/eLookDB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private static final String INSERT_MEMBERBOOKMARKS =
 			"INSERT INTO MemberBookmarks (memberID, courseID) VALUES (?,?) ";
@@ -31,20 +40,17 @@ public class MemberBookmarksDAO_JDBC implements MemberBookmarksDAO_interface {
 	
 	
 	@Override
-	public void insert(MemberBookmarksVO memberBookmarksVO) {
+	public void insert(Integer memberID,Integer courseID) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_MEMBERBOOKMARKS);
-			pstmt.setInt(1, memberBookmarksVO.getCourseID());
-			pstmt.executeUpdate();
+			pstmt.setInt(1,memberID);
+			pstmt.setInt(2,courseID);
 			
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
+			pstmt.executeUpdate();
+
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -69,22 +75,18 @@ public class MemberBookmarksDAO_JDBC implements MemberBookmarksDAO_interface {
 	}
 
 	@Override
-	public void update(MemberBookmarksVO memberBookmarksVO) {
+	public void update(MemberBookmarksVO MemberBookmarksVO) {
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			//"UPDATE MemberBookmarks SET courseID=? WHERE memberID=?";
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_MEMBERBOOKMARKS);
-			pstmt.setInt(1, memberBookmarksVO.getCourseID());
-			pstmt.setInt(2, memberBookmarksVO.getMemberID());
+			pstmt.setInt(2, MemberBookmarksVO.getMemberID());
+			pstmt.setInt(1,MemberBookmarksVO.getCourseID());
 			pstmt.executeUpdate();
-		
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
+
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -115,17 +117,12 @@ public class MemberBookmarksDAO_JDBC implements MemberBookmarksDAO_interface {
 		PreparedStatement pstmt = null;
 		try {
 			//"DELETE FROM MemberBookmarks WHERE memberID =? and courseID =?";
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt=con.prepareStatement(DELETE_MEMBERBOOKMARKS);
 			pstmt.setInt(1, memberID);
 			pstmt.setInt(2, courseID);
 			pstmt.executeUpdate();
-			
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
+
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -160,8 +157,7 @@ public class MemberBookmarksDAO_JDBC implements MemberBookmarksDAO_interface {
 		
 		try {
 			//"SELECT memberID, courseID FROM MemberBookmarks WHERE memberID=?";
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_ONE_MEMBERBOOKMARKS);
 
 			pstmt.setInt(1, memberID);
@@ -172,14 +168,10 @@ public class MemberBookmarksDAO_JDBC implements MemberBookmarksDAO_interface {
 				// memberSubscriptionVO 也稱為 Domain objects
 				memberBookmarksVO = new MemberBookmarksVO();
 				memberBookmarksVO.setMemberID(rs.getInt("memberID"));
-				memberBookmarksVO.setCourseID(rs.getInt(""));
+				memberBookmarksVO.setCourseID(rs.getInt("courseID"));
 				list.add(memberBookmarksVO); // Store the row in the list
 			}
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -222,8 +214,7 @@ public class MemberBookmarksDAO_JDBC implements MemberBookmarksDAO_interface {
 
 		try {
 			//"SELECT memberID, courseID FROM MemberBookmarks";
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_ALL_MEMBERBOOKMARKS);
 			rs = pstmt.executeQuery();
 
@@ -235,10 +226,6 @@ public class MemberBookmarksDAO_JDBC implements MemberBookmarksDAO_interface {
 				list.add(memberBookmarksVO); // Store the row in the list
 			}
 
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -268,11 +255,6 @@ public class MemberBookmarksDAO_JDBC implements MemberBookmarksDAO_interface {
 			}
 		}
 		return list;
-	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
 	}
 
 }

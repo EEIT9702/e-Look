@@ -3,15 +3,7 @@ var _finished = true; //是否上傳結束
 //function $(XXX){//XXX一定要給隨意的參數，且這個function有存在的必要，影響第52行的結果。
 //	return document.getElementById(XXX);//傳回指定id的html
 //}
-var clickId;
 
-function bottonClick(){	
-	var obj = event.srcElement; 
-	if(obj.type=="submit"){
-		clickId = obj.id;
-	}
-	
-}
 
 var selectId;
 function fileSelect(){
@@ -26,19 +18,46 @@ function fileSelect(){
 			$('#inputfilename1').val("");
 			$('#inputfilename3').val("");
 		}
-		if(selectId==="inputfilename3"){
-			$('#inputfilename1').val("");
-			$('#inputfilename2').val("");
-		}
 	}
 	console.log(selectId);
 }
+
+var clickId;
+
+function bottonClick(){	
+	var obj = event.srcElement; 
+	if(obj.type=="submit"){
+		clickId = obj.id;
+	}
+	
+	
+	var formData = new FormData($('form')[3]);
+	//console.log("5555555555");
+	$.ajax({
+		type : 'POST',
+		url : '/e-Look/toolkie/ProgressUploadServlet',
+		data :formData,
+		processData : false,
+		contentType : false,
+//		success: function(){
+//			
+//			$('#sendOK').modal()
+//			$('#sendOK h3').text("更新成功")
+//			setTimeout(function(){
+//		        $("#sendOK").modal('hide');
+//		        }, 1000);
+//        }
+	})
+	
+}
+
+
 
 function showStatus(){//顯示進度條
 	_finished = false;
 //	$('#status').css("display" , 'block')//將隱藏進度條顯示 
 			
-	console.log(clickId);
+	//console.log("1234567890");
 	
 	if(clickId==="btnSubmit1"){
 		$('#progressBar1').attr('aria-valuenow', "0").css("width" , '1%').text("0%");; //設定進度條初始為1%
@@ -48,13 +67,15 @@ function showStatus(){//顯示進度條
 		$('#progressBar2').attr('aria-valuenow', "0").css("width" , '1%').text("0%");; //設定進度條初始為1%
 		$('#btnSubmit2').disabled = true;//將傳送按鈕鎖定 防止重覆傳送	
 	}
-	if(clickId==="btnSubmit3"){
-		$('#progressBar3').attr('aria-valuenow', "0").css("width" , '1%').text("0%");; //設定進度條初始為1%
-		$('#btnSubmit3').disabled = true;//將傳送按鈕鎖定 防止重覆傳送
-	}
 	
 	setTimeout("requestStatus()", 1000); //一秒後執行requestStatus()方法 更新上傳進度
 }
+
+
+
+
+
+
 
 function requestStatus(){//向伺服器請求上傳進度
 
@@ -111,9 +132,7 @@ function callback(req){//更新進度條
 		if(clickId==="btnSubmit2"){
 			$('#progressBar2').attr('aria-valuenow', ss[0]).css('width',ss[0] + '%').text(ss[0]+"%");
 		}
-		if(clickId==="btnSubmit3"){
-			$('#progressBar3').attr('aria-valuenow', ss[0]).css('width',ss[0] + '%').text(ss[0]+"%");
-		}						
+						
 //		$('#statusInfo').innerHTML = '已完成百分比: ' + ss[0] +'<br/>已用時間(s): ' + ss[3] +'<br/>預估剩於時間(s): ' + ss[5];
 		
 		if(ss[0] >= 100){

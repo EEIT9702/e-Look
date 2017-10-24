@@ -216,18 +216,22 @@ public class ShoppingCartDAO_JDBC implements ShoppingCartDAO_interface {
 	public static void main(String[] args) {
 		ShoppingCartDAO_JDBC dao = new ShoppingCartDAO_JDBC();
 		
-//		ShoppingCartVO shoppingCartVO = new ShoppingCartVO();
-//		CourseVO courseVO=new CourseVO();
-//		courseVO.setCourseID(200001);
-//		shoppingCartVO.setMemberID(100001);
-//		shoppingCartVO.setCourseVO(courseVO);
-//		dao.insert(shoppingCartVO);
+		ShoppingCartVO shoppingCartVO = new ShoppingCartVO();
+		CourseVO courseVO=new CourseVO();
+		courseVO.setCourseID(200002);
+		//courseVO.setMemberID(100001);
+		shoppingCartVO.setMemberID(100001);
+		shoppingCartVO.setCourseVO(courseVO);
+		dao.insert(shoppingCartVO);
 		
-//		System.out.println("111");
-//		List<ShoppingCartVO> list = dao.getAll();
-//		for(ShoppingCartVO vo : list){
-//			System.out.print(vo.getMemberID());
-//		}
+		
+		
+		
+		
+		List<ShoppingCartVO> list = dao.getAll();
+		for(ShoppingCartVO vo : list){
+			System.out.print(vo.getMemberID());
+		}
 		
 		
 		

@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE>
+<link href="<%=request.getContextPath()%>/css/bootstrap.css"
+	rel="stylesheet">
 <script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.js"></script>
 <link rel="Shortcut Icon" type="image/x-icon" href="${SYSTEM.iconUri}" />
@@ -147,7 +149,7 @@ a:HOVER {
 
 </head>
 
-<body id="body">
+<body id="body" style="margin-top:50px">
 	<jsp:include page="/login.jsp" />
 	<jsp:useBean id="course" scope="page" class="com.e_Look.Course.CourseDAO"/>
 	

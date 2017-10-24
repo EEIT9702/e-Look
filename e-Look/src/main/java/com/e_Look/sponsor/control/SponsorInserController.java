@@ -30,7 +30,7 @@ public class SponsorInserController extends HttpServlet {
 		String SponsorName=request.getParameter("SponsorName");
 		String money=request.getParameter("money");
 		int moneyInt=Integer.parseInt(money);
-		int courseID=Integer.parseInt("200002");
+		int courseID=Integer.parseInt(request.getParameter("courseID"));
 		//用時間當oPay流水號
 		SimpleDateFormat sfd=new SimpleDateFormat("yyyyMMddHHmmss");
 		String MerchantTradeNo=sfd.format(new Date());

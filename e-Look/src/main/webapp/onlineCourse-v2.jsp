@@ -325,18 +325,18 @@ a:HOVER {
 
 
 				<div class="col-md-1 "></div>
-				<div class="col-md-1 col-xs-4">
+				<div class="col-md-1 col-xs-4" style="padding-top:15px">
 					<img src="<%=request.getContextPath()%>/_Lyy/004-people.png"
 						class="img-responsive center-block ">
 					<h5 class="text-center">課程人數</h5>
 				</div>
-				<div class="col-md-1 col-xs-4">
+				<div class="col-md-1 col-xs-4" style="padding-top:15px">
 					<img src="<%=request.getContextPath()%>/_Lyy/clock.png"
 						class="img-responsive center-block">
-					<h5 class="text-center">課程時間為min</h5>
+					<h5 class="text-center">課程時間為</h5>
 				</div>
 				<form method="post" action="">
-					<div class="col-md-1 col-xs-4">
+					<div class="col-md-1 col-xs-4" style="padding-top:15px">
 						<a href=”#”> <img
 							src="<%=request.getContextPath()%>/img/favorite.png"
 							class="img-responsive center-block">
