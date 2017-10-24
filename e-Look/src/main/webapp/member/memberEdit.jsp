@@ -253,7 +253,7 @@ a.clickable:hover {
 										id="mPassword" name="mPassword" readonly value="${LoginOK.mPassword}">
 										<span  class="input-group-btn" style="padding-top: 27px">
             <button data-toggle="modal" data-target="#ChangePassword" class="btn  btn-info reveal" type="button"  <c:if test="${LoginOK.mPassword==''}">disabled="disabled"</c:if>><i class="glyphicon glyphicon-pencil"></i></button>
-         </span>      
+        			 </span>      
 								</div>
 							</div>
 							<div class="col-md-8"></div>
@@ -299,7 +299,7 @@ a.clickable:hover {
 						</div>
 					</div>
 							<div class="col-md-12 ">
-								<button type="button" class="btn btn-primary btn-product" style="margin: 0 auto;" id="send">確認</button>
+								<button type="button" class="btn btn-primary btn-product" style="margin: 0 auto;" id="send">確認修改</button>
 								<a href="<%=request.getContextPath()%>/member/member.jsp"><button type="button" class="btn btn-primary btn-danger ">返回</button></a>
 							</div>
 

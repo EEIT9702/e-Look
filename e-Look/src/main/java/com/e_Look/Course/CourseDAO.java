@@ -26,7 +26,7 @@ public class CourseDAO implements CourseDAO_interface {
 		}
 	}
 	private static final String INSERT_Course = "insert into Course (courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	private static final String UPDATE_Course = "update Course set courseName=?,cPhoto=?,preTool=?,background=?,ability=?,targetgroup=?,soldPrice=?,courseLength=?,targetStudentNumber=?,fundStartDate=?,fundEndDate=?,courseStartDate=?,courseContent=? where courseID= ?";
+	private static final String UPDATE_Course = "update Course set courseName=?,preTool=?,background=?,ability=?,targetgroup=?,soldPrice=?,courseLength=?,targetStudentNumber=?,fundStartDate=?,fundEndDate=?,courseStartDate=?,courseContent=? where courseID= ?";
 	private static final String UPDATE_Course_IMAGE ="update Course set cPhoto=? where courseID= ?";
 	private static final String UPDATE_Course_PAPER ="update Course set paper=? where courseID= ?";
 	private static final String UPDATE_Course_CourseVideopathway ="update Course set CourseVideopathway=? where courseID= ?";
@@ -103,7 +103,7 @@ public class CourseDAO implements CourseDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_Course);
 			pstmt.setString(1, courseVO.getCourseName());// 課程名稱
-			pstmt.setBlob(2, courseVO.getcPhoto());// 課程封面照片
+//			pstmt.setBlob(2, courseVO.getcPhoto());// 課程封面照片
 			pstmt.setString(2, courseVO.getPreTool());// 準備工具
 			pstmt.setString(3, courseVO.getBackground());// 背景知識
 			pstmt.setString(4, courseVO.getAbility());// 先備能力
@@ -413,7 +413,7 @@ public class CourseDAO implements CourseDAO_interface {
 			}
 		}
 	}
-
+	//顯示所有status2的課程(顯示首頁的熱門課程等....)
 	@Override
 	public List<CourseVO> getAllonlineCourse() {
 		List<CourseVO> CourseList = new LinkedList<CourseVO>();
