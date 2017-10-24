@@ -492,6 +492,7 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 		CourseVO CourseVO2 = new CourseVO();
 		CourseVO2.setCourseName("java的基本功能介紹");//課程名稱
 		CourseVO2.setPreTool("需要安裝Adobe CC 2017的版本");
+		CourseVO2.setcPhoto(new FileInputStream(new File("src/main/webapp/img/02.jpg")));
 		CourseVO2.setBackground("無限制");
 		CourseVO2.setAbility("需要基本的美術觀念");
 		CourseVO2.setTargetgroup("影像後製特效師、剪接師");
@@ -505,7 +506,7 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 		CourseVO2.setCourseContent("第一次使用 After Effects 將會出現歡迎對話框，您可以選擇 New Composition 建立新的合成，或是選擇 Open Project 開啟已儲存的 After Effects 專案。若是以後不需要顯示此歡迎對話框，只要將下方的「Show Welcome Screen at startup」取消勾選即可。");
 		CourseVO2.setCourseID(200003);
 		dao.update(CourseVO2);
-					
+		dao.updateimage(CourseVO2);
 		//測試用：刪除草稿功能
 //		dao.delete(200002);
 		
