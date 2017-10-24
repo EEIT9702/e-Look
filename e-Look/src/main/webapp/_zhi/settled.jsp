@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<%@ page import="com.e_Look.member.model.MemberVO" %>
+<% 
+HttpSession sess= request.getSession(); 
+MemberVO memberVO=(MemberVO) sess.getAttribute("LoginOK");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -151,17 +157,11 @@ ul {
 						<li role="presentation" class="disabled"><a href="#step2"
 							data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
 								<span class="round-tab"> <i
-									class="glyphicon glyphicon-pencil"></i>
+									class="glyphicon glyphicon-usd"></i>
 							</span>
 						</a></li>
 						<li role="presentation" class="disabled"><a href="#step3"
 							data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
-								<span class="round-tab"> <i
-									class="glyphicon glyphicon-usd"></i>
-							</span>
-						</a></li>
-						<li role="presentation" class="disabled"><a href="#step4"
-							data-toggle="tab" aria-controls="step4" role="tab" title="Step 4">
 								<span class="round-tab"> <i
 									class="glyphicon glyphicon-ok"></i>
 							</span>
@@ -184,8 +184,8 @@ ul {
 														alt="ALT NAME" class="pull-left span2 clearfix"
 														style='margin-right: 10px'>
 													<div class="caption" class="pull-left">
-														<a href="onlineCourse-v2.jsp?courseID=200001"
-															class="btn btn-danger icon  pull-right">刪除</a>
+														<button 
+															class="btn btn-danger icon  pull-right">刪除</button>
 														<h4>
 															<a href="<%=request.getContextPath()%>/onlineCourse-v2.jsp?courseID=200001">在這裡顯示課程名稱</a>
 														</h4>
@@ -214,7 +214,7 @@ ul {
 														class="pull-left span2 clearfix"
 														style='margin-right: 10px'>
 													<div class="caption" class="pull-left">
-														< href="onlineCourse-v2.jsp?courseID=200003"
+														<a href="onlineCourse-v2.jsp?courseID=200003"
 															class="btn btn-danger icon  pull-right">刪除</a>
 														<h4>
 															<a href="<%=request.getContextPath()%>/onlineCourse-v2.jsp?courseID=200001">在這裡顯示課程名稱</a>
@@ -282,221 +282,10 @@ ul {
 						</div>
 						<!-- step1end -->
 						<!-- step2start -->
-						<div class="tab-pane" role="tabpanel" id="step2">
-							<div class="container">
-								<div class="row">
-
-									<fieldset>
-										<!-- Multiple Radios (inline) -->
-										<div class="form-group">
-											<label class="col-md-3 control-label" for="reqType">發票類型
-											</label>
-											<div class="col-md-4">
-												<label class="radio-inline" for="reqType-0"> <input
-													type="radio" name="reqType" id="reqType-0" value="post"
-													checked="checked"> 二聯電子發票
-												</label> <label class="radio-inline" for="reqType-1"> <input
-													type="radio" name="reqType" id="reqType-1" value="get">
-													三聯電子發票
-												</label>
-											</div>
-										</div>
-										<!-- Multiple Radios (inline) -->
-										<div class="form-group">
-											<label class="col-md-4 control-label" for="textinput">統一編號</label>
-											<div class="col-md-2">
-												<input id="textinput" name="textinput" type="text"
-													placeholder="placeholder" class="form-control input-md"
-													required="">
-											</div>
-										</div>
-										<!-- Text input-->
-										<div class="form-group">
-											<label class="col-md-4 control-label" for="color">購買人姓名</label>
-											<div class="col-md-2">
-												<input id="color" name="color" type="text"
-													placeholder="#F0F0F0" class="form-control input-md">
-											</div>
-										</div>
-										<!-- Appended Input-->
-										<div class="form-group">
-											<label class="col-md-4 control-label" for="account">聯絡電話</label>
-											<div class="col-md-3">
-												<div class="input-group">
-													<input id="account" name="account" class="form-control"
-														placeholder="Alan Francis" type="text">
-												</div>
-											</div>
-										</div>
-										<!-- Select Basic -->
-										<div class="form-group">
-											<label class="col-md-4 control-label" for="threshold">地址</label>
-											<div class="col-md-2">
-												<select id="threshold" name="threshold" class="form-control">
-													<option value="台北市">台北市</option>
-													<option value="新北市">新北市</option>
-													<option value="桃園市">桃園市</option>
-													<option value="台中市">台中市</option>
-													<option value="台南市">台南市</option>
-													<option value="高雄市">高雄市</option>
-													<option value="基隆市">基隆市</option>
-													<option value="新竹市">新竹市</option>
-													<option value="嘉義市">嘉義市</option>
-													<option value="新竹縣">新竹縣</option>
-													<option value="苗栗縣">苗栗縣</option>
-													<option value="彰化縣">彰化縣</option>
-													<option value="南投縣">南投縣</option>
-													<option value="雲林縣">雲林縣</option>
-													<option value="嘉義縣">嘉義縣</option>
-													<option value="屏東縣">屏東縣</option>
-													<option value="宜蘭縣">宜蘭縣</option>
-													<option value="花蓮縣">花蓮縣</option>
-													<option value="台東縣">台東縣</option>
-													<option value="澎湖縣">澎湖縣</option>
-													<option value="金門縣">金門縣</option>
-													<option value="連江縣">連江縣</option>
-												</select>
-											</div>
-											<div class="col-md-2">
-												<select name="comparison" class="form-control">
-													<option value="中正區">中正區</option>
-													<option value="大同區">大同區</option>
-													<option value="中山區">中山區</option>
-													<option value="松山區">松山區</option>
-													<option value="大安區">大安區</option>
-													<option value="萬華區">萬華區</option>
-													<option value="信義區">信義區</option>
-													<option value="士林區">士林區</option>
-													<option value="北投區">北投區</option>
-													<option value="內湖區">內湖區</option>
-													<option value="南港區">南港區</option>
-													<option value="文山區">文山區</option>
-												</select>
-											</div>
-										</div>
-										<!-- Text input-->
-										<div class="form-group">
-											<label class="col-md-4 control-label" for="thresholdvalue"></label>
-											<div class="col-md-6">
-												<input id="thresholdvalue" name="thresholdvalue" type="text"
-													placeholder="threshold value" class="form-control input-md">
-											</div>
-										</div>
-										<!-- Button (Double) -->
-										<!-- 
-									 	<div class="form-group">
-											<label class="col-md-4 control-label" for="submitButton"></label>
-											<div class="col-md-8">
-												<button id="submitButton" name="submitButton"
-													class="btn btn-success">Save</button>
-												<button id="cancel" name="cancel" class="btn btn-inverse">Cancel</button>
-											</div>
-										</div> 
-										-->
-
-										<div class="col-md-4 pull-right" style="margin-top: 20px">
-											<button type="button"
-												class="btn btn-primary pull-right next-step">選擇付款方式</button>
-										</div>
-									</fieldset>
-								</div>
-							</div>
-						</div>
 						<!-- step2end -->
 						<!-- step3start -->
+						
 						<div class="tab-pane" role="tabpanel" id="step3">
-							<div class="container">
-								<div class="row">
-									<div class="col-md-3"></div>
-									<div class="form-group col-md-6">
-										<h3>訂單金額： 2300 元</h3>
-										<hr>
-										<br>
-										<h3>付款方式：</h3>
-										<hr>
-									</div>
-
-									<div class="col-md-3"></div>
-									<div class="col-md-12"></div>
-									<div class="col-md-3"></div>
-									<div class="col-xs-12 col-md-6">
-
-
-										<!-- CREDIT CARD FORM STARTS HERE -->
-										<div class="panel panel-default credit-card-box">
-											<div class="panel-heading display-table">
-												<div class="row display-tr">
-													<h3 class="panel-title display-td">Payment Details</h3>
-													<div class="display-td">
-														<img class="img-responsive pull-right"
-															src="http://i76.imgup.net/accepted_c22e0.png">
-													</div>
-												</div>
-											</div>
-											<div class="panel-body">
-												<div class="row">
-													<div class="col-xs-12">
-														<div class="form-group">
-															<label for="cardNumber">CARD NUMBER</label>
-															<div class="input-group">
-																<input type="tel" class="form-inline col-md-2"
-																	name="cardNumber" maxlength="4" required /> <input
-																	type="tel" class="form-inline col-md-2"
-																	name="cardNumber" maxlength="4" required /> <input
-																	type="tel" class="form-inline col-md-2"
-																	name="cardNumber" maxlength="4" required /> <input
-																	type="tel" class="form-inline col-md-2"
-																	name="cardNumber" maxlength="4" required />
-
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-xs-7 col-md-7">
-														<div class="form-group">
-															<label for="cardExpiry"><span class="hidden-xs">EXPIRATION</span><span
-																class="visible-xs-inline">EXP</span> DATE</label> <input
-																type="tel" class="form-control" name="cardExpiry"
-																placeholder="MM / YY" autocomplete="cc-exp" required />
-														</div>
-													</div>
-													<div class="col-xs-5 col-md-5 pull-right">
-														<div class="form-group">
-															<label for="cardCVC">CV CODE</label> <input type="tel"
-																class="form-control" name="cardCVC" placeholder="CVC"
-																autocomplete="cc-csc" required />
-														</div>
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-xs-12">
-														<div class="form-group">
-															<label for="couponCode">COUPON CODE</label> <input
-																type="text" class="form-control" name="couponCode" />
-														</div>
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-xs-12">
-														<button type="button"
-														class="btn btn-primary pull-right next-step">進行訂單確認</button>
-													</div>
-												</div>
-												<div class="row" style="display: none;">
-													<div class="col-xs-12">
-														<p class="payment-errors"></p>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- step3end -->
-						<!-- step4start -->
-						<div class="tab-pane" role="tabpanel" id="step4">
 							<div class="container">
 								<div class="row">
 									<div
@@ -600,8 +389,12 @@ ul {
 			</section>
 		</div>
 	</div>
+<script>
+//由於不需要用到 取消上方步驟按鈕功能
+$('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+		return false;
+});
 
-
-
+</script>
 </body>
 </html>

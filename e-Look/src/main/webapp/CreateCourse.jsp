@@ -120,7 +120,7 @@
 													<i class="glyphicon glyphicon-list"></i>
 												</div>
 												<div class="update-text">
-													<strong>步驟一555、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
+													<strong>步驟一、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
 												</div>
 											</div>
 										</div>
@@ -861,15 +861,7 @@
 					$('#filename2').val(value);
 					$('#filename2+span').text(value);
 				})
-		$('#inputfilename3').change(
-				function() {
-					$('#filename3').attr("class",
-							"btn btn-default image-preview-input");
-					var value = $('#inputfilename3').val();
-					console.log(value);
-					$('#filename3').val(value);
-					$('#filename3+span').text(value);
-				})
+
 				
 				
 				
