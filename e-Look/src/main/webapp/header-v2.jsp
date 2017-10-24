@@ -167,7 +167,7 @@ font-size: 18px;
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<c:choose>
-								<c:when test="${!empty LoginOK && !empty shoppingCartList}">
+								<c:when test="${!empty LoginOK}">
 									<li class="dropdown"><a class="dropdown-toggle"
 										data-toggle="dropdown" aria-haspopup="false"
 										aria-expanded="false"><span class="cartcount"></span><img style="margin-top:15px"
@@ -201,7 +201,7 @@ font-size: 18px;
 												<span id="totalPrice">總金額：0元</span>
 											</div>
 											<div class="modal-footer">
-												<a href="<%= request.getContextPath() %>/settled/settled.jsp">
+												<a href="<%= request.getContextPath() %>/ShoppingCartIntoOrder">
 												<button type="button" class="btn btn-primary btn-block">前往結帳</button>
 												</a>
 											</div>
@@ -303,14 +303,9 @@ $(function(){
 	function deleteShoppingCart(){
 		var courseID=$(this).attr('name');
 		$.post('<%=request.getContextPath() %>/LoadShoppingCart',{"memberID":${LoginOK.memberID},"courseID":courseID},function(datas){
-			
-			
-			
+			loadShoppingCart();
 		})
 	}
-	
-	
-	
 	
 })
 </script>
