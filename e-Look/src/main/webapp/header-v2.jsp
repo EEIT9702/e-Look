@@ -168,6 +168,7 @@ font-size: 18px;
 						<ul class="nav navbar-nav navbar-right">
 							<c:choose>
 								<c:when test="${!empty LoginOK}">
+								<input id="gbmemberID" type="hidden" value="${LoginOK.memberID}"/>
 									<li class="dropdown"><a class="dropdown-toggle"
 										data-toggle="dropdown" aria-haspopup="false"
 										aria-expanded="false"><span class="cartcount"></span><img style="margin-top:15px"
@@ -265,12 +266,15 @@ font-size: 18px;
 	</div>
 <script>
 $(function(){
-	if(${LoginOK.memberID}>1){
+	var memberID=$('#gbmemberID').val();
+	
+	
+	if(memberID>1){
 		loadShoppingCart();
 	}
 	
 	function loadShoppingCart(){
-		$.post('<%=request.getContextPath() %>/LoadShoppingCart',{"memberID":${LoginOK.memberID}},function(datas){
+		$.post('<%=request.getContextPath() %>/LoadShoppingCart',{"memberID":memberID},function(datas){
 			var fg = $(document.createDocumentFragment());
 			$('.cartrows').empty();
 			var totalPrice = 0
@@ -302,7 +306,7 @@ $(function(){
 	}
 	function deleteShoppingCart(){
 		var courseID=$(this).attr('name');
-		$.post('<%=request.getContextPath() %>/LoadShoppingCart',{"memberID":${LoginOK.memberID},"courseID":courseID},function(datas){
+		$.post('<%=request.getContextPath() %>/LoadShoppingCart',{"memberID":memberID,"courseID":courseID},function(datas){
 			loadShoppingCart();
 		})
 	}

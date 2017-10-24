@@ -22,9 +22,7 @@
 /* 影片區塊 */
 video {
 	width: 100%;
-	height: 90%;
-	padding-left: -15px;
-	padding-right: -15px;
+	height: 100%;
 }
 
 #videoArea {
@@ -44,7 +42,7 @@ video {
 #videoArea>div>div>ul {
 	width: 100%;
 	color: white;
-	height: 80%;
+	height: 83.2%;
 	overflow-y: scroll;
 	margin: 0;
 	padding: 0;
@@ -66,12 +64,9 @@ video::-webkit-media-controls-panel {
 	background-color: rgba(0%, 10%, 20%, 0.3);
 	color: white;
 }
-
 #videoDivListStyle {
 	border: 1px solid gray;
-	height: 90.3%;
-	padding-left: -15px;
-	padding-right: -15px;
+	height: 100%;
 	background-color: rgba(0%, 10%, 20%, 0.3);
 }
 
@@ -192,12 +187,11 @@ video::-webkit-media-controls-panel {
 		<div class="container">
 			<div class="row">
 				<h1 align="center" id="videoTitle">${courseVO.courseName}</h1>
-				<div class="col-md-12 " id="videoArea"
-					style="background-color: gray"
+				<div class="col-md-12 " id="videoArea"					
 					style="background-image: url('<%=request.getContextPath() %>/CourseImage?CourseID=${courseVO.courseID}')">
 
 					<div class="col-md-12">
-						<div class="col-md-8 col-xs-12">
+						<div class="col-md-8 col-xs-12" style="margin-right:-15px">
 
 							<video controls="controls" id="vidoeControl">
 								<source
@@ -244,16 +238,25 @@ video::-webkit-media-controls-panel {
 						class="img-responsive center-block">
 					<h5 class="text-center">課程時間為 ${courseVO.courseLength}min</h5>
 				</div>
-				<c:forEach items="${memberBookmarksVOList}" var="memberBookmsrks">
-					<c:choose>
-						<c:when test="${courseVO.courseID==memberBookmsrks.courseID}">
-							<c:set var="favor" value="favoriteclick1" />
-						</c:when>
-						<c:otherwise>
-							<c:set var="favor" value="favoriteclick2" />
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
+				<c:if test="${!empty mBookmarkList}">
+						<c:forEach items="${mBookmarkList}" var="memberBookmsrks">
+							<c:choose>
+								<c:when test="${courseVO.courseID==memberBookmsrks.courseID}">
+									<c:set var="favor" value="favoriteclick1" />
+									<c:set var="favor1" value="ture" />
+								</c:when>
+								<c:when test="${!empty favor1}">
+								</c:when>
+								<c:otherwise>
+									<c:set var="favor" value="favoriteclick2" />
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+				</c:if>
+				
+				<c:if test="${empty mBookmarkList}">
+					<c:set var="favor" value="favoriteclick2"/>
+				</c:if>
 				<div class="col-md-1 col-xs-4">
 					<img src="<%=request.getContextPath()%>/img/favorite.png"
 						class="img-responsive center-block"> <a href="#"

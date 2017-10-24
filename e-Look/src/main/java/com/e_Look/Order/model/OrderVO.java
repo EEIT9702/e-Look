@@ -8,14 +8,12 @@ public class OrderVO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Integer orderID;
 	private Integer memberID;
-	private String receiptNO;
 	private Date orderTime;
 	public OrderVO(){};
-	public OrderVO(Integer orderID, Integer memberID, String receiptNO, Date orderTime) {
+	public OrderVO(Integer orderID, Integer memberID, Date orderTime) {
 		super();
 		this.orderID = orderID;
 		this.memberID = memberID;
-		this.receiptNO = receiptNO;
 		this.orderTime = orderTime;
 	}
 
@@ -31,12 +29,7 @@ public class OrderVO implements Serializable{
 	public void setMemberID(Integer memberID) {
 		this.memberID = memberID;
 	}
-	public String getReceiptNO() {
-		return receiptNO;
-	}
-	public void setReceiptNO(String receiptNO) {
-		this.receiptNO = receiptNO;
-	}
+
 	public Date getOrderTime() {
 		return orderTime;
 	}

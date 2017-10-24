@@ -5,12 +5,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+import org.json.simple.JSONValue;
 
 import com.e_Look.message.model.MessageDAO;
 import com.e_Look.message.model.MessageVO;
@@ -41,6 +46,12 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 			"SELECT reportId, reportMessageID, reportMemberID, reportContent, reportTime, status FROM ReportMessage WHERE status=0";
 	private static final String SELECT_ALL_REPORT_MESSAGE =
 			"SELECT reportId, reportMessageID, reportMemberID, reportContent, reportTime, status FROM ReportMessage";
+	
+	private static final String GET_JSON = "SELECT m.messageID, m.mContent, rm.reportID, rm.reportMessageID,"
+			+ " rm.reportMemberID, rm.reportContent, rm.reportTime, rm.status"
+			+ " FROM Message m INNER JOIN ReportMessage rm ON m.messageID = "
+			+ "rm.reportMessageID WHERE rm.status=?";
+	
 	/*
 	private static final String SELECT_ONE_REPORT_MESSAGE =
 			"SELECT m.messageID, m.mContent, rm.reportID, rm.reportMessageID, rm.reportMemberID, rm.reportContent, rm.reportTime, rm.status FROM Message m INNER JOIN ReportMessage rm ON m.messageID = rm.reportMessageID WHERE rm.reportId=?";
@@ -222,6 +233,73 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 		return reportMessageVO;
 	}
 
+	@Override
+	public String getJSON(Integer status) {
+		//List<ReportMessageVO> list = new ArrayList<ReportMessageVO>();
+		String jsonString;
+		//ReportMessageVO reportMessageVO = null;
+		//MessageVO messageVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			//"SELECT m.messageID, m.mContent, rm.reportID, rm.reportMessageID,
+			//rm.reportMemberID, rm.reportContent, rm.reportTime, rm.status
+			//FROM Message m INNER JOIN ReportMessage rm ON m.messageID = 
+			//rm.reportMessageID WHERE rm.status=?";
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_JSON);
+			pstmt.setInt(1, status);
+			rs = pstmt.executeQuery();
+			
+			 List  l1 = new LinkedList();
+			 while (rs.next()) {
+				 Map m1 = new HashMap();  
+				 m1.put("messageID", rs.getString(1));   
+				 m1.put("mContent", rs.getString(2));  
+				 m1.put("reportID", rs.getString(3));   
+				 m1.put("reportMessageID", rs.getString(4)); 
+				 m1.put("reportMemberID", rs.getString(5)); 
+				 m1.put("reportContent", rs.getString(6));
+				 m1.put("reportTime", rs.getString(7));
+				 m1.put("status", rs.getString(8));
+				 l1.add(m1);
+			 }
+			 jsonString = JSONValue.toJSONString(l1);  
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return jsonString;
+	}
+	
 	@Override
 	public List<ReportMessageVO> getNotHandle() {
 		List<ReportMessageVO> list = new ArrayList<ReportMessageVO>();
