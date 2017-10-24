@@ -14,23 +14,7 @@
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
 <title>${SYSTEM.systemName}</title>
-<% 
-MemberVO memberVO=(MemberVO)session.getAttribute("LoginOK");
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-%>
 <style type="text/css">
 h5 {
 	font-size: 1.28571429em;
@@ -241,7 +225,9 @@ a.clickable:hover {
 	padding: 5px 10px 5px 10px;
 	border-radius: 27px;
 }
-
+a:HOVER {
+	color:black;
+}
 </style>
 
 </head>
@@ -251,7 +237,12 @@ a.clickable:hover {
 	<c:redirect url="/HOME.jsp"/>
 	</c:if>
 	<jsp:include page="/login.jsp" />
-	
+	<% 
+		MemberVO memberVO=(MemberVO)session.getAttribute("LoginOK");
+		CourseDAO dao=new CourseDAO();
+		List<CourseVO> list=dao.findBymemberID(memberVO.getMemberID(),2);
+		pageContext.setAttribute("list",list);
+%>
 	<div style="margin-top: 10px" class="container">
 		<div class="row">
 				<div class="col-md-4 " style="padding-top: 20px;background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);">
@@ -339,27 +330,60 @@ a.clickable:hover {
 						</div>
 						<div class="panel-body" style="display: none;">
 							<!-- 1 -->
+							<c:forEach var="mycouser" items="${list}">
+							<c:if test="${mycouser.soldPrice>0}">
 							<div class=" col-md-4  col-sm-4" style="width: 211px">
+							 <a style="text-decoration: none; color:black"; href="<%=request.getContextPath() %>/onlineCourse-v2.jsp?CourseID=${mycouser.courseID}">
 								<div class="card card-inverse">
 									<img class="card-img-top"
-										src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png"
+										src="<%=request.getContextPath()%>/CourseImage?CourseID=${mycouser.courseID}"
 										alt="course" id="wizardPicturePreview" title="">
 									<div class="card-block">
 										<figure class="profile">
 											<img
-												src="<%=request.getContextPath()%>/Class Steps/imgs/eLook_LOGO1.png"
+												src="<%=request.getContextPath()%>/Image?MemberID=${LoginOK.memberID}"
 												class="profile-avatar" alt="">
 										</figure>
 										<div class="card-text">
-											<p id="title" class="card-title mt-3 multi_ellipsis">這裡請輸入課程標題</p>
+											<p id="title" class="card-title mt-3 multi_ellipsis">${mycouser.courseName}</p>
 										</div>
 									</div>
+									</a>
 									<div class="card-footer">
+									<a style="text-decoration: none; color:black"; href="<%=request.getContextPath() %>/CreateCourse.jsp?CourseID=${mycouser.courseID}">
 										<button class="btn-info btn-sm center-block"
-											style="margin-bottom: 5px; margin-top: 10px">編輯</button>
+											style="margin-bottom: 5px; margin-top: 10px">編輯</button></a>
 									</div>
 								</div>
 							</div>
+							</c:if>
+							<c:if test="${mycouser.soldPrice==0}">
+							<div class=" col-md-4  col-sm-4" style="width: 211px">
+							<a style="text-decoration: none; color:black"; href="<%=request.getContextPath() %>/freeCourse-v1.jsp?CourseID=${mycouser.courseID}">
+								<div class="card card-inverse">
+									<img class="card-img-top"
+										src="<%=request.getContextPath()%>/CourseImage?CourseID=${mycouser.courseID}"
+										alt="course" id="wizardPicturePreview" title="">
+									<div class="card-block">
+										<figure class="profile">
+											<img
+												src="<%=request.getContextPath()%>/Image?MemberID=${LoginOK.memberID}"
+												class="profile-avatar" alt="">
+										</figure>
+										<div class="card-text">
+											<p id="title" class="card-title mt-3 multi_ellipsis">${mycouser.courseName}</p>
+										</div>
+									</div>
+									</a>
+									<div class="card-footer">
+									<a style="text-decoration: none; color:black"; href="<%=request.getContextPath() %>/CreateCourse.jsp?CourseID=${mycouser.courseID}">
+										 <button class="btn-info btn-sm center-block"
+											style="margin-bottom: 5px; margin-top: 10px">編輯</button></a>
+									</div>
+								</div>
+							</div>
+							</c:if>
+							</c:forEach>
 							<!-- 1 -->
 							
 						</div>
@@ -374,7 +398,7 @@ a.clickable:hover {
 						</div>
 						<div class="panel-body" style="display: none;">
 
-
+							
 							<div class=" col-md-4  col-sm-4" style="width: 211px">
 								<div class="card card-inverse">
 									<img class="card-img-top"
@@ -392,7 +416,7 @@ a.clickable:hover {
 									</div>
 								</div>
 							</div>
-
+					
 						</div>
 					</div>
 				</div>
