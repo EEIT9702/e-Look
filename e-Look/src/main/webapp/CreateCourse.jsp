@@ -104,6 +104,7 @@
 						onsubmit="showStatus()">
 						<iframe name=upload_iframe width=0 height=0></iframe>
 						<input type="hidden" value="${CourseID}" name="CourseID">
+						<input type="hidden" value="${LoginOK.memberID}" name="memberID">
 
 						<div class="tab-content">
 							<!-- 整個step1頁面 -->

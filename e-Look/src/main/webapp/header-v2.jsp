@@ -167,7 +167,7 @@ font-size: 18px;
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<c:choose>
-								<c:when test="${!empty LoginOK && !empty shoppingCartList}">
+								<c:when test="${!empty LoginOK}">
 									<li class="dropdown"><a class="dropdown-toggle"
 										data-toggle="dropdown" aria-haspopup="false"
 										aria-expanded="false"><span class="cartcount"></span><img style="margin-top:15px"
@@ -201,7 +201,7 @@ font-size: 18px;
 												<span id="totalPrice">總金額：0元</span>
 											</div>
 											<div class="modal-footer">
-												<a href="<%= request.getContextPath() %>/settled/settled.jsp">
+												<a href="<%= request.getContextPath() %>/ShoppingCartIntoOrder">
 												<button type="button" class="btn btn-primary btn-block">前往結帳</button>
 												</a>
 											</div>
@@ -270,7 +270,7 @@ $(function(){
 	}
 	
 	function loadShoppingCart(){
-		$.getJSON('<%=request.getContextPath() %>/LoadShoppingCart',{"memberID":${LoginOK.memberID}},function(datas){
+		$.post('<%=request.getContextPath() %>/LoadShoppingCart',{"memberID":${LoginOK.memberID}},function(datas){
 			var fg = $(document.createDocumentFragment());
 			$('.cartrows').empty();
 			var totalPrice = 0
@@ -279,7 +279,7 @@ $(function(){
 				var cell1 = $('<div></div>').addClass('cartrow').val(courseVO.courseID);
 				var cell2 = $('<div></div>').css('text-align','right');
 				var cell3 = $('<div></div>').css(['float','left','width','80%','text-align','left']);
-				var cell4 = $('<button></button>').css('color','red').addClass('close glyphicon glyphicon-remove').attr('type','button');
+				var cell4 = $('<button></button>').css('color','red').addClass('close glyphicon glyphicon-remove').attr({'type':'button','name':courseVO.courseID});
 				var cell5 = $('<img>').attr({'src':'<%=request.getContextPath() %>/CourseImage?CourseID='+courseVO.courseID,'alt':'<%= request.getContextPath()%>/img/請上傳課程封面.png'});
 				var cell6 = $('<span></span>').addClass('courseTitle').text(courseVO.courseName);
 				var cell7 = $('<br>')
@@ -297,10 +297,15 @@ $(function(){
 			$('#totalPrice').text('總金額：'+totalPrice+'元');
 			$('#courseCount').text('共'+courseCount+'筆課程');
 			$('.cartcount').text(courseCount);
+		},'json')
+	$('.cartrows').on('click','button',deleteShoppingCart);
+	}
+	function deleteShoppingCart(){
+		var courseID=$(this).attr('name');
+		$.post('<%=request.getContextPath() %>/LoadShoppingCart',{"memberID":${LoginOK.memberID},"courseID":courseID},function(datas){
+			loadShoppingCart();
 		})
 	}
-	
-	
 	
 })
 </script>

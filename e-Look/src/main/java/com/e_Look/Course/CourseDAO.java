@@ -413,7 +413,7 @@ public class CourseDAO implements CourseDAO_interface {
 			}
 		}
 	}
-
+	//顯示所有status2的課程(顯示首頁的熱門課程等....)
 	@Override
 	public List<CourseVO> getAllonlineCourse() {
 		List<CourseVO> CourseList = new LinkedList<CourseVO>();

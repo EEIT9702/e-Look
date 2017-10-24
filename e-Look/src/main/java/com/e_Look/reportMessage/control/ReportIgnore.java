@@ -35,7 +35,7 @@ public class ReportIgnore extends HttpServlet {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String url = "jdbc:sqlserver://localhost:1433;DatabaseName=eLook";
-		String query = "UPDATE ReportMessage SET status=0 WHERE reportId=?";
+		String query = "UPDATE ReportMessage SET status=1 WHERE reportId=?";
 		try {
 			DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 			con = DriverManager.getConnection(url, "sa", "P@ssw0rd");
