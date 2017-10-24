@@ -25,12 +25,15 @@
     <param-value>/e-Look/img/eLook.icon</param-value>
   </context-param>
   <filter-mapping>
-  <filter-name>DisableCacheFilter</filter-name>
-  <url-pattern>/*</url-pattern>
+    <filter-name>DisableCacheFilter</filter-name>
+    <url-pattern>/*</url-pattern>
   </filter-mapping>
   <filter-mapping>
-  <filter-name>CreateCourseFilter</filter-name>
-  <url-pattern>/CreateCourse.jsp</url-pattern>
+    <filter-name>CreateCourseFilter</filter-name>
+    <url-pattern>/CreateCourse.jsp</url-pattern>
   </filter-mapping>
-  
+    <filter-mapping>
+    <filter-name>OnlineCourseFilter</filter-name>
+    <url-pattern>/onlineCourse-v2.jsp</url-pattern>
+  </filter-mapping>
 </web-app>

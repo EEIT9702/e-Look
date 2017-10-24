@@ -1,19 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="java.util.*,java.text.*,com.e_Look.Course.*,com.e_Look.member.model.*"%>
+	pageEncoding="UTF-8" import="java.util.*,java.text.*,com.e_Look.Course.*,com.e_Look.member.model.*,com.e_Look.buyCourse.model.*,javax.servlet.http.HttpSession"%>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 	<%
-		String courseID=request.getParameter("CourseID");
-	if(courseID!=null){
-		CourseDAO dao= new CourseDAO();
-		CourseVO courseVO= dao.findByPrimaryKey(Integer.valueOf(courseID));
-		MemberService service=new MemberService();
-		MemberVO memberVo=service.getMember(courseVO.getMemberID());
-		List<CourseVO> list =dao.findBymemberID(courseVO.getMemberID(),2);
-		pageContext.setAttribute("list",list);
-		pageContext.setAttribute("courseVO",courseVO);
-		pageContext.setAttribute("memberVo",memberVo);
-		
-	}
+	
+	
 	%>
 <!DOCTYPE >
 <html>
@@ -251,17 +241,49 @@ a:HOVER {
 	<div class="container-fluid">
 		<div class="container" style="background-color: gray;">
 			<div class="row">
-
 				<div class="col-md-12 " id="videoArea"
 					style="background-image: url('<%=request.getContextPath() %>/CourseImage?CourseID=${courseVO.courseID}')">
 					<h1 align="center" style="color: white">${courseVO.courseName}</h1>
 					<div class="col-md-12">
 						<div class="col-md-8 col-xs-12">
-							<video poster="<%=request.getContextPath()%>/_Lyy/poster.png"
-								id="vidoeControl">
-								<source src="<%=request.getContextPath()%>/_Lyy/tri.mp4"
+							<c:choose>
+							<c:when test="${LoginOK.memberID==courseVO.memberID}">
+							<video controls="controls" id="vidoeControl">
+								<source src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}"
 									type="video/mp4">
 							</video>
+							</c:when>
+								<c:when test="${!empty LoginOK && !empty list2}">
+							<video 
+							<c:forEach var="buycourse"  items='${list2}'>
+							<c:choose>
+								<c:when test="${courseVO.courseID==buycourse.courseID}">
+							<c:set var="control" value="controls=controls" />
+							<c:set var="boo" value="true" />
+							</c:when>
+							<c:when test="${!empty boo}">
+							</c:when>
+							<c:otherwise> 
+								<c:set var="poster" value="poster=_Lyy/poster.png" />
+								<c:set var="control" value="" />
+							</c:otherwise>
+							</c:choose>
+							</c:forEach>
+								<c:out value="${poster}"/>
+								<c:out value="${control}"/>
+								id="vidoeControl">
+								<source src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}"
+									type="video/mp4">
+							</video>
+							</c:when>
+							<c:otherwise>
+							<video poster="<%=request.getContextPath()%>/_Lyy/poster.png"
+								id="vidoeControl">
+								<source src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}"
+									type="video/mp4">
+							</video>
+							</c:otherwise>
+							</c:choose>
 						</div>
 						<div class="col-md-4 col-xs-12" id="videoDivListStyle">
 							<div>
@@ -273,7 +295,7 @@ a:HOVER {
 								<li><a style="color: white;text-decoration: none;" href="<%=request.getContextPath() %>/onlineCourse-v2.jsp?CourseID=${course.courseID}">${course.courseName}</a></li>
 								</c:if>
 								<c:if test="${course.soldPrice==0}">
-								<li><a style="color: white;text-decoration: none;" href="<%=request.getContextPath() %>/freeCourse-v1.jsp?CourseID=${course.courseID}">course.courseName</a></li>
+								<li><a style="color: white;text-decoration: none;" href="<%=request.getContextPath() %>/freeCourse-v1.jsp?CourseID=${course.courseID}">${course.courseName}</a></li>
 								</c:if>
 								</c:forEach>
 <!-- 								<li>線上課程</li> -->
