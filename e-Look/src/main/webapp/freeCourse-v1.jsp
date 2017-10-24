@@ -16,7 +16,6 @@
 		pageContext.setAttribute("memberBookmarksVOList", memberBookmarksVO);
 		pageContext.setAttribute("courseVO", courseVO);
 		pageContext.setAttribute("memberVo", memberVo);
-
 	}
 %>
 <!DOCTYPE >
@@ -263,13 +262,13 @@ video::-webkit-media-controls-panel {
 		<div class="row">
 			<div class="col-md-12">
 
-				<div class="col-md-1 " style="padding-top: 15px"></div>
-				<div class="col-md-1 col-xs-4" style="padding-top: 13px">
+				<div class="col-md-1" ></div>
+				<div class="col-md-1 col-xs-4">
 					<img src="<%=request.getContextPath()%>/_Lyy/004-people.png"
 						class="img-responsive center-block ">
 					<h5 class="text-center">課程人數</h5>
 				</div>
-				<div class="col-md-1 col-xs-4" style="padding-top: 13px">
+				<div class="col-md-1 col-xs-4">
 					<img src="<%=request.getContextPath()%>/_Lyy/clock.png"
 						class="img-responsive center-block">
 					<h5 class="text-center">課程時間為</h5>
@@ -284,7 +283,7 @@ video::-webkit-media-controls-panel {
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
-				<div class="col-md-1 col-xs-4" style="padding-top: 13px">
+				<div class="col-md-1 col-xs-4">
 					<img src="<%=request.getContextPath()%>/img/favorite.png"
 						class="img-responsive center-block"> <a href="#"
 						id="${favor}"><h5 class="text-center">加到最愛</h5></a>

@@ -20,6 +20,6 @@ public class MemberBookmarksService {
 	}
 	public List<MemberBookmarksVO> findPrimaryMemberBookmarks(Integer memberID) {
 		return dao.findByMemberID(memberID);
-		
 	}
-}
+	
+}	
