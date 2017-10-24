@@ -32,7 +32,7 @@
 						
 							<!-- 請在下方影片標題處加入連結位置 ,及抓取要更改的影片名稱 -->
 							<!-- 輸入要連結的jsp?courseID=輸入課程ID -->
-							<a href="?courseID="><p id="title" class="card-title mt-3 multi_ellipsis">影片名稱1</p></a>
+							<a href="?courseID="><p id="title" class="card-title mt-3 multi_ellipsis">${param.rowValueY}</p></a>
 						</div>
 						<div>
 							<p style="margin-top: 40px; font-size: 18px">課程售價：免費</p>

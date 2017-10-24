@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.util.*,java.text.*,com.e_Look.Course.*,com.e_Look.member.model.*,com.e_Look.buyCourse.model.*,javax.servlet.http.HttpSession"%>
 	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html >
 <html>
@@ -14,6 +14,23 @@
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
 <title>${SYSTEM.systemName}</title>
+<% 
+MemberVO memberVO=(MemberVO)session.getAttribute("LoginOK");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%>
 <style type="text/css">
 h5 {
 	font-size: 1.28571429em;
@@ -321,7 +338,6 @@ a.clickable:hover {
 								class="glyphicon glyphicon-plus"></i></span>
 						</div>
 						<div class="panel-body" style="display: none;">
-
 							<!-- 1 -->
 							<div class=" col-md-4  col-sm-4" style="width: 211px">
 								<div class="card card-inverse">
@@ -345,75 +361,7 @@ a.clickable:hover {
 								</div>
 							</div>
 							<!-- 1 -->
-							<!-- 2 -->
-							<div class=" col-md-4  col-sm-4" style="width: 211px">
-								<div class="card card-inverse">
-									<img class="card-img-top"
-										src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png"
-										alt="course" id="wizardPicturePreview" title="">
-									<div class="card-block">
-										<figure class="profile">
-											<img
-												src="<%=request.getContextPath()%>/Class Steps/imgs/eLook_LOGO1.png"
-												class="profile-avatar" alt="">
-										</figure>
-										<div class="card-text">
-											<p id="title" class="card-title mt-3 multi_ellipsis">這裡請輸入課程標題</p>
-										</div>
-									</div>
-									<div class="card-footer">
-										<button class="btn-info btn-sm center-block"
-											style="margin-bottom: 5px; margin-top: 10px">編輯</button>
-									</div>
-								</div>
-							</div>
-							<!-- 2 -->
-							<!-- 3 -->
-							<div class=" col-md-4  col-sm-4" style="width: 211px">
-								<div class="card card-inverse">
-									<img class="card-img-top"
-										src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png"
-										alt="course" id="wizardPicturePreview" title="">
-									<div class="card-block">
-										<figure class="profile">
-											<img
-												src="<%=request.getContextPath()%>/Class Steps/imgs/eLook_LOGO1.png"
-												class="profile-avatar" alt="">
-										</figure>
-										<div class="card-text">
-											<p id="title" class="card-title mt-3 multi_ellipsis">這裡請輸入課程標題</p>
-										</div>
-									</div>
-									<div class="card-footer">
-										<button class="btn-info btn-sm center-block"
-											style="margin-bottom: 5px; margin-top: 10px">編輯</button>
-									</div>
-								</div>
-							</div>
-							<!-- 3 -->
-							<!-- 4 -->
-							<div class=" col-md-4  col-sm-4" style="width: 211px">
-								<div class="card card-inverse">
-									<img class="card-img-top"
-										src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png"
-										alt="course" id="wizardPicturePreview" title="">
-									<div class="card-block">
-										<figure class="profile">
-											<img
-												src="<%=request.getContextPath()%>/Class Steps/imgs/eLook_LOGO1.png"
-												class="profile-avatar" alt="">
-										</figure>
-										<div class="card-text">
-											<p id="title" class="card-title mt-3 multi_ellipsis">這裡請輸入課程標題</p>
-										</div>
-									</div>
-									<div class="card-footer">
-										<button class="btn-info btn-sm center-block"
-											style="margin-bottom: 5px; margin-top: 10px">編輯</button>
-									</div>
-								</div>
-							</div>
-							<!-- 4 -->
+							
 						</div>
 					</div>
 				</div>
@@ -477,8 +425,20 @@ a.clickable:hover {
 						</div>
 					</div>
 				</div>
+				
 				<div class="col-md-12" style="margin: 25px 0;">
 					<div class="panel panel-primary">
+						<div class="panel-heading clickable panel-collapsed">
+							<h3 class="panel-title">我的草稿課程</h3>
+							<span class="pull-right "><i
+								class="glyphicon glyphicon-plus"></i></span>
+						</div>
+						<div class="panel-body" style="display: none;"></div>
+					</div>
+				</div>
+				
+				<div class="col-md-12" style="margin: 25px 0;">
+					<div class="panel panel-info">
 						<div class="panel-heading clickable panel-collapsed">
 							<h3 class="panel-title">我的追蹤講師</h3>
 							<span class="pull-right "><i
