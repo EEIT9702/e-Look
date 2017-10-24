@@ -312,10 +312,11 @@ $(function() {
 			courseClass=$(this).children('p').text()
 		}
 		
-		$('#river').slideUp(1000,refreshRiver);
-		setTimeout(function(){
-		$('#river').slideDown(1000);
-		},1100)
+// 		$('#river').slideUp(1000,refreshRiver);
+// 		setTimeout(function(){
+// 		$('#river').slideDown(1000);
+// 		},1100)
+		
 		
 	})
 	
