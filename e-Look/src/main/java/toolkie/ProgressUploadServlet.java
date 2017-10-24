@@ -18,6 +18,9 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import com.e_Look.Course.CourseService;
+import com.e_Look.Course.CourseVO;
+
 @WebServlet("/toolkie/ProgressUploadServlet")
 public class ProgressUploadServlet extends HttpServlet {
 	// 用途不明
@@ -25,6 +28,11 @@ public class ProgressUploadServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		CourseService service = null;
+		CourseVO course = null;
+//		Integer courseID = new Integer(request.getParameter("CourseID"));
+		
+		String courseVideopathway= null;
 		// 上傳狀態
 		UploadStatus status = new UploadStatus();
 
@@ -38,14 +46,14 @@ public class ProgressUploadServlet extends HttpServlet {
 
 		// 設定上傳listener
 		upload.setProgressListener(listener);
-
+		
 		try {
 			List itemList = upload.parseRequest(request);// 傳送所有參數
 
 			for (Iterator it = itemList.iterator(); it.hasNext();) {// 檢查所有參數
 				FileItem item = (FileItem) it.next();
 				if (item.isFormField()) {// 如果是表單資料
-					//System.out.println("FormField: " + item.getFieldName() + " = " + item.getString());
+					System.out.println("FormField: " + item.getFieldName() + " = " + item.getString());
 				} else {// 否則上傳檔案
 					if (!item.getName().equals("")) {
 						System.out.println("File: " + item.getName());
@@ -57,8 +65,9 @@ public class ProgressUploadServlet extends HttpServlet {
 
 						File saved = new File("D:\\TEST", item.getName());
 						System.out.println("D:\\TEST\\"+ item.getName());
-						String courseVideopathway = "D:\\TEST\\"+ item.getName();
+						courseVideopathway = "D:\\TEST\\"+ item.getName();
 						saved.getParentFile().mkdirs();
+											 
 
 						InputStream ins = item.getInputStream();
 						OutputStream ous = new FileOutputStream(saved);
@@ -77,6 +86,15 @@ public class ProgressUploadServlet extends HttpServlet {
 					}
 				}
 			}
+			System.out.println(request.getParameter("CourseID"));
+			service = new CourseService();
+			course= new CourseVO();
+//			course.setCourseID(courseID);
+			course.setCourseVideopathway(courseVideopathway);
+			
+			
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.getWriter().println("�W�ǵo�Ϳ��~�G" + e.getMessage());
