@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/ReportCourseInsert")
-public class ReportCourseInsert extends HttpServlet {
+public class ReportCourseInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public ReportCourseInsert() {
+    public ReportCourseInsertController() {
 
     }
 

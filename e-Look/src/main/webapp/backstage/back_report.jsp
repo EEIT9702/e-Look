@@ -9,10 +9,6 @@
 
     List<ReportMessageVO> list = dao.getNotHandle();
     pageContext.setAttribute("list",list);
-    
-// 	MessageDAO dao2 = new MessageDAO();
-// 	List<MessageVO> list2 = dao2.getAll();
-// 	pageContext.setAttribute("list2",list2);
 
 %>
 <!DOCTYPE>
@@ -21,7 +17,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>檢舉管理畫面</title>
 <script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script>
-<script type="text/javascript" src="css/jquery.mmenu.js"></script>
+<!-- <script type="text/javascript" src="css/jquery.mmenu.js"></script> -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
 
 <style>
@@ -81,12 +77,15 @@
                     </tr>
                  </thead>
                  <tbody>
-                <c:forEach var="reportMessageVO" items="${list}">
-                    <tr><td>${reportMessageVO.reportId}</td><td>${reportMessageVO.reportContent}</td><td>${reportMessageVO.messageVO.mContent}</td>
-                    <td>${reportMessageVO.reportTime}</td><td>${reportMessageVO.status}</td><td>
-	                    <button id="" class="btn btn-primary">確認</button>
-	                    <button class="btn btn-warning">不處理</button></td>
-                    </tr>
+                 <!-- 
+	                <c:forEach var="reportMessageVO" items="${list}">
+	                    <tr><td>${reportMessageVO.reportId}</td><td>${reportMessageVO.reportContent}</td><td>${reportMessageVO.messageVO.mContent}</td>
+	                    <td>${reportMessageVO.reportTime}</td><td>${reportMessageVO.status}</td><td>
+		                    <button id="" class="btn btn-primary">確認</button>
+		                    <button class="btn btn-warning">不處理</button></td>
+	                    </tr>
+	                </c:forEach>
+                 -->
 <!--                     <tr><td>1002</td><td>我不喜歡</td><td>x@o!*x/</td><td>2017/10/29</td><td>0</td><td> -->
 <!-- 	                    <button class="btn btn-primary">確認</button> -->
 <!-- 	                    <button class="btn btn-warning">不處理</button></td> -->
@@ -99,7 +98,6 @@
 <!-- 	                    <button class="btn btn-primary">確認</button> -->
 <!-- 	                    <button class="btn btn-warning">不處理</button></td> -->
 <!--                     </tr> -->
-                </c:forEach>
                   </tbody>
 <!--                  <tfoot> -->
 <!--                  <form name="reportForm"> -->
@@ -123,8 +121,8 @@
 			//帶入0到loadReportMessage方法裡
 		    loadReportMessage(0);
 			
-			//找td底下按鈕的第一個子元素-刪除鈕
-			//$('#productTable td>button:nth-child(1)').click(function(){
+			//找td底下按鈕的第一個子元素-確認鈕
+			//$('#reportTable td>button:nth-child(1)').click(function(){
 			$('#reportTable>tbody').on('click','td>button:nth-child(1)',function(){
 				//用nth-child找父元素,因為往上不只一層,所以要用有s的,往上找到'tr',在往下撈所有的'td'
 				var id = $(this).parents('tr').find('td:nth-child(1)').text();
@@ -136,11 +134,24 @@
 				})
 			})
 			
+			//找td底下按鈕的第一個子元素-不處理鈕
+			//$('#reportTable td>button:nth-child(1)').click(function(){
+			$('#reportTable>tbody').on('click','td>button:nth-child(2)',function(){
+				//用nth-child找父元素,因為往上不只一層,所以要用有s的,往上找到'tr',在往下撈所有的'td'
+				var id = $(this).parents('tr').find('td:nth-child(1)').text();
+				//alert(id);
+				$.get('ReportIgnore',{'reportId':id},function(data){
+					//alert(data);
+					//檢舉狀態更改完要再重新載入
+					loadReportMessage(0);
+				})
+			})
+			
 		    //讀取檢舉
-		    //讀取到剛剛觸發帶入的值放入id
+		    //讀取到剛剛觸發帶入的值,並放入id
 		   function loadReportMessage(id){
 		    $.getJSON('ReportMessages',{"status":id},function(datas){
-		    	console.log(datas)
+		    	//console.log(datas)
 
 		    	//datas = [] array
 		    	//建一個fragment容器,並加上$()轉成jQuery物件去裝迴圈裡產生的物件
@@ -148,14 +159,13 @@
 		    	$.each(datas,function(idx,report){
 		    		//product = {}
 		    		var cell1 = $('<td></td>').text(report.reportID);
-		    		var cell2 = $('<td></td>').text(report.reportMessageID);
-		    		var cell3 = $('<td></td>').text(report.reportMemberID);
-		    		var cell4 = $('<td></td>').text(report.reportContent);
-		    		var cell5 = $('<td></td>').text(report.reportTime);
-		    		var cell6 = $('<td></td>').text(report.status);
-		    		var cell7 = $('<td></td>').html('<button class="btn btn-primary">確認</button><button class="btn btn-warning">不處理</button></td>');
+		    		var cell2 = $('<td></td>').text(report.reportContent);
+		    		var cell3 = $('<td></td>').text(report.mContent);
+		    		var cell4 = $('<td></td>').text(report.reportTime);
+		    		var cell5 = $('<td></td>').text(report.status);
+		    		var cell6 = $('<td></td>').html('<button class="btn btn-primary">確認</button>&nbsp;<button class="btn btn-warning">不處理</button></td>');
 		    		//<tr><td>
-		    		var row = $('<tr></tr>').append([cell1,cell2,cell3,cell4,cell5,cell6,cell7]);
+		    		var row = $('<tr></tr>').append([cell1,cell2,cell3,cell4,cell5,cell6]);
 		    		//放到容器裡
 		    		fragment.append(row);
 		    	})

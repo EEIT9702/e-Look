@@ -14,15 +14,16 @@
 	text-decoration: none;
 	color:black;
 }
-</style>
+</style> 
 	
 <!-- 		<div class="row"> -->
 			<!-- 1-4 Template row -->
+<!-- 			No.1 -->
 			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<!-- 請在影片縮圖處加入連結位置 ,更改影片縮圖路徑,及抓取要更改的影片名稱 -->
 					<!-- 輸入要連結的jsp?courseID=輸入課程ID -->
-					<a href="?courseID="><img class="img-responsive img-hover card-img-top"
+					<a href="?courseID=${LoginOK.memberID}"><img class="img-responsive img-hover card-img-top"
 						src="<%= request.getContextPath() %>/body/img/001.jpg" alt="course" id="wizardPicturePreview" title=""></a>
 					<div class="card-block">
 						<figure class="profile"><img
@@ -45,6 +46,7 @@
 					</div>
 				</div>
 			</div>
+<!-- 			No.2 -->	
 			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<!-- 請在影片縮圖處加入連結位置 ,更改影片縮圖路徑,及抓取要更改的影片名稱 -->
@@ -72,6 +74,7 @@
 					</div>
 				</div>
 			</div>
+			
 			<div class="item col-md-3 col-sm-6 col-xs-6 img-portfolio">
 				<div class="card card-inverse">
 					<!-- 請在影片縮圖處加入連結位置 ,更改影片縮圖路徑,及抓取要更改的影片名稱 -->

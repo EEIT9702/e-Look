@@ -14,13 +14,13 @@ public class CourseService {
 		dao = new CourseDAO();
 	}
 
-	public Integer CreateNewCourse() {
+	public Integer CreateNewCourse(Integer memberID) {
 		CourseVO CourseVO1 = new CourseVO();
 		CourseVO1.setSoldPrice(0);
 		CourseVO1.setCourseLength(0);
 		CourseVO1.setTargetStudentNumber(0);
 		CourseVO1.setStatus(0);
-		CourseVO1.setMemberID(100001);
+		CourseVO1.setMemberID(memberID);
 		CourseVO1.setAvgScore(0.0);
 		Integer CourseID = dao.insert(CourseVO1);
 		return CourseID;
@@ -28,6 +28,9 @@ public class CourseService {
 
 	public void updateCourseContent(CourseVO courseVO) {
 		dao.update(courseVO);
+	}
+	public void updateCourseVideoPathway(CourseVO courseVO) {
+		dao.updatecourseVideopathway(courseVO);
 	}
 	
 	
