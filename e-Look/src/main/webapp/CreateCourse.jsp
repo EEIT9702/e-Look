@@ -118,7 +118,7 @@
 												<div class="update-split update-step1">
 													<i class="glyphicon glyphicon-list"></i>
 												</div>
-												<div class="update-text">
+												<div class="update-text">																																			
 													<strong>步驟一、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
 												</div>
 											</div>
@@ -880,6 +880,9 @@
 //					        $("#sendOK").modal('hide');
 //					        }, 1000);
 //			        }
+					error:function(){
+						alert("請輸入正確的格式!");
+					}
 				})
 			 
 			 
@@ -897,14 +900,16 @@
 					data :formData,
 					processData : false,
 					contentType : false,
-//					success: function(){
-//						
-//						$('#sendOK').modal()
-//						$('#sendOK h3').text("更新成功")
-//						setTimeout(function(){
-//					        $("#sendOK").modal('hide');
-//					        }, 1000);
-//			        }
+					success: function(){
+						
+// 						$('#sendOK').modal()
+// 						$('#sendOK h3').text("更新成功")
+// 						setTimeout(function(){
+// 					        $("#sendOK").modal('hide');
+// 					        }, 1000);
+					
+			        }
+
 				})
 			 
 			 
