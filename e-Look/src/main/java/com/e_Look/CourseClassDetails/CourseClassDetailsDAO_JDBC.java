@@ -292,5 +292,16 @@ public class CourseClassDetailsDAO_JDBC implements CourseClassDetails_interface 
 		}
 		return getAll;
 	}
-
+	
+	public static void main(String[] args) {
+		
+		CourseClassDetailsDAO_JDBC dao = new CourseClassDetailsDAO_JDBC();
+		
+		//新增
+		CourseClassDetailsVO ccDetailsVO1 = new CourseClassDetailsVO();
+		CourseVO courseVO = new CourseVO();
+		courseVO.setCourseID(200001);
+		//courseVO.set
+	}
+	
 }
