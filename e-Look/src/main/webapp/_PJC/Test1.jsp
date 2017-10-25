@@ -8,12 +8,17 @@
 	<body>
 		<form id="get-data-form" method="post">
 
+
 			<textarea class="tinymce" id="texteditor"></textarea>						
+
 			<input type="hidden" value="" id="courseContent">
 		</form>
 
+
 <!-- 		<div id="data-container">49491916156-->
 <!-- 		</div> -->
+
+
 
 
 		<script src="<%=request.getContextPath()%>/_PJC/js/jquery.js"></script>		
@@ -35,6 +40,7 @@
 			        $("#courseContent").val(ed.getContent());
 			    });
 			}}); 
+
 		</script>
 		
 	</body>

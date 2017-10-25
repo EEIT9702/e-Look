@@ -50,7 +50,11 @@ public class CourseService {
 		}
 
 	}
-
+	public CourseVO getCourse(Integer courseID){
+		
+		return dao.findByPrimaryKey(courseID);
+		
+	}
 	public void updateCoursePaper(Integer CourseID, Part part) {
 
 		if (part.getSize() > 0) {
