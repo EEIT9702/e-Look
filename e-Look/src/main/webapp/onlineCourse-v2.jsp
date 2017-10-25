@@ -677,10 +677,12 @@ a:HOVER {
 		$('#favoriteclick1').click(function() {
 			alert('已經加入過囉');
 		})
-		$('#favoriteclick2').click(function() {
+		
+		$("#favoriteclick2").click(function() {
 
 			console.log($("#mbcourseID").val())
 			console.log($("#mbmemberID").val())
+			$('#favoriteclick2').attr("id","favoriteclick1")
 			$.post('MemberBookmarksInsertController', {
 				'courseID' : $("#mbcourseID").val(),
 				'memberID' : $("#mbmemberID").val()

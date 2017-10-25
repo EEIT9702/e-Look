@@ -59,25 +59,29 @@ public class CourseEditControlloer extends HttpServlet {
 		}
 		Integer targetStudentNumber=0;
 		String targetStudentNumberTEST=request.getParameter("targetStudentNumber");
-		if(!targetStudentNumberTEST.equals("")){
+		if(targetStudentNumberTEST!=null){
+			if(targetStudentNumberTEST.length()>0)
 			targetStudentNumber = new Integer(request.getParameter("targetStudentNumber"));	
 		}
 		
 		Date fundStartDate =null;
 		String fundStartDateTEST = request.getParameter("fundStartDate");
-		if(!fundStartDateTEST.equals("")){
+		if(fundStartDateTEST!=null){
+			if(fundStartDateTEST.length()>0)
 			fundStartDate =  Date.valueOf(request.getParameter("fundStartDate"));
 		}
 		
 		Date fundEndDate =null;
 		String fundEndDateTEST = request.getParameter("fundEndDate");
-		if(!fundEndDateTEST.equals("")){
+		if(fundEndDateTEST!=null){
+			if(fundEndDateTEST.length()>0)
 			fundEndDate =  Date.valueOf(request.getParameter("fundEndDate"));
 		}
 		
 		Date courseStartDate =null;
 		String courseStartDateTEST = request.getParameter("courseStartDate");
-		if(!courseStartDateTEST.equals("")){
+		if(courseStartDateTEST!=null){
+			if(courseStartDateTEST.length()>0)
 			courseStartDate =  Date.valueOf(request.getParameter("courseStartDate"));
 		}
 								
@@ -86,8 +90,7 @@ public class CourseEditControlloer extends HttpServlet {
 		
 		service = new CourseService();
 		courseVO= new CourseVO(courseID,courseName,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseContent);
-		service.updateCourseContent(courseVO);	
-		
+		service.updateCourseContent(courseVO);		
 		service.updateCourseImage(courseID, request.getPart("picture"));
 		
 	}
