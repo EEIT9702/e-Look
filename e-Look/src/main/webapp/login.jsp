@@ -216,8 +216,7 @@ margin:2px auto;
 			</div>
 		</div>
 	</div>
-	<c:remove var="err" scope="session"/>
-	<c:remove var="loginerr" scope="session"/>
+	
 	<!-- 以上是login畫面 -->
 
 

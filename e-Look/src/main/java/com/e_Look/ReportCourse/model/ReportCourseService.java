@@ -14,5 +14,6 @@ public class ReportCourseService {
 			reportCourseVO.setReportContent(reportContent);
 			dao.insert(reportCourseVO);
 	}
-	
+
+
 }
