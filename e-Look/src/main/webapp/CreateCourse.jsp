@@ -51,7 +51,7 @@
 // 			        console.log(ed.getContent());
 			        $("#courseContent").val(ed.getContent());
 			        var formData = new FormData($('form')[3]);
-					console.log("從textarea欄位送資料到資料庫囉!");
+					console.log("從文字編輯器欄位送資料到資料庫囉!");
 					$.ajax({
 						type : 'POST',
 						url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
@@ -60,11 +60,9 @@
 						contentType : false,
 						success: function(){
 							
-//	 						$('#sendOK').modal()
-//	 						$('#sendOK h3').text("更新成功")
-//	 						setTimeout(function(){
-//	 					        $("#sendOK").modal('hide');
-//	 					        }, 1000);
+							$('#updateConfirm').text("變更已儲存至草稿");
+						    $("#updateConfirm").fadeIn();
+						    $("#updateConfirm").fadeOut(1500);
 						
 				        }
 
@@ -133,7 +131,9 @@
 								</span>
 							</a></li>
 						</ul>
+						
 					</div>
+					<P class="great" id="updateConfirm"><P>
 
 					<form
 						action=""
@@ -158,7 +158,7 @@
 													<i class="glyphicon glyphicon-list"></i>
 												</div>
 												<div class="update-text">																																			
-													<strong>步驟一156、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
+													<strong>步驟一、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
 												</div>
 											</div>
 										</div>
@@ -914,14 +914,12 @@
 					data :formData,
 					processData : false,
 					contentType : false,
-//					success: function(){
-//						
-//						$('#sendOK').modal()
-//						$('#sendOK h3').text("更新成功")
-//						setTimeout(function(){
-//					        $("#sendOK").modal('hide');
-//					        }, 1000);
-//			        }
+					success: function(){
+						$('#updateConfirm').text("變更已儲存至草稿");
+					    $("#updateConfirm").fadeIn();
+					    $("#updateConfirm").fadeOut(1500);
+// 						$("#updateConfirm").style="background: green";
+					        },			        
 					error:function(){
 						alert("請輸入正確的格式!");
 					}
@@ -944,11 +942,10 @@
 					contentType : false,
 					success: function(){
 						
-// 						$('#sendOK').modal()
-// 						$('#sendOK h3').text("更新成功")
-// 						setTimeout(function(){
-// 					        $("#sendOK").modal('hide');
-// 					        }, 1000);
+						$('#updateConfirm').text("變更已儲存至草稿");
+					    $("#updateConfirm").fadeIn();
+					    $("#updateConfirm").fadeOut(1500);
+// 						$("#updateConfirm").style="background: green";
 					
 			        }
 
@@ -961,7 +958,7 @@
 		 	$('#wizard-picture').change(function(e){
 			 
 			 var formData = new FormData($('form')[3]);
-				console.log("從textarea欄位送資料到資料庫囉!");
+				console.log("圖片送資料到資料庫囉!");
 				$.ajax({
 					type : 'POST',
 					url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
@@ -970,11 +967,11 @@
 					contentType : false,
 					success: function(){
 						
-// 						$('#sendOK').modal()
-// 						$('#sendOK h3').text("更新成功")
-// 						setTimeout(function(){
-// 					        $("#sendOK").modal('hide');
-// 					        }, 1000);
+ 						
+						$('#updateConfirm').text("變更已儲存至草稿");
+					    $("#updateConfirm").fadeIn();
+					    $("#updateConfirm").fadeOut(1500);
+// 						$("#updateConfirm").style="background: green";
 					
 			        }
 

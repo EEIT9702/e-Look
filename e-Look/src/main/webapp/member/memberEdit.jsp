@@ -137,11 +137,17 @@ a.clickable:hover {
 	<c:redirect url="/HOME.jsp"/>
 	</c:if>
 	<jsp:include page="/login.jsp" />
+	<div  class="alert alert-success" role="alert" id="updatainfo" style="display: none ;position:fixed;z-index: 20;width: 100%; text-align: center;opacity: 0.8;font-size: 32px">
+	更新成功
+	</div>
 	<div style="margin-top: 10px" class="container">
+	
+
 		<form action="" method="POST" name="formData" id="formData"
 			enctype="multipart/form-data">
 			<input type="hidden" name="memberID" value="${LoginOK.memberID}">
 			<div class="row">
+		
 				<div class="col-md-4 "
 					style="padding-top: 20px; background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);">
 					<h4 class="text-center">預覽樣式</h4>
@@ -229,6 +235,7 @@ a.clickable:hover {
 					</h3>
 					<div class="row" style="margin-top: 50px">
 						<div class=" col-md-12 ">
+						
 							<div class=" col-md-4 " style="margin: 10px 0;">
 								<div class="form-group">
 									<label>名字</label> <input type="text" class="form-control" 
@@ -267,7 +274,7 @@ a.clickable:hover {
 						</div>
 					</div>
 
-					<div class=" col-ms-12 " style="margin: 40px 0 10px 0;">
+					<div class=" col-ms-12 " style="margin: 30px 0 10px 0;">
 						<div class="panel panel-success">
 							<div class="panel-heading">關於我</div>
 							<div class=" form-group  form-group-textarea ">
@@ -277,7 +284,7 @@ a.clickable:hover {
 							</div>
 						</div>
 					</div>
-					<div class=" col-ms-12 " style="margin: 40px 0;">
+					<div class=" col-ms-12 " style="margin: 20px 0;">
 						<div class="panel panel-info">
 							<div class="panel-heading">專長</div>
 							<div class=" form-group  form-group-textarea ">
@@ -288,7 +295,7 @@ a.clickable:hover {
 						</div>
 					</div>
 
-					<div class=" col-ms-12 " style="margin: 40px 0;">
+					<div class=" col-ms-12 " style="margin: 20px 0;">
 						<div class="panel panel-warning">
 							<div class="panel-heading">興趣</div>
 							<div class=" form-group  form-group-textarea ">
@@ -299,7 +306,7 @@ a.clickable:hover {
 						</div>
 					</div>
 							<div class="col-md-12 ">
-								<button type="button" class="btn btn-primary btn-product" style="margin: 0 auto;" id="send">確認修改</button>
+<!-- 								<button type="button" class="btn btn-primary btn-product" style="margin: 0 auto;" id="send">確認修改</button> -->
 								<a href="<%=request.getContextPath()%>/member/member.jsp"><button type="button" class="btn btn-primary btn-danger ">返回</button></a>
 							</div>
 
@@ -456,7 +463,7 @@ $(function() {
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
-	$("#send").click(function(){
+	$("form input[type!='file'],textarea").keyup(function(){
 		var formData = new FormData($('form')[3]);
 		//console.log(formData);
 		$.ajax({
@@ -466,14 +473,39 @@ $(function() {
 			processData : false,
 			contentType : false,
 			success: function(){
-				
-				$('#sendOK').modal()
-				$('#sendOK h3').text("更新成功")
+				$("#updatainfo").fadeIn(2000);
 				setTimeout(function(){
-			        $("#sendOK").modal('hide');
-			        }, 1000);
+					$("#updatainfo").fadeOut(5000);
+				}, 1000);
+// 				$('#sendOK').modal()
+// 				$('#sendOK h3').text("更新成功")
+// 				setTimeout(function(){
+// 			        $("#sendOK").modal('hide');
+// 			        }, 1000);
             }
 		})
+	})
+	$("form input[type='file']").change(function(){
+		var formData = new FormData($('form')[3]);
+		$.ajax({
+			type : 'POST',
+			url : 'MemberDataContrlloer',
+			data :formData,
+			processData : false,
+			contentType : false,
+			success: function(){
+				$("#updatainfo").fadeIn(1000);
+				setTimeout(function(){
+					$("#updatainfo").fadeOut(1000);
+				}, 1000);
+// 				$('#sendOK').modal()
+// 				$('#sendOK h3').text("更新成功")
+// 				setTimeout(function(){
+// 			        $("#sendOK").modal('hide');
+// 			        }, 1000);
+            }
+		})
+		
 	})
 	
 	var chkoldpwd;

@@ -64,5 +64,9 @@ public class CourseService {
 		}
 
 	}
+	public CourseVO getCourseData(Integer courseID) {
+		return dao.findByPrimaryKey(courseID);
+		
+	}
 
 }
