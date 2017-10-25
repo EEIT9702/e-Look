@@ -217,11 +217,11 @@ public class ShoppingCartDAO_JDBC implements ShoppingCartDAO_interface {
 		ShoppingCartDAO_JDBC dao = new ShoppingCartDAO_JDBC();
 		
 		ShoppingCartVO shoppingCartVO = new ShoppingCartVO();
-		CourseVO courseVO=new CourseVO();
-		courseVO.setCourseID(200003);
-		//courseVO.setMemberID(100001);
+		CourseDAO_JDBC cdao = new CourseDAO_JDBC();
+		
+		
 		shoppingCartVO.setMemberID(100001);
-		shoppingCartVO.setCourseVO(courseVO);
+		shoppingCartVO.setCourseVO(cdao.findByPrimaryKey(200003));
 		dao.insert(shoppingCartVO);
 		
 		
@@ -230,7 +230,8 @@ public class ShoppingCartDAO_JDBC implements ShoppingCartDAO_interface {
 		
 		List<ShoppingCartVO> list = dao.getAll();
 		for(ShoppingCartVO vo : list){
-			System.out.print(vo.getMemberID());
+			System.out.print("會員編號："+vo.getMemberID()+"的購物車有課程：");
+			System.out.println(vo.getCourseVO().getCourseID());
 		}
 		
 		

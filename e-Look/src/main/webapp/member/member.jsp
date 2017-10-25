@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="java.util.*,java.text.*,com.e_Look.Course.*,com.e_Look.member.model.*,com.e_Look.buyCourse.model.*,javax.servlet.http.HttpSession"%>
+	pageEncoding="UTF-8" import="java.util.*,java.text.*,com.e_Look.Course.*,com.e_Look.member.model.*,com.e_Look.buyCourse.model.*,javax.servlet.http.HttpSession,com.e_Look.memberBookmarks.model.*"%>
 	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html >
 <html>
@@ -240,8 +240,29 @@ a:HOVER {
 	<% 
 		MemberVO memberVO=(MemberVO)session.getAttribute("LoginOK");
 		CourseDAO dao=new CourseDAO();
+		BuyCourseDAO dao2 = new BuyCourseDAO();
+		BuyCourseService  CourseService =new BuyCourseService();
+		MemberBookmarksService memberBookmarksService=new MemberBookmarksService();
 		List<CourseVO> list=dao.findBymemberID(memberVO.getMemberID(),2);
+		List<BuyCourseVO> buyCourselist = CourseService.getBuyCourse(memberVO.getMemberID());
+		List<CourseVO> list2 = new LinkedList<CourseVO>();
+		List<CourseVO> list3 = new LinkedList<CourseVO>();
+		if(buyCourselist!=null){
+			for(BuyCourseVO buyCoursevo: buyCourselist){
+				list2.add(dao.findByPrimaryKey(buyCoursevo.getCourseID()));
+			}
+		}
+		List<MemberBookmarksVO> mBookmarkList=memberBookmarksService.findPrimaryMemberBookmarks(memberVO.getMemberID());
+		if(mBookmarkList!=null){
+			for(MemberBookmarksVO MemberBookmarksVO: mBookmarkList){
+				list3.add(dao.findByPrimaryKey(MemberBookmarksVO.getCourseID()));
+			}
+		}
 		pageContext.setAttribute("list",list);
+		pageContext.setAttribute("list2",list2);
+		pageContext.setAttribute("list3",list3);
+		
+		
 %>
 	<div style="margin-top: 10px" class="container">
 		<div class="row">
@@ -398,8 +419,100 @@ a:HOVER {
 						</div>
 						<div class="panel-body" style="display: none;">
 
-							
+							<c:forEach var="buycouser" items="${list2}">
+							<a style="text-decoration: none; color:black"; href="<%=request.getContextPath() %>/onlineCourse-v2.jsp?CourseID=${buycouser.courseID}">
 							<div class=" col-md-4  col-sm-4" style="width: 211px">
+								<div class="card card-inverse">
+									<img class="card-img-top"
+										src="<%=request.getContextPath()%>/CourseImage?CourseID=${buycouser.courseID}"
+										alt="course" id="wizardPicturePreview" title="">
+									<div class="card-block">
+										<figure class="profile">
+											<img
+												src="<%=request.getContextPath()%>/Image?MemberID=${buycouser.memberID}"
+												class="profile-avatar" alt="">
+										</figure>
+										<div class="card-text">
+											<p id="title" class="card-title mt-3 multi_ellipsis">${buycouser.courseName}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							</a>
+							</c:forEach>
+					
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12" style="margin: 25px 0;">
+					<div class="panel panel-info">
+						<div class="panel-heading clickable panel-collapsed">
+							<h3 class="panel-title">我的收藏課程</h3>
+							<span class="pull-right "><i
+								class="glyphicon glyphicon-plus"></i></span>
+						 </div>
+						<div class="panel-body" style="display: none;">
+						<c:forEach var="mBookmark" items="${list3}">
+						<c:if test="${mBookmark.soldPrice>0}">
+						 <div id="click" class=" col-md-4  col-sm-4" style="width: 211px">
+						  <a style="text-decoration: none; color:black"; href="<%=request.getContextPath() %>/onlineCourse-v2.jsp?CourseID=${mBookmark.courseID}">
+                    <div class="card card-inverse">
+                    <img class="card-img-top" src="<%=request.getContextPath()%>/CourseImage?CourseID=${mBookmark.courseID}" alt="course" id="wizardPicturePreview" title="">
+                    <div class="card-block">
+                        <figure class="profile">
+                            <img src="<%=request.getContextPath()%>/Image?MemberID=${mBookmark.memberID}" class="profile-avatar" alt="">
+                        </figure>
+                        <div class="card-text">
+                        <p id="title" class="card-title mt-3 multi_ellipsis">${mBookmark.courseName}</p>                        	
+                        </div>
+                       </div>
+                       </a>
+                    <div class="card-footer">
+                    <button class="btn-info btn-sm pull-right" style="margin-bottom: 5px;margin-top: 10px">取消訂閱</button>   
+                     <input type="hidden" value="${mBookmark.courseID}">
+                   <input type="hidden" value="${LoginOK.memberID}">
+                    </div>
+                    
+                </div>
+                </div>
+                </c:if>
+                <c:if test="${mBookmark.soldPrice==0}">
+                 <div id="click" class=" col-md-4  col-sm-4" style="width: 211px">
+                 <a style="text-decoration: none; color:black"; href="<%=request.getContextPath() %>/freeCourse-v1.jsp?CourseID=${mBookmark.courseID}">
+                    <div class="card card-inverse">
+                    <img class="card-img-top" src="<%=request.getContextPath()%>/CourseImage?CourseID=${mBookmark.courseID}" alt="course" id="wizardPicturePreview" title="">
+                    <div class="card-block">
+                        <figure class="profile">
+                            <img src="<%=request.getContextPath()%>/Image?MemberID=${mBookmark.memberID}" class="profile-avatar" alt="">
+                        </figure>
+                        <div class="card-text">
+                        <p id="title" class="card-title mt-3 multi_ellipsis">${mBookmark.courseName}</p>                        	
+                        </div>
+                       </div>
+                       </a>
+                    <div class="card-footer">
+                    <button class="btn-info btn-sm pull-right" style="margin-bottom: 5px;margin-top: 10px">取消訂閱</button>   
+                     <input type="hidden" value="${mBookmark.courseID}">
+                     <input type="hidden" value="${LoginOK.memberID}">
+                    </div>
+                    
+                </div>
+                </div>
+                </c:if>
+                </c:forEach>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-md-12" style="margin: 25px 0;">
+					<div class="panel panel-primary">
+						<div class="panel-heading clickable panel-collapsed">
+							<h3 class="panel-title">我的草稿課程</h3>
+							<span class="pull-right "><i
+								class="glyphicon glyphicon-plus"></i></span>
+						</div>
+						<div class="panel-body" style="display: none;">
+						<div class=" col-md-4  col-sm-4" style="width: 211px">
 								<div class="card card-inverse">
 									<img class="card-img-top"
 										src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png"
@@ -414,53 +527,29 @@ a:HOVER {
 											<p id="title" class="card-title mt-3 multi_ellipsis">這裡請輸入課程標題</p>
 										</div>
 									</div>
+									
+									<div class="card-footer">
+									
+										<button class="btn-info btn-sm "
+											style="margin-bottom: 5px; margin-top: 10px">編輯</button>
+											<button class="btn-danger btn-sm "
+											style="margin-bottom: 5px; margin-top: 10px">刪除</button>
+									</div>
 								</div>
-							</div>
-					
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
 						</div>
 					</div>
 				</div>
-				<div class="col-md-12" style="margin: 25px 0;">
-					<div class="panel panel-info">
-						<div class="panel-heading clickable panel-collapsed">
-							<h3 class="panel-title">我的收藏課程</h3>
-							<span class="pull-right "><i
-								class="glyphicon glyphicon-plus"></i></span>
-						</div>
-						<div class="panel-body" style="display: none;">
-
-						 <div  class=" col-md-4  col-sm-4" style="width: 211px">
-                    <div class="card card-inverse">
-                    <img class="card-img-top" src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png" alt="course" id="wizardPicturePreview" title="">
-                    <div class="card-block">
-                        <figure class="profile">
-                            <img src="<%=request.getContextPath()%>/Class Steps/imgs/eLook_LOGO1.png" class="profile-avatar" alt="">
-                        </figure>
-                        <div class="card-text">
-                        <p id="title" class="card-title mt-3 multi_ellipsis">這裡請輸入課程標題</p>                        	
-                        </div>
-                       </div>
-                    <div class="card-footer">
-                    <button class="btn-info btn-sm pull-right" style="margin-bottom: 5px;margin-top: 10px">取消訂閱</button>   
-                    </div>
-                    
-                </div>
-                </div>
-						</div>
-					</div>
 				</div>
-				
-				<div class="col-md-12" style="margin: 25px 0;">
-					<div class="panel panel-primary">
-						<div class="panel-heading clickable panel-collapsed">
-							<h3 class="panel-title">我的草稿課程</h3>
-							<span class="pull-right "><i
-								class="glyphicon glyphicon-plus"></i></span>
-						</div>
-						<div class="panel-body" style="display: none;"></div>
-					</div>
-				</div>
-				
 				<div class="col-md-12" style="margin: 25px 0;">
 					<div class="panel panel-info">
 						<div class="panel-heading clickable panel-collapsed">
@@ -528,5 +617,23 @@ a:HOVER {
 		$('.panel-heading span.clickable').click();
 
 	});
+	 $('#click>div').on('click','.card-footer>button:nth-child(1)',function(){
+		   if( confirm("確定取消訂閱嗎?")){
+			   $(this).parents('#click').css("display","none")
+			    $.get('/e-Look/MemberBookmarksInsertController', {
+				'courseID' : $(this).parents('#click').find("input").val(),
+				'memberID' : $(this).parents('#click').find("input+input").val()
+			}, function() {
+			})
+		   }else{
+			   
+		   }
+
+			 
+// 			$.get('ProductsDelete',{'ProductID':id},function(data){
+// 				alert(data);
+// 				 loadProduct(1);
+// 			})
+});
 </script>
 </html>

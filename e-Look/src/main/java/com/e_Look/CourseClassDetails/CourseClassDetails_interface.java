@@ -3,13 +3,13 @@ package com.e_Look.CourseClassDetails;
 import java.util.List;
 
 import com.e_Look.Course.CourseVO;
-import com.e_Look.courseClass.courseClassVO;
+import com.e_Look.courseClass.CourseClassVO;
 
 public interface CourseClassDetails_interface {
 	
-	public void insert(courseClassVO courseClassVO,CourseVO courseVO);
+	public void insert(CourseVO courseVO, CourseClassVO courseClassVO);
 	public void delete(Integer courseID);
-	public void update(courseClassVO courseClassVO,CourseVO courseVO);
+	public void update(CourseClassVO courseClassVO, CourseVO courseVO);
 	public List<CourseClassDetailsVO> findBycourseClassID(Integer CourseClassID);
 	public List<CourseClassDetailsVO> findBycourseID(Integer courseID);
 	public List<CourseClassDetailsVO> getAll();
