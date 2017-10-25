@@ -267,7 +267,7 @@ a.clickable:hover {
 						</div>
 					</div>
 
-					<div class=" col-ms-12 " style="margin: 40px 0 10px 0;">
+					<div class=" col-ms-12 " style="margin: 30px 0 10px 0;">
 						<div class="panel panel-success">
 							<div class="panel-heading">關於我</div>
 							<div class=" form-group  form-group-textarea ">
@@ -277,7 +277,7 @@ a.clickable:hover {
 							</div>
 						</div>
 					</div>
-					<div class=" col-ms-12 " style="margin: 40px 0;">
+					<div class=" col-ms-12 " style="margin: 20px 0;">
 						<div class="panel panel-info">
 							<div class="panel-heading">專長</div>
 							<div class=" form-group  form-group-textarea ">
@@ -288,7 +288,7 @@ a.clickable:hover {
 						</div>
 					</div>
 
-					<div class=" col-ms-12 " style="margin: 40px 0;">
+					<div class=" col-ms-12 " style="margin: 20px 0;">
 						<div class="panel panel-warning">
 							<div class="panel-heading">興趣</div>
 							<div class=" form-group  form-group-textarea ">
