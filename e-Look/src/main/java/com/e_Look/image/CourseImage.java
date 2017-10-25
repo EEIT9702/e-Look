@@ -1,5 +1,7 @@
 package com.e_Look.image;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -51,6 +53,9 @@ public class CourseImage extends HttpServlet {
 			
 			if(rs.next()){
 				 is= rs.getBinaryStream(1);
+				 if(is==null){
+					 is=new FileInputStream(new File(request.getServletContext().getRealPath("")+"/img/請上傳課程封面.png"));
+				 }
 				 response.setContentType("image/jpeg");
 				 os = response.getOutputStream();
 				 int count = 0;

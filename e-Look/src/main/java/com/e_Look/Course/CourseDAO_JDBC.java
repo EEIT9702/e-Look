@@ -511,7 +511,10 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 		//新增圖片
 		CourseVO CourseVO4 = new CourseVO();
 		CourseVO4.setcPhoto(new FileInputStream(new File("src/main/webapp/img/02.jpg")));
-		CourseVO4.setCourseID(200044);
+
+		CourseVO4.setCourseID(200002);
+
+
 		dao.updateimage(CourseVO4);
 
 		//測試用：刪除草稿功能

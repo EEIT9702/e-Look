@@ -24,7 +24,6 @@ import com.e_Look.shoppingCart.model.jdbc.ShoppingCartVO;
 public class ShoppingCartIntoOrder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter rw = response.getWriter();
 		
@@ -33,7 +32,7 @@ public class ShoppingCartIntoOrder extends HttpServlet {
 		OrderDetailsDAO odDAO=new OrderDetailsDAO();
 		
 		
-		HttpSession session=request.getSession();
+		HttpSession session = request.getSession();
 		MemberVO memberVO=(MemberVO) session.getAttribute("LoginOK");
 		Integer memberID = memberVO.getMemberID();
 		
@@ -48,27 +47,23 @@ public class ShoppingCartIntoOrder extends HttpServlet {
 				orderVO=new OrderVO();
 				orderVO.setMemberID(memberID);
 				orderDAO.insert(orderVO);
-				
 				orderVO=orderDAO.findMemberUncheckOrder(memberID);
-				
+			}
 				for(CourseVO courseVO:list){
 					ShoppingCartVO scVO = new ShoppingCartVO(memberID, courseVO);
 					scdao.delete(scVO);
 					OrderDetailsVO odVO=new OrderDetailsVO();
-					odVO.setCourseID(courseVO.getCourseID());
+					odVO.setCourseVO(courseVO);
 					odVO.setOrderID(orderVO.getOrderID());
 					odVO.setOriginalPrice(courseVO.getSoldPrice());
+					//記得調整成特價後的價格
 					odVO.setBuyingPrice(courseVO.getSoldPrice());
+					
 					odDAO.insert(odVO);
 				}
 				response.sendRedirect(request.getContextPath()+"/settled/settled.jsp");
 				return;
-			}
-			
-			
-			
-			
-			
+				
 		}
 		
 		
