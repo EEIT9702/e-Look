@@ -118,7 +118,7 @@
 												<div class="update-split update-step1">
 													<i class="glyphicon glyphicon-list"></i>
 												</div>
-												<div class="update-text">
+												<div class="update-text">																																			
 													<strong>步驟一、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
 												</div>
 											</div>
@@ -193,7 +193,7 @@
 									</div>
 								</div>
 
-
+								
 								<!-- step1最終確認按鈕 -->
 								<div class="col-md-4 pull-right" style="margin-top: 20px">
 									<button type="button"
@@ -201,7 +201,7 @@
 								</div>
 								<!-- 整個step1頁面 -->
 							</div>
-
+		
 							<div class="tab-pane" role="tabpanel" id="step2">
 								<!-- step2的填寫資料 -->
 								<div>
@@ -210,7 +210,7 @@
 										<div class="row" style="margin-bottom: 25px">
 											<label for="exampleInputEmail1" style="font-size: 20pt">課程標題</label>
 											<input type="text" onfocus="this.select()"
-												class="form-control" id="CourseInput" value="輸入課程標題"
+												class="form-control" id="CourseInput" <c:if test="${!empty CoursedData}">value="${CoursedData.courseName}"</c:if><c:if test="${empty CoursedData}">value="輸入課程標題"</c:if>
 												style="font-size: 18px" name="courseName">
 										</div>
 										<div class="row" style="margin-bottom: 40px">
@@ -242,6 +242,7 @@
 									</div>
 									<div class="list-inline col-md-4">
 										<img alt=""
+											
 											src="<%=request.getContextPath()%>/Class Steps/imgs/預覽課程展示畫面.png"
 											style="width: 150px; height: 250px; margin-right: 50px; margin-top: 50px">
 									</div>
@@ -249,16 +250,18 @@
 										<div style="width: 310px">
 											<div class="card card-inverse">
 												<img class="card-img-top"
-													src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png"
+												<c:if test="${!empty CoursedData}">src="<%=request.getContextPath()%>/CourseImage?CourseID=${CourseID}"</c:if>
+												<c:if test="${empty CoursedData}">src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png"</c:if>
+													
 													alt="您的圖片連結已失效" id="wizardPicturePreview" title="">
 												<div class="card-block">
 													<figure class="profile">
 														<img
-															src="<%=request.getContextPath()%>/Class Steps/imgs/eLook_LOGO1.png"
+															src="<%=request.getContextPath()%>/Image?MemberID=${LoginOK.memberID}"
 															class="profile-avatar" alt="">
 													</figure>
 													<div class="card-text">
-														<p id="title" class="card-title multi_ellipsis"></p>
+														<p id="title" class="card-title multi_ellipsis">${CoursedData.courseName}</p>
 													</div>
 													<div>
 														<p style="margin-top: 40px; font-size: 18px">課程售價：xxx元</p>
@@ -300,7 +303,7 @@
 												<textarea name="preTool"
 													placeholder="請輸入課程中，可能會使用到的工具" class="form-control"
 													data-toggle="floatLabel" data-value="no-js"
-													style="font-size: 18px" form="TotalContent"></textarea>
+													style="font-size: 18px" form="TotalContent">${CoursedData.preTool}</textarea>
 												<label for="customStyle" style="">(例：Photoshop CC
 													2015)</label>
 											</div>
@@ -318,7 +321,7 @@
 												<textarea name="background"
 													placeholder="如果是比較進階的課程，建議先跟學生說明必備的知識，幫助學生了解這堂課"
 													class="form-control" data-toggle="floatLabel"
-													data-value="no-js" style="font-size: 18px" form="TotalContent"></textarea>
+													data-value="no-js" style="font-size: 18px" form="TotalContent">${CoursedData.background}</textarea>
 												<label for="customStyle" style="">(例：學過PS遮罩的概念)</label>
 											</div>
 										</div>
@@ -335,7 +338,7 @@
 												<textarea name="ability"
 													placeholder="最好是某種實質的東西：像是完成某種作品、達到哪種目標甚至是得到什麼結果"
 													class="form-control" data-toggle="floatLabel"
-													data-value="no-js" style="font-size: 18px" form="TotalContent"></textarea>
+													data-value="no-js" style="font-size: 18px" form="TotalContent">${CoursedData.ability}</textarea>
 												<label for="customStyle" style="">(例：可習得合成影像的基本技術)</label>
 											</div>
 										</div>
@@ -352,7 +355,7 @@
 												<textarea name="targetgroup"
 													placeholder="形容這堂課適合的學生族群，可以更讓學生了解課程內容的方向"
 													class="form-control" data-toggle="floatLabel"
-													data-value="no-js" style="font-size: 18px" form="TotalContent"></textarea>
+													data-value="no-js" style="font-size: 18px" form="TotalContent">${CoursedData.targetgroup}</textarea>
 												<label for="customStyle" style="">(例：雜誌編輯、海報設計的美編人員等...)</label>
 											</div>
 										</div>
@@ -394,12 +397,12 @@
 									<div class="col-md-6">
 										<div class="form-group col-lg-6" style="font-size: 20px;">
 											<label>定價(最低售價為$10元)</label> <input type="text" name="soldPrice"
-												class="form-control" id="" value="" style="font-size: 18px;">
+												class="form-control" id="" value="${CoursedData.soldPrice}" style="font-size: 18px;">
 										</div>
 
 										<div class="form-group col-lg-6" style="font-size: 20px;">
 											<label>預計課程長度(以分鐘為單位)</label> <input type="text" name="courseLength"
-												class="form-control" id="" value="" style="font-size: 18px;">
+												class="form-control" id="" value="${CoursedData.courseLength}" style="font-size: 18px;">
 										</div>
 
 
@@ -410,7 +413,7 @@
 									<div class="col-md-12">
 										<div class="form-group col-lg-4" style="font-size: 20px;">
 											<label>開課門檻人數(最低為10人)</label> <input type="text" name="targetStudentNumber"
-												class="form-control" id="" value="" style="font-size: 18px;">
+												class="form-control" id="" value="${CoursedData.targetStudentNumber}" style="font-size: 18px;">
 										</div>
 									</div>
 									<div class="col-md-12" style="margin-top: 2em;">
@@ -420,7 +423,7 @@
 												data-date-format="yyyy-mm-dd" data-link-field="dtp_input1"
 												data-link-format="yyyy-mm-dd">
 												<input class="form-control" style="font-size: 18px;"
-													type="text" value="" readonly size="18" id="starttime" name="fundStartDate"><span
+													type="text" value="${CoursedData.fundStartDate}" readonly size="18" id="starttime" name="fundStartDate"><span
 													class="input-group-addon"> <span
 													class="glyphicon glyphicon-calendar"></span>
 												</span>
@@ -435,7 +438,7 @@
 												data-date-format="yyyy-mm-dd" data-link-field="dtp_input2"
 												data-link-format="yyyy-mm-dd">
 												<input class="form-control" style="font-size: 18px;"
-													type="text" value="" readonly size="18" id="endtime" name="fundEndDate"><span
+													type="text" value="${CoursedData.fundEndDate}" readonly size="18" id="endtime" name="fundEndDate"><span
 													class="input-group-addon"> <span
 													class="glyphicon glyphicon-calendar"></span>
 												</span>
@@ -452,7 +455,7 @@
 									</div>
 									<div class="col-md-12" style="margin-top: 0.5em;">
 										<div class="form-group col-lg-6" style="font-size: 20px;">
-											<label>課程預計上線日期：</label><input type="hidden" id="endofproposal" name="courseStartDate" value=""><span></span>
+											<label>課程預計上線日期：</label><input type="hidden" id="endofproposal" name="courseStartDate" value="${CoursedData.courseStartDate}"><span></span>
 										</div>
 									</div>
 								</div>
@@ -478,7 +481,7 @@
 											</div>
 											<div class="[ form-group ][ form-group-textarea ]"
 												id="get-data-form">
-												<textarea class="tinymce" id="texteditor" name="courseContent"  form="TotalContent"></textarea>
+												<textarea class="tinymce" id="texteditor" name="courseContent"  form="TotalContent">${CoursedData.courseContent}</textarea>
 											</div>
 										</div>
 									</div>
@@ -880,6 +883,9 @@
 //					        $("#sendOK").modal('hide');
 //					        }, 1000);
 //			        }
+					error:function(){
+						alert("請輸入正確的格式!");
+					}
 				})
 			 
 			 
@@ -897,14 +903,16 @@
 					data :formData,
 					processData : false,
 					contentType : false,
-//					success: function(){
-//						
-//						$('#sendOK').modal()
-//						$('#sendOK h3').text("更新成功")
-//						setTimeout(function(){
-//					        $("#sendOK").modal('hide');
-//					        }, 1000);
-//			        }
+					success: function(){
+						
+// 						$('#sendOK').modal()
+// 						$('#sendOK h3').text("更新成功")
+// 						setTimeout(function(){
+// 					        $("#sendOK").modal('hide');
+// 					        }, 1000);
+					
+			        }
+
 				})
 			 
 			 

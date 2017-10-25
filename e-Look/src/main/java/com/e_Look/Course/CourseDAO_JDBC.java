@@ -505,9 +505,15 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 //		CourseVO2.setCourseStartDate(java.sql.Date.valueOf("2017-10-26"));
 //		CourseVO2.setCourseVideopathway("img/EEIT97(e_Look)第一版.mp4");
 //		CourseVO2.setCourseContent("第一次使用 After Effects 將會出現歡迎對話框，您可以選擇 New Composition 建立新的合成，或是選擇 Open Project 開啟已儲存的 After Effects 專案。若是以後不需要顯示此歡迎對話框，只要將下方的「Show Welcome Screen at startup」取消勾選即可。");
-//		CourseVO2.setCourseID(200005);
+
+//		CourseVO2.setCourseID(200002);
 //		dao.update(CourseVO2);
-					
+		//新增圖片
+		CourseVO CourseVO4 = new CourseVO();
+		CourseVO4.setcPhoto(new FileInputStream(new File("src/main/webapp/img/02.jpg")));
+		CourseVO4.setCourseID(200001);
+		dao.updateimage(CourseVO4);
+
 		//測試用：刪除草稿功能
 
 //		dao.delete(200002);
