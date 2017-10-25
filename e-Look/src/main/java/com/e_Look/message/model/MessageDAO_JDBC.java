@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_MESSAGE);
 			pstmt.setString(1, messageVO.getmContent());
-			pstmt.setDate(2, messageVO.getmTime());
+			pstmt.setTimestamp(2, messageVO.getmTime());
 			pstmt.setInt(3, messageVO.getMemberID());
 			pstmt.setInt(4, messageVO.getCourseID());
 			pstmt.setLong(5, messageVO.getBought());
@@ -82,13 +83,13 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 			if (update.equalsIgnoreCase("message")) {
 				pstmt = con.prepareStatement(UPDATE_MESSAGE);
 				pstmt.setString(1, messageVO.getmContent());
-				pstmt.setDate(2, messageVO.getmTime());
+				pstmt.setTimestamp(2, messageVO.getmTime());
 				pstmt.setInt(3, messageVO.getMessageID());			
 				pstmt.executeUpdate();
 			} else if (update.equalsIgnoreCase("messageresponse")) {
 				pstmt = con.prepareStatement(UPDATE_MESSAGE_RESPONSE);
 				pstmt.setString(1, messageVO.getmContent());
-				pstmt.setDate(2, messageVO.getmTime());
+				pstmt.setTimestamp(2, messageVO.getmTime());
 				pstmt.setInt(3, messageVO.getMessageID_response());		
 				pstmt.executeUpdate();
 			} else if (update.equalsIgnoreCase("status")) {
@@ -174,7 +175,7 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 				messageVO = new MessageVO();
 				messageVO.setMessageID(rs.getInt(1));
 				messageVO.setmContent(rs.getString(2));
-				messageVO.setmTime(rs.getDate(3));
+				messageVO.setmTime(rs.getTimestamp(3));
 				messageVO.setMessageID_response(rs.getInt(4));
 				messageVO.setMemberID(rs.getInt(5));
 				messageVO.setCourseID(rs.getInt(6));
@@ -223,7 +224,7 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 				MessageVO messageVO = new MessageVO();		
 				messageVO.setMessageID(rs.getInt(1));
 				messageVO.setmContent(rs.getString(2));
-				messageVO.setmTime(rs.getDate(3));
+				messageVO.setmTime(rs.getTimestamp(3));
 				messageVO.setMessageID_response(rs.getInt(4));
 				messageVO.setMemberID(rs.getInt(5));
 				messageVO.setCourseID(rs.getInt(6));
@@ -262,8 +263,8 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 //		//新增
 		MessageVO messageVO1= new MessageVO();
 		
-		messageVO1.setmContent("good1");
-		messageVO1.setmTime(new Date(System.currentTimeMillis()));
+		messageVO1.setmContent("goodnews");
+		messageVO1.setmTime(new Timestamp(System.currentTimeMillis()));
 		messageVO1.setMemberID(100001);
 		messageVO1.setCourseID(200001);
 		messageVO1.setBought((long) 123);

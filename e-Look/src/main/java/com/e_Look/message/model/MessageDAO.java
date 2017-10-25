@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -37,17 +39,31 @@ public class MessageDAO implements MessageDAO_interface {
 	public void insert(MessageVO messageVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		ResultSet generatedKeys = null;
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_MESSAGE);
+			
+			pstmt = con.prepareStatement(INSERT_MESSAGE,
+					Statement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, messageVO.getmContent());
-			pstmt.setDate(2, messageVO.getmTime());
+			Timestamp ts = new Timestamp(System.currentTimeMillis());
+			pstmt.setTimestamp(2, ts);
 			pstmt.setInt(3, messageVO.getMemberID());
 			pstmt.setInt(4, messageVO.getCourseID());
 			pstmt.setLong(5, messageVO.getBought());
 			pstmt.setByte(6, messageVO.getStatus());
 			
 			pstmt.executeUpdate();
+			
+			int id = 0;
+			generatedKeys = pstmt.getGeneratedKeys();
+			if (generatedKeys.next()) {
+				id = generatedKeys.getInt(1);
+			} else {
+				throw new SQLException(
+						"Creating user failed, no generated key obtained.");
+			}
+			
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -77,14 +93,14 @@ public class MessageDAO implements MessageDAO_interface {
 			if (update.equalsIgnoreCase("message")) {
 				pstmt = con.prepareStatement(UPDATE_MESSAGE);
 				pstmt.setString(1, messageVO.getmContent());
-				pstmt.setDate(2, messageVO.getmTime());
+				pstmt.setTimestamp(2, messageVO.getmTime());
 				pstmt.setInt(3, messageVO.getMessageID());	
 				
 				pstmt.executeUpdate();
 			} else if (update.equalsIgnoreCase("messageresponse")) {
 				pstmt = con.prepareStatement(UPDATE_MESSAGE_RESPONSE);
 				pstmt.setString(1, messageVO.getmContent());
-				pstmt.setDate(2, messageVO.getmTime());
+				pstmt.setTimestamp(2, messageVO.getmTime());
 				pstmt.setInt(3, messageVO.getMessageID_response());
 				
 				pstmt.executeUpdate();
@@ -160,7 +176,7 @@ public class MessageDAO implements MessageDAO_interface {
 				messageVO = new MessageVO();
 				messageVO.setMessageID(rs.getInt(1));
 				messageVO.setmContent(rs.getString(2));
-				messageVO.setmTime(rs.getDate(3));
+				messageVO.setmTime(rs.getTimestamp(3));
 				messageVO.setMessageID_response(rs.getInt(4));
 				messageVO.setMemberID(rs.getInt(5));
 				messageVO.setCourseID(rs.getInt(6));
@@ -205,7 +221,7 @@ public class MessageDAO implements MessageDAO_interface {
 				MessageVO messageVO = new MessageVO();		
 				messageVO.setMessageID(rs.getInt(1));
 				messageVO.setmContent(rs.getString(2));
-				messageVO.setmTime(rs.getDate(3));
+				messageVO.setmTime(rs.getTimestamp(3));
 				messageVO.setMessageID_response(rs.getInt(4));
 				messageVO.setMemberID(rs.getInt(5));
 				messageVO.setCourseID(rs.getInt(6));

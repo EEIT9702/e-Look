@@ -20,11 +20,22 @@
 			</div>
 			<div class="col-md-10">	
 				<div>
-					<span>name</span><span>Time</span>
+					<span>name</span><span>time</span>
 				</div>
+				<form method="post" action="<%=request.getContextPath()%>/MessageController" >
 				<div>
-					<input type="text" class="col-md-10">
+					<input type="text" class="col-md-10" name="mContent">
+					<font color='red'>${ErrorMsgKey.mContentError}</font>
+                    <font color='red'>${ErrorMsgKey.mContentError}</font>
+                    <font color='red'>${MessageInsertOK}</font>
 				</div>
+				    <input type="hidden" name="action" value="insert">
+					<input type="submit" value="留言"><br>
+					<input type="radio" name="update" value="message">修改留言
+					<input type="radio" name="update" value="messageesponse">修改回應
+					<input type="submit" value="修改">
+				</form>
+				
 				<div class="panel-group">
 					<div class="panel">
 						<div class="panel-heading">
@@ -54,12 +65,15 @@
 						</div>
 						<div id="collapse2" class="panel-collapse collapse ">
 							<div class="col-md-8">
-								<p>內容:</p>
-								<form action="" medthod="post">
+								<p>內容:123</p>
+								<form action="<%=request.getContextPath()%>/MessageController" medthod="post">
 									<div class="form-group">
 										<textarea class="form-control" rows="5" id="comment"></textarea>
 									</div>
+									
 									<input type="submit">
+									
+									
 								</form>
 							</div>
 						</div>
