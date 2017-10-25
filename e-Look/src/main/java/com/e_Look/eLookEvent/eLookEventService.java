@@ -29,4 +29,7 @@ public eLookEventVO getOneeLookEvent(Integer eventID) {
 public List<eLookEventVO> getAll() {
 	return dao.getAll();
 }
+public void updateeLookEvent(eLookEventVO eLookEventVO) {
+	dao.update(eLookEventVO);
+}
 }

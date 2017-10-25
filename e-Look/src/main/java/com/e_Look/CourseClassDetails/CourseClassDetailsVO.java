@@ -1,7 +1,7 @@
 package com.e_Look.CourseClassDetails;
 
 import java.io.Serializable;
-import com.e_Look.courseClass.courseClassVO;
+import com.e_Look.courseClass.CourseClassVO;
 import com.e_Look.Course.CourseVO;
 public class CourseClassDetailsVO  implements Serializable{
 	
@@ -11,7 +11,7 @@ public class CourseClassDetailsVO  implements Serializable{
 	private Integer CourseClassID;
 	private String courseName;
 	private String ccName;
-	private courseClassVO courseClassVO;
+	private CourseClassVO courseClassVO;
 	private CourseVO CourseVO;
 	
 	
@@ -35,10 +35,10 @@ public class CourseClassDetailsVO  implements Serializable{
 		CourseClassID = courseClassID;
 	}
 	
-	public courseClassVO getCourseClassVO() {
+	public CourseClassVO getCourseClassVO() {
 		return courseClassVO;
 	}
-	public void setCourseClassVO(courseClassVO courseClassVO) {
+	public void setCourseClassVO(CourseClassVO courseClassVO) {
 		this.courseClassVO = courseClassVO;
 	}
 	public CourseVO getCourseVO() {

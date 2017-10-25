@@ -16,16 +16,15 @@ import javax.sql.DataSource;
 import com.e_Look.Course.CourseVO;
 import com.e_Look.courseClass.CourseClassVO;
 
-public class CourseClassDetailsDAO implements CourseClassDetails_interface {
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/eLookDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
+public class CourseClassDetailsDAO_JDBC implements CourseClassDetails_interface {
+	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=eLook";
+	String userid = "sa";
+	// 第一組密碼
+	
+	String passwd = "P@ssw0rd";
+	// 第二組密碼
+	// String passwd = "123456";
 	
 	private static final String INSERT_COURSE_N_CLASS = 
 			"INSERT INTO CourseClassDetails (courseID,courseName,CourseClassID,ccName) VALUES (?,?,?,?)";
@@ -50,7 +49,8 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_COURSE_N_CLASS);
 
 			pstmt.setInt(1, courseVO.getCourseID());
@@ -60,6 +60,8 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 
 			pstmt.executeUpdate();
 			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();	
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -86,14 +88,16 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			con = ds.getConnection();
-			
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 //			pstmt = con.prepareStatement(UPDATE_courseNClass);
 
 //			pstmt.setInt(1, courseClassVO.getCourseClassID());
 //			pstmt.setInt(2, courseVO.getCourseID());
 //			pstmt.executeUpdate();
 			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -120,11 +124,14 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 		PreparedStatement pstmt = null;
 		
 		try {
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(DELETE_COURSE_N_CLASS);
 			pstmt.setInt(1,courseID);
 			pstmt.executeUpdate();
 			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -154,7 +161,8 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 		PreparedStatement pstmt = null;
 
 		try {
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(SELECT_BY_COURSE_CLASSID);
 		
 			pstmt.setInt(1, CourseClassID);
@@ -169,6 +177,8 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 				findBycourseClassID.add(CourseClassDetailsVO);
 			}
 			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -198,7 +208,8 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 		PreparedStatement pstmt = null;
 
 		try {
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(SELECT_BY_COURSEID);
 			pstmt.setInt(1, CourseID);
 			ResultSet rs = pstmt.executeQuery();
@@ -213,6 +224,8 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 				findBycourseID.add(CourseClassDetailsVO);
 			}
 			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -241,7 +254,8 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			con = ds.getConnection();
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(SELECT_ALL);
 
 			ResultSet rs = pstmt.executeQuery();
@@ -256,6 +270,8 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 				getAll.add(CourseClassDetailsVO);
 			}
 			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -276,5 +292,16 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 		}
 		return getAll;
 	}
-
+	
+	public static void main(String[] args) {
+		
+		CourseClassDetailsDAO_JDBC dao = new CourseClassDetailsDAO_JDBC();
+		
+		//新增
+		CourseClassDetailsVO ccDetailsVO1 = new CourseClassDetailsVO();
+		CourseVO courseVO = new CourseVO();
+		courseVO.setCourseID(200001);
+		//courseVO.set
+	}
+	
 }
