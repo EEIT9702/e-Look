@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 import com.e_Look.Course.CourseVO;
 import com.e_Look.courseClass.CourseClassVO;
 
-public class CourseClassDetailsDAO implements CourseClassDetails_interface {
+public class CourseClassDetailsDAO_JDBC implements CourseClassDetails_interface {
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=eLook";
 	String userid = "sa";
