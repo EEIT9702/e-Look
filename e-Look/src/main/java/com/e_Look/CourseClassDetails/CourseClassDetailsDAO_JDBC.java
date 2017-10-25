@@ -300,7 +300,8 @@ public class CourseClassDetailsDAO_JDBC implements CourseClassDetails_interface 
 		//新增
 		CourseClassDetailsVO ccDetailsVO1 = new CourseClassDetailsVO();
 		CourseVO courseVO = new CourseVO();
-		
+		courseVO.setCourseID(200001);
+		//courseVO.set
 	}
 	
 }
