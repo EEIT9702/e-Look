@@ -167,18 +167,7 @@ h5 {
 	width:50px;
 	cursor:pointer;
 }
-.iconA{
-/* 	text-align:center; */
-/* 	text-decoration: none; */
-/*   	color:#9F35FF; */
-/*   	visited: none; */
-/*   	active: none; */
-/*   	font-size: 20px; */
-/*   	font-family: 微軟正黑體; */
-/*   	cursor: pointer; */
-}
-.formicon{
-}
+
 .formicon a:hover{
 	text-decoration: none;
 	color:#9F35FF;
@@ -247,7 +236,11 @@ h5 {
 .gray1{
 -webkit-filter:grayscale(1);
 }
-
+.videobox{
+/* 	width:78%; */
+/* 	margin-left:auto; */
+/* 	margin-right:auto; */
+}
 </style>
 <script type="text/javascript">
 //為文件的滑鼠按下事件定義回呼
@@ -284,15 +277,9 @@ $(function() {
 	//showAdPic();
 	//init();
 	river();
-	$('#submit').click(function(e){
-		
+	$('#submit').click(function(e){	
 		e.preventDefault();
-		//var insertKey = $('#keyWord').text();
-		//console.log("1 ----" + insertKey)
 		clickSearch();
-	})
-	$('#submit').on('click', function(){
-		
 	})
 	
 	//卷軸初載入高度為0
@@ -327,15 +314,15 @@ $(function() {
 	$('#searchicon').click(clickSearch);
 });
 	
-	function clickSearch(){
-		keyWord=$('#keyWord').val();
-		console.log("clickSearch() keyWord = " + keyWord);
-		$.get('SearchController',{'keyWord':keyWord},function(){
-			
-		})
-		$('#keyWord').val("");
-		refreshRiver();		
-	}
+function clickSearch(){
+	keyWord=$('#keyWord').val();
+	console.log("clickSearch() keyWord = " + keyWord);
+	$.get('/e-Look/SearchController.do',{'keyWord':keyWord},function(){
+		
+	})
+	$('#keyWord').val("");
+	refreshRiver();		
+}
 function refreshRiver(){
 	rowValueX=0;
 	$('#river').html("");
@@ -355,67 +342,26 @@ function river(){
 	//有時候卷軸會多0.5  改>=的寫法可以解決這個問題
 	if( wst>=(dh-wh) || rowValueX==0 ){
 		rowValueX++;
-		$.get("<%= request.getContextPath() %>/body/body_data2.jsp",{"rowValueY":rowValueX,"keyWord":keyWord,"courseClass":courseClass},function(data){
+		$.get("<%= request.getContextPath() %>/body/body_data3.jsp",{"rowValueY":rowValueX,"keyWord":keyWord,"courseClass":courseClass},function(data){
 			$('#river').append(data)
 			
 		});
 	}
 }
 
-	
-	
-
-/*延遲載入圖片*/
-//初始化函數
-function init() {
-	//開始計時器
-	//setTimeout("checkHeight()", 1000);
-}
-//計時器函數
-function checkHeight() {
-	//圖片的DOM
-	var rows = document.querySelectorAll(".row");
-	//console.log(pics)
-	//var pic = document.getElementById("pic");
-	//取得捲軸的位置
-	var sTop = document.documentElement.scrollTop;
-	//取得可見區域高度
-	var cHeight = document.documentElement.clientHeight;
-
-	for (i = 1; i < rows.length; i++) {
-		//圖片距離最左上角的top值
-		var top = rows[i].offsetTop;
-		//如果捲軸還未來到可見區域
-		if (sTop + cHeight < top) {
-			//計時器繼續工作
-			setTimeout("checkHeight()", 1500);
-		} else {
-
-			var pics = rows[i].querySelectorAll("img");
-			for (var j = 0; j < pics.length; j++) {
-				pics[j].src = pics[j].getAttribute("lazy_src");
-			}
-			//把延遲的值指定給src
-			//pics[i].src = pics[i].getAttribute("lazy_src");
-			//console.log(top);
-		}
-	}
-
-}
 </script>
 </head>
 
 
 <body style="margin-top:10px;">
 
-<%-- <jsp:include page="${contextPath}/header.jsp" /> --%>
 <jsp:include page="${contextPath}/login.jsp" />
 
 
 <!-- form按鈕圖式star -->
 <div class="formDiv container" >
 	<div class="row">
-	<div class="col-md-8 col-sm-10 col-xs-12 cclass">
+	<div class="col-md-8 col-sm-10 col-xs-12 col-lg-10 cclass">
 
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center" style="" >
 			<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/life.svg"><p class="pstyle">生活</p>
@@ -456,8 +402,8 @@ function checkHeight() {
 	
 
 	</div><!-- /col-md-10 -->
-	<div class="col-md-2 col-sm-0 col-xs-0"></div>
-	<div class="col-md-2 col-sm-2 col-xs-6">
+	<div class="col-md-2 col-sm-0 col-xs-0 col-lg-2"></div>
+	<div class="col-md-2 col-sm-2 col-xs-6 col-lg-2">
 	<form class="navbar-form navbar-left" id="searchKey" method="get" action="">
 	
 		<div class="input-group outBorder" style="">
@@ -475,7 +421,7 @@ function checkHeight() {
 			
 		</div>
 	</form>
-	<div class="col-md-12 col-sm-12 col-xs-12">
+	<div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
 	<p class="hotkeyword text-left">熱門：
 		<span class="keyword">
 			<c:forEach var="searchVO" items="<%= new SearchDAO().getKeywordRank(4) %>" >
@@ -486,7 +432,7 @@ function checkHeight() {
 	</div>
 	</div><!-- /col-md-2 -->
 	<!-- 黑分隔線 -->
-	<div class="col-md-12 col-sm-12 col-xs-12" style="border:1px solid black;margin-bottom:20px"></div>
+	<div class="col-md-12 col-sm-12 col-xs-12 col-lg-12" style="border:1px solid black;margin-bottom:20px"></div>
 	</div>
 </div><!-- /width:78% -->
 
@@ -497,11 +443,12 @@ function checkHeight() {
 <!-- 3秒消失廣告end -->
 
 <div class="videobox container">
-	<div class="row" id="river">
+	<div class="row" id="river" style="margin-left:40px;">
 	
 	<!-- end of class="container" -->
 	</div>
 </div>
+
 
 <jsp:include page="${contextPath}/footer.jsp" />
 </body>
