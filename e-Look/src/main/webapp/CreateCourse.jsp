@@ -158,10 +158,12 @@
 													<i class="glyphicon glyphicon-list"></i>
 												</div>
 												<div class="update-text">																																			
-													<strong>步驟一15、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
+													<strong>步驟一、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
 												</div>
 											</div>
 										</div>
+
+
 
 										<div class="col-md-12">
 											<div class="update-nag">
@@ -255,7 +257,7 @@
 										<div class="row" style="margin-bottom: 40px">
 											<label for="exampleInputEmail1" style="font-size: 20pt">上傳課程封面</label>
 											<input type="file" id="wizard-picture"
-												style="font-size: 18px" name="picture">
+												style="font-size: 18px" name="picture" accept="image/png, image/jpeg, image/gif">
 										</div>
 										<div class="row" style="margin-bottom: 25px">
 											<label for="exampleInputEmail1" style="font-size: 20pt">選擇課程類別(最多三項)</label>
@@ -934,6 +936,32 @@
 	
 	
 	$('textarea').keyup(function(e){
+			 
+			 var formData = new FormData($('form')[3]);
+				console.log("從textarea欄位送資料到資料庫囉!");
+				$.ajax({
+					type : 'POST',
+					url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
+					data :formData,
+					processData : false,
+					contentType : false,
+					success: function(){
+						
+// 						$('#sendOK').modal()
+// 						$('#sendOK h3').text("更新成功")
+// 						setTimeout(function(){
+// 					        $("#sendOK").modal('hide');
+// 					        }, 1000);
+					
+			        }
+
+				})
+			 
+			 
+		 })
+		 
+		 
+		 	$('#wizard-picture').change(function(e){
 			 
 			 var formData = new FormData($('form')[3]);
 				console.log("從textarea欄位送資料到資料庫囉!");

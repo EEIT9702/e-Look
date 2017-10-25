@@ -45,8 +45,7 @@ public class CourseEditControlloer extends HttpServlet {
 		String preTool = request.getParameter("preTool");
 		String background = request.getParameter("background");
 		String ability = request.getParameter("ability");
-		String targetgroup = request.getParameter("targetgroup");
-		
+		String targetgroup = request.getParameter("targetgroup");		
 		Integer soldPrice=0;
 		String soldPriceTEST = request.getParameter("soldPrice");
 		if (!soldPriceTEST.equals("")){
@@ -83,9 +82,12 @@ public class CourseEditControlloer extends HttpServlet {
 		}
 								
 		String courseContent =request.getParameter("courseContent");
+		
+		
 		service = new CourseService();
 		courseVO= new CourseVO(courseID,courseName,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseContent);
 		service.updateCourseContent(courseVO);	
+		service.updateCourseImage(courseID, request.getPart("picture"));
 		
 	}
 
