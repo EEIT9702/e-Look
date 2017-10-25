@@ -9,11 +9,9 @@ import com.e_Look.member.model.MemberVO;
 
 public class CourseService {
 	private CourseDAO_interface dao;
-
 	public CourseService() {
 		dao = new CourseDAO();
 	}
-
 	public Integer CreateNewCourse(Integer memberID) {
 		CourseVO CourseVO1 = new CourseVO();
 		CourseVO1.setSoldPrice(0);
@@ -25,21 +23,17 @@ public class CourseService {
 		Integer CourseID = dao.insert(CourseVO1);
 		return CourseID;
 	}
-
 	public void updateCourseContent(CourseVO courseVO) {
 		dao.update(courseVO);
 	}
 	public void updateCourseVideoPathway(CourseVO courseVO) {
 		dao.updatecourseVideopathway(courseVO);
 	}
-	
-	
-
 	public void updateCourseImage(Integer CourseID, Part part) {
 
 		if (part.getSize() > 0) {
 			CourseVO courseVO2 = new CourseVO();
-			courseVO2.setMemberID(CourseID);
+			courseVO2.setCourseID(CourseID);
 			try {
 				courseVO2.setcPhoto(part.getInputStream());
 			} catch (IOException e) {

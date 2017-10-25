@@ -136,6 +136,7 @@ e.printStackTrace();
 			pstmt.setString(5, eLookEventVO.getCourseClass1());
 			pstmt.setString(6, eLookEventVO.getCourseClass2());
 			pstmt.setString(7, eLookEventVO.getCourseClass3());
+			pstmt.setInt(8,eLookEventVO.getEventID() );
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
