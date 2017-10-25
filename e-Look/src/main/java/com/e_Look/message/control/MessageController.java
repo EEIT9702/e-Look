@@ -34,20 +34,19 @@ public class MessageController extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest requestuest, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
-//		String messageID=request.getParameter("messageID");
+//		String messageID=requestuest.getParameter("messageID");
 		String mContent=request.getParameter("mContent").trim();
-//		String mTime=request.getParameter("mTime");
-//		String messageID_response=request.getParameter("messageID_response");
+//		String mTime=requestuest.getParameter("mTime");
 		
-//		Integer memberID = new Integer(request.getParameter("memberID"));
-//		Integer courseID = new Integer(request.getParameter("courseID"));
-//		Long bought= new Long(request.getParameter("bought"));
-//		Byte status= new Byte(request.getParameter("status"));
+//		Integer memberID = new Integer(requestuest.getParameter("memberID"));
+//		Integer courseID = new Integer(requestuest.getParameter("courseID"));
+//		Long bought= new Long(requestuest.getParameter("bought"));
+//		Byte status= new Byte(requestuest.getParameter("status"));
 		String action = request.getParameter("action");
 		String update = request.getParameter("update");
 //		
@@ -74,7 +73,6 @@ public class MessageController extends HttpServlet {
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher rd = request.getRequestDispatcher("/_Ccc/Message.jsp");
 					rd.forward(request, response);
-					System.out.println("2222");
 					return;
 					}
 
@@ -111,13 +109,21 @@ public class MessageController extends HttpServlet {
 				}
 			}
       if ("update".equals(action)) { 
-			
+    	    MessageVO messageVO = null;
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			request.setAttribute("errorMsgs", errorMsgs);
 			
 			if ("message".equals(update)){    // 修改留言
+				
+			try{Integer messageID_response = new Integer(request.getParameter("messageID_response"));
+					}catch(Exception e) {
+						errorMsgs.add("修改資料失敗:"+e.getMessage());
+						RequestDispatcher failureView = request
+								.getRequestDispatcher("/_Ccc/Message.jsp");
+						failureView.forward(request, response);
+					}
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				Integer messageID = new Integer(request.getParameter("messageID").trim());
@@ -129,7 +135,6 @@ public class MessageController extends HttpServlet {
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher rd = request.getRequestDispatcher("/_Ccc/Message.jsp");
 					rd.forward(request, response);
-					System.out.println("2222");
 					return;
 					}
 				
@@ -152,38 +157,129 @@ public class MessageController extends HttpServlet {
 				Long bought= (long)123;
 				Byte status= 1;
 				
+				/***************************2.開始修改資料*****************************************/			
+				messageVO = service.updateMessage(messageID,mContent, memberID,courseID,bought,status,update);
+
+				/***************************3.修改完成,準備轉交(Send the Success view)*************/
+				request.setAttribute("messageVO",messageVO); // 資料庫update成功後,正確的的empVO物件,存入requestuest
 				
-				messageVO = service.addMessage(mContent, memberID,courseID,bought,status);
-				
-				session.setAttribute("MessageInsertOK", "新增留言成功");
-				response.sendRedirect(request.getContextPath() +"/_Ccc/Message.jsp");
+				RequestDispatcher successView = request.getRequestDispatcher("/_Ccc/Message.jsp"); // 修改成功後,轉交
+				successView.forward(request, response);
+				/***************************其他可能的錯誤處理*************************************/
 				} catch (Exception e) {
-					errorMsgs.add("新增資料失敗:"+e.getMessage());
+					errorMsgs.add("修改資料失敗:"+e.getMessage());
 					RequestDispatcher failureView = request
 							.getRequestDispatcher("/_Ccc/Message.jsp");
 					failureView.forward(request, response);
 				}
 			}
-				/***************************2.開始修改資料*****************************************/
-				EmpService empSvc = new EmpService();
-				empVO = empSvc.updateEmp(messageID, ename, job, hiredate, sal,comm, deptno);
+	
+      }
+      
+      if ("delete".equals(action)) { // 來自listAllEmp.jsp
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			request.setAttribute("errorMsgs", errorMsgs);
+	
+			try {
+				/***************************1.接收請求參數***************************************/
+				Integer messageID = new Integer(request.getParameter("messageID"));
 				
-				/***************************3.修改完成,準備轉交(Send the Success view)*************/
-				request.setAttribute("empVO", empVO); // 資料庫update成功後,正確的的empVO物件,存入request
-				String url = "/emp/listOneEmp.jsp";
-				RequestDispatcher successView = request.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
-				successView.forward(request, res);
+				/***************************2.開始刪除資料***************************************/
+				MessageService messageSvc = new MessageService();
+				messageSvc.deleteMessage(messageID);
+				
+				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
+				
+				RequestDispatcher successView = request.getRequestDispatcher("/_Ccc/Message.jsp");// 刪除成功後,轉交回送出刪除的來源網頁
+				successView.forward(request, response);
+				
+				/***************************其他可能的錯誤處理**********************************/
+			} catch (Exception e) {
+				errorMsgs.add("刪除資料失敗:"+e.getMessage());
+				RequestDispatcher failureView = request
+						.getRequestDispatcher("/_Ccc/Message.jsp");
+				failureView.forward(request, response);
+			}
+		}
+      
+      if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
+    	  
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			request.setAttribute("errorMsgs", errorMsgs);      //放前後沒差,先設空的也可以
+
+			try {
+				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+				String str = request.getParameter("messageID");
+								
+				Integer messageID = null;
+				messageID = new Integer(str);
+								
+				/***************************2.開始查詢資料*****************************************/
+				MessageService messageSvc = new MessageService();
+				MessageVO messageVO = messageSvc.getOneMessage(messageID);
+				if (messageVO == null) {
+					errorMsgs.add("查無資料");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = request
+							.getRequestDispatcher("/_Ccc/Message.jsp");
+					failureView.forward(request, response);
+					return;//程式中斷
+				}
+				
+				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
+				request.setAttribute("messageVO", messageVO); // 資料庫取出的VO物件,存入request
+				RequestDispatcher successView = request.getRequestDispatcher("/_Ccc/Message.jsp"); // 成功轉交 listOneEmp.jsp
+				successView.forward(request, response);
 
 				/***************************其他可能的錯誤處理*************************************/
 			} catch (Exception e) {
-				errorMsgs.add("修改資料失敗:"+e.getMessage());
+				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = request
-						.getRequestDispatcher("/emp/update_emp_input.jsp");
-				failureView.forward(request, res);
+						.getRequestDispatcher("/_Ccc/Message.jsp");
+				failureView.forward(request, response);
 			}
-		} 
-      
+		}
+		
+		
+		if ("getOne_For_Update".equals(action)) { // 來自listAllEmp.jsp的請求
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			request.setAttribute("errorMsgs", errorMsgs);
+			
+			try {
+				/***************************1.接收請求參數****************************************/
+				Integer messageID = new Integer(request.getParameter("messageID"));
+				
+				/***************************2.開始查詢資料****************************************/
+				MessageService messageSvc = new MessageService();
+				MessageVO messageVO = messageSvc.getOneMessage(messageID);
+												
+				/***************************3.查詢完成,準備轉交(Send the Success view)************/
+				request.setAttribute("messageVO", messageVO);         // 資料庫取出的VO物件,存入request
+				
+				RequestDispatcher successView = request.getRequestDispatcher("/_Ccc/Message.jsp");// 成功轉交 update_emp_input.jsp
+				successView.forward(request, response);
+
+				/***************************其他可能的錯誤處理**********************************/
+			} catch (Exception e) {
+				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
+				RequestDispatcher failureView = request
+						.getRequestDispatcher("/_Ccc/Message.jsp");
+				failureView.forward(request, response);
+			}
+		}
+		
+		
       }
       
 	}
-	}
+	
