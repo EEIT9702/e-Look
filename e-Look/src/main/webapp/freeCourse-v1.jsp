@@ -252,9 +252,8 @@ video::-webkit-media-controls-panel {
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
-				</c:if>
-				
-				<c:if test="${empty mBookmarkList}">
+				</c:if>	
+				<c:if test="${empty mBookmarkList}">	
 					<c:set var="favor" value="favoriteclick2"/>
 				</c:if>
 				<div class="col-md-1 col-xs-4">
@@ -329,7 +328,7 @@ video::-webkit-media-controls-panel {
 								</div>
 
 								<form method="post"
-									action="<%=request.getContextPath()%>/SponsorController">
+									action="<%=request.getContextPath()%>/oPayController">
 									<div class="modal-body">
 										<div class="text-center">
 											<h4>請在下方填寫贊助相關資訊!</h4>
@@ -340,9 +339,8 @@ video::-webkit-media-controls-panel {
 												<tr>
 													<td class="text-right">贊助者暱稱 :</td>
 													<td><input type="text" name="SponsorName"
-														placeholder="請輸入暱稱"></td>
+														placeholder="請輸入暱稱" value="${LoginOK.mName}"></td>
 												</tr>
-
 												<tr>
 													<td class="text-right">贊助金額 :</td>
 													<td><input type="text" name="money">單位:新台幣</td>
@@ -675,6 +673,7 @@ video::-webkit-media-controls-panel {
 
 			console.log($("#mbcourseID").val())
 			console.log($("#mbmemberID").val())
+			
 			$.post('MemberBookmarksInsertController', {
 				'courseID' : $("#mbcourseID").val(),
 				'memberID' : $("#mbmemberID").val()
