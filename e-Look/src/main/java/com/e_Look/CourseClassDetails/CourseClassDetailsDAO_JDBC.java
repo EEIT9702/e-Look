@@ -8,12 +8,9 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-
+import com.e_Look.Course.CourseDAO_JDBC;
 import com.e_Look.Course.CourseVO;
+import com.e_Look.courseClass.CourseClassDAO_JDBC;
 import com.e_Look.courseClass.CourseClassVO;
 
 public class CourseClassDetailsDAO_JDBC implements CourseClassDetails_interface {
@@ -45,18 +42,31 @@ public class CourseClassDetailsDAO_JDBC implements CourseClassDetails_interface 
 			"SELECT CourseClassID,ccName,courseID,courseName FROM CourseClassDetails";
 
 	@Override
-	public void insert(CourseClassVO courseClassVO, CourseVO courseVO) {
+	public void insert(CourseVO courseVO, CourseClassVO courseClassVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_COURSE_N_CLASS);
-
+			
 			pstmt.setInt(1, courseVO.getCourseID());
 			pstmt.setString(2, courseVO.getCourseName());
 			pstmt.setInt(3, courseClassVO.getCourseClassID());
 			pstmt.setString(4, courseClassVO.getCcName());
+			
+//			CourseVO courseVO = new CourseVO();
+//			courseVO.setCourseID(courseID);
+//			String courseName = courseVO.getCourseName();
+//			
+//			CourseClassVO courseClassVO = new CourseClassVO();
+//			courseClassVO.setCourseClassID(CourseClassID);
+//			String CcName = courseClassVO.getCcName();
+//			
+//			pstmt.setInt(1, courseID);
+//			pstmt.setString(2, courseName);
+//			pstmt.setInt(3, CourseClassID);
+//			pstmt.setString(4, CcName);
 
 			pstmt.executeUpdate();
 			
@@ -298,10 +308,21 @@ public class CourseClassDetailsDAO_JDBC implements CourseClassDetails_interface 
 		CourseClassDetailsDAO_JDBC dao = new CourseClassDetailsDAO_JDBC();
 		
 		//新增
-		CourseClassDetailsVO ccDetailsVO1 = new CourseClassDetailsVO();
-		CourseVO courseVO = new CourseVO();
-		courseVO.setCourseID(200001);
-		//courseVO.set
+//		CourseDAO_JDBC cdao = new CourseDAO_JDBC();
+//		CourseVO courseVO = cdao.findByPrimaryKey(200002);
+//	
+//		CourseClassDAO_JDBC ccdao = new CourseClassDAO_JDBC();
+//		CourseClassVO courseClassVO = ccdao.findByCourseClassID(101);
+//		dao.insert(courseVO, courseClassVO);
+		
+		//查詢全部
+		List<CourseClassDetailsVO> list = dao.getAll();
+		for(CourseClassDetailsVO ccDetailsVO3 : list) {
+			System.out.print(ccDetailsVO3.getCourseID() + ", ");
+			System.out.print(ccDetailsVO3.getCourseName() + ", ");
+			System.out.print(ccDetailsVO3.getCourseClassID() + ", ");
+			System.out.print(ccDetailsVO3.getCcName() + "\n");
+		}
 	}
 	
 }

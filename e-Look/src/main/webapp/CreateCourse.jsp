@@ -34,9 +34,48 @@
 	src="<%=request.getContextPath()%>/_PJC/js/bootstrap-datetimepicker.js"></script>
 <script
 	src="<%=request.getContextPath()%>/_PJC/js/bootstrap-datetimepicker.zh-TW.js"></script>
-<script src="<%=request.getContextPath()%>/_PJC/tinymce/tinymce.min.js"></script>
-<script src="<%=request.getContextPath()%>/_PJC/tinymce/init-tinymce.js"></script>
+<script src="<%=request.getContextPath()%>/_PJC/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
+		<script src="<%=request.getContextPath()%>/_PJC/tinymce/js/tinymce/tinymce.js"></script>
+		<script>
+		tinymce.init({ selector:'#texteditor',
+			language_url:'<%=request.getContextPath()%>/_PJC/tinymce/js/tinymce/langs/zh_TW.js',
+			plugins: [
+			  		"advlist autolink link image lists charmap print preview hr anchor pagebreak",
+			  		"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+			  		"save table contextmenu directionality emoticons template paste textcolor"
+			  	],
+			  	/* toolbar */
+			  	toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",			
+			setup: function(ed) {
+			    ed.on('keyup', function(e) {
+// 			        console.log(ed.getContent());
+			        $("#courseContent").val(ed.getContent());
+			        var formData = new FormData($('form')[3]);
+					console.log("從textarea欄位送資料到資料庫囉!");
+					$.ajax({
+						type : 'POST',
+						url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
+						data :formData,
+						processData : false,
+						contentType : false,
+						success: function(){
+							
+//	 						$('#sendOK').modal()
+//	 						$('#sendOK h3').text("更新成功")
+//	 						setTimeout(function(){
+//	 					        $("#sendOK").modal('hide');
+//	 					        }, 1000);
+						
+				        }
+
+					});
+			    });
+			}}); 
+		</script>
 <script src="<%=request.getContextPath()%>/_PJC/js/upload1.js"></script>
+
+
+
 </head>
 
 <body>
@@ -123,6 +162,8 @@
 												</div>
 											</div>
 										</div>
+
+
 
 										<div class="col-md-12">
 											<div class="update-nag">
@@ -216,7 +257,7 @@
 										<div class="row" style="margin-bottom: 40px">
 											<label for="exampleInputEmail1" style="font-size: 20pt">上傳課程封面</label>
 											<input type="file" id="wizard-picture"
-												style="font-size: 18px" name="picture">
+												style="font-size: 18px" name="picture" accept="image/png, image/jpeg, image/gif">
 										</div>
 										<div class="row" style="margin-bottom: 25px">
 											<label for="exampleInputEmail1" style="font-size: 20pt">選擇課程類別(最多三項)</label>
@@ -481,7 +522,8 @@
 											</div>
 											<div class="[ form-group ][ form-group-textarea ]"
 												id="get-data-form">
-												<textarea class="tinymce" id="texteditor" name="courseContent"  form="TotalContent">${CoursedData.courseContent}</textarea>
+												<textarea class="tinymce" id="texteditor" form="TotalContent">${CoursedData.courseContent}</textarea>
+												<input type="hidden" value="" id="courseContent" name="courseContent">
 											</div>
 										</div>
 									</div>
@@ -918,7 +960,34 @@
 			 
 		 })
 		 
-		 		 
+		 
+		 	$('#wizard-picture').change(function(e){
+			 
+			 var formData = new FormData($('form')[3]);
+				console.log("從textarea欄位送資料到資料庫囉!");
+				$.ajax({
+					type : 'POST',
+					url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
+					data :formData,
+					processData : false,
+					contentType : false,
+					success: function(){
+						
+// 						$('#sendOK').modal()
+// 						$('#sendOK h3').text("更新成功")
+// 						setTimeout(function(){
+// 					        $("#sendOK").modal('hide');
+// 					        }, 1000);
+					
+			        }
+
+				})
+			 
+			 
+		 })
+		 
+			
+		 
 					
 
 	</script>

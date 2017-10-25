@@ -1,31 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-		<title>TinyMCE - Setup</title>
-	</head>
-	<body>
-		<form id="get-data-form" method="post">
-
-
-			<textarea class="tinymce" id="texteditor"></textarea>						
-
-			<input type="hidden" value="" id="courseContent">
-		</form>
-
-
-<!-- 		<div id="data-container">49491916156-->
-<!-- 		</div> -->
-
-
-
-
-		<script src="<%=request.getContextPath()%>/_PJC/js/jquery.js"></script>		
-		<script src="<%=request.getContextPath()%>/_PJC/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
-		<script src="<%=request.getContextPath()%>/_PJC/tinymce/js/tinymce/tinymce.js"></script>		
-		<script>
-		tinymce.init({ selector:'#texteditor',
+tinymce.init({ selector:'textarea',
 			language_url:'<%=request.getContextPath()%>/_PJC/tinymce/js/tinymce/langs/zh_TW.js',
 			plugins: [
 			  		"advlist autolink link image lists charmap print preview hr anchor pagebreak",
@@ -40,8 +13,4 @@
 			        $("#courseContent").val(ed.getContent());
 			    });
 			}}); 
-
-		</script>
 		
-	</body>
-</html>
