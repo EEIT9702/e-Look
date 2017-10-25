@@ -202,7 +202,7 @@ font-size: 18px;
 												<span id="totalPrice">總金額：0元</span>
 											</div>
 											<div class="modal-footer">
-												<a href="<%= request.getContextPath() %>/ShoppingCartIntoOrder">
+												<a href="<%= request.getContextPath() %>/settled.jsp">
 												<button type="button" class="btn btn-primary btn-block">前往結帳</button>
 												</a>
 											</div>

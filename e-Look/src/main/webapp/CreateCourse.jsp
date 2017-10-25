@@ -158,13 +158,10 @@
 													<i class="glyphicon glyphicon-list"></i>
 												</div>
 												<div class="update-text">																																			
-													<strong>步驟一、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
+													<strong>步驟一156、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
 												</div>
 											</div>
 										</div>
-
-
-
 										<div class="col-md-12">
 											<div class="update-nag">
 												<div class="update-split update-step2">
@@ -449,7 +446,7 @@
 
 									</div>
 								</div>
-								<div class="container" style="margin-top: 2em;"
+								<div class="container" style="margin-top: 2em;font-size: 18px;"
 									id="ProposalCourse">
 									<div class="col-md-12">
 										<div class="form-group col-lg-4" style="font-size: 20px;">
@@ -871,18 +868,18 @@
 		function select() {
 			var selectr = document.querySelector("#CourseList input:checked").value;
 			if (selectr === "radio1" || selectr === "radio3") {
-				document.querySelector("#ProposalCourse").style = "opacity: 0.4";
+				document.querySelector("#ProposalCourse").style = "opacity: 0.4;font-size: 18px;margin-top: 2em;";
 				document.querySelectorAll("#ProposalCourse input").forEach(
-						function(el) {
-							el.setAttribute("disabled", "disabled");
-							el.style = "opacity: 0.4";
+						function(el) {							
+							el.setAttribute("disabled", "disabled");							
+							el.style = "opacity: 0.4;font-size: 18px;";
 						})
 			} else if (selectr === "radio2") {
-				document.querySelector("#ProposalCourse").style = "opacity: 1";
+				document.querySelector("#ProposalCourse").style = "opacity: 1;font-size: 18px;margin-top: 2em;";
 				document.querySelectorAll("#ProposalCourse input").forEach(
-						function(el) {
-							el.removeAttribute("disabled");
-							el.style = "opacity: 1";
+						function(el) {							
+							el.removeAttribute("disabled");						
+							el.style = "opacity: 1;font-size: 18px;";
 						})
 			}
 		};
@@ -907,7 +904,7 @@
 				})
 
 				
-		 $('input[type!="file"]').keyup(function(e){
+		 $('input[type!="file"],input[type!="radio"]').keyup(function(e){
 			 
 			 var formData = new FormData($('form')[3]);
 				console.log("從input欄位送資料到資料庫囉!");
