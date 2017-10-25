@@ -303,16 +303,16 @@ public class CourseClassDAO_JDBC implements CourseClass_interface{
 	public static void main(String[] args) {
 		CourseClassDAO_JDBC dao = new CourseClassDAO_JDBC();
 //		新增類別
-		CourseClassVO courseClassVO1 = new CourseClassVO();	
-		courseClassVO1.setCcName("商業");
-		dao.insert(courseClassVO1);
+//		CourseClassVO courseClassVO1 = new CourseClassVO();	
+//		courseClassVO1.setCcName("商業1");
+//		dao.insert(courseClassVO1);
 		
 //		查詢一筆
 		CourseClassVO courseClassVO2 = dao.findByCourseClassID(101);
 		System.out.print(courseClassVO2.getCourseClassID() + ",");
 		System.out.print(courseClassVO2.getCcName() + ",");
-		System.out.print(courseClassVO2.getEventVO().getEventID());
-		System.out.println("----------------------------------------------");
+		System.out.print(courseClassVO2.getEventVO().getEventID() + "\n");
+		System.out.println("-----------");
 		
 		
 //		查詢全部
