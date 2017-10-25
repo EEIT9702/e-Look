@@ -511,10 +511,45 @@ a:HOVER {
 							<span class="pull-right "><i
 								class="glyphicon glyphicon-plus"></i></span>
 						</div>
-						<div class="panel-body" style="display: none;"></div>
+						<div class="panel-body" style="display: none;">
+						<div class=" col-md-4  col-sm-4" style="width: 211px">
+								<div class="card card-inverse">
+									<img class="card-img-top"
+										src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png"
+										alt="course" id="wizardPicturePreview" title="">
+									<div class="card-block">
+										<figure class="profile">
+											<img
+												src="<%=request.getContextPath()%>/Class Steps/imgs/eLook_LOGO1.png"
+												class="profile-avatar" alt="">
+										</figure>
+										<div class="card-text">
+											<p id="title" class="card-title mt-3 multi_ellipsis">這裡請輸入課程標題</p>
+										</div>
+									</div>
+									
+									<div class="card-footer">
+									
+										<button class="btn-info btn-sm "
+											style="margin-bottom: 5px; margin-top: 10px">編輯</button>
+											<button class="btn-danger btn-sm "
+											style="margin-bottom: 5px; margin-top: 10px">刪除</button>
+									</div>
+								</div>
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						</div>
 					</div>
 				</div>
-				
+				</div>
 				<div class="col-md-12" style="margin: 25px 0;">
 					<div class="panel panel-info">
 						<div class="panel-heading clickable panel-collapsed">
