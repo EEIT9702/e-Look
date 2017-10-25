@@ -64,6 +64,7 @@ video::-webkit-media-controls-panel {
 	background-color: rgba(0%, 10%, 20%, 0.3);
 	color: white;
 }
+
 #videoDivListStyle {
 	border: 1px solid gray;
 	height: 100%;
@@ -187,11 +188,11 @@ video::-webkit-media-controls-panel {
 		<div class="container">
 			<div class="row">
 				<h1 align="center" id="videoTitle">${courseVO.courseName}</h1>
-				<div class="col-md-12 " id="videoArea"					
+				<div class="col-md-12 " id="videoArea"
 					style="background-image: url('<%=request.getContextPath() %>/CourseImage?CourseID=${courseVO.courseID}')">
 
 					<div class="col-md-12">
-						<div class="col-md-8 col-xs-12" style="margin-right:-15px">
+						<div class="col-md-8 col-xs-12" style="margin-right: -15px">
 
 							<video controls="controls" id="vidoeControl">
 								<source
@@ -238,23 +239,24 @@ video::-webkit-media-controls-panel {
 						class="img-responsive center-block">
 					<h5 class="text-center">課程時間為 ${courseVO.courseLength}min</h5>
 				</div>
+
 				<c:if test="${!empty mBookmarkList}">
-						<c:forEach items="${mBookmarkList}" var="memberBookmsrks">
-							<c:choose>
-								<c:when test="${courseVO.courseID==memberBookmsrks.courseID}">
-									<c:set var="favor" value="favoriteclick1" />
-									<c:set var="favor1" value="ture" />
-								</c:when>
-								<c:when test="${!empty favor1}">
-								</c:when>
-								<c:otherwise>
-									<c:set var="favor" value="favoriteclick2" />
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-				</c:if>	
-				<c:if test="${empty mBookmarkList}">	
-					<c:set var="favor" value="favoriteclick2"/>
+					<c:forEach items="${mBookmarkList}" var="memberBookmsrks">
+						<c:choose>
+							<c:when test="${courseVO.courseID==memberBookmsrks.courseID}">
+								<c:set var="favor" value="favoriteclick1" />
+								<c:set var="favor1" value="ture" />
+							</c:when>
+							<c:when test="${!empty favor1}">
+							</c:when>
+							<c:otherwise>
+								<c:set var="favor" value="favoriteclick2" />
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+				</c:if>
+				<c:if test="${empty mBookmarkList}">
+					<c:set var="favor" value="favoriteclick2" />
 				</c:if>
 				
 				<c:if test="${empty LoginOK}">
@@ -292,8 +294,11 @@ video::-webkit-media-controls-panel {
 						class="img-responsive center-block"> <a href="#"
 						id="${favor}"><h5 class="text-center">加到最愛</h5></a>
 				</div>
+<<<<<<< HEAD
 				</c:if>
 				
+=======
+>>>>>>> branch 'master' of https://github.com/EEIT9702/e-Look.git
 				<input type="hidden" value="${courseVO.courseID}" id="mbcourseID">
 				<input type="hidden" value="${LoginOK.memberID}" id="mbmemberID">
 				<div class="col-md-1 col-xs-4 ">
@@ -367,18 +372,26 @@ video::-webkit-media-controls-panel {
 
 										<table class="table">
 											<tbody>
+												<c:if test="${empty LoginOK}">
+													<c:set var="Name" value="user" />
+												</c:if>
+												<c:if test="${!empty LoginOK}">
+													<c:set var="Name" value="${LoginOK.mName}" />
+												</c:if>
 												<tr>
 													<td class="text-right">贊助者暱稱 :</td>
 													<td><input type="text" name="SponsorName"
-														placeholder="請輸入暱稱" value="${LoginOK.mName}"></td>
+														id="SponsorName" placeholder="請輸入暱稱" value="${Name}"></td>
 												</tr>
 												<tr>
 													<td class="text-right">贊助金額 :</td>
-													<td><input type="text" name="money">單位:新台幣</td>
+													<td><input type="text" name="money" id="money">單位:新台幣</td>
+
 												</tr>
 
 											</tbody>
 										</table>
+										<p id="errorMoney" style="color: red"></p>
 										<p>◎ 贊助金額最低為新台幣50元</p>
 										<p>◎ 贊助金額最高為新台幣20000元</p>
 										<small>Copyright © 2017 O'Pay Electronic Payment
@@ -391,7 +404,8 @@ video::-webkit-media-controls-panel {
 
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal">關閉</button>
-										<button type="submit" class="btn btn-primary">使用歐付寶付款</button>
+										<button type="submit" class="btn btn-primary" id="sponsorBtu"
+											disabled="disabled">使用歐付寶付款</button>
 
 									</div>
 									<input type="hidden" value="${courseVO.courseID}"
@@ -479,181 +493,185 @@ video::-webkit-media-controls-panel {
 										<p>${memberVo.hobby}</p>
 									</c:if>
 								</div>
-								</div>
-								<!-- 留言板 -->
-								<div role="tabpanel" class="tab-pane fade" id="Section3">
-									<div class="col-md-12" id="messageHeader">
-										<div class="col-md-1">
-											<img src="<%=request.getContextPath()%>/img/imember_image.png"
-												class="img-thumbnail pull-left">
+							</div>
+							<!-- 留言板 -->
+							<div role="tabpanel" class="tab-pane fade" id="Section3">
+								<div class="col-md-12" id="messageHeader">
+									<div class="col-md-1">
+										<img src="<%=request.getContextPath()%>/img/imember_image.png"
+											class="img-thumbnail pull-left">
+									</div>
+									<div class="col-md-11">
+
+										<div>
+											<span class="text-left">吳永志</span>
+
+											<%
+												Date dNow = new Date();
+												SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+												out.print("<span align=\"center\">" + ft.format(dNow) + "</span>");
+											%>
+											<div class="dropdown pull-right">
+												<button class="btn dropdown-toggle btn-default "
+													type="button" data-toggle="dropdown" style="height: 30px">
+													<span class="glyphicon glyphicon-option-horizontal"></span>
+												</button>
+												<ul class="dropdown-menu">
+													<li><a href="#">檢舉</a></li>
+													<li><a href="#">修改</a></li>
+													<li><a href="#">刪除</a></li>
+												</ul>
+											</div>
+
 										</div>
-										<div class="col-md-11">
 
-											<div>
-												<span class="text-left">吳永志</span>
+										<div style="border-bottom: 1px solid black">
 
-												<%
-													Date dNow = new Date();
-													SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-													out.print("<span align=\"center\">" + ft.format(dNow) + "</span>");
-												%>
-												<div class="dropdown pull-right">
-													<button class="btn dropdown-toggle btn-default "
-														type="button" data-toggle="dropdown" style="height: 30px">
-														<span class="glyphicon glyphicon-option-horizontal"></span>
-													</button>
-													<ul class="dropdown-menu">
-														<li><a href="#">檢舉</a></li>
-														<li><a href="#">修改</a></li>
-														<li><a href="#">刪除</a></li>
-													</ul>
-												</div>
-
-											</div>
-
-											<div style="border-bottom: 1px solid black">
-
-												<p>With Bootstrap 2, we added optional mobile friendly
-													styles for key aspects of the framework. With Bootstrap 3,
-													we've rewritten the project to be mobile friendly from the
-													start. Instead of adding on optional mobile styles, they're
-													baked right into the core. In fact, Bootstrap is mobile
-													first. Mobile first styles can be found throughout the
-													entire library instead of in separate files. To ensure
-													proper rendering and touch zooming, add the viewport meta
-													tag to your</p>
-											</div>
+											<p>With Bootstrap 2, we added optional mobile friendly
+												styles for key aspects of the framework. With Bootstrap 3,
+												we've rewritten the project to be mobile friendly from the
+												start. Instead of adding on optional mobile styles, they're
+												baked right into the core. In fact, Bootstrap is mobile
+												first. Mobile first styles can be found throughout the
+												entire library instead of in separate files. To ensure
+												proper rendering and touch zooming, add the viewport meta
+												tag to your</p>
+										</div>
 
 
-											<div class="col-md-12">
+										<div class="col-md-12">
 
-												<div class="panel-group">
-													<div class="panel">
-														<div class="panel-heading">
-															<h4 class="panel-title " style="padding-bottom: 10px">
-																<a data-toggle="collapse" href="#collapse1">回應記錄</a>
-															</h4>
-														</div>
-														<div id="collapse1" class="panel-collapse collapse ">
-															<!--第一個回應 -->
-															<div>
-																<div class="col-md-1">
-																	<img
-																		src="<%=request.getContextPath()%>/img/imember_image.png"
-																		class="img-thumbnail pull-left">
-																</div>
-																<div class="col-md-11 "
-																	style="border-bottom: 1px solid black">
-																	<span>吳永志</span>
-																	<%
-																		out.print("<span align=\"center\">" + ft.format(dNow) + "</span>");
-																	%>
-																	<div class="dropdown pull-right">
-																		<button class="btn dropdown-toggle btn-default "
-																			type="button" data-toggle="dropdown"
-																			style="height: 30px">
-																			<span class="glyphicon glyphicon-option-horizontal"></span>
-																		</button>
-																		<ul class="dropdown-menu">
-																			<li><a href="#">檢舉</a></li>
-																			<li><a href="#">修改</a></li>
-																			<li><a href="#">刪除</a></li>
-																		</ul>
-																	</div>
-																	<p>With Bootstrap 2, we added optional mobile
-																		friendly styles for key aspects of the framework. With
-																		Bootstrap 3, we've rewritten the project to be mobile
-																		friendly from the start. Instead of adding on optional
-																		mobile styles, they're baked right into the core. In
-																		fact, Bootstrap is mobile first. Mobile first styles
-																		can be found throughout the entire library instead of
-																		in separate files. To ensure proper rendering and
-																		touch zooming, add the viewport meta tag to your</p>
-																</div>
+											<div class="panel-group">
+												<div class="panel">
+													<div class="panel-heading">
+														<h4 class="panel-title " style="padding-bottom: 10px">
+															<a data-toggle="collapse" href="#collapse1">回應記錄</a>
+														</h4>
+													</div>
+													<div id="collapse1" class="panel-collapse collapse ">
+														<!--第一個回應 -->
+														<div>
+															<div class="col-md-1">
+																<img
+																	src="<%=request.getContextPath()%>/img/imember_image.png"
+																	class="img-thumbnail pull-left">
 															</div>
-															<!--第二個回應 -->
-															<div>
-																<div class="col-md-1">
-																	<img
-																		src="<%=request.getContextPath()%>/img/imember_image.png"
-																		class="img-thumbnail pull-left">
+															<div class="col-md-11 "
+																style="border-bottom: 1px solid black">
+																<span>吳永志</span>
+																<%
+																	out.print("<span align=\"center\">" + ft.format(dNow) + "</span>");
+																%>
+																<div class="dropdown pull-right">
+																	<button class="btn dropdown-toggle btn-default "
+																		type="button" data-toggle="dropdown"
+																		style="height: 30px">
+																		<span class="glyphicon glyphicon-option-horizontal"></span>
+																	</button>
+																	<ul class="dropdown-menu">
+																		<li><a href="#">檢舉</a></li>
+																		<li><a href="#">修改</a></li>
+																		<li><a href="#">刪除</a></li>
+																	</ul>
 																</div>
-																<div class="col-md-11 "
-																	style="border-bottom: 1px solid black">
-																	<span>吳永志</span>
-																	<%
-																		out.print("<span align=\"center\">" + ft.format(dNow) + "</span>");
-																	%>
-																	<div class="dropdown pull-right">
-																		<button class="btn dropdown-toggle btn-default "
-																			type="button" data-toggle="dropdown"
-																			style="height: 30px">
-																			<span class="glyphicon glyphicon-option-horizontal"></span>
-																		</button>
-																		<ul class="dropdown-menu">
-																			<li><a href="#">檢舉</a></li>
-																			<li><a href="#">修改</a></li>
-																			<li><a href="#">刪除</a></li>
-																		</ul>
-																	</div>
-																	<p>With Bootstrap 2, we added optional mobile
-																		friendly styles for key aspects of the framework. With
-																		Bootstrap 3, we've rewritten the project to be mobile
-																		friendly from the start. Instead of adding on optional
-																		mobile styles, they're baked right into the core. In
-																		fact, Bootstrap is mobile first. Mobile first styles
-																		can be found throughout the entire library instead of
-																		in separate files. To ensure proper rendering and
-																		touch zooming, add the viewport meta tag to your</p>
+																<p>With Bootstrap 2, we added optional mobile
+																	friendly styles for key aspects of the framework. With
+																	Bootstrap 3, we've rewritten the project to be mobile
+																	friendly from the start. Instead of adding on optional
+																	mobile styles, they're baked right into the core. In
+																	fact, Bootstrap is mobile first. Mobile first styles
+																	can be found throughout the entire library instead of
+																	in separate files. To ensure proper rendering and touch
+																	zooming, add the viewport meta tag to your</p>
+															</div>
+														</div>
+														<!--第二個回應 -->
+														<div>
+															<div class="col-md-1">
+																<img
+																	src="<%=request.getContextPath()%>/img/imember_image.png"
+																	class="img-thumbnail pull-left">
+															</div>
+															<div class="col-md-11 "
+																style="border-bottom: 1px solid black">
+																<span>吳永志</span>
+																<%
+																	out.print("<span align=\"center\">" + ft.format(dNow) + "</span>");
+																%>
+																<div class="dropdown pull-right">
+																	<button class="btn dropdown-toggle btn-default "
+																		type="button" data-toggle="dropdown"
+																		style="height: 30px">
+																		<span class="glyphicon glyphicon-option-horizontal"></span>
+																	</button>
+																	<ul class="dropdown-menu">
+																		<li><a href="#">檢舉</a></li>
+																		<li><a href="#">修改</a></li>
+																		<li><a href="#">刪除</a></li>
+																	</ul>
 																</div>
+																<p>With Bootstrap 2, we added optional mobile
+																	friendly styles for key aspects of the framework. With
+																	Bootstrap 3, we've rewritten the project to be mobile
+																	friendly from the start. Instead of adding on optional
+																	mobile styles, they're baked right into the core. In
+																	fact, Bootstrap is mobile first. Mobile first styles
+																	can be found throughout the entire library instead of
+																	in separate files. To ensure proper rendering and touch
+																	zooming, add the viewport meta tag to your</p>
 															</div>
 														</div>
 													</div>
 												</div>
 											</div>
-											<!-- 			<!--回應輸入表格-->
-											<div class="col-md-12">
-												<div class="panel-group">
-													<div class="panel">
-														<div class="panel-heading">
-															<h4 class="panel-title ">
-																<a data-toggle="collapse" href="#collapse2">我要回應</a>
-															</h4>
-														</div>
-														<div id="collapse2" class="panel-collapse collapse ">
-															<div>
-																<p>內容:</p>
-																<form action="" method="post">
-																	<div class="form-group">
-																		<textarea class="form-control" rows="5" id="comment"></textarea>
-																	</div>
-																	<div class="text-right">
-																		<input type="submit">
-																	</div>
-																</form>
-															</div>
+										</div>
+										<!-- 			<!--回應輸入表格-->
+										<div class="col-md-12">
+											<div class="panel-group">
+												<div class="panel">
+													<div class="panel-heading">
+														<h4 class="panel-title ">
+															<a data-toggle="collapse" href="#collapse2">我要回應</a>
+														</h4>
+													</div>
+													<div id="collapse2" class="panel-collapse collapse ">
+														<div>
+															<p>內容:</p>
+															<form action="" method="post">
+																<div class="form-group">
+																	<textarea class="form-control" rows="5" id="comment"></textarea>
+																</div>
+																<div class="text-right">
+																	<input type="submit">
+																</div>
+															</form>
 														</div>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-									<!-- 點評收藏 -->
 								</div>
-								<div role="tabpanel" class="tab-pane fade" id="Section4"
-									style="font-size: 20px">
+								<!-- 點評收藏 -->
+							</div>
+							<div role="tabpanel" class="tab-pane fade" id="Section4"
+								style="font-size: 20px">
 
-									<p>喜歡的話記得幫我們評分還有收藏唷</p>
+								<p>喜歡的話記得幫我們評分還有收藏唷</p>
 
-								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+
 <c:remove var="err" scope="session"/>
 	<c:remove var="loginerr" scope="session"/>
+
+
+
+
 
 	<jsp:include page="/footer.jsp" />
 	<script>
@@ -702,16 +720,37 @@ video::-webkit-media-controls-panel {
 			alert('已經加入過囉');
 		})
 		$('#favoriteclick2').click(function() {
-
+			$('#favoriteclick2').attr("id", "favoriteclick1")
 			console.log($("#mbcourseID").val())
 			console.log($("#mbmemberID").val())
-			
+
 			$.post('MemberBookmarksInsertController', {
 				'courseID' : $("#mbcourseID").val(),
-				'memberID' : $("#mbmemberID").val()
+				'memberID' : $("#mbmemberID").val(),
 			}, function() {
+
 				alert('已經加到你的最愛囉');
+				$("#errorMoney").text('數字有誤,金額只能在50到20000之間');
 			})
+		})
+	</script>
+	<script>
+		$("#money").keyup(function() {
+			var money = $("#money").val();
+			
+			if(!isNaN(money)&&money!=""){
+				if (money<50||money>20000) {
+				
+					$("#sponsorBtu").prop("disabled", true)
+				} else {
+					$("#errorMoney").text('');
+					$('#sponsorBtu').prop('disabled', false)
+				}
+			}else{
+				$("#errorMoney").text('請輸入數字');
+				$('#sponsorBtu').prop('disabled', true)
+				
+			}
 		})
 	</script>
 </body>
