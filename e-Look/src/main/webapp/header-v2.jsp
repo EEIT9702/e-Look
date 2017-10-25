@@ -264,6 +264,7 @@ font-size: 18px;
 			</nav>
 		</div>
 	</div>
+	
 <script>
 $(function(){
 	var memberID=$('#gbmemberID').val();

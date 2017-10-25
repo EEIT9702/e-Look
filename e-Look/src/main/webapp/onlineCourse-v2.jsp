@@ -598,6 +598,8 @@ a:HOVER {
 			</div>
 		</div>
 	</div>
+	<c:remove var="err" scope="session"/>
+	<c:remove var="loginerr" scope="session"/>
 	<jsp:include page="/footer.jsp" />
 	<script>
 		$(document).ready(function() {

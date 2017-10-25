@@ -256,13 +256,44 @@ video::-webkit-media-controls-panel {
 				<c:if test="${empty mBookmarkList}">	
 					<c:set var="favor" value="favoriteclick2"/>
 				</c:if>
+				
+				<c:if test="${empty LoginOK}">
+				<c:choose>
+				<c:when test="${!empty loginerr}">
+									<div class="col-md-1 col-xs-4">
+									<a href="#" data-toggle="modal" data-target="#myModal2">
+									<img src="<%=request.getContextPath()%>/img/favorite.png"class="img-responsive center-block">
+									<h5 class="text-center">加到最愛</h5>
+									</a>
+									</div>
+								</c:when>
+								<c:when test="${empty err}">
+								<div class="col-md-1 col-xs-4">
+									<a href="#" data-toggle="modal" data-target="#myModal">
+									<img src="<%=request.getContextPath()%>/img/favorite.png"class="img-responsive center-block">
+									<h5 class="text-center">加到最愛</h5>
+									</a>
+									</div>
+								</c:when>
+								<c:otherwise>
+								<div class="col-md-1 col-xs-4">
+									<a href="#" data-toggle="modal"	data-target="#myModal2">
+									<img src="<%=request.getContextPath()%>/img/favorite.png"class="img-responsive center-block">
+									<h5 class="text-center">加到最愛</h5>
+									</a>
+									</div>
+								</c:otherwise>
+					</c:choose>
+						</c:if>
+				
+				<c:if test="${!empty LoginOK}">
 				<div class="col-md-1 col-xs-4">
 					<img src="<%=request.getContextPath()%>/img/favorite.png"
 						class="img-responsive center-block"> <a href="#"
 						id="${favor}"><h5 class="text-center">加到最愛</h5></a>
 				</div>
-
-
+				</c:if>
+				
 				<input type="hidden" value="${courseVO.courseID}" id="mbcourseID">
 				<input type="hidden" value="${LoginOK.memberID}" id="mbmemberID">
 				<div class="col-md-1 col-xs-4 ">
@@ -621,7 +652,8 @@ video::-webkit-media-controls-panel {
 				</div>
 			</div>
 		</div>
-
+<c:remove var="err" scope="session"/>
+	<c:remove var="loginerr" scope="session"/>
 
 	<jsp:include page="/footer.jsp" />
 	<script>

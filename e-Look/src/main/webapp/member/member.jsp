@@ -469,8 +469,8 @@ a:HOVER {
                        </a>
                     <div class="card-footer">
                     <button class="btn-info btn-sm pull-right" style="margin-bottom: 5px;margin-top: 10px">取消訂閱</button>   
-                   <input type="hidden" value="${mBookmark.memberID}">
                      <input type="hidden" value="${mBookmark.courseID}">
+                   <input type="hidden" value="${LoginOK.memberID}">
                     </div>
                     
                 </div>
@@ -492,8 +492,8 @@ a:HOVER {
                        </a>
                     <div class="card-footer">
                     <button class="btn-info btn-sm pull-right" style="margin-bottom: 5px;margin-top: 10px">取消訂閱</button>   
-                     <input type="hidden" value="${LoginOK.memberID}">
                      <input type="hidden" value="${mBookmark.courseID}">
+                     <input type="hidden" value="${LoginOK.memberID}">
                     </div>
                     
                 </div>
@@ -583,10 +583,13 @@ a:HOVER {
 
 	});
 	 $('#click>div').on('click','.card-footer>button:nth-child(1)',function(){
-		   if( confirm("確定取消訂閱")){
+		   if( confirm("確定取消訂閱嗎?")){
 			   $(this).parents('#click').css("display","none")
-			   console.log($(this).find("input").val())
-			    console.log($(this).find("input+input").val())
+			    $.get('/e-Look/MemberBookmarksInsertController', {
+				'courseID' : $(this).parents('#click').find("input").val(),
+				'memberID' : $(this).parents('#click').find("input+input").val()
+			}, function() {
+			})
 		   }else{
 			   
 		   }
