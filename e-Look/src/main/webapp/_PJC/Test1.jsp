@@ -9,12 +9,12 @@
 		<form id="get-data-form" method="post">
 
 			<textarea class="tinymce" id="texteditor"></textarea>
-			<input type="submit" value="Get Data">
+			<input type="button" id="test" value="Get Data">
 			<input type="hidden" value="" id="courseContent">
 		</form>
 
-<!-- 		<div id="data-container"> -->
-<!-- 		</div> -->
+		<div id="data-container">
+		</div>
 
 		<!-- javascript -->
 		<script src="<%=request.getContextPath()%>/js/jquery.js"></script>
@@ -23,7 +23,7 @@
 		<script type="text/javascript">
 		$(document).ready(function(){
 
-			$("#get-data-form").submit(function(e){
+			$("#test").click(function(e){
 
 				var content = tinymce.get("texteditor").getContent();
 				alert(content);
