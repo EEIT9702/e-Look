@@ -54,6 +54,9 @@
 /* 	valign="center; */
 /* 	valign="middle; */
 }
+.histiryBtn a{
+	text-decoration: none;
+}
 </style>
 </head>
 <body>
@@ -77,9 +80,16 @@
                     </tr>
                  </thead>
                  <tbody>
-<!--                   <tfoot> -->
-<!-- 	                 <form name="reportForm"> -->
-<!-- 	                 <tr> -->
+                 </tbody>
+                  <tfoot>
+	                 <form>
+	                 <tr>
+	                  <td><input type="hidden" id="" name=""><span></span></td>
+	                  <td><input type="hidden" id="" name=""><span></span></td>
+	                  <td><input type="hidden" id="" name=""><span></span></td>
+	                  <td><input type="hidden" id="" name=""><span></span></td>
+	                  <td><input type="hidden" id="" name=""><span></span></td>
+	                  <td><button type="button" value="hideHistory" onclick="self.location.href='back_report_history.jsp'" class="btn btn-success">查詢遮蔽留言紀錄</button></td>
 <!-- 	                  <td><input type="hidden" id="reportID" name="reportID"><span></span></td> -->
 <!-- 	                  <td><input type="text" class="form-control" id="reportContent" name="reportContent" placeholder="檢舉內容"></td> -->
 <!-- 	                  <td><input type="text" class="form-control" id="mContent" name="mContent" placeholder="留言內容"></td> -->
@@ -88,10 +98,14 @@
 <!-- 	                  <td> -->
 <!-- 						<button id="buttonAdd" type="button" class="btn btn-primary">確認</button>  -->
 <!-- 	                      <button id="buttonUpdate" type="button" class="btn btn-success">遮蔽留言</button></td> -->
-<!-- 	                 </tr> -->
-<!-- 	                 </form> -->
-<!--                   </tfoot> -->
+	                 </tr>
+	                 </form>
+                  </tfoot>
+				 
             </table>
+<!--             <div class="col-md-4"> -->
+<!--             	<a href="back_report_history.jsp" class="histiryBtn btn btn-success">查詢處理紀錄</a> -->
+<!--             </div> -->
 		</div>
 
 	</div>
@@ -132,7 +146,7 @@
 				//alert("edit")
 				var reportIDy = $(this).parents('tr').children('td:first-child').text();
 				//Message的status設為0,reportMessage的status設為1
-				$.post('ReportMessageControl',{'reportIDx':reportIDy,'status':0},function(){
+				$.post('ReportMessageControl',{'reportIDx':reportIDy,'status':2},function(){
 					loadReportMessage(0);
 				})
 			})
@@ -141,7 +155,7 @@
 		    //讀取到剛剛觸發帶入的值,並放入id
 		   function loadReportMessage(id){
 		    $.getJSON('ReportMessageControl',{"status":id},function(datas){
-		    	console.log(datas)
+		    	//console.log(datas)
 
 		    	//datas = [] array
 		    	//建一個fragment容器,並加上$()轉成jQuery物件去裝迴圈裡產生的物件
@@ -162,6 +176,7 @@
 		    	$('#reportTable>tbody').html(fragment);
 		     })
 	    	}
+
 			
 		//end of readyfunction
 		})
