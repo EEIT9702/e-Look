@@ -1,4 +1,4 @@
-package com.e_Look.ReportCourse.control;
+package com.e_Look.tool;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,24 +7,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/ReportCourseInsert")
-public class ReportCourseInsertController extends HttpServlet {
+/**
+ * Servlet implementation class GetBuyingPrice
+ */
+@WebServlet("/GetBuyingPrice")
+public class GetBuyingPrice extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-    public ReportCourseInsertController() {
-
-    }
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		response.setContentType("text/html;charset=UTF-8");
+		
+		Integer courseID=Integer.parseInt(request.getParameter("courseID"));
+		response.getWriter().write(BuyingPrice.getBuyingPrice(courseID).toString());;
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integer memberID= Integer.valueOf(request.getParameter("memberID"));
-		Integer courseID= Integer.valueOf(request.getParameter("courseID"));
-		String 	reportContent=request.getParameter("reportContent");
-		
-		
+		doGet(request, response);
 	}
 
 }

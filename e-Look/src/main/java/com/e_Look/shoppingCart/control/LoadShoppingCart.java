@@ -27,6 +27,7 @@ public class LoadShoppingCart extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
+			//刪購物車
 			Integer courseID = Integer.parseInt(request.getParameter("courseID"));
 			Integer memberID = Integer.parseInt(request.getParameter("memberID"));
 			ShoppingCartDAO dao = new ShoppingCartDAO();
@@ -39,6 +40,7 @@ public class LoadShoppingCart extends HttpServlet {
 			dao.delete(shoppingCartVO);
 			System.out.println("會員："+memberID+",刪除了購物車中的課程："+courseID);
 		}catch(NumberFormatException e){
+			//載入購物車
 			Integer memberID = Integer.parseInt(request.getParameter("memberID"));
 			response.setCharacterEncoding("UTF-8");
 			ShoppingCartDAO dao = new ShoppingCartDAO();

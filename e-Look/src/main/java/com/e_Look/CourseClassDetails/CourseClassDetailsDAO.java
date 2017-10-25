@@ -39,7 +39,7 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 			"SELECT CourseClassID,ccName,courseID,courseName FROM CourseClassDetails WHERE CourseClassID=?";
 	
 	private static final String SELECT_BY_COURSEID = 
-			"SELECT courseID,courseName,CourseClassID,ccName, FROM CourseClassDetails WHERE courseID=?";
+			"SELECT courseID,courseName,CourseClassID,ccName FROM CourseClassDetails WHERE courseID=?";
 	
 	private static final String SELECT_ALL = 
 			"SELECT CourseClassID,ccName,courseID,courseName FROM CourseClassDetails";

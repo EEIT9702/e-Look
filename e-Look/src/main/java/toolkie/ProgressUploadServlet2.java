@@ -21,18 +21,14 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import com.e_Look.Course.CourseService;
 import com.e_Look.Course.CourseVO;
 
-@WebServlet("/toolkie/ProgressUploadServlet")
-public class ProgressUploadServlet extends HttpServlet {
+@WebServlet("/toolkie/ProgressUploadServlet2")
+public class ProgressUploadServlet2 extends HttpServlet {
 	// 用途不明
 	// private static final long serialVersionUID = -4935921396709035718L;
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		CourseService service = null;
-		CourseVO courseVO = null;
-		Integer courseID = null;
-		
-		String courseVideopathway= null;
+
 		// 上傳狀態
 		UploadStatus status = new UploadStatus();
 
@@ -52,10 +48,7 @@ public class ProgressUploadServlet extends HttpServlet {
 				System.out.println(itemList);
 			for (Iterator it = itemList.iterator(); it.hasNext();) {// 檢查所有參數
 				FileItem item = (FileItem) it.next();
-				if (item.isFormField()) {// 如果是表單資料
-					if(item.getFieldName().equals("CourseID")){
-						 courseID=new Integer(item.getString());
-					}
+				if (item.isFormField()) {// 如果是表單資料					
 					//System.out.println("FormField: " + item.getFieldName() + " = " + item.getString());
 				} else {// 否則上傳檔案
 					if (!item.getName().equals("")) {
@@ -67,8 +60,7 @@ public class ProgressUploadServlet extends HttpServlet {
 						// fileName.substring(fileName.lastIndexOf("\\"));
 
 						File saved = new File(request.getServletContext().getRealPath("")+"\\video", item.getName());
-						System.out.println("D:\\TEST\\"+ item.getName());
-						courseVideopathway ="video\\"+item.getName();
+						System.out.println("D:\\TEST\\"+ item.getName());						
 						saved.getParentFile().mkdirs();
 											 
 
@@ -89,14 +81,7 @@ public class ProgressUploadServlet extends HttpServlet {
 					}
 				}
 			}
-			
-			System.out.println(courseID);
-			service = new CourseService();
-			courseVO= new CourseVO();
-			courseVO.setCourseVideopathway(courseVideopathway);
-			courseVO.setCourseID(courseID);
-			service.updateCourseVideoPathway(courseVO);
-			
+						
 			
 			
 			
