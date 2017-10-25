@@ -49,6 +49,10 @@ public class CheckOutFilter implements Filter {
 
 			HttpSession session = request.getSession();
 			MemberVO memberVO = (MemberVO) session.getAttribute("LoginOK");
+			if(memberVO==null){
+				rw.write("<script>alert('請先登入'); location.href='" + request.getContextPath() + "'</script>");
+				return;
+			}
 			Integer memberID = memberVO.getMemberID();
 
 			OrderVO orderVO = orderDAO.findMemberUncheckOrder(memberID);

@@ -202,7 +202,7 @@ font-size: 18px;
 												<span id="totalPrice">總金額：0元</span>
 											</div>
 											<div class="modal-footer">
-												<a href="<%= request.getContextPath() %>/ShoppingCartIntoOrder">
+												<a href="<%= request.getContextPath() %>/settled.jsp">
 												<button type="button" class="btn btn-primary btn-block">前往結帳</button>
 												</a>
 											</div>
@@ -274,7 +274,7 @@ $(function(){
 	}
 	
 	function loadShoppingCart(){
-		$.post('<%=request.getContextPath() %>/settled.jsp',{"memberID":memberID},function(datas){
+		$.post('<%=request.getContextPath() %>/LoadShoppingCart',{"memberID":memberID},function(datas){
 			var fg = $(document.createDocumentFragment());
 			$('.cartrows').empty();
 			var totalPrice = 0

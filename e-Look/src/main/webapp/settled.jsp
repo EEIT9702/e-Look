@@ -184,12 +184,11 @@ ul {
 													<img src="<%=request.getContextPath()%>/img/02.jpg"
 														alt="ALT NAME" class="pull-left span2 clearfix"
 														style='margin-right: 10px'>
-													<div class="caption" class="pull-left">
-														<a href="onlineCourse-v2.jsp?courseID=200001"
-															class="btn btn-danger icon  pull-right">刪除</a>
+													<div class="caption" >
+														<button 
+															class="btn btn-danger icon  pull-right">刪除</button>
 														<h4>
-															<a
-																href="<%=request.getContextPath()%>/onlineCourse-v2.jsp?courseID=200001">在這裡顯示課程名稱</a>
+															<a href="<%=request.getContextPath()%>/onlineCourse-v2.jsp?courseID=200001">在這裡顯示課程名稱</a>
 														</h4>
 														<small><b>課程類別,課程類別</b></small>
 													</div>
@@ -200,9 +199,9 @@ ul {
 													<img src="<%=request.getContextPath()%>/img/預覽課程展示畫面.png"
 														alt="ALT NAME" class="pull-left span2 clearfix"
 														style='margin-right: 10px'>
-													<div class="caption" class="pull-left">
-														<a href="onlineCourse-v2.jsp?courseID=200002"
-															class="btn btn-danger icon  pull-right">刪除</a>
+													<div class="caption" >
+														<button 
+															class="btn btn-danger icon  pull-right">刪除</button>
 														<h4>
 															<a
 																href="<%=request.getContextPath()%>/onlineCourse-v2.jsp?courseID=200001">在這裡顯示課程名稱</a>
@@ -217,8 +216,8 @@ ul {
 														class="pull-left span2 clearfix"
 														style='margin-right: 10px'>
 													<div class="caption" class="pull-left">
-														<a href="onlineCourse-v2.jsp?courseID=200003"
-															class="btn btn-danger icon  pull-right">刪除</a>
+														<button 
+															class="btn btn-danger icon  pull-right">刪除</button>
 														<h4>
 															<a
 																href="<%=request.getContextPath()%>/onlineCourse-v2.jsp?courseID=200001">在這裡顯示課程名稱</a>
@@ -233,8 +232,8 @@ ul {
 														class="pull-left span2 clearfix"
 														style='margin-right: 10px'>
 													<div class="caption" class="pull-left">
-														<a href="onlineCourse-v2.jsp?courseID=200004"
-															class="btn btn-danger icon  pull-right">刪除</a>
+														<button 
+															class="btn btn-danger icon  pull-right">刪除</button>
 														<h4>
 															<a
 																href="<%=request.getContextPath()%>/onlineCourse-v2.jsp?courseID=200001">在這裡顯示課程名稱</a>
@@ -249,8 +248,8 @@ ul {
 														class="pull-left span2 clearfix"
 														style='margin-right: 10px'>
 													<div class="caption" class="pull-left">
-														<a href="onlineCourse-v2.jsp?courseID=200005"
-															class="btn btn-danger icon  pull-right">刪除</a>
+														<button 
+															class="btn btn-danger icon  pull-right">刪除</button>
 														<h4>
 															<a
 																href="<%=request.getContextPath()%>/onlineCourse-v2.jsp?courseID=200001">在這裡顯示課程名稱</a>
@@ -265,8 +264,8 @@ ul {
 														alt="ALT NAME" class="pull-left span2 clearfix"
 														style='margin-right: 10px'>
 													<div class="caption" class="pull-left">
-														<a href="http://bootsnipp.com/"
-															class="btn btn-danger icon  pull-right">刪除</a>
+														<button 
+															class="btn btn-danger icon  pull-right">刪除</button>
 														<h4>
 															<a
 																href="<%=request.getContextPath()%>/onlineCourse-v2.jsp?courseID=200001">在這裡顯示課程名稱</a>
@@ -401,21 +400,42 @@ ul {
 			$('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
 				return false;
 			});
-			//if($('#gbmemberID').val()<1){
-				//alert("請先進行登入");
-				//location.href="<%= request.getContextPath()%>"
-			//}
 			loadMemberOrder();
 			function loadMemberOrder(){
 				$('#showdetails').html('');
+				var fg = $(document.createDocumentFragment());
 				$.post('<%=request.getContextPath()%>/OrderEdit',{'action':'loading'},function(datas){
 					console.log(datas);
-					$.each(datas,function(name,value){
-						console.log("name:"+name+",value:"+value);
-						
+					$.each(datas,function(index,orderVO){
+						console.log("index:"+index+",orderVO:"+orderVO);
+						var cell1 = $('<li>').addClass('span5 clearfix');
+						var cell2 = $('<div>').addClass('thumbnail clearfix');
+						var cell3 = $('<img>').addClass('pull-left span2 clearfix').css('margin-right','10px').attr({'alt':'','src':'<%=request.getContextPath() %>/CourseImage?CourseID='+orderVO.courseVO.courseID});
+						var cell4 = $('<div>').addClass('caption');
+						var cell5 = $('<button>').addClass('btn btn-danger icon  pull-right').text('刪除').val(orderVO.courseVO.courseID);
+						var cell6 = $('<h4>')
+						var cell7 = $('<a>').attr('href','<%=request.getContextPath()%>/onlineCourse-v2.jsp?courseID='+orderVO.courseVO.courseID).text(orderVO.courseVO.courseName);
+						var cell8 = $('<small>');
+						var cell9 = $('<b>').text('類別');
+						cell1.append(cell2);
+						cell2.append([cell3,cell4]);
+						cell4.append([cell5,cell6,cell8]);
+						cell6.append(cell7);
+						cell8.append(cell9);
+					fg.append(cell1)
 					})
+					$('#showdetails').append(fg);
 				},"json")
 			}//loadMemberOrder end
+			
+			$('#showdetails button').on('click',function(){
+				var courseID=$(this).val;
+				$.post('<%=request.getContextPath()%>/OrderEdit',{'action':'delete','courseID':courseID},function(){
+					loadMemberOrder();
+				})
+				
+			})
+			
 		})
 	</script>
 </body>
