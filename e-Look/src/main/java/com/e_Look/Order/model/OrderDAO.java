@@ -1,5 +1,6 @@
 package com.e_Look.Order.model;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,11 +24,12 @@ public class OrderDAO implements OrderDAO_interface{
 		}
 	}
 
-	private static final String INSERT_Order = "insert into Order (memberID,receiptNO,orderTime) values (?,?,?)"; 
-	private static final String UPDATE_Order = "update Order set memberID=? receiptNO=? orderTime=? where OrderID=?"; 
-	private static final String DELETE_Order = "delete from Order where OrderID=?"; 
-	private static final String SELECT_Order = "select OrderID,memberID,receiptNO,orderTime from Order where OrderID=?";
-	private static final String SELECT_ALL_Order = "select OrderID,memberID,receiptNO,orderTime from Order";
+	private static final String INSERT_Order = "insert into [Order] (memberID,orderTime) values (?,?)"; 
+	private static final String UPDATE_Order = "update [Order] set memberID=? orderTime=? where OrderID=?"; 
+	private static final String DELETE_Order = "delete from [Order] where OrderID=?"; 
+	private static final String SELECT_Order = "select OrderID,memberID,orderTime from [Order] where OrderID=?";
+	private static final String SELECT_ALL_Order = "select OrderID,memberID,orderTime from [Order]";
+	private static final String SELECT_MEMBER_UNCHECK_Order = "select OrderID,memberID,orderTime from [Order] where memberID=? and orderTime=null";
 	@Override
 	public void insert(OrderVO OrderVO) {
 		Connection conn =null;
@@ -37,8 +39,7 @@ public class OrderDAO implements OrderDAO_interface{
 			
 			pstmt=conn.prepareStatement(INSERT_Order);
 			pstmt.setInt(1,OrderVO.getMemberID());
-			pstmt.setString(2,OrderVO.getReceiptNO());
-			pstmt.setDate(3,OrderVO.getOrderTime());
+			pstmt.setDate(2,OrderVO.getOrderTime());
 			pstmt.executeUpdate();
 			
 			
@@ -109,8 +110,7 @@ public class OrderDAO implements OrderDAO_interface{
 			pstmt=conn.prepareStatement(UPDATE_Order);
 			
 			pstmt.setInt(1,OrderVO.getMemberID());
-			pstmt.setString(2,OrderVO.getReceiptNO());
-			pstmt.setDate(3,OrderVO.getOrderTime());
+			pstmt.setDate(2,OrderVO.getOrderTime());
 			pstmt.executeUpdate();
 			
 			
@@ -150,8 +150,7 @@ public class OrderDAO implements OrderDAO_interface{
 				OrderVO = new OrderVO();
 				OrderVO.setOrderID(rs.getInt(1));
 				OrderVO.setMemberID(rs.getInt(2));
-				OrderVO.setReceiptNO(rs.getString(3));
-				OrderVO.setOrderTime(rs.getDate(4));
+				OrderVO.setOrderTime(rs.getDate(3));
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
@@ -191,8 +190,7 @@ public class OrderDAO implements OrderDAO_interface{
 				OrderVO OrderVO= new OrderVO();
 				OrderVO.setOrderID(rs.getInt(1));
 				OrderVO.setMemberID(rs.getInt(2));
-				OrderVO.setReceiptNO(rs.getString(3));
-				OrderVO.setOrderTime(rs.getDate(4));
+				OrderVO.setOrderTime(rs.getDate(3));
 				list.add(OrderVO);
 			}	
 		} catch (SQLException e) {
@@ -215,5 +213,41 @@ public class OrderDAO implements OrderDAO_interface{
 		}
 		return list;
 	}
-
+	@Override
+	public OrderVO findMemberUncheckOrder(Integer memberID) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		OrderVO orderVO = null;
+		try {
+			con =ds.getConnection();	
+			pstmt = con.prepareStatement(SELECT_MEMBER_UNCHECK_Order);
+			pstmt.setInt(1, memberID);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()){
+				orderVO=new OrderVO();
+				orderVO.setOrderID(rs.getInt(1));
+				orderVO.setMemberID(rs.getInt(2));
+				orderVO.setOrderTime(rs.getDate(3));
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+		return orderVO;
+	}
 }

@@ -13,7 +13,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.e_Look.Course.CourseVO;
-import com.e_Look.courseClass.courseClassVO;
+import com.e_Look.courseClass.CourseClassVO;
 
 public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 	private static DataSource ds = null;
@@ -25,38 +25,40 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 			e.printStackTrace();
 		}
 	}
-	private static final String INSERT_courseNClass = 
-			"insert into CourseClassDetails (courseID,courseName,CourseClassID,ccName) values (?,?,?,?)";
+	
+	private static final String INSERT_COURSE_N_CLASS = 
+			"INSERT INTO CourseClassDetails (courseID,courseName,CourseClassID,ccName) VALUES (?,?,?,?)";
 	
 //	private static final String UPDATE_courseNClass = 
 //			"update CourseClassDetails set CourseClassID=? where courseID=?";
 	
-	private static final String DELETE_courseNClass = 
-			"delete from CourseClassDetails where courseID=?";
+	private static final String DELETE_COURSE_N_CLASS = 
+			"DELETE FROM CourseClassDetails WHERE courseID=?";
 	
-	private static final String SELECT_findBycourseClassID = 
-			"select CourseClassID,ccName,courseID,courseName from CourseClassDetails where CourseClassID=?";
+	private static final String SELECT_BY_COURSE_CLASSID = 
+			"SELECT CourseClassID,ccName,courseID,courseName FROM CourseClassDetails WHERE CourseClassID=?";
 	
-	private static final String SELECT_findBycourseID = 
-			"select courseID,courseName,CourseClassID,ccName, from CourseClassDetails where courseID=?";
+	private static final String SELECT_BY_COURSEID = 
+			"SELECT courseID,courseName,CourseClassID,ccName, FROM CourseClassDetails WHERE courseID=?";
 	
 	private static final String SELECT_ALL = 
-			"select CourseClassID,ccName,courseID,courseName from CourseClassDetails";
+			"SELECT CourseClassID,ccName,courseID,courseName FROM CourseClassDetails";
 
 	@Override
-	public void insert(courseClassVO courseClassVO, CourseVO courseVO) {
+	public void insert(CourseVO courseVO, CourseClassVO courseClassVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_courseNClass);
-
+			pstmt = con.prepareStatement(INSERT_COURSE_N_CLASS);
+			
 			pstmt.setInt(1, courseVO.getCourseID());
 			pstmt.setString(2, courseVO.getCourseName());
 			pstmt.setInt(3, courseClassVO.getCourseClassID());
 			pstmt.setString(4, courseClassVO.getCcName());
-
+			
 			pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -79,16 +81,18 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 	}
 
 	@Override
-	public void update(courseClassVO courseClassVO, CourseVO courseVO) {
+	public void update(CourseClassVO courseClassVO, CourseVO courseVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
+			
 //			pstmt = con.prepareStatement(UPDATE_courseNClass);
 
-			pstmt.setInt(1, courseClassVO.getCourseClassID());
-			pstmt.setInt(2, courseVO.getCourseID());
-			pstmt.executeUpdate();
+//			pstmt.setInt(1, courseClassVO.getCourseClassID());
+//			pstmt.setInt(2, courseVO.getCourseID());
+//			pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -113,11 +117,13 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 	public void delete(Integer courseID) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(DELETE_courseNClass);
+			pstmt = con.prepareStatement(DELETE_COURSE_N_CLASS);
 			pstmt.setInt(1,courseID);
 			pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -143,11 +149,12 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 	public List<CourseClassDetailsVO> findBycourseClassID(Integer CourseClassID) {
 		
 		List<CourseClassDetailsVO> findBycourseClassID = new LinkedList<CourseClassDetailsVO>();
-		Connection conn = null;
+		Connection con = null;
 		PreparedStatement pstmt = null;
 
 		try {
-			pstmt = conn.prepareStatement(SELECT_findBycourseClassID);
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(SELECT_BY_COURSE_CLASSID);
 		
 			pstmt.setInt(1, CourseClassID);
 			ResultSet rs = pstmt.executeQuery();
@@ -160,6 +167,7 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 				CourseClassDetailsVO.setCourseName(rs.getString(4));
 				findBycourseClassID.add(CourseClassDetailsVO);
 			}
+			
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -170,9 +178,9 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 					e.printStackTrace(System.err);
 				}
 			}
-			if (conn != null) {
+			if (con != null) {
 				try {
-					conn.close();
+					con.close();
 				} catch (Exception e) {
 					e.printStackTrace(System.err);
 				}
@@ -185,11 +193,12 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 	public List<CourseClassDetailsVO> findBycourseID(Integer CourseID) {
 		List<CourseClassDetailsVO> findBycourseID = new LinkedList<CourseClassDetailsVO>();
 
-		Connection conn = null;
+		Connection con = null;
 		PreparedStatement pstmt = null;
 
 		try {
-			pstmt = conn.prepareStatement(SELECT_findBycourseID);
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(SELECT_BY_COURSEID);
 			pstmt.setInt(1, CourseID);
 			ResultSet rs = pstmt.executeQuery();
 
@@ -202,6 +211,7 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 				CourseClassDetailsVO.setCcName(rs.getString(4));
 				findBycourseID.add(CourseClassDetailsVO);
 			}
+			
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -212,9 +222,9 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 					e.printStackTrace(System.err);
 				}
 			}
-			if (conn != null) {
+			if (con != null) {
 				try {
-					conn.close();
+					con.close();
 				} catch (Exception e) {
 					e.printStackTrace(System.err);
 				}
@@ -227,13 +237,15 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 	public List<CourseClassDetailsVO> getAll() {
 		List<CourseClassDetailsVO> getAll = new LinkedList<CourseClassDetailsVO>();
 
-		Connection conn = null;
+		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			pstmt = conn.prepareStatement(SELECT_ALL);
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(SELECT_ALL);
 
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
+				
 				CourseClassDetailsVO CourseClassDetailsVO = new CourseClassDetailsVO();
 				CourseClassDetailsVO.setCourseClassID(rs.getInt(1));
 				CourseClassDetailsVO.setCcName(rs.getString(2));
@@ -242,6 +254,7 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 				
 				getAll.add(CourseClassDetailsVO);
 			}
+			
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {
@@ -252,9 +265,9 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 					e.printStackTrace(System.err);
 				}
 			}
-			if (conn != null) {
+			if (con != null) {
 				try {
-					conn.close();
+					con.close();
 				} catch (Exception e) {
 					e.printStackTrace(System.err);
 				}

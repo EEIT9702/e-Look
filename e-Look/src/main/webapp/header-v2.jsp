@@ -1,6 +1,14 @@
+<%@page import="com.e_Look.shoppingCart.model.jdbc.ShoppingCartDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ page import="com.e_Look.Course.*" %>
+    <%@ page import="java.util.List" %>
+<%	/*List<CourseVO> shoppingCartList= (List<CourseVO>) session.getAttribute("shoppingCartList");
+int courseCount=0;
+if(shoppingCartList != null){
+    courseCount = shoppingCartList.size();  }*/
+    %>
 <!DOCTYPE>
 <html>
 <head>
@@ -35,19 +43,19 @@
 	box-shadow: none;
 }
 
-.nav li:hover:nth-child(4n+1), .nav li.active:nth-child(4n+1) {
+#navbar .nav li:hover:nth-child(4n+1), #navbar .nav li.active:nth-child(4n+1) {
 	border-bottom: #C4E17F 3px solid;
 }
 
-.nav li:hover:nth-child(4n+2), .nav li.active:nth-child(4n+2) {
+#navbar .nav li:hover:nth-child(4n+2),#navbar .nav li.active:nth-child(4n+2) {
 	border-bottom: #F7FDCA 3px solid;
 }
 
-.nav li:hover:nth-child(4n+3), .nav li.active:nth-child(4n+3) {
+#navbar .nav li:hover:nth-child(4n+3),#navbar .nav li.active:nth-child(4n+3) {
 	border-bottom: #FECF71 3px solid;
 }
 
-.nav li:hover:nth-child(4n+4), .nav li.active:nth-child(4n+4) {
+#navbar .nav li:hover:nth-child(4n+4),#navbar .nav li.active:nth-child(4n+4) {
 	border-bottom: #F0776C 3px solid;
 }
 
@@ -56,7 +64,7 @@
 	background: #fff;
 }
 body{
-padding-top:80px;
+padding-top:75px;
 }
 #headerTextStyle{
 font-family: Microsoft JhengHei;
@@ -71,6 +79,7 @@ font-size: 18px;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	float: right;
+	font-weight: bold;
 }
 
 .courseSubtitle {
@@ -93,7 +102,7 @@ font-size: 18px;
 	width: 90%;
 	padding: 20px;
 	border-bottom: 1px solid #cccccc;
-	margin: auto
+	margin: auto;
 }
 
 .cartrow img {
@@ -159,63 +168,43 @@ font-size: 18px;
 						<ul class="nav navbar-nav navbar-right">
 							<c:choose>
 								<c:when test="${!empty LoginOK}">
+								<input id="gbmemberID" type="hidden" value="${LoginOK.memberID}"/>
 									<li class="dropdown"><a class="dropdown-toggle"
 										data-toggle="dropdown" aria-haspopup="false"
-										aria-expanded="false"><span class="cartcount">3</span><img style="margin-top:15px"
+										aria-expanded="false"><span class="cartcount"></span><img style="margin-top:15px"
 											src="<%=request.getContextPath()%>/HeaderCssJs/002-shopping-cart.png"
 											height="26" /></a> <!-- 				以下為購物車內容 -->
 										<ul class="dropdown-menu" style="width: 465px;">
 											<li class="dropdown-header"
 												style="border-bottom: 1px solid #aaaaaa;"><h3></h3></li>
 											<!-- 				課程1 -->
+										
 											<div class="cartrows">
+											
+											<!--<c:forEach var="courseVO" items="${shoppingCartList}">
 												<div class="cartrow">
 													<div style="text-align: right;">
 														<div style="float: left; width: 80%; text-align: left;"></div>
-														<button class="close" type="button" aria-hidden="true">&times;</button>
+														<button id="delete${courseVO.courseID}" class="close" style="color:red" type="button" aria-hidden="true">&times;</button>
 													</div>
-													<img
-														src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png">
-													<span class="courseTitle">Java線上學習1xxxxxxxxxxxxxxxxxx<br>
+													<img src="<%=request.getContextPath() %>/CourseImage?CourseID=${courseVO.courseID}">
+													<span class="courseTitle">${courseVO.courseName} <br>
 														<span class="courseSubtitle">科技,語言,IT</span> <span
 														class="courseDelete"></span><br> <span
-														class="courseDelete">$800</span>
+														class="courseDelete">$ ${courseVO.soldPrice} 元</span>
 													</span>
 												</div>
+												</c:forEach>-->
 												<!-- 				課程2 -->
-												<div class="cartrow">
-													<div style="text-align: right;">
-														<div style="float: left; width: 80%; text-align: left;"></div>
-														<button class="close" type="button" aria-hidden="true">&times;</button>
-													</div>
-													<img
-														src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png">
-													<span class="courseTitle">Java線上學習2xxxx<br> <span
-														class="courseSubtitle">科技,語言</span> <span
-														class="courseDelete"></span><br> <span
-														class="courseDelete">$70</span>
-													</span>
-												</div>
-												<div class="cartrow">
-													<div style="text-align: right;">
-														<div style="float: left; width: 80%; text-align: left;"></div>
-														<button class="close" type="button" aria-hidden="true">&times;</button>
-													</div>
-													<img
-														src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png">
-													<span class="courseTitle">Java線上學習2xxxx<br> <span
-														class="courseSubtitle">科技,語言</span> <span
-														class="courseDelete"></span><br> <span
-														class="courseDelete">$70</span>
-													</span>
-												</div>
 											</div>
 											<div class="modal-body text-right">
-												<div style="float: left;">共 3 筆課程</div>
-												<span>總金額：940元</span>
+												<div id="courseCount" style="float: left;">共 0 筆課程</div>
+												<span id="totalPrice">總金額：0元</span>
 											</div>
 											<div class="modal-footer">
+												<a href="<%= request.getContextPath() %>/ShoppingCartIntoOrder">
 												<button type="button" class="btn btn-primary btn-block">前往結帳</button>
+												</a>
 											</div>
 										</ul> 
 										<!-- 				以上為購物車內容 --></li>
@@ -275,3 +264,52 @@ font-size: 18px;
 			</nav>
 		</div>
 	</div>
+<script>
+$(function(){
+	var memberID=$('#gbmemberID').val();
+	
+	
+	if(memberID>1){
+		loadShoppingCart();
+	}
+	
+	function loadShoppingCart(){
+		$.post('<%=request.getContextPath() %>/LoadShoppingCart',{"memberID":memberID},function(datas){
+			var fg = $(document.createDocumentFragment());
+			$('.cartrows').empty();
+			var totalPrice = 0
+			var courseCount = 0
+			$.each(datas,function(idx,courseVO){
+				var cell1 = $('<div></div>').addClass('cartrow').val(courseVO.courseID);
+				var cell2 = $('<div></div>').css('text-align','right');
+				var cell3 = $('<div></div>').css(['float','left','width','80%','text-align','left']);
+				var cell4 = $('<button></button>').css('color','red').addClass('close glyphicon glyphicon-remove').attr({'type':'button','name':courseVO.courseID});
+				var cell5 = $('<img>').attr({'src':'<%=request.getContextPath() %>/CourseImage?CourseID='+courseVO.courseID,'alt':'<%= request.getContextPath()%>/img/請上傳課程封面.png'});
+				var cell6 = $('<span></span>').addClass('courseTitle').text(courseVO.courseName);
+				var cell7 = $('<br>')
+				var cell8 = $('<span></span>').addClass('courseSubtitle').text('類別1,類別2');
+				var cell9 = $('<span></span>').addClass('courseDelete')
+				var cell10 = $('<br>');				var cell11 = $('<span></span>').addClass('courseDelete').text('$' + courseVO.soldPrice+'元');
+				cell2.append([cell3,cell4])
+				cell6.append([cell7,cell8,cell9,cell10,cell11])
+				cell1.append([cell2,cell5,cell6])
+				fg.append(cell1)
+				totalPrice+=courseVO.soldPrice;
+				courseCount++;
+			})
+			$('.cartrows').append(fg);
+			$('#totalPrice').text('總金額：'+totalPrice+'元');
+			$('#courseCount').text('共'+courseCount+'筆課程');
+			$('.cartcount').text(courseCount);
+		},'json')
+	$('.cartrows').on('click','button',deleteShoppingCart);
+	}
+	function deleteShoppingCart(){
+		var courseID=$(this).attr('name');
+		$.post('<%=request.getContextPath() %>/LoadShoppingCart',{"memberID":memberID,"courseID":courseID},function(datas){
+			loadShoppingCart();
+		})
+	}
+	
+})
+</script>

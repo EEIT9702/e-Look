@@ -24,20 +24,16 @@ public class MemberVO implements Serializable {
 	
 
 
-	public MemberVO(Integer memberID, String email, String mPassword, String mName, InputStream mPhoto, String aboutme,
-			String skill, String hobby, Date registerDate, Byte status, Integer count, String address) {
+	public MemberVO(Integer memberID, String email, String mPassword, String mName, String aboutme,
+			String skill, String hobby, String address) {
 		super();
 		this.memberID = memberID;
 		this.email = email;
 		this.mPassword = mPassword;
 		this.mName = mName;
-		this.mPhoto = mPhoto;
 		this.aboutme = aboutme;
 		this.skill = skill;
 		this.hobby = hobby;
-		this.registerDate = registerDate;
-		this.status = status;
-		this.count = count;
 		this.address = address;
 	}
 

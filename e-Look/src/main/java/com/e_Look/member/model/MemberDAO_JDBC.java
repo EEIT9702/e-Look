@@ -30,6 +30,8 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 		      "update Member set status=? where memberID= ?";
 	private static final String UPDATE_COUNT =
 		      "update Member set count=? where memberID= ?";
+	private static final String UPDATE_MEMBER_IMAGE =
+		      "update Member set  mPhoto=?, where memberID= ?";
 	private static final String DELETE_MEMBER =
 		      "delete from Member where memberID= ?";
 	private static final String SELECT_ONE_MEMBER =
@@ -81,7 +83,43 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 		}
 		
 	}
+	@Override
+	public void updataimage(MemberVO memberVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			
+				pstmt = con.prepareStatement(UPDATE_MEMBER_IMAGE);
+				pstmt.setBlob(1, memberVO.getmPhoto());
+				pstmt.setInt(2, memberVO.getMemberID());
+				pstmt.executeUpdate();
+			
 
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
 	@Override
 	public void update(MemberVO memberVO,String update) {
 		Connection con = null;
@@ -321,15 +359,15 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 	public static void main(String[] args) throws FileNotFoundException {
 		MemberDAO_JDBC dao = new MemberDAO_JDBC();
 //		//新增會員
-//		MemberVO memberVO1= new MemberVO();
-//		memberVO1.setmName("李XX");
-//		memberVO1.setEmail("abc8512125230@yahyy.com.tw");
-//		memberVO1.setmPassword("XXXX");
-//		memberVO1.setRegisterDate(new Date(System.currentTimeMillis()));
-//		memberVO1.setStatus((byte) 0);
-//		memberVO1.setCount(1);
+		MemberVO memberVO1= new MemberVO();
+		memberVO1.setmName("李XX");
+		memberVO1.setEmail("abc8512125230@yahyy.com.tw");
+		memberVO1.setmPassword("XXXX");
+		memberVO1.setRegisterDate(new Date(System.currentTimeMillis()));
+		memberVO1.setStatus((byte) 0);
+		memberVO1.setCount(1);
 		/*331行 是讀取硬碟路徑寫入資料庫方法*/
-//		memberVO1.setmPhoto(new FileInputStream(new File("src/main/webapp/img/imember_image.png")));
+		memberVO1.setmPhoto(new FileInputStream(new File("src/main/webapp/img/imember_image.png")));
 		/*333行~341行 是讀取網路圖片寫入資料庫方法*/
 //		try {
 //			HttpURLConnection con = (HttpURLConnection)(new URL("http://graph.facebook.com/106384896774920/picture?type=large").openConnection());
@@ -346,7 +384,7 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 //		} catch (IOException e) {
 //			e.printStackTrace();
 //		}
-//		dao.insert(memberVO1);
+		dao.insert(memberVO1);
 //		//修改會員資料
 //		MemberVO memberVO2= new MemberVO();
 //		memberVO2.setMemberID(100001);
@@ -365,7 +403,7 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 		//刪除會員
 //		dao.delete(100008);
 		//查詢單一會員
-		MemberVO memberVO3=dao.findByPrimaryKey(100003);
+		MemberVO memberVO3=dao.findByPrimaryKey(100001);
 		System.out.println(memberVO3.getMemberID());
 		System.out.println(memberVO3.getEmail());
 		System.out.println(memberVO3.getmPassword());
@@ -393,6 +431,8 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 //			System.out.println(memberVO.getAddress());
 //		}
 	}
+
+
 
 
 }

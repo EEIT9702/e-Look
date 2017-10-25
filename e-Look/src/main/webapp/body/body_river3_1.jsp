@@ -312,10 +312,11 @@ $(function() {
 			courseClass=$(this).children('p').text()
 		}
 		
-		$('#river').slideUp(1000,refreshRiver);
-		setTimeout(function(){
-		$('#river').slideDown(1000);
-		},1100)
+// 		$('#river').slideUp(1000,refreshRiver);
+// 		setTimeout(function(){
+// 		$('#river').slideDown(1000);
+// 		},1100)
+		
 		
 	})
 	
@@ -400,7 +401,10 @@ function checkHeight() {
 }
 </script>
 </head>
-<body>
+
+
+<body style="margin-top:10px;">
+
 <%-- <jsp:include page="${contextPath}/header.jsp" /> --%>
 <jsp:include page="${contextPath}/login.jsp" />
 

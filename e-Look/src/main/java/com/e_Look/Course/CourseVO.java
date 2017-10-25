@@ -9,7 +9,6 @@ public class CourseVO implements Serializable {
 	
 	private Integer courseID;
 	private String courseName;
-	private String photoName;
 	private InputStream cPhoto;
 	private String preTool;
 	private String background;
@@ -27,21 +26,18 @@ public class CourseVO implements Serializable {
 	private String courseContent;
 	private Integer memberID;
 	private Double avgScore;
-	private String proposalVideopathway;
 	
 	
 	public CourseVO(){
 		
 	};		
 
-	public CourseVO(Integer courseID, String courseName, String photoName, InputStream cPhoto, String preTool,
+	public CourseVO(Integer courseID, String courseName, String preTool,
 			String background, String ability, String targetgroup, Integer soldPrice, Integer courseLength,
-			Integer targetStudentNumber, Date fundStartDate, Date fundEndDate, Date courseStartDate, String courseVideopathway,
-			InputStream paper, Integer status, String courseContent, Integer memberID, Double avgScore, String proposalVideopathway) {		
+			Integer targetStudentNumber, Date fundStartDate, Date fundEndDate, Date courseStartDate,
+			String courseContent) {		
 		this.courseID = courseID;
 		this.courseName = courseName;
-		this.photoName = photoName;
-		this.cPhoto = cPhoto;
 		this.preTool = preTool;
 		this.background = background;
 		this.ability = ability;
@@ -52,13 +48,7 @@ public class CourseVO implements Serializable {
 		this.fundStartDate = fundStartDate;
 		this.fundEndDate = fundEndDate;
 		this.courseStartDate = courseStartDate;
-		this.courseVideopathway = courseVideopathway;
-		this.paper = paper;
-		this.status = status;
 		this.courseContent = courseContent;
-		this.memberID = memberID;
-		this.avgScore = avgScore;
-		this.proposalVideopathway=proposalVideopathway;
 	}
 
 
@@ -77,15 +67,7 @@ public class CourseVO implements Serializable {
 
 	public void setCourseName(String courseName) {
 		this.courseName = courseName;
-	}
-
-	public String getPhotoName() {
-		return photoName;
-	}
-
-	public void setPhotoName(String photoName) {
-		this.photoName = photoName;
-	}
+	}	
 
 	public InputStream getcPhoto() {
 		return cPhoto;
@@ -228,13 +210,5 @@ public class CourseVO implements Serializable {
 	public void setCourseVideopathway(String courseVideopathway) {
 		this.courseVideopathway = courseVideopathway;
 	};
-	
-	public String getProposalVideopathway() {
-		return proposalVideopathway;
-	}
-
-	public void setProposalVideopathway(String proposalVideopathway) {
-		this.proposalVideopathway = proposalVideopathway;
-	}
 	
 }

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.util.*,java.text.*"%>
 <!DOCTYPE >
 <html>
 <head>
@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <link href="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.css"
 	rel="stylesheet">
-<link href="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.css"
+<link href="<%=request.getContextPath()%>/css/bootstrap.css"
 	rel="stylesheet">
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
@@ -161,6 +161,15 @@ font-size: 18px; color: white;
 .nstar {
 	-webkit-filter: grayscale(0);
 }
+#messageHeader {
+	border: 1px solid black;
+	border-radius: 15px;
+	font-size: 18px;
+}
+
+#messageHeader>img {
+	width: 50px;
+}
 </style>
 </head>
 <!-- 影片區 -->
@@ -238,13 +247,14 @@ font-size: 18px; color: white;
 	</div>
 	<!--內容 -->
 
-	<div class="demo" style="margin-top: 100px">
-		<div class="container" style="background: #efd391">
+		<div class="demo" style="padding-top:50px">
+		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="tab" role="tabpanel">
 
-						<ul class="nav nav-tabs" role="tablist">
+						<ul class="nav nav-tabs" role="tablist"
+							style="background-color: #efd391">
 							<li role="presentation" class="active"><a href="#Section1"
 								aria-controls="home" role="tab" data-toggle="tab">課程簡介</a></li>
 							<li role="presentation"><a href="#Section2"
@@ -254,10 +264,10 @@ font-size: 18px; color: white;
 							<li role="presentation"><a href="#Section4"
 								aria-controls="messages" role="tab" data-toggle="tab">點評收藏</a></li>
 						</ul>
-
+						<!-- 課程簡介 -->
 						<div class="tab-content tabs">
 							<div role="tabpanel" class="tab-pane fade in active"
-								id="Section1">
+								id="Section1" style="font-size: 20px">
 
 								<p>黑松企業是1925年由張氏家族所創立，創辦人張文杞先生受家庭環境影響，自小即有做生意的願望。
 									1924年末於台北後火車站，鄭州路附近一家生產彈珠汽水的「尼可尼可」（ニコニコラムネ）商會有意出
@@ -269,20 +279,178 @@ font-size: 18px; color: white;
 									，在飲料的專業領域不斷創新及提升品質，並致力於經銷通路的經營，同時長期投入環保綠色行動，成為善
 									盡社會責任、對環境友善的績優企業。</p>
 							</div>
+							<!-- 講師簡介 -->
+							<div role="tabpanel" class="tab-pane fade" id="Section2"
+								style="font-size: 20px">
 
-							<div role="tabpanel" class="tab-pane fade" id="Section2">
-
-								<p>本校為研究型大學，向以理工著稱，尤在電子、資通訊及光電等領域已佔世界頂尖領導之地位，另於優勢基礎
+								<div>本校為研究型大學，向以理工著稱，尤在電子、資通訊及光電等領域已佔世界頂尖領導之地位，另於優勢基礎
 									之上，發展管理與科技領域之結合、開拓人文社會新興領域及開展國際客家文化。近年更結合既有優勢領域進入新
-									興生醫電子領域並發展問題解決為取向之科技應用工程領域。.</p>
+									興生醫電子領域並發展問題解決為取向之科技應用工程領域。.</div>
 							</div>
+							<!-- 留言板 -->
 							<div role="tabpanel" class="tab-pane fade" id="Section3">
+								<div class="col-md-12" id="messageHeader">
+									<div class="col-md-1">
+										<img src="<%=request.getContextPath()%>/img/imember_image.png"
+											class="img-thumbnail pull-left">
+									</div>
+									<div class="col-md-11">
 
-								<p>本校為研究型大學，向以理工著稱，尤在電子、資通訊及光電等領域已佔世界頂尖領導之地位，另於優勢基礎
-									之上，發展管理與科技領域之結合、開拓人文社會新興領域及開展國際客家文化。近年更結合既有優勢領域進入新
-									興生醫電子領域並發展問題解決為取向之科技應用工程領域。.</p>
+										<div>
+											<span class="text-left">吳永志</span>
+
+											<%
+												Date dNow = new Date();
+												SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+												out.print("<span align=\"center\">" + ft.format(dNow) + "</span>");
+											%>
+											<div class="dropdown pull-right">
+												<button class="btn dropdown-toggle btn-default "
+													type="button" data-toggle="dropdown" style="height: 30px">
+													<span class="glyphicon glyphicon-option-horizontal"></span>
+												</button>
+												<ul class="dropdown-menu">
+													<li><a href="#">檢舉</a></li>
+													<li><a href="#">修改</a></li>
+													<li><a href="#">刪除</a></li>
+												</ul>
+											</div>
+
+										</div>
+
+										<div style="border-bottom: 1px solid black">
+
+											<p>With Bootstrap 2, we added optional mobile friendly
+												styles for key aspects of the framework. With Bootstrap 3,
+												we've rewritten the project to be mobile friendly from the
+												start. Instead of adding on optional mobile styles, they're
+												baked right into the core. In fact, Bootstrap is mobile
+												first. Mobile first styles can be found throughout the
+												entire library instead of in separate files. To ensure
+												proper rendering and touch zooming, add the viewport meta
+												tag to your</p>
+										</div>
+
+
+										<div class="col-md-12">
+
+											<div class="panel-group">
+												<div class="panel">
+													<div class="panel-heading">
+														<h4 class="panel-title " style="padding-bottom: 10px">
+															<a data-toggle="collapse" href="#collapse1">回應記錄</a>
+														</h4>
+													</div>
+													<div id="collapse1" class="panel-collapse collapse ">
+														<!--第一個回應 -->
+														<div>
+															<div class="col-md-1">
+																<img
+																	src="<%=request.getContextPath()%>/img/imember_image.png"
+																	class="img-thumbnail pull-left">
+															</div>
+															<div class="col-md-11 "
+																style="border-bottom: 1px solid black">
+																<span>吳永志</span>
+																<%
+																	out.print("<span align=\"center\">" + ft.format(dNow) + "</span>");
+																%>
+																<div class="dropdown pull-right">
+																	<button class="btn dropdown-toggle btn-default "
+																		type="button" data-toggle="dropdown"
+																		style="height: 30px">
+																		<span class="glyphicon glyphicon-option-horizontal"></span>
+																	</button>
+																	<ul class="dropdown-menu">
+																		<li><a href="#">檢舉</a></li>
+																		<li><a href="#">修改</a></li>
+																		<li><a href="#">刪除</a></li>
+																	</ul>
+																</div>
+																<p>With Bootstrap 2, we added optional mobile
+																	friendly styles for key aspects of the framework. With
+																	Bootstrap 3, we've rewritten the project to be mobile
+																	friendly from the start. Instead of adding on optional
+																	mobile styles, they're baked right into the core. In
+																	fact, Bootstrap is mobile first. Mobile first styles
+																	can be found throughout the entire library instead of
+																	in separate files. To ensure proper rendering and touch
+																	zooming, add the viewport meta tag to your</p>
+															</div>
+														</div>
+														<!--第二個回應 -->
+														<div>
+															<div class="col-md-1">
+																<img
+																	src="<%=request.getContextPath()%>/img/imember_image.png"
+																	class="img-thumbnail pull-left">
+															</div>
+															<div class="col-md-11 "
+																style="border-bottom: 1px solid black">
+																<span>吳永志</span>
+																<%
+																	out.print("<span align=\"center\">" + ft.format(dNow) + "</span>");
+																%>
+																<div class="dropdown pull-right">
+																	<button class="btn dropdown-toggle btn-default "
+																		type="button" data-toggle="dropdown"
+																		style="height: 30px">
+																		<span class="glyphicon glyphicon-option-horizontal"></span>
+																	</button>
+																	<ul class="dropdown-menu">
+																		<li><a href="#">檢舉</a></li>
+																		<li><a href="#">修改</a></li>
+																		<li><a href="#">刪除</a></li>
+																	</ul>
+																</div>
+																<p>With Bootstrap 2, we added optional mobile
+																	friendly styles for key aspects of the framework. With
+																	Bootstrap 3, we've rewritten the project to be mobile
+																	friendly from the start. Instead of adding on optional
+																	mobile styles, they're baked right into the core. In
+																	fact, Bootstrap is mobile first. Mobile first styles
+																	can be found throughout the entire library instead of
+																	in separate files. To ensure proper rendering and touch
+																	zooming, add the viewport meta tag to your</p>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+
+										<!-- 			<!--回應輸入表格-->
+										<div class="col-md-12">
+											<div class="panel-group">
+												<div class="panel">
+													<div class="panel-heading">
+														<h4 class="panel-title ">
+															<a data-toggle="collapse" href="#collapse2">我要回應</a>
+														</h4>
+													</div>
+													<div id="collapse2" class="panel-collapse collapse ">
+														<div>
+															<p>內容:</p>
+															<form action="" method="post">
+																<div class="form-group">
+																	<textarea class="form-control" rows="5" id="comment"></textarea>
+																</div>
+																<div class="text-right">
+																	<input type="submit">
+																</div>
+															</form>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- 點評收藏 -->
 							</div>
-							<div role="tabpanel" class="tab-pane fade" id="Section4">
+							<div role="tabpanel" class="tab-pane fade" id="Section4"
+								style="font-size: 20px">
 
 								<p>喜歡的話記得幫我們評分還有收藏唷</p>
 
@@ -299,7 +467,7 @@ font-size: 18px; color: white;
 	$('.led3').ClassyLED({
 		type : 'countdown',
 		format : 'ddd:hh:mm:ss',
-		countTo : '2017:10:30',
+		countTo : '2017:11:17',
 		color : '#af0',
 		backgroundColor : '	#272727',
 		size : 4,
