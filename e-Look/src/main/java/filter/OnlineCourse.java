@@ -16,8 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.e_Look.Course.CourseDAO;
+import com.e_Look.Course.CourseService;
 import com.e_Look.Course.CourseVO;
 import com.e_Look.buyCourse.model.BuyCourseDAO;
+import com.e_Look.buyCourse.model.BuyCourseService;
 import com.e_Look.buyCourse.model.BuyCourseVO;
 import com.e_Look.member.model.MemberService;
 import com.e_Look.member.model.MemberVO;
@@ -46,18 +48,20 @@ public class OnlineCourse implements Filter {
 			if (courseID != null) {
 				CourseDAO dao = new CourseDAO();
 				BuyCourseDAO dao2 = new BuyCourseDAO();
-				CourseVO courseVO = dao.findByPrimaryKey(Integer.valueOf(courseID));
+				CourseService courseService = new CourseService();
+				CourseVO courseVO =courseService.getCourse(Integer.valueOf(courseID));
 				MemberService service = new MemberService();
 				MemberVO memberVo = service.getMember(courseVO.getMemberID());
 				List<CourseVO> list = dao.findBymemberID(courseVO.getMemberID(), 2);
 				HttpSession session = request.getSession();
 				MemberVO memberVoOK = (MemberVO) session.getAttribute("LoginOK");
+				BuyCourseService  CourseService =new BuyCourseService();
 				List<BuyCourseVO> list2 = null;
 				List<MemberBookmarksVO> mBookmarkList = null;
 				MemberBookmarksService memberBookmarksService=new MemberBookmarksService();
 				if (memberVoOK != null) {
 				
-						list2 = dao2.findByMemberID(memberVoOK.getMemberID());
+						list2 = CourseService.getBuyCourse(memberVoOK.getMemberID());
 						mBookmarkList=memberBookmarksService.findPrimaryMemberBookmarks(memberVoOK.getMemberID());
 						
 						
