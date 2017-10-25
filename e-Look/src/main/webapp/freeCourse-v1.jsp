@@ -28,7 +28,7 @@ video {
 #videoArea {
 	background-size: cover;
 	background-position: center;
-	height: 60%;
+	height: 62%;
 }
 
 #videoliststyle>li {
@@ -227,19 +227,21 @@ video::-webkit-media-controls-panel {
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-
+				<!--空-->
 				<div class="col-md-1"></div>
+				<!--課程人數 -->
 				<div class="col-md-1 col-xs-4">
 					<img src="<%=request.getContextPath()%>/_Lyy/004-people.png"
 						class="img-responsive center-block ">
 					<h5 class="text-center">課程人數</h5>
 				</div>
+				<!--課程時間 -->
 				<div class="col-md-1 col-xs-4">
 					<img src="<%=request.getContextPath()%>/_Lyy/clock.png"
 						class="img-responsive center-block">
 					<h5 class="text-center">課程時間為 ${courseVO.courseLength}min</h5>
 				</div>
-
+				<!--加到最愛 -->
 				<c:if test="${!empty mBookmarkList}">
 					<c:forEach items="${mBookmarkList}" var="memberBookmsrks">
 						<c:choose>
@@ -258,49 +260,49 @@ video::-webkit-media-controls-panel {
 				<c:if test="${empty mBookmarkList}">
 					<c:set var="favor" value="favoriteclick2" />
 				</c:if>
-				
 				<c:if test="${empty LoginOK}">
-				<c:choose>
-				<c:when test="${!empty loginerr}">
-									<div class="col-md-1 col-xs-4">
-									<a href="#" data-toggle="modal" data-target="#myModal2">
-									<img src="<%=request.getContextPath()%>/img/favorite.png"class="img-responsive center-block">
+					<c:choose>
+						<c:when test="${!empty loginerr}">
+							<div class="col-md-1 col-xs-4">
+								<a href="#" data-toggle="modal" data-target="#myModal2"> <img
+									src="<%=request.getContextPath()%>/img/favorite.png"
+									class="img-responsive center-block">
 									<h5 class="text-center">加到最愛</h5>
-									</a>
-									</div>
-								</c:when>
-								<c:when test="${empty err}">
-								<div class="col-md-1 col-xs-4">
-									<a href="#" data-toggle="modal" data-target="#myModal">
-									<img src="<%=request.getContextPath()%>/img/favorite.png"class="img-responsive center-block">
+								</a>
+							</div>
+						</c:when>
+						<c:when test="${empty err}">
+							<div class="col-md-1 col-xs-4">
+								<a href="#" data-toggle="modal" data-target="#myModal"> <img
+									src="<%=request.getContextPath()%>/img/favorite.png"
+									class="img-responsive center-block">
 									<h5 class="text-center">加到最愛</h5>
-									</a>
-									</div>
-								</c:when>
-								<c:otherwise>
-								<div class="col-md-1 col-xs-4">
-									<a href="#" data-toggle="modal"	data-target="#myModal2">
-									<img src="<%=request.getContextPath()%>/img/favorite.png"class="img-responsive center-block">
+								</a>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="col-md-1 col-xs-4">
+								<a href="#" data-toggle="modal" data-target="#myModal2"> <img
+									src="<%=request.getContextPath()%>/img/favorite.png"
+									class="img-responsive center-block">
 									<h5 class="text-center">加到最愛</h5>
-									</a>
-									</div>
-								</c:otherwise>
+								</a>
+							</div>
+						</c:otherwise>
 					</c:choose>
-						</c:if>
-				
-				<c:if test="${!empty LoginOK}">
-				<div class="col-md-1 col-xs-4">
-					<img src="<%=request.getContextPath()%>/img/favorite.png"
-						class="img-responsive center-block"> <a href="#"
-						id="${favor}"><h5 class="text-center">加到最愛</h5></a>
-				</div>
-<<<<<<< HEAD
 				</c:if>
-				
-=======
->>>>>>> branch 'master' of https://github.com/EEIT9702/e-Look.git
+				<c:if test="${!empty LoginOK}">
+					<div class="col-md-1 col-xs-4">
+						<a href="#" id="${favor}"> <img
+							src="<%=request.getContextPath()%>/img/favorite.png"
+							class="img-responsive center-block">
+							<h5 class="text-center">加到最愛</h5>
+						</a>
+					</div>
+				</c:if>
 				<input type="hidden" value="${courseVO.courseID}" id="mbcourseID">
 				<input type="hidden" value="${LoginOK.memberID}" id="mbmemberID">
+				<!--分享連結 -->
 				<div class="col-md-1 col-xs-4 ">
 					<img src="<%=request.getContextPath()%>/_Lyy/share.png"
 						class="img-responsive center-block">
@@ -313,7 +315,7 @@ video::-webkit-media-controls-panel {
 						</ul>
 					</div>
 				</div>
-
+				<!--講義下載 -->
 				<div class="col-md-1 col-xs-4 ">
 					<a href="#"> <img
 						src="<%=request.getContextPath()%>/_Lyy/001-download.png"
@@ -321,17 +323,84 @@ video::-webkit-media-controls-panel {
 						<h5 class="text-center">講義下載</h5>
 					</a>
 				</div>
-				<div class="col-md-1 col-xs-4">
-					<a href="#"> <img
-						src="<%=request.getContextPath()%>/img/warning.png"
-						class="img-responsive center-block">
-						<h5 class="text-center">影片檢舉</h5>
-					</a>
-				</div>
+				<!--影片檢舉 -->
+				<c:if test="${empty LoginOK}">
+					<c:choose>
+						<c:when test="${!empty loginerr}">
+							<div class="col-md-1 col-xs-4">
+								<a href="#" href="#" data-toggle="modal" data-target="#myModal2">
+									<img src="<%=request.getContextPath()%>/img/warning.png"
+									class="img-responsive center-block">
+									<h5 class="text-center">影片檢舉</h5>
+								</a>
+							</div>
+						</c:when>
+						<c:when test="${empty err}">
+							<div class="col-md-1 col-xs-4">
+								<a href="#" href="#" data-toggle="modal" data-target="#myModal">
+									<img src="<%=request.getContextPath()%>/img/warning.png"
+									class="img-responsive center-block">
+									<h5 class="text-center">影片檢舉</h5>
+								</a>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="col-md-1 col-xs-4">
+								<a href="#" href="#" data-toggle="modal" data-target="#myModal2">
+									<img src="<%=request.getContextPath()%>/img/warning.png"
+									class="img-responsive center-block">
+									<h5 class="text-center">影片檢舉</h5>
+								</a>
+							</div>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+				<c:if test="${!empty LoginOK}">
+					<div class="col-md-1 col-xs-4">
+						<a href="#" data-toggle="modal" data-target="#myModalReportVideo">
+							<img src="<%=request.getContextPath()%>/img/warning.png"
+							class="img-responsive center-block">
+							<h5 class="text-center">影片檢舉</h5>
+						</a>
+					</div>
+					<div class="modal fade" id="myModalReportVideo" tabindex="-1"
+						role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header"
+									style="background-color: #FFC78E; border-top-right-radius: 8px; border-top-left-radius: 8px">
+									<button type="button" class="close pull-right"
+										data-dismiss="modal" aria-hidden="true">&times;</button>
+									<img src="<%=request.getContextPath()%>/img/warning.png"
+										width="42"> <span class="modal-title" id="myModalLabel"
+										style="font-size: 24px; color: red">檢舉影片</span>
+								</div>
+								<form action="" method="post">
+									<h2>你檢舉的內容為:</h2>
+									<div class="modal-body" style="padding-left: 50px">
+										<input type="radio" id="male" name="sex"><label
+											for="1" style="font-size: 30px; padding-left: 5px">該影片侵犯著作權</label><br>
+										<input type="radio" id="male" name="sex"><label
+											for="2" style="font-size: 30px; padding-left: 5px">該影片含有不雅內容</label><br>
+										<input type="radio" id="male" name="sex"><label
+											for="3" style="font-size: 30px; padding-left: 5px">該影片無法播放</label><br>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">離開</button>
+										<button type="button" class="btn btn-warning">提交檢舉</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</c:if>
+				<!--課程售價 -->
 				<div class="col-md-2 col-xs-6 ">
 					<h5>課程售價</h5>
 					<h2 style="text-align: center; font-weight: bold;">Free</h2>
 				</div>
+				<!--星星 -->
 				<div class="col-md-2 col-xs-6 center-block" style="margin-top: 10px">
 					<div style="width: 70px; margin: 0 auto">
 						<img id="idstar1" class="star"
@@ -345,7 +414,7 @@ video::-webkit-media-controls-panel {
 							id="idstar5" class="star "
 							src="<%=request.getContextPath()%>/star/ystar.png" />
 					</div>
-					<!--贊助資訊 -->
+					<!--贊助 -->
 					<button type="button" class="btn btn-primary center-block"
 						style="width: 160px" data-toggle="modal" data-target="#mysponer">贊助</button>
 					<div class="modal fade" id="mysponer" tabindex="-1" role="dialog"
@@ -420,7 +489,6 @@ video::-webkit-media-controls-panel {
 		</div>
 	</div>
 	<!--內容 -->
-
 	<div class="demo">
 		<div class="container">
 			<div class="row">
@@ -665,14 +733,9 @@ video::-webkit-media-controls-panel {
 				</div>
 			</div>
 		</div>
-
-<c:remove var="err" scope="session"/>
-	<c:remove var="loginerr" scope="session"/>
-
-
-
-
-
+	</div>
+	<c:remove var="err" scope="session" />
+	<c:remove var="loginerr" scope="session" />
 	<jsp:include page="/footer.jsp" />
 	<script>
 		$(document).ready(function() {
@@ -737,19 +800,19 @@ video::-webkit-media-controls-panel {
 	<script>
 		$("#money").keyup(function() {
 			var money = $("#money").val();
-			
-			if(!isNaN(money)&&money!=""){
+
+			if (!isNaN(money) && money != "") {
 				if (money<50||money>20000) {
-				
+
 					$("#sponsorBtu").prop("disabled", true)
 				} else {
 					$("#errorMoney").text('');
 					$('#sponsorBtu').prop('disabled', false)
 				}
-			}else{
+			} else {
 				$("#errorMoney").text('請輸入數字');
 				$('#sponsorBtu').prop('disabled', true)
-				
+
 			}
 		})
 	</script>

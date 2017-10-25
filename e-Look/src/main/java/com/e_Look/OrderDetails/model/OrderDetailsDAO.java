@@ -12,6 +12,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.e_Look.Course.CourseDAO;
+
 
 public class OrderDetailsDAO implements OrderDetailsDAO_interface {
 	private static DataSource ds = null;
@@ -39,7 +41,7 @@ public class OrderDetailsDAO implements OrderDetailsDAO_interface {
 			con = ds.getConnection();		
 			pstmt=con.prepareStatement(INSERT_ORDERDETAILS);
 			pstmt.setInt(1, orderDetailsVO.getOrderID());
-			pstmt.setInt(2, orderDetailsVO.getCourseID());
+			pstmt.setInt(2, orderDetailsVO.getCourseVO().getCourseID());
 			pstmt.setInt(3, orderDetailsVO.getBuyingPrice());
 			pstmt.setInt(4, orderDetailsVO.getOriginalPrice());
 			pstmt.executeUpdate();
@@ -70,11 +72,11 @@ public class OrderDetailsDAO implements OrderDetailsDAO_interface {
 			con = ds.getConnection();		
 			pstmt=con.prepareStatement(UPDATE_ORDERDETAILS);
 			pstmt.setInt(1, orderDetailsVO.getOrderID());
-			pstmt.setInt(2, orderDetailsVO.getCourseID());
+			pstmt.setInt(2, orderDetailsVO.getCourseVO().getCourseID());
 			pstmt.setInt(3, orderDetailsVO.getBuyingPrice());
 			pstmt.setInt(4, orderDetailsVO.getOriginalPrice());
 			pstmt.setInt(5, orderDetailsVO.getOrderID());
-			pstmt.setInt(6, orderDetailsVO.getCourseID());
+			pstmt.setInt(6, orderDetailsVO.getCourseVO().getCourseID());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
@@ -103,7 +105,7 @@ public class OrderDetailsDAO implements OrderDetailsDAO_interface {
 			con = ds.getConnection();		
 			pstmt=con.prepareStatement(DELETE_ORDERDETAILS);
 			pstmt.setInt(1, orderDetailsVO.getOrderID());
-			pstmt.setInt(2, orderDetailsVO.getCourseID());
+			pstmt.setInt(2, orderDetailsVO.getCourseVO().getCourseID());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
@@ -127,7 +129,7 @@ public class OrderDetailsDAO implements OrderDetailsDAO_interface {
 	@Override
 	public List<OrderDetailsVO> findByOrderID(Integer orderID) {
 		List<OrderDetailsVO> list =new LinkedList<OrderDetailsVO>();
-
+		CourseDAO cdao = new CourseDAO();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -138,7 +140,7 @@ public class OrderDetailsDAO implements OrderDetailsDAO_interface {
 			while(rs.next()){
 				OrderDetailsVO vo = new OrderDetailsVO();
 				vo.setOrderID(rs.getInt(1));
-				vo.setCourseID(rs.getInt(2));
+				vo.setCourseVO(cdao.findByPrimaryKey(rs.getInt(2)));
 				vo.setBuyingPrice(rs.getInt(3));
 				vo.setOriginalPrice(rs.getInt(4));
 				list.add(vo);
@@ -169,6 +171,7 @@ public class OrderDetailsDAO implements OrderDetailsDAO_interface {
 		List<OrderDetailsVO> list =new LinkedList<OrderDetailsVO>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		CourseDAO cdao = new CourseDAO();
 		try {
 			con = ds.getConnection();		
 			pstmt=con.prepareStatement(SELECT_ALL_ORDERDETAILS);
@@ -176,7 +179,7 @@ public class OrderDetailsDAO implements OrderDetailsDAO_interface {
 			while(rs.next()){
 				OrderDetailsVO vo = new OrderDetailsVO();
 				vo.setOrderID(rs.getInt(1));
-				vo.setCourseID(rs.getInt(2));
+				vo.setCourseVO(cdao.findByPrimaryKey(rs.getInt(2)));
 				vo.setBuyingPrice(rs.getInt(3));
 				vo.setOriginalPrice(rs.getInt(4));
 				list.add(vo);

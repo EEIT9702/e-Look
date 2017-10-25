@@ -29,7 +29,7 @@ public class OrderDAO implements OrderDAO_interface{
 	private static final String DELETE_Order = "delete from [Order] where OrderID=?"; 
 	private static final String SELECT_Order = "select OrderID,memberID,orderTime from [Order] where OrderID=?";
 	private static final String SELECT_ALL_Order = "select OrderID,memberID,orderTime from [Order]";
-	private static final String SELECT_MEMBER_UNCHECK_Order = "select OrderID,memberID,orderTime from [Order] where memberID=? and orderTime=null";
+	private static final String SELECT_MEMBER_UNCHECK_Order = "select OrderID,memberID,orderTime from [Order] where memberID=? and orderTime is null";
 	@Override
 	public void insert(OrderVO OrderVO) {
 		Connection conn =null;

@@ -312,11 +312,8 @@ $(function() {
 			courseClass=$(this).children('p').text()
 		}
 		
-// 		$('#river').slideUp(1000,refreshRiver);
-// 		setTimeout(function(){
-// 		$('#river').slideDown(1000);
-// 		},1100)
-		
+		keyWord="";
+		refreshRiver();
 		
 	})
 	
@@ -326,17 +323,12 @@ $(function() {
 	function clickSearch(){
 		keyWord=$('#keyWord').val();
 		$('#keyWord').val("");
-		$('#river').slideUp(1000,refreshRiver);
-		setTimeout(function(){
-		$('#river').slideDown(1000);
-		},1100)
-		
+		refreshRiver();		
 	}
 function refreshRiver(){
 	rowValueX=0;
 	$('#river').html("");
 	river();
-	keyWord="";
 	$('#keyWord').val("");
 }
 function river(){
