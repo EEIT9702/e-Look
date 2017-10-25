@@ -1,7 +1,6 @@
 package com.e_Look.CourseClassDetails;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,18 +45,18 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 			"SELECT CourseClassID,ccName,courseID,courseName FROM CourseClassDetails";
 
 	@Override
-	public void insert(CourseClassVO courseClassVO, CourseVO courseVO) {
+	public void insert(CourseVO courseVO, CourseClassVO courseClassVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_COURSE_N_CLASS);
-
+			
 			pstmt.setInt(1, courseVO.getCourseID());
 			pstmt.setString(2, courseVO.getCourseName());
 			pstmt.setInt(3, courseClassVO.getCourseClassID());
 			pstmt.setString(4, courseClassVO.getCcName());
-
+			
 			pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
