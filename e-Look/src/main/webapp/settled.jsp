@@ -1,13 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	<%@ page import="com.e_Look.member.model.MemberVO" %>
-<% 
-HttpSession sess= request.getSession(); 
-MemberVO memberVO=(MemberVO) sess.getAttribute("LoginOK");
-
-	
-	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.e_Look.member.model.MemberVO"%>
+<%
+	HttpSession sess = request.getSession();
+	MemberVO memberVO = (MemberVO) sess.getAttribute("LoginOK");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -142,6 +139,7 @@ ul {
 </head>
 <body>
 	<jsp:include page="${contextPath}/login.jsp" flush="true" />
+	<input id="gbmemberID" type="hidden" value="${LoginOK.memberID}"/>
 	<div class="container" style="margin-top: 50px">
 		<div class="row">
 			<section>
@@ -180,7 +178,7 @@ ul {
 								<div class="row">
 
 									<div class="span12">
-										<ul class="thumbnails">
+										<ul class="thumbnails" id="showdetails">
 											<li class="span5 clearfix">
 												<div class="thumbnail clearfix">
 													<img src="<%=request.getContextPath()%>/img/02.jpg"
@@ -190,7 +188,8 @@ ul {
 														<a href="onlineCourse-v2.jsp?courseID=200001"
 															class="btn btn-danger icon  pull-right">刪除</a>
 														<h4>
-															<a href="<%=request.getContextPath()%>/onlineCourse-v2.jsp?courseID=200001">在這裡顯示課程名稱</a>
+															<a
+																href="<%=request.getContextPath()%>/onlineCourse-v2.jsp?courseID=200001">在這裡顯示課程名稱</a>
 														</h4>
 														<small><b>課程類別,課程類別</b></small>
 													</div>
@@ -205,7 +204,8 @@ ul {
 														<a href="onlineCourse-v2.jsp?courseID=200002"
 															class="btn btn-danger icon  pull-right">刪除</a>
 														<h4>
-															<a href="<%=request.getContextPath()%>/onlineCourse-v2.jsp?courseID=200001">在這裡顯示課程名稱</a>
+															<a
+																href="<%=request.getContextPath()%>/onlineCourse-v2.jsp?courseID=200001">在這裡顯示課程名稱</a>
 														</h4>
 														<small><b>課程類別,課程類別</b></small>
 													</div>
@@ -220,7 +220,8 @@ ul {
 														<a href="onlineCourse-v2.jsp?courseID=200003"
 															class="btn btn-danger icon  pull-right">刪除</a>
 														<h4>
-															<a href="<%=request.getContextPath()%>/onlineCourse-v2.jsp?courseID=200001">在這裡顯示課程名稱</a>
+															<a
+																href="<%=request.getContextPath()%>/onlineCourse-v2.jsp?courseID=200001">在這裡顯示課程名稱</a>
 														</h4>
 														<small><b>課程類別,課程類別</b></small>
 													</div>
@@ -235,7 +236,8 @@ ul {
 														<a href="onlineCourse-v2.jsp?courseID=200004"
 															class="btn btn-danger icon  pull-right">刪除</a>
 														<h4>
-															<a href="<%=request.getContextPath()%>/onlineCourse-v2.jsp?courseID=200001">在這裡顯示課程名稱</a>
+															<a
+																href="<%=request.getContextPath()%>/onlineCourse-v2.jsp?courseID=200001">在這裡顯示課程名稱</a>
 														</h4>
 														<small><b>課程類別,課程類別</b></small>
 													</div>
@@ -250,7 +252,8 @@ ul {
 														<a href="onlineCourse-v2.jsp?courseID=200005"
 															class="btn btn-danger icon  pull-right">刪除</a>
 														<h4>
-															<a href="<%=request.getContextPath()%>/onlineCourse-v2.jsp?courseID=200001">在這裡顯示課程名稱</a>
+															<a
+																href="<%=request.getContextPath()%>/onlineCourse-v2.jsp?courseID=200001">在這裡顯示課程名稱</a>
 														</h4>
 														<small><b>課程類別,課程類別</b></small>
 													</div>
@@ -265,7 +268,8 @@ ul {
 														<a href="http://bootsnipp.com/"
 															class="btn btn-danger icon  pull-right">刪除</a>
 														<h4>
-															<a href="<%=request.getContextPath()%>/onlineCourse-v2.jsp?courseID=200001">在這裡顯示課程名稱</a>
+															<a
+																href="<%=request.getContextPath()%>/onlineCourse-v2.jsp?courseID=200001">在這裡顯示課程名稱</a>
 														</h4>
 														<small><b>課程類別,課程類別</b></small>
 													</div>
@@ -287,7 +291,7 @@ ul {
 						<!-- step2start -->
 						<!-- step2end -->
 						<!-- step3start -->
-						
+
 						<div class="tab-pane" role="tabpanel" id="step3">
 							<div class="container">
 								<div class="row">
@@ -376,8 +380,7 @@ ul {
 													</tr>
 												</tbody>
 											</table>
-											<button type="button"
-												class="btn btn-danger ">
+											<button type="button" class="btn btn-danger ">
 												Pay Now   <span class="glyphicon glyphicon-chevron-right"></span>
 											</button>
 										</div>
@@ -392,12 +395,28 @@ ul {
 			</section>
 		</div>
 	</div>
-<script>
-//由於不需要用到 取消上方步驟按鈕功能
-$('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
-		return false;
-});
-
-</script>
+	<script>
+		$(function() {
+			//由於不需要用到 取消上方步驟按鈕功能
+			$('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+				return false;
+			});
+			//if($('#gbmemberID').val()<1){
+				//alert("請先進行登入");
+				//location.href="<%= request.getContextPath()%>"
+			//}
+			loadMemberOrder();
+			function loadMemberOrder(){
+				$('#showdetails').html('');
+				$.post('<%=request.getContextPath()%>/OrderEdit',{'action':'loading'},function(datas){
+					console.log(datas);
+					$.each(datas,function(name,value){
+						console.log("name:"+name+",value:"+value);
+						
+					})
+				},"json")
+			}//loadMemberOrder end
+		})
+	</script>
 </body>
 </html>

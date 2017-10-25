@@ -274,7 +274,7 @@ $(function(){
 	}
 	
 	function loadShoppingCart(){
-		$.post('<%=request.getContextPath() %>/LoadShoppingCart',{"memberID":memberID},function(datas){
+		$.post('<%=request.getContextPath() %>/settled.jsp',{"memberID":memberID},function(datas){
 			var fg = $(document.createDocumentFragment());
 			$('.cartrows').empty();
 			var totalPrice = 0
