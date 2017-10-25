@@ -87,6 +87,7 @@ public class CourseEditControlloer extends HttpServlet {
 		service = new CourseService();
 		courseVO= new CourseVO(courseID,courseName,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseContent);
 		service.updateCourseContent(courseVO);	
+		
 		service.updateCourseImage(courseID, request.getPart("picture"));
 		
 	}
