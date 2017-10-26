@@ -29,7 +29,10 @@ public class CourseEditControlloer extends HttpServlet {
 	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		//Integer memberID= Integer.valueOf(request.getParameter("memberID"));
+		Integer courseID= Integer.valueOf(request.getParameter("courseID"));
+		CourseService courseService=new CourseService();
+		courseService.deleteCourse(courseID);
 	}
 
 	/**
@@ -92,6 +95,7 @@ public class CourseEditControlloer extends HttpServlet {
 		courseVO= new CourseVO(courseID,courseName,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseContent);
 		service.updateCourseContent(courseVO);		
 		service.updateCourseImage(courseID, request.getPart("picture"));
+		service.updateCoursePaper(courseID, request.getPart("paper"));
 		
 	}
 

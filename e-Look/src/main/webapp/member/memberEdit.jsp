@@ -473,15 +473,17 @@ $(function() {
 			processData : false,
 			contentType : false,
 			success: function(){
-				$("#updatainfo").fadeIn(2000);
-				setTimeout(function(){
-					$("#updatainfo").fadeOut(5000);
-				}, 1000);
+
+				delay_till_last('id', function() {
+				$("#updatainfo").fadeIn(1200);
+				$("#updatainfo").fadeOut(3500);
+
 // 				$('#sendOK').modal()
 // 				$('#sendOK h3').text("更新成功")
 // 				setTimeout(function(){
 // 			        $("#sendOK").modal('hide');
 // 			        }, 1000);
+				}, 500);
             }
 		})
 	})
@@ -494,15 +496,16 @@ $(function() {
 			processData : false,
 			contentType : false,
 			success: function(){
+				delay_till_last('id', function() {
 				$("#updatainfo").fadeIn(1000);
-				setTimeout(function(){
-					$("#updatainfo").fadeOut(1000);
-				}, 1000);
+
+				$("#updatainfo").fadeOut(3500);
 // 				$('#sendOK').modal()
 // 				$('#sendOK h3').text("更新成功")
 // 				setTimeout(function(){
 // 			        $("#sendOK").modal('hide');
 // 			        }, 1000);
+				}, 500);
             }
 		})
 		
@@ -616,6 +619,22 @@ $(function() {
 			$("#angpwd1").val("")
 			})
 	})
+	
+	
+	// 設定keyup事件在特定秒數內只會觸發1次
+		var _timer = {};
+		function delay_till_last(id, fn, wait) {
+			if (_timer[id]) {
+				window.clearTimeout(_timer[id]);
+				delete _timer[id];
+			}
+
+			return _timer[id] = window.setTimeout(function() {
+				fn();
+				delete _timer[id];
+			}, wait);
+		}
+		// =====================================
 </script>
 </body>
 

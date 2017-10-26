@@ -142,7 +142,7 @@ public class CourseClassDAO implements CourseClass_interface{
 
 	
 	@Override
-	public CourseClassVO findByCourseClassID(Integer CourseClassID) {
+	public CourseClassVO getByCourseClassID(Integer CourseClassID) {
 		CourseClassVO courseClassVO = null;
 		eLookEventVO eventVO = null;
 		Connection con = null;
@@ -189,7 +189,7 @@ public class CourseClassDAO implements CourseClass_interface{
 	
 	}
 
-	public List<CourseClassVO> findByEventID(Integer eventID){
+	public List<CourseClassVO> getByEventID(Integer eventID){
 		
 		List<CourseClassVO> event_courseClass = new LinkedList<CourseClassVO>();
 		eLookEventVO eventVO = null;

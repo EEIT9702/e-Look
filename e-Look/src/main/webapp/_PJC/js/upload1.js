@@ -24,6 +24,33 @@ function fileSelect(){
 
 var clickId;
 
+function bottonClick1(){	
+	var obj = event.srcElement; 
+	if(obj.type=="submit"){
+		clickId = obj.id;
+	}
+	
+	
+	var formData = new FormData($('form')[3]);
+	//console.log("5555555555");
+	$.ajax({
+		type : 'POST',
+		url : '/e-Look/toolkie/ProgressUploadServlet1',
+		data :formData,
+		processData : false,
+		contentType : false,
+//		success: function(){
+//			
+//			$('#sendOK').modal()
+//			$('#sendOK h3').text("更新成功")
+//			setTimeout(function(){
+//		        $("#sendOK").modal('hide');
+//		        }, 1000);
+//        }
+	})
+	
+}
+
 function bottonClick(){	
 	var obj = event.srcElement; 
 	if(obj.type=="submit"){

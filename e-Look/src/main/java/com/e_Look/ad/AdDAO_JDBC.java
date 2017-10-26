@@ -358,4 +358,10 @@ public class AdDAO_JDBC implements AdDAO_interface {
 		}
 	}
 
+	@Override
+	public List<AdVO> findByStatus() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
