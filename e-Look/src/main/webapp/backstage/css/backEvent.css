@@ -172,8 +172,8 @@ tbody tr:hover {
 tbody img {
 /* 	border-radius: 50%; */
 /* 	display: block; */
-	width: 5rem;
-	height: 4rem;
+	width: 7rem;
+	height: 5rem;
 }
 
 .user-name, .user-firstName, .user-lastName, .user-location {
@@ -350,3 +350,6 @@ width:1200px;
 #i2Style1{background:#00DD77;}
 #i2Style2{background:#00DD77;}
 .inputtext{text-align:center;}
+
+.close{width:20px;
+height: 10px;}
