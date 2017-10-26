@@ -904,6 +904,33 @@
 							el.setAttribute("disabled", "disabled");
 							el.style = "opacity: 0.4;font-size: 18px;";
 						})
+				var formData = new FormData($('form')[3]);
+							console.log("圖片送到資料庫囉!");
+							$
+									.ajax({
+										type : 'POST',
+										url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
+										data : formData,
+										processData : false,
+										contentType : false,
+										success : function() {
+											delay_till_last('id', function() {
+												$('#updateConfirm').text(
+														"變更已儲存至草稿");
+												$("#updateConfirm")
+														.fadeIn(1200);
+
+												$("#updateConfirm").fadeOut(
+														1500);
+
+											}, 500);
+										}
+									})		
+						
+						
+						
+						
+						
 			}
 			if(selectr === "radio3"){
 				document.querySelector("#soldPrice").removeAttribute("readonly");
