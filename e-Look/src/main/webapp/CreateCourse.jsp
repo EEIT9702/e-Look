@@ -345,9 +345,8 @@
 							<div class="tab-pane" role="tabpanel" id="step3">
 								<div class="[ container ]">
 									<div class="[ row ]">
-										<div class="[ col-xs-12 ]">
-											<div
-												style="font-size: 20px; font-weight: bold; background-color: #BBFFEE">
+										<div class="col-xs-12 alert alert-info">
+											<div style="font-size: 20px; font-weight: bold;">
 												學生會需要用到的工具（含種類、版本細節）</div>
 											<div class="[ form-group ][ form-group-textarea ]">
 												<textarea name="preTool" placeholder="請輸入課程中，可能會使用到的工具"
@@ -363,9 +362,9 @@
 
 								<div class="[ container ]">
 									<div class="[ row ]">
-										<div class="[ col-xs-12 ]">
+										<div class="[ col-xs-12 ] alert alert-info">
 											<div
-												style="font-size: 20px; font-weight: bold; background-color: #BBFFEE">
+												style="font-size: 20px; font-weight: bold;">
 												學這堂課之前，學生需要具有哪些背景知識？</div>
 											<div class="[ form-group ][ form-group-textarea ]">
 												<textarea name="background"
@@ -381,9 +380,9 @@
 
 								<div class="[ container ]">
 									<div class="[ row ]">
-										<div class="[ col-xs-12 ]">
+										<div class="[ col-xs-12 ] alert alert-info">
 											<div
-												style="font-size: 20px; font-weight: bold; background-color: #BBFFEE">
+												style="font-size: 20px; font-weight: bold;">
 												學完這堂課後，學生可以做出什麼東西？</div>
 											<div class="[ form-group ][ form-group-textarea ]">
 												<textarea name="ability"
@@ -399,9 +398,9 @@
 
 								<div class="[ container ]">
 									<div class="[ row ]">
-										<div class="[ col-xs-12 ]">
+										<div class="[ col-xs-12 ] alert alert-info">
 											<div
-												style="font-size: 20px; font-weight: bold; background-color: #BBFFEE">
+												style="font-size: 20px; font-weight: bold;">
 												哪些人適合這堂課？</div>
 											<div class="[ form-group ][ form-group-textarea ]">
 												<textarea name="targetgroup"
@@ -535,14 +534,17 @@
 								<div class="[ container ]">
 									<div class="[ row ]">
 										<div class="[ col-xs-12 ]">
-											<div
-												style="font-size: 20px; font-weight: bold; background-color: #BBFFEE">
-												課程內容說明</div>
-											<div>趕緊來為你精心設計的課程做個介紹吧!請務必在文案中加上開課緣由、自我介紹、課程單元說明、教學方式、課程難易度、相關作品圖片、作品集網站…等資料，越詳細的內容將會提升學生對課程的信任感；而善用編輯排版功能，讓提案更加吸引人！
+											<div class="alert alert-info"
+												style="font-size: 20px; font-weight: bold;">
+												課程內容說明
+											<div style="color:black;font-size: 18px">趕緊來為你精心設計的課程做個介紹吧!請務必在文案中加上開課緣由、自我介紹、課程單元說明、教學方式、課程難易度、相關作品圖片、作品集網站…等資料，越詳細的內容將會提升學生對課程的信任感；而善用編輯排版功能，讓提案更加吸引人！
+											</div>
 											</div>
 											<div class="[ form-group ][ form-group-textarea ]"
 												id="get-data-form">
-												<textarea class="tinymce" id="texteditor"
+												<textarea class="tinymce" id="texteditor" placeholder="請輸入課程中，可能會使用到的工具"
+													class="form-control" data-toggle="floatLabel"
+													data-value="no-js" style="font-size: 18px"
 													form="TotalContent">${CoursedData.courseContent}</textarea>
 												<input type="hidden" value="" id="courseContent"
 													name="courseContent">
