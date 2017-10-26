@@ -221,7 +221,7 @@ public class ShoppingCartDAO_JDBC implements ShoppingCartDAO_interface {
 		
 		
 		shoppingCartVO.setMemberID(100001);
-		shoppingCartVO.setCourseVO(cdao.findByPrimaryKey(200003));
+		shoppingCartVO.setCourseVO(cdao.findByPrimaryKey(200004));
 		dao.insert(shoppingCartVO);
 		
 		

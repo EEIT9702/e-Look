@@ -151,6 +151,7 @@ a:HOVER {
 #div1 {
 	width: 100%;
 }
+#body{background-color: #FAEBD7;}
 </style>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -166,7 +167,7 @@ a:HOVER {
 		style="background-color: black; margin: -50px">
 		<div class="row">
 			<div class="col-md-12 col-sm-12">
-				<jsp:include page="/jay/advertising.jsp" />
+				<jsp:include page="advertising.jsp" />
 			</div>
 		</div>
 	</div>

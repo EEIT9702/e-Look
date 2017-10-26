@@ -24,10 +24,8 @@ import com.e_Look.OrderDetails.model.OrderDetailsVO;
 import com.e_Look.member.model.MemberVO;
 import com.e_Look.shoppingCart.model.jdbc.ShoppingCartDAO;
 import com.e_Look.shoppingCart.model.jdbc.ShoppingCartVO;
+import com.e_Look.tool.BuyingPrice;
 
-/**
- * Servlet Filter implementation class CheckOutFilter
- */
 
 @WebFilter(filterName = "CheckOutFilter", dispatcherTypes = { DispatcherType.REQUEST })
 public class CheckOutFilter implements Filter {
@@ -58,7 +56,7 @@ public class CheckOutFilter implements Filter {
 			OrderVO orderVO = orderDAO.findMemberUncheckOrder(memberID);
 			List<CourseVO> list = scdao.findByMemberID(memberID);
 			if (orderVO == null && list.size() == 0) {
-				rw.write("<script>alert('請先選購商品'); location.href='" + request.getHeader("Referer") + "'</script>");
+				rw.write("<script>alert('您沒有任何訂單，請先選購商品！'); location.href='" + request.getHeader("Referer") + "'</script>");
 				return;
 			} else {
 				if (orderVO == null) {
@@ -67,6 +65,7 @@ public class CheckOutFilter implements Filter {
 					orderDAO.insert(orderVO);
 					orderVO = orderDAO.findMemberUncheckOrder(memberID);
 				}
+				//把購物車倒入訂單 購物車清空
 				for (CourseVO courseVO : list) {
 					ShoppingCartVO scVO = new ShoppingCartVO(memberID, courseVO);
 					scdao.delete(scVO);
@@ -74,11 +73,16 @@ public class CheckOutFilter implements Filter {
 					odVO.setCourseVO(courseVO);
 					odVO.setOrderID(orderVO.getOrderID());
 					odVO.setOriginalPrice(courseVO.getSoldPrice());
-					// 記得調整成特價後的價格
-					odVO.setBuyingPrice(courseVO.getSoldPrice());
-
+					odVO.setBuyingPrice(BuyingPrice.getBuyingPrice(courseVO.getCourseID()));
 					odDAO.insert(odVO);
 				}
+				//更新訂單內的價格 已經在OrderEdit做了
+//				List<OrderDetailsVO> odVOs = odDAO.findByOrderID(orderVO.getOrderID());
+//				for(OrderDetailsVO orderDetailsVO:odVOs){
+//					orderDetailsVO.setBuyingPrice(BuyingPrice.getBuyingPrice(orderDetailsVO.getCourseVO().getCourseID()));
+//					odDAO.update(orderDetailsVO);
+//				}
+				
 				chain.doFilter(request, response);
 				return;
 			}
