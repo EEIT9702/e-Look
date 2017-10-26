@@ -22,7 +22,7 @@
 <link
 	href="<%=request.getContextPath()%>/css/bootstrap-datetimepicker.css"
 	rel="stylesheet">
-	
+
 <!-- 顯示分頁上e-look的小圖示	 -->
 <link rel="Short Icon" type="image/x-icon" href="${initParam.icon}" />
 
@@ -34,42 +34,63 @@
 	src="<%=request.getContextPath()%>/_PJC/js/bootstrap-datetimepicker.js"></script>
 <script
 	src="<%=request.getContextPath()%>/_PJC/js/bootstrap-datetimepicker.zh-TW.js"></script>
-<script src="<%=request.getContextPath()%>/_PJC/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
-		<script src="<%=request.getContextPath()%>/_PJC/tinymce/js/tinymce/tinymce.js"></script>
-		<script>
+<script
+	src="<%=request.getContextPath()%>/_PJC/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
+<script
+	src="<%=request.getContextPath()%>/_PJC/tinymce/js/tinymce/tinymce.js"></script>
+<script>
 		tinymce.init({ selector:'#texteditor',
 			language_url:'<%=request.getContextPath()%>/_PJC/tinymce/js/tinymce/langs/zh_TW.js',
-			plugins: [
-			  		"advlist autolink link image lists charmap print preview hr anchor pagebreak",
-			  		"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-			  		"save table contextmenu directionality emoticons template paste textcolor"
-			  	],
-			  	/* toolbar */
-			  	toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",			
-			setup: function(ed) {
-			    ed.on('keyup', function(e) {
-// 			        console.log(ed.getContent());
-			        $("#courseContent").val(ed.getContent());
-			        var formData = new FormData($('form')[3]);
-					console.log("從文字編輯器欄位送資料到資料庫囉!");
-					$.ajax({
-						type : 'POST',
-						url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
-						data :formData,
-						processData : false,
-						contentType : false,
-						success: function(){
-							
-							$('#updateConfirm').text("變更已儲存至草稿");
-						    $("#updateConfirm").fadeIn();
-						    $("#updateConfirm").fadeOut(1500);
-						
-				        }
+				plugins : [
+						"advlist autolink link image lists charmap print preview hr anchor pagebreak",
+						"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+						"save table contextmenu directionality emoticons template paste textcolor" ],
+				/* toolbar */
+				toolbar : "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
+				setup : function(ed) {
+					ed
+							.on(
+									'keyup',
+									function(e) {
+										// 			        console.log(ed.getContent());
+										$("#courseContent")
+												.val(ed.getContent());
+										var formData = new FormData(
+												$('form')[3]);
+										console.log("從文字編輯器欄位送資料到資料庫囉!");
+										$
+												.ajax({
+													type : 'POST',
+													url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
+													data : formData,
+													processData : false,
+													contentType : false,
+													success : function() {
 
-					});
-			    });
-			}}); 
-		</script>
+														delay_till_last(
+																'id',
+																function() {
+																	$(
+																			'#updateConfirm')
+																			.text(
+																					"變更已儲存至草稿");
+																	$(
+																			"#updateConfirm")
+																			.fadeIn(
+																					1200);
+																	$(
+																			"#updateConfirm")
+																			.fadeOut(
+																					1500);
+																}, 500);
+
+													}
+
+												});
+									});
+				}
+			});
+</script>
 <script src="<%=request.getContextPath()%>/_PJC/js/upload1.js"></script>
 
 
@@ -88,8 +109,8 @@
 
 							<li role="presentation" class="active"><a href="#step1"
 								data-toggle="tab" aria-controls="step1" role="tab"
-								title="Step 1"> <span class="round-tab"> 
-								<i class="glyphicon glyphicon-list"></i>
+								title="Step 1"> <span class="round-tab"> <i
+										class="glyphicon glyphicon-list"></i>
 								</span>
 							</a></li>
 
@@ -131,16 +152,14 @@
 								</span>
 							</a></li>
 						</ul>
-						
-					</div>
-					<P class="great" id="updateConfirm"><P>
 
-					<form
-						action=""
-						method="POST" name="formData" target="upload_iframe"
-						enctype="multipart/form-data" role="form" id="TotalContent"
-						onsubmit="showStatus()">
-						<iframe name=upload_iframe width=0 height=0></iframe>
+					</div>
+					<P class="great" id="updateConfirm" style="display: none;">
+					<P>
+					<form action="" method="POST" name="formData"
+						target="upload_iframe" enctype="multipart/form-data" role="form"
+						id="TotalContent" onsubmit="showStatus()">
+						<iframe name=upload_iframe width=0 height=0 style="display: none;"></iframe>
 						<input type="hidden" value="${CourseID}" name="CourseID">
 						<input type="hidden" value="${LoginOK.memberID}" name="memberID">
 						<div class="tab-content">
@@ -157,8 +176,8 @@
 												<div class="update-split update-step1">
 													<i class="glyphicon glyphicon-list"></i>
 												</div>
-												<div class="update-text">																																			
-													<strong>步驟一、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
+												<div class="update-text">
+													<strong>步驟一79、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
 												</div>
 											</div>
 										</div>
@@ -231,7 +250,7 @@
 									</div>
 								</div>
 
-								
+
 								<!-- step1最終確認按鈕 -->
 								<div class="col-md-4 pull-right" style="margin-top: 20px">
 									<button type="button"
@@ -239,7 +258,7 @@
 								</div>
 								<!-- 整個step1頁面 -->
 							</div>
-		
+
 							<div class="tab-pane" role="tabpanel" id="step2">
 								<!-- step2的填寫資料 -->
 								<div>
@@ -248,13 +267,16 @@
 										<div class="row" style="margin-bottom: 25px">
 											<label for="exampleInputEmail1" style="font-size: 20pt">課程標題</label>
 											<input type="text" onfocus="this.select()"
-												class="form-control" id="CourseInput" <c:if test="${!empty CoursedData}">value="${CoursedData.courseName}"</c:if><c:if test="${empty CoursedData}">value="輸入課程標題"</c:if>
+												class="form-control" id="CourseInput"
+												<c:if test="${!empty CoursedData}">value="${CoursedData.courseName}"</c:if>
+												<c:if test="${empty CoursedData}">value="輸入課程標題"</c:if>
 												style="font-size: 18px" name="courseName">
 										</div>
 										<div class="row" style="margin-bottom: 40px">
 											<label for="exampleInputEmail1" style="font-size: 20pt">上傳課程封面</label>
 											<input type="file" id="wizard-picture"
-												style="font-size: 18px" name="picture" accept="image/png, image/jpeg, image/gif">
+												style="font-size: 18px" name="picture"
+												accept="image/png, image/jpeg, image/gif">
 										</div>
 										<div class="row" style="margin-bottom: 25px">
 											<label for="exampleInputEmail1" style="font-size: 20pt">選擇課程類別(最多三項)</label>
@@ -280,7 +302,6 @@
 									</div>
 									<div class="list-inline col-md-4">
 										<img alt=""
-											
 											src="<%=request.getContextPath()%>/Class Steps/imgs/預覽課程展示畫面.png"
 											style="width: 150px; height: 250px; margin-right: 50px; margin-top: 50px">
 									</div>
@@ -288,9 +309,8 @@
 										<div style="width: 310px">
 											<div class="card card-inverse">
 												<img class="card-img-top"
-												<c:if test="${!empty CoursedData}">src="<%=request.getContextPath()%>/CourseImage?CourseID=${CourseID}"</c:if>
-												<c:if test="${empty CoursedData}">src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png"</c:if>
-													
+													<c:if test="${!empty CoursedData}">src="<%=request.getContextPath()%>/CourseImage?CourseID=${CourseID}"</c:if>
+													<c:if test="${empty CoursedData}">src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png"</c:if>
 													alt="您的圖片連結已失效" id="wizardPicturePreview" title="">
 												<div class="card-block">
 													<figure class="profile">
@@ -338,10 +358,10 @@
 												style="font-size: 20px; font-weight: bold; background-color: #BBFFEE">
 												學生會需要用到的工具（含種類、版本細節）</div>
 											<div class="[ form-group ][ form-group-textarea ]">
-												<textarea name="preTool"
-													placeholder="請輸入課程中，可能會使用到的工具" class="form-control"
-													data-toggle="floatLabel" data-value="no-js"
-													style="font-size: 18px" form="TotalContent">${CoursedData.preTool}</textarea>
+												<textarea name="preTool" placeholder="請輸入課程中，可能會使用到的工具"
+													class="form-control" data-toggle="floatLabel"
+													data-value="no-js" style="font-size: 18px"
+													form="TotalContent">${CoursedData.preTool}</textarea>
 												<label for="customStyle" style="">(例：Photoshop CC
 													2015)</label>
 											</div>
@@ -359,7 +379,8 @@
 												<textarea name="background"
 													placeholder="如果是比較進階的課程，建議先跟學生說明必備的知識，幫助學生了解這堂課"
 													class="form-control" data-toggle="floatLabel"
-													data-value="no-js" style="font-size: 18px" form="TotalContent">${CoursedData.background}</textarea>
+													data-value="no-js" style="font-size: 18px"
+													form="TotalContent">${CoursedData.background}</textarea>
 												<label for="customStyle" style="">(例：學過PS遮罩的概念)</label>
 											</div>
 										</div>
@@ -376,7 +397,8 @@
 												<textarea name="ability"
 													placeholder="最好是某種實質的東西：像是完成某種作品、達到哪種目標甚至是得到什麼結果"
 													class="form-control" data-toggle="floatLabel"
-													data-value="no-js" style="font-size: 18px" form="TotalContent">${CoursedData.ability}</textarea>
+													data-value="no-js" style="font-size: 18px"
+													form="TotalContent">${CoursedData.ability}</textarea>
 												<label for="customStyle" style="">(例：可習得合成影像的基本技術)</label>
 											</div>
 										</div>
@@ -393,7 +415,8 @@
 												<textarea name="targetgroup"
 													placeholder="形容這堂課適合的學生族群，可以更讓學生了解課程內容的方向"
 													class="form-control" data-toggle="floatLabel"
-													data-value="no-js" style="font-size: 18px" form="TotalContent">${CoursedData.targetgroup}</textarea>
+													data-value="no-js" style="font-size: 18px"
+													form="TotalContent">${CoursedData.targetgroup}</textarea>
 												<label for="customStyle" style="">(例：雜誌編輯、海報設計的美編人員等...)</label>
 											</div>
 										</div>
@@ -434,24 +457,28 @@
 								<div class="container" style="margin-top: 2em;">
 									<div class="col-md-6">
 										<div class="form-group col-lg-6" style="font-size: 20px;">
-											<label>定價(最低售價為$10元)</label> <input type="text" name="soldPrice"
-												class="form-control" id="" value="${CoursedData.soldPrice}" style="font-size: 18px;">
+											<label>定價(最低售價為$10元)</label> <input type="text"
+												name="soldPrice" class="form-control" id=""
+												value="${CoursedData.soldPrice}" style="font-size: 18px;">
 										</div>
 
 										<div class="form-group col-lg-6" style="font-size: 20px;">
-											<label>預計課程長度(以分鐘為單位)</label> <input type="text" name="courseLength"
-												class="form-control" id="" value="${CoursedData.courseLength}" style="font-size: 18px;">
+											<label>預計課程長度(以分鐘為單位)</label> <input type="text"
+												name="courseLength" class="form-control" id=""
+												value="${CoursedData.courseLength}" style="font-size: 18px;">
 										</div>
 
 
 									</div>
 								</div>
-								<div class="container" style="margin-top: 2em;font-size: 18px;"
+								<div class="container" style="margin-top: 2em; font-size: 18px;"
 									id="ProposalCourse">
 									<div class="col-md-12">
 										<div class="form-group col-lg-4" style="font-size: 20px;">
-											<label>開課門檻人數(最低為10人)</label> <input type="text" name="targetStudentNumber"
-												class="form-control" id="" value="${CoursedData.targetStudentNumber}" style="font-size: 18px;">
+											<label>開課門檻人數(最低為10人)</label> <input type="text"
+												name="targetStudentNumber" class="form-control" id=""
+												value="${CoursedData.targetStudentNumber}"
+												style="font-size: 18px;">
 										</div>
 									</div>
 									<div class="col-md-12" style="margin-top: 2em;">
@@ -461,7 +488,8 @@
 												data-date-format="yyyy-mm-dd" data-link-field="dtp_input1"
 												data-link-format="yyyy-mm-dd">
 												<input class="form-control" style="font-size: 18px;"
-													type="text" value="${CoursedData.fundStartDate}" readonly size="18" id="starttime" name="fundStartDate"><span
+													type="text" value="${CoursedData.fundStartDate}" readonly
+													size="18" id="starttime" name="fundStartDate"><span
 													class="input-group-addon"> <span
 													class="glyphicon glyphicon-calendar"></span>
 												</span>
@@ -476,7 +504,8 @@
 												data-date-format="yyyy-mm-dd" data-link-field="dtp_input2"
 												data-link-format="yyyy-mm-dd">
 												<input class="form-control" style="font-size: 18px;"
-													type="text" value="${CoursedData.fundEndDate}" readonly size="18" id="endtime" name="fundEndDate"><span
+													type="text" value="${CoursedData.fundEndDate}" readonly
+													size="18" id="endtime" name="fundEndDate"><span
 													class="input-group-addon"> <span
 													class="glyphicon glyphicon-calendar"></span>
 												</span>
@@ -493,7 +522,9 @@
 									</div>
 									<div class="col-md-12" style="margin-top: 0.5em;">
 										<div class="form-group col-lg-6" style="font-size: 20px;">
-											<label>課程預計上線日期：</label><input type="hidden" id="endofproposal" name="courseStartDate" value="${CoursedData.courseStartDate}"><span></span>
+											<label>課程預計上線日期：</label><input type="hidden"
+												id="endofproposal" name="courseStartDate"
+												value="${CoursedData.courseStartDate}"><span></span>
 										</div>
 									</div>
 								</div>
@@ -519,8 +550,10 @@
 											</div>
 											<div class="[ form-group ][ form-group-textarea ]"
 												id="get-data-form">
-												<textarea class="tinymce" id="texteditor" form="TotalContent">${CoursedData.courseContent}</textarea>
-												<input type="hidden" value="" id="courseContent" name="courseContent">
+												<textarea class="tinymce" id="texteditor"
+													form="TotalContent">${CoursedData.courseContent}</textarea>
+												<input type="hidden" value="" id="courseContent"
+													name="courseContent">
 											</div>
 										</div>
 									</div>
@@ -548,14 +581,13 @@
 												<div class="panel-body">
 													<div class="input-group image-preview">
 														<!-- don't give a name === doesn't send on POST/GET -->
-														<span> <!-- image-preview-clear button --> 
-														<input type="hidden"id="filename1" value="">
-														<span></span>
+														<span> <!-- image-preview-clear button --> <input
+															type="hidden" id="filename1" value=""> <span></span>
 															<div class="btn btn-default image-preview-input">
 																<span class="glyphicon glyphicon-folder-open"></span> <span
-																	class="image-preview-input-title">選擇檔案</span>
-																	<input type="file" name="input-file-preview"
-																	id="inputfilename1" onclick="fileSelect()"/>
+																	class="image-preview-input-title">選擇檔案</span> <input
+																	type="file" name="input-file-preview"
+																	id="inputfilename1" onclick="fileSelect()" />
 																<!-- rename it -->
 															</div>
 															<button id="btnSubmit1" type="submit"
@@ -595,9 +627,8 @@
 												<div class="panel-body">
 													<div class="input-group image-preview">
 														<!-- don't give a name === doesn't send on POST/GET -->
-														<span> <!-- image-preview-clear button --> 
-														<input type="hidden"id="filename2" value="">
-														<span></span>
+														<span> <!-- image-preview-clear button --> <input
+															type="hidden" id="filename2" value=""> <span></span>
 															<div class="btn btn-default image-preview-input">
 																<span class="glyphicon glyphicon-folder-open"></span> <span
 																	class="image-preview-input-title">選擇檔案</span> <input
@@ -631,7 +662,7 @@
 									</div>
 								</div>
 								<!-- /container -->
-								
+
 								<ul class="list-inline pull-right">
 									<li><button type="button"
 											class="btn btn-default prev-step">上一步</button></li>
@@ -858,8 +889,9 @@
 					Dates = Dates.valueOf();
 					Dates = Dates + (prepareDate * 24 * 60 * 60 * 1000); // 一天幾豪秒
 					Dates = new Date(Dates);
-					$("#endofproposal").val(Dates.getFullYear() + "-" + (Dates.getMonth() + 1)
-							+ "-" + Dates.getDate());
+					$("#endofproposal").val(
+							Dates.getFullYear() + "-" + (Dates.getMonth() + 1)
+									+ "-" + Dates.getDate());
 					$("#endofproposal+span").text(
 							Dates.getFullYear() + "-" + (Dates.getMonth() + 1)
 									+ "-" + Dates.getDate());
@@ -870,15 +902,15 @@
 			if (selectr === "radio1" || selectr === "radio3") {
 				document.querySelector("#ProposalCourse").style = "opacity: 0.4;font-size: 18px;margin-top: 2em;";
 				document.querySelectorAll("#ProposalCourse input").forEach(
-						function(el) {							
-							el.setAttribute("disabled", "disabled");							
+						function(el) {
+							el.setAttribute("disabled", "disabled");
 							el.style = "opacity: 0.4;font-size: 18px;";
 						})
 			} else if (selectr === "radio2") {
 				document.querySelector("#ProposalCourse").style = "opacity: 1;font-size: 18px;margin-top: 2em;";
 				document.querySelectorAll("#ProposalCourse input").forEach(
-						function(el) {							
-							el.removeAttribute("disabled");						
+						function(el) {
+							el.removeAttribute("disabled");
 							el.style = "opacity: 1;font-size: 18px;";
 						})
 			}
@@ -903,87 +935,106 @@
 					$('#filename2+span').text(value);
 				})
 
-				
-		 $('input[type!="file"],input[type!="radio"]').keyup(function(e){
-			 
-			 var formData = new FormData($('form')[3]);
-				console.log("從input欄位送資料到資料庫囉!");
-				$.ajax({
-					type : 'POST',
-					url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
-					data :formData,
-					processData : false,
-					contentType : false,
-					success: function(){
-						$('#updateConfirm').text("變更已儲存至草稿");
-					    $("#updateConfirm").fadeIn();
-					    $("#updateConfirm").fadeOut(1500);
-// 						$("#updateConfirm").style="background: green";
-					        },			        
-					error:function(){
-						alert("請輸入正確的格式!");
-					}
-				})
-			 
-			 
-		 })
-		
-	
-	
-	$('textarea').keyup(function(e){
-			 
-			 var formData = new FormData($('form')[3]);
-				console.log("從textarea欄位送資料到資料庫囉!");
-				$.ajax({
-					type : 'POST',
-					url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
-					data :formData,
-					processData : false,
-					contentType : false,
-					success: function(){
-						
-						$('#updateConfirm').text("變更已儲存至草稿");
-					    $("#updateConfirm").fadeIn();
-					    $("#updateConfirm").fadeOut(1500);
-// 						$("#updateConfirm").style="background: green";
-					
-			        }
+		$('input[type!="file"],input[type!="radio"]')
+				.keyup(
+						function(e) {
 
-				})
-			 
-			 
-		 })
-		 
-		 
-		 	$('#wizard-picture').change(function(e){
-			 
-			 var formData = new FormData($('form')[3]);
-				console.log("圖片送資料到資料庫囉!");
-				$.ajax({
-					type : 'POST',
-					url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
-					data :formData,
-					processData : false,
-					contentType : false,
-					success: function(){
-						
- 						
-						$('#updateConfirm').text("變更已儲存至草稿");
-					    $("#updateConfirm").fadeIn();
-					    $("#updateConfirm").fadeOut(1500);
-// 						$("#updateConfirm").style="background: green";
-					
-			        }
+							var formData = new FormData($('form')[3]);
+							console.log("從input欄位送資料到資料庫囉!");
+							$
+									.ajax({
+										type : 'POST',
+										url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
+										data : formData,
+										processData : false,
+										contentType : false,
+										success : function() {
+											delay_till_last('id', function() {
+												$('#updateConfirm').text(
+														"變更已儲存至草稿");
+												$("#updateConfirm")
+														.fadeIn(1200);
 
-				})
-			 
-			 
-		 })
-		 
-			
-		 
-					
+												$("#updateConfirm").fadeOut(
+														1500);
 
+											}, 500);
+										},
+										error : function() {
+											alert("請輸入正確的格式!");
+										}
+									})
+						})
+
+		$('textarea')
+				.keyup(
+						function(e) {
+
+							var formData = new FormData($('form')[3]);
+							console.log("從textarea欄位送資料到資料庫囉!");
+							$
+									.ajax({
+										type : 'POST',
+										url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
+										data : formData,
+										processData : false,
+										contentType : false,
+										success : function() {
+											delay_till_last('id', function() {
+												$('#updateConfirm').text(
+														"變更已儲存至草稿");
+												$("#updateConfirm")
+														.fadeIn(1200);
+
+												$("#updateConfirm").fadeOut(
+														1500);
+
+											}, 500);
+										}
+									})
+						})
+
+		$('#wizard-picture')
+				.change(
+						function(e) {
+
+							var formData = new FormData($('form')[3]);
+							console.log("圖片送資料到資料庫囉!");
+							$
+									.ajax({
+										type : 'POST',
+										url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
+										data : formData,
+										processData : false,
+										contentType : false,
+										success : function() {
+											delay_till_last('id', function() {
+												$('#updateConfirm').text(
+														"變更已儲存至草稿");
+												$("#updateConfirm")
+														.fadeIn(1200);
+
+												$("#updateConfirm").fadeOut(
+														1500);
+
+											}, 500);
+										}
+									})
+						})
+		// 設定keyup事件在特定秒數內只會觸發1次
+		var _timer = {};
+		function delay_till_last(id, fn, wait) {
+			if (_timer[id]) {
+				window.clearTimeout(_timer[id]);
+				delete _timer[id];
+			}
+
+			return _timer[id] = window.setTimeout(function() {
+				fn();
+				delete _timer[id];
+			}, wait);
+		}
+		// =====================================
 	</script>
 
 
