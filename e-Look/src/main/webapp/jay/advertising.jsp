@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.e_Look.ad.*"%>
+<%
+	AdService svc = new AdService();
+	List<AdVO> list = svc.getAll();
+	pageContext.setAttribute("list", list);
+%>
 <!DOCTYPE>
 <html>
 <head>
@@ -12,7 +19,6 @@
 
 </head>
 <style>
-
 video::-internal-media-controls-download-button {
 	display: none;
 }
@@ -22,14 +28,15 @@ video::-webkit-media-controls-enclosure {
 }
 
 video::-webkit-media-controls-panel {
-	width: calc(100% + 30px); /* Adjust as needed */
+	width: calc(70% + 30px); /* Adjust as needed */
+	margin: auto;
 }
+
 #abgneBlock {
-	width: 1450px;
+	width: 1200px;
 	height: 450px;
 	position: relative;
 	overflow: hidden;
-	
 }
 
 #abgneBlock ul.list {
@@ -42,9 +49,8 @@ video::-webkit-media-controls-panel {
 
 #abgneBlock ul.list li {
 	float: left;
-	width: 1450px;
+	width: 1200px;
 	height: 100%;
-
 }
 
 #abgneBlock .list img {
@@ -52,11 +58,12 @@ video::-webkit-media-controls-panel {
 	height: 100%;
 	border: 0;
 }
+
 #abgneBlock .list video {
-	width: 800px;
-	height:435px;
-	border:0;
-	margin-left:325px ;
+	width: 100%;
+	height: 100%;
+	border: 0;
+	margin: auto;
 }
 
 #abgneBlock ul.playerControl {
@@ -119,11 +126,17 @@ video::-webkit-media-controls-panel {
 	<div class="container">
 		<div style="margin: 0px auto" id="abgneBlock">
 			<ul class="list">
-				<li ><video autoplay="autoplay" controls
-							src="<%=request.getContextPath()%>/img/EEIT97(e_Look)第一版.mp4"></video></li>
-				<li><a target="_blank" href="#"><img src="<%=request.getContextPath()%>/img/04.jpg"></a></li>
-				<li><a target="_blank" href="#"><img src="<%=request.getContextPath()%>/img/02.jpg"></a></li>
-				<li><a target="_blank" href="#"><img src="<%=request.getContextPath()%>/img/03.jpg"></a></li>
+				<li><video autoplay="autoplay" controls
+						src="<%=request.getContextPath()%>/img/EEIT97(e_Look)第一版.mp4"></video></li>
+				<c:forEach var="AdVO" items="${list}">
+					<li><img
+						src="<%=request.getContextPath()%>/adImages?adID=${AdVO.adID}" />
+					</li>
+				</c:forEach>
+
+				<%-- 				<li><a target="_blank" href="#"><img src="<%=request.getContextPath()%>/img/04.jpg"></a></li> --%>
+				<%-- 				<li><a target="_blank" href="#"><img src="<%=request.getContextPath()%>/img/02.jpg"></a></li> --%>
+				<%-- 				<li><a target="_blank" href="#"><img src="<%=request.getContextPath()%>/img/03.jpg"></a></li> --%>
 			</ul>
 		</div>
 	</div>

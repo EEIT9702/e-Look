@@ -34,7 +34,7 @@ public class AdDAO implements AdDAO_interface {
 	private static final String SELECT_ONE_AD =
 			"SELECT adID, fileName, adFile, status FROM Ad WHERE adID=?";
 	private static final String SELECT_ALL_AD =
-			"SELECT adID, fileName, adFile, status FROM Ad";
+			"SELECT adID, fileName, adFile, status FROM Ad order by adID";
 	
 	@Override
 	public void insert(AdVO adVO) {
