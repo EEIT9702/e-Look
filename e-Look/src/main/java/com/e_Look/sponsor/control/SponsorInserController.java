@@ -43,7 +43,7 @@ public class SponsorInserController extends HttpServlet {
 		sponsorService.addNameMoney(courseID,SponsorName, money);
 		
 		response.sendRedirect(addressSpon);
-		
+		sessionSponsor.removeAttribute("sponsor");
 			
         }
 
