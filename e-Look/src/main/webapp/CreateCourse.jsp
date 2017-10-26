@@ -166,9 +166,9 @@
 							<!-- 整個step1頁面 -->
 							<div class="tab-pane active" role="tabpanel" id="step1" style="margin-bottom: 50px">
 								<div class="container">
-									<div class="row">
+									<div class="col-md-8 col-md-offset-3">
 										<div class="col-md-12">
-											<div class="update-nag">
+											<div class="update-nag element-animation1">
 												<div class="update-split update-step1">
 													<i class="glyphicon glyphicon-list"></i>
 												</div>
@@ -178,7 +178,7 @@
 											</div>
 										</div>
 										<div class="col-md-12">
-											<div class="update-nag">
+											<div class="update-nag element-animation2">
 												<div class="update-split update-step2">
 													<i class="glyphicon glyphicon-picture"></i>
 												</div>
@@ -189,7 +189,7 @@
 										</div>
 
 										<div class="col-md-12">
-											<div class="update-nag">
+											<div class="update-nag element-animation3">
 												<div class="update-split update-step3">
 													<i class="glyphicon glyphicon-tags"></i>
 												</div>
@@ -200,7 +200,7 @@
 										</div>
 
 										<div class="col-md-12">
-											<div class="update-nag">
+											<div class="update-nag element-animation4">
 												<div class="update-split update-step4">
 													<i class="glyphicon glyphicon-usd"></i>
 												</div>
@@ -212,7 +212,7 @@
 										</div>
 
 										<div class="col-md-12">
-											<div class="update-nag">
+											<div class="update-nag element-animation5">
 												<div class="update-split update-step5">
 													<i class="glyphicon glyphicon-pencil"></i>
 												</div>
@@ -223,7 +223,7 @@
 										</div>
 
 										<div class="col-md-12">
-											<div class="update-nag">
+											<div class="update-nag element-animation6">
 												<div class="update-split update-step6">
 													<i class="glyphicon glyphicon-open"></i>
 												</div>
@@ -234,7 +234,7 @@
 										</div>
 
 										<div class="col-md-12">
-											<div class="update-nag">
+											<div class="update-nag element-animation7">
 												<div class="update-split update-step7">
 													<i class="glyphicon glyphicon-thumbs-up"></i>
 												</div>
@@ -248,9 +248,9 @@
 
 
 								<!-- step1最終確認按鈕 -->
-								<div class="col-md-4 pull-right" style="margin-top: 20px">
+								<div class="col-md-offset-3" style="margin-top: 20px">
 									<button type="button"
-										class="btn btn-primary btn-lg btn3d pull-right next-step"><span class="glyphicon glyphicon-hand-right"></span>    開始編輯課程</button>
+										class="btn btn-primary btn-lg btn3d col-md-offset-3 next-step"><span class="glyphicon glyphicon-hand-right"></span>   開始編輯課程</button>
 								</div>
 								<!-- 整個step1頁面 -->
 							</div>
@@ -259,7 +259,7 @@
 								<!-- step2的填寫資料 -->
 								<div>
 									<!-- 預覽課程頁面圖 -->
-									<div class="col-md-4">
+									<div class="col-md-3 col-md-offset-2">
 										<div class="row" style="margin-bottom: 25px">
 											<label for="exampleInputEmail1" style="font-size: 20pt">課程標題</label>
 											<input type="text" onfocus="this.select()"
@@ -296,12 +296,8 @@
 											</div>
 										</div>
 									</div>
-									<div class="list-inline col-md-4">
-										<img alt=""
-											src="<%=request.getContextPath()%>/Class Steps/imgs/預覽課程展示畫面.png"
-											style="width: 150px; height: 250px; margin-right: 50px; margin-top: 50px">
-									</div>
-									<div class="col-md-4">
+									
+									<div class="col-md-3 col-md-offset-2">
 										<div style="width: 310px">
 											<div class="card card-inverse">
 												<img class="card-img-top"
@@ -334,11 +330,11 @@
 									<!-- 包住step2填寫資料 -->
 								</div>
 
-								<ul class="list-inline pull-right" style="margin-top: 50px;margin-bottom: 80px">
-									<li><button type="button"
-											class="btn3d btn btn-default btn-lg prev-step">上一步</button></li>
-									<li><button type="button"
+								<ul class="list-inline col-md-6 pull-right" style="margin-top: 50px;margin-bottom: 80px;">
+									<li class="pull-right"><button type="button"
 											class="btn btn-primary btn-lg btn3d next-step">儲存並前往下一步</button></li>
+									<li class="pull-right"><button type="button"
+											class="btn3d btn btn-default btn-lg prev-step">上一步</button></li>
 								</ul>
 
 							</div>
