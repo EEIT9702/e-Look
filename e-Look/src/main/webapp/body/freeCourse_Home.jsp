@@ -54,7 +54,7 @@ h5 {
 .card-img-top {
 	display: block;
 	width: 340px;
-/* 	height:200px; */
+	height:200px; 
 	margin-top: 4px;
 	margin-bottom: 4px;
 }
@@ -287,8 +287,6 @@ $(function() {
 	$('#submit').click(function(e){
 		
 		e.preventDefault();
-		//var insertKey = $('#keyWord').text();
-		//console.log("1 ----" + insertKey)
 		clickSearch();
 	})
 	$('#submit').on('click', function(){
@@ -327,15 +325,15 @@ $(function() {
 	$('#searchicon').click(clickSearch);
 });
 	
-	function clickSearch(){
-		keyWord=$('#keyWord').val();
-		console.log("clickSearch() keyWord = " + keyWord);
-		$.get('SearchController',{'keyWord':keyWord},function(){
-			
-		})
-		$('#keyWord').val("");
-		refreshRiver();		
-	}
+function clickSearch(){
+	keyWord=$('#keyWord').val();
+	console.log("clickSearch() keyWord = " + keyWord);
+	$.get('/e-Look/SearchController.do',{'keyWord':keyWord},function(){
+		
+	})
+	$('#keyWord').val("");
+	refreshRiver();		
+}
 function refreshRiver(){
 	rowValueX=0;
 	$('#river').html("");
@@ -355,52 +353,11 @@ function river(){
 	//有時候卷軸會多0.5  改>=的寫法可以解決這個問題
 	if( wst>=(dh-wh) || rowValueX==0 ){
 		rowValueX++;
-		$.get("<%= request.getContextPath() %>/body/body_data2.jsp",{"rowValueY":rowValueX,"keyWord":keyWord,"courseClass":courseClass},function(data){
+		$.get("<%= request.getContextPath() %>/body/body_data3.jsp",{"rowValueY":rowValueX,"keyWord":keyWord,"courseClass":courseClass},function(data){
 			$('#river').append(data)
 			
 		});
 	}
-}
-
-	
-	
-
-/*延遲載入圖片*/
-//初始化函數
-function init() {
-	//開始計時器
-	//setTimeout("checkHeight()", 1000);
-}
-//計時器函數
-function checkHeight() {
-	//圖片的DOM
-	var rows = document.querySelectorAll(".row");
-	//console.log(pics)
-	//var pic = document.getElementById("pic");
-	//取得捲軸的位置
-	var sTop = document.documentElement.scrollTop;
-	//取得可見區域高度
-	var cHeight = document.documentElement.clientHeight;
-
-	for (i = 1; i < rows.length; i++) {
-		//圖片距離最左上角的top值
-		var top = rows[i].offsetTop;
-		//如果捲軸還未來到可見區域
-		if (sTop + cHeight < top) {
-			//計時器繼續工作
-			setTimeout("checkHeight()", 1500);
-		} else {
-
-			var pics = rows[i].querySelectorAll("img");
-			for (var j = 0; j < pics.length; j++) {
-				pics[j].src = pics[j].getAttribute("lazy_src");
-			}
-			//把延遲的值指定給src
-			//pics[i].src = pics[i].getAttribute("lazy_src");
-			//console.log(top);
-		}
-	}
-
 }
 </script>
 </head>
@@ -408,7 +365,7 @@ function checkHeight() {
 
 <body style="margin-top:10px;">
 
-<%-- <jsp:include page="${contextPath}/header.jsp" /> --%>
+
 <jsp:include page="${contextPath}/login.jsp" />
 
 
@@ -496,8 +453,8 @@ function checkHeight() {
 </div>
 <!-- 3秒消失廣告end -->
 
-<div class="videobox container">
-	<div class="row" id="river">
+<div class="videobox container" style="">
+	<div class="row" id="river" style="margin-left:40px;">
 	
 	<!-- end of class="container" -->
 	</div>
