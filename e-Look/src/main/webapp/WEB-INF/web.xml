@@ -44,4 +44,5 @@
     <filter-name>CheckOutFilter</filter-name>
     <url-pattern>/settled.jsp</url-pattern>
   </filter-mapping>
+
 </web-app>

@@ -41,42 +41,44 @@ public class OnlineCourse implements Filter {
 			HttpServletRequest request = (HttpServletRequest) req;
 			HttpServletResponse response = (HttpServletResponse) resp;
 			String courseID = request.getParameter("CourseID");
-			if (courseID == null) {
-				response.sendRedirect(request.getContextPath() + request.getServletPath() + "?CourseID=200001");
+			if (courseID == null||courseID.length()==0) {
+				response.sendRedirect(request.getContextPath()+"/HOME.jsp");
 				return;
 			}
-			if (courseID != null) {
+			else if (courseID != null) {
 				CourseDAO dao = new CourseDAO();
 				BuyCourseDAO dao2 = new BuyCourseDAO();
 				CourseService courseService = new CourseService();
-				CourseVO courseVO =courseService.getCourse(Integer.valueOf(courseID));
-				MemberService service = new MemberService();
-				MemberVO memberVo = service.getMember(courseVO.getMemberID());
-				List<CourseVO> list = dao.findBymemberID(courseVO.getMemberID(), 2);
-				HttpSession session = request.getSession();
-				MemberVO memberVoOK = (MemberVO) session.getAttribute("LoginOK");
-				BuyCourseService  CourseService =new BuyCourseService();
-				List<BuyCourseVO> list2 = null;
-				List<MemberBookmarksVO> mBookmarkList = null;
-				MemberBookmarksService memberBookmarksService=new MemberBookmarksService();
-				if (memberVoOK != null) {
-				
+				CourseVO courseVO = courseService.getCourse(Integer.valueOf(courseID));
+				if (courseVO.getStatus() == 2) {
+					MemberService service = new MemberService();
+					MemberVO memberVo = service.getMember(courseVO.getMemberID());
+					List<CourseVO> list = dao.findBymemberID(courseVO.getMemberID(), 2);
+					HttpSession session = request.getSession();
+					MemberVO memberVoOK = (MemberVO) session.getAttribute("LoginOK");
+					BuyCourseService CourseService = new BuyCourseService();
+					List<BuyCourseVO> list2 = null;
+					List<MemberBookmarksVO> mBookmarkList = null;
+					MemberBookmarksService memberBookmarksService = new MemberBookmarksService();
+					if (memberVoOK != null) {
+
 						list2 = CourseService.getBuyCourse(memberVoOK.getMemberID());
-						mBookmarkList=memberBookmarksService.findPrimaryMemberBookmarks(memberVoOK.getMemberID());
-						
-						
-				}
-				
-				if(mBookmarkList!=null){
-					request.setAttribute("mBookmarkList", mBookmarkList);
-				}
+						mBookmarkList = memberBookmarksService.findPrimaryMemberBookmarks(memberVoOK.getMemberID());
+
+					}
+
+					if (mBookmarkList != null) {
+						request.setAttribute("mBookmarkList", mBookmarkList);
+					}
 					request.setAttribute("list", list);
 					request.setAttribute("list2", list2);
 					request.setAttribute("courseVO", courseVO);
 					request.setAttribute("memberVo", memberVo);
-					
-				
-				chain.doFilter(request, response);
+
+					chain.doFilter(request, response);
+				}else{
+					response.sendRedirect(request.getContextPath()+"/HOME.jsp");
+				}
 			}
 		}
 
