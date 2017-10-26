@@ -15,8 +15,8 @@ public class MemberBookmarksInsertController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Integer memberID= Integer.valueOf(request.getParameter("memberID"));
 		Integer courseID= Integer.valueOf(request.getParameter("courseID"));
-		System.out.println(memberID);
-		System.out.println(courseID);
+		//System.out.println(memberID);
+		//System.out.println(courseID);
 		MemberBookmarksService memberBookmarksService =new MemberBookmarksService();
 		memberBookmarksService.deleteMemberBookmarks(memberID, courseID);
 	}

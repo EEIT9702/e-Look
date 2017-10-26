@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
- <form action="liuyan.jsp" method="post">
+ <form action="<%=request.getContextPath()%>/message/MessageController" method="post">
               <table width="300" height="300" border="0" align="center">
              
                 <tr height="80" align="center">
@@ -42,6 +42,9 @@
                     <td width="80" align="right">內&nbsp;&nbsp;容：</td>
                   
                     <td><textarea name="neirong" rows="4" cols="20"></textarea></td>
+                    <font color='red'>${ErrorMsgKey.mContentError}</font>
+                    <font color='red'>${ErrorMsgKey.mContentError}</font>
+                    <font color='red'>${MessageInsertOK}</font>
                 </tr>
                
                 <tr>

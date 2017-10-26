@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="java.util.*,java.text.*,com.e_Look.Course.*,com.e_Look.member.model.*,com.e_Look.buyCourse.model.*,javax.servlet.http.HttpSession,com.e_Look.memberBookmarks.model.*"%>
+	pageEncoding="UTF-8" import="java.util.*,java.text.*,com.e_Look.Course.*,com.e_Look.member.model.*,com.e_Look.buyCourse.model.*,javax.servlet.http.HttpSession,com.e_Look.memberBookmarks.model.*,com.e_Look.memberSubscription.*"%>
 	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html >
 <html>
@@ -199,6 +199,9 @@ a.clickable:hover {
 
 .profile-header-img {
 	padding: 30px 0;
+	width: 100px;
+	margin: auto;
+	
 }
 
 .profile-header-img>img.img-circle {
@@ -240,13 +243,14 @@ a:HOVER {
 	<% 
 		MemberVO memberVO=(MemberVO)session.getAttribute("LoginOK");
 		CourseDAO dao=new CourseDAO();
-		BuyCourseDAO dao2 = new BuyCourseDAO();
+		//BuyCourseDAO dao2 = new BuyCourseDAO();
 		BuyCourseService  CourseService =new BuyCourseService();
 		MemberBookmarksService memberBookmarksService=new MemberBookmarksService();
 		List<CourseVO> list=dao.findBymemberID(memberVO.getMemberID(),2);
 		List<BuyCourseVO> buyCourselist = CourseService.getBuyCourse(memberVO.getMemberID());
 		List<CourseVO> list2 = new LinkedList<CourseVO>();
 		List<CourseVO> list3 = new LinkedList<CourseVO>();
+		List<CourseVO> list4=dao.findBymemberID(memberVO.getMemberID(),0);
 		if(buyCourselist!=null){
 			for(BuyCourseVO buyCoursevo: buyCourselist){
 				list2.add(dao.findByPrimaryKey(buyCoursevo.getCourseID()));
@@ -261,6 +265,7 @@ a:HOVER {
 		pageContext.setAttribute("list",list);
 		pageContext.setAttribute("list2",list2);
 		pageContext.setAttribute("list3",list3);
+		pageContext.setAttribute("list4",list4);
 		
 		
 %>
@@ -507,46 +512,40 @@ a:HOVER {
 				<div class="col-md-12" style="margin: 25px 0;">
 					<div class="panel panel-primary">
 						<div class="panel-heading clickable panel-collapsed">
-							<h3 class="panel-title">我的草稿課程</h3>
+							<h3 class="panel-title">我的草稿</h3>
 							<span class="pull-right "><i
 								class="glyphicon glyphicon-plus"></i></span>
 						</div>
 						<div class="panel-body" style="display: none;">
-						<div class=" col-md-4  col-sm-4" style="width: 211px">
+						<c:forEach var="mydraftcouser" items="${list4}">
+						<div  id="click2" class=" col-md-4  col-sm-4" style="width: 211px">
 								<div class="card card-inverse">
 									<img class="card-img-top"
-										src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png"
+										src="<%=request.getContextPath()%>/CourseImage?CourseID=${mydraftcouser.courseID}"
 										alt="course" id="wizardPicturePreview" title="">
 									<div class="card-block">
 										<figure class="profile">
 											<img
-												src="<%=request.getContextPath()%>/Class Steps/imgs/eLook_LOGO1.png"
+												src="<%=request.getContextPath()%>/Image?MemberID=${mydraftcouser.memberID}"
 												class="profile-avatar" alt="">
 										</figure>
 										<div class="card-text">
-											<p id="title" class="card-title mt-3 multi_ellipsis">這裡請輸入課程標題</p>
+											<p id="title" class="card-title mt-3 multi_ellipsis">${mydraftcouser.courseName}</p>
 										</div>
 									</div>
 									
 									<div class="card-footer">
 									
-										<button class="btn-info btn-sm "
-											style="margin-bottom: 5px; margin-top: 10px">編輯</button>
-											<button class="btn-danger btn-sm "
+										<a style="text-decoration: none; color:black"; href="<%=request.getContextPath() %>/CreateCourse.jsp?CourseID=${mydraftcouser.courseID}"><button class="btn-info btn-sm "
+											style="margin-bottom: 5px; margin-top: 10px">編輯</button></a>
+											<button class="btn-danger btn-sm pull-right"
 											style="margin-bottom: 5px; margin-top: 10px">刪除</button>
+												<input type="hidden" value="${mydraftcouser.courseID}">
+                     							
 									</div>
-								</div>
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
+								</div>						
 						</div>
+						</c:forEach>
 					</div>
 				</div>
 				</div>
@@ -557,7 +556,18 @@ a:HOVER {
 							<span class="pull-right "><i
 								class="glyphicon glyphicon-plus"></i></span>
 						</div>
-						<div class="panel-body" style="display: none;"></div>
+						<div class="panel-body" style="display: none;">
+						<div id="click3" class=" col-md-3  col-sm-3" style="border: 1px solid #d4d4d5;" >
+							<div class="profile-header-img">
+								<img class="img-circle"
+									src="<%=request.getContextPath()%>/Image?MemberID=${LoginOK.memberID}" />
+								<!-- badge -->
+                       			 <h5 style="text-align: center;">${LoginOK.mName}</h5>
+                       			 <button class="btn-danger btn-sm center-block"style="margin-bottom: 5px; margin-top: 10px">取消訂閱</button></a>
+							</div>
+						 </div>                 
+						
+						</div>
 					</div>
 				</div>
 
@@ -579,9 +589,7 @@ a:HOVER {
 // 	});
 
 
-	$(document).on(
-			'click',
-			'.panel-heading span.clickable',
+	$(document).on('click','.panel-heading span.clickable',
 			function(e) {
 				var $this = $(this);
 				if (!$this.hasClass('panel-collapsed')) {
@@ -596,9 +604,7 @@ a:HOVER {
 							'glyphicon-minus');
 				}
 			});
-	$(document).on(
-			'click',
-			'.panel div.clickable',
+	$(document).on('click','.panel div.clickable',
 			function(e) {
 				var $this = $(this);
 				if (!$this.hasClass('panel-collapsed')) {
@@ -617,23 +623,48 @@ a:HOVER {
 		$('.panel-heading span.clickable').click();
 
 	});
-	 $('#click>div').on('click','.card-footer>button:nth-child(1)',function(){
-		   if( confirm("確定取消訂閱嗎?")){
-			   $(this).parents('#click').css("display","none")
-			    $.get('/e-Look/MemberBookmarksInsertController', {
-				'courseID' : $(this).parents('#click').find("input").val(),
-				'memberID' : $(this).parents('#click').find("input+input").val()
+	 $('#click2>div').on('click','.card-footer>button:nth-child(2)',function(){
+		   if( confirm("確定刪除草稿嗎?")){
+			   $(this).parents('#click2').css("display","none")
+			    $.get('/e-Look/com.e_Look.Course.control/CourseEditControlloer', {
+				'courseID' : $(this).parents('#click2').find("input").val()
+				//'memberID' : $(this).parents('#click2').find("input+input").val()
 			}, function() {
 			})
 		   }else{
 			   
 		   }
-
+	 });
+		   $('#click>div').on('click','.card-footer>button:nth-child(1)',function(){
+			   if( confirm("確定取消訂閱嗎?")){
+				   $(this).parents('#click').css("display","none")
+				    $.get('/e-Look/MemberBookmarksInsertController', {
+					'courseID' : $(this).parents('#click').find("input").val(),
+					'memberID' : $(this).parents('#click').find("input+input").val()
+				}, function() {
+				})
+			   }else{
+				   
+			   }
+			   
 			 
 // 			$.get('ProductsDelete',{'ProductID':id},function(data){
 // 				alert(data);
 // 				 loadProduct(1);
 // 			})
 });
+		   $('#click3>div').on('click3','.profile-header-img>button:nth-child(1)',function(){
+			   if( confirm("確定取消訂閱嗎?")){
+				   $(this).parents('#click3').css("display","none")
+				    $.get('/e-Look/MemberBookmarksInsertController', {
+					'courseID' : $(this).parents('#click').find("input").val(),
+					'memberID' : $(this).parents('#click').find("input+input").val()
+				}, function() {
+				})
+			   }else{
+				   
+			   }	
+		   });
+
 </script>
 </html>

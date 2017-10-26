@@ -65,6 +65,7 @@ if(shoppingCartList != null){
 }
 body{
 padding-top:75px;
+font-family:Microsoft JhengHei;
 }
 #headerTextStyle{
 font-family: Microsoft JhengHei;
@@ -154,10 +155,12 @@ font-size: 18px;
 							<li style="padding-top:12px"><a href="#"><img
 									src="<%=request.getContextPath()%>/HeaderCssJs/003-coins.png"
 									height="28">募資</a></li>
-							<li style="padding-top:12px"><a href="#"><img
+							<li style="padding-top:12px"><a 
+								href="<%=request.getContextPath()%>/onlineCourse_Home.jsp"><img
 									src="<%=request.getContextPath()%>/HeaderCssJs/002-team.png"
 									height="28">線上課程</a></li>
-							<li style="padding-top:12px"><a href="#"><img
+							<li style="padding-top:12px"><a 
+								href="<%=request.getContextPath()%>/freeCourse_Home.jsp"><img
 									src="<%=request.getContextPath()%>/HeaderCssJs/004-gift.png"
 									height="28">免費課程</a></li>
 							<li style="padding-top:12px"><a
@@ -215,7 +218,6 @@ font-size: 18px;
 											height="24" /></a></li>
 								</c:otherwise>
 							</c:choose>
-
 							<c:choose>
 								<c:when test="${!empty LoginOK}">
 									<li class="dropdown "><a href="#" class=" dropdown-toggle"
@@ -278,9 +280,11 @@ $(function(){
 		$.post('<%=request.getContextPath() %>/LoadShoppingCart',{"memberID":memberID},function(datas){
 			var fg = $(document.createDocumentFragment());
 			$('.cartrows').empty();
-			var totalPrice = 0
-			var courseCount = 0
+			var totalPrice = 0;
+			var courseCount = 0;
 			$.each(datas,function(idx,courseVO){
+				var buyingPrice = getBuyingPrice(courseVO.courseID);
+				var courseClass = getCourseClass(courseVO.courseID);
 				var cell1 = $('<div></div>').addClass('cartrow').val(courseVO.courseID);
 				var cell2 = $('<div></div>').css('text-align','right');
 				var cell3 = $('<div></div>').css(['float','left','width','80%','text-align','left']);
@@ -288,20 +292,26 @@ $(function(){
 				var cell5 = $('<img>').attr({'src':'<%=request.getContextPath() %>/CourseImage?CourseID='+courseVO.courseID,'alt':'<%= request.getContextPath()%>/img/請上傳課程封面.png'});
 				var cell6 = $('<span></span>').addClass('courseTitle').text(courseVO.courseName);
 				var cell7 = $('<br>')
-				var cell8 = $('<span></span>').addClass('courseSubtitle').text('類別1,類別2');
+				var cell8 = $('<span></span>').addClass('courseSubtitle').text(courseClass);
 				var cell9 = $('<span></span>').addClass('courseDelete')
-				var cell10 = $('<br>');				var cell11 = $('<span></span>').addClass('courseDelete').text('$' + courseVO.soldPrice+'元');
+				var cell10 = $('<br>');				var cell11 = $('<span></span>').addClass('courseDelete').text('$' + buyingPrice+'元');
 				cell2.append([cell3,cell4])
 				cell6.append([cell7,cell8,cell9,cell10,cell11])
 				cell1.append([cell2,cell5,cell6])
 				fg.append(cell1)
-				totalPrice+=courseVO.soldPrice;
+				totalPrice+=buyingPrice;
 				courseCount++;
 			})
 			$('.cartrows').append(fg);
 			$('#totalPrice').text('總金額：'+totalPrice+'元');
 			$('#courseCount').text('共'+courseCount+'筆課程');
 			$('.cartcount').text(courseCount);
+			$('#gbmemberID+li>a').attr('data-toggle','dropdown');
+			$('.cartcount').css('display','block');
+			if(courseCount==0){
+				$('.cartcount').css('display','none');
+				$('#gbmemberID+li>a').attr('data-toggle','no');
+			}
 		},'json')
 	$('.cartrows').on('click','button',deleteShoppingCart);
 	}
@@ -311,6 +321,43 @@ $(function(){
 			loadShoppingCart();
 		})
 	}
+	function getBuyingPrice(courseID){
+		var buyingPrice = 99999;
+		$.ajax({'url':'<%=request.getContextPath() %>/GetBuyingPrice',
+				'async':false,
+				'data':{'courseID':courseID},
+				'success':function(result){
+					buyingPrice = parseInt(result);
+				}
+		});//$.ajax end
+		return buyingPrice;
+	};
+	function getCourseClass(courseID){
+		var courseClass="";
+		$.ajax({'url':'<%=request.getContextPath() %>/GetCourseClass',
+			'async':false,
+			'data':{'courseID':courseID},
+			'success':function(result){
+				courseClass = result;
+			}
+	});//$.ajax end
+	return courseClass;
+		
+	}
+	$(function(){
+		$('#intoShoppingCart').on('click',function(){
+			if($("#mbcourseID").val()>1){
+					$.post('<%= request.getContextPath()%>/InsertShoppingCart',{
+						'memberID':$("#mbmemberID").val(),
+						'courseID':$("#mbcourseID").val()
+						},function(){
+							alert("已經加入購物車囉!!");
+							loadShoppingCart();
+						})			
+			}
+		})
+	});
+	
 	
 })
 </script>

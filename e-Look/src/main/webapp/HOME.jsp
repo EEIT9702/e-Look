@@ -9,14 +9,16 @@
 <link rel="Shortcut Icon" type="image/x-icon" href="${SYSTEM.iconUri}" />
 <html>
 <style>
-#title1 {
+#title12 {
 	border-bottom: solid 1px #FF8800;
+	padding-top: 30px;
 }
 </style>
 <style type="text/css">
-#title1{
-padding-top:30px;
+#title1 {
+	padding-top: 30px;
 }
+
 h5 {
 	font-size: 1.28571429em;
 	font-weight: 700;
@@ -137,205 +139,256 @@ h5 {
 	height: 60px;
 	font-size: 30px;
 }
-#course{
-margin-top:20px
+
+#course {
+	margin-top: 20px
 }
+
 a:HOVER {
-	color:black;
+	color: black;
 }
+
+#div1 {
+	width: 100%;
+}
+#body{background-color: #FAEBD7;}
 </style>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 </head>
 
-<body id="body" style="margin-top:50px">
+<body id="body" style="margin-top: 50px">
 	<jsp:include page="/login.jsp" />
-	<jsp:useBean id="course" scope="page" class="com.e_Look.Course.CourseDAO"/>
+	<jsp:useBean id="course" scope="page"
+		class="com.e_Look.Course.CourseDAO" />
+
+	<div class="container-fluid"
+		style="background-color: black; margin: -50px">
+		<div class="row">
+			<div class="col-md-12 col-sm-12">
+				<jsp:include page="advertising.jsp" />
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12" id="title12">
+				<div class="col-md-6 ">
+					<div class="text-left" style="font-size: 28px">熱門課程</div>
+				</div>
+				<div class="col-md-6">
+					<div class="text-right" style="margin-top: 10px">
+						<a class="btu"
+							href="<%=request.getContextPath()%>/onlineCourse_Home.jsp">>>更多課程</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row" style="padding-left: 40px">
+			<!--for each  -->
+			<c:forEach var='listcourse' items='${course.allonlineCourse}'>
+				<c:if test="${listcourse.soldPrice>0}">
+					<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course"
+						style="width: 341px">
+						<a style="text-decoration: none; color: black"
+							; href="<%=request.getContextPath() %>/onlineCourse-v2.jsp?CourseID=${listcourse.courseID}">
+							<div class="card card-inverse" style="background-color: white;">
+								<img class="card-img-top"
+									src="<%=request.getContextPath() %>/CourseImage?CourseID=${listcourse.courseID}"
+									alt="course" id="wizardPicturePreview" title="">
+								<div class="card-block">
+									<figure class="profile">
+										<img
+											src="<%=request.getContextPath() %>/Image?MemberID=${listcourse.memberID}"
+											class="profile-avatar" alt="">
+									</figure>
+									<div class="card-text">
+										<p id="title" class="card-title mt-3 multi_ellipsis">${listcourse.courseName}</p>
+									</div>
+						</a>
+						<div>
+							<p style="margin-top: 40px; font-size: 18px">課程售價：${listcourse.soldPrice}</p>
+						</div>
+					</div>
+					<div class="card-footer">
+						
+						<small>課程時間:${listcourse.courseLength}分鐘</small> <br> <small>購買人數:zzz人</small>
+					</div>
+
+				</div>
+			</div>
+			</c:if>
+			
+
 	
-	<div class="container-fluid" style="background-color: black; margin:-50px">
-		<div class="row">
-			<div class="col-md-12">
-				<jsp:include page="/jay/advertising.jsp" />
-			</div>
-		</div>
-	</div>
 
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<h2 id="title1">熱門課程</h2>
-			</div>
-		</div>
-	</div>
-	<div class="container">
-		<div class="row" style="padding-left:40px">
-		<!--for each  -->
-		 <c:forEach var='listcourse' items='${course.allonlineCourse}'>
-		<c:if test="${listcourse.soldPrice>0}">
-		<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width: 341px">
-		 <a style="text-decoration: none; color:black"; href="<%=request.getContextPath() %>/onlineCourse-v2.jsp?CourseID=${listcourse.courseID}">
+
+	<c:if test="${listcourse.soldPrice==0}">
+		<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course"
+			style="width: 341px">
+			<a style="text-decoration: none; color: black"
+				; href="<%=request.getContextPath() %>/freeCourse-v1.jsp?CourseID=${listcourse.courseID}">
 				<div class="card card-inverse" style="background-color: white;">
-					<img class="card-img-top" src="<%=request.getContextPath() %>/CourseImage?CourseID=${listcourse.courseID}" alt="course"
-						id="wizardPicturePreview" title="">
+					<img class="card-img-top"
+						src="<%=request.getContextPath() %>/CourseImage?CourseID=${listcourse.courseID}"
+						alt="course" id="wizardPicturePreview" title="">
 					<div class="card-block">
 						<figure class="profile">
-							<img src="<%=request.getContextPath() %>/Image?MemberID=${listcourse.memberID}" class="profile-avatar" alt="">
+							<img
+								src="<%=request.getContextPath() %>/Image?MemberID=${listcourse.memberID}"
+								class="profile-avatar" alt="">
 						</figure>
 						<div class="card-text">
 							<p id="title" class="card-title mt-3 multi_ellipsis">${listcourse.courseName}</p>
 						</div>
 			</a>
-						<div>
-							<p style="margin-top: 40px; font-size: 18px">課程售價：${listcourse.soldPrice}</p>
-						</div>
-					</div>
-					<div class="card-footer">
-						<button class="btn-info btn-sm pull-right"
-							style="margin-bottom: 5px; margin-top: 10px">加入書籤</button>
-						<small>課程時間:${listcourse.courseLength}分鐘</small> <br> <small>購買人數:zzz人</small>
+			<div>
+				<p style="margin-top: 40px; font-size: 18px">課程售價：${listcourse.soldPrice}</p>
+			</div>
+		</div>
+		<div class="card-footer">
+			
+			<small>課程時間:${listcourse.courseLength}分鐘</small> <br> <small>購買人數:zzz人</small>
+		</div>
+	</div>
+	</div>
+	</c:if>
+	</c:forEach>
+	<!--for each  -->
+
+	</div>
+	</div>
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-12" id="title12">
+				<div class="col-md-6 " >
+					<div class="text-left" style="font-size: 28px">募資課程</div>
+				</div>
+				<div class="col-md-6">
+					<div class="text-right" style="margin-top: 10px">
+						<a class="btu"
+							href="<%=request.getContextPath()%>/progressUpload.jsp">>>更多課程</a>
 					</div>
 				</div>
 			</div>
-			</c:if>
-			
-			<c:if test="${listcourse.soldPrice==0}">
-		<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width: 341px">
-		 <a style="text-decoration: none; color:black"; href="<%=request.getContextPath() %>/freeCourse-v1.jsp?CourseID=${listcourse.courseID}">
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row" style="padding-left: 40px">
+			<!-- 	1 -->
+			<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course"
+				style="width: 341px">
 				<div class="card card-inverse" style="background-color: white;">
-					<img class="card-img-top" src="<%=request.getContextPath() %>/CourseImage?CourseID=${listcourse.courseID}" alt="course"
+					<img class="card-img-top"
+						src="<%=request.getContextPath()%>/img/請上傳課程封面.png" alt="course"
 						id="wizardPicturePreview" title="">
 					<div class="card-block">
 						<figure class="profile">
-							<img src="<%=request.getContextPath() %>/Image?MemberID=${listcourse.memberID}" class="profile-avatar" alt="">
+							<img src="<%=request.getContextPath()%>/img/eLook_LOGO1.png"
+								class="profile-avatar" alt="">
 						</figure>
 						<div class="card-text">
-							<p id="title" class="card-title mt-3 multi_ellipsis">${listcourse.courseName}</p>
+							<p id="title" class="card-title mt-3 multi_ellipsis">這裡請輸入課程標題</p>
 						</div>
-			</a>
 						<div>
-							<p style="margin-top: 40px; font-size: 18px">課程售價：${listcourse.soldPrice}</p>
+							<p style="margin-top: 40px; font-size: 18px">課程售價：xxx元</p>
 						</div>
 					</div>
 					<div class="card-footer">
 						<button class="btn-info btn-sm pull-right"
 							style="margin-bottom: 5px; margin-top: 10px">加入書籤</button>
-						<small>課程時間:${listcourse.courseLength}分鐘</small> <br> <small>購買人數:zzz人</small>
+						<small>課程時間:yyy分鐘</small> <br> <small>購買人數:zzz人</small>
 					</div>
 				</div>
 			</div>
-			</c:if>
-			</c:forEach>
-		<!--for each  -->
-
-			</div>
-			</div>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<h2 id="title1">募資課程</h2>
+			<!-- 2 -->
+			<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course"
+				style="width: 341px">
+				<div class="card card-inverse" style="background-color: white;">
+					<img class="card-img-top"
+						src="<%=request.getContextPath()%>/img/請上傳課程封面.png" alt="course"
+						id="wizardPicturePreview" title="">
+					<div class="card-block">
+						<figure class="profile">
+							<img src="<%=request.getContextPath()%>/img/eLook_LOGO1.png"
+								class="profile-avatar" alt="">
+						</figure>
+						<div class="card-text">
+							<p id="title" class="card-title mt-3 multi_ellipsis">這裡請輸入課程標題</p>
+						</div>
+						<div>
+							<p style="margin-top: 40px; font-size: 18px">課程售價：xxx元</p>
+						</div>
+					</div>
+					<div class="card-footer">
+						<button class="btn-info btn-sm pull-right"
+							style="margin-bottom: 5px; margin-top: 10px">加入書籤</button>
+						<small>課程時間:yyy分鐘</small> <br> <small>購買人數:zzz人</small>
 					</div>
 				</div>
 			</div>
-			
-			<div class="container">
-				<div class="row"style="padding-left:40px">
-					<!-- 	1 -->
-					<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width: 341px">
-						<div class="card card-inverse" style="background-color: white;">
-							<img class="card-img-top" src="<%=request.getContextPath()%>/img/請上傳課程封面.png" alt="course"
-								id="wizardPicturePreview" title="">
-							<div class="card-block">
-								<figure class="profile">
-									<img src="<%=request.getContextPath()%>/img/eLook_LOGO1.png" class="profile-avatar" alt="">
-								</figure>
-								<div class="card-text">
-									<p id="title" class="card-title mt-3 multi_ellipsis">這裡請輸入課程標題</p>
-								</div>
-								<div>
-									<p style="margin-top: 40px; font-size: 18px">課程售價：xxx元</p>
-								</div>
-							</div>
-							<div class="card-footer">
-								<button class="btn-info btn-sm pull-right"
-									style="margin-bottom: 5px; margin-top: 10px">加入書籤</button>
-								<small>課程時間:yyy分鐘</small> <br> <small>購買人數:zzz人</small>
-							</div>
+			<!-- 			3 -->
+			<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course"
+				style="width: 341px">
+				<div class="card card-inverse" style="background-color: white;">
+					<img class="card-img-top"
+						src="<%=request.getContextPath()%>/img/請上傳課程封面.png" alt="course"
+						id="wizardPicturePreview" title="">
+					<div class="card-block">
+						<figure class="profile">
+							<img src="<%=request.getContextPath()%>/img/eLook_LOGO1.png"
+								class="profile-avatar" alt="">
+						</figure>
+						<div class="card-text">
+							<p id="title" class="card-title mt-3 multi_ellipsis">這裡請輸入課程標題</p>
+						</div>
+						<div>
+							<p style="margin-top: 40px; font-size: 18px">課程售價：xxx元</p>
 						</div>
 					</div>
-					<!-- 2 -->
-					<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width: 341px">
-						<div class="card card-inverse" style="background-color: white;">
-							<img class="card-img-top" src="<%=request.getContextPath()%>/img/請上傳課程封面.png" alt="course"
-								id="wizardPicturePreview" title="">
-							<div class="card-block">
-								<figure class="profile">
-									<img src="<%=request.getContextPath()%>/img/eLook_LOGO1.png" class="profile-avatar" alt="">
-								</figure>
-								<div class="card-text">
-									<p id="title" class="card-title mt-3 multi_ellipsis">這裡請輸入課程標題</p>
-								</div>
-								<div>
-									<p style="margin-top: 40px; font-size: 18px">課程售價：xxx元</p>
-								</div>
-							</div>
-							<div class="card-footer">
-								<button class="btn-info btn-sm pull-right"
-									style="margin-bottom: 5px; margin-top: 10px">加入書籤</button>
-								<small>課程時間:yyy分鐘</small> <br> <small>購買人數:zzz人</small>
-							</div>
-						</div>
-					</div>
-					<!-- 			3 -->
-					<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width: 341px">
-						<div class="card card-inverse" style="background-color: white;">
-							<img class="card-img-top" src="<%=request.getContextPath()%>/img/請上傳課程封面.png" alt="course"
-								id="wizardPicturePreview" title="">
-							<div class="card-block">
-								<figure class="profile">
-									<img src="<%=request.getContextPath()%>/img/eLook_LOGO1.png" class="profile-avatar" alt="">
-								</figure>
-								<div class="card-text">
-									<p id="title" class="card-title mt-3 multi_ellipsis">這裡請輸入課程標題</p>
-								</div>
-								<div>
-									<p style="margin-top: 40px; font-size: 18px">課程售價：xxx元</p>
-								</div>
-							</div>
-							<div class="card-footer">
-								<button class="btn-info btn-sm pull-right"
-									style="margin-bottom: 5px; margin-top: 10px">加入書籤</button>
-								<small>課程時間:yyy分鐘</small> <br> <small>購買人數:zzz人</small>
-							</div>
-						</div>
-					</div>
-					<!-- 4 -->
-					<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width: 341px">
-						<div class="card card-inverse" style="background-color: white;">
-							<img class="card-img-top" src="<%=request.getContextPath()%>/img/請上傳課程封面.png" alt="course"
-								id="wizardPicturePreview" title="">
-							<div class="card-block">
-								<figure class="profile">
-									<img src="<%=request.getContextPath()%>/img/eLook_LOGO1.png" class="profile-avatar" alt="">
-								</figure>
-								<div class="card-text">
-									<p id="title" class="card-title mt-3 multi_ellipsis">這裡請輸入課程標題</p>
-								</div>
-								<div>
-									<p style="margin-top: 40px; font-size: 18px">課程售價：xxx元</p>
-								</div>
-							</div>
-							<div class="card-footer">
-								<button class="btn-info btn-sm pull-right"
-									style="margin-bottom: 5px; margin-top: 10px">加入書籤</button>
-								<small>課程時間:yyy分鐘</small> <br> <small>購買人數:zzz人</small>
-							</div>
-						</div>
+					<div class="card-footer">
+						<button class="btn-info btn-sm pull-right"
+							style="margin-bottom: 5px; margin-top: 10px">加入書籤</button>
+						<small>課程時間:yyy分鐘</small> <br> <small>購買人數:zzz人</small>
 					</div>
 				</div>
 			</div>
-			<c:remove var="err" scope="session"/>
-			<c:remove var="loginerr" scope="session"/>
-<jsp:include page="/footer.jsp" />
+			<!-- 4 -->
+			<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course"
+				style="width: 341px">
+				<div class="card card-inverse" style="background-color: white;">
+					<img class="card-img-top"
+						src="<%=request.getContextPath()%>/img/請上傳課程封面.png" alt="course"
+						id="wizardPicturePreview" title="">
+					<div class="card-block">
+						<figure class="profile">
+							<img src="<%=request.getContextPath()%>/img/eLook_LOGO1.png"
+								class="profile-avatar" alt="">
+						</figure>
+						<div class="card-text">
+							<p id="title" class="card-title mt-3 multi_ellipsis">這裡請輸入課程標題</p>
+						</div>
+						<div>
+							<p style="margin-top: 40px; font-size: 18px">課程售價：xxx元</p>
+						</div>
+					</div>
+					<div class="card-footer">
+						<button class="btn-info btn-sm pull-right"
+							style="margin-bottom: 5px; margin-top: 10px">加入書籤</button>
+						<small>課程時間:yyy分鐘</small> <br> <small>購買人數:zzz人</small>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<c:remove var="err" scope="session" />
+	<c:remove var="loginerr" scope="session" />
+	<jsp:include page="/footer.jsp" />
 </body>
 </html>
