@@ -328,6 +328,14 @@ public class CourseDAO implements CourseDAO_interface {
 		}
 		return courseVO;
 	}
+	//給開
+	
+	
+	
+	
+	
+	
+	
 	//會員後臺管理(選擇我的草稿、我開的課)、管理員後台待審核中的課程列表
 	@Override
 	public List<CourseVO> findBymemberID(Integer memberID, Integer status) {

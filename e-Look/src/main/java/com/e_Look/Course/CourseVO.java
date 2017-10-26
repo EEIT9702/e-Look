@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.sql.Date;
 
 public class CourseVO implements Serializable {
+	
+
 	private static final long serialVersionUID = 1L;
 	
 	private Integer courseID;
@@ -210,5 +212,6 @@ public class CourseVO implements Serializable {
 	public void setCourseVideopathway(String courseVideopathway) {
 		this.courseVideopathway = courseVideopathway;
 	};
+	
 	
 }
