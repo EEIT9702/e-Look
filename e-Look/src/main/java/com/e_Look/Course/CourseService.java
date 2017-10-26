@@ -68,5 +68,10 @@ public class CourseService {
 		return dao.findByPrimaryKey(courseID);
 		
 	}
+	public void deleteCourse(Integer courseID) {
+
+			dao.delete(courseID);
+		
+	}
 
 }

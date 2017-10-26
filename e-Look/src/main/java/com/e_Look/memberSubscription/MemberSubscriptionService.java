@@ -2,15 +2,18 @@ package com.e_Look.memberSubscription;
 
 import java.util.List;
 
-public class MemberBookmarksService {
+public class MemberSubscriptionService {
 	private MemberSubscriptionDAO_interface dao;
 
-	public MemberBookmarksService() {
+	public MemberSubscriptionService() {
 		dao = new MemberSubscriptionDAO();
 	}
 
-	public void insertMemberBookmarks(Integer memberID,Integer courseID) {
-		dao.insert(MemberSubscriptionVO memberSubscriptionVO);
+	public void insertMemberBookmarks(Integer memberID,Integer memberTrackID) {
+		MemberSubscriptionVO memberSubscriptionVO =new MemberSubscriptionVO();
+		memberSubscriptionVO.setMemberID(memberID);
+		memberSubscriptionVO.setMemberTrackID(memberTrackID);
+		dao.insert(memberSubscriptionVO);
 		
 	}
 
