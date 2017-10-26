@@ -512,7 +512,7 @@ a:HOVER {
 								class="glyphicon glyphicon-plus"></i></span>
 						</div>
 						<div class="panel-body" style="display: none;">
-						<div class=" col-md-4  col-sm-4" style="width: 211px">
+						<div  id="click2" class=" col-md-4  col-sm-4" style="width: 211px">
 								<div class="card card-inverse">
 									<img class="card-img-top"
 										src="<%=request.getContextPath()%>/Class Steps/imgs/請上傳課程封面.png"
@@ -532,7 +532,7 @@ a:HOVER {
 									
 										<button class="btn-info btn-sm "
 											style="margin-bottom: 5px; margin-top: 10px">編輯</button>
-											<button class="btn-danger btn-sm "
+											<button class="btn-danger btn-sm pull-right"
 											style="margin-bottom: 5px; margin-top: 10px">刪除</button>
 									</div>
 								</div>
@@ -579,9 +579,7 @@ a:HOVER {
 // 	});
 
 
-	$(document).on(
-			'click',
-			'.panel-heading span.clickable',
+	$(document).on('click','.panel-heading span.clickable',
 			function(e) {
 				var $this = $(this);
 				if (!$this.hasClass('panel-collapsed')) {
@@ -596,9 +594,7 @@ a:HOVER {
 							'glyphicon-minus');
 				}
 			});
-	$(document).on(
-			'click',
-			'.panel div.clickable',
+	$(document).on('click','.panel div.clickable',
 			function(e) {
 				var $this = $(this);
 				if (!$this.hasClass('panel-collapsed')) {
@@ -617,17 +613,29 @@ a:HOVER {
 		$('.panel-heading span.clickable').click();
 
 	});
-	 $('#click>div').on('click','.card-footer>button:nth-child(1)',function(){
-		   if( confirm("確定取消訂閱嗎?")){
-			   $(this).parents('#click').css("display","none")
-			    $.get('/e-Look/MemberBookmarksInsertController', {
-				'courseID' : $(this).parents('#click').find("input").val(),
-				'memberID' : $(this).parents('#click').find("input+input").val()
-			}, function() {
-			})
+	 $('#click2>div').on('click','.card-footer>button:nth-child(2)',function(){
+		   if( confirm("確定刪除草稿嗎?")){
+			   $(this).parents('#click2').css("display","none")
+// 			    $.get('/e-Look/MemberBookmarksInsertController', {
+// 				'courseID' : $(this).parents('#click').find("input").val(),
+// 				'memberID' : $(this).parents('#click').find("input+input").val()
+// 			}, function() {
+// 			})
 		   }else{
 			   
 		   }
+	 });
+		   $('#click>div').on('click','.card-footer>button:nth-child(1)',function(){
+			   if( confirm("確定取消訂閱嗎?")){
+				   $(this).parents('#click').css("display","none")
+				    $.get('/e-Look/MemberBookmarksInsertController', {
+					'courseID' : $(this).parents('#click').find("input").val(),
+					'memberID' : $(this).parents('#click').find("input+input").val()
+				}, function() {
+				})
+			   }else{
+				   
+			   }
 
 			 
 // 			$.get('ProductsDelete',{'ProductID':id},function(data){

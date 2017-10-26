@@ -473,7 +473,7 @@ $(function() {
 			processData : false,
 			contentType : false,
 			success: function(){
-				$("#updatainfo").fadeIn(2000);
+				$("#updatainfo").fadeIn(1000);
 				setTimeout(function(){
 					$("#updatainfo").fadeOut(5000);
 				}, 1000);
@@ -496,7 +496,7 @@ $(function() {
 			success: function(){
 				$("#updatainfo").fadeIn(1000);
 				setTimeout(function(){
-					$("#updatainfo").fadeOut(1000);
+					$("#updatainfo").fadeOut(5000);
 				}, 1000);
 // 				$('#sendOK').modal()
 // 				$('#sendOK h3').text("更新成功")
