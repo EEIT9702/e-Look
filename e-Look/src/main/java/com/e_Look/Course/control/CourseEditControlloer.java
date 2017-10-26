@@ -108,17 +108,16 @@ public class CourseEditControlloer extends HttpServlet {
 		String[] CourseClass = request.getParameterValues("CourseClass");
 		if (CourseClass != null) {
 			if (CourseClass.length > 0) {
-				CourseClassDetailsDAO dao1 = new CourseClassDetailsDAO();
-				if (dao1.findBycourseID(courseID) != null) {
+				CourseClassDetailsDAO dao1 = new CourseClassDetailsDAO();//先載入課程類別清單CourseClassDetailsDAO，建立dao1物件
 					dao1.delete(courseID);
-				}
 				for (int i = 0; i < CourseClass.length; i++) {
-					CourseVO courseVO2 = new CourseVO();
-					courseVO2.setCourseID(courseID);
-					courseVO2.setCourseName(courseName);
-					CourseClassDAO dao = new CourseClassDAO();
+					CourseVO courseVO2 = new CourseVO();//建立CourseVO2物件
+					courseVO2.setCourseID(courseID);//將取到的courseID用set方法放到courseVO2
+					courseVO2.setCourseName(courseName);//將取到的courseName用set方法放到courseVO2
+					CourseClassDAO dao = new CourseClassDAO();//先載入課程類別CourseClassDAO，並建立dao物件
+					//先載入課程類別(CourseClassVO)的VO，使用CourseClassDAO的getByCourseClassID方法取得courseClassVO物件存入courseClassVO
 					CourseClassVO courseClassVO = dao.getByCourseClassID(Integer.valueOf(CourseClass[i]));
-					dao1.insert(courseVO2, courseClassVO);
+					dao1.insert(courseVO2, courseClassVO);//使用CourseClassDetailsDAO的方法，存入課程類別明細
 				}
 				// System.out.println("myCheckBoxValue:"+CourseClass[i]);
 			}

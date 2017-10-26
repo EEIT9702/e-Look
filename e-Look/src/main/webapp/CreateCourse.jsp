@@ -82,7 +82,7 @@
 																			"#updateConfirm")
 																			.fadeOut(
 																					1500);
-																}, 500);
+																}, 1000);
 
 													}
 
@@ -173,7 +173,7 @@
 													<i class="glyphicon glyphicon-list"></i>
 												</div>
 												<div class="update-text">
-													<strong>步驟一1456、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
+													<strong>步驟一、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
 												</div>
 											</div>
 										</div>
@@ -912,7 +912,7 @@
 												$("#updateConfirm").fadeOut(
 														1500);
 
-											}, 500);
+											}, 1000);
 										}
 									})		
 						
@@ -983,7 +983,7 @@
 												$("#updateConfirm").fadeOut(
 														1500);
 
-											}, 500);
+											}, 1000);
 										},
 										error : function() {
 											alert("請輸入正確的格式!");
@@ -1014,7 +1014,7 @@
 												$("#updateConfirm").fadeOut(
 														1500);
 
-											}, 500);
+											}, 1000);
 										}
 									})
 						})
@@ -1042,7 +1042,7 @@
 												$("#updateConfirm").fadeOut(
 														1500);
 
-											}, 500);
+											}, 1000);
 										}
 									})
 						})
