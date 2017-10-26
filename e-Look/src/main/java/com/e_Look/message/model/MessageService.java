@@ -40,7 +40,7 @@ public class MessageService {
 		messageVO.setStatus(status);
 		dao.update(messageVO,update);
 
-		return dao.findByPrimaryKey(messageID);
+		return dao.findByPrimaryKey(courseID);
 	}
 	
 	
@@ -49,8 +49,8 @@ public class MessageService {
 		dao.delete(messageID);
 	}
 
-	public MessageVO getOneMessage(Integer messageID) {
-		return dao.findByPrimaryKey(messageID);
+	public MessageVO getOneMessage(Integer courseID) {
+		return dao.findByPrimaryKey(courseID);
 	}
 
 	public List<MessageVO> getAll() {

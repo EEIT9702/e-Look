@@ -32,7 +32,7 @@ public class MessageDAO implements MessageDAO_interface {
 //	private static final String UPDATE_MESSAGE_RESPONSE = "update Message set mContent=?, mTime=? where messageID= ?";
 	private static final String UPDATE_STATUS = "update Message set status=? where messageID= ?";
 	private static final String DELETE_MESSAGE = "delete from Message where messageID= ?";
-	private static final String SELECT_ONE_MESSAGE = "select messageID,mContent,mTime,messageID_response,memberID,courseID,bought,status from Message where messageID= ?";
+	private static final String SELECT_ONE_MESSAGE = "select messageID,mContent,mTime,messageID_response,memberID,courseID,bought,status from Message where courseID= ?";
 	private static final String SELECT_ALL_MESSAGE = "select messageID,mContent,mTime,messageID_response,memberID,courseID,bought,status from Message";	
 		
 	@Override
@@ -165,14 +165,14 @@ public class MessageDAO implements MessageDAO_interface {
 	}
 
 	@Override
-	public MessageVO findByPrimaryKey(Integer messageID) {
+	public MessageVO findByPrimaryKey(Integer courseID) {
 		MessageVO messageVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_ONE_MESSAGE);
-			pstmt.setInt(1, messageID);
+			pstmt.setInt(1, courseID);
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
 				messageVO = new MessageVO();

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.e_Look.Course.CourseVO;
 import com.e_Look.member.model.MemberService;
 import com.e_Look.member.model.MemberVO;
 import com.e_Look.message.model.MessageDAO;
@@ -81,24 +82,25 @@ public class MessageController extends HttpServlet {
 //				MessageDAO md;
 //要再轉型   		MessageVO mb = new MessageVO(messageID, mContent, mTime, messageID_response, memberID,courseID,bought,status);
 				
-//				MessageVO messageVO1= new MessageVO();
+				MessageVO messageVO1= new MessageVO();
 //				messageVO1.setmContent(mContent);
 //				messageVO1.setmTime();
-//				MemberVO member=(MemberVO)session.getAttribute("LoginOK");
+				MemberVO member=(MemberVO)session.getAttribute("LoginOK");
+				Integer memberID = member.getMemberID();
 //				messageVO1.setMemberID(member.getMemberID());
 //				messageVO1.setMemberID(100001);
 //				messageVO1.setCourseID(200001);
 //				messageVO1.setBought((long) 123);
 //				messageVO1.setStatus((byte) 1);
 				
-				Integer memberID = 100001;
+//				Integer memberID = 100001;
 				Integer courseID = 200001;
 				Long bought= (long)123;
 				Byte status= 1;
 				
 				
 				messageVO = service.addMessage(mContent, memberID,courseID,bought,status);
-				
+				session.setAttribute("MessageVO", messageVO);
 				session.setAttribute("MessageInsertOK", "新增留言成功");
 				response.sendRedirect(request.getContextPath() +"/_Ccc/Message.jsp");
 				} catch (Exception e) {
@@ -214,14 +216,17 @@ public class MessageController extends HttpServlet {
 
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-				String str = request.getParameter("messageID");
-								
-				Integer messageID = null;
-				messageID = new Integer(str);
+				
+				CourseVO course=(CourseVO)session.getAttribute("CourseVO");
+				Integer courseID = course.getCourseID();
+//				String str = request.getParameter("courseID");
+//								
+//				Integer courseID = null;
+//				courseID = new Integer(str);
 								
 				/***************************2.開始查詢資料*****************************************/
 				MessageService messageSvc = new MessageService();
-				MessageVO messageVO = messageSvc.getOneMessage(messageID);
+				MessageVO messageVO = messageSvc.getOneMessage(courseID);
 				if (messageVO == null) {
 					errorMsgs.add("查無資料");
 				}
