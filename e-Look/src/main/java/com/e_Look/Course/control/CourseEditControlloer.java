@@ -49,11 +49,13 @@ public class CourseEditControlloer extends HttpServlet {
 		String background = request.getParameter("background");
 		String ability = request.getParameter("ability");
 		String targetgroup = request.getParameter("targetgroup");		
+				
 		Integer soldPrice=0;
 		String soldPriceTEST = request.getParameter("soldPrice");
-		if (!soldPriceTEST.equals("")){
+		if (soldPriceTEST!=null){
+			if(soldPriceTEST.length()>0){
 			 soldPrice = new Integer(request.getParameter("soldPrice"));
-		}
+		}}
 		
 		Integer courseLength=0;
 		String courseLengthTEST=request.getParameter("courseLength");
