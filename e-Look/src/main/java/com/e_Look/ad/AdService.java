@@ -30,4 +30,7 @@ public class AdService {
 		dao.update(AdVO);
 	}
 
+	public List<AdVO> findByStatus() {
+		return dao.findByStatus();
+	}
 }

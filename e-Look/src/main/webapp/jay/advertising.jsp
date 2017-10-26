@@ -5,7 +5,7 @@
 <%@ page import="com.e_Look.ad.*"%>
 <%
 	AdService svc = new AdService();
-	List<AdVO> list = svc.getAll();
+	List<AdVO> list = svc.findByStatus();
 	pageContext.setAttribute("list", list);
 %>
 <!DOCTYPE>
