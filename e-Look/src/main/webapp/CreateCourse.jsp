@@ -173,7 +173,7 @@
 													<i class="glyphicon glyphicon-list"></i>
 												</div>
 												<div class="update-text">
-													<strong>步驟一、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
+													<strong>步驟一1456、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
 												</div>
 											</div>
 										</div>
@@ -279,18 +279,18 @@
 											<div>
 												<div style="font-size: 15pt">
 
-													<INPUT TYPE="checkbox" NAME="CourseClass" value="101" onClick="choose()">生活
-													<INPUT TYPE="checkbox" NAME="CourseClass" value="102" onClick="choose()">藝術
-													<INPUT TYPE="checkbox" NAME="CourseClass" value="103" onClick="choose()">運動
-													<INPUT TYPE="checkbox" NAME="CourseClass" value="104" onClick="choose()">影音<br>
-													<INPUT TYPE="checkbox" NAME="CourseClass" value="105" onClick="choose()">手作
-													<INPUT TYPE="checkbox" NAME="CourseClass" value="106" onClick="choose()">其他
-													<INPUT TYPE="checkbox" NAME="CourseClass" value="107" onClick="choose()">設計
-													<INPUT TYPE="checkbox" NAME="CourseClass" value="108" onClick="choose()">科技<br>
-													<INPUT TYPE="checkbox" NAME="CourseClass" value="109" onClick="choose()">商業
-													<INPUT TYPE="checkbox" NAME="CourseClass" value="110" onClick="choose()">語言
-													<INPUT TYPE="checkbox" NAME="CourseClass" value="111" onClick="choose()">烹飪
-													<INPUT TYPE="checkbox" NAME="CourseClass" value="112" onClick="choose()">程式
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="101">生活				
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="102">藝術			
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="103">運動
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="104">影音<br>		
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="105">手作
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="106">其他
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="107">設計	
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="108">科技<br>
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="109">商業
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="110">語言
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="111">烹飪
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="112">程式
 
 												</div>
 											</div>
@@ -780,28 +780,17 @@
 			}
 		}
 
-		function choose() {
-			var n = 12; //checkbox的數量
-			var limit = 3; //限制勾選的數量
-			var j = 0; //已勾選的數量
-			var f = document.forms[3];
-			limit--;
-			for (i = 1; i <= n; i++) {
-				eval("t1 = f.checkbox" + i + ".checked");
-				if (t1)
-					j++;
-			}
-			if (j > limit) {
-				for (i = 1; i <= n; i++) {
-					eval("t2 = f.checkbox" + i + ".checked");
-					if (!t2)
-						eval("f.checkbox" + i + ".disabled = true");
-				}
-			} else {
-				for (i = 1; i <= n; i++)
-					eval("f.checkbox" + i + ".disabled = false");
-			}
-		}
+		 $(document).ready(function() {
+		        $('input[type=checkbox]').click(function() {
+		            $("input[name='CourseClass']").attr('disabled', true);
+		            if ($("input[name='CourseClass']:checked").length >= 3) {
+		                $("input[name='CourseClass']:checked").attr('disabled', false);
+		            } else {
+		                $("input[name='CourseClass']").attr('disabled', false);
+		            }
+		        });
+		 
+		    })
 
 		$("#CourseInput").keyup(function() {
 			var value = $(this).val();
