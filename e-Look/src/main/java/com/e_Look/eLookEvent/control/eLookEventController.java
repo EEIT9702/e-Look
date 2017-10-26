@@ -137,12 +137,11 @@ public class eLookEventController extends HttpServlet {
 			}
 			// 以下練習正則(規)表示式(regular-expression)
 			java.sql.Date eStartDate = null;
-			try {System.out.println("1");
+			try {
 				eStartDate = java.sql.Date.valueOf(req.getParameter("eStartDate").trim());
 			} catch (IllegalArgumentException e) {
 				eStartDate = new java.sql.Date(System.currentTimeMillis());
 				
-				System.out.println("2");
 			}
 
 			java.sql.Date eEndDate = null;
