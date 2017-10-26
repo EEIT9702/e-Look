@@ -370,40 +370,40 @@ function river(){
 	<div class="col-md-8 col-sm-10 col-xs-12 cclass">
 
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center" style="" >
-			<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/life.svg"><p alt="109" class="pstyle">生活</p>
+			<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/life.svg"><p alt="101" class="pstyle">生活</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/arts.svg"><p alt="104" class="pstyle">藝術</p>
+				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/arts.svg"><p alt="102" class="pstyle">藝術</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-			<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/athletics.svg"><p alt="108" class="pstyle">運動</p>
+			<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/athletics.svg"><p alt="103" class="pstyle">運動</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-			<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/video.svg"><p alt="110" class="pstyle">影音</p>
+			<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/video.svg"><p alt="104" class="pstyle">影音</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
 			<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/hand-made.svg"><p alt="105" class="pstyle">手作</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-			<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/other.svg"><p alt="112" class="pstyle">其他</p>
+			<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/other.svg"><p alt="106" class="pstyle">其他</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/design.svg"><p alt="106" class="pstyle">設計</p>
+				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/design.svg"><p alt="107" class="pstyle">設計</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/science.svg"><p alt="111" class="pstyle">科技</p>
+				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/science.svg"><p alt="108" class="pstyle">科技</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/business.svg"><p alt="102" class="pstyle">商業</p>
+				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/business.svg"><p alt="109" class="pstyle">商業</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/language.svg"><p alt="107" class="pstyle">語言</p>
+				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/language.svg"><p alt="110" class="pstyle">語言</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/cooking.svg"><p alt="101" class="pstyle">烹飪</p>
+				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/cooking.svg"><p alt="111" class="pstyle">烹飪</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/program.svg"><p alt="103" class="pstyle">程式</p>
+				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/program.svg"><p alt="112" class="pstyle">程式</p>
 		</div>
 	
 
