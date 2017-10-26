@@ -29,7 +29,10 @@ public class CourseEditControlloer extends HttpServlet {
 	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		//Integer memberID= Integer.valueOf(request.getParameter("memberID"));
+		Integer courseID= Integer.valueOf(request.getParameter("courseID"));
+		CourseService courseService=new CourseService();
+		courseService.deleteCourse(courseID);
 	}
 
 	/**
@@ -46,11 +49,13 @@ public class CourseEditControlloer extends HttpServlet {
 		String background = request.getParameter("background");
 		String ability = request.getParameter("ability");
 		String targetgroup = request.getParameter("targetgroup");		
+				
 		Integer soldPrice=0;
 		String soldPriceTEST = request.getParameter("soldPrice");
-		if (!soldPriceTEST.equals("")){
+		if (soldPriceTEST!=null){
+			if(soldPriceTEST.length()>0){
 			 soldPrice = new Integer(request.getParameter("soldPrice"));
-		}
+		}}
 		
 		Integer courseLength=0;
 		String courseLengthTEST=request.getParameter("courseLength");
@@ -92,6 +97,7 @@ public class CourseEditControlloer extends HttpServlet {
 		courseVO= new CourseVO(courseID,courseName,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseContent);
 		service.updateCourseContent(courseVO);		
 		service.updateCourseImage(courseID, request.getPart("picture"));
+		service.updateCoursePaper(courseID, request.getPart("paper"));
 		
 	}
 

@@ -147,7 +147,7 @@ public class CourseClassDAO_JDBC implements CourseClass_interface{
 
 	
 	@Override
-	public CourseClassVO findByCourseClassID(Integer CourseClassID) {
+	public CourseClassVO getByCourseClassID(Integer CourseClassID) {
 		CourseClassVO courseClassVO = null;
 		eLookEventVO eventVO = null;
 		Connection conn = null;
@@ -197,7 +197,7 @@ public class CourseClassDAO_JDBC implements CourseClass_interface{
 	
 	}
 
-	public List<CourseClassVO> findByEventID(Integer eventID){
+	public List<CourseClassVO> getByEventID(Integer eventID){
 		
 		List<CourseClassVO> event_courseClass = new LinkedList<CourseClassVO>();
 		eLookEventVO eventVO = null;
@@ -308,7 +308,7 @@ public class CourseClassDAO_JDBC implements CourseClass_interface{
 //		dao.insert(courseClassVO1);
 		
 //		查詢一筆
-		CourseClassVO courseClassVO2 = dao.findByCourseClassID(101);
+		CourseClassVO courseClassVO2 = dao.getByCourseClassID(101);
 		System.out.print(courseClassVO2.getCourseClassID() + ",");
 		System.out.print(courseClassVO2.getCcName() + ",");
 		System.out.print(courseClassVO2.getEventVO().getEventID() + "\n");
