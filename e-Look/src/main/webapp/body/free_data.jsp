@@ -48,7 +48,7 @@
 				</div>
 			</div>
 			<div class="card-footer">
-				<button class="btn-info btn-sm pull-right" style="margin-bottom: 5px; margin-top: 10px">加入書籤</button>
+<!-- 				<button class="btn-info btn-sm pull-right" style="margin-bottom: 5px; margin-top: 10px">加入書籤</button> -->
 				<small>課程時間:${freeCourse.courseLength}分鐘</small>
 				<br>
 				<small>購買人數:xxx人</small>
