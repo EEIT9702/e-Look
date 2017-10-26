@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.e_Look.eLookEvent.eLookEventDAO;
+import com.e_Look.eLookEvent.eLookEventDAO_JDBC;
 import com.e_Look.eLookEvent.eLookEventVO;
 
 
@@ -153,7 +154,7 @@ public class CourseClassDAO_JDBC implements CourseClass_interface{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		eLookEventDAO eedao = new eLookEventDAO(); 
+		eLookEventDAO_JDBC eedao = new eLookEventDAO_JDBC(); 
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url, userid, passwd);
@@ -198,7 +199,7 @@ public class CourseClassDAO_JDBC implements CourseClass_interface{
 	public List<CourseClassVO> getByEventID(Integer eventID){
 		
 		List<CourseClassVO> event_courseClass = new LinkedList<CourseClassVO>();
-		eLookEventDAO eedao = new eLookEventDAO(); 
+		eLookEventDAO_JDBC eedao = new eLookEventDAO_JDBC(); 
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -251,7 +252,7 @@ public class CourseClassDAO_JDBC implements CourseClass_interface{
 	public List<CourseClassVO> getAll() {
 		
 		List<CourseClassVO> event_courseClass = new LinkedList<CourseClassVO>();
-		eLookEventDAO eedao = new eLookEventDAO(); 
+		eLookEventDAO_JDBC eedao = new eLookEventDAO_JDBC(); 
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;

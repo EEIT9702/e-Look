@@ -465,21 +465,21 @@ a:HOVER {
 						<c:choose>
 							<c:when test="${!empty loginerr}">
 								<a href="#" href="#" data-toggle="modal" data-target="#myModal2">
-									<button type="button" class="btn btn-success center-block"
+									<button id="intoShoppingCart" type="button" class="btn btn-success center-block"
 										style="width: 160px">加入購物車</button>
 								</a>
 							</c:when>
 							<c:when test="${empty err}">
 
 								<a href="#" href="#" data-toggle="modal" data-target="#myModal">
-									<button type="button" class="btn btn-success center-block"
+									<button id="intoShoppingCart" type="button" class="btn btn-success center-block"
 										style="width: 160px">加入購物車</button>
 								</a>
 
 							</c:when>
 							<c:otherwise>
 								<a href="#" href="#" data-toggle="modal" data-target="#myModal2">
-									<button type="button" class="btn btn-success center-block"
+									<button id="intoShoppingCart" type="button" class="btn btn-success center-block"
 										style="width: 160px">加入購物車</button>
 								</a>
 							</c:otherwise>
@@ -500,14 +500,14 @@ a:HOVER {
 										</c:when>
 										<c:when test="${!empty boo}"></c:when>
 										<c:otherwise>
-											<button type="button" class="btn btn-success center-block"
+											<button id="intoShoppingCart" type="button" class="btn btn-success center-block"
 												style="width: 160px">加入購物車</button>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
 							</c:when>
 							<c:otherwise>
-								<button type="button" class="btn btn-success center-block"
+								<button id="intoShoppingCart" type="button" class="btn btn-success center-block"
 									style="width: 160px">加入購物車</button>
 							</c:otherwise>
 						</c:choose>
@@ -878,6 +878,22 @@ a:HOVER {
 			$("#myModalReportVideo").modal('hide');
 
 		})
+	</script>
+	<script>
+	$(function(){
+		$('#intoShoppingCart').on('click',function(){
+			console.log("ssss");
+			if($("#mbcourseID").val()>1){
+					$.post('<%= request.getContextPath()%>/InsertShoppingCart',{
+						'memberID':$("#mbmemberID").val(),
+						'courseID':$("#mbcourseID").val()
+						},function(){
+							alert("已經加入購物車囉!!");
+							loadShoppingCart();
+						})			
+			}
+		})
+	});
 	</script>
 </body>
 </html>

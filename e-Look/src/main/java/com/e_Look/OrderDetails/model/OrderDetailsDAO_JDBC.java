@@ -14,6 +14,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.e_Look.Course.CourseDAO;
+import com.e_Look.Course.CourseDAO_JDBC;
 
 public class OrderDetailsDAO_JDBC implements OrderDetailsDAO_interface {
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
@@ -139,7 +140,7 @@ public class OrderDetailsDAO_JDBC implements OrderDetailsDAO_interface {
 	@Override
 	public List<OrderDetailsVO> findByOrderID(Integer orderID) {
 		List<OrderDetailsVO> list = new LinkedList<OrderDetailsVO>();
-		CourseDAO cdao = new CourseDAO();
+		CourseDAO_JDBC cdao = new CourseDAO_JDBC();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -185,7 +186,7 @@ public class OrderDetailsDAO_JDBC implements OrderDetailsDAO_interface {
 		List<OrderDetailsVO> list = new LinkedList<OrderDetailsVO>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		CourseDAO cdao = new CourseDAO();
+		CourseDAO_JDBC cdao = new CourseDAO_JDBC();
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
@@ -228,7 +229,7 @@ public class OrderDetailsDAO_JDBC implements OrderDetailsDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		OrderDetailsVO orderDetailsVO2 = null;		
-		CourseDAO cdao = new CourseDAO();
+		CourseDAO_JDBC cdao = new CourseDAO_JDBC();
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
