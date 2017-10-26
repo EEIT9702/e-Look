@@ -243,7 +243,7 @@ a:HOVER {
 	<% 
 		MemberVO memberVO=(MemberVO)session.getAttribute("LoginOK");
 		CourseDAO dao=new CourseDAO();
-		BuyCourseDAO dao2 = new BuyCourseDAO();
+		//BuyCourseDAO dao2 = new BuyCourseDAO();
 		BuyCourseService  CourseService =new BuyCourseService();
 		MemberBookmarksService memberBookmarksService=new MemberBookmarksService();
 		List<CourseVO> list=dao.findBymemberID(memberVO.getMemberID(),2);

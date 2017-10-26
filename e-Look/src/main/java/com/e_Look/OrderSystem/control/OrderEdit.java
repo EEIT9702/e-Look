@@ -32,7 +32,6 @@ public class OrderEdit extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter rw = response.getWriter();
-		
 		HttpSession session=request.getSession();
 		MemberVO memberVO=(MemberVO) session.getAttribute("LoginOK");
 		
@@ -43,7 +42,12 @@ public class OrderEdit extends HttpServlet {
 		OrderVO orderVO = odao.findMemberUncheckOrder(memberVO.getMemberID());
 		if("loading".equals(action)){
 			List<OrderDetailsVO> odVOs= oddao.findByOrderID(orderVO.getOrderID());
-			String jsonString = JSONValue.toJSONString(odVOs);  
+			for(OrderDetailsVO odVO:odVOs){
+				odVO.setBuyingPrice(BuyingPrice.getBuyingPrice(odVO.getCourseVO().getCourseID()));
+				oddao.update(odVO);
+			}
+			
+			String jsonString = JSONValue.toJSONString(oddao.findByOrderID(orderVO.getOrderID()));  
 			response.getWriter().print(jsonString);
 		}else{
 			Integer courseID=Integer.parseInt(request.getParameter("courseID"));

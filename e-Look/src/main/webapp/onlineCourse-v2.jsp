@@ -7,8 +7,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>收費課程</title>
-<link href="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.css"rel="stylesheet">
-<link href="<%=request.getContextPath()%>/css/bootstrap.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.css"
+	rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/bootstrap.css"
+	rel="stylesheet">
 <!-- <!-- jQuery -->
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
 <!-- <!-- Bootstrap Core JavaScript -->
@@ -59,6 +61,7 @@ video::-webkit-media-controls-panel {
 	background-color: rgba(0%, 10%, 20%, 0.3);
 	color: white;
 }
+
 #videoDivListStyle {
 	border: 1px solid gray;
 	height: 100%;
@@ -170,6 +173,7 @@ video::-webkit-media-controls-panel {
 a:HOVER {
 	color: white;
 }
+
 #radioReporter {
 	padding-left: 50px;
 }
@@ -189,9 +193,9 @@ a:HOVER {
 				<h1 align="center" id="videoTitle">${courseVO.courseName}</h1>
 				<div class="col-md-12 " id="videoArea"
 					style="background-image: url('<%=request.getContextPath() %>/CourseImage?CourseID=${courseVO.courseID}')">
-				<input type="hidden" value="${courseVO.courseID}">
+					<input type="hidden" value="${courseVO.courseID}">
 					<div class="col-md-12">
-						<div class="col-md-8 col-xs-12"  style="margin-right:-15px">
+						<div class="col-md-8 col-xs-12" style="margin-right: -15px">
 
 							<c:choose>
 								<c:when test="${LoginOK.memberID==courseVO.memberID}">
@@ -207,17 +211,17 @@ a:HOVER {
 										<c:forEach var="buycourse"  items='${list2}'>
 							<c:choose>
 								<c:when test="${courseVO.courseID==buycourse.courseID}">
-							<c:set var="control" value="controls=controls" />
-							<c:set var="boo" value="true" />
-							</c:when>
-							<c:when test="${!empty boo}">
-							</c:when>
-							<c:otherwise> 
-								<c:set var="poster" value="poster=_Lyy/poster.png" />
-								<c:set var="control" value=""/>
-							</c:otherwise>
+										<c:set var="control" value="controls=controls" />
+										<c:set var="boo" value="true" />
+								</c:when>
+								<c:when test="${!empty boo}">
+								</c:when>
+								<c:otherwise> 
+									<c:set var="poster" value="poster=_Lyy/poster.png" />
+									<c:set var="control" value=""/>
+								</c:otherwise>
 							</c:choose>
-							</c:forEach>
+						</c:forEach>
 										<c:out value="${poster}"/> <c:out value="${control}"/>
 										id="vidoeControl">
 										<source
@@ -262,79 +266,85 @@ a:HOVER {
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-	<!--空-->
+				<!--空-->
 				<div class="col-md-1 "></div>
-	<!--課程人數 -->			
+				<!--課程人數 -->
 				<div class="col-md-1 col-xs-4">
 					<img src="<%=request.getContextPath()%>/_Lyy/004-people.png"
 						class="img-responsive center-block ">
 					<h5 class="text-center">課程人數</h5>
 				</div>
-	<!--課程時間 -->			
+				<!--課程時間 -->
 				<div class="col-md-1 col-xs-4">
 					<img src="<%=request.getContextPath()%>/_Lyy/clock.png"
 						class="img-responsive center-block">
 					<h5 class="text-center">課程時間為 ${courseVO.courseLength}min</h5>
 				</div>
-	<!--加到最愛 -->			
+				<!--加到最愛 -->
 				<c:if test="${!empty mBookmarkList}">
-						<c:forEach items="${mBookmarkList}" var="memberBookmsrks">
-							<c:choose>
-								<c:when test="${courseVO.courseID==memberBookmsrks.courseID}">
-									<c:set var="favor" value="favoriteclick1" />
-									<c:set var="favor1" value="ture" />
-								</c:when>
-								<c:when test="${!empty favor1}">
-								</c:when>
-								<c:otherwise>
-									<c:set var="favor" value="favoriteclick2" />
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-				</c:if>
-				
-				<c:if test="${empty mBookmarkList}">
-					<c:set var="favor" value="favoriteclick2"/>
-				</c:if>
-				
-					<c:if test="${empty LoginOK}">
+					<c:forEach items="${mBookmarkList}" var="memberBookmsrks">
 						<c:choose>
-									<c:when test="${!empty loginerr}">
-										<div class="col-md-1 col-xs-4">
-										<a href="#" data-toggle="modal" data-target="#myModal2">
-										<img src="<%=request.getContextPath()%>/img/favorite.png"class="img-responsive center-block">
-										<h5 class="text-center">加到最愛</h5>
-										</a>
-										</div>
-									</c:when>
-									<c:when test="${empty err}">
-									<div class="col-md-1 col-xs-4">
-										<a href="#" data-toggle="modal" data-target="#myModal">
-										<img src="<%=request.getContextPath()%>/img/favorite.png"class="img-responsive center-block">
-										<h5 class="text-center">加到最愛</h5>
-										</a>
-										</div>
-									</c:when>
-									<c:otherwise>
-									<div class="col-md-1 col-xs-4">
-										<a href="#" data-toggle="modal"	data-target="#myModal2">
-										<img src="<%=request.getContextPath()%>/img/favorite.png"class="img-responsive center-block">
-										<h5 class="text-center">加到最愛</h5>
-										</a>
-										</div>
-									</c:otherwise>
+							<c:when test="${courseVO.courseID==memberBookmsrks.courseID}">
+								<c:set var="favor" value="favoriteclick1" />
+								<c:set var="favor1" value="ture" />
+							</c:when>
+							<c:when test="${!empty favor1}">
+							</c:when>
+							<c:otherwise>
+								<c:set var="favor" value="favoriteclick2" />
+							</c:otherwise>
 						</c:choose>
+					</c:forEach>
 				</c:if>
-				
+
+				<c:if test="${empty mBookmarkList}">
+					<c:set var="favor" value="favoriteclick2" />
+				</c:if>
+
+				<c:if test="${empty LoginOK}">
+					<c:choose>
+						<c:when test="${!empty loginerr}">
+							<div class="col-md-1 col-xs-4">
+								<a href="#" data-toggle="modal" data-target="#myModal2"> <img
+									src="<%=request.getContextPath()%>/img/favorite.png"
+									class="img-responsive center-block">
+									<h5 class="text-center">加到最愛</h5>
+								</a>
+							</div>
+						</c:when>
+						<c:when test="${empty err}">
+							<div class="col-md-1 col-xs-4">
+								<a href="#" data-toggle="modal" data-target="#myModal"> <img
+									src="<%=request.getContextPath()%>/img/favorite.png"
+									class="img-responsive center-block">
+									<h5 class="text-center">加到最愛</h5>
+								</a>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="col-md-1 col-xs-4">
+								<a href="#" data-toggle="modal" data-target="#myModal2"> <img
+									src="<%=request.getContextPath()%>/img/favorite.png"
+									class="img-responsive center-block">
+									<h5 class="text-center">加到最愛</h5>
+								</a>
+							</div>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+
 				<c:if test="${!empty LoginOK}">
 					<div class="col-md-1 col-xs-4">
-						 <a href="#" id="${favor}"><img src="<%=request.getContextPath()%>/img/favorite.png"
-							class="img-responsive center-block"><h5 class="text-center">加到最愛</h5></a>
+						<a href="#" id="${favor}"><img
+							src="<%=request.getContextPath()%>/img/favorite.png"
+							class="img-responsive center-block">
+							<h5 class="text-center">加到最愛</h5></a>
 					</div>
 				</c:if>
-				<input type="hidden" value="${courseVO.courseID}" id="mbcourseID" name="courseID">
-				<input type="hidden" value="${LoginOK.memberID}" id="mbmemberID" name="memberID">
-	<!--分享連結 -->
+				<input type="hidden" value="${courseVO.courseID}" id="mbcourseID"
+					name="courseID"> <input type="hidden"
+					value="${LoginOK.memberID}" id="mbmemberID" name="memberID">
+				<!--分享連結 -->
 				<div class="col-md-1 col-xs-4 ">
 					<img src="<%=request.getContextPath()%>/_Lyy/share.png"
 						class="img-responsive center-block">
@@ -347,15 +357,15 @@ a:HOVER {
 						</ul>
 					</div>
 				</div>
-	<!--講義下載 -->
+				<!--講義下載 -->
 				<div class="col-md-1 col-xs-4 ">
 					<a href="#"> <img
 						src="<%=request.getContextPath()%>/_Lyy/001-download.png"
 						class="img-responsive center-block">
 						<h5 class="text-center">講義下載</h5>
 					</a>
-				</div>		
-	<!--影片檢舉 -->			
+				</div>
+				<!--影片檢舉 -->
 				<c:if test="${empty LoginOK}">
 					<c:choose>
 						<c:when test="${!empty loginerr}">
@@ -428,13 +438,13 @@ a:HOVER {
 							</div>
 						</div>
 					</div>
-				</c:if>	
-	<!--課程售價 -->
+				</c:if>
+				<!--課程售價 -->
 				<div class="col-md-2 col-xs-6 ">
 					<h5>課程售價</h5>
 					<h2 style="text-align: center; font-weight: bold;">NT${courseVO.soldPrice}</h2>
 				</div>
-		<!--星星 -->			
+				<!--星星 -->
 				<div class="col-md-2 col-xs-6 center-block">
 					<div style="width: 70px; margin: 0 auto">
 						<img id="idstar1" class="star"
@@ -448,8 +458,62 @@ a:HOVER {
 							id="idstar5" class="star "
 							src="<%=request.getContextPath()%>/star/ystar.png" />
 					</div>
-					<button type="button" class="btn btn-success center-block"
-						style="width: 160px">加入購物車</button>
+
+
+					<!-- 		加入購物車 -->
+					<c:if test="${empty LoginOK}">
+						<c:choose>
+							<c:when test="${!empty loginerr}">
+								<a href="#" href="#" data-toggle="modal" data-target="#myModal2">
+									<button type="button" class="btn btn-success center-block"
+										style="width: 160px">加入購物車</button>
+								</a>
+							</c:when>
+							<c:when test="${empty err}">
+
+								<a href="#" href="#" data-toggle="modal" data-target="#myModal">
+									<button type="button" class="btn btn-success center-block"
+										style="width: 160px">加入購物車</button>
+								</a>
+
+							</c:when>
+							<c:otherwise>
+								<a href="#" href="#" data-toggle="modal" data-target="#myModal2">
+									<button type="button" class="btn btn-success center-block"
+										style="width: 160px">加入購物車</button>
+								</a>
+							</c:otherwise>
+						</c:choose>
+					</c:if>
+					<c:if test="${!empty LoginOK}">
+						<c:choose>
+							<c:when test="${LoginOK.memberID==courseVO.memberID}">
+								<button type="button" class="btn btn-success center-block"
+									style="width: 160px" disabled="disabled">已擁有</button>
+							</c:when>
+							<c:when test="${!empty LoginOK && !empty list2}">
+								<c:forEach var="buycourse" items='${list2}'>
+									<c:choose>
+										<c:when test="${courseVO.courseID==buycourse.courseID}">
+											<button type="button" class="btn btn-success center-block"
+												style="width: 160px" disabled="disabled">已擁有</button>
+										</c:when>
+										<c:when test="${!empty boo}"></c:when>
+										<c:otherwise>
+											<button type="button" class="btn btn-success center-block"
+												style="width: 160px">加入購物車</button>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<button type="button" class="btn btn-success center-block"
+									style="width: 160px">加入購物車</button>
+							</c:otherwise>
+						</c:choose>
+
+					</c:if>
+					<!-- 加入購物車結束 -->
 				</div>
 			</div>
 		</div>
@@ -473,7 +537,7 @@ a:HOVER {
 							<li role="presentation"><a href="#Section4"
 								aria-controls="messages" role="tab" data-toggle="tab">點評收藏</a></li>
 						</ul>
-	<!-- 課程簡介 -->
+						<!-- 課程簡介 -->
 						<div class="tab-content tabs">
 							<div role="tabpanel" class="tab-pane fade in active"
 								id="Section1" style="font-size: 20px">
@@ -502,16 +566,44 @@ a:HOVER {
 							<div role="tabpanel" class="tab-pane fade" id="Section2"
 								style="font-size: 20px">
 								<c:if test="${!empty memberVo.memberID}">
-									<div class="col-md-1">
+									<div class="col-md-2 col-xs-3">
 										<figure>
 											<img
 												src="<%=request.getContextPath() %>/Image?MemberID=${memberVo.memberID}"
 												class="img-thumbnail pull-left">
 											<div style="text-align: center;">${memberVo.mName}</div>
 										</figure>
+										<div>
+
+											<c:if test="${empty LoginOK}">
+												<c:choose>
+													<c:when test="${!empty loginerr}">
+														<button type="button" class="btn btn-info"
+															style="width: 100%">追蹤講師</button>
+													</c:when>
+													<c:when test="${empty err}">
+														<button type="button" class="btn btn-info"
+															style="width: 100%">追蹤講師</button>
+													</c:when>
+													<c:otherwise>
+														<button type="button" class="btn btn-info"
+															style="width: 100%">追蹤講師</button>
+													</c:otherwise>
+												</c:choose>
+											</c:if>
+											<c:if test="${!empty LoginOK}">
+												<c:when test="">
+													<button type="button" class="btn btn-info"style="width: 100%">追蹤講師</button>
+												</c:when>
+												<c:when test="">
+													<button type="button" class="btn btn-info"style="width: 100%">追蹤講師</button>
+												</c:when>
+											</c:if>
+										</div>
 									</div>
+
 								</c:if>
-								<div class=" pull-right">
+								<div class="col-md-10 col-xs-9">
 									<c:if test="${!empty memberVo.aboutme}">
 										<strong>關於我</strong>
 										<p>${memberVo.aboutme}</p>
@@ -702,8 +794,8 @@ a:HOVER {
 			</div>
 		</div>
 	</div>
-	<c:remove var="err" scope="session"/>
-	<c:remove var="loginerr" scope="session"/>
+	<c:remove var="err" scope="session" />
+	<c:remove var="loginerr" scope="session" />
 	<jsp:include page="/footer.jsp" />
 	<script>
 		$(document).ready(function() {
@@ -712,7 +804,7 @@ a:HOVER {
 			});
 		});
 	</script>
-	
+
 	<script>
 		$(function() {
 			var flag1 = false;
@@ -747,31 +839,31 @@ a:HOVER {
 	</script>
 	<script>
 		//判斷是否加入過最愛		
-  var count=0;
-		 $('#favoriteclick1').click(function() {
+		var count = 0;
+		$('#favoriteclick1').click(function() {
 			alert('已經加入過囉');
 		})
-		
+
 		$("#favoriteclick2").click(function() {
 
 			console.log($("#mbcourseID").val())
 			console.log($("#mbmemberID").val())
-			if(count==0){
-			$('#favoriteclick2').attr("id","favoriteclick1")
-			 	$.post('MemberBookmarksInsertController', {
-				'courseID' : $("#mbcourseID").val(),
-				'memberID' : $("#mbmemberID").val()
-			}, function() {
-				alert('已經加到你的最愛囉');
-				count++;
+			if (count == 0) {
+				$('#favoriteclick2').attr("id", "favoriteclick1")
+				$.post('MemberBookmarksInsertController', {
+					'courseID' : $("#mbcourseID").val(),
+					'memberID' : $("#mbmemberID").val()
+				}, function() {
+					alert('已經加到你的最愛囉');
+					count++;
 				})
-			}else{
+			} else {
 				alert('已經加入過囉');
 			}
 
 		})
 	</script>
-		<script>
+	<script>
 		$('#reportAction').click(function() {
 			if ($('#radioReporterCon:checked').val() == null) {
 				$("#myModalReportVideo").modal('hide');
