@@ -164,7 +164,7 @@
 						<input type="hidden" value="${LoginOK.memberID}" name="memberID">
 						<div class="tab-content">
 							<!-- 整個step1頁面 -->
-							<div class="tab-pane active" role="tabpanel" id="step1">
+							<div class="tab-pane active" role="tabpanel" id="step1" style="margin-bottom: 50px">
 								<div class="container">
 									<div class="row">
 										<div class="col-md-12">
@@ -173,7 +173,7 @@
 													<i class="glyphicon glyphicon-list"></i>
 												</div>
 												<div class="update-text">
-													<strong>步驟一1456、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
+													<strong>步驟一、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
 												</div>
 											</div>
 										</div>
@@ -250,7 +250,7 @@
 								<!-- step1最終確認按鈕 -->
 								<div class="col-md-4 pull-right" style="margin-top: 20px">
 									<button type="button"
-										class="btn btn-primary pull-right next-step">前往下一步並開始編輯課程</button>
+										class="btn btn-primary btn-lg btn3d pull-right next-step"><span class="glyphicon glyphicon-hand-right"></span>    開始編輯課程</button>
 								</div>
 								<!-- 整個step1頁面 -->
 							</div>
@@ -334,11 +334,11 @@
 									<!-- 包住step2填寫資料 -->
 								</div>
 
-								<ul class="list-inline pull-right" style="margin-top: 50px">
+								<ul class="list-inline pull-right" style="margin-top: 50px;margin-bottom: 80px">
 									<li><button type="button"
-											class="btn btn-default prev-step">上一步</button></li>
+											class="btn3d btn btn-default btn-lg prev-step">上一步</button></li>
 									<li><button type="button"
-											class="btn btn-primary next-step">儲存並前往下一步</button></li>
+											class="btn btn-primary btn-lg btn3d next-step">儲存並前往下一步</button></li>
 								</ul>
 
 							</div>
@@ -419,13 +419,13 @@
 									</div>
 								</div>
 
-								<ul class="list-inline pull-right">
+								<ul class="list-inline pull-right" style="margin-bottom: 80px">
 									<li><button type="button"
-											class="btn btn-default prev-step">上一步</button></li>
+											class="btn3d btn btn-default btn-lg prev-step">上一步</button></li>
 									<li><button type="button"
-											class="btn btn-default next-step">跳過此步驟</button></li>
+											class="btn3d btn btn-default btn-lg next-step">跳過此步驟</button></li>
 									<li><button type="button"
-											class="btn btn-primary btn-info-full next-step">儲存並前往下一步</button></li>
+											class="btn btn-primary btn-lg btn3d next-step">儲存並前往下一步</button></li>
 								</ul>
 							</div>
 
@@ -526,11 +526,11 @@
 								</div>
 
 
-								<ul class="list-inline pull-right">
+								<ul class="list-inline pull-right" style="margin-bottom: 80px">
 									<li><button type="button"
-											class="btn btn-default prev-step">上一步</button></li>
+											class="btn3d btn btn-default btn-lg prev-step">上一步</button></li>
 									<li><button type="button"
-											class="btn btn-primary btn-info-full next-step">儲存並前往下一步</button></li>
+											class="btn btn-primary btn-lg btn3d next-step">儲存並前往下一步</button></li>
 								</ul>
 
 							</div>
@@ -557,11 +557,11 @@
 
 
 
-								<ul class="list-inline pull-right">
+								<ul class="list-inline pull-right" style="margin-bottom: 80px">
 									<li><button type="button"
-											class="btn btn-default prev-step">上一步</button></li>
+											class="btn3d btn btn-default btn-lg prev-step">上一步</button></li>
 									<li><button type="button"
-											class="btn btn-primary btn-info-full next-step">儲存並前往下一步</button></li>
+											class="btn btn-primary btn-lg btn3d next-step">儲存並前往下一步</button></li>
 								</ul>
 							</div>
 
@@ -659,20 +659,20 @@
 								</div>
 								<!-- /container -->
 
-								<ul class="list-inline pull-right">
+								<ul class="list-inline pull-right" style="margin-bottom: 80px">
 									<li><button type="button"
-											class="btn btn-default prev-step">上一步</button></li>
+											class="btn3d btn btn-default btn-lg prev-step">上一步</button></li>
 									<li><button type="button"
-											class="btn btn-primary btn-info-full next-step">儲存並前往下一步</button></li>
+											class="btn btn-primary btn-lg btn3d next-step">儲存並前往下一步</button></li>
 								</ul>
 							</div>
 
 							<div class="tab-pane" role="tabpanel" id="complete">
-								<ul class="list-inline pull-right">
+								<ul class="list-inline pull-right" style="margin-bottom: 80px">
 									<li><button type="button"
-											class="btn btn-default prev-step">上一步</button></li>
+											class="btn3d btn btn-default btn-lg prev-step">上一步</button></li>
 									<li><button type="button"
-											class="btn btn-primary btn-info-full next-step">完成課程編輯並送出審核</button></li>
+											class="btn btn-success btn-lg btn3d next-step"><span class="glyphicon glyphicon-ok"></span>   完成課程編輯並送出審核</button></li>
 								</ul>
 							</div>
 							<div class="clearfix"></div>
