@@ -453,7 +453,8 @@ function river(){
 	
 	</div>
 </div>
-
+<c:remove var="err" scope="session"/>
+<c:remove var="loginerr" scope="session"/>
 <jsp:include page="${contextPath}/footer.jsp" />
 </body>
 </html>

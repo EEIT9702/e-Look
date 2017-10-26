@@ -164,11 +164,11 @@
 						<input type="hidden" value="${LoginOK.memberID}" name="memberID">
 						<div class="tab-content">
 							<!-- 整個step1頁面 -->
-							<div class="tab-pane active" role="tabpanel" id="step1">
+							<div class="tab-pane active" role="tabpanel" id="step1" style="margin-bottom: 50px">
 								<div class="container">
-									<div class="row">
+									<div class="col-md-8 col-md-offset-3">
 										<div class="col-md-12">
-											<div class="update-nag">
+											<div class="update-nag element-animation1">
 												<div class="update-split update-step1">
 													<i class="glyphicon glyphicon-list"></i>
 												</div>
@@ -178,7 +178,7 @@
 											</div>
 										</div>
 										<div class="col-md-12">
-											<div class="update-nag">
+											<div class="update-nag element-animation2">
 												<div class="update-split update-step2">
 													<i class="glyphicon glyphicon-picture"></i>
 												</div>
@@ -189,7 +189,7 @@
 										</div>
 
 										<div class="col-md-12">
-											<div class="update-nag">
+											<div class="update-nag element-animation3">
 												<div class="update-split update-step3">
 													<i class="glyphicon glyphicon-tags"></i>
 												</div>
@@ -200,7 +200,7 @@
 										</div>
 
 										<div class="col-md-12">
-											<div class="update-nag">
+											<div class="update-nag element-animation4">
 												<div class="update-split update-step4">
 													<i class="glyphicon glyphicon-usd"></i>
 												</div>
@@ -212,7 +212,7 @@
 										</div>
 
 										<div class="col-md-12">
-											<div class="update-nag">
+											<div class="update-nag element-animation5">
 												<div class="update-split update-step5">
 													<i class="glyphicon glyphicon-pencil"></i>
 												</div>
@@ -223,7 +223,7 @@
 										</div>
 
 										<div class="col-md-12">
-											<div class="update-nag">
+											<div class="update-nag element-animation6">
 												<div class="update-split update-step6">
 													<i class="glyphicon glyphicon-open"></i>
 												</div>
@@ -234,7 +234,7 @@
 										</div>
 
 										<div class="col-md-12">
-											<div class="update-nag">
+											<div class="update-nag element-animation7">
 												<div class="update-split update-step7">
 													<i class="glyphicon glyphicon-thumbs-up"></i>
 												</div>
@@ -248,9 +248,9 @@
 
 
 								<!-- step1最終確認按鈕 -->
-								<div class="col-md-4 pull-right" style="margin-top: 20px">
+								<div class="col-md-offset-3" style="margin-top: 20px">
 									<button type="button"
-										class="btn btn-primary pull-right next-step">前往下一步並開始編輯課程</button>
+										class="btn btn-primary btn-lg btn3d col-md-offset-3 next-step"><span class="glyphicon glyphicon-hand-right"></span>   開始編輯課程</button>
 								</div>
 								<!-- 整個step1頁面 -->
 							</div>
@@ -259,7 +259,7 @@
 								<!-- step2的填寫資料 -->
 								<div>
 									<!-- 預覽課程頁面圖 -->
-									<div class="col-md-4">
+									<div class="col-md-3 col-md-offset-2">
 										<div class="row" style="margin-bottom: 25px">
 											<label for="exampleInputEmail1" style="font-size: 20pt">課程標題</label>
 											<input type="text" onfocus="this.select()"
@@ -296,12 +296,8 @@
 											</div>
 										</div>
 									</div>
-									<div class="list-inline col-md-4">
-										<img alt=""
-											src="<%=request.getContextPath()%>/Class Steps/imgs/預覽課程展示畫面.png"
-											style="width: 150px; height: 250px; margin-right: 50px; margin-top: 50px">
-									</div>
-									<div class="col-md-4">
+									
+									<div class="col-md-3 col-md-offset-2">
 										<div style="width: 310px">
 											<div class="card card-inverse">
 												<img class="card-img-top"
@@ -334,11 +330,11 @@
 									<!-- 包住step2填寫資料 -->
 								</div>
 
-								<ul class="list-inline pull-right" style="margin-top: 50px">
-									<li><button type="button"
-											class="btn btn-default prev-step">上一步</button></li>
-									<li><button type="button"
-											class="btn btn-primary next-step">儲存並前往下一步</button></li>
+								<ul class="list-inline col-md-6 pull-right" style="margin-top: 50px;margin-bottom: 80px;">
+									<li class="pull-right"><button type="button"
+											class="btn btn-primary btn-lg btn3d next-step">儲存並前往下一步</button></li>
+									<li class="pull-right"><button type="button"
+											class="btn3d btn btn-default btn-lg prev-step">上一步</button></li>
 								</ul>
 
 							</div>
@@ -349,9 +345,8 @@
 							<div class="tab-pane" role="tabpanel" id="step3">
 								<div class="[ container ]">
 									<div class="[ row ]">
-										<div class="[ col-xs-12 ]">
-											<div
-												style="font-size: 20px; font-weight: bold; background-color: #BBFFEE">
+										<div class="col-xs-12 alert alert-info">
+											<div style="font-size: 20px; font-weight: bold;">
 												學生會需要用到的工具（含種類、版本細節）</div>
 											<div class="[ form-group ][ form-group-textarea ]">
 												<textarea name="preTool" placeholder="請輸入課程中，可能會使用到的工具"
@@ -367,9 +362,9 @@
 
 								<div class="[ container ]">
 									<div class="[ row ]">
-										<div class="[ col-xs-12 ]">
+										<div class="[ col-xs-12 ] alert alert-info">
 											<div
-												style="font-size: 20px; font-weight: bold; background-color: #BBFFEE">
+												style="font-size: 20px; font-weight: bold;">
 												學這堂課之前，學生需要具有哪些背景知識？</div>
 											<div class="[ form-group ][ form-group-textarea ]">
 												<textarea name="background"
@@ -385,9 +380,9 @@
 
 								<div class="[ container ]">
 									<div class="[ row ]">
-										<div class="[ col-xs-12 ]">
+										<div class="[ col-xs-12 ] alert alert-info">
 											<div
-												style="font-size: 20px; font-weight: bold; background-color: #BBFFEE">
+												style="font-size: 20px; font-weight: bold;">
 												學完這堂課後，學生可以做出什麼東西？</div>
 											<div class="[ form-group ][ form-group-textarea ]">
 												<textarea name="ability"
@@ -403,9 +398,9 @@
 
 								<div class="[ container ]">
 									<div class="[ row ]">
-										<div class="[ col-xs-12 ]">
+										<div class="[ col-xs-12 ] alert alert-info">
 											<div
-												style="font-size: 20px; font-weight: bold; background-color: #BBFFEE">
+												style="font-size: 20px; font-weight: bold;">
 												哪些人適合這堂課？</div>
 											<div class="[ form-group ][ form-group-textarea ]">
 												<textarea name="targetgroup"
@@ -419,13 +414,13 @@
 									</div>
 								</div>
 
-								<ul class="list-inline pull-right">
+								<ul class="list-inline pull-right" style="margin-bottom: 80px">
 									<li><button type="button"
-											class="btn btn-default prev-step">上一步</button></li>
+											class="btn3d btn btn-default btn-lg prev-step">上一步</button></li>
 									<li><button type="button"
-											class="btn btn-default next-step">跳過此步驟</button></li>
+											class="btn3d btn btn-default btn-lg next-step">跳過此步驟</button></li>
 									<li><button type="button"
-											class="btn btn-primary btn-info-full next-step">儲存並前往下一步</button></li>
+											class="btn btn-primary btn-lg btn3d next-step">儲存並前往下一步</button></li>
 								</ul>
 							</div>
 
@@ -526,11 +521,11 @@
 								</div>
 
 
-								<ul class="list-inline pull-right">
+								<ul class="list-inline pull-right" style="margin-bottom: 80px">
 									<li><button type="button"
-											class="btn btn-default prev-step">上一步</button></li>
+											class="btn3d btn btn-default btn-lg prev-step">上一步</button></li>
 									<li><button type="button"
-											class="btn btn-primary btn-info-full next-step">儲存並前往下一步</button></li>
+											class="btn btn-primary btn-lg btn3d next-step">儲存並前往下一步</button></li>
 								</ul>
 
 							</div>
@@ -539,14 +534,17 @@
 								<div class="[ container ]">
 									<div class="[ row ]">
 										<div class="[ col-xs-12 ]">
-											<div
-												style="font-size: 20px; font-weight: bold; background-color: #BBFFEE">
-												課程內容說明</div>
-											<div>趕緊來為你精心設計的課程做個介紹吧!請務必在文案中加上開課緣由、自我介紹、課程單元說明、教學方式、課程難易度、相關作品圖片、作品集網站…等資料，越詳細的內容將會提升學生對課程的信任感；而善用編輯排版功能，讓提案更加吸引人！
+											<div class="alert alert-info"
+												style="font-size: 20px; font-weight: bold;">
+												課程內容說明
+											<div style="color:black;font-size: 18px">趕緊來為你精心設計的課程做個介紹吧!請務必在文案中加上開課緣由、自我介紹、課程單元說明、教學方式、課程難易度、相關作品圖片、作品集網站…等資料，越詳細的內容將會提升學生對課程的信任感；而善用編輯排版功能，讓提案更加吸引人！
+											</div>
 											</div>
 											<div class="[ form-group ][ form-group-textarea ]"
 												id="get-data-form">
-												<textarea class="tinymce" id="texteditor"
+												<textarea class="tinymce" id="texteditor" placeholder="請輸入課程中，可能會使用到的工具"
+													class="form-control" data-toggle="floatLabel"
+													data-value="no-js" style="font-size: 18px"
 													form="TotalContent">${CoursedData.courseContent}</textarea>
 												<input type="hidden" value="" id="courseContent"
 													name="courseContent">
@@ -557,17 +555,16 @@
 
 
 
-								<ul class="list-inline pull-right">
+								<ul class="list-inline pull-right" style="margin-bottom: 80px">
 									<li><button type="button"
-											class="btn btn-default prev-step">上一步</button></li>
+											class="btn3d btn btn-default btn-lg prev-step">上一步</button></li>
 									<li><button type="button"
-											class="btn btn-primary btn-info-full next-step">儲存並前往下一步</button></li>
+											class="btn btn-primary btn-lg btn3d next-step">儲存並前往下一步</button></li>
 								</ul>
 							</div>
 
 							<div class="tab-pane" role="tabpanel" id="step6">
-								<div class="container">
-									<br />
+								<div class="container alert alert-info">
 									<div class="row">
 										<div class="col-md-12">
 											<div class="panel panel-default">
@@ -612,8 +609,7 @@
 									</div>
 								</div>
 								<!-- /container -->
-								<div class="container">
-									<br />
+								<div class="container alert alert-info">
 									<div class="row">
 										<div class="col-md-12">
 											<div class="panel panel-default">
@@ -659,20 +655,20 @@
 								</div>
 								<!-- /container -->
 
-								<ul class="list-inline pull-right">
+								<ul class="list-inline pull-right" style="margin-bottom: 80px">
 									<li><button type="button"
-											class="btn btn-default prev-step">上一步</button></li>
+											class="btn3d btn btn-default btn-lg prev-step">上一步</button></li>
 									<li><button type="button"
-											class="btn btn-primary btn-info-full next-step">儲存並前往下一步</button></li>
+											class="btn btn-primary btn-lg btn3d next-step">儲存並前往下一步</button></li>
 								</ul>
 							</div>
 
 							<div class="tab-pane" role="tabpanel" id="complete">
-								<ul class="list-inline pull-right">
+								<ul class="list-inline pull-right" style="margin-bottom: 80px">
 									<li><button type="button"
-											class="btn btn-default prev-step">上一步</button></li>
+											class="btn3d btn btn-default btn-lg prev-step">上一步</button></li>
 									<li><button type="button"
-											class="btn btn-primary btn-info-full next-step">完成課程編輯並送出審核</button></li>
+											class="btn btn-success btn-lg btn3d next-step"><span class="glyphicon glyphicon-ok"></span>   完成課程編輯並送出審核</button></li>
 								</ul>
 							</div>
 							<div class="clearfix"></div>

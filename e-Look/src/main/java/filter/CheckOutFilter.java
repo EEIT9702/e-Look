@@ -74,14 +74,10 @@ public class CheckOutFilter implements Filter {
 					odVO.setOrderID(orderVO.getOrderID());
 					odVO.setOriginalPrice(courseVO.getSoldPrice());
 					odVO.setBuyingPrice(BuyingPrice.getBuyingPrice(courseVO.getCourseID()));
-					odDAO.insert(odVO);
+					if(odDAO.findByPrimaryKey(odVO)==null){
+						odDAO.insert(odVO);
+					}
 				}
-				//更新訂單內的價格 已經在OrderEdit做了
-//				List<OrderDetailsVO> odVOs = odDAO.findByOrderID(orderVO.getOrderID());
-//				for(OrderDetailsVO orderDetailsVO:odVOs){
-//					orderDetailsVO.setBuyingPrice(BuyingPrice.getBuyingPrice(orderDetailsVO.getCourseVO().getCourseID()));
-//					odDAO.update(orderDetailsVO);
-//				}
 				
 				chain.doFilter(request, response);
 				return;

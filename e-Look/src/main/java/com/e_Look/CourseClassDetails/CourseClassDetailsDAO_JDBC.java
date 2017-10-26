@@ -171,8 +171,8 @@ public class CourseClassDetailsDAO_JDBC implements CourseClassDetails_interface 
 		List<CourseClassDetailsVO> findBycourseClassID = new LinkedList<CourseClassDetailsVO>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		CourseDAO cdao = new CourseDAO();
-		CourseClassDAO ccdao = new CourseClassDAO();
+		CourseDAO_JDBC cdao = new CourseDAO_JDBC();
+		CourseClassDAO_JDBC ccdao = new CourseClassDAO_JDBC();
 
 		try {
 			Class.forName(driver);
@@ -220,8 +220,8 @@ public class CourseClassDetailsDAO_JDBC implements CourseClassDetails_interface 
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		CourseDAO cdao = new CourseDAO();
-		CourseClassDAO ccdao = new CourseClassDAO();
+		CourseDAO_JDBC cdao = new CourseDAO_JDBC();
+		CourseClassDAO_JDBC ccdao = new CourseClassDAO_JDBC();
 
 		try {
 			Class.forName(driver);
@@ -269,8 +269,8 @@ public class CourseClassDetailsDAO_JDBC implements CourseClassDetails_interface 
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		CourseDAO cdao = new CourseDAO();
-		CourseClassDAO ccdao = new CourseClassDAO();
+		CourseDAO_JDBC cdao = new CourseDAO_JDBC();
+		CourseClassDAO_JDBC ccdao = new CourseClassDAO_JDBC();
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
