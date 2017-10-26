@@ -186,7 +186,7 @@ a:HOVER {
 				<h1 align="center" id="videoTitle">${courseVO.courseName}</h1>
 				<div class="col-md-12 " id="videoArea"
 					style="background-image: url('<%=request.getContextPath() %>/CourseImage?CourseID=${courseVO.courseID}')">
-
+				<input type="hidden" value="${courseVO.courseID}">
 					<div class="col-md-12">
 						<div class="col-md-8 col-xs-12"  style="margin-right:-15px">
 
@@ -639,6 +639,7 @@ a:HOVER {
 			});
 		});
 	</script>
+	
 	<script>
 		$(function() {
 			var flag1 = false;

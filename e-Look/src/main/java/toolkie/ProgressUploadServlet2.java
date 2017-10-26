@@ -21,7 +21,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import com.e_Look.Course.CourseService;
 import com.e_Look.Course.CourseVO;
 
-@WebServlet("/toolkie/ProgressUploadServlet2")
+@WebServlet("/toolkie/ProgressUploadServlet1")
 public class ProgressUploadServlet2 extends HttpServlet {
 	// 用途不明
 	// private static final long serialVersionUID = -4935921396709035718L;

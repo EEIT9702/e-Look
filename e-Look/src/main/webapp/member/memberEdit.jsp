@@ -473,9 +473,11 @@ $(function() {
 			processData : false,
 			contentType : false,
 			success: function(){
+
 				delay_till_last('id', function() {
 				$("#updatainfo").fadeIn(1200);
 				$("#updatainfo").fadeOut(3500);
+
 // 				$('#sendOK').modal()
 // 				$('#sendOK h3').text("更新成功")
 // 				setTimeout(function(){
@@ -496,6 +498,7 @@ $(function() {
 			success: function(){
 				delay_till_last('id', function() {
 				$("#updatainfo").fadeIn(1000);
+
 				$("#updatainfo").fadeOut(3500);
 // 				$('#sendOK').modal()
 // 				$('#sendOK h3').text("更新成功")
