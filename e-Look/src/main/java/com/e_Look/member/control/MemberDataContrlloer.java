@@ -36,8 +36,12 @@ public class MemberDataContrlloer extends HttpServlet {
 		String change = request.getParameter("change");
 		if (change == null) {
 			Integer memberID = new Integer(request.getParameter("memberID"));
-			String mName = request.getParameter("mName");
 			String email = request.getParameter("email");
+			service = new MemberService();
+			if(request.getPart("memberphoto").getSize()==0){
+			
+			String mName = request.getParameter("mName");
+			
 			String mPassword = request.getParameter("mPassword");
 			String aboutme = request.getParameter("aboutme");
 			String skill = request.getParameter("skill");
@@ -48,9 +52,12 @@ public class MemberDataContrlloer extends HttpServlet {
 			service = new MemberService();
 			memberVO = new MemberVO(memberID, email, mPassword, mName, aboutme, skill, hobby, address);
 			service.updateMember(memberVO);
-			service.updateMemberImage(memberID, request.getPart("memberphoto"));
 			memberVO = service.getMemberMail(email);
 			session.setAttribute("LoginOK", memberVO);
+			}else{
+				service.updateMemberImage(memberID, request.getPart("memberphoto"));
+			}
+			
 		}else{
 			String mPassword = request.getParameter("mPassword");
 			memberVO=(MemberVO)session.getAttribute("LoginOK");

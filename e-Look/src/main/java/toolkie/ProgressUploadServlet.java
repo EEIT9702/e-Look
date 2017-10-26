@@ -30,7 +30,7 @@ public class ProgressUploadServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		CourseService service = null;
 		CourseVO courseVO = null;
-	Integer courseID = null;
+		Integer courseID = null;
 		
 		String courseVideopathway= null;
 		// 上傳狀態

@@ -29,7 +29,10 @@ public class CourseEditControlloer extends HttpServlet {
 	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		//Integer memberID= Integer.valueOf(request.getParameter("memberID"));
+		Integer courseID= Integer.valueOf(request.getParameter("courseID"));
+		CourseService courseService=new CourseService();
+		courseService.deleteCourse(courseID);
 	}
 
 	/**
@@ -46,11 +49,13 @@ public class CourseEditControlloer extends HttpServlet {
 		String background = request.getParameter("background");
 		String ability = request.getParameter("ability");
 		String targetgroup = request.getParameter("targetgroup");		
+				
 		Integer soldPrice=0;
 		String soldPriceTEST = request.getParameter("soldPrice");
-		if (!soldPriceTEST.equals("")){
+		if (soldPriceTEST!=null){
+			if(soldPriceTEST.length()>0){
 			 soldPrice = new Integer(request.getParameter("soldPrice"));
-		}
+		}}
 		
 		Integer courseLength=0;
 		String courseLengthTEST=request.getParameter("courseLength");
@@ -59,25 +64,29 @@ public class CourseEditControlloer extends HttpServlet {
 		}
 		Integer targetStudentNumber=0;
 		String targetStudentNumberTEST=request.getParameter("targetStudentNumber");
-		if(!targetStudentNumberTEST.equals("")){
+		if(targetStudentNumberTEST!=null){
+			if(targetStudentNumberTEST.length()>0)
 			targetStudentNumber = new Integer(request.getParameter("targetStudentNumber"));	
 		}
 		
 		Date fundStartDate =null;
 		String fundStartDateTEST = request.getParameter("fundStartDate");
-		if(!fundStartDateTEST.equals("")){
+		if(fundStartDateTEST!=null){
+			if(fundStartDateTEST.length()>0)
 			fundStartDate =  Date.valueOf(request.getParameter("fundStartDate"));
 		}
 		
 		Date fundEndDate =null;
 		String fundEndDateTEST = request.getParameter("fundEndDate");
-		if(!fundEndDateTEST.equals("")){
+		if(fundEndDateTEST!=null){
+			if(fundEndDateTEST.length()>0)
 			fundEndDate =  Date.valueOf(request.getParameter("fundEndDate"));
 		}
 		
 		Date courseStartDate =null;
 		String courseStartDateTEST = request.getParameter("courseStartDate");
-		if(!courseStartDateTEST.equals("")){
+		if(courseStartDateTEST!=null){
+			if(courseStartDateTEST.length()>0)
 			courseStartDate =  Date.valueOf(request.getParameter("courseStartDate"));
 		}
 								
@@ -86,9 +95,9 @@ public class CourseEditControlloer extends HttpServlet {
 		
 		service = new CourseService();
 		courseVO= new CourseVO(courseID,courseName,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseContent);
-		service.updateCourseContent(courseVO);	
-		
+		service.updateCourseContent(courseVO);		
 		service.updateCourseImage(courseID, request.getPart("picture"));
+		service.updateCoursePaper(courseID, request.getPart("paper"));
 		
 	}
 
