@@ -122,6 +122,9 @@ public class CourseEditControlloer extends HttpServlet {
 				// System.out.println("myCheckBoxValue:"+CourseClass[i]);
 			}
 		}
+		
+		
+		
 
 	}
 
