@@ -14,7 +14,7 @@ import org.springframework.web.servlet.DispatcherServlet;
 /**
  * Servlet implementation class SearchController
  */
-@WebServlet("/SearchController")
+@WebServlet("/SearchController.do")
 public class SearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,7 +32,7 @@ public class SearchController extends HttpServlet {
 		}
 //		response.sendRedirect(getServletContext().getContextPath()+"/body/body_river.jsp");
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/body/body_river2.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/body/freeCourse_Home.jsp");
 		rd.forward(request, response);
 		
 	}

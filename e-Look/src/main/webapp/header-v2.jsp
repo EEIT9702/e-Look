@@ -65,6 +65,7 @@ if(shoppingCartList != null){
 }
 body{
 padding-top:75px;
+font-family:Microsoft JhengHei;
 }
 #headerTextStyle{
 font-family: Microsoft JhengHei;
@@ -154,10 +155,12 @@ font-size: 18px;
 							<li style="padding-top:12px"><a href="#"><img
 									src="<%=request.getContextPath()%>/HeaderCssJs/003-coins.png"
 									height="28">募資</a></li>
-							<li style="padding-top:12px"><a href="#"><img
+							<li style="padding-top:12px"><a 
+								href="<%=request.getContextPath()%>/onlineCourse_Home.jsp"><img
 									src="<%=request.getContextPath()%>/HeaderCssJs/002-team.png"
 									height="28">線上課程</a></li>
-							<li style="padding-top:12px"><a href="#"><img
+							<li style="padding-top:12px"><a 
+								href="<%=request.getContextPath()%>/freeCourse_Home.jsp"><img
 									src="<%=request.getContextPath()%>/HeaderCssJs/004-gift.png"
 									height="28">免費課程</a></li>
 							<li style="padding-top:12px"><a

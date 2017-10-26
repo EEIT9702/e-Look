@@ -9,8 +9,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="Short Icon" type="image/x-icon" href="${initParam.icon}" />
 <title>${initParam.systemName}</title>
-<link href="HeaderCssJs/bootstrap.css" rel="stylesheet">
-<link href="HeaderCssJs/bootstrap.min.css" rel="stylesheet">
+<!-- <link href="HeaderCssJs/bootstrap.css" rel="stylesheet"> -->
+<link href="css/bootstrap.css" rel="stylesheet">
+<!-- <link href="HeaderCssJs/bootstrap.min.css" rel="stylesheet"> -->
 <!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom CSS -->
@@ -19,9 +20,11 @@
 <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet"
 	type="text/css">
 <!-- 載入課程模板css -->
-<!-- <link href="css/twmplate.css" rel="stylesheet"> -->
-<script src="HeaderCssJs/jquery.js"></script>
-<script src="HeaderCssJs/bootstrap.min.js"></script>
+<!-- <link href="css/twmplate.css" rel="stylesheet" no> -->
+<!-- <script src="HeaderCssJs/jquery.js"></script> -->
+<script src="js/jquery.js"></script>
+<!-- <script src="HeaderCssJs/bootstrap.min.js"></script> -->
+<script src="js/bootstrap.min.js"></script>
 
 <style type="text/css">
 /* 課程模板 */
@@ -54,7 +57,7 @@ h5 {
 .card-img-top {
 	display: block;
 	width: 340px;
-/* 	height:200px; */
+	height:200px; 
 	margin-top: 4px;
 	margin-bottom: 4px;
 }
@@ -167,18 +170,7 @@ h5 {
 	width:50px;
 	cursor:pointer;
 }
-.iconA{
-/* 	text-align:center; */
-/* 	text-decoration: none; */
-/*   	color:#9F35FF; */
-/*   	visited: none; */
-/*   	active: none; */
-/*   	font-size: 20px; */
-/*   	font-family: 微軟正黑體; */
-/*   	cursor: pointer; */
-}
-.formicon{
-}
+
 .formicon a:hover{
 	text-decoration: none;
 	color:#9F35FF;
@@ -287,8 +279,6 @@ $(function() {
 	$('#submit').click(function(e){
 		
 		e.preventDefault();
-		//var insertKey = $('#keyWord').text();
-		//console.log("1 ----" + insertKey)
 		clickSearch();
 	})
 	$('#submit').on('click', function(){
@@ -316,7 +306,10 @@ $(function() {
 		if($(this).children('p').text()==courseClass){
 			courseClass="";
 		}else{
-			courseClass=$(this).children('p').text()
+			//courseClass=$(this).children('p').text()
+			courseClass = $(this).children('p').attr("alt");
+			cCName = $(this).children('p').text();
+			console.log("courseClass = " + courseClass + ", cCName = " + cCName);
 		}
 		
 		keyWord="";
@@ -327,15 +320,15 @@ $(function() {
 	$('#searchicon').click(clickSearch);
 });
 	
-	function clickSearch(){
-		keyWord=$('#keyWord').val();
-		console.log("clickSearch() keyWord = " + keyWord);
-		$.get('SearchController',{'keyWord':keyWord},function(){
-			
-		})
-		$('#keyWord').val("");
-		refreshRiver();		
-	}
+function clickSearch(){
+	keyWord=$('#keyWord').val();
+	console.log("clickSearch() keyWord = " + keyWord);
+	$.get('/e-Look/SearchController.do',{'keyWord':keyWord},function(){
+		
+	})
+	$('#keyWord').val("");
+	refreshRiver();		
+}
 function refreshRiver(){
 	rowValueX=0;
 	$('#river').html("");
@@ -355,52 +348,11 @@ function river(){
 	//有時候卷軸會多0.5  改>=的寫法可以解決這個問題
 	if( wst>=(dh-wh) || rowValueX==0 ){
 		rowValueX++;
-		$.get("<%= request.getContextPath() %>/body/body_data2.jsp",{"rowValueY":rowValueX,"keyWord":keyWord,"courseClass":courseClass},function(data){
+		$.get("<%= request.getContextPath() %>/body/free_data.jsp",{"rowValueY":rowValueX,"keyWord":keyWord,"courseClass":courseClass},function(data){
 			$('#river').append(data)
 			
 		});
 	}
-}
-
-	
-	
-
-/*延遲載入圖片*/
-//初始化函數
-function init() {
-	//開始計時器
-	//setTimeout("checkHeight()", 1000);
-}
-//計時器函數
-function checkHeight() {
-	//圖片的DOM
-	var rows = document.querySelectorAll(".row");
-	//console.log(pics)
-	//var pic = document.getElementById("pic");
-	//取得捲軸的位置
-	var sTop = document.documentElement.scrollTop;
-	//取得可見區域高度
-	var cHeight = document.documentElement.clientHeight;
-
-	for (i = 1; i < rows.length; i++) {
-		//圖片距離最左上角的top值
-		var top = rows[i].offsetTop;
-		//如果捲軸還未來到可見區域
-		if (sTop + cHeight < top) {
-			//計時器繼續工作
-			setTimeout("checkHeight()", 1500);
-		} else {
-
-			var pics = rows[i].querySelectorAll("img");
-			for (var j = 0; j < pics.length; j++) {
-				pics[j].src = pics[j].getAttribute("lazy_src");
-			}
-			//把延遲的值指定給src
-			//pics[i].src = pics[i].getAttribute("lazy_src");
-			//console.log(top);
-		}
-	}
-
 }
 </script>
 </head>
@@ -408,7 +360,7 @@ function checkHeight() {
 
 <body style="margin-top:10px;">
 
-<%-- <jsp:include page="${contextPath}/header.jsp" /> --%>
+
 <jsp:include page="${contextPath}/login.jsp" />
 
 
@@ -418,40 +370,40 @@ function checkHeight() {
 	<div class="col-md-8 col-sm-10 col-xs-12 cclass">
 
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center" style="" >
-			<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/life.svg"><p class="pstyle">生活</p>
+			<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/life.svg"><p alt="101" class="pstyle">生活</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/arts.svg"><p class="pstyle">藝術</p>
+				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/arts.svg"><p alt="102" class="pstyle">藝術</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-			<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/athletics.svg"><p class="pstyle">運動</p>
+			<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/athletics.svg"><p alt="103" class="pstyle">運動</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-			<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/video.svg"><p class="pstyle">影音</p>
+			<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/video.svg"><p alt="104" class="pstyle">影音</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-			<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/hand-made.svg"><p class="pstyle">手作</p>
+			<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/hand-made.svg"><p alt="105" class="pstyle">手作</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-			<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/other.svg"><p class="pstyle">其他</p>
+			<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/other.svg"><p alt="106" class="pstyle">其他</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/design.svg"><p class="pstyle">設計</p>
+				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/design.svg"><p alt="107" class="pstyle">設計</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/science.svg"><p class="pstyle">科技</p>
+				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/science.svg"><p alt="108" class="pstyle">科技</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/business.svg"><p class="pstyle">商業</p>
+				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/business.svg"><p alt="109" class="pstyle">商業</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/language.svg"><p class="pstyle">語言</p>
+				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/language.svg"><p alt="110" class="pstyle">語言</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/cooking.svg"><p class="pstyle">烹飪</p>
+				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/cooking.svg"><p alt="111" class="pstyle">烹飪</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
-				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/program.svg"><p class="pstyle">程式</p>
+				<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/program.svg"><p alt="112" class="pstyle">程式</p>
 		</div>
 	
 
@@ -496,10 +448,9 @@ function checkHeight() {
 </div>
 <!-- 3秒消失廣告end -->
 
-<div class="videobox container">
-	<div class="row" id="river">
+<div class="videobox container" style="">
+	<div class="row" id="river" style="margin-left:40px;">
 	
-	<!-- end of class="container" -->
 	</div>
 </div>
 
