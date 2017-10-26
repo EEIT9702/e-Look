@@ -8,8 +8,10 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.e_Look.Course.CourseDAO;
 import com.e_Look.Course.CourseDAO_JDBC;
 import com.e_Look.Course.CourseVO;
+import com.e_Look.courseClass.CourseClassDAO;
 import com.e_Look.courseClass.CourseClassDAO_JDBC;
 import com.e_Look.courseClass.CourseClassVO;
 
@@ -169,6 +171,8 @@ public class CourseClassDetailsDAO_JDBC implements CourseClassDetails_interface 
 		List<CourseClassDetailsVO> findBycourseClassID = new LinkedList<CourseClassDetailsVO>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		CourseDAO cdao = new CourseDAO();
+		CourseClassDAO ccdao = new CourseClassDAO();
 
 		try {
 			Class.forName(driver);
@@ -180,9 +184,9 @@ public class CourseClassDetailsDAO_JDBC implements CourseClassDetails_interface 
 
 			while (rs.next()) {
 				CourseClassDetailsVO CourseClassDetailsVO = new CourseClassDetailsVO();
-				CourseClassDetailsVO.setCourseClassID(rs.getInt(1));
+				CourseClassDetailsVO.setCourseClassVO(ccdao.findByCourseClassID(rs.getInt(1)));
 				CourseClassDetailsVO.setCcName(rs.getString(2));
-				CourseClassDetailsVO.setCourseID(rs.getInt(3));
+				CourseClassDetailsVO.setCourseVO(cdao.findByPrimaryKey(rs.getInt(3)));
 				CourseClassDetailsVO.setCourseName(rs.getString(4));
 				findBycourseClassID.add(CourseClassDetailsVO);
 			}
@@ -216,6 +220,8 @@ public class CourseClassDetailsDAO_JDBC implements CourseClassDetails_interface 
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		CourseDAO cdao = new CourseDAO();
+		CourseClassDAO ccdao = new CourseClassDAO();
 
 		try {
 			Class.forName(driver);
@@ -227,9 +233,9 @@ public class CourseClassDetailsDAO_JDBC implements CourseClassDetails_interface 
 			while (rs.next()) {
 				CourseClassDetailsVO CourseClassDetailsVO = new CourseClassDetailsVO();
 				
-				CourseClassDetailsVO.setCourseID(rs.getInt(1));
+				CourseClassDetailsVO.setCourseVO(cdao.findByPrimaryKey(rs.getInt(1)));
 				CourseClassDetailsVO.setCourseName(rs.getString(2));
-				CourseClassDetailsVO.setCourseClassID(rs.getInt(3));
+				CourseClassDetailsVO.setCourseClassVO(ccdao.findByCourseClassID(rs.getInt(3)));
 				CourseClassDetailsVO.setCcName(rs.getString(4));
 				findBycourseID.add(CourseClassDetailsVO);
 			}
@@ -263,6 +269,8 @@ public class CourseClassDetailsDAO_JDBC implements CourseClassDetails_interface 
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		CourseDAO cdao = new CourseDAO();
+		CourseClassDAO ccdao = new CourseClassDAO();
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
@@ -271,10 +279,11 @@ public class CourseClassDetailsDAO_JDBC implements CourseClassDetails_interface 
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				
+				
 				CourseClassDetailsVO CourseClassDetailsVO = new CourseClassDetailsVO();
-				CourseClassDetailsVO.setCourseClassID(rs.getInt(1));
+				CourseClassDetailsVO.setCourseClassVO(ccdao.findByCourseClassID(rs.getInt(1)));
 				CourseClassDetailsVO.setCcName(rs.getString(2));
-				CourseClassDetailsVO.setCourseID(rs.getInt(3));
+				CourseClassDetailsVO.setCourseVO(cdao.findByPrimaryKey(rs.getInt(3)));
 				CourseClassDetailsVO.setCourseName(rs.getString(4));
 				
 				getAll.add(CourseClassDetailsVO);
@@ -318,9 +327,9 @@ public class CourseClassDetailsDAO_JDBC implements CourseClassDetails_interface 
 		//查詢全部
 		List<CourseClassDetailsVO> list = dao.getAll();
 		for(CourseClassDetailsVO ccDetailsVO3 : list) {
-			System.out.print(ccDetailsVO3.getCourseID() + ", ");
+			System.out.print(ccDetailsVO3.getCourseVO().getCourseID() + ", ");
 			System.out.print(ccDetailsVO3.getCourseName() + ", ");
-			System.out.print(ccDetailsVO3.getCourseClassID() + ", ");
+			System.out.print(ccDetailsVO3.getCourseClassVO().getCourseClassID() + ", ");
 			System.out.print(ccDetailsVO3.getCcName() + "\n");
 		}
 	}

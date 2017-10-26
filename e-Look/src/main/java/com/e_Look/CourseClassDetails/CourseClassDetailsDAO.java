@@ -12,7 +12,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.e_Look.Course.CourseDAO;
 import com.e_Look.Course.CourseVO;
+import com.e_Look.courseClass.CourseClassDAO;
 import com.e_Look.courseClass.CourseClassVO;
 
 public class CourseClassDetailsDAO implements CourseClassDetails_interface {
@@ -151,7 +153,8 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 		List<CourseClassDetailsVO> findBycourseClassID = new LinkedList<CourseClassDetailsVO>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
-
+		CourseDAO cdao = new CourseDAO();
+		CourseClassDAO ccdao = new CourseClassDAO();
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_BY_COURSE_CLASSID);
@@ -161,9 +164,9 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 
 			while (rs.next()) {
 				CourseClassDetailsVO CourseClassDetailsVO = new CourseClassDetailsVO();
-				CourseClassDetailsVO.setCourseClassID(rs.getInt(1));
+				CourseClassDetailsVO.setCourseClassVO(ccdao.findByCourseClassID(rs.getInt(1)));
 				CourseClassDetailsVO.setCcName(rs.getString(2));
-				CourseClassDetailsVO.setCourseID(rs.getInt(3));
+				CourseClassDetailsVO.setCourseVO(cdao.findByPrimaryKey(rs.getInt(3)));
 				CourseClassDetailsVO.setCourseName(rs.getString(4));
 				findBycourseClassID.add(CourseClassDetailsVO);
 			}
@@ -195,6 +198,8 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		CourseDAO cdao = new CourseDAO();
+		CourseClassDAO ccdao = new CourseClassDAO();
 
 		try {
 			con = ds.getConnection();
@@ -205,9 +210,9 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 			while (rs.next()) {
 				CourseClassDetailsVO CourseClassDetailsVO = new CourseClassDetailsVO();
 				
-				CourseClassDetailsVO.setCourseID(rs.getInt(1));
+				CourseClassDetailsVO.setCourseVO(cdao.findByPrimaryKey(rs.getInt(1)));
 				CourseClassDetailsVO.setCourseName(rs.getString(2));
-				CourseClassDetailsVO.setCourseClassID(rs.getInt(3));
+				CourseClassDetailsVO.setCourseClassVO(ccdao.findByCourseClassID(rs.getInt(3)));
 				CourseClassDetailsVO.setCcName(rs.getString(4));
 				findBycourseID.add(CourseClassDetailsVO);
 			}
@@ -239,6 +244,8 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		CourseDAO cdao = new CourseDAO();
+		CourseClassDAO ccdao = new CourseClassDAO();
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_ALL);
@@ -247,9 +254,9 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 			while (rs.next()) {
 				
 				CourseClassDetailsVO CourseClassDetailsVO = new CourseClassDetailsVO();
-				CourseClassDetailsVO.setCourseClassID(rs.getInt(1));
+				CourseClassDetailsVO.setCourseClassVO(ccdao.findByCourseClassID(rs.getInt(1)));
 				CourseClassDetailsVO.setCcName(rs.getString(2));
-				CourseClassDetailsVO.setCourseID(rs.getInt(3));
+				CourseClassDetailsVO.setCourseVO(cdao.findByPrimaryKey(rs.getInt(3)));
 				CourseClassDetailsVO.setCourseName(rs.getString(4));
 				
 				getAll.add(CourseClassDetailsVO);
