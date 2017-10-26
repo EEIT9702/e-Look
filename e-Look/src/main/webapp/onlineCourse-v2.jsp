@@ -879,21 +879,6 @@ a:HOVER {
 
 		})
 	</script>
-	<script>
-	$(function(){
-		$('#intoShoppingCart').on('click',function(){
-			console.log("ssss");
-			if($("#mbcourseID").val()>1){
-					$.post('<%= request.getContextPath()%>/InsertShoppingCart',{
-						'memberID':$("#mbmemberID").val(),
-						'courseID':$("#mbcourseID").val()
-						},function(){
-							alert("已經加入購物車囉!!");
-							loadShoppingCart();
-						})			
-			}
-		})
-	});
-	</script>
+	
 </body>
 </html>
