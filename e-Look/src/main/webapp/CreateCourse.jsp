@@ -167,17 +167,13 @@
 							<div class="tab-pane active" role="tabpanel" id="step1">
 								<div class="container">
 									<div class="row">
-
-
-
-
 										<div class="col-md-12">
 											<div class="update-nag">
 												<div class="update-split update-step1">
 													<i class="glyphicon glyphicon-list"></i>
 												</div>
 												<div class="update-text">
-													<strong>步驟一79、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
+													<strong>步驟一、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
 												</div>
 											</div>
 										</div>
@@ -586,7 +582,7 @@
 															<div class="btn btn-default image-preview-input">
 																<span class="glyphicon glyphicon-folder-open"></span> <span
 																	class="image-preview-input-title">選擇檔案</span> <input
-																	type="file" name="input-file-preview"
+																	type="file" name="video"
 																	id="inputfilename1" onclick="fileSelect()" />
 																<!-- rename it -->
 															</div>
@@ -632,13 +628,13 @@
 															<div class="btn btn-default image-preview-input">
 																<span class="glyphicon glyphicon-folder-open"></span> <span
 																	class="image-preview-input-title">選擇檔案</span> <input
-																	type="file" name="input-file-preview"
+																	type="file" name="paper"
 																	id="inputfilename2" onclick="fileSelect()" />
 																<!-- rename it -->
 															</div>
 															<button id="btnSubmit2" type="submit"
 																class="btn btn-labeled btn-primary"
-																onclick="bottonClick()">
+																onclick="bottonClick1()">
 																<span class="btn-label"><i
 																	class="glyphicon glyphicon-upload"></i></span>上傳
 															</button>
@@ -999,7 +995,7 @@
 						function(e) {
 
 							var formData = new FormData($('form')[3]);
-							console.log("圖片送資料到資料庫囉!");
+							console.log("圖片送到資料庫囉!");
 							$
 									.ajax({
 										type : 'POST',
@@ -1021,6 +1017,36 @@
 										}
 									})
 						})
+						
+						
+						
+		$('#inputfilename2')
+				.change(
+						function(e) {
+
+							var formData = new FormData($('form')[3]);
+							console.log("講義送到資料庫囉!");
+							$
+									.ajax({
+										type : 'POST',
+										url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
+										data : formData,
+										processData : false,
+										contentType : false,
+										success : function() {
+											delay_till_last('id', function() {
+												$('#updateConfirm').text(
+														"變更已儲存至草稿");
+												$("#updateConfirm")
+														.fadeIn(1200);
+
+												$("#updateConfirm").fadeOut(
+														1500);
+
+											}, 500);
+										}
+									})
+						})				
 		// 設定keyup事件在特定秒數內只會觸發1次
 		var _timer = {};
 		function delay_till_last(id, fn, wait) {
