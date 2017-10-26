@@ -279,18 +279,18 @@
 											<div>
 												<div style="font-size: 15pt">
 
-													<INPUT TYPE="checkbox" NAME="checkbox1" onClick="choose()">烹飪
-													<INPUT TYPE="checkbox" NAME="checkbox2" onClick="choose()">商業
-													<INPUT TYPE="checkbox" NAME="checkbox3" onClick="choose()">程式
-													<INPUT TYPE="checkbox" NAME="checkbox4" onClick="choose()">音樂<br>
-													<INPUT TYPE="checkbox" NAME="checkbox5" onClick="choose()">手作
-													<INPUT TYPE="checkbox" NAME="checkbox6" onClick="choose()">設計
-													<INPUT TYPE="checkbox" NAME="checkbox7" onClick="choose()">語言
-													<INPUT TYPE="checkbox" NAME="checkbox8" onClick="choose()">運動<br>
-													<INPUT TYPE="checkbox" NAME="checkbox9" onClick="choose()">生活
-													<INPUT TYPE="checkbox" NAME="checkbox10" onClick="choose()">影音
-													<INPUT TYPE="checkbox" NAME="checkbox11" onClick="choose()">科技
-													<INPUT TYPE="checkbox" NAME="checkbox12" onClick="choose()">其他
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="101" onClick="choose()">生活
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="102" onClick="choose()">藝術
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="103" onClick="choose()">運動
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="104" onClick="choose()">影音<br>
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="105" onClick="choose()">手作
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="106" onClick="choose()">其他
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="107" onClick="choose()">設計
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="108" onClick="choose()">科技<br>
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="109" onClick="choose()">商業
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="110" onClick="choose()">語言
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="111" onClick="choose()">烹飪
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="112" onClick="choose()">程式
 
 												</div>
 											</div>
@@ -454,7 +454,7 @@
 									<div class="col-md-6">
 										<div class="form-group col-lg-6" style="font-size: 20px;">
 											<label>定價(最低售價為$10元)</label> <input type="text"
-												name="soldPrice" class="form-control" id=""
+												name="soldPrice" class="form-control"  id="soldPrice"
 												value="${CoursedData.soldPrice}" style="font-size: 18px;">
 										</div>
 
@@ -895,21 +895,34 @@
 
 		function select() {
 			var selectr = document.querySelector("#CourseList input:checked").value;
-			if (selectr === "radio1" || selectr === "radio3") {
+			if(selectr === "radio1"){
+				$("#soldPrice").val("0");
+				document.querySelector("#soldPrice").setAttribute("readonly","readonly");				
 				document.querySelector("#ProposalCourse").style = "opacity: 0.4;font-size: 18px;margin-top: 2em;";
 				document.querySelectorAll("#ProposalCourse input").forEach(
 						function(el) {
 							el.setAttribute("disabled", "disabled");
 							el.style = "opacity: 0.4;font-size: 18px;";
 						})
-			} else if (selectr === "radio2") {
+			}
+			if(selectr === "radio3"){
+				document.querySelector("#soldPrice").removeAttribute("readonly");
+				document.querySelector("#ProposalCourse").style = "opacity: 0.4;font-size: 18px;margin-top: 2em;";
+				document.querySelectorAll("#ProposalCourse input").forEach(
+						function(el) {
+							el.setAttribute("disabled", "disabled");
+							el.style = "opacity: 0.4;font-size: 18px;";
+						})
+			}
+			if(selectr === "radio2"){
+				document.querySelector("#soldPrice").removeAttribute("readonly");										
 				document.querySelector("#ProposalCourse").style = "opacity: 1;font-size: 18px;margin-top: 2em;";
 				document.querySelectorAll("#ProposalCourse input").forEach(
 						function(el) {
 							el.removeAttribute("disabled");
 							el.style = "opacity: 1;font-size: 18px;";
 						})
-			}
+			}						
 		};
 
 		$('#inputfilename1').change(
@@ -1033,18 +1046,6 @@
 										data : formData,
 										processData : false,
 										contentType : false,
-										success : function() {
-											delay_till_last('id', function() {
-												$('#updateConfirm').text(
-														"變更已儲存至草稿");
-												$("#updateConfirm")
-														.fadeIn(1200);
-
-												$("#updateConfirm").fadeOut(
-														1500);
-
-											}, 500);
-										}
 									})
 						})				
 		// 設定keyup事件在特定秒數內只會觸發1次
