@@ -323,7 +323,7 @@ video::-webkit-media-controls-panel {
 				</div>
 				<!--講義下載 -->
 				<div class="col-md-1 col-xs-4 ">
-					<a href="#"> <img
+					<a href="<%=request.getContextPath()%>/Paper?CourseID=${courseVO.courseID}"> <img
 						src="<%=request.getContextPath()%>/_Lyy/001-download.png"
 						class="img-responsive center-block">
 						<h5 class="text-center">講義下載</h5>

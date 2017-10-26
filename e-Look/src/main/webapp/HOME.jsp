@@ -193,8 +193,7 @@ a:HOVER {
 						</div>
 					</div>
 					<div class="card-footer">
-						<button class="btn-info btn-sm pull-right"
-							style="margin-bottom: 5px; margin-top: 10px">加入書籤</button>
+						
 						<small>課程時間:${listcourse.courseLength}分鐘</small> <br> <small>購買人數:zzz人</small>
 					</div>
 				</div>
@@ -220,8 +219,7 @@ a:HOVER {
 						</div>
 					</div>
 					<div class="card-footer">
-						<button class="btn-info btn-sm pull-right"
-							style="margin-bottom: 5px; margin-top: 10px">加入書籤</button>
+						
 						<small>課程時間:${listcourse.courseLength}分鐘</small> <br> <small>購買人數:zzz人</small>
 					</div>
 				</div>

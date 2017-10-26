@@ -23,7 +23,7 @@ public class SearchController extends HttpServlet {
 		String keyWord=request.getParameter("keyWord");
 		String[] kk = keyWord.split(" ");
 		for(String k:kk){
-			System.out.println(k);
+			//System.out.println(k);
 			if(k.length()>=1){
 				SearchVO searchVO=new SearchVO();
 				searchVO.setKeyWord(k);

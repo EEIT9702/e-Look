@@ -199,6 +199,9 @@ a.clickable:hover {
 
 .profile-header-img {
 	padding: 30px 0;
+	width: 100px;
+	margin: auto;
+	
 }
 
 .profile-header-img>img.img-circle {
@@ -509,7 +512,7 @@ a:HOVER {
 				<div class="col-md-12" style="margin: 25px 0;">
 					<div class="panel panel-primary">
 						<div class="panel-heading clickable panel-collapsed">
-							<h3 class="panel-title">我的草稿課程</h3>
+							<h3 class="panel-title">我的草稿</h3>
 							<span class="pull-right "><i
 								class="glyphicon glyphicon-plus"></i></span>
 						</div>
@@ -553,7 +556,18 @@ a:HOVER {
 							<span class="pull-right "><i
 								class="glyphicon glyphicon-plus"></i></span>
 						</div>
-						<div class="panel-body" style="display: none;"></div>
+						<div class="panel-body" style="display: none;">
+						<div id="click3" class=" col-md-3  col-sm-3" style="border: 1px solid #d4d4d5;" >
+							<div class="profile-header-img">
+								<img class="img-circle"
+									src="<%=request.getContextPath()%>/Image?MemberID=${LoginOK.memberID}" />
+								<!-- badge -->
+                       			 <h5 style="text-align: center;">${LoginOK.mName}</h5>
+                       			 <button class="btn-danger btn-sm center-block"style="margin-bottom: 5px; margin-top: 10px">取消訂閱</button></a>
+							</div>
+						 </div>                 
+						
+						</div>
 					</div>
 				</div>
 
@@ -632,12 +646,25 @@ a:HOVER {
 			   }else{
 				   
 			   }
-
+			   
 			 
 // 			$.get('ProductsDelete',{'ProductID':id},function(data){
 // 				alert(data);
 // 				 loadProduct(1);
 // 			})
 });
+		   $('#click3>div').on('click3','.profile-header-img>button:nth-child(1)',function(){
+			   if( confirm("確定取消訂閱嗎?")){
+				   $(this).parents('#click3').css("display","none")
+				    $.get('/e-Look/MemberBookmarksInsertController', {
+					'courseID' : $(this).parents('#click').find("input").val(),
+					'memberID' : $(this).parents('#click').find("input+input").val()
+				}, function() {
+				})
+			   }else{
+				   
+			   }	
+		   });
+
 </script>
 </html>
