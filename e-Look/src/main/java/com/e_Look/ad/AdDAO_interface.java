@@ -10,4 +10,6 @@ public interface AdDAO_interface {
 	public void delete(Integer adID);
 	public AdVO findByAdID(Integer adID);
 	public List<AdVO> getAll();
+	public List<AdVO> findByStatus();
+	
 }
