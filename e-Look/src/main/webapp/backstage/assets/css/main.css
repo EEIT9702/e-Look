@@ -1764,7 +1764,7 @@
 	}
 span{color: #ffffff;}
 	p {
-		margin: 0 0 2em 0;
+		margin: 0 0 2em 0.5em;
 			color: #ffffff;
 	}
 
@@ -1940,7 +1940,7 @@ span{color: #ffffff;}
 		background: rgba(255, 255, 255, 0.025);
 		border-radius: 5px;
 		border: none;
-		border: solid 2px #FF5511;
+		border: solid 2px #ffffff;
 		color: inherit;
 /* 		display: block; */
 		outline: 0;
@@ -2009,7 +2009,7 @@ span{color: #ffffff;}
 	input[type="password"],
 	input[type="email"],
 	select {
-		height: 2.75em;
+/* 		height: 2.75em; */
 	}
 
 	textarea {
@@ -2507,7 +2507,7 @@ span{color: #ffffff;}
 
 	table {
 		margin: 0 0 2em 0;
-		width: 100%;
+		width: 1400px;
 	}
 
 		table tbody tr {
@@ -2525,7 +2525,7 @@ span{color: #ffffff;}
 		}
 
 		table th {
-			color: #ffffff;
+			color: #30aee7;
 			font-size: 0.9em;
 			font-weight: 600;
 			padding: 0 0.75em 0.75em 0.75em;
@@ -2568,9 +2568,9 @@ span{color: #ffffff;}
 
 /* Button */
 
-/* 	input[type="submit"], */
+	input[type="submit"],
 /* 	input[type="reset"], */
-/* 	input[type="button"], */
+	input[type="button"],
 	button,
 	.button {
 		-moz-appearance: none;
@@ -2590,11 +2590,11 @@ span{color: #ffffff;}
 		display: inline-block;
 		font-family: Raleway, Helvetica, sans-serif;
 		font-size: 0.8em;
-		font-weight: 700;
-		height: 3.75em;
+		font-weight: 500;
+		height: 3em;
 		letter-spacing: 0.1em;
-		line-height: 3.75em;
-		padding: 0 2.25em;
+/* 		line-height: 3.75em; */
+		padding: 0 0.25em;
 		text-align: center;
 		text-decoration: none;
 		text-transform: uppercase;
@@ -3268,7 +3268,7 @@ span{color: #ffffff;}
 /* Wrapper */
 
 	#wrapper > header {
-		padding: 11em 0 2.25em 0 ;
+		padding: 2em 0 0 0 ;
 	}
 
 		#wrapper > header .inner {

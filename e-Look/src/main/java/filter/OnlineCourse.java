@@ -25,6 +25,8 @@ import com.e_Look.member.model.MemberService;
 import com.e_Look.member.model.MemberVO;
 import com.e_Look.memberBookmarks.model.MemberBookmarksService;
 import com.e_Look.memberBookmarks.model.MemberBookmarksVO;
+import com.e_Look.memberSubscription.MemberSubscriptionService;
+import com.e_Look.memberSubscription.MemberSubscriptionVO;
 
 /**
  * Servlet Filter implementation class OnlineCourse
@@ -59,22 +61,28 @@ public class OnlineCourse implements Filter {
 					BuyCourseService CourseService = new BuyCourseService();
 					List<BuyCourseVO> list2 = null;
 					List<MemberBookmarksVO> mBookmarkList = null;
+					List<MemberSubscriptionVO> memberSubscriptionVO = null;
 					MemberBookmarksService memberBookmarksService = new MemberBookmarksService();
+					MemberSubscriptionService memberSubscriptionService =new MemberSubscriptionService();
 					if (memberVoOK != null) {
 
 						list2 = CourseService.getBuyCourse(memberVoOK.getMemberID());
 						mBookmarkList = memberBookmarksService.findPrimaryMemberBookmarks(memberVoOK.getMemberID());
-
+						memberSubscriptionVO=memberSubscriptionService.findPrimaryMemberBookmarks(memberVoOK.getMemberID());
 					}
 
 					if (mBookmarkList != null) {
 						request.setAttribute("mBookmarkList", mBookmarkList);
 					}
+					
+					
+					
+					
 					request.setAttribute("list", list);
 					request.setAttribute("list2", list2);
 					request.setAttribute("courseVO", courseVO);
 					request.setAttribute("memberVo", memberVo);
-
+					request.setAttribute("memberSubscription", memberSubscriptionVO);
 					chain.doFilter(request, response);
 				}else{
 					response.sendRedirect(request.getContextPath()+"/HOME.jsp");

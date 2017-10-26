@@ -12,22 +12,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link type="text/css" href="css/stickysort.css" media="all"
-	rel="stylesheet" />
-<link rel="stylesheet" type="text/css" href="css/normalize.css" />
-<link
-	href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
-	rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="css/MODALit.min.css">
-<link href="<%=request.getContextPath()%>/backstage/css/jquery-ui.min.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="css/backEvent.css">
-<script src="<%=request.getContextPath()%>/js/jquery.js"></script>
+  <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="css/button.css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/jdialog.min.css">
+  <script src="js/jquery.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
-<script type="text/javascript" src="js/jquery.stickysort.min.js"></script>
-<script type="text/javascript" src="js/MODALit.min.js" ></script>
-<title>Insert title here</title>
+  <script src="js/jdialog.min.js" type="text/javascript"></script>
+
+<title>eLook後台管理系統</title>
 <style type="text/css">
-p{color:#666666;}
+#delete{width: 200px;
+height: 300px;
+}
+#div3{padding-left: 90px;
+padding-bottom: 5px;}  
+#div4{padding-left:1290px;
+padding-bottom: 5px;}  
 </style>
 </head>
 <body>
@@ -40,25 +41,21 @@ p{color:#666666;}
 								
 							</div>
 						</header>
-						</section>
-						
-	<div id="div1">
-		<table>
-			<thead>
-				<tr>
-					<th>活動編號</th>
-					<th>活動名稱</th>
-					<th>開始日期</th>
-					<th>結束日期</th>
-					<th>折扣優惠</th>
-					<th>優惠類別</th>
-					<th>編輯</th>
-				</tr>
-			</thead>
-			
-		
-			<tbody>
-				<c:forEach var="eLookEventVO" items="${list}">
+						</section> 
+	<table class="container">
+	<thead>
+		<tr>
+			<th><h1>活動編號</h1></th>
+			<th><h1>活動名稱</h1></th>
+			<th><h1>開始日期</h1></th>
+			<th><h1>結束日期</h1></th>
+			<th><h1>折扣優惠</h1></th>
+			<th><h1>優惠類別</h1></th>
+			<th><h1>編輯</h1></th>
+		</tr>
+	</thead>
+	<tbody>
+<c:forEach var="eLookEventVO" items="${list}"> 
 					<tr>
 						<td>${eLookEventVO.eventID}</td>
 						<td>${eLookEventVO.eventName}</td>
@@ -70,16 +67,16 @@ p{color:#666666;}
 							<FORM METHOD="post"
 								ACTION="<%=request.getContextPath()%>/backstage/elookeventinsert"
 								style="display: inline;">
-								<input type="button" class="i2Style1"  name="update" data-target="#update" value="修改"> 
+								<input type="button"   name="update" class="button cyan alt" data-toggle="JDialog" data-target="update" value="修改"> 
 								<input type="hidden" name="eventID" value="${eLookEventVO.eventID}">
-								&ensp;<input type="button" name="delete" class="i2Style" data-target="#modal"  value="刪除">  
+								<input type="button" name="delete"  class="button red alt" data-toggle="JDialog" data-target="delete"  value="刪除">  
 							</FORM> 
 						</td>
 					</tr>
 				</c:forEach>
-			</tbody>
-					
-				<form METHOD="post"	ACTION="<%=request.getContextPath()%>/backstage/elookeventinsert"   >
+	</tbody>
+	
+					<form METHOD="post"	ACTION="<%=request.getContextPath()%>/backstage/elookeventinsert"   >
 				<tr>
 					<td></td>
 					<td><input type="text" name="eventName" value="${ErrMsg.errName}" class="inputtext"></td>
@@ -101,7 +98,7 @@ p{color:#666666;}
 							<option value="語言">語言</option>
 							<option value="烹飪">烹飪</option>
 							<option value="程式">程式</option>
-							<option value="音樂">音樂</option>
+							<option value="藝術">藝術</option>
 					</select>&ensp;<select class="font courseclass" name="courseClass2">
 							<option value="null">無</option>
 							<option value="全部">全部</option>
@@ -116,7 +113,7 @@ p{color:#666666;}
 							<option value="語言">語言</option>
 							<option value="烹飪">烹飪</option>
 							<option value="程式">程式</option>
-							<option value="音樂">音樂</option>
+							<option value="藝術">藝術</option>
 					</select>&ensp;<select class="font courseclass" name="courseClass3">
 							<option value="null">無</option>
 							<option value="全部">全部</option>
@@ -131,59 +128,72 @@ p{color:#666666;}
 							<option value="語言">語言</option>
 							<option value="烹飪">烹飪</option>
 							<option value="程式">程式</option>
-							<option value="音樂">音樂</option>
+							<option value="藝術">藝術</option>
 					</select></td>
-					<td><input type="submit" class="i2Style3" id="i2Style1"  value="新增">
+					<td><input type="submit" class="button green alt"   value="新增">
 					<input type="hidden" name="action" value="insert">
 					</td>	
 				</tr>
 			</form>
-
+</table>		
 			
-			</table>     
-			</div>
-		
-                    
-<!-- Sets modal target -->
-<!-- <button type="button" id="button" data-target="#modal">測試</button> -->
+			
+			
+			
+			
+			
+						
+
 <!-- 刪除訊息視窗 -->
-<div id="modal" class="modalit" aria-hidden="true">
-    <div class="dialog">
+<div  class="jDialog" id="delete">
+    <div class="content">
         <header>
             <p>警告</p>
         </header>
         <div class="content">
             <p>是否刪除此活動?</p>
         </div>
-        <footer>
+        <footer><div id="div3">
         <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backstage/elookeventinsert" style="display: inline;">
-        <input type="submit"  value="刪除"> 
+        <input type="submit"  value="刪除" > 
         <input	type="hidden" name="eventID" id="deleteEventID" value="">
 		<input type="hidden" name="action" value="delete"></FORM>
-            <button type="button" data-modal-btn="dismiss" class="btn primary">取消</button>
+            <button type="button" data-dismiss="JDialog" class="btn primary" >取消</button></div>
         </footer>
     </div>
 </div>  
 
-<!-- 修改訊息視窗 -->
-<div id="update" class="modalit" aria-hidden="true">
-    <div class="dialog">
+
+
+
+
+
+
+
+<!--  修改訊息視窗  -->
+<div class="jDialog" id="update" >
+     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backstage/elookeventinsert" >
+    <div class="content">
         <header>
-            <h3>修改</h3>
+            <h3>修改活動</h3>
         </header>
+        
         <div class="content" id="updateDiv">
+         
           <table>
           <thead>
 				<tr>
-			    	<th>活動編號</th>
-					<th>活動名稱</th>
-					<th>開始日期</th>
-					<th>結束日期</th>
-					<th>折扣優惠</th>
-					<th>優惠類別</th>
+			    	<td>活動編號</td>
+					<td>活動名稱</td>
+					<td>開始日期</td>
+					<td>結束日期</td>
+					<td>折扣優惠</td>
+					<td>優惠類別</td>
 				</tr>
 			</thead>
-          <form METHOD="post"ACTION="<%=request.getContextPath()%>/backstage/elookeventinsert" >
+			
+          
+          
 				<tr>
 				    <td id="td1"></td>
 					<td><input type="text" name="eventName"  class="inputtext"></td>
@@ -205,7 +215,7 @@ p{color:#666666;}
 							<option value="語言">語言</option>
 							<option value="烹飪">烹飪</option>
 							<option value="程式">程式</option>
-							<option value="音樂">音樂</option>
+							<option value="藝術">藝術</option>
 					</select>&ensp;<select class="font courseclass" name="courseClass2">
 							<option value="null">無</option>
 							<option value="全部">全部</option>
@@ -220,7 +230,7 @@ p{color:#666666;}
 							<option value="語言">語言</option>
 							<option value="烹飪">烹飪</option>
 							<option value="程式">程式</option>
-							<option value="音樂">音樂</option>
+							<option value="藝術">藝術</option>
 					</select>&ensp;<select class="font courseclass" name="courseClass3">
 							<option value="null">無</option>
 							<option value="全部">全部</option>
@@ -235,21 +245,39 @@ p{color:#666666;}
 							<option value="語言">語言</option>
 							<option value="烹飪">烹飪</option>
 							<option value="程式">程式</option>
-							<option value="音樂">音樂</option>
+							<option value="藝術">藝術</option>
 					</select></td>
 				</tr>
 			</table>
         </div>
-        <footer>
-        <input type="submit"  value="儲存"> 
-        <input	type="hidden" name="eventID" id="updateEventID" value="">
-		<input type="hidden" name="action" value="update1"></FORM>
-            <input type="button" data-modal-btn="dismiss" class="btn primary" value="取消"></input>
+        <footer><div id="div4">
+        <input type="submit" class="button blue alt" value="儲存" > 
+        <input type="hidden" name="eventID" id="updateEventID" value="">
+		<input type="hidden" name="action" value="update1">
+            &nbsp;<input type="button" data-dismiss="JDialog" class="btn primary button red alt" value="取消"></input>
+            </div>
         </footer>
+          
     </div>
+     </FORM>
 </div>  
 
+
+<!-- 彈跳窗 -->
+
 <script>		
+$("#delete").jDialog({
+    skinClassName: 'demo',
+    allowOverlay: true,
+    animationType: 'flip'
+});     
+
+$("#update").jDialog({
+    skinClassName: 'demo',
+    allowOverlay: true,
+    animationType: 'flip'
+});      
+		
 			
 		//抓取delete該行id	
 		$('tbody input[name="delete"]').on('click',function(){
@@ -279,17 +307,11 @@ p{color:#666666;}
 
 	$.datepicker.setDefaults({ dateFormat: 'yy-mm-dd' }); //全局設置日期格式
 
-	//初始彈跳視窗插件
-
-	// Sets modal target
-	var modal = new MODALit({
-	    el:'.i2Style'
-	});   
 	
-	var modal = new MODALit({
-	    el:'.i2Style1'
-	});      
 </script> 
 
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
 </body>
 </html>
