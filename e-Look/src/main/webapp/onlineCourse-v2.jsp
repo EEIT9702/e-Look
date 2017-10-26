@@ -1,23 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-
 	pageEncoding="UTF-8"
 	import="java.util.*,java.text.*,com.e_Look.Course.*,com.e_Look.member.model.*,com.e_Look.buyCourse.model.*,javax.servlet.http.HttpSession"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <!DOCTYPE >
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<link href="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.css"
-	rel="stylesheet">
-<link href="<%=request.getContextPath()%>/css/bootstrap.css"
-	rel="stylesheet">
+<title>收費課程</title>
+<link href="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.css"rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/bootstrap.css" rel="stylesheet">
 <!-- <!-- jQuery -->
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
 <!-- <!-- Bootstrap Core JavaScript -->
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
-
 <style>
 /* 影片區塊 */
 video {
@@ -175,6 +170,14 @@ video::-webkit-media-controls-panel {
 a:HOVER {
 	color: white;
 }
+#radioReporter {
+	padding-left: 50px;
+}
+
+#radioReporter>span {
+	font-size: 30px;
+	padding-left: 5px;
+}
 </style>
 </head>
 <!-- 影片區 -->
@@ -259,19 +262,21 @@ a:HOVER {
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-
-
+	<!--空-->
 				<div class="col-md-1 "></div>
+	<!--課程人數 -->			
 				<div class="col-md-1 col-xs-4">
 					<img src="<%=request.getContextPath()%>/_Lyy/004-people.png"
 						class="img-responsive center-block ">
 					<h5 class="text-center">課程人數</h5>
 				</div>
+	<!--課程時間 -->			
 				<div class="col-md-1 col-xs-4">
 					<img src="<%=request.getContextPath()%>/_Lyy/clock.png"
 						class="img-responsive center-block">
 					<h5 class="text-center">課程時間為 ${courseVO.courseLength}min</h5>
 				</div>
+	<!--加到最愛 -->			
 				<c:if test="${!empty mBookmarkList}">
 						<c:forEach items="${mBookmarkList}" var="memberBookmsrks">
 							<c:choose>
@@ -323,14 +328,13 @@ a:HOVER {
 				
 				<c:if test="${!empty LoginOK}">
 					<div class="col-md-1 col-xs-4">
-						<img src="<%=request.getContextPath()%>/img/favorite.png"
-							class="img-responsive center-block"> <a href="#"
-							id="${favor}"><h5 class="text-center">加到最愛</h5></a>
+						 <a href="#" id="${favor}"><img src="<%=request.getContextPath()%>/img/favorite.png"
+							class="img-responsive center-block"><h5 class="text-center">加到最愛</h5></a>
 					</div>
 				</c:if>
 				<input type="hidden" value="${courseVO.courseID}" id="mbcourseID" name="courseID">
 				<input type="hidden" value="${LoginOK.memberID}" id="mbmemberID" name="memberID">
-
+	<!--分享連結 -->
 				<div class="col-md-1 col-xs-4 ">
 					<img src="<%=request.getContextPath()%>/_Lyy/share.png"
 						class="img-responsive center-block">
@@ -343,25 +347,94 @@ a:HOVER {
 						</ul>
 					</div>
 				</div>
-
+	<!--講義下載 -->
 				<div class="col-md-1 col-xs-4 ">
 					<a href="#"> <img
 						src="<%=request.getContextPath()%>/_Lyy/001-download.png"
 						class="img-responsive center-block">
 						<h5 class="text-center">講義下載</h5>
 					</a>
-				</div>
-				<div class="col-md-1 col-xs-4">
-					<a href="#"> <img
-						src="<%=request.getContextPath()%>/img/warning.png"
-						class="img-responsive center-block">
-						<h5 class="text-center">影片檢舉</h5>
-					</a>
-				</div>
+				</div>		
+	<!--影片檢舉 -->			
+				<c:if test="${empty LoginOK}">
+					<c:choose>
+						<c:when test="${!empty loginerr}">
+							<div class="col-md-1 col-xs-4">
+								<a href="#" href="#" data-toggle="modal" data-target="#myModal2">
+									<img src="<%=request.getContextPath()%>/img/warning.png"
+									class="img-responsive center-block">
+									<h5 class="text-center">影片檢舉</h5>
+								</a>
+							</div>
+						</c:when>
+						<c:when test="${empty err}">
+							<div class="col-md-1 col-xs-4">
+								<a href="#" href="#" data-toggle="modal" data-target="#myModal">
+									<img src="<%=request.getContextPath()%>/img/warning.png"
+									class="img-responsive center-block">
+									<h5 class="text-center">影片檢舉</h5>
+								</a>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="col-md-1 col-xs-4">
+								<a href="#" href="#" data-toggle="modal" data-target="#myModal2">
+									<img src="<%=request.getContextPath()%>/img/warning.png"
+									class="img-responsive center-block">
+									<h5 class="text-center">影片檢舉</h5>
+								</a>
+							</div>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+				<c:if test="${!empty LoginOK}">
+					<div class="col-md-1 col-xs-4">
+						<a href="#" data-toggle="modal" data-target="#myModalReportVideo">
+							<img src="<%=request.getContextPath()%>/img/warning.png"
+							class="img-responsive center-block">
+							<h5 class="text-center">影片檢舉</h5>
+						</a>
+					</div>
+					<div class="modal fade" id="myModalReportVideo" tabindex="-1"
+						role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header"
+									style="background-color: #FFC78E; border-top-right-radius: 8px; border-top-left-radius: 8px">
+									<button type="button" class="close pull-right"
+										data-dismiss="modal" aria-hidden="true">&times;</button>
+									<img src="<%=request.getContextPath()%>/img/warning.png"
+										width="42"> <span class="modal-title" id="myModalLabel"
+										style="font-size: 24px; color: red">檢舉影片</span>
+								</div>
+								<h2>檢舉的影片為:${courseVO.courseName}</h2>
+								<h2>你檢舉的內容為:</h2>
+								<div class="modal-body" id="radioReporter">
+									<input type="radio" id="radioReporterCon" name="cont"
+										value="該影片侵犯著作權"><span>該影片侵犯著作權</span><br> <input
+										type="radio" id="radioReporterCon" name="cont"
+										value="該影片含有不雅內容"><span>該影片含有不雅內容</span><br> <input
+										type="radio" id="radioReporterCon" name="cont" value="該影片無法播放"><span>該影片無法播放</span><br>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">離開</button>
+									<button type="button" class="btn btn-warning" id="reportAction"
+										data-toggle="modal" data-target="#myModalReportVideo1">提交檢舉</button>
+								</div>
+								<input type="hidden" id="reportMemberID"
+									value="${LoginOK.memberID}" /> <input type="hidden"
+									id="reportCourseID" value="${courseVO.courseID}" />
+							</div>
+						</div>
+					</div>
+				</c:if>	
+	<!--課程售價 -->
 				<div class="col-md-2 col-xs-6 ">
 					<h5>課程售價</h5>
 					<h2 style="text-align: center; font-weight: bold;">NT${courseVO.soldPrice}</h2>
 				</div>
+		<!--星星 -->			
 				<div class="col-md-2 col-xs-6 center-block">
 					<div style="width: 70px; margin: 0 auto">
 						<img id="idstar1" class="star"
@@ -400,7 +473,7 @@ a:HOVER {
 							<li role="presentation"><a href="#Section4"
 								aria-controls="messages" role="tab" data-toggle="tab">點評收藏</a></li>
 						</ul>
-						<!-- 課程簡介 -->
+	<!-- 課程簡介 -->
 						<div class="tab-content tabs">
 							<div role="tabpanel" class="tab-pane fade in active"
 								id="Section1" style="font-size: 20px">
@@ -695,6 +768,22 @@ a:HOVER {
 			}else{
 				alert('已經加入過囉');
 			}
+
+		})
+	</script>
+		<script>
+		$('#reportAction').click(function() {
+			if ($('#radioReporterCon:checked').val() == null) {
+				$("#myModalReportVideo").modal('hide');
+				return;
+			} else {
+				$.post("ReportCourseInsertController", {
+					'reportMemberID' : $('#reportMemberID').val(),
+					'reportCourseID' : $('#reportCourseID').val(),
+					'radioReporterCon' : $('#radioReporterCon:checked').val()
+				});
+			}
+			$("#myModalReportVideo").modal('hide');
 
 		})
 	</script>

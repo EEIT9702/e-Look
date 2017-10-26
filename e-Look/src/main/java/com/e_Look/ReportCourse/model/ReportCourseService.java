@@ -1,7 +1,5 @@
 package com.e_Look.ReportCourse.model;
 
-import java.sql.Date;
-
 public class ReportCourseService {
 	private ReportCourseDAO_interface dao;
 	public ReportCourseService (){
