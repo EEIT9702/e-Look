@@ -564,8 +564,7 @@
 							</div>
 
 							<div class="tab-pane" role="tabpanel" id="step6">
-								<div class="container">
-									<br />
+								<div class="container alert alert-info">
 									<div class="row">
 										<div class="col-md-12">
 											<div class="panel panel-default">
@@ -610,8 +609,7 @@
 									</div>
 								</div>
 								<!-- /container -->
-								<div class="container">
-									<br />
+								<div class="container alert alert-info">
 									<div class="row">
 										<div class="col-md-12">
 											<div class="panel panel-default">
