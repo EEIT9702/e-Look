@@ -184,7 +184,7 @@ public class CourseClassDetailsDAO_JDBC implements CourseClassDetails_interface 
 
 			while (rs.next()) {
 				CourseClassDetailsVO CourseClassDetailsVO = new CourseClassDetailsVO();
-				CourseClassDetailsVO.setCourseClassVO(ccdao.findByCourseClassID(rs.getInt(1)));
+				CourseClassDetailsVO.setCourseClassVO(ccdao.getByCourseClassID(rs.getInt(1)));
 				CourseClassDetailsVO.setCcName(rs.getString(2));
 				CourseClassDetailsVO.setCourseVO(cdao.findByPrimaryKey(rs.getInt(3)));
 				CourseClassDetailsVO.setCourseName(rs.getString(4));
@@ -235,7 +235,7 @@ public class CourseClassDetailsDAO_JDBC implements CourseClassDetails_interface 
 				
 				CourseClassDetailsVO.setCourseVO(cdao.findByPrimaryKey(rs.getInt(1)));
 				CourseClassDetailsVO.setCourseName(rs.getString(2));
-				CourseClassDetailsVO.setCourseClassVO(ccdao.findByCourseClassID(rs.getInt(3)));
+				CourseClassDetailsVO.setCourseClassVO(ccdao.getByCourseClassID(rs.getInt(3)));
 				CourseClassDetailsVO.setCcName(rs.getString(4));
 				findBycourseID.add(CourseClassDetailsVO);
 			}
@@ -281,7 +281,7 @@ public class CourseClassDetailsDAO_JDBC implements CourseClassDetails_interface 
 				
 				
 				CourseClassDetailsVO CourseClassDetailsVO = new CourseClassDetailsVO();
-				CourseClassDetailsVO.setCourseClassVO(ccdao.findByCourseClassID(rs.getInt(1)));
+				CourseClassDetailsVO.setCourseClassVO(ccdao.getByCourseClassID(rs.getInt(1)));
 				CourseClassDetailsVO.setCcName(rs.getString(2));
 				CourseClassDetailsVO.setCourseVO(cdao.findByPrimaryKey(rs.getInt(3)));
 				CourseClassDetailsVO.setCourseName(rs.getString(4));
