@@ -50,7 +50,6 @@
 
 @media ( min-width : 1200px) and ( max-width:1500px) {
 	[class*="span"] {
-		float: left;
 		min-height: 1px;
 		margin: 0px 7%;
 	}
@@ -64,7 +63,6 @@
 		width: 470px;
 	}
 	[class*="span"] {
-		float: left;
 		min-height: 1px;
 		margin: 0px 8%;
 	}
@@ -97,7 +95,7 @@ ul {
 }
 
 .btn {
-	margin-bottom: 20px !important;
+	margin-bottom: 5px !important;
 }
 
 .credit-card-box .panel-title {
@@ -129,6 +127,10 @@ ul {
 
 .input-group input {
 	margin: 0px 2px
+}
+.price{
+float: right;
+font-weight: bold;
 }
 </style>
 
@@ -179,6 +181,7 @@ ul {
 
 									<div class="span12">
 										<ul class="thumbnails" id="showdetails">
+											<!--  
 											<li class="span5 clearfix">
 												<div class="thumbnail clearfix">
 													<img src="<%=request.getContextPath()%>/img/02.jpg"
@@ -194,103 +197,19 @@ ul {
 													</div>
 												</div>
 											</li>
-											<li class="span5 clearfix">
-												<div class="thumbnail clearfix">
-													<img src="<%=request.getContextPath()%>/img/預覽課程展示畫面.png"
-														alt="ALT NAME" class="pull-left span2 clearfix"
-														style='margin-right: 10px'>
-													<div class="caption" >
-														<button 
-															class="btn btn-danger icon  pull-right">刪除</button>
-														<h4>
-															<a
-																href="<%=request.getContextPath()%>/onlineCourse-v2.jsp?courseID=200001">在這裡顯示課程名稱</a>
-														</h4>
-														<small><b>課程類別,課程類別</b></small>
-													</div>
-												</div>
-											</li>
-											<li class="span5 clearfix">
-												<div class="thumbnail clearfix">
-													<img src="http://placehold.it/320x200" alt="ALT NAME"
-														class="pull-left span2 clearfix"
-														style='margin-right: 10px'>
-													<div class="caption" class="pull-left">
-														<button 
-															class="btn btn-danger icon  pull-right">刪除</button>
-														<h4>
-															<a
-																href="<%=request.getContextPath()%>/onlineCourse-v2.jsp?courseID=200001">在這裡顯示課程名稱</a>
-														</h4>
-														<small><b>課程類別,課程類別</b></small>
-													</div>
-												</div>
-											</li>
-											<li class="span5 clearfix">
-												<div class="thumbnail clearfix">
-													<img src="http://placehold.it/320x200" alt="ALT NAME"
-														class="pull-left span2 clearfix"
-														style='margin-right: 10px'>
-													<div class="caption" class="pull-left">
-														<button 
-															class="btn btn-danger icon  pull-right">刪除</button>
-														<h4>
-															<a
-																href="<%=request.getContextPath()%>/onlineCourse-v2.jsp?courseID=200001">在這裡顯示課程名稱</a>
-														</h4>
-														<small><b>課程類別,課程類別</b></small>
-													</div>
-												</div>
-											</li>
-											<li class="span5 clearfix">
-												<div class="thumbnail clearfix">
-													<img src="http://placehold.it/320x200" alt="ALT NAME"
-														class="pull-left span2 clearfix"
-														style='margin-right: 10px'>
-													<div class="caption" class="pull-left">
-														<button 
-															class="btn btn-danger icon  pull-right">刪除</button>
-														<h4>
-															<a
-																href="<%=request.getContextPath()%>/onlineCourse-v2.jsp?courseID=200001">在這裡顯示課程名稱</a>
-														</h4>
-														<small><b>課程類別,課程類別</b></small>
-													</div>
-												</div>
-											</li>
-											<li class="span5 clearfix">
-												<div class="thumbnail clearfix">
-													<img src="onlineCourse-v2.jsp?courseID=200006"
-														alt="ALT NAME" class="pull-left span2 clearfix"
-														style='margin-right: 10px'>
-													<div class="caption" class="pull-left">
-														<button 
-															class="btn btn-danger icon  pull-right">刪除</button>
-														<h4>
-															<a
-																href="<%=request.getContextPath()%>/onlineCourse-v2.jsp?courseID=200001">在這裡顯示課程名稱</a>
-														</h4>
-														<small><b>課程類別,課程類別</b></small>
-													</div>
-												</div>
-											</li>
+											-->
 										</ul>
-
-
-
 									</div>
 								</div>
 							</div>
+							<h4 id="total" class="text-right">總金額:8700元</h4>
 							<div class="col-md-4 pull-right" style="margin-top: 20px">
 								<button type="button"
 									class="btn btn-primary pull-right next-step">前往填寫付款資訊</button>
 							</div>
 						</div>
 						<!-- step1end -->
-						<!-- step2start -->
-						<!-- step2end -->
 						<!-- step3start -->
-
 						<div class="tab-pane" role="tabpanel" id="step3">
 							<div class="container">
 								<div class="row">
@@ -400,41 +319,66 @@ ul {
 			$('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
 				return false;
 			});
+			
 			loadMemberOrder();
 			function loadMemberOrder(){
 				$('#showdetails').html('');
 				var fg = $(document.createDocumentFragment());
 				$.post('<%=request.getContextPath()%>/OrderEdit',{'action':'loading'},function(datas){
-					console.log(datas);
+				var total = 0;
+				var hasdata=0;
 					$.each(datas,function(index,orderVO){
-						console.log("index:"+index+",orderVO:"+orderVO);
+						var courseClass = getCourseClass(orderVO.courseVO.courseID);
 						var cell1 = $('<li>').addClass('span5 clearfix');
 						var cell2 = $('<div>').addClass('thumbnail clearfix');
 						var cell3 = $('<img>').addClass('pull-left span2 clearfix').css('margin-right','10px').attr({'alt':'','src':'<%=request.getContextPath() %>/CourseImage?CourseID='+orderVO.courseVO.courseID});
 						var cell4 = $('<div>').addClass('caption');
-						var cell5 = $('<button>').addClass('btn btn-danger icon  pull-right').text('刪除').val(orderVO.courseVO.courseID);
+						var cell5 = $('<button>').addClass('btn btn-danger icon  pull-right').text('刪除').val(orderVO.courseVO.courseID).attr('type','button');
 						var cell6 = $('<h4>')
 						var cell7 = $('<a>').attr('href','<%=request.getContextPath()%>/onlineCourse-v2.jsp?courseID='+orderVO.courseVO.courseID).text(orderVO.courseVO.courseName);
 						var cell8 = $('<small>');
-						var cell9 = $('<b>').text('類別');
+						var cell9 = $('<b>').text(courseClass);
+						var cell10 = $('<div>').addClass('text-right price').text('$ '+orderVO.buyingPrice+' 元')
 						cell1.append(cell2);
 						cell2.append([cell3,cell4]);
-						cell4.append([cell5,cell6,cell8]);
+						cell4.append([cell5,cell6,cell8,cell10]);
 						cell6.append(cell7);
 						cell8.append(cell9);
-					fg.append(cell1)
+						fg.append(cell1);
+						hasdata++;
+						total+=orderVO.buyingPrice;
 					})
 					$('#showdetails').append(fg);
+					$('#total').text('總金額: '+total+' 元');
+					if(hasdata==0){
+						alert('請先選購商品'); 
+						location.href='<%=request.getContextPath()%>';
+					}
 				},"json")
 			}//loadMemberOrder end
 			
-			$('#showdetails button').on('click',function(){
-				var courseID=$(this).val;
-				$.post('<%=request.getContextPath()%>/OrderEdit',{'action':'delete','courseID':courseID},function(){
+			$('#showdetails').on('click','button',function(){
+				var courseID=$(this).val();
+				$.post('<%=request.getContextPath()%>/OrderEdit',{'action':'delete','courseID':courseID},function(data){
 					loadMemberOrder();
 				})
 				
 			})
+			function getCourseClass(courseID){
+				var courseClass="";
+				$.ajax({'url':'<%=request.getContextPath() %>/GetCourseClass',
+					'async':false,
+					'data':{'courseID':courseID},
+					'success':function(result){
+						courseClass = result;
+					}
+			});//$.ajax end
+			return courseClass;
+				
+			}
+			
+			
+			
 			
 		})
 	</script>

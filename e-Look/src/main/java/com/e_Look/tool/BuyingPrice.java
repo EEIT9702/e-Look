@@ -2,7 +2,6 @@ package com.e_Look.tool;
 
 import java.sql.Date;
 import java.util.List;
-
 import com.e_Look.Course.CourseDAO;
 import com.e_Look.Course.CourseVO;
 import com.e_Look.CourseClassDetails.CourseClassDetailsDAO;
@@ -20,14 +19,9 @@ public class BuyingPrice {
 		List<CourseClassDetailsVO> ccdVOs = ccddao.findBycourseID(courseID);
 		for(CourseClassDetailsVO ccdVO:ccdVOs){
 			if(ccdVO.getCourseClassVO().getEventVO()!=null){
-				System.out.println("該類別有活動");
 				Date startDate = ccdVO.getCourseClassVO().getEventVO().geteStartDate();
 				Date endDate = ccdVO.getCourseClassVO().getEventVO().geteEndDate();
-				System.out.println("startDate:"+startDate);
-				System.out.println("endDate:"+endDate);
-				System.out.println("startDateMills:"+startDate.getTime());
-				System.out.println("endDateMills:"+endDate.getTime());
-				if(startDate.getTime()<=System.currentTimeMillis() && endDate.getTime()>=System.currentTimeMillis()){
+				if(startDate.getTime()<=System.currentTimeMillis() && (endDate.getTime()+3600*1000*24) >=System.currentTimeMillis()){
 					if(discount>ccdVO.getCourseClassVO().getEventVO().getDiscount()){
 						discount=ccdVO.getCourseClassVO().getEventVO().getDiscount();
 					}

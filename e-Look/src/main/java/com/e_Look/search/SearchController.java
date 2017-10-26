@@ -14,7 +14,7 @@ import org.springframework.web.servlet.DispatcherServlet;
 /**
  * Servlet implementation class SearchController
  */
-@WebServlet("/SearchController")
+@WebServlet("/SearchController.do")
 public class SearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -23,7 +23,7 @@ public class SearchController extends HttpServlet {
 		String keyWord=request.getParameter("keyWord");
 		String[] kk = keyWord.split(" ");
 		for(String k:kk){
-			System.out.println(k);
+			//System.out.println(k);
 			if(k.length()>=1){
 				SearchVO searchVO=new SearchVO();
 				searchVO.setKeyWord(k);
@@ -32,7 +32,7 @@ public class SearchController extends HttpServlet {
 		}
 //		response.sendRedirect(getServletContext().getContextPath()+"/body/body_river.jsp");
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/body/body_river2.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/body/freeCourse_Home.jsp");
 		rd.forward(request, response);
 		
 	}

@@ -34,8 +34,9 @@ public class AdDAO implements AdDAO_interface {
 	private static final String SELECT_ONE_AD =
 			"SELECT adID, fileName, adFile, status FROM Ad WHERE adID=?";
 	private static final String SELECT_ALL_AD =
-			"SELECT adID, fileName, adFile, status FROM Ad";
-	
+			"SELECT adID, fileName, adFile, status FROM Ad order by adID";
+	private static final String SELECT_STATUS_AD =
+			"SELECT adID, fileName, adFile, status FROM Ad WHERE status=0 order by adID";
 	@Override
 	public void insert(AdVO adVO) {
 		Connection con = null;
@@ -239,6 +240,54 @@ public class AdDAO implements AdDAO_interface {
 			//"SELECT adID, fileName, adFile, status FROM Ad";
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_ALL_AD);
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// adVO 也稱為 Domain objects
+				adVO = new AdVO();
+				adVO.setAdID(rs.getInt("adID"));
+				adVO.setFileName(rs.getString("fileName"));
+				adVO.setAdFile(rs.getBinaryStream("adFile"));
+				adVO.setStatus(rs.getByte("status"));
+				list.add(adVO); // Store the row in the list
+			}
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	@Override
+	public List<AdVO> findByStatus() {
+		List<AdVO> list = new ArrayList<AdVO>();
+		AdVO adVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			//"SELECT adID, fileName, adFile, status FROM Ad";
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(SELECT_STATUS_AD);
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {

@@ -53,7 +53,7 @@ public class CourseService {
 
 		if (part.getSize() > 0) {
 			CourseVO courseVO3 = new CourseVO();
-			courseVO3.setMemberID(CourseID);
+			courseVO3.setCourseID(CourseID);
 			try {
 				courseVO3.setPaper(part.getInputStream());
 			} catch (IOException e) {
@@ -66,6 +66,11 @@ public class CourseService {
 	}
 	public CourseVO getCourseData(Integer courseID) {
 		return dao.findByPrimaryKey(courseID);
+		
+	}
+	public void deleteCourse(Integer courseID) {
+
+			dao.delete(courseID);
 		
 	}
 

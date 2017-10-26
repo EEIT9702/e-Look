@@ -6,18 +6,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>免費課程</title>
 <link href="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.css"
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/bootstrap.css"
 	rel="stylesheet">
-<%-- <link href="<%=request.getContextPath()%>/font-awesome/css/font-awesome.min.css" --%>
-<!-- 	rel="stylesheet"> -->
 <!-- <!-- jQuery -->
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
 <!-- <!-- Bootstrap Core JavaScript -->
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
-
 <style>
 /* 影片區塊 */
 video {
@@ -179,6 +176,15 @@ video::-webkit-media-controls-panel {
 #messageHeader>img {
 	width: 50px;
 }
+
+#radioReporter {
+	padding-left: 50px;
+}
+
+#radioReporter>span {
+	font-size: 30px;
+	padding-left: 5px;
+}
 </style>
 </head>
 <!-- 影片區 -->
@@ -317,7 +323,7 @@ video::-webkit-media-controls-panel {
 				</div>
 				<!--講義下載 -->
 				<div class="col-md-1 col-xs-4 ">
-					<a href="#"> <img
+					<a href="<%=request.getContextPath()%>/Paper?CourseID=${courseVO.courseID}"> <img
 						src="<%=request.getContextPath()%>/_Lyy/001-download.png"
 						class="img-responsive center-block">
 						<h5 class="text-center">講義下載</h5>
@@ -375,25 +381,28 @@ video::-webkit-media-controls-panel {
 										width="42"> <span class="modal-title" id="myModalLabel"
 										style="font-size: 24px; color: red">檢舉影片</span>
 								</div>
-								<form action="" method="post">
-									<h2>你檢舉的內容為:</h2>
-									<div class="modal-body" style="padding-left: 50px">
-										<input type="radio" id="male" name="sex"><label
-											for="1" style="font-size: 30px; padding-left: 5px">該影片侵犯著作權</label><br>
-										<input type="radio" id="male" name="sex"><label
-											for="2" style="font-size: 30px; padding-left: 5px">該影片含有不雅內容</label><br>
-										<input type="radio" id="male" name="sex"><label
-											for="3" style="font-size: 30px; padding-left: 5px">該影片無法播放</label><br>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default"
-											data-dismiss="modal">離開</button>
-										<button type="button" class="btn btn-warning">提交檢舉</button>
-									</div>
-								</form>
+								<h2>檢舉的影片為:${courseVO.courseName}</h2>
+								<h2>你檢舉的內容為:</h2>
+								<div class="modal-body" id="radioReporter">
+									<input type="radio" id="radioReporterCon" name="cont"
+										value="該影片侵犯著作權"><span>該影片侵犯著作權</span><br> <input
+										type="radio" id="radioReporterCon" name="cont"
+										value="該影片含有不雅內容"><span>該影片含有不雅內容</span><br> <input
+										type="radio" id="radioReporterCon" name="cont" value="該影片無法播放"><span>該影片無法播放</span><br>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">離開</button>
+									<button type="button" class="btn btn-warning" id="reportAction"
+										data-toggle="modal" data-target="#myModalReportVideo1">提交檢舉</button>
+								</div>
+								<input type="hidden" id="reportMemberID"
+									value="${LoginOK.memberID}" /> <input type="hidden"
+									id="reportCourseID" value="${courseVO.courseID}" />
 							</div>
 						</div>
 					</div>
+
 				</c:if>
 				<!--課程售價 -->
 				<div class="col-md-2 col-xs-6 ">
@@ -778,23 +787,28 @@ video::-webkit-media-controls-panel {
 	</script>
 	<script>
 		//判斷是否加入過最愛		
-
+		var count = 0;
 		$('#favoriteclick1').click(function() {
 			alert('已經加入過囉');
 		})
-		$('#favoriteclick2').click(function() {
-			$('#favoriteclick2').attr("id", "favoriteclick1")
+
+		$("#favoriteclick2").click(function() {
+
 			console.log($("#mbcourseID").val())
 			console.log($("#mbmemberID").val())
+			if (count == 0) {
+				$('#favoriteclick2').attr("id", "favoriteclick1")
+				$.post('MemberBookmarksInsertController', {
+					'courseID' : $("#mbcourseID").val(),
+					'memberID' : $("#mbmemberID").val()
+				}, function() {
+					alert('已經加到你的最愛囉');
+					count++;
+				})
+			} else {
+				alert('已經加入過囉');
+			}
 
-			$.post('MemberBookmarksInsertController', {
-				'courseID' : $("#mbcourseID").val(),
-				'memberID' : $("#mbmemberID").val(),
-			}, function() {
-
-				alert('已經加到你的最愛囉');
-				$("#errorMoney").text('數字有誤,金額只能在50到20000之間');
-			})
 		})
 	</script>
 	<script>
@@ -803,7 +817,7 @@ video::-webkit-media-controls-panel {
 
 			if (!isNaN(money) && money != "") {
 				if (money<50||money>20000) {
-
+					$("#errorMoney").text('金額不對唷!');
 					$("#sponsorBtu").prop("disabled", true)
 				} else {
 					$("#errorMoney").text('');
@@ -816,5 +830,22 @@ video::-webkit-media-controls-panel {
 			}
 		})
 	</script>
+	<script>
+		$('#reportAction').click(function() {
+			if ($('#radioReporterCon:checked').val() == null) {
+				$("#myModalReportVideo").modal('hide');
+				return;
+			} else {
+				$.post("ReportCourseInsertController", {
+					'reportMemberID' : $('#reportMemberID').val(),
+					'reportCourseID' : $('#reportCourseID').val(),
+					'radioReporterCon' : $('#radioReporterCon:checked').val()
+				});
+			}
+			$("#myModalReportVideo").modal('hide');
+
+		})
+	</script>
+
 </body>
 </html>

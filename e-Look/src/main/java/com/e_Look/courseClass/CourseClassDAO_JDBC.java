@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.e_Look.eLookEvent.eLookEventDAO;
+import com.e_Look.eLookEvent.eLookEventDAO_JDBC;
 import com.e_Look.eLookEvent.eLookEventVO;
 
 
@@ -147,13 +149,12 @@ public class CourseClassDAO_JDBC implements CourseClass_interface{
 
 	
 	@Override
-	public CourseClassVO findByCourseClassID(Integer CourseClassID) {
+	public CourseClassVO getByCourseClassID(Integer CourseClassID) {
 		CourseClassVO courseClassVO = null;
-		eLookEventVO eventVO = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+		eLookEventDAO_JDBC eedao = new eLookEventDAO_JDBC(); 
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url, userid, passwd);
@@ -163,12 +164,10 @@ public class CourseClassDAO_JDBC implements CourseClass_interface{
 			
 			if (rs.next()) {
 				courseClassVO = new CourseClassVO();
-				eventVO = new eLookEventVO();
 				
 				courseClassVO.setCourseClassID(rs.getInt(1));
 				courseClassVO.setCcName(rs.getString(2));
-				//courseClassVO.setEventID(rs.getInt(3));				
-				eventVO.setEventID(rs.getInt(3));
+				eLookEventVO eventVO=eedao.findByPrimaryKey(rs.getInt(3));				
 				courseClassVO.setEventVO(eventVO);
 			}
 			
@@ -197,10 +196,10 @@ public class CourseClassDAO_JDBC implements CourseClass_interface{
 	
 	}
 
-	public List<CourseClassVO> findByEventID(Integer eventID){
+	public List<CourseClassVO> getByEventID(Integer eventID){
 		
 		List<CourseClassVO> event_courseClass = new LinkedList<CourseClassVO>();
-		eLookEventVO eventVO = null;
+		eLookEventDAO_JDBC eedao = new eLookEventDAO_JDBC(); 
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -215,11 +214,10 @@ public class CourseClassDAO_JDBC implements CourseClass_interface{
 			
 			while(rs.next()){
 				CourseClassVO courseClassVO = new CourseClassVO();
-				eventVO = new eLookEventVO();
+				
 				courseClassVO.setCourseClassID(rs.getInt(1));	
 				courseClassVO.setCcName(rs.getString(2));	
-				//courseClassVO.setEventID(rs.getInt(3));	
-				eventVO.setEventID(rs.getInt(3));
+				eLookEventVO eventVO = eedao.findByPrimaryKey(rs.getInt(3));
 				courseClassVO.setEventVO(eventVO);
 				
 				event_courseClass.add(courseClassVO);
@@ -254,7 +252,7 @@ public class CourseClassDAO_JDBC implements CourseClass_interface{
 	public List<CourseClassVO> getAll() {
 		
 		List<CourseClassVO> event_courseClass = new LinkedList<CourseClassVO>();
-		eLookEventVO eventVO = null;
+		eLookEventDAO_JDBC eedao = new eLookEventDAO_JDBC(); 
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -268,12 +266,9 @@ public class CourseClassDAO_JDBC implements CourseClass_interface{
 			
 			while(rs.next()){
 				CourseClassVO courseClassVO = new CourseClassVO();
-				eventVO = new eLookEventVO();
-				
 				courseClassVO.setCourseClassID(rs.getInt(1));	
 				courseClassVO.setCcName(rs.getString(2));	
-				//courseClassVO.setEventID(rs.getInt(3));	
-				eventVO.setEventID(rs.getInt(3));
+				eLookEventVO eventVO = eedao.findByPrimaryKey(rs.getInt(3));
 				courseClassVO.setEventVO(eventVO);
 				event_courseClass.add(courseClassVO);
 			}		
@@ -308,7 +303,7 @@ public class CourseClassDAO_JDBC implements CourseClass_interface{
 //		dao.insert(courseClassVO1);
 		
 //		查詢一筆
-		CourseClassVO courseClassVO2 = dao.findByCourseClassID(101);
+		CourseClassVO courseClassVO2 = dao.getByCourseClassID(101);
 		System.out.print(courseClassVO2.getCourseClassID() + ",");
 		System.out.print(courseClassVO2.getCcName() + ",");
 		System.out.print(courseClassVO2.getEventVO().getEventID() + "\n");
