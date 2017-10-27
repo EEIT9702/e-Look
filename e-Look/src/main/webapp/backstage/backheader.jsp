@@ -10,7 +10,7 @@
 			<body>
 <!-- Header -->
 					<header id="header">
-						<h1><a href="index.html">Solid State</a></h1>
+						<h1><a href="backHome1.jsp">eLook後台管理系統</a></h1>
 						<nav>
 							<a href="#menu">Menu</a>
 						</nav>
@@ -35,8 +35,8 @@
 					</script> 
 			<script src="assets/js/skel.min.js"></script>
 <!-- 			<script src="assets/js/jquery.min.js"></script> -->
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+<!-- 			<script src="assets/js/jquery.scrollex.min.js"></script> -->
+<!-- 			<script src="assets/js/util.js"></script> -->
+<!-- 			<script src="assets/js/main.js"></script> -->
 					</body>
 </html>

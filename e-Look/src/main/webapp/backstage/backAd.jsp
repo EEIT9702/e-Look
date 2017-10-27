@@ -13,31 +13,53 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="css/backEvent.css">
-<link type="text/css" href="css/stickysort.css" media="all"
-	rel="stylesheet" />
-<link rel="stylesheet" type="text/css" href="css/MODALit.min.css">
+<!-- <link rel="stylesheet" type="text/css" href="css/backEvent.css"> -->
+<!-- <link type="text/css" href="css/stickysort.css" media="all" -->
+<!-- 	rel="stylesheet" /> -->
+<!-- <link rel="stylesheet" type="text/css" href="css/MODALit.min.css"> -->
 <script src="js/jquery.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
-<script src="js/stickysort.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="js/MODALit.min.js"></script>
-<title>Insert title here</title>
+<!-- <script src="js/stickysort.min.js" type="text/javascript"></script> -->
+<!-- <script type="text/javascript" src="js/MODALit.min.js"></script> -->
+
+<link rel="stylesheet" href="css/table.css">
+<link rel="stylesheet" href="css/button.css">
+<link rel="stylesheet" href="css/jdialog.min.css">
+<script src="js/jdialog.min.js" type="text/javascript"></script>
+<script src="js/MODALit.min.js" type="text/javascript"></script>
+<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+<title>eLook後台管理系統</title>
 </head>
 <style>
 #div2 {
 	margin: 0px auto;
 }
+img{width:5em;
+height: 3em;}
 </style>
 <body>
 	<jsp:include page="backheader.jsp"></jsp:include>
+
+	<section id="wrapper">
+		<header>
+			<div class="inner">
+				<h2>輪播管理</h2>
+
+			</div>
+		</header>
+	</section>
+
+
 	<div id="div1">
 
-		<table>
+		<table class="container">
 			<thead>
 				<tr>
 					<th>廣告編號</th>
 					<th>廣告名稱</th>
-					<th>顯示( 0：顯示  / 1：隱藏 )</th>
+					<th>顯示( 0：顯示 / 1：隱藏 )</th>
 					<th>預覽</th>
 					<th>管理</th>
 				</tr>
@@ -90,7 +112,7 @@
 					<table>
 						<thead>
 							<tr>
-								
+
 								<td>廣告名稱</td>
 								<td>檔案上傳</td>
 								<td>上架狀態</td>
@@ -98,7 +120,7 @@
 						</thead>
 
 						<tr>
-							
+
 							<td><input type="text" name="fileName"></td>
 							<td><input type="file" name="adFile"></td>
 							<td><select name="status">
@@ -108,7 +130,7 @@
 						</tr>
 						<tfoot>
 							<tr>
-								
+
 								<th>${errMsg.errName}</th>
 								<th>${errMsg.adFile}</th>
 								<th></th>
@@ -122,11 +144,12 @@
 				<input type="submit" value="新增"> <input type="hidden"
 					name="action" value="insert">
 				</FORM>
-				<input type="button" data-modal-btn="dismiss" class="btn primary close" value="取消">
+				<input type="button" data-modal-btn="dismiss"
+					class="btn primary close" value="取消">
 			</footer>
 		</div>
 	</div>
-<!-- 修改訊息窗 -->
+	<!-- 修改訊息窗 -->
 	<div id="update" class="modalit" aria-hidden="true">
 		<div class="dialog">
 			<header>
@@ -175,7 +198,8 @@
 					name="adID" id="updateAdID" value=""> <input type="hidden"
 					name="action" value="update">
 				</FORM>
-				<input type="button" data-modal-btn="dismiss" class="btn primary " value="取消">
+				<input type="button" data-modal-btn="dismiss" class="btn primary "
+					value="取消">
 			</footer>
 		</div>
 	</div>
@@ -197,7 +221,8 @@
 						name="adID" id="deleteAdID" value=""> <input type="hidden"
 						name="action" value="delete">
 				</FORM>
-				<input type="button" data-modal-btn="dismiss" class="btn primary " value="取消"></input>
+				<input type="button" data-modal-btn="dismiss" class="btn primary "
+					value="取消"></input>
 			</footer>
 		</div>
 	</div>
@@ -222,7 +247,6 @@
 			var event2 = $(this).parent().children('input:eq(1)').val();
 			$('#deleteAdID').val(event2);
 		})
-		
 	</script>
 </body>
 </html>
