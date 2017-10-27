@@ -545,19 +545,47 @@ video::-webkit-media-controls-panel {
 								</c:if>
 							</div>
 							<!-- 講師簡介 -->
-							<div role="tabpanel" class="tab-pane fade" id="Section2"
+									<div role="tabpanel" class="tab-pane fade" id="Section2"
 								style="font-size: 20px">
 								<c:if test="${!empty memberVo.memberID}">
-									<div class="col-md-1">
+									<div class="col-md-2 col-xs-3">
 										<figure>
 											<img
 												src="<%=request.getContextPath() %>/Image?MemberID=${memberVo.memberID}"
 												class="img-thumbnail pull-left">
 											<div style="text-align: center;">${memberVo.mName}</div>
 										</figure>
+										<div>
+
+											<c:if test="${empty LoginOK}">
+												<c:choose>
+													<c:when test="${!empty loginerr}">
+														<button type="button" class="btn btn-info"
+															style="width: 100%">追蹤講師</button>
+													</c:when>
+													<c:when test="${empty err}">
+														<button type="button" class="btn btn-info"
+															style="width: 100%">追蹤講師</button>
+													</c:when>
+													<c:otherwise>
+														<button type="button" class="btn btn-info"
+															style="width: 100%">追蹤講師</button>
+													</c:otherwise>
+												</c:choose>
+											</c:if>
+											<%-- 											<c:if test="${!empty LoginOK}"> --%>
+											<%-- 												<c:when test=""> --%>
+											<!-- 													<button type="button" class="btn btn-info"style="width: 100%">追蹤講師</button> -->
+											<%-- 												</c:when> --%>
+											<%-- 												<c:when test=""> --%>
+											<!-- 													<button type="button" class="btn btn-info"style="width: 100%">追蹤講師</button> -->
+											<%-- 												</c:when> --%>
+											<%-- 											</c:if> --%>
+										</div>
 									</div>
+
 								</c:if>
-								<div class="pull-right">
+								<div class="col-md-10 col-xs-9">
 									<c:if test="${!empty memberVo.aboutme}">
 										<strong>關於我</strong>
 										<p>${memberVo.aboutme}</p>

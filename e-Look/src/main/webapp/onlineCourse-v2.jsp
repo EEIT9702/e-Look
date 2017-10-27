@@ -583,38 +583,65 @@ a:HOVER {
 										<figure>
 											<img
 												src="<%=request.getContextPath() %>/Image?MemberID=${memberVo.memberID}"
-												class="img-thumbnail pull-left">
-											<div style="text-align: center;">${memberVo.mName}</div>
+												class="img-thumbnail center-block img-circle"  />
+											<div style="text-align: center">${memberVo.mName}</div>
 										</figure>
 										<div>
 
 											<c:if test="${empty LoginOK}">
 												<c:choose>
 													<c:when test="${!empty loginerr}">
-														<button type="button" class="btn btn-info"
-															style="width: 100%">追蹤講師</button>
+														<a href="#" data-toggle="modal" data-target="#myModal">
+															<button type="button" class="btn btn-info"
+																style="width: 100%">追蹤講師</button>
+														</a>
 													</c:when>
 													<c:when test="${empty err}">
-														<button type="button" class="btn btn-info"
-															style="width: 100%">追蹤講師</button>
+														<a href="#" data-toggle="modal" data-target="#myModal">
+															<button type="button" class="btn btn-info"
+																style="width: 100%">追蹤講師</button>
+														</a>
 													</c:when>
 													<c:otherwise>
-														<button type="button" class="btn btn-info"
-															style="width: 100%">追蹤講師</button>
+														<a href="#" data-toggle="modal" data-target="#myModal">
+															<button type="button" class="btn btn-info"
+																style="width: 100%">追蹤講師</button>
+														</a>
 													</c:otherwise>
 												</c:choose>
 											</c:if>
-											<%-- 											<c:if test="${!empty LoginOK}"> --%>
-											<%-- 												<c:when test=""> --%>
-											<!-- 													<button type="button" class="btn btn-info"style="width: 100%">追蹤講師</button> -->
-											<%-- 												</c:when> --%>
-											<%-- 												<c:when test=""> --%>
-											<!-- 													<button type="button" class="btn btn-info"style="width: 100%">追蹤講師</button> -->
-											<%-- 												</c:when> --%>
-											<%-- 											</c:if> --%>
+											<c:if test="${!empty LoginOK}">
+												<c:if test="${!empty memberSubscription}">													
+													<c:forEach items="${memberSubscription}" var="memberSubscription">
+														<c:choose>
+															<c:when	test="${memberSubscription.memberTrackID==courseVO.memberID}">
+																<c:set var="disabled" value="disabled" />
+																<c:set var="subName" value="已追蹤講師" />
+																<c:set var="sub1" value="ture" />
+															</c:when>
+															<c:when test="${!empty sub1}">
+															</c:when>
+															<c:otherwise>
+																<c:set var="disabled" value="" />
+																<c:set var="subName" value="追蹤講師" />
+															</c:otherwise>
+														</c:choose>
+													</c:forEach>
+												</c:if>
+												<c:if test="${empty memberSubscription}">
+													<c:set var="disabled" value="" />
+														<c:set var="subName" value="追蹤講師" />
+												</c:if>
+												<c:if test="${courseVO.memberID==LoginOK.memberID}">
+													<c:set var="disabled" value="disabled" />
+													<c:set var="subName" value="本人" />
+												</c:if>
+												<button type="button" class="btn btn-info" ${disabled} style="width: 100%" id="subAction">${subName}</button>
+												<input type="hidden" id="coursevoMemeberID" value="${courseVO.memberID}">
+											</c:if>
+										
 										</div>
 									</div>
-
 								</c:if>
 								<div class="col-md-10 col-xs-9">
 									<c:if test="${!empty memberVo.aboutme}">
@@ -940,7 +967,7 @@ a:HOVER {
 				$("#myModalReportVideo").modal('hide');
 				warning();
 			}
-			
+
 			function warning() {
 				swal({
 
@@ -952,6 +979,17 @@ a:HOVER {
 			}
 		})
 	</script>
-
+		<script>
+		$('#subAction').click(function() {
+			alert("已加入收藏");
+			console.log($('#reportMemberID').val());
+			console.log($('#coursevoMemeberID').val());
+			$.post("MemberSubcriptionInsert_DeleteController", {
+					'memberID' : $('#reportMemberID').val(),
+					'memberTrackID' : $('#coursevoMemeberID').val()
+				})
+	
+		})
+	</script>
 </body>
 </html>
