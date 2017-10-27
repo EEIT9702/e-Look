@@ -41,7 +41,8 @@
 <script>
 		tinymce.init({ selector:'#texteditor',
 			language_url:'<%=request.getContextPath()%>/_PJC/tinymce/js/tinymce/langs/zh_TW.js',
-				plugins : [
+			height:"500px",	
+			plugins : [
 						"advlist autolink link image lists charmap print preview hr anchor pagebreak",
 						"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
 						"save table contextmenu directionality emoticons template paste textcolor" ],
@@ -82,7 +83,7 @@
 																			"#updateConfirm")
 																			.fadeOut(
 																					1500);
-																}, 500);
+																}, 1000);
 
 													}
 
@@ -667,8 +668,8 @@
 								<ul class="list-inline pull-right" style="margin-bottom: 80px">
 									<li><button type="button"
 											class="btn3d btn btn-default btn-lg prev-step">上一步</button></li>
-									<li><button type="button"
-											class="btn btn-success btn-lg btn3d next-step"><span class="glyphicon glyphicon-ok"></span>   完成課程編輯並送出審核</button></li>
+									<li><a href="<%=request.getContextPath()%>/HOME.jsp"><button type="button"
+											class="btn btn-success btn-lg btn3d next-step"><span class="glyphicon glyphicon-ok"></span>   完成課程編輯並送出審核</button></a></li>
 								</ul>
 							</div>
 							<div class="clearfix"></div>
@@ -908,7 +909,7 @@
 												$("#updateConfirm").fadeOut(
 														1500);
 
-											}, 500);
+											}, 1000);
 										}
 									})		
 						
@@ -979,7 +980,7 @@
 												$("#updateConfirm").fadeOut(
 														1500);
 
-											}, 500);
+											}, 1000);
 										},
 										error : function() {
 											alert("請輸入正確的格式!");
@@ -1010,7 +1011,7 @@
 												$("#updateConfirm").fadeOut(
 														1500);
 
-											}, 500);
+											}, 1000);
 										}
 									})
 						})
@@ -1038,7 +1039,7 @@
 												$("#updateConfirm").fadeOut(
 														1500);
 
-											}, 500);
+											}, 1000);
 										}
 									})
 						})

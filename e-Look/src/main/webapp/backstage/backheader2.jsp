@@ -1,18 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*"%>
-<%@ page import="com.e_Look.eLookEvent.*"%>
+    pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ page import="com.e_Look.eLookEvent.*"%>
 <%
 	eLookEventService eLookEventSvc = new eLookEventService();
 	List<eLookEventVO> list = eLookEventSvc.getAll();
 	pageContext.setAttribute("list", list);
 %>
-<!DOCTYPE html>
+<%@ page import="java.util.*"%>
+
+<!DOCTYPE html >
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link type="text/css" href="css/stickysort.css" media="all"
+		<title>Generic - Solid State by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		
+		<link type="text/css" href="css/stickysort.css" media="all"
 	rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="css/normalize.css" />
 <link
@@ -25,27 +30,48 @@
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="js/jquery.stickysort.min.js"></script>
 <script type="text/javascript" src="js/MODALit.min.js" ></script>
-<title>Insert title here</title>
-<style type="text/css">
-p{color:#666666;}
-</style>
-</head>
-<body>
-	<jsp:include page="backheader.jsp"></jsp:include>
-				
-<section id="wrapper">
+
+	</head>
+	<body>
+<!-- Header -->
+					<header id="header">
+						<h1><a href="index.html">Solid State</a></h1>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+						<!-- Menu -->
+					<nav id="menu">
+						<div class="inner">
+							<h2>Menu</h2>
+							<ul class="links">
+								<li><a href="index.html">Home</a></li>
+								<li><a href="generic.html">Generic</a></li>
+								<li><a href="elements.html">Elements</a></li>
+								<li><a href="#">Log In</a></li>
+								<li><a href="#">Sign Up</a></li>
+							</ul>
+							<a href="#" class="close">Close</a>
+						</div>
+					</nav>
+					
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Wrapper -->
+					<section id="wrapper">
 						<header>
 							<div class="inner">
-								<h2>活動管理</h2>
-								
+								<h2>Generic</h2>
+								<p>Phasellus non pulvinar erat. Fusce tincidunt nisl eget ipsum.</p>
 							</div>
 						</header>
-						</section>
-						
+
+						<!-- Content -->
 	<div id="div1">
 		<table>
 			<thead>
-				<tr>
+				<tr id="tr1">
 					<th>活動編號</th>
 					<th>活動名稱</th>
 					<th>開始日期</th>
@@ -56,7 +82,7 @@ p{color:#666666;}
 				</tr>
 			</thead>
 			
-		
+
 			<tbody>
 				<c:forEach var="eLookEventVO" items="${list}">
 					<tr>
@@ -78,7 +104,9 @@ p{color:#666666;}
 					</tr>
 				</c:forEach>
 			</tbody>
-					
+			
+						
+			
 				<form METHOD="post"	ACTION="<%=request.getContextPath()%>/backstage/elookeventinsert"   >
 				<tr>
 					<td></td>
@@ -142,15 +170,17 @@ p{color:#666666;}
 			
 			</table>     
 			</div>
-		
-                    
-<!-- Sets modal target -->
-<!-- <button type="button" id="button" data-target="#modal">測試</button> -->
+				
+					</section>
+
+
+			</div>
+
 <!-- 刪除訊息視窗 -->
 <div id="modal" class="modalit" aria-hidden="true">
     <div class="dialog">
         <header>
-            <p>警告</p>
+            <h3>警告</h3>
         </header>
         <div class="content">
             <p>是否刪除此活動?</p>
@@ -249,7 +279,11 @@ p{color:#666666;}
     </div>
 </div>  
 
-<script>		
+
+
+
+		<!-- Scripts -->
+		<script>		
 			
 		//抓取delete該行id	
 		$('tbody input[name="delete"]').on('click',function(){
@@ -290,6 +324,11 @@ p{color:#666666;}
 	    el:'.i2Style1'
 	});      
 </script> 
+			<script src="assets/js/skel.min.js"></script>
+<!-- 			<script src="assets/js/jquery.min.js"></script> -->
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
 
 </body>
 </html>
