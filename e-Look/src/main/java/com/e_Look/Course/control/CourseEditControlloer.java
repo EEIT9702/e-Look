@@ -44,14 +44,7 @@ public class CourseEditControlloer extends HttpServlet {
 		courseService.deleteCourse(courseID);
 		}
 		
-		
-		else{			
-				Integer courseID = Integer.valueOf(request.getParameter("courseID"));
-				CourseService courseService = new CourseService();
-				courseService.updateProposalStatus(courseID);
-		}
-		
-		if(request.getParameter("getProposalData")!=null){
+		else if(request.getParameter("getProposalData")!=null){
 			response.setHeader("Access-Control-Allow-Origin", "*");
 			response.setHeader("content-type", "text/html;charset=UTF-8");
 			response.setCharacterEncoding("UTF-8");
@@ -65,6 +58,15 @@ public class CourseEditControlloer extends HttpServlet {
 			//System.out.println(jsonString1);
 			out.print(jsonString1);
 		}
+		
+		
+		 else {			
+				Integer courseID = Integer.valueOf(request.getParameter("courseID"));
+				CourseService courseService = new CourseService();
+				courseService.updateProposalStatus(courseID);
+		}
+		
+		
 		
 		
 	}

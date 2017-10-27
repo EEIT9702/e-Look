@@ -147,7 +147,7 @@
 								</span>
 							</a></li>
 
-							<li role="presentation" class="disabled"><a href="#complete"
+							<li role="presentation" class="disabled" id="getProposalData2"><a href="#complete"
 								data-toggle="tab" aria-controls="complete" role="tab"
 								title="Complete"> <span class="round-tab"> <i
 										class="glyphicon glyphicon-thumbs-up"></i>
@@ -177,7 +177,7 @@
 													<i class="glyphicon glyphicon-list"></i>
 												</div>
 												<div class="update-text">
-													<strong>步驟一、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
+													<strong>步驟一123、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
 												</div>
 											</div>
 										</div>
@@ -1162,7 +1162,7 @@
 		//======================================================
 			
 		//用goGet方法送到CourseEditControlloer，取得目前資料庫存入的課程內容	
-		$('#getProposalData').click(function() {
+		$('#getProposalData,#getProposalData2').click(function() {
 			$.getJSON('/e-Look/com.e_Look.Course.control/CourseEditControlloer', {
 				'courseID' : $('#courseID').val(),"getProposalData":"XXXXXXXX"
 			}, function(datas) {
@@ -1184,7 +1184,7 @@
 			
 			
 		//用goGet方法送到GetCourseClass，取得目前資料庫課程所屬的類別
-		$('#getProposalData').click(function(){
+		$('#getProposalData,#getProposalData2').click(function(){
 			var courseClass="";
 			$.ajax({'url':'<%=request.getContextPath() %>/GetCourseClass',
 				'async':false,
