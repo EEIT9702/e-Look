@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="javax.servlet.http.HttpServletRequest,java.util.*,java.text.*,com.e_Look.message.model.*,com.e_Look.Course.*,com.e_Look.member.model.*,com.e_Look.buyCourse.model.*,javax.servlet.http.HttpSession"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE>
 <html>
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet"
@@ -21,6 +22,10 @@ width:50px;
 </style>
 </head>
 <body>
+
+<!--      <% String str=request.getQueryString();              
+          int courseID1=Integer.valueOf(str.substring(10)); %>  -->
+<!--      <c:set var="courseID1" value="200001" />          -->
        <%   int courseID=200001;   %>
 	<div class="container">
 		<div class="row">
@@ -62,12 +67,13 @@ width:50px;
 
 					<div style="border-bottom: 1px solid black">
 
-						<p class=messageContent>
+						<p id=messageContent>
+		<!--  				${MessageVO.mContent}    -->
+						
 							into the core. In fact, Bootstrap is mobile first. Mobile first
 							styles can be found throughout the entire library instead of in
 							separate files. To ensure proper rendering and touch zooming, add
-							the viewport meta tag to you
-							r</p>
+							the viewport meta tag to your</p>
 					</div>
 
 
@@ -167,27 +173,76 @@ width:50px;
 		<div class="container">
         <div class="row">
 			<div class="col-md-12" id="messageHeader">
-						<p>
-				<form method="post" action="<%=request.getContextPath()%>/MessageController" >
+						<p><form method="post" action="<%=request.getContextPath()%>/MessageController" >
 				<div>
 					<input type="text" class="col-md-10" name="mContent">
 					<font color='red'>${errorMsgs}</font>
                     <font color='red'>${MessageInsertOK}</font>
 				</div>
-				   <!--  <input type="hidden" name="action" value="insert">
+				    <input type="hidden" name="action" value="insert">
 					<input type="submit" value="留言"><br>
 					<input type="radio" name="update" value="message">修改留言
-					<input type="submit" value="修改"> -->
-					 <input type="hidden" name="action" value="getOne_For_Display">
-					 <input type="hidden" name="courseID" value="200001">
-					<input type="submit" value="查詢"><br>
-				</form>
-				</p>
+					<input type="submit" value="修改">
+				</form></p>
 					</div>  
 					</div>
 					</div>
-					
-	 <c:forEach var="messageVO1" items="${messageVO}">
+<!-- 	<script src="js/jquery-1.12.3.min.js"></script> -->
+<!-- 	<script src="js/jquery-ui.min.js"></script> -->
+	<script>
+		$(function(){
+		   loadProduct(1);
+		  //刪除
+		  $('#productTable>tbody').on('click','td>button:nth-child(1)',function(){
+			  
+					var id = $(this).parents('tr').find('td:nth-child(1)').text();
+					$.get('ProductsDelete',{'ProductID':id},function(data){
+						alert(data);
+						 loadProduct(1);
+					})
+		  });
+			//修改
+		  $('#productTable>tbody').on('click','td>button:nth-child(2)',function(){
+				  var tds = $(this).parents('tr').find("td");
+				  $('#ProductID').val(tds.eq(0).text())
+				  $('#ProductID+span').text(tds.eq(0).text())
+				  $('#ProductName').val(tds.eq(1).text())
+				  $('#UnitPrice').val(tds.eq(2).text())
+				  $('#UnitsInStock').val(tds.eq(3).text())
+		  });
+		  
+		  
+			
+		   //新增產品
+		    $('#buttonAdd').click(function(){
+		    	
+		    	var frm = $('form[name="myForm"]');
+		    //	console.log(frm.serialize());
+
+		    //	console.log(frm.serializeArray());
+		    $.post('ProductsInsert',frm.serialize(),function(data){
+		    	 alert(data);
+		    	 loadProduct(1);
+		    	 $('#productTable>tfoot input').val("");
+		    })
+		    	
+		    	
+		    	
+		    	
+		    	
+		    	
+// 		    	var datas = $('form[name="myForm"]').serialize();
+// 		    	$.post('ProductsInsert',datas,function(data){
+// 		    		alert(data);
+// 		    		loadProduct(1);
+// 		    		 $('#ProductID').val('');
+// 					   $('#ProductName').val('');
+// 					   $('#UnitPrice').val('');
+// 					   $('#UnitsInStock').val('');
+// 		    	});
+		    })
+//-----------------------------------		   
+		   <c:forEach var="messageVO1" items="${messageVO}">
 		<tr align='center' valign='middle'>
 			<td>${messageVO1.messageID}</td>
 			<td>${messageVO1.mContent}</td>
@@ -215,16 +270,8 @@ width:50px;
 			</td>
 		</tr>
 	</c:forEach> 
-		    				
-					
- 	<script src="js/jquery-1.12.3.min.js"></script> 
- 	<script src="js/jquery-ui.min.js"></script> 
-	<script>
-	
-		$(function(){
-	 
-		  //讀取
-		  
+		    
+		    //讀取產品
 		   function loadMessage(courseID){
 			   
 		   }
@@ -245,8 +292,20 @@ width:50px;
 		    	  });
 		    	  $('#productTable>tbody').html(fragment);
 		    	  
-		    }) 
-		 })
-		  
+		    })
+		    	 //更新產品
+		   $('#buttonUpdate').click(function(){
+			   
+				var frm = $('form[name="myForm"]');
+			    //	console.log(frm.serialize());
+
+			    //	console.log(frm.serializeArray());
+			    $.post('ProductsUpdate',frm.serialize(),function(data){
+			    	 alert(data);
+			    	 loadProduct(1);
+			    	 $('#productTable>tfoot input').val("");
+			    	 $('#productTable>tfoot span').text("");
+			    })
+			   				
 </body>
 </html>
