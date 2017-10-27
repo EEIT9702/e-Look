@@ -41,8 +41,7 @@
     <url-pattern>/freeCourse-v1.jsp</url-pattern>
   </filter-mapping>
   <filter-mapping>
-    <filter-name>CheckOutFilter</filter-name>
-    <url-pattern>/settled.jsp</url-pattern>
+    <filter-name>MemberFilter</filter-name>
+    <url-pattern>/member/member.jsp</url-pattern>
   </filter-mapping>
-
 </web-app>

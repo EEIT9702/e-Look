@@ -28,7 +28,7 @@ video::-webkit-media-controls-enclosure {
 }
 
 video::-webkit-media-controls-panel {
-	width: calc(70% + 30px); /* Adjust as needed */
+	width: calc(100% + 30px); /* Adjust as needed */
 	margin: auto;
 }
 

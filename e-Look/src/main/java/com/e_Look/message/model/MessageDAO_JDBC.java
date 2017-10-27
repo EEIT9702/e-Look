@@ -322,4 +322,10 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 
 	}
 
+	@Override
+	public List<MessageVO> findByPrimaryKeyM(Integer courseID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

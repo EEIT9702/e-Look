@@ -13,31 +13,79 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="css/backEvent.css">
-<link type="text/css" href="css/stickysort.css" media="all"
-	rel="stylesheet" />
-<link rel="stylesheet" type="text/css" href="css/MODALit.min.css">
+
+<link rel="stylesheet" href="css/jquery-ui.min.css">
+<link rel="stylesheet" href="css/table.css">
+<link rel="stylesheet" href="css/button.css">
+<link rel="stylesheet" href="css/jdialog.min.css">
 <script src="js/jquery.js" type="text/javascript"></script>
-<script type="text/javascript" src="js/jquery-ui.min.js"></script>
-<script src="js/stickysort.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="js/MODALit.min.js"></script>
-<title>Insert title here</title>
+<script src="js/jquery-ui.min.js" type="text/javascript" ></script>
+<script src="js/jdialog.min.js" type="text/javascript"></script>
+<script src="js/MODALit.min.js" type="text/javascript"></script>
+
+<title>eLook後台管理系統</title>
 </head>
 <style>
 #div2 {
 	margin: 0px auto;
 }
+
+img {
+	width: 5em;
+	height: 4em;
+}
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
+	blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn,
+	em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
+	b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
+	table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas,
+	details, embed, figure, figcaption, footer, header, hgroup, menu, nav,
+	output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: middle;
+}
+
+#delete {
+	width: 200px;
+	height: 300px;
+}
+
+#div3 {
+	padding-left: 90px;
+	padding-bottom: 5px;
+}
+
+.div4 {
+	padding-left: 1290px;
+	padding-bottom: 5px;
+}
 </style>
 <body>
-	<jsp:include page="bheader.jsp"></jsp:include>
-	<div id="div1">
+	<jsp:include page="backheader.jsp"></jsp:include>
 
-		<table>
+	<section id="wrapper">
+		<header>
+			<div class="inner">
+				<h2>輪播管理</h2>
+
+			</div>
+		</header>
+	</section>
+
+
+	<div id="div1" style="margin-bottom: 100px;">
+
+		<table class="container">
 			<thead>
 				<tr>
 					<th>廣告編號</th>
 					<th>廣告名稱</th>
-					<th>顯示( 0：顯示  / 1：隱藏 )</th>
+					<th>顯示( 0：顯示 / 1：隱藏 )</th>
 					<th>預覽</th>
 					<th>管理</th>
 				</tr>
@@ -48,18 +96,19 @@
 						<td align="center">${AdVO.adID}</td>
 						<td align="center">${AdVO.fileName}</td>
 						<td align="center">${AdVO.status}</td>
-						<td align="center"><div id="div2">
+						<td align="center"><div id="div2"
+								style="vertical-align: middle;">
 								<img
 									src="<%=request.getContextPath()%>/adImages?adID=${AdVO.adID}" />
 							</div></td>
 						<td align="center"><FORM METHOD="post"
 								ACTION="<%=request.getContextPath()%>/backstage/elookeventinsert"
 								style="display: inline;">
-								<input type="button" class="i2Style1" name="update"
-									data-target="#update" value="修改"> <input type="hidden"
-									name="adID" value="${AdVO.adID}"> &ensp;<input
-									type="button" name="delete" class="i2Style"
-									data-target="#delete" value="刪除">
+								<input type="button" name="update" class="button cyan alt"
+									data-toggle="JDialog" data-target="update" value="修改">
+								<input type="hidden" name="adID" value="${AdVO.adID}"> <input
+									type="button" name="delete" class="button red alt"
+									data-toggle="JDialog" data-target="delete" value="刪除">
 							</FORM></td>
 					</tr>
 				</c:forEach>
@@ -70,27 +119,28 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td><input type="button" class="i2Style3" data-target="#modal"
-						value="新增"></td>
+					<td><input type="button" class="button green alt"
+						data-toggle="JDialog" data-target="insert" value="新增"></td>
 				</tr>
 			</tfoot>
 		</table>
 	</div>
 
 	<!-- 	新增彈跳窗 -->
-	<div id="modal" class="modalit" aria-hidden="true">
-		<div class="dialog">
-			<header>
-				<h3>新增</h3>
-			</header>
-			<div class="content">
-				<FORM METHOD="post"
-					ACTION="<%=request.getContextPath()%>/backstage/adControl"
-					enctype="multipart/form-data" style="display: inline;">
+	<div class="jDialog" id="insert">
+		<FORM METHOD="post"
+			ACTION="<%=request.getContextPath()%>/backstage/adControl"
+			enctype="multipart/form-data" style="display: inline;">
+			<div class="dialog">
+				<header>
+					<h3>新增</h3>
+				</header>
+				<div class="content">
+
 					<table>
 						<thead>
 							<tr>
-								
+
 								<td>廣告名稱</td>
 								<td>檔案上傳</td>
 								<td>上架狀態</td>
@@ -98,7 +148,7 @@
 						</thead>
 
 						<tr>
-							
+
 							<td><input type="text" name="fileName"></td>
 							<td><input type="file" name="adFile"></td>
 							<td><select name="status">
@@ -108,7 +158,7 @@
 						</tr>
 						<tfoot>
 							<tr>
-								
+
 								<th>${errMsg.errName}</th>
 								<th>${errMsg.adFile}</th>
 								<th></th>
@@ -116,26 +166,28 @@
 						</tfoot>
 
 					</table>
+				</div>
+				<footer>
+					<div class="div4">
+						<input type="submit" value="新增"> <input type="hidden"
+							name="action" value="insert"> <input type="button"
+							data-dismiss="JDialog" class="btn primary close" value="取消">
+					</div>
+				</footer>
 			</div>
-			<footer>
-
-				<input type="submit" value="新增"> <input type="hidden"
-					name="action" value="insert">
-				</FORM>
-				<button type="button" data-modal-btn="dismiss" class="btn primary">取消</button>
-			</footer>
-		</div>
+		</FORM>
 	</div>
-<!-- 修改訊息窗 -->
-	<div id="update" class="modalit" aria-hidden="true">
-		<div class="dialog">
-			<header>
-				<h3>修改</h3>
-			</header>
-			<div class="content">
-				<FORM METHOD="post"
-					ACTION="<%=request.getContextPath()%>/backstage/adControl"
-					enctype="multipart/form-data" style="display: inline;">
+	<!-- 修改訊息窗 -->
+	<div class="jDialog" id="update">
+		<FORM METHOD="post"
+			ACTION="<%=request.getContextPath()%>/backstage/adControl"
+			enctype="multipart/form-data" style="display: inline;">
+			<div class="dialog">
+				<header>
+					<h3>修改</h3>
+				</header>
+				<div class="content">
+
 					<table>
 						<thead>
 							<tr>
@@ -159,7 +211,6 @@
 
 						<tfoot>
 							<tr>
-
 								<th></th>
 								<th>${errMsg.errName}</th>
 								<th>${errMsg.adFile}</th>
@@ -168,20 +219,22 @@
 						</tfoot>
 
 					</table>
+				</div>
+				<footer>
+					<div class="div4">
+						<input type="submit" value="修改"> <input type="hidden"
+							name="adID" id="updateAdID" value=""> <input
+							type="hidden" name="action" value="update"> <input
+							type="button" data-dismiss="JDialog" class="btn primary "
+							value="取消">
+					</div>
+				</footer>
 			</div>
-			<footer>
-
-				<input type="submit" value="修改"> <input type="hidden"
-					name="adID" id="updateAdID" value=""> <input type="hidden"
-					name="action" value="update">
-				</FORM>
-				<button type="button" data-modal-btn="dismiss" class="btn primary">取消</button>
-			</footer>
-		</div>
+		</FORM>
 	</div>
 
 	<!-- 刪除訊息視窗 -->
-	<div id="delete" class="modalit" aria-hidden="true">
+	<div class="jDialog" id="delete">
 		<div class="dialog">
 			<header>
 				<h3>警告</h3>
@@ -190,39 +243,53 @@
 				<p>是否刪除此廣告?</p>
 			</div>
 			<footer>
-				<FORM METHOD="post"
-					ACTION="<%=request.getContextPath()%>/backstage/adControl"
-					enctype="multipart/form-data" style="display: inline;">
-					<input type="submit" value="刪除"> <input type="hidden"
-						name="adID" id="deleteAdID" value=""> <input type="hidden"
-						name="action" value="delete">
-				</FORM>
-				<button type="button" data-modal-btn="dismiss" class="btn primary">取消</button>
+				<div id="div3">
+					<FORM METHOD="post"
+						ACTION="<%=request.getContextPath()%>/backstage/adControl"
+						enctype="multipart/form-data" style="display: inline;">
+						<input type="submit" value="刪除"> <input type="hidden"
+							name="adID" id="deleteAdID" value=""> <input
+							type="hidden" name="action" value="delete"> <input
+							type="button" data-dismiss="JDialog" class="btn primary "
+							value="取消"></input>
+					</FORM>
+				</div>
 			</footer>
 		</div>
 	</div>
 
 	<script>
-		var modal = new MODALit({
-			el : '.i2Style3'
+		$("#delete").jDialog({
+			skinClassName : 'demo',
+			allowOverlay : true,
+			animationType : 'flip'
 		});
-		var modal = new MODALit({
-			el : '.i2Style1'
+
+		$("#update").jDialog({
+			skinClassName : 'demo',
+			allowOverlay : true,
+			animationType : 'flip'
 		});
-		var modal = new MODALit({
-			el : '.i2Style'
+		$("#insert").jDialog({
+			skinClassName : 'demo',
+			allowOverlay : true,
+			animationType : 'flip'
 		});
 
 		$('tbody input[name="update"]').on('click', function() {
 			var event1 = $(this).parent().children('input:eq(1)').val();
 			$('#updateAdID').val(event1);
 			$('#td1').text(event1);
+
 		})
 		$('tbody input[name="delete"]').on('click', function() {
 			var event2 = $(this).parent().children('input:eq(1)').val();
 			$('#deleteAdID').val(event2);
 		})
-		
 	</script>
+	
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>

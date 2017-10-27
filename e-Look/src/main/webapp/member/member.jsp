@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="java.util.*,java.text.*,com.e_Look.Course.*,com.e_Look.member.model.*,com.e_Look.buyCourse.model.*,javax.servlet.http.HttpSession,com.e_Look.memberBookmarks.model.*,com.e_Look.memberSubscription.*"%>
+	pageEncoding="UTF-8" %>
 	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html >
 <html>
@@ -199,8 +199,7 @@ a.clickable:hover {
 
 .profile-header-img {
 	padding: 30px 0;
-	width: 100px;
-	margin: auto;
+	
 	
 }
 
@@ -241,32 +240,7 @@ a:HOVER {
 	</c:if>
 	<jsp:include page="/login.jsp" />
 	<% 
-		MemberVO memberVO=(MemberVO)session.getAttribute("LoginOK");
-		CourseDAO dao=new CourseDAO();
-		//BuyCourseDAO dao2 = new BuyCourseDAO();
-		BuyCourseService  CourseService =new BuyCourseService();
-		MemberBookmarksService memberBookmarksService=new MemberBookmarksService();
-		List<CourseVO> list=dao.findBymemberID(memberVO.getMemberID(),2);
-		List<BuyCourseVO> buyCourselist = CourseService.getBuyCourse(memberVO.getMemberID());
-		List<CourseVO> list2 = new LinkedList<CourseVO>();
-		List<CourseVO> list3 = new LinkedList<CourseVO>();
-		List<CourseVO> list4=dao.findBymemberID(memberVO.getMemberID(),0);
-		if(buyCourselist!=null){
-			for(BuyCourseVO buyCoursevo: buyCourselist){
-				list2.add(dao.findByPrimaryKey(buyCoursevo.getCourseID()));
-			}
-		}
-		List<MemberBookmarksVO> mBookmarkList=memberBookmarksService.findPrimaryMemberBookmarks(memberVO.getMemberID());
-		if(mBookmarkList!=null){
-			for(MemberBookmarksVO MemberBookmarksVO: mBookmarkList){
-				list3.add(dao.findByPrimaryKey(MemberBookmarksVO.getCourseID()));
-			}
-		}
-		pageContext.setAttribute("list",list);
-		pageContext.setAttribute("list2",list2);
-		pageContext.setAttribute("list3",list3);
-		pageContext.setAttribute("list4",list4);
-		
+
 		
 %>
 	<div style="margin-top: 10px" class="container">
@@ -275,7 +249,8 @@ a:HOVER {
             <div class=" panel-body" style="padding: 20px; background-image: linear-gradient(-225deg, #77FFD2 0%, #6297DB 48%, #1EECFF 100%);">
 
                 	<div class="col-md-6 no-pad ">
-                  						<div class="profile-header-container">
+                	<c:if test="${empty Submembervo}">
+                  		<div class="profile-header-container">
 							<div class="profile-header-img">
 								<img class="img-circle"
 									src="<%=request.getContextPath()%>/Image?MemberID=${LoginOK.memberID}" />
@@ -287,13 +262,32 @@ a:HOVER {
 								</div>
 							</div>
 						</div>
+						</c:if>
+<!--                      講師頁面                                 -->
+						<c:if test="${!empty Submembervo}">
+                  		<div class="profile-header-container">
+							<div class="profile-header-img">
+								<img class="img-circle"
+									src="<%=request.getContextPath()%>/Image?MemberID=${Submembervo.memberID}" />
+								<!-- badge -->
+							</div>
+						</div>
+						</c:if>
                 </div>
                  <div class="col-md-6 no-pad text-center">
+                 <c:if test="${empty Submembervo}">
                     <div class="user-pad" style="padding: 60px 0;">
                         <h2 style="color: white;">${LoginOK.mName}</h2>
                     </div>
+                    </c:if>
+                     <c:if test="${!empty Submembervo}">
+                    <div class="user-pad" style="padding: 60px 0;">
+                        <h2 style="color: white;">${Submembervo.mName}</h2>
+                    </div>
+                    </c:if>
                 </div>
             </div>
+           <c:if test="${empty Submembervo}"> 
             <div class="row overview panel-body" >
                 <div class="col-md-6 user-pad text-center">
                 <div class="hero-widget well  well-lg">
@@ -308,6 +302,7 @@ a:HOVER {
                     </div>
                 </div>
             </div>
+            </c:if>
             <div class="col-md-12">
 					<div class="panel panel-success">
 						<div class="panel-heading">
@@ -315,7 +310,7 @@ a:HOVER {
 						</div>
 						<div class="panel-body text-center">
 							<p class="lead">
-							<p style="word-break: break-all; word-wrap: break-word">${LoginOK.aboutme}
+							<p style="word-break: break-all; word-wrap: break-word">${empty Submembervo?LoginOK.aboutme:Submembervo.aboutme}
 							<p></p>
 						</div>
 					</div>
@@ -327,7 +322,7 @@ a:HOVER {
 						</div>
 						<div class="panel-body text-center">
 							<p class="lead">
-							<p style="word-break: break-all; word-wrap: break-word">${LoginOK.skill}</p>
+							<p style="word-break: break-all; word-wrap: break-word">${empty Submembervo?LoginOK.skill:Submembervo.skill}</p>
 							<p></p>
 						</div>
 					</div>
@@ -339,7 +334,7 @@ a:HOVER {
 						</div>
 						<div class="panel-body text-center">
 							<p class="lead">
-							<p style="word-break: break-all; word-wrap: break-word">${LoginOK.hobby}
+							<p style="word-break: break-all; word-wrap: break-word">${empty Submembervo?LoginOK.hobby:Submembervo.hobby}
 							<p></p>
 						</div>
 					</div>
@@ -347,6 +342,7 @@ a:HOVER {
         </div>
 			<!-- 會員左半邊-->
 			<div class="col-md-8 breadcrumb" style="padding-top: 50px;   ">
+			<c:if test="${empty Submembervo}">
 				<div class="col-md-12" style="margin: 25px 0;">
 					<div class="panel panel-info">
 						<div class="panel-heading clickable panel-collapsed">
@@ -473,7 +469,7 @@ a:HOVER {
                        </div>
                        </a>
                     <div class="card-footer">
-                    <button class="btn-info btn-sm pull-right" style="margin-bottom: 5px;margin-top: 10px">取消訂閱</button>   
+                    <button class="btn-danger btn-sm center-block" style="margin-bottom: 5px;margin-top: 10px">取消訂閱</button>   
                      <input type="hidden" value="${mBookmark.courseID}">
                    <input type="hidden" value="${LoginOK.memberID}">
                     </div>
@@ -496,7 +492,7 @@ a:HOVER {
                        </div>
                        </a>
                     <div class="card-footer">
-                    <button class="btn-info btn-sm pull-right" style="margin-bottom: 5px;margin-top: 10px">取消訂閱</button>   
+                    <button class="btn-danger btn-sm center-block" style="margin-bottom: 5px;margin-top: 10px">取消訂閱</button>   
                      <input type="hidden" value="${mBookmark.courseID}">
                      <input type="hidden" value="${LoginOK.memberID}">
                     </div>
@@ -557,21 +553,99 @@ a:HOVER {
 								class="glyphicon glyphicon-plus"></i></span>
 						</div>
 						<div class="panel-body" style="display: none;">
-						<div id="click3" class=" col-md-3  col-sm-3" style="border: 1px solid #d4d4d5;" >
-							<div class="profile-header-img">
-								<img class="img-circle"
-									src="<%=request.getContextPath()%>/Image?MemberID=${LoginOK.memberID}" />
-								<!-- badge -->
-                       			 <h5 style="text-align: center;">${LoginOK.mName}</h5>
-                       			 <button class="btn-danger btn-sm center-block"style="margin-bottom: 5px; margin-top: 10px">取消訂閱</button></a>
+						<c:forEach var="mySubscription" items="${list5}">						 
+						 <div  id="click3" class=" col-md-3  col-sm-3" style="border: 1px solid #d4d4d5;width: 222px;height: 255px; margin:0 10px ">
+						 <a style="text-decoration: none; color:black;" href="<%=request.getContextPath() %>/member/member.jsp?memberID=${mySubscription.memberID}">
+								<div class="cprofile-header-img" style="width:120px;margin: auto; padding: 30px 0;">
+									<img class="img-circle" style="width: 120px; height: 120px; border: 2px solid #51D2B7;" src="<%=request.getContextPath()%>/Image?MemberID=${mySubscription.memberID}" >
+									
+									<div class="card-block">
+										<div class="card-text"  style="height: 5px;">
+											<h5 style="text-align: center;">${mySubscription.mName}</h5>
+										</div>
+									</div>
+									 </a>
+									<div class="card-footer">
+									
+										<button  class="btn-danger btn-sm center-block">取消訂閱</button>
+                       			 <input type="hidden" value="${mySubscription.memberID}">
+                    			 <input type="hidden" value="${LoginOK.memberID}">
+                     							
+									</div>
+								</div>						
 							</div>
-						 </div>                 
-						
+						</c:forEach>
 						</div>
 					</div>
 				</div>
-
-
+				</c:if>
+<!-- 講師資訊 -->
+<c:if test="${!empty Submembervo}">
+						<div class="col-md-12" style="margin: 25px 0;">
+					<div class="panel panel-info">
+						<div class="panel-heading clickable panel-collapsed">
+							<h3 class="panel-title">講師的課</h3>
+							<span class="pull-right "><i
+								class="glyphicon glyphicon-plus"></i></span>
+						</div>
+						<div class="panel-body" style="display: none;">
+							<!-- 1 -->
+							<c:forEach var="TeacherCourse" items="${TeacherCourselist}">
+							<c:if test="${TeacherCourse.soldPrice>0}">
+							<div class=" col-md-4  col-sm-4" style="width: 211px">
+							 <a style="text-decoration: none; color:black"; href="<%=request.getContextPath() %>/onlineCourse-v2.jsp?CourseID=${TeacherCourse.courseID}">
+								<div class="card card-inverse">
+									<img class="card-img-top"
+										src="<%=request.getContextPath()%>/CourseImage?CourseID=${TeacherCourse.courseID}"
+										alt="course" id="wizardPicturePreview" title="">
+									<div class="card-block">
+										<figure class="profile">
+											<img
+												src="<%=request.getContextPath()%>/Image?MemberID=${TeacherCourse.memberID}"
+												class="profile-avatar" alt="">
+										</figure>
+										<div class="card-text">
+											<p id="title" class="card-title mt-3 multi_ellipsis">${TeacherCourse.courseName}</p>
+										</div>
+									</div>
+									</a>
+									<div class="card-footer">
+									</div>
+								</div>
+							</div>
+							</c:if>
+							<c:if test="${TeacherCourse.soldPrice==0}">
+							<div class=" col-md-4  col-sm-4" style="width: 211px">
+							<a style="text-decoration: none; color:black"; href="<%=request.getContextPath() %>/freeCourse-v1.jsp?CourseID=${TeacherCourse.courseID}">
+								<div class="card card-inverse">
+									<img class="card-img-top"
+										src="<%=request.getContextPath()%>/CourseImage?CourseID=${TeacherCourse.courseID}"
+										alt="course" id="wizardPicturePreview" title="">
+									<div class="card-block">
+										<figure class="profile">
+											<img
+												src="<%=request.getContextPath()%>/Image?MemberID=${TeacherCourse.memberID}"
+												class="profile-avatar" alt="">
+										</figure>
+										<div class="card-text">
+											<p id="title" class="card-title mt-3 multi_ellipsis">${TeacherCourse.courseName}</p>
+										</div>
+									</div>
+									</a>
+									<div class="card-footer">
+									</div>
+								</div>
+							</div>
+							</c:if>
+							</c:forEach>
+							<!-- 1 -->
+							
+						</div>
+					</div>
+				</div>	
+				</c:if>			
+<!-- 講師資訊 -->
+				
 			</div>
 		</div>
 	</div>
@@ -627,7 +701,7 @@ a:HOVER {
 		   if( confirm("確定刪除草稿嗎?")){
 			   $(this).parents('#click2').css("display","none")
 			    $.get('/e-Look/com.e_Look.Course.control/CourseEditControlloer', {
-				'courseID' : $(this).parents('#click2').find("input").val()
+				'courseID' : $(this).parents('#click2').find("input").val(),'member':"member"
 				//'memberID' : $(this).parents('#click2').find("input+input").val()
 			}, function() {
 			})
@@ -647,18 +721,19 @@ a:HOVER {
 				   
 			   }
 			   
-			 
+
 // 			$.get('ProductsDelete',{'ProductID':id},function(data){
 // 				alert(data);
 // 				 loadProduct(1);
 // 			})
 });
-		   $('#click3>div').on('click3','.profile-header-img>button:nth-child(1)',function(){
+		   $('#click3 button:nth-child(1)').on('click',function(){
+			   console.log("123")
 			   if( confirm("確定取消訂閱嗎?")){
 				   $(this).parents('#click3').css("display","none")
-				    $.get('/e-Look/MemberBookmarksInsertController', {
-					'courseID' : $(this).parents('#click').find("input").val(),
-					'memberID' : $(this).parents('#click').find("input+input").val()
+				    $.get('/e-Look/MemberSubcriptionInsert_DeleteController', {
+					'memberTrackID' : $(this).parents('#click3').find("input").val(),
+					'memberID' : $(this).parents('#click3').find("input+input").val()
 				}, function() {
 				})
 			   }else{
