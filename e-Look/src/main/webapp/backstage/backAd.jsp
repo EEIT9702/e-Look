@@ -29,7 +29,7 @@
 }
 </style>
 <body>
-	<jsp:include page="bheader.jsp"></jsp:include>
+	<jsp:include page="backheader.jsp"></jsp:include>
 	<div id="div1">
 
 		<table>
@@ -122,7 +122,7 @@
 				<input type="submit" value="新增"> <input type="hidden"
 					name="action" value="insert">
 				</FORM>
-				<button type="button" data-modal-btn="dismiss" class="btn primary">取消</button>
+				<input type="button" data-modal-btn="dismiss" class="btn primary close" value="取消">
 			</footer>
 		</div>
 	</div>
@@ -175,7 +175,7 @@
 					name="adID" id="updateAdID" value=""> <input type="hidden"
 					name="action" value="update">
 				</FORM>
-				<button type="button" data-modal-btn="dismiss" class="btn primary">取消</button>
+				<input type="button" data-modal-btn="dismiss" class="btn primary " value="取消">
 			</footer>
 		</div>
 	</div>
@@ -197,7 +197,7 @@
 						name="adID" id="deleteAdID" value=""> <input type="hidden"
 						name="action" value="delete">
 				</FORM>
-				<button type="button" data-modal-btn="dismiss" class="btn primary">取消</button>
+				<input type="button" data-modal-btn="dismiss" class="btn primary " value="取消"></input>
 			</footer>
 		</div>
 	</div>
