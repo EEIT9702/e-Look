@@ -19,7 +19,7 @@
   <script src="js/jquery.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
   <script src="js/jdialog.min.js" type="text/javascript"></script>
-  <script src="js/MODALit.min.js" type="text/javascript"></script>
+
 <title>eLook後台管理系統</title>
 <style type="text/css">
 #delete{width: 200px;
@@ -130,7 +130,7 @@ padding-bottom: 5px;}
 							<option value="程式">程式</option>
 							<option value="音樂">音樂</option>
 					</select></td>
-					<td><input type="submit" class="button green alt" id="i2Style1"  value="新增">
+					<td><input type="submit" class="button green alt"   value="新增">
 					<input type="hidden" name="action" value="insert">
 					</td>	
 				</tr>
@@ -183,12 +183,12 @@ padding-bottom: 5px;}
           <table>
           <thead>
 				<tr>
-			    	<th>活動編號</th>
-					<th>活動名稱</th>
-					<th>開始日期</th>
-					<th>結束日期</th>
-					<th>折扣優惠</th>
-					<th>優惠類別</th>
+			    	<td>活動編號</td>
+					<td>活動名稱</td>
+					<td>開始日期</td>
+					<td>結束日期</td>
+					<td>折扣優惠</td>
+					<td>優惠類別</td>
 				</tr>
 			</thead>
 			
@@ -269,13 +269,13 @@ padding-bottom: 5px;}
 $("#delete").jDialog({
     skinClassName: 'demo',
     allowOverlay: true,
-    animationType: 'fade-in'
+    animationType: 'flip'
 });     
 
 $("#update").jDialog({
     skinClassName: 'demo',
     allowOverlay: true,
-    animationType: 'fade-in'
+    animationType: 'flip'
 });      
 		
 			

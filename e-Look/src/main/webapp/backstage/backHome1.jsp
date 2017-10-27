@@ -28,7 +28,6 @@
 						<div class="inner">
 							<h2>Menu</h2>
 							<ul class="links">
-								<li><a href="backHome1.jsp">會員管理</a></li>
 								<li><a href="event.jsp">活動管理</a></li>
 								<li><a href="backAd.jsp">輪播管理</a></li>
 								<li><a href="#">課程審查</a></li>
