@@ -172,7 +172,6 @@ font-weight: bold;
 
 					</ul>
 				</div>
-				<form class="form-horizontal">
 					<div class="tab-content">
 						<!-- step1start -->
 						<div class="tab-pane active" role="tabpanel" id="step1">
@@ -204,8 +203,9 @@ font-weight: bold;
 							</div>
 							<h4 id="total" class="text-right">總金額:8700元</h4>
 							<div class="col-md-4 pull-right" style="margin-top: 20px">
-								<button type="button"
-									class="btn btn-primary pull-right next-step">前往填寫付款資訊</button>
+								<form action="<%=request.getContextPath() %>/OrderoPayController" method="post" >
+									<button type="submit" class="btn btn-primary pull-right next-step">前往歐付寶結帳</button>
+								</form>
 							</div>
 						</div>
 						<!-- step1end -->
@@ -306,7 +306,6 @@ font-weight: bold;
 								</div>
 							</div>
 						</div>
-				</form>
 
 
 			</div>
