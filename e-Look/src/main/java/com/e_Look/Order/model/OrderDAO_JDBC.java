@@ -17,7 +17,7 @@ public class OrderDAO_JDBC implements OrderDAO_interface {
 	//第二組密碼
 	//String passwd = "123456";
 	private static final String INSERT_Order = "insert into [Order] (memberID,orderTime) values (?,?)"; 
-	private static final String UPDATE_Order = "update [Order] set memberID=? orderTime=? where OrderID=?"; 
+	private static final String UPDATE_Order = "update [Order] set memberID=? ,orderTime=? where OrderID=?"; 
 	private static final String DELETE_Order = "delete from [Order] where OrderID=?"; 
 	private static final String SELECT_Order = "select OrderID,memberID,orderTime from [Order] where OrderID=?";
 	private static final String SELECT_ALL_Order = "select OrderID,memberID,orderTime from [Order]";
@@ -69,6 +69,7 @@ public class OrderDAO_JDBC implements OrderDAO_interface {
 			pstmt=con.prepareStatement(UPDATE_Order);
 			pstmt.setInt(1,orderVO.getMemberID());
 			pstmt.setDate(2,orderVO.getOrderTime());
+			pstmt.setInt(3, orderVO.getOrderID());
 			pstmt.executeUpdate();
 			
 		} catch (ClassNotFoundException e) {

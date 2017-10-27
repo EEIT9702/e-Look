@@ -19,6 +19,8 @@
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/_PJC/css/step6.css"
 	rel="stylesheet">
+<link href="<%=request.getContextPath()%>/_PJC/css/step7.css"
+	rel="stylesheet">
 <link
 	href="<%=request.getContextPath()%>/css/bootstrap-datetimepicker.css"
 	rel="stylesheet">
@@ -39,8 +41,8 @@
 <script
 	src="<%=request.getContextPath()%>/_PJC/tinymce/js/tinymce/tinymce.js"></script>
 <script>
-		tinymce.init({ selector:'#texteditor',
-			language_url:'<%=request.getContextPath()%>/_PJC/tinymce/js/tinymce/langs/zh_TW.js',
+		tinymce.init({ selector:'#texteditor',language_url:'<%=request.getContextPath()%>/_PJC/tinymce/js/tinymce/langs/zh_TW.js',
+				height : "500px",
 				plugins : [
 						"advlist autolink link image lists charmap print preview hr anchor pagebreak",
 						"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
@@ -82,7 +84,7 @@
 																			"#updateConfirm")
 																			.fadeOut(
 																					1500);
-																}, 500);
+																}, 1000);
 
 													}
 
@@ -154,17 +156,19 @@
 						</ul>
 
 					</div>
-					<P class="great" id="updateConfirm" style="display: none;">
-					<P>
+					<P class="great" id="updateConfirm" style="display: none;z-index:10;">
+					</P>
 					<form action="" method="POST" name="formData"
 						target="upload_iframe" enctype="multipart/form-data" role="form"
 						id="TotalContent" onsubmit="showStatus()">
 						<iframe name=upload_iframe width=0 height=0 style="display: none;"></iframe>
-						<input type="hidden" value="${CourseID}" name="CourseID">
-						<input type="hidden" value="${LoginOK.memberID}" name="memberID">
+						<input type="hidden" value="${CourseID}" name="CourseID"
+							id="courseID"> <input type="hidden"
+							value="${LoginOK.memberID}" name="memberID">
 						<div class="tab-content">
 							<!-- 整個step1頁面 -->
-							<div class="tab-pane active" role="tabpanel" id="step1" style="margin-bottom: 50px">
+							<div class="tab-pane active" role="tabpanel" id="step1"
+								style="margin-bottom: 50px">
 								<div class="container">
 									<div class="col-md-8 col-md-offset-3">
 										<div class="col-md-12">
@@ -250,7 +254,9 @@
 								<!-- step1最終確認按鈕 -->
 								<div class="col-md-offset-3" style="margin-top: 20px">
 									<button type="button"
-										class="btn btn-primary btn-lg btn3d col-md-offset-3 next-step"><span class="glyphicon glyphicon-hand-right"></span>   開始編輯課程</button>
+										class="btn btn-primary btn-lg btn3d col-md-offset-3 next-step">
+										<span class="glyphicon glyphicon-hand-right"></span> 開始編輯課程
+									</button>
 								</div>
 								<!-- 整個step1頁面 -->
 							</div>
@@ -279,13 +285,13 @@
 											<div>
 												<div style="font-size: 15pt">
 
-													<INPUT TYPE="checkbox" NAME="CourseClass" value="101">生活				
-													<INPUT TYPE="checkbox" NAME="CourseClass" value="102">藝術			
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="101">生活
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="102">藝術
 													<INPUT TYPE="checkbox" NAME="CourseClass" value="103">運動
-													<INPUT TYPE="checkbox" NAME="CourseClass" value="104">影音<br>		
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="104">影音<br>
 													<INPUT TYPE="checkbox" NAME="CourseClass" value="105">手作
 													<INPUT TYPE="checkbox" NAME="CourseClass" value="106">其他
-													<INPUT TYPE="checkbox" NAME="CourseClass" value="107">設計	
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="107">設計
 													<INPUT TYPE="checkbox" NAME="CourseClass" value="108">科技<br>
 													<INPUT TYPE="checkbox" NAME="CourseClass" value="109">商業
 													<INPUT TYPE="checkbox" NAME="CourseClass" value="110">語言
@@ -296,7 +302,7 @@
 											</div>
 										</div>
 									</div>
-									
+
 									<div class="col-md-3 col-md-offset-2">
 										<div style="width: 310px">
 											<div class="card card-inverse">
@@ -330,7 +336,8 @@
 									<!-- 包住step2填寫資料 -->
 								</div>
 
-								<ul class="list-inline col-md-6 pull-right" style="margin-top: 50px;margin-bottom: 80px;">
+								<ul class="list-inline col-md-6 pull-right"
+									style="margin-top: 50px; margin-bottom: 80px;">
 									<li class="pull-right"><button type="button"
 											class="btn btn-primary btn-lg btn3d next-step">儲存並前往下一步</button></li>
 									<li class="pull-right"><button type="button"
@@ -363,8 +370,7 @@
 								<div class="[ container ]">
 									<div class="[ row ]">
 										<div class="[ col-xs-12 ] alert alert-info">
-											<div
-												style="font-size: 20px; font-weight: bold;">
+											<div style="font-size: 20px; font-weight: bold;">
 												學這堂課之前，學生需要具有哪些背景知識？</div>
 											<div class="[ form-group ][ form-group-textarea ]">
 												<textarea name="background"
@@ -381,8 +387,7 @@
 								<div class="[ container ]">
 									<div class="[ row ]">
 										<div class="[ col-xs-12 ] alert alert-info">
-											<div
-												style="font-size: 20px; font-weight: bold;">
+											<div style="font-size: 20px; font-weight: bold;">
 												學完這堂課後，學生可以做出什麼東西？</div>
 											<div class="[ form-group ][ form-group-textarea ]">
 												<textarea name="ability"
@@ -399,8 +404,7 @@
 								<div class="[ container ]">
 									<div class="[ row ]">
 										<div class="[ col-xs-12 ] alert alert-info">
-											<div
-												style="font-size: 20px; font-weight: bold;">
+											<div style="font-size: 20px; font-weight: bold;">
 												哪些人適合這堂課？</div>
 											<div class="[ form-group ][ form-group-textarea ]">
 												<textarea name="targetgroup"
@@ -449,7 +453,7 @@
 									<div class="col-md-6">
 										<div class="form-group col-lg-6" style="font-size: 20px;">
 											<label>定價(最低售價為$10元)</label> <input type="text"
-												name="soldPrice" class="form-control"  id="soldPrice"
+												name="soldPrice" class="form-control" id="soldPrice"
 												value="${CoursedData.soldPrice}" style="font-size: 18px;">
 										</div>
 
@@ -537,15 +541,15 @@
 											<div class="alert alert-info"
 												style="font-size: 20px; font-weight: bold;">
 												課程內容說明
-											<div style="color:black;font-size: 18px">趕緊來為你精心設計的課程做個介紹吧!請務必在文案中加上開課緣由、自我介紹、課程單元說明、教學方式、課程難易度、相關作品圖片、作品集網站…等資料，越詳細的內容將會提升學生對課程的信任感；而善用編輯排版功能，讓提案更加吸引人！
-											</div>
+												<div style="color: black; font-size: 18px">趕緊來為你精心設計的課程做個介紹吧!請務必在文案中加上開課緣由、自我介紹、課程單元說明、教學方式、課程難易度、相關作品圖片、作品集網站…等資料，越詳細的內容將會提升學生對課程的信任感；而善用編輯排版功能，讓提案更加吸引人！
+												</div>
 											</div>
 											<div class="[ form-group ][ form-group-textarea ]"
 												id="get-data-form">
-												<textarea class="tinymce" id="texteditor" placeholder="請輸入課程中，可能會使用到的工具"
-													class="form-control" data-toggle="floatLabel"
-													data-value="no-js" style="font-size: 18px"
-													form="TotalContent">${CoursedData.courseContent}</textarea>
+												<textarea class="tinymce form-control" id="texteditor"
+													placeholder="請輸入課程中，可能會使用到的工具" class="form-control"
+													data-toggle="floatLabel" data-value="no-js"
+													style="font-size: 18px" form="TotalContent">${CoursedData.courseContent}</textarea>
 												<input type="hidden" value="" id="courseContent"
 													name="courseContent">
 											</div>
@@ -579,8 +583,8 @@
 															<div class="btn btn-default image-preview-input">
 																<span class="glyphicon glyphicon-folder-open"></span> <span
 																	class="image-preview-input-title">選擇檔案</span> <input
-																	type="file" name="video"
-																	id="inputfilename1" onclick="fileSelect()" />
+																	type="file" name="video" id="inputfilename1"
+																	onclick="fileSelect()" />
 																<!-- rename it -->
 															</div>
 															<button id="btnSubmit1" type="submit"
@@ -624,8 +628,8 @@
 															<div class="btn btn-default image-preview-input">
 																<span class="glyphicon glyphicon-folder-open"></span> <span
 																	class="image-preview-input-title">選擇檔案</span> <input
-																	type="file" name="paper"
-																	id="inputfilename2" onclick="fileSelect()" />
+																	type="file" name="paper" id="inputfilename2"
+																	onclick="fileSelect()" />
 																<!-- rename it -->
 															</div>
 															<button id="btnSubmit2" type="submit"
@@ -658,21 +662,89 @@
 								<ul class="list-inline pull-right" style="margin-bottom: 80px">
 									<li><button type="button"
 											class="btn3d btn btn-default btn-lg prev-step">上一步</button></li>
-									<li><button type="button"
+									<li><button type="button" id="getProposalData"
 											class="btn btn-primary btn-lg btn3d next-step">儲存並前往下一步</button></li>
 								</ul>
 							</div>
 
 							<div class="tab-pane" role="tabpanel" id="complete">
-								<ul class="list-inline pull-right" style="margin-bottom: 80px">
-									<li><button type="button"
-											class="btn3d btn btn-default btn-lg prev-step">上一步</button></li>
-									<li><button type="button"
-											class="btn btn-success btn-lg btn3d next-step"><span class="glyphicon glyphicon-ok"></span>   完成課程編輯並送出審核</button></li>
-								</ul>
+								<div class="container">
+									<div class="row col-list">
+										<div class="col-md-4 t1">
+											<div class="col-head text-center">
+												<span class="glyphicon glyphicon-paperclip"
+													aria-hidden="true"></span>
+												<h2>課程簡介</h2>
+											</div>
+											<ul class="list-unstyled">
+												<li>
+													<p class="option" id="courseNameJSON">課程名稱：</p>
+												</li>
+												<li>
+													<p class="option" id="courseClassJSON">課程類別：</p>
+												</li>
+												<li>
+													<p class="option" id="preToolJSON">所需工具：</p>
+												</li>
+												<li>
+													<p class="option" id="targetgroupJSON">適合族群：</p>
+												</li>
+												<li><p></p></li>
+
+											</ul>
+										</div>
+										<div class="col-md-4 t2">
+											<div class="col-head text-center">
+												<span class="glyphicon glyphicon-eye-open"
+													aria-hidden="true"></span>
+												<h2>銷售方式</h2>
+											</div>
+											<ul class="list-unstyled">
+												<li>
+													<p class="option" id="soldPriceJSON">銷售金額：</p>
+												</li>
+												<li>
+													<p class="option" id="fundDateDurationJSON">募資起迄時間：</p>
+												</li>
+												<li>
+													<p class="option" id="courseStartDateJSON">開課日期：</p>
+												</li>
+												<li><p></p></li>
+											</ul>
+										</div>
+										<div class="col-md-4 t3">
+											<div class="col-head text-center">
+												<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+												<h2>檔案內容</h2>
+											</div>
+											<ul class="list-unstyled">
+												<li>
+													<p class="option" id="courseVideoNameJSON">影片檔名：</p>
+												</li>
+												<li>
+													<p class="option" id="courseLengthJSON">課程長度：</p>
+												</li>
+												<li><p></p></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+
+
+
+								<div class="col-md-offset-4" style="margin-top: 80px">
+									<ul class="list-inline" style="margin-bottom: 80px">
+										<li><button type="button"
+												class="btn3d btn btn-default btn-lg prev-step">上一步</button></li>
+										<li><a href="<%=request.getContextPath()%>/HOME.jsp"><button
+													type="button" id="postProposal"
+													class="btn btn-success btn-lg btn3d next-step">
+													<span class="glyphicon glyphicon-ok"></span> 完成課程編輯並送出審核
+												</button></a></li>
+									</ul>
+								</div>
+								<div class="clearfix"></div>
 							</div>
-							<div class="clearfix"></div>
-						</div>
 					</form>
 				</div>
 			</section>
@@ -776,17 +848,28 @@
 			}
 		}
 
-		 $(document).ready(function() {
-		        $('input[type=checkbox]').click(function() {
-		            $("input[name='CourseClass']").attr('disabled', true);
-		            if ($("input[name='CourseClass']:checked").length >= 3) {
-		                $("input[name='CourseClass']:checked").attr('disabled', false);
-		            } else {
-		                $("input[name='CourseClass']").attr('disabled', false);
-		            }
-		        });
-		 
-		    })
+		$(document)
+				.ready(
+						function() {
+							$('input[type=checkbox]')
+									.click(
+											function() {
+												$("input[name='CourseClass']")
+														.attr('disabled', true);
+												if ($("input[name='CourseClass']:checked").length >= 3) {
+													$(
+															"input[name='CourseClass']:checked")
+															.attr('disabled',
+																	false);
+												} else {
+													$(
+															"input[name='CourseClass']")
+															.attr('disabled',
+																	false);
+												}
+											});
+
+						})
 
 		$("#CourseInput").keyup(function() {
 			var value = $(this).val();
@@ -880,9 +963,10 @@
 
 		function select() {
 			var selectr = document.querySelector("#CourseList input:checked").value;
-			if(selectr === "radio1"){
+			if (selectr === "radio1") {
 				$("#soldPrice").val("0");
-				document.querySelector("#soldPrice").setAttribute("readonly","readonly");				
+				document.querySelector("#soldPrice").setAttribute("readonly",
+						"readonly");
 				document.querySelector("#ProposalCourse").style = "opacity: 0.4;font-size: 18px;margin-top: 2em;";
 				document.querySelectorAll("#ProposalCourse input").forEach(
 						function(el) {
@@ -890,35 +974,29 @@
 							el.style = "opacity: 0.4;font-size: 18px;";
 						})
 				var formData = new FormData($('form')[3]);
-							console.log("圖片送到資料庫囉!");
-							$
-									.ajax({
-										type : 'POST',
-										url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
-										data : formData,
-										processData : false,
-										contentType : false,
-										success : function() {
-											delay_till_last('id', function() {
-												$('#updateConfirm').text(
-														"變更已儲存至草稿");
-												$("#updateConfirm")
-														.fadeIn(1200);
+				console.log("圖片送到資料庫囉!");
+				$
+						.ajax({
+							type : 'POST',
+							url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
+							data : formData,
+							processData : false,
+							contentType : false,
+							success : function() {
+								delay_till_last('id', function() {
+									$('#updateConfirm').text("變更已儲存至草稿");
+									$("#updateConfirm").fadeIn(1200);
 
-												$("#updateConfirm").fadeOut(
-														1500);
+									$("#updateConfirm").fadeOut(1500);
 
-											}, 500);
-										}
-									})		
-						
-						
-						
-						
-						
+								}, 1000);
+							}
+						})
+
 			}
-			if(selectr === "radio3"){
-				document.querySelector("#soldPrice").removeAttribute("readonly");
+			if (selectr === "radio3") {
+				document.querySelector("#soldPrice")
+						.removeAttribute("readonly");
 				document.querySelector("#ProposalCourse").style = "opacity: 0.4;font-size: 18px;margin-top: 2em;";
 				document.querySelectorAll("#ProposalCourse input").forEach(
 						function(el) {
@@ -926,15 +1004,16 @@
 							el.style = "opacity: 0.4;font-size: 18px;";
 						})
 			}
-			if(selectr === "radio2"){
-				document.querySelector("#soldPrice").removeAttribute("readonly");										
+			if (selectr === "radio2") {
+				document.querySelector("#soldPrice")
+						.removeAttribute("readonly");
 				document.querySelector("#ProposalCourse").style = "opacity: 1;font-size: 18px;margin-top: 2em;";
 				document.querySelectorAll("#ProposalCourse input").forEach(
 						function(el) {
 							el.removeAttribute("disabled");
 							el.style = "opacity: 1;font-size: 18px;";
 						})
-			}						
+			}
 		};
 
 		$('#inputfilename1').change(
@@ -979,7 +1058,7 @@
 												$("#updateConfirm").fadeOut(
 														1500);
 
-											}, 500);
+											}, 1000);
 										},
 										error : function() {
 											alert("請輸入正確的格式!");
@@ -1010,7 +1089,7 @@
 												$("#updateConfirm").fadeOut(
 														1500);
 
-											}, 500);
+											}, 1000);
 										}
 									})
 						})
@@ -1038,13 +1117,11 @@
 												$("#updateConfirm").fadeOut(
 														1500);
 
-											}, 500);
+											}, 1000);
 										}
 									})
 						})
-						
-						
-						
+
 		$('#inputfilename2')
 				.change(
 						function(e) {
@@ -1059,7 +1136,7 @@
 										processData : false,
 										contentType : false,
 									})
-						})				
+						})
 		// 設定keyup事件在特定秒數內只會觸發1次
 		var _timer = {};
 		function delay_till_last(id, fn, wait) {
@@ -1074,6 +1151,55 @@
 			}, wait);
 		}
 		// =====================================
+
+		//用goGet方法送到CourseEditControlloer，改變草稿的狀態	
+		$('#postProposal').click(function() {
+			$.get('/e-Look/com.e_Look.Course.control/CourseEditControlloer', {
+				'courseID' : $('#courseID').val()
+			}, function() {
+			})
+		})
+		//======================================================
+			
+		//用goGet方法送到CourseEditControlloer，取得目前資料庫存入的課程內容	
+		$('#getProposalData').click(function() {
+			$.getJSON('/e-Look/com.e_Look.Course.control/CourseEditControlloer', {
+				'courseID' : $('#courseID').val(),"getProposalData":"XXXXXXXX"
+			}, function(datas) {
+				console.log(datas);
+				$('#courseNameJSON').text("課程名稱："+datas.courseName);
+				$('#preToolJSON').text("所需工具："+datas.preTool);
+				$('#targetgroupJSON').text("適合族群："+datas.targetgroup);
+				$('#soldPriceJSON').text("銷售金額："+datas.soldPrice+"元");
+				$('#fundDateDurationJSON').text("募資起迄時間："+datas.fundStartDate+" ~ "+datas.fundEndDate);
+				$('#courseStartDateJSON').text("開課日期："+datas.courseStartDate);
+				$('#courseVideoNameJSON').text("上傳影片檔名："+datas.courseVideopathway);
+				$('#courseLengthJSON').text("影片長度："+datas.courseLength+"分鐘");
+				
+			})
+		})
+		//======================================================
+			
+			
+			
+			
+		//用goGet方法送到GetCourseClass，取得目前資料庫課程所屬的類別
+		$('#getProposalData').click(function(){
+			var courseClass="";
+			$.ajax({'url':'<%=request.getContextPath() %>/GetCourseClass',
+				'async':false,
+				'data':{'courseID':$('#courseID').val()},
+				'success':function(result){
+					courseClass = result;
+					$('#courseClassJSON').text("課程所屬類別："+courseClass);					
+				}
+		});//$.ajax end
+	
+		})		
+						
+		
+		//===============================================================
+			
 	</script>
 
 

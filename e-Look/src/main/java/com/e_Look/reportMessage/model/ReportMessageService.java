@@ -37,7 +37,7 @@ public class ReportMessageService {
 		rmVO.setStatus((byte) 1);
 		dao.update(rmVO);
 		
-		MessageVO mVO = rmVO.getMessageVO();
+		MessageVO mVO = rmVO.getMessageVO();		
 		//將傳進來的status訊息狀態設定進去Message裡
 		mVO.setStatus((byte)status);
 		//DAO裡有判斷式,使用符合status的update

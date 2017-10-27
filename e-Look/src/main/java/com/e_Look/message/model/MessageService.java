@@ -1,6 +1,5 @@
 package com.e_Look.message.model;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 public class MessageService {
@@ -40,7 +39,7 @@ public class MessageService {
 		messageVO.setStatus(status);
 		dao.update(messageVO,update);
 
-		return dao.findByPrimaryKey(courseID);
+		return dao.findByPrimaryKey(messageID);
 	}
 	
 	
@@ -49,8 +48,11 @@ public class MessageService {
 		dao.delete(messageID);
 	}
 
-	public MessageVO getOneMessage(Integer courseID) {
-		return dao.findByPrimaryKey(courseID);
+	public MessageVO getOneMessage(Integer messageID) {
+		return dao.findByPrimaryKey(messageID);
+	}
+	public List<MessageVO> getOneMessageM(Integer courseID) {
+		return dao.findByPrimaryKeyM(courseID);
 	}
 
 	public List<MessageVO> getAll() {

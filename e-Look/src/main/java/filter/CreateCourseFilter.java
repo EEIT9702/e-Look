@@ -42,7 +42,7 @@ public class CreateCourseFilter implements Filter {
 				// 判斷"向"哪一個網頁發出請求，當.indexOf()的值不等於-1時，表示對CreateCourse.jsp發出請求
 				if (request.getServletPath().indexOf("CreateCourse.jsp") != -1) {
 					// 判斷"從"哪一個網頁發出請求，當.indexOf()的值等於-1時，表示從CreateCourse.jsp送出請求
-					if (request.getHeader("referer").indexOf("CreateCourse.jsp") == -1) {
+//					if (request.getHeader("referer").indexOf("CreateCourse.jsp") == -1) {
 						HttpSession session = request.getSession();
 						MemberVO memberVO = (MemberVO) session.getAttribute("LoginOK");
 						if (memberVO == null) {
@@ -58,9 +58,9 @@ public class CreateCourseFilter implements Filter {
 					} else {
 						chain.doFilter(request, response);
 					}
-				} else {
-					chain.doFilter(request, response);
-				}
+//				} else {
+//					chain.doFilter(request, response);
+//				}
 
 			} else {
 				Integer courseID=Integer.valueOf(request.getParameter("CourseID"));

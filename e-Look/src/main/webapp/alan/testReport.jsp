@@ -688,7 +688,8 @@ a:HOVER {
 															</div>
 															<div class="col-md-11 "
 																style="border-bottom: 1px solid black">
-																<span>吳永志</span>
+																<!--測試用messageID -->
+																<span id="testMessage1" value="1001">吳永志</span>
 																<%
 																	out.print("<span align=\"center\">" + ft.format(dNow) + "</span>");
 																%>
@@ -815,6 +816,11 @@ a:HOVER {
 		//點擊檢舉留言
 		$('.reportM').on('click',function(){
 			warning();
+// 			$.post("ReportCourseInsertController", {
+// 				'reportMemberID' : $('#reportMemberID').val(),
+// 				'reportCourseID' : $('#reportCourseID').val(),
+// 				'radioReporterCon' : $('#radioReporterCon:checked').val()
+// 			});
 		})
 		//選取檢舉留言功能
 		function warning() {
@@ -842,13 +848,21 @@ a:HOVER {
 				  }
 				}).then(function(result) {
 				  if (result) {
+					  //var reportContent = result;
+					  console.log($('#testMessage1').attr('value'));
+					  console.log($('#reportMemberID').val());
+					  console.log(result);
+					  $.post('InsertReportMessageController',
+							  {'reportContent':result,
+						  		'reportMemberID':$('#reportMemberID').val(),
+						  		'reportMessageID':$('#testMessage1').attr('value')})
 				    swal({
 				    	
 				      confirmButtonText: '確認',
 				      type: 'success',
 //		 		      html: '檢舉成功 : ' + result
-				      html: '檢舉成功，管理員會盡快審核 '
-				    
+				      html: '檢舉 ' + result + ' 成功，管理員會盡快審核 '
+				    	
 				    });
 				  }
 				});

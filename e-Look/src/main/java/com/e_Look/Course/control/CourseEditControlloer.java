@@ -1,6 +1,7 @@
 package com.e_Look.Course.control;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 
 import javax.servlet.ServletException;
@@ -10,11 +11,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
 import com.e_Look.Course.CourseService;
 import com.e_Look.Course.CourseVO;
 import com.e_Look.CourseClassDetails.CourseClassDetailsDAO;
 import com.e_Look.courseClass.CourseClassDAO;
 import com.e_Look.courseClass.CourseClassVO;
+
+import net.minidev.json.JSONValue;
 
 /**
  * Servlet implementation class CreateNewCourseControlloer
@@ -33,9 +38,35 @@ public class CourseEditControlloer extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// Integer memberID= Integer.valueOf(request.getParameter("memberID"));
+		if(request.getParameter("member")!=null){
 		Integer courseID = Integer.valueOf(request.getParameter("courseID"));
 		CourseService courseService = new CourseService();
 		courseService.deleteCourse(courseID);
+		}
+		
+		
+		else{			
+				Integer courseID = Integer.valueOf(request.getParameter("courseID"));
+				CourseService courseService = new CourseService();
+				courseService.updateProposalStatus(courseID);
+		}
+		
+		if(request.getParameter("getProposalData")!=null){
+			response.setHeader("Access-Control-Allow-Origin", "*");
+			response.setHeader("content-type", "text/html;charset=UTF-8");
+			response.setCharacterEncoding("UTF-8");
+			PrintWriter out = response.getWriter();
+			
+			CourseService courseService1 = new CourseService();
+			CourseVO proposalData=courseService1.getCourseData(Integer.valueOf(request.getParameter("courseID")));						
+//			JSONObject jsonString =new JSONObject(proposalData);	
+//			System.out.println(jsonString);
+			String jsonString1 = JSONValue.toJSONString(proposalData); //另外一種把VO物件轉JSON的API
+			//System.out.println(jsonString1);
+			out.print(jsonString1);
+		}
+		
+		
 	}
 
 	/**
@@ -108,21 +139,23 @@ public class CourseEditControlloer extends HttpServlet {
 		String[] CourseClass = request.getParameterValues("CourseClass");
 		if (CourseClass != null) {
 			if (CourseClass.length > 0) {
-				CourseClassDetailsDAO dao1 = new CourseClassDetailsDAO();
-				if (dao1.findBycourseID(courseID) != null) {
+				CourseClassDetailsDAO dao1 = new CourseClassDetailsDAO();//先載入課程類別清單CourseClassDetailsDAO，建立dao1物件
 					dao1.delete(courseID);
-				}
 				for (int i = 0; i < CourseClass.length; i++) {
-					CourseVO courseVO2 = new CourseVO();
-					courseVO2.setCourseID(courseID);
-					courseVO2.setCourseName(courseName);
-					CourseClassDAO dao = new CourseClassDAO();
+					CourseVO courseVO2 = new CourseVO();//建立CourseVO2物件
+					courseVO2.setCourseID(courseID);//將取到的courseID用set方法放到courseVO2
+					courseVO2.setCourseName(courseName);//將取到的courseName用set方法放到courseVO2
+					CourseClassDAO dao = new CourseClassDAO();//先載入課程類別CourseClassDAO，並建立dao物件
+					//先載入課程類別(CourseClassVO)的VO，使用CourseClassDAO的getByCourseClassID方法取得courseClassVO物件存入courseClassVO
 					CourseClassVO courseClassVO = dao.getByCourseClassID(Integer.valueOf(CourseClass[i]));
-					dao1.insert(courseVO2, courseClassVO);
+					dao1.insert(courseVO2, courseClassVO);//使用CourseClassDetailsDAO的方法，存入課程類別明細
 				}
 				// System.out.println("myCheckBoxValue:"+CourseClass[i]);
 			}
 		}
+		
+		
+		
 
 	}
 

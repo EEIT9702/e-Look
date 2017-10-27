@@ -44,11 +44,7 @@ public class CourseService {
 		}
 
 	}
-	public CourseVO getCourse(Integer courseID){
-		
-		return dao.findByPrimaryKey(courseID);
-		
-	}
+	
 	public void updateCoursePaper(Integer CourseID, Part part) {
 
 		if (part.getSize() > 0) {
@@ -68,10 +64,15 @@ public class CourseService {
 		return dao.findByPrimaryKey(courseID);
 		
 	}
+	public CourseVO getCourse(Integer courseID){		
+		return dao.findByPrimaryKey(courseID);		
+	}
 	public void deleteCourse(Integer courseID) {
 
 			dao.delete(courseID);
 		
 	}
-
+	public void updateProposalStatus(Integer courseID){
+			dao.postProposal(courseID);
+	}
 }

@@ -25,7 +25,7 @@ public class OrderDAO implements OrderDAO_interface{
 	}
 
 	private static final String INSERT_Order = "insert into [Order] (memberID,orderTime) values (?,?)"; 
-	private static final String UPDATE_Order = "update [Order] set memberID=? orderTime=? where OrderID=?"; 
+	private static final String UPDATE_Order = "update [Order] set memberID=? ,orderTime=? where OrderID=?"; 
 	private static final String DELETE_Order = "delete from [Order] where OrderID=?"; 
 	private static final String SELECT_Order = "select OrderID,memberID,orderTime from [Order] where OrderID=?";
 	private static final String SELECT_ALL_Order = "select OrderID,memberID,orderTime from [Order]";
@@ -111,6 +111,7 @@ public class OrderDAO implements OrderDAO_interface{
 			
 			pstmt.setInt(1,OrderVO.getMemberID());
 			pstmt.setDate(2,OrderVO.getOrderTime());
+			pstmt.setInt(3, OrderVO.getOrderID());
 			pstmt.executeUpdate();
 			
 			
