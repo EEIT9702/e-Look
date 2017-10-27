@@ -660,7 +660,22 @@ video::-webkit-media-controls-panel {
 													<span class="glyphicon glyphicon-option-horizontal"></span>
 												</button>
 												<ul class="dropdown-menu">
-													<li><a class="reportM" href="#">檢舉</a></li>
+												<c:if test="${empty LoginOK}">
+													<c:choose>
+														<c:when test="${!empty loginerr}">
+															<li><a href="#" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>
+														</c:when>
+														<c:when test="${empty err}">	
+															<li><a href="#" href="#" data-toggle="modal" data-target="#myModal">檢舉</a></li>
+														</c:when>
+														<c:otherwise>
+															<li><a class="reportM" href="#" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>
+														</c:otherwise>
+												</c:choose>
+												</c:if>
+												<c:if test="${!empty LoginOK}">
+														<li><a class="reportM" href="#">檢舉</a></li>
+												</c:if>
 													<li><a href="#">修改</a></li>
 													<li><a href="#">刪除</a></li>
 												</ul>
@@ -712,7 +727,22 @@ video::-webkit-media-controls-panel {
 																		<span class="glyphicon glyphicon-option-horizontal"></span>
 																	</button>
 																	<ul class="dropdown-menu">
-																		<li><a class="reportM" href="#">檢舉</a></li>
+																	<c:if test="${empty LoginOK}">
+																		<c:choose>
+																			<c:when test="${!empty loginerr}">
+																				<li><a href="#" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>
+																			</c:when>
+																			<c:when test="${empty err}">	
+																				<li><a href="#" href="#" data-toggle="modal" data-target="#myModal">檢舉</a></li>
+																			</c:when>
+																			<c:otherwise>
+																				<li><a class="reportM" href="#" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>
+																			</c:otherwise>
+																	</c:choose>
+																	</c:if>
+																	<c:if test="${!empty LoginOK}">
+																			<li><a class="reportM" href="#">檢舉</a></li>
+																	</c:if>
 																		<li><a href="#">修改</a></li>
 																		<li><a href="#">刪除</a></li>
 																	</ul>
@@ -748,7 +778,22 @@ video::-webkit-media-controls-panel {
 																		<span class="glyphicon glyphicon-option-horizontal"></span>
 																	</button>
 																	<ul class="dropdown-menu">
-																		<li><a class="reportM" href="#">檢舉</a></li>
+																	<c:if test="${empty LoginOK}">
+																	<c:choose>
+																		<c:when test="${!empty loginerr}">
+																			<li><a href="#" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>
+																		</c:when>
+																		<c:when test="${empty err}">	
+																			<li><a href="#" href="#" data-toggle="modal" data-target="#myModal">檢舉</a></li>
+																		</c:when>
+																		<c:otherwise>
+																			<li><a class="reportM" href="#" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>
+																		</c:otherwise>
+																	</c:choose>
+																	</c:if>
+																	<c:if test="${!empty LoginOK}">
+																			<li><a class="reportM" href="#">檢舉</a></li>
+																	</c:if>
 																		<li><a href="#">修改</a></li>
 																		<li><a href="#">刪除</a></li>
 																	</ul>
