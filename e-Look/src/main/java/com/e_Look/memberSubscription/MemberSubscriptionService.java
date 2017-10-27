@@ -9,7 +9,7 @@ public class MemberSubscriptionService {
 		dao = new MemberSubscriptionDAO();
 	}
 
-	public void insertMemberBookmarks(Integer memberID,Integer memberTrackID) {
+	public void insertMemberSubscription(Integer memberID,Integer memberTrackID) {
 		MemberSubscriptionVO memberSubscriptionVO =new MemberSubscriptionVO();
 		memberSubscriptionVO.setMemberID(memberID);
 		memberSubscriptionVO.setMemberTrackID(memberTrackID);
@@ -17,8 +17,8 @@ public class MemberSubscriptionService {
 		
 	}
 
-	public void deleteMemberBookmarks(Integer memberID, Integer courseID) {
-		dao.delete(memberID, courseID);
+	public void deleteMemberSubscription(Integer memberID, Integer memberTrackID) {
+		dao.delete(memberID, memberTrackID);
 		
 	}
 	public List<MemberSubscriptionVO> findPrimaryMemberBookmarks(Integer memberID) {
