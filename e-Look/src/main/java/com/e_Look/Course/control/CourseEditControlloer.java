@@ -1,6 +1,7 @@
 package com.e_Look.Course.control;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 
 import javax.servlet.ServletException;
@@ -10,11 +11,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
 import com.e_Look.Course.CourseService;
 import com.e_Look.Course.CourseVO;
 import com.e_Look.CourseClassDetails.CourseClassDetailsDAO;
 import com.e_Look.courseClass.CourseClassDAO;
 import com.e_Look.courseClass.CourseClassVO;
+
+import net.minidev.json.JSONValue;
 
 /**
  * Servlet implementation class CreateNewCourseControlloer
@@ -37,9 +42,31 @@ public class CourseEditControlloer extends HttpServlet {
 		Integer courseID = Integer.valueOf(request.getParameter("courseID"));
 		CourseService courseService = new CourseService();
 		courseService.deleteCourse(courseID);
-		}else{
-			
 		}
+		
+		
+		else{			
+				Integer courseID = Integer.valueOf(request.getParameter("courseID"));
+				CourseService courseService = new CourseService();
+				courseService.updateProposalStatus(courseID);
+		}
+		
+		if(request.getParameter("getProposalData")!=null){
+			response.setHeader("Access-Control-Allow-Origin", "*");
+			response.setHeader("content-type", "text/html;charset=UTF-8");
+			response.setCharacterEncoding("UTF-8");
+			PrintWriter out = response.getWriter();
+			
+			CourseService courseService1 = new CourseService();
+			CourseVO proposalData=courseService1.getCourseData(Integer.valueOf(request.getParameter("courseID")));						
+//			JSONObject jsonString =new JSONObject(proposalData);	
+//			System.out.println(jsonString);
+			String jsonString1 = JSONValue.toJSONString(proposalData); //另外一種把VO物件轉JSON的API
+			//System.out.println(jsonString1);
+			out.print(jsonString1);
+		}
+		
+		
 	}
 
 	/**
