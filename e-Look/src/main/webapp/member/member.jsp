@@ -553,22 +553,27 @@ a:HOVER {
 								class="glyphicon glyphicon-plus"></i></span>
 						</div>
 						<div class="panel-body" style="display: none;">
-						<c:forEach var="mySubscription" items="${list5}">
-						
-						<div id="click3" class=" col-md-3  col-sm-3" style="border: 1px solid #d4d4d5;width: 222px;	height: 255px; margin:0 10px " >
-							<div class="profile-header-img"style="width:120px;margin: auto;">
-							 
-								<img class="img-circle"  src="<%=request.getContextPath()%>/Image?MemberID=${mySubscription.memberID}" />
-								<!-- badge -->
-								<a style="text-decoration: none; color:black;" href="<%=request.getContextPath() %>/member/member.jsp?memberID=${mySubscription.memberID}">
-                       			 <h5 style="text-align: center;">${mySubscription.mName}</h5>
-                       			 </a>
-                       			 <button id="clean" class="btn-danger btn-sm center-block"style="margin-bottom: 5px; margin-top: 30px">取消訂閱</button>
+						<c:forEach var="mySubscription" items="${list5}">						 
+						 <div  id="click3" class=" col-md-3  col-sm-3" style="border: 1px solid #d4d4d5;width: 222px;height: 255px; margin:0 10px ">
+						 <a style="text-decoration: none; color:black;" href="<%=request.getContextPath() %>/member/member.jsp?memberID=${mySubscription.memberID}">
+								<div class="cprofile-header-img" style="width:120px;margin: auto; padding: 30px 0;">
+									<img class="img-circle" style="width: 120px; height: 120px; border: 2px solid #51D2B7;" src="<%=request.getContextPath()%>/Image?MemberID=${mySubscription.memberID}" >
+									
+									<div class="card-block">
+										<div class="card-text"  style="height: 5px;">
+											<h5 style="text-align: center;">${mySubscription.mName}</h5>
+										</div>
+									</div>
+									 </a>
+									<div class="card-footer">
+									
+										<button  class="btn-danger btn-sm center-block">取消訂閱</button>
                        			 <input type="hidden" value="${mySubscription.memberID}">
                     			 <input type="hidden" value="${LoginOK.memberID}">
+                     							
+									</div>
+								</div>						
 							</div>
-						 </div>     
-						 </a>            
 						</c:forEach>
 						</div>
 					</div>
@@ -722,7 +727,7 @@ a:HOVER {
 // 				 loadProduct(1);
 // 			})
 });
-		   $('#clean').on('click',function(){
+		   $('#click3 button:nth-child(1)').on('click',function(){
 			   console.log("123")
 			   if( confirm("確定取消訂閱嗎?")){
 				   $(this).parents('#click3').css("display","none")
