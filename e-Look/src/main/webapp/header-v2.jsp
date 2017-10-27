@@ -307,11 +307,11 @@ $(function(){
 			$('#totalPrice').text('總金額：'+totalPrice+'元');
 			$('#courseCount').text('共'+courseCount+'筆課程');
 			$('.cartcount').text(courseCount);
-			$('#gbmemberID+li>a').attr('data-toggle','dropdown');
+			//$('#gbmemberID+li>a').attr('data-toggle','dropdown');
 			$('.cartcount').css('display','block');
 			if(courseCount==0){
 				$('.cartcount').css('display','none');
-				$('#gbmemberID+li>a').attr('data-toggle','no');
+				//$('#gbmemberID+li>a').attr('data-toggle','no');
 			}
 		},'json')
 	$('.cartrows').on('click','button',deleteShoppingCart);
