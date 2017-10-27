@@ -78,7 +78,7 @@ public class OnlineCourse implements Filter {
 					if (mBookmarkList != null) {
 						request.setAttribute("mBookmarkList", mBookmarkList);
 
-					
+					}
 					request.setAttribute("list", list);
 					request.setAttribute("list2", list2);
 					request.setAttribute("courseVO", courseVO);
@@ -90,7 +90,7 @@ public class OnlineCourse implements Filter {
 				}
 			}
 		}
-		}
+		
 	}
 
 	/**
