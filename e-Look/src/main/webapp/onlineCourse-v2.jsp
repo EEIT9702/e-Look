@@ -25,6 +25,9 @@
 <script
 	src="<%=request.getContextPath()%>/alan/sweet/sweetalert2.min.js"></script>
 
+
+<script
+	src="<%=request.getContextPath()%>/js/star.jss"></script>
 <style>
 /* 影片區塊 */
 video {
@@ -177,15 +180,21 @@ video::-webkit-media-controls-panel {
 #radioReporter {
 	padding-left: 50px;
 }
+
 #radioReporter>span {
 	font-size: 20px;
 	padding-left: 5px;
 }
 /* <!--課程售價 --> */
-#soldPrice{
-border-right:1px solid #ADADAD;border-left:1px solid #ADADAD
+#soldPrice {
+	border-right: 1px solid #ADADAD;
+	border-left: 1px solid #ADADAD;
 }
-a{text-decoration:none}
+
+a {
+	text-decoration: none
+}
+
 </style>
 </head>
 <!-- 影片區 -->
@@ -269,7 +278,7 @@ a{text-decoration:none}
 	<!-- 人數、時間 等等-->
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12" style="margin-top:20px">
+			<div class="col-md-12" style="margin-top: 20px">
 				<!--空-->
 				<div class="col-md-1 "></div>
 				<!--課程人數 -->
@@ -450,32 +459,35 @@ a{text-decoration:none}
 					<h2 style="text-align: center; font-weight: bold;">NT${courseVO.soldPrice}</h2>
 				</div>
 				<!--星星 -->
-				<div class="col-md-2 col-xs-6" style="height:89px;border-right:1px solid #ADADAD;" >
-					
+				<div class="col-md-2 col-xs-6"
+					style="height: 89px; border-right: 1px solid #ADADAD;">
 
 
 					<!-- 		加入購物車 -->
 					<c:if test="${empty LoginOK}">
 						<c:choose>
 							<c:when test="${!empty loginerr}">
-								
-									<button id="intoShoppingCart" type="button"  data-toggle="modal" data-target="#myModal2"
-										class="btn btn-success center-block" style="width: 160px">加入購物車</button>
-								
+
+								<button id="intoShoppingCart" type="button" data-toggle="modal"
+									data-target="#myModal2" class="btn btn-success center-block"
+									style="width: 160px">加入購物車</button>
+
 							</c:when>
 							<c:when test="${empty err}">
 
-								
-									<button id="intoShoppingCart" type="button"data-toggle="modal" data-target="#myModal"
-										class="btn btn-success center-block" style="width: 160px">加入購物車</button>
-								
+
+								<button id="intoShoppingCart" type="button" data-toggle="modal"
+									data-target="#myModal" class="btn btn-success center-block"
+									style="width: 160px">加入購物車</button>
+
 
 							</c:when>
 							<c:otherwise>
-								
-									<button id="intoShoppingCart" type="button"data-toggle="modal" data-target="#myModal"
-										class="btn btn-success center-block" style="width: 160px">加入購物車</button>
-								
+
+								<button id="intoShoppingCart" type="button" data-toggle="modal"
+									data-target="#myModal" class="btn btn-success center-block"
+									style="width: 160px">加入購物車</button>
+
 							</c:otherwise>
 						</c:choose>
 					</c:if>
@@ -509,7 +521,7 @@ a{text-decoration:none}
 					</c:if>
 					<!-- 加入購物車結束 -->
 				</div>
-				
+
 			</div>
 		</div>
 	</div>
@@ -867,7 +879,6 @@ a{text-decoration:none}
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="Section4"
 								style="font-size: 20px">
-
 								<p>喜歡的話記得幫我們評分還有收藏唷</p>
 
 							</div>
@@ -880,6 +891,7 @@ a{text-decoration:none}
 	<c:remove var="err" scope="session" />
 	<c:remove var="loginerr" scope="session" />
 	<jsp:include page="/footer.jsp" />
+
 	<script>
 		$(document).ready(function() {
 			$(".col-md-4 a").click(function() {
