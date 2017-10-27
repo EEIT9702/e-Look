@@ -15,16 +15,9 @@
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
 <!-- <!-- Bootstrap Core JavaScript -->
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
-
-<link href="<%=request.getContextPath()%>/_PJC/css/step1.css"
-	rel="stylesheet">
-
 <!-- Sweet Alert -->
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/alan/sweet/sweetalert2.min.css">
-<script
-	src="<%=request.getContextPath()%>/alan/sweet/sweetalert2.min.js"></script>
-
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/alan/sweet/sweetalert2.min.css">
+<script src="<%=request.getContextPath()%>/alan/sweet/sweetalert2.min.js"></script>
 <style>
 /* 影片區塊 */
 video {
@@ -189,7 +182,7 @@ a:HOVER {
 }
 
 #radioReporter>span {
-	font-size: 20px;
+	font-size: 30px;
 	padding-left: 5px;
 }
 </style>
@@ -288,7 +281,7 @@ a:HOVER {
 				<div class="col-md-1 col-xs-4">
 					<img src="<%=request.getContextPath()%>/_Lyy/clock.png"
 						class="img-responsive center-block">
-					<h5 class="text-center">${courseVO.courseLength}分鐘</h5>
+					<h5 class="text-center">課程時間為 ${courseVO.courseLength}min</h5>
 				</div>
 				<!--加到最愛 -->
 				<c:if test="${!empty mBookmarkList}">
@@ -306,9 +299,11 @@ a:HOVER {
 						</c:choose>
 					</c:forEach>
 				</c:if>
+
 				<c:if test="${empty mBookmarkList}">
 					<c:set var="favor" value="favoriteclick2" />
 				</c:if>
+
 				<c:if test="${empty LoginOK}">
 					<c:choose>
 						<c:when test="${!empty loginerr}">
@@ -340,24 +335,24 @@ a:HOVER {
 						</c:otherwise>
 					</c:choose>
 				</c:if>
+
 				<c:if test="${!empty LoginOK}">
 					<div class="col-md-1 col-xs-4">
-						<a href="#" id="${favor}"> <img
+						<a href="#" id="${favor}"><img
 							src="<%=request.getContextPath()%>/img/favorite.png"
 							class="img-responsive center-block">
-							<h5 class="text-center">加到最愛</h5>
-						</a>
+							<h5 class="text-center">加到最愛</h5></a>
 					</div>
 				</c:if>
-				<input type="hidden" value="${courseVO.courseID}" id="mbcourseID">
-				<input type="hidden" value="${LoginOK.memberID}" id="mbmemberID">
+				<input type="hidden" value="${courseVO.courseID}" id="mbcourseID"
+					name="courseID"> <input type="hidden"
+					value="${LoginOK.memberID}" id="mbmemberID" name="memberID">
 				<!--分享連結 -->
 				<div class="col-md-1 col-xs-4 ">
-					<div class="dropdown text-center">
-						<a data-toggle="dropdown"><img
-							src="<%=request.getContextPath()%>/_Lyy/share.png"
-							class="img-responsive center-block" style="margin-bottom: 7px">
-							分享連結 <span class="caret"></span></a>
+					<img src="<%=request.getContextPath()%>/_Lyy/share.png"
+						class="img-responsive center-block">
+					<div class="dropdown text-center" style="margin: 6px">
+						<a data-toggle="dropdown">分享連結 <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="#">FaceBook</a></li>
 							<li><a href="#">Google</a></li>
@@ -422,14 +417,11 @@ a:HOVER {
 									<button type="button" class="close pull-right"
 										data-dismiss="modal" aria-hidden="true">&times;</button>
 									<img src="<%=request.getContextPath()%>/img/warning.png"
-										width="32"> <span class="modal-title" id="myModalLabel"
-										style="font-size: 20px; color: red">檢舉影片</span>
+										width="42"> <span class="modal-title" id="myModalLabel"
+										style="font-size: 24px; color: red">檢舉影片</span>
 								</div>
-								<h3>
-									<strong>檢舉的影片:</strong>${courseVO.courseName}</h3>
-								<h3>
-									<strong>檢舉的內容:</strong>
-								</h3>
+								<h2>檢舉的影片為:${courseVO.courseName}</h2>
+								<h2>你檢舉的內容為:</h2>
 								<div class="modal-body" id="radioReporter">
 									<input type="radio" id="radioReporterCon" name="cont"
 										value="該影片侵犯著作權"><span>該影片侵犯著作權</span><br> <input
@@ -476,22 +468,22 @@ a:HOVER {
 						<c:choose>
 							<c:when test="${!empty loginerr}">
 								<a href="#" href="#" data-toggle="modal" data-target="#myModal2">
-									<button id="intoShoppingCart" type="button"
-										class="btn btn-success center-block" style="width: 160px">加入購物車</button>
+									<button type="button" class="btn btn-success center-block"
+										style="width: 160px">加入購物車</button>
 								</a>
 							</c:when>
 							<c:when test="${empty err}">
 
 								<a href="#" href="#" data-toggle="modal" data-target="#myModal">
-									<button id="intoShoppingCart" type="button"
-										class="btn btn-success center-block" style="width: 160px">加入購物車</button>
+									<button type="button" class="btn btn-success center-block"
+										style="width: 160px">加入購物車</button>
 								</a>
 
 							</c:when>
 							<c:otherwise>
 								<a href="#" href="#" data-toggle="modal" data-target="#myModal2">
-									<button id="intoShoppingCart" type="button"
-										class="btn btn-success center-block" style="width: 160px">加入購物車</button>
+									<button type="button" class="btn btn-success center-block"
+										style="width: 160px">加入購物車</button>
 								</a>
 							</c:otherwise>
 						</c:choose>
@@ -499,29 +491,27 @@ a:HOVER {
 					<c:if test="${!empty LoginOK}">
 						<c:choose>
 							<c:when test="${LoginOK.memberID==courseVO.memberID}">
-								<button type="button" class="btn btn-success center-block btn3d"
+								<button type="button" class="btn btn-success center-block"
 									style="width: 160px" disabled="disabled">已擁有</button>
 							</c:when>
 							<c:when test="${!empty LoginOK && !empty list2}">
 								<c:forEach var="buycourse" items='${list2}'>
 									<c:choose>
 										<c:when test="${courseVO.courseID==buycourse.courseID}">
-											<button type="button"
-												class="btn btn-success center-block btn3d"
+											<button type="button" class="btn btn-success center-block"
 												style="width: 160px" disabled="disabled">已擁有</button>
 										</c:when>
 										<c:when test="${!empty boo}"></c:when>
 										<c:otherwise>
-											<button id="intoShoppingCart" type="button"
-												class="btn btn-success center-block btn3d"
+											<button type="button" class="btn btn-success center-block"
 												style="width: 160px">加入購物車</button>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
 							</c:when>
 							<c:otherwise>
-								<button id="intoShoppingCart" type="button"
-									class="btn btn-success center-block btn3d" style="width: 160px">加入購物車</button>
+								<button type="button" class="btn btn-success center-block"
+									style="width: 160px">加入購物車</button>
 							</c:otherwise>
 						</c:choose>
 
@@ -583,65 +573,38 @@ a:HOVER {
 										<figure>
 											<img
 												src="<%=request.getContextPath() %>/Image?MemberID=${memberVo.memberID}"
-												class="img-thumbnail center-block img-circle"  />
-											<div style="text-align: center">${memberVo.mName}</div>
+												class="img-thumbnail pull-left">
+											<div style="text-align: center;">${memberVo.mName}</div>
 										</figure>
 										<div>
 
 											<c:if test="${empty LoginOK}">
 												<c:choose>
 													<c:when test="${!empty loginerr}">
-														<a href="#" data-toggle="modal" data-target="#myModal">
-															<button type="button" class="btn btn-info"
-																style="width: 100%">追蹤講師</button>
-														</a>
+														<button type="button" class="btn btn-info"
+															style="width: 100%">追蹤講師</button>
 													</c:when>
 													<c:when test="${empty err}">
-														<a href="#" data-toggle="modal" data-target="#myModal">
-															<button type="button" class="btn btn-info"
-																style="width: 100%">追蹤講師</button>
-														</a>
+														<button type="button" class="btn btn-info"
+															style="width: 100%">追蹤講師</button>
 													</c:when>
 													<c:otherwise>
-														<a href="#" data-toggle="modal" data-target="#myModal">
-															<button type="button" class="btn btn-info"
-																style="width: 100%">追蹤講師</button>
-														</a>
+														<button type="button" class="btn btn-info"
+															style="width: 100%">追蹤講師</button>
 													</c:otherwise>
 												</c:choose>
 											</c:if>
 											<c:if test="${!empty LoginOK}">
-												<c:if test="${!empty memberSubscription}">													
-													<c:forEach items="${memberSubscription}" var="memberSubscription">
-														<c:choose>
-															<c:when	test="${memberSubscription.memberTrackID==courseVO.memberID}">
-																<c:set var="disabled" value="disabled" />
-																<c:set var="subName" value="已追蹤講師" />
-																<c:set var="sub1" value="ture" />
-															</c:when>
-															<c:when test="${!empty sub1}">
-															</c:when>
-															<c:otherwise>
-																<c:set var="disabled" value="" />
-																<c:set var="subName" value="追蹤講師" />
-															</c:otherwise>
-														</c:choose>
-													</c:forEach>
-												</c:if>
-												<c:if test="${empty memberSubscription}">
-													<c:set var="disabled" value="" />
-														<c:set var="subName" value="追蹤講師" />
-												</c:if>
-												<c:if test="${courseVO.memberID==LoginOK.memberID}">
-													<c:set var="disabled" value="disabled" />
-													<c:set var="subName" value="本人" />
-												</c:if>
-												<button type="button" class="btn btn-info" ${disabled} style="width: 100%" id="subAction">${subName}</button>
-												<input type="hidden" id="coursevoMemeberID" value="${courseVO.memberID}">
+												<c:when test="">
+													<button type="button" class="btn btn-info"style="width: 100%">追蹤講師</button>
+												</c:when>
+												<c:when test="">
+													<button type="button" class="btn btn-info"style="width: 100%">追蹤講師</button>
+												</c:when>
 											</c:if>
-										
 										</div>
 									</div>
+
 								</c:if>
 								<div class="col-md-10 col-xs-9">
 									<c:if test="${!empty memberVo.aboutme}">
@@ -670,8 +633,7 @@ a:HOVER {
 									<div class="col-md-11">
 
 										<div>
-											<!--測試用messageID -->
-											<span id="testMessage1" value="1001" class="text-left">吳永志</span>
+											<span class="text-left">吳永志</span>
 
 											<%
 												Date dNow = new Date();
@@ -684,6 +646,7 @@ a:HOVER {
 													<span class="glyphicon glyphicon-option-horizontal"></span>
 												</button>
 												<ul class="dropdown-menu">
+													<!--下方加入檢舉class -->
 													<li><a class="reportM" href="#">檢舉</a></li>
 													<li><a href="#">修改</a></li>
 													<li><a href="#">刪除</a></li>
@@ -725,7 +688,8 @@ a:HOVER {
 															</div>
 															<div class="col-md-11 "
 																style="border-bottom: 1px solid black">
-																<span>吳永志</span>
+																<!--測試用messageID -->
+																<span id="testMessage1" value="1001">吳永志</span>
 																<%
 																	out.print("<span align=\"center\">" + ft.format(dNow) + "</span>");
 																%>
@@ -736,6 +700,7 @@ a:HOVER {
 																		<span class="glyphicon glyphicon-option-horizontal"></span>
 																	</button>
 																	<ul class="dropdown-menu">
+																		<!--下方加入檢舉class -->
 																		<li><a class="reportM" href="#">檢舉</a></li>
 																		<li><a href="#">修改</a></li>
 																		<li><a href="#">刪除</a></li>
@@ -772,6 +737,7 @@ a:HOVER {
 																		<span class="glyphicon glyphicon-option-horizontal"></span>
 																	</button>
 																	<ul class="dropdown-menu">
+																		<!--下方加入檢舉class -->
 																		<li><a class="reportM" href="#">檢舉</a></li>
 																		<li><a href="#">修改</a></li>
 																		<li><a href="#">刪除</a></li>
@@ -844,57 +810,66 @@ a:HOVER {
 				$(this).tab('show');
 			});
 		});
-	</script>
+	</script>	
 	<script>
-		$(function() {
-			//點擊檢舉留言
-			$('.reportM').on('click', function() {
-				warning();
-			})
-			//選取檢舉留言功能
-			function warning() {
-				swal({
-					title : '檢舉留言',
-					input : 'select',
-					inputOptions : {
-						'含有仇恨言論' : '含有仇恨言論',
-						'不雅內容' : '不雅內容',
-						'垃圾訊息' : '垃圾訊息'
-					},
-					inputPlaceholder : '請選擇檢舉事項',
-					confirmButtonText : '確認',
-					cancelButtonText : '取消',
-					showCancelButton : true,
-					inputValidator : function(value) {
-						return new Promise(function(resolve) {
-							resolve();
-						});
-					}
-				}).then(
-						function(result) {
-							if (result) {
-								console.log($('#testMessage1').attr('value'));
-								console.log($('#reportMemberID').val());
-								console.log(result);
-								$.post('InsertReportMessageController', {
-									'reportContent' : result,
-									'reportMemberID' : $('#reportMemberID')
-											.val(),
-									'reportMessageID' : $('#testMessage1')
-											.attr('value')
-								})
-								swal({
-
-									confirmButtonText : '確認',
-									type : 'success',
-									html : '檢舉 ' + result + ' 成功，管理員會盡快審核 '
-
-								});
-							}
-						});
-			}
+	$(function() {
+		//點擊檢舉留言
+		$('.reportM').on('click',function(){
+			warning();
+// 			$.post("ReportCourseInsertController", {
+// 				'reportMemberID' : $('#reportMemberID').val(),
+// 				'reportCourseID' : $('#reportCourseID').val(),
+// 				'radioReporterCon' : $('#radioReporterCon:checked').val()
+// 			});
 		})
+		//選取檢舉留言功能
+		function warning() {
+			swal({
+				  title: '檢舉留言',
+				  input: 'select',
+				  inputOptions: {
+				    '含有仇恨言論': '含有仇恨言論',
+				    '不雅內容': '不雅內容',
+				    '垃圾訊息': '垃圾訊息'
+				  },
+				  inputPlaceholder: '請選擇檢舉事項',
+				  confirmButtonText: '確認',
+				  cancelButtonText: '取消',
+				  showCancelButton: true,
+				  inputValidator: function(value) {
+				    return new Promise(function(resolve) {
+				    	resolve();
+//		 		      if (value === '垃圾訊息') {
+//		 		        resolve();
+//		 		      } else {
+//		 		        reject('You need to select Ukraine :)');
+//		 		      }
+				    });
+				  }
+				}).then(function(result) {
+				  if (result) {
+					  //var reportContent = result;
+					  console.log($('#testMessage1').attr('value'));
+					  console.log($('#reportMemberID').val());
+					  console.log(result);
+					  $.post('InsertReportMessageController',
+							  {'reportContent':result,
+						  		'reportMemberID':$('#reportMemberID').val(),
+						  		'reportMessageID':$('#testMessage1').attr('value')})
+				    swal({
+				    	
+				      confirmButtonText: '確認',
+				      type: 'success',
+//		 		      html: '檢舉成功 : ' + result
+				      html: '檢舉 ' + result + ' 成功，管理員會盡快審核 '
+				    	
+				    });
+				  }
+				});
+		}
+	})
 	</script>
+
 	<script>
 		$(function() {
 			var flag1 = false;
@@ -963,32 +938,10 @@ a:HOVER {
 					'reportMemberID' : $('#reportMemberID').val(),
 					'reportCourseID' : $('#reportCourseID').val(),
 					'radioReporterCon' : $('#radioReporterCon:checked').val()
-				})
-				$("#myModalReportVideo").modal('hide');
-				warning();
-			}
-
-			function warning() {
-				swal({
-
-					confirmButtonText : '確認',
-					type : 'success',
-					html : '檢舉成功，管理員會盡快審核 '
-
 				});
 			}
-		})
-	</script>
-		<script>
-		$('#subAction').click(function() {
-			alert("已加入收藏");
-			console.log($('#reportMemberID').val());
-			console.log($('#coursevoMemeberID').val());
-			$.post("MemberSubcriptionInsert_DeleteController", {
-					'memberID' : $('#reportMemberID').val(),
-					'memberTrackID' : $('#coursevoMemeberID').val()
-				})
-	
+			$("#myModalReportVideo").modal('hide');
+
 		})
 	</script>
 </body>

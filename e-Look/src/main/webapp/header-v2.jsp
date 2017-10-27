@@ -152,7 +152,8 @@ font-size: 18px;
 					</div>
 					<div id="navbar" class="navbar-collapse collapse" >
 						<ul class="nav navbar-nav">
-							<li style="padding-top:12px"><a href="#"><img
+							<li style="padding-top:12px"><a 
+								href="<%=request.getContextPath()%>/fundraisingCourse.jsp"><img
 									src="<%=request.getContextPath()%>/HeaderCssJs/003-coins.png"
 									height="28">募資</a></li>
 							<li style="padding-top:12px"><a 

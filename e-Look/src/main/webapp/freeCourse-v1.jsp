@@ -15,6 +15,8 @@
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
 <!-- <!-- Bootstrap Core JavaScript -->
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
+<link href="<%=request.getContextPath()%>/_PJC/css/step1.css" rel="stylesheet">
+
 <style>
 /* 影片區塊 */
 video {
@@ -182,9 +184,10 @@ video::-webkit-media-controls-panel {
 }
 
 #radioReporter>span {
-	font-size: 30px;
+	font-size: 20px;
 	padding-left: 5px;
 }
+
 </style>
 </head>
 <!-- 影片區 -->
@@ -238,14 +241,14 @@ video::-webkit-media-controls-panel {
 				<!--課程人數 -->
 				<div class="col-md-1 col-xs-4">
 					<img src="<%=request.getContextPath()%>/_Lyy/004-people.png"
-						class="img-responsive center-block ">
+						class="img-responsive center-block " >
 					<h5 class="text-center">課程人數</h5>
 				</div>
 				<!--課程時間 -->
 				<div class="col-md-1 col-xs-4">
 					<img src="<%=request.getContextPath()%>/_Lyy/clock.png"
 						class="img-responsive center-block">
-					<h5 class="text-center">課程時間為 ${courseVO.courseLength}min</h5>
+					<h5 class="text-center"> ${courseVO.courseLength}分鐘</h5>
 				</div>
 				<!--加到最愛 -->
 				<c:if test="${!empty mBookmarkList}">
@@ -310,10 +313,10 @@ video::-webkit-media-controls-panel {
 				<input type="hidden" value="${LoginOK.memberID}" id="mbmemberID">
 				<!--分享連結 -->
 				<div class="col-md-1 col-xs-4 ">
-					<img src="<%=request.getContextPath()%>/_Lyy/share.png"
-						class="img-responsive center-block">
-					<div class="dropdown text-center" style="margin: 6px">
-						<a data-toggle="dropdown">分享連結 <span class="caret"></span></a>
+					<div class="dropdown text-center" >
+						<a data-toggle="dropdown"><img src="<%=request.getContextPath()%>/_Lyy/share.png"
+						class="img-responsive center-block" style="margin-bottom:7px">
+						分享連結 <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="#">FaceBook</a></li>
 							<li><a href="#">Google</a></li>
@@ -378,11 +381,11 @@ video::-webkit-media-controls-panel {
 									<button type="button" class="close pull-right"
 										data-dismiss="modal" aria-hidden="true">&times;</button>
 									<img src="<%=request.getContextPath()%>/img/warning.png"
-										width="42"> <span class="modal-title" id="myModalLabel"
-										style="font-size: 24px; color: red">檢舉影片</span>
+										width="32"> <span class="modal-title " id="myModalLabel"
+										style="font-size: 20px; color: red">檢舉影片</span>
 								</div>
-								<h2>檢舉的影片為:${courseVO.courseName}</h2>
-								<h2>你檢舉的內容為:</h2>
+								<h3><strong>檢舉的影片:</strong>${courseVO.courseName}</h3>
+								<h3><strong>檢舉的內容:</strong></h3>
 								<div class="modal-body" id="radioReporter">
 									<input type="radio" id="radioReporterCon" name="cont"
 										value="該影片侵犯著作權"><span>該影片侵犯著作權</span><br> <input
@@ -424,7 +427,7 @@ video::-webkit-media-controls-panel {
 							src="<%=request.getContextPath()%>/star/ystar.png" />
 					</div>
 					<!--贊助 -->
-					<button type="button" class="btn btn-primary center-block"
+					<button type="button" class="btn btn-primary center-block btn3d"
 						style="width: 160px" data-toggle="modal" data-target="#mysponer">贊助</button>
 					<div class="modal fade" id="mysponer" tabindex="-1" role="dialog"
 						aria-labelledby="myModalLabel" aria-hidden="true">
@@ -482,7 +485,7 @@ video::-webkit-media-controls-panel {
 
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal">關閉</button>
-										<button type="submit" class="btn btn-primary" id="sponsorBtu"
+										<button type="submit" class="btn btn-primary " id="sponsorBtu"
 											disabled="disabled">使用歐付寶付款</button>
 
 									</div>
@@ -542,19 +545,47 @@ video::-webkit-media-controls-panel {
 								</c:if>
 							</div>
 							<!-- 講師簡介 -->
-							<div role="tabpanel" class="tab-pane fade" id="Section2"
+									<div role="tabpanel" class="tab-pane fade" id="Section2"
 								style="font-size: 20px">
 								<c:if test="${!empty memberVo.memberID}">
-									<div class="col-md-1">
+									<div class="col-md-2 col-xs-3">
 										<figure>
 											<img
 												src="<%=request.getContextPath() %>/Image?MemberID=${memberVo.memberID}"
 												class="img-thumbnail pull-left">
 											<div style="text-align: center;">${memberVo.mName}</div>
 										</figure>
+										<div>
+
+											<c:if test="${empty LoginOK}">
+												<c:choose>
+													<c:when test="${!empty loginerr}">
+														<button type="button" class="btn btn-info"
+															style="width: 100%">追蹤講師</button>
+													</c:when>
+													<c:when test="${empty err}">
+														<button type="button" class="btn btn-info"
+															style="width: 100%">追蹤講師</button>
+													</c:when>
+													<c:otherwise>
+														<button type="button" class="btn btn-info"
+															style="width: 100%">追蹤講師</button>
+													</c:otherwise>
+												</c:choose>
+											</c:if>
+											<%-- 											<c:if test="${!empty LoginOK}"> --%>
+											<%-- 												<c:when test=""> --%>
+											<!-- 													<button type="button" class="btn btn-info"style="width: 100%">追蹤講師</button> -->
+											<%-- 												</c:when> --%>
+											<%-- 												<c:when test=""> --%>
+											<!-- 													<button type="button" class="btn btn-info"style="width: 100%">追蹤講師</button> -->
+											<%-- 												</c:when> --%>
+											<%-- 											</c:if> --%>
+										</div>
 									</div>
+
 								</c:if>
-								<div class="pull-right">
+								<div class="col-md-10 col-xs-9">
 									<c:if test="${!empty memberVo.aboutme}">
 										<strong>關於我</strong>
 										<p>${memberVo.aboutme}</p>
@@ -831,20 +862,30 @@ video::-webkit-media-controls-panel {
 		})
 	</script>
 	<script>
-		$('#reportAction').click(function() {
-			if ($('#radioReporterCon:checked').val() == null) {
-				$("#myModalReportVideo").modal('hide');
-				return;
-			} else {
-				$.post("ReportCourseInsertController", {
-					'reportMemberID' : $('#reportMemberID').val(),
-					'reportCourseID' : $('#reportCourseID').val(),
-					'radioReporterCon' : $('#radioReporterCon:checked').val()
-				});
-			}
+	$('#reportAction').click(function() {
+		if ($('#radioReporterCon:checked').val() == null) {
 			$("#myModalReportVideo").modal('hide');
+			return;
+		} else {
+			$.post("ReportCourseInsertController", {
+				'reportMemberID' : $('#reportMemberID').val(),
+				'reportCourseID' : $('#reportCourseID').val(),
+				'radioReporterCon' : $('#radioReporterCon:checked').val()
+			})
+			$("#myModalReportVideo").modal('hide');
+			warning();
+		}
+		
+		function warning() {
+			swal({
 
-		})
+				confirmButtonText : '確認',
+				type : 'success',
+				html : '檢舉成功，管理員會盡快審核 '
+
+			});
+		}
+	})
 	</script>
 
 </body>
