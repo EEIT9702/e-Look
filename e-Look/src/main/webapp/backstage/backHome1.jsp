@@ -7,10 +7,8 @@
 	<title>eLook後台管理系統</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="assets/css/main.css" />
-		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+
 	</head>
 	<body>
 
@@ -30,12 +28,11 @@
 						<div class="inner">
 							<h2>Menu</h2>
 							<ul class="links">
-								<li><a href="index.html">會員管理</a></li>
-								<li><a href="generic.html">活動管理</a></li>
-								<li><a href="elements.html">輪播管理</a></li>
+								<li><a href="event.jsp">活動管理</a></li>
+								<li><a href="backAd.jsp">輪播管理</a></li>
 								<li><a href="#">課程審查</a></li>
 								<li><a href="#">收益報表</a></li>
-								<li><a href="#">檢舉管理</a></li>
+								<li><a href="back_report.jsp">檢舉管理</a></li>
 								<li><a href="backLogin.jsp">登出</a></li>
 							</ul>
 							<a href="#" class="close">Close</a>
@@ -57,7 +54,6 @@
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrollex.min.js"></script>
 			<script src="assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="assets/js/main.js"></script>
 
 	</body>

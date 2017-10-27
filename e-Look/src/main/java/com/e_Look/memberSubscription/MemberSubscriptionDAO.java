@@ -43,7 +43,8 @@ public class MemberSubscriptionDAO implements MemberSubscriptionDAO_interface {
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_MEMBERSUBSCRIPTION);
-			pstmt.setInt(1, memberSubscriptionVO.getMemberTrackID());
+			pstmt.setInt(1, memberSubscriptionVO.getMemberID());
+			pstmt.setInt(2, memberSubscriptionVO.getMemberTrackID());
 			pstmt.executeUpdate();
 
 			// Handle any SQL errors
