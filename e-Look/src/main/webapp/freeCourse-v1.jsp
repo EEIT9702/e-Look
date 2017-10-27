@@ -553,43 +553,71 @@ video::-webkit-media-controls-panel {
 							<!-- 講師簡介 -->
 									<div role="tabpanel" class="tab-pane fade" id="Section2"
 								style="font-size: 20px">
-								<c:if test="${!empty memberVo.memberID}">
+						
+										<c:if test="${!empty memberVo.memberID}">
 									<div class="col-md-2 col-xs-3">
 										<figure>
 											<img
 												src="<%=request.getContextPath() %>/Image?MemberID=${memberVo.memberID}"
-												class="img-thumbnail pull-left">
-											<div style="text-align: center;">${memberVo.mName}</div>
+												class="img-thumbnail center-block img-circle"  />
+											<div style="text-align: center">${memberVo.mName}</div>
 										</figure>
 										<div>
 
 											<c:if test="${empty LoginOK}">
 												<c:choose>
 													<c:when test="${!empty loginerr}">
-														<button type="button" class="btn btn-info"
-															style="width: 100%">追蹤講師</button>
+														<a href="#" data-toggle="modal" data-target="#myModal">
+															<button type="button" class="btn btn-info"
+																style="width: 100%">追蹤講師</button>
+														</a>
 													</c:when>
 													<c:when test="${empty err}">
-														<button type="button" class="btn btn-info"
-															style="width: 100%">追蹤講師</button>
+														<a href="#" data-toggle="modal" data-target="#myModal">
+															<button type="button" class="btn btn-info"
+																style="width: 100%">追蹤講師</button>
+														</a>
 													</c:when>
 													<c:otherwise>
-														<button type="button" class="btn btn-info"
-															style="width: 100%">追蹤講師</button>
+														<a href="#" data-toggle="modal" data-target="#myModal">
+															<button type="button" class="btn btn-info"
+																style="width: 100%">追蹤講師</button>
+														</a>
 													</c:otherwise>
 												</c:choose>
 											</c:if>
-											<%-- 											<c:if test="${!empty LoginOK}"> --%>
-											<%-- 												<c:when test=""> --%>
-											<!-- 													<button type="button" class="btn btn-info"style="width: 100%">追蹤講師</button> -->
-											<%-- 												</c:when> --%>
-											<%-- 												<c:when test=""> --%>
-											<!-- 													<button type="button" class="btn btn-info"style="width: 100%">追蹤講師</button> -->
-											<%-- 												</c:when> --%>
-											<%-- 											</c:if> --%>
+											<c:if test="${!empty LoginOK}">
+												<c:if test="${!empty memberSubscription}">													
+													<c:forEach items="${memberSubscription}" var="memberSubscription">
+														<c:choose>
+															<c:when	test="${memberSubscription.memberTrackID==courseVO.memberID}">
+																<c:set var="disabled" value="disabled" />
+																<c:set var="subName" value="已追蹤講師" />
+																<c:set var="sub1" value="ture" />
+															</c:when>
+															<c:when test="${!empty sub1}">
+															</c:when>
+															<c:otherwise>
+																<c:set var="disabled" value="" />
+																<c:set var="subName" value="追蹤講師" />
+															</c:otherwise>
+														</c:choose>
+													</c:forEach>
+												</c:if>
+												<c:if test="${empty memberSubscription}">
+													<c:set var="disabled" value="" />
+														<c:set var="subName" value="追蹤講師" />
+												</c:if>
+												<c:if test="${courseVO.memberID==LoginOK.memberID}">
+													<c:set var="disabled" value="disabled" />
+													<c:set var="subName" value="本人" />
+												</c:if>
+												<button type="button" class="btn btn-info" ${disabled} style="width: 100%" id="subAction">${subName}</button>
+												<input type="hidden" id="coursevoMemeberID" value="${courseVO.memberID}">
+											</c:if>
+										
 										</div>
 									</div>
-
 								</c:if>
 								<div class="col-md-10 col-xs-9">
 									<c:if test="${!empty memberVo.aboutme}">
@@ -943,6 +971,26 @@ video::-webkit-media-controls-panel {
 			});
 		}
 	})
+	</script>
+	<script>
+		var count = 0;
+		$('#subAction').click(function() {
+			if (count == 0) {
+			$.post("MemberSubcriptionInsert_DeleteController", {
+					'memberID' : $('#reportMemberID').val(),
+					'memberTrackID' : $('#coursevoMemeberID').val()
+				}, function() {
+				alert('已加到您的追蹤講師囉');
+				count++;
+			});
+			$('#subAction').attr('disabled','false')
+			$('#subAction').text('已追蹤講師')
+		} else {
+			alert('已經追蹤過囉');
+			$('#subAction').attr('disabled','false')
+		}
+	
+		})
 	</script>
 
 </body>
