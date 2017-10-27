@@ -239,9 +239,10 @@ video::-webkit-media-controls-panel {
 	</div>
 
 	<!-- 人數、時間 等等-->
+	
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-12" >
 				<!--空-->
 				<div class="col-md-1"></div>
 				<!--課程人數 -->
@@ -414,13 +415,13 @@ video::-webkit-media-controls-panel {
 
 				</c:if>
 				<!--課程售價 -->
-				<div class="col-md-2 col-xs-6 ">
+				<div class="col-md-2 col-xs-6 "style="border-right:1px solid gray">
 					<h5>課程售價</h5>
 					<h2 style="text-align: center; font-weight: bold;">Free</h2>
 				</div>
 				<!--星星 -->
-				<div class="col-md-2 col-xs-6 center-block" style="margin-top: 10px">
-					<div style="width: 70px; margin: 0 auto">
+				<div class="col-md-2 col-xs-6 center-block" >
+					<div style=" margin: 0 auto;margin-top: 12px">
 						<img id="idstar1" class="star"
 							src="<%=request.getContextPath()%>/star/ystar.png" /> <img
 							id="idstar2" class="star"
@@ -433,7 +434,7 @@ video::-webkit-media-controls-panel {
 							src="<%=request.getContextPath()%>/star/ystar.png" />
 					</div>
 					<!--贊助 -->
-					<button type="button" class="btn btn-primary center-block btn3d"
+					<button type="button" class="btn btn-primary center-block "
 						style="width: 160px" data-toggle="modal" data-target="#mysponer">贊助</button>
 					<div class="modal fade" id="mysponer" tabindex="-1" role="dialog"
 						aria-labelledby="myModalLabel" aria-hidden="true">
@@ -460,7 +461,7 @@ video::-webkit-media-controls-panel {
 										<table class="table">
 											<tbody>
 												<c:if test="${empty LoginOK}">
-													<c:set var="Name" value="user" />
+													<c:set var="Name" value="訪客" />
 												</c:if>
 												<c:if test="${!empty LoginOK}">
 													<c:set var="Name" value="${LoginOK.mName}" />

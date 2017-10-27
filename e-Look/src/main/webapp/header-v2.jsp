@@ -43,21 +43,22 @@ if(shoppingCartList != null){
 	box-shadow: none;
 }
 
-#navbar .nav li:hover:nth-child(4n+1), #navbar .nav li.active:nth-child(4n+1) {
+#navbar .nav .tt:hover:nth-child(4n+1), #navbar .nav .tt.active:nth-child(4n+1) {
 	border-bottom: #C4E17F 3px solid;
 }
 
-#navbar .nav li:hover:nth-child(4n+2),#navbar .nav li.active:nth-child(4n+2) {
+#navbar .nav .tt:hover:nth-child(4n+2),#navbar .nav .tt.active:nth-child(4n+2) {
 	border-bottom: #F7FDCA 3px solid;
 }
 
-#navbar .nav li:hover:nth-child(4n+3),#navbar .nav li.active:nth-child(4n+3) {
+#navbar .nav .tt:hover:nth-child(4n+3),#navbar .nav .tt.active:nth-child(4n+3) {
 	border-bottom: #FECF71 3px solid;
 }
 
-#navbar .nav li:hover:nth-child(4n+4),#navbar .nav li.active:nth-child(4n+4) {
+#navbar .nav .tt:hover:nth-child(4n+4),#navbar .nav .tt.active:nth-child(4n+4) {
 	border-bottom: #F0776C 3px solid;
 }
+
 
 .navbar-toggle .icon-bar {
 	color: #fff;
@@ -152,19 +153,19 @@ font-size: 18px;
 					</div>
 					<div id="navbar" class="navbar-collapse collapse" >
 						<ul class="nav navbar-nav">
-							<li style="padding-top:12px"><a 
+							<li style="padding-top:12px" class="tt"><a 
 								href="<%=request.getContextPath()%>/fundraisingCourse.jsp"><img
 									src="<%=request.getContextPath()%>/HeaderCssJs/003-coins.png"
 									height="28">募資</a></li>
-							<li style="padding-top:12px"><a 
+							<li style="padding-top:12px" class="tt"><a 
 								href="<%=request.getContextPath()%>/onlineCourse_Home.jsp"><img
 									src="<%=request.getContextPath()%>/HeaderCssJs/002-team.png"
 									height="28">線上課程</a></li>
-							<li style="padding-top:12px"><a 
+							<li style="padding-top:12px" class="tt"><a 
 								href="<%=request.getContextPath()%>/freeCourse_Home.jsp"><img
 									src="<%=request.getContextPath()%>/HeaderCssJs/004-gift.png"
 									height="28">免費課程</a></li>
-							<li style="padding-top:12px"><a
+							<li style="padding-top:12px" class="tt"><a
 								href="<%=request.getContextPath()%>/CreateCourse.jsp"><img
 									src="<%=request.getContextPath()%>/HeaderCssJs/001-book.png"
 									height="28">我要開課</a></li>
@@ -224,7 +225,7 @@ font-size: 18px;
 									<li class="dropdown "><a href="#" class=" dropdown-toggle"
 										id="dropdownMenu1" data-toggle="dropdown"><img
 											src="<%=request.getContextPath() %>/Image?MemberID=${LoginOK.memberID}"
-											height="40" /><span class="caret"></span></a>
+											height="40" class="" /><span class="caret"></span></a>
 										<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 											<li class="text-center"><a
 												href="<%=request.getContextPath()%>/member/member.jsp"><img

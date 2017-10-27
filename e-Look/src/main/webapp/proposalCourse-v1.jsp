@@ -37,8 +37,8 @@ video {
 #videoArea {
 	background-size: cover;
 	background-position: center;
-	height: 62%;
-	
+	height: 487px;
+/* 	62% */
 }
 
 video::-internal-media-controls-download-button {
