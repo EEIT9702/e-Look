@@ -217,16 +217,16 @@ public class MessageController extends HttpServlet {
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				
-				CourseVO course=(CourseVO)session.getAttribute("CourseVO");
-				Integer courseID = course.getCourseID();
-//				String str = request.getParameter("courseID");
-//								
-//				Integer courseID = null;
-//				courseID = new Integer(str);
+//				CourseVO course=(CourseVO)session.getAttribute("CourseVO");
+//				Integer courseID = course.getCourseID();
+				String str = request.getParameter("courseID");
+								
+				Integer courseID = null;
+				courseID = new Integer(str);
 								
 				/***************************2.開始查詢資料*****************************************/
 				MessageService messageSvc = new MessageService();
-				MessageVO messageVO = messageSvc.getOneMessage(courseID);
+				List<MessageVO> messageVO = messageSvc.getOneMessageM(courseID);
 				if (messageVO == null) {
 					errorMsgs.add("查無資料");
 				}
@@ -237,7 +237,7 @@ public class MessageController extends HttpServlet {
 					failureView.forward(request, response);
 					return;//程式中斷
 				}
-				
+				System.out.println(111);
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				request.setAttribute("messageVO", messageVO); // 資料庫取出的VO物件,存入request
 				RequestDispatcher successView = request.getRequestDispatcher("/_Ccc/Message.jsp"); // 成功轉交 listOneEmp.jsp
