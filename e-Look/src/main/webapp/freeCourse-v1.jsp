@@ -333,11 +333,19 @@ video::-webkit-media-controls-panel {
 				</div>
 				<!--講義下載 -->
 				<div class="col-md-1 col-xs-4 ">
+					<c:if test="${!empty courseVO.paper}">
 					<a href="<%=request.getContextPath()%>/Paper?CourseID=${courseVO.courseID}"> <img
 						src="<%=request.getContextPath()%>/_Lyy/001-download.png"
 						class="img-responsive center-block">
 						<h5 class="text-center">講義下載</h5>
 					</a>
+				</c:if>
+				<c:if test="${empty courseVO.paper}">
+					<img
+						src="<%=request.getContextPath()%>/_Lyy/001-download.png"
+						class="img-responsive center-block">
+						<h5 class="text-center">講義下載</h5>
+					</c:if>
 				</div>
 				<!--影片檢舉 -->
 				<c:if test="${empty LoginOK}">
