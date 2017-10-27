@@ -976,7 +976,7 @@ a:HOVER {
 	</script>
 	<script>
 		//判斷是否加入過最愛		
-		var count = 0;
+		var count1 = 0;
 		$('#favoriteclick1').click(function() {
 			alert('已經加入過囉');
 		})
@@ -985,14 +985,14 @@ a:HOVER {
 
 			console.log($("#mbcourseID").val())
 			console.log($("#mbmemberID").val())
-			if (count == 0) {
+			if (count1 == 0) {
 				$('#favoriteclick2').attr("id", "favoriteclick1")
 				$.post('MemberBookmarksInsertController', {
 					'courseID' : $("#mbcourseID").val(),
 					'memberID' : $("#mbmemberID").val()
 				}, function() {
 					alert('已經加到你的最愛囉');
-					count++;
+					count1++;
 				})
 			} else {
 				alert('已經加入過囉');
