@@ -499,7 +499,7 @@ a:HOVER {
 					<c:if test="${!empty LoginOK}">
 						<c:choose>
 							<c:when test="${LoginOK.memberID==courseVO.memberID}">
-								<button type="button" class="btn btn-success center-block btn3d"
+								<button type="button" class="btn btn-success center-block "
 									style="width: 160px" disabled="disabled">已擁有</button>
 							</c:when>
 							<c:when test="${!empty LoginOK && !empty list2}">
@@ -507,13 +507,13 @@ a:HOVER {
 									<c:choose>
 										<c:when test="${courseVO.courseID==buycourse.courseID}">
 											<button type="button"
-												class="btn btn-success center-block btn3d"
+												class="btn btn-success center-block "
 												style="width: 160px" disabled="disabled">已擁有</button>
 										</c:when>
 										<c:when test="${!empty boo}"></c:when>
 										<c:otherwise>
 											<button id="intoShoppingCart" type="button"
-												class="btn btn-success center-block btn3d"
+												class="btn btn-success center-block "
 												style="width: 160px">加入購物車</button>
 										</c:otherwise>
 									</c:choose>
@@ -521,7 +521,7 @@ a:HOVER {
 							</c:when>
 							<c:otherwise>
 								<button id="intoShoppingCart" type="button"
-									class="btn btn-success center-block btn3d" style="width: 160px">加入購物車</button>
+									class="btn btn-success center-block " style="width: 160px">加入購物車</button>
 							</c:otherwise>
 						</c:choose>
 
@@ -583,38 +583,65 @@ a:HOVER {
 										<figure>
 											<img
 												src="<%=request.getContextPath() %>/Image?MemberID=${memberVo.memberID}"
-												class="img-thumbnail pull-left">
-											<div style="text-align: center;">${memberVo.mName}</div>
+												class="img-thumbnail center-block img-circle"  />
+											<div style="text-align: center">${memberVo.mName}</div>
 										</figure>
 										<div>
 
 											<c:if test="${empty LoginOK}">
 												<c:choose>
 													<c:when test="${!empty loginerr}">
-														<button type="button" class="btn btn-info"
-															style="width: 100%">追蹤講師</button>
+														<a href="#" data-toggle="modal" data-target="#myModal">
+															<button type="button" class="btn btn-info"
+																style="width: 100%">追蹤講師</button>
+														</a>
 													</c:when>
 													<c:when test="${empty err}">
-														<button type="button" class="btn btn-info"
-															style="width: 100%">追蹤講師</button>
+														<a href="#" data-toggle="modal" data-target="#myModal">
+															<button type="button" class="btn btn-info"
+																style="width: 100%">追蹤講師</button>
+														</a>
 													</c:when>
 													<c:otherwise>
-														<button type="button" class="btn btn-info"
-															style="width: 100%">追蹤講師</button>
+														<a href="#" data-toggle="modal" data-target="#myModal">
+															<button type="button" class="btn btn-info"
+																style="width: 100%">追蹤講師</button>
+														</a>
 													</c:otherwise>
 												</c:choose>
 											</c:if>
-											<%-- 											<c:if test="${!empty LoginOK}"> --%>
-											<%-- 												<c:when test=""> --%>
-											<!-- 													<button type="button" class="btn btn-info"style="width: 100%">追蹤講師</button> -->
-											<%-- 												</c:when> --%>
-											<%-- 												<c:when test=""> --%>
-											<!-- 													<button type="button" class="btn btn-info"style="width: 100%">追蹤講師</button> -->
-											<%-- 												</c:when> --%>
-											<%-- 											</c:if> --%>
+											<c:if test="${!empty LoginOK}">
+												<c:if test="${!empty memberSubscription}">													
+													<c:forEach items="${memberSubscription}" var="memberSubscription">
+														<c:choose>
+															<c:when	test="${memberSubscription.memberTrackID==courseVO.memberID}">
+																<c:set var="disabled" value="disabled" />
+																<c:set var="subName" value="已追蹤講師" />
+																<c:set var="sub1" value="ture" />
+															</c:when>
+															<c:when test="${!empty sub1}">
+															</c:when>
+															<c:otherwise>
+																<c:set var="disabled" value="" />
+																<c:set var="subName" value="追蹤講師" />
+															</c:otherwise>
+														</c:choose>
+													</c:forEach>
+												</c:if>
+												<c:if test="${empty memberSubscription}">
+													<c:set var="disabled" value="" />
+														<c:set var="subName" value="追蹤講師" />
+												</c:if>
+												<c:if test="${courseVO.memberID==LoginOK.memberID}">
+													<c:set var="disabled" value="disabled" />
+													<c:set var="subName" value="本人" />
+												</c:if>
+												<button type="button" class="btn btn-info" ${disabled} style="width: 100%" id="subAction">${subName}</button>
+												<input type="hidden" id="coursevoMemeberID" value="${courseVO.memberID}">
+											</c:if>
+										
 										</div>
 									</div>
-
 								</c:if>
 								<div class="col-md-10 col-xs-9">
 									<c:if test="${!empty memberVo.aboutme}">
@@ -657,7 +684,22 @@ a:HOVER {
 													<span class="glyphicon glyphicon-option-horizontal"></span>
 												</button>
 												<ul class="dropdown-menu">
-													<li><a class="reportM" href="#">檢舉</a></li>
+												<c:if test="${empty LoginOK}">
+													<c:choose>
+														<c:when test="${!empty loginerr}">
+															<li><a href="#" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>
+														</c:when>
+														<c:when test="${empty err}">	
+															<li><a href="#" href="#" data-toggle="modal" data-target="#myModal">檢舉</a></li>
+														</c:when>
+														<c:otherwise>
+															<li><a class="reportM" href="#" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>
+														</c:otherwise>
+												</c:choose>
+												</c:if>
+												<c:if test="${!empty LoginOK}">
+														<li><a class="reportM" href="#">檢舉</a></li>
+												</c:if>
 													<li><a href="#">修改</a></li>
 													<li><a href="#">刪除</a></li>
 												</ul>
@@ -709,7 +751,22 @@ a:HOVER {
 																		<span class="glyphicon glyphicon-option-horizontal"></span>
 																	</button>
 																	<ul class="dropdown-menu">
-																		<li><a class="reportM" href="#">檢舉</a></li>
+																	<c:if test="${empty LoginOK}">
+																		<c:choose>
+																			<c:when test="${!empty loginerr}">
+																				<li><a href="#" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>
+																			</c:when>
+																			<c:when test="${empty err}">	
+																				<li><a href="#" href="#" data-toggle="modal" data-target="#myModal">檢舉</a></li>
+																			</c:when>
+																			<c:otherwise>
+																				<li><a class="reportM" href="#" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>
+																			</c:otherwise>
+																	</c:choose>
+																	</c:if>
+																	<c:if test="${!empty LoginOK}">
+																			<li><a class="reportM" href="#">檢舉</a></li>
+																	</c:if>
 																		<li><a href="#">修改</a></li>
 																		<li><a href="#">刪除</a></li>
 																	</ul>
@@ -745,7 +802,22 @@ a:HOVER {
 																		<span class="glyphicon glyphicon-option-horizontal"></span>
 																	</button>
 																	<ul class="dropdown-menu">
-																		<li><a class="reportM" href="#">檢舉</a></li>
+																	<c:if test="${empty LoginOK}">
+																		<c:choose>
+																			<c:when test="${!empty loginerr}">
+																				<li><a href="#" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>
+																			</c:when>
+																			<c:when test="${empty err}">	
+																				<li><a href="#" href="#" data-toggle="modal" data-target="#myModal">檢舉</a></li>
+																			</c:when>
+																			<c:otherwise>
+																				<li><a class="reportM" href="#" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>
+																			</c:otherwise>
+																	</c:choose>
+																	</c:if>
+																	<c:if test="${!empty LoginOK}">
+																			<li><a class="reportM" href="#">檢舉</a></li>
+																	</c:if>
 																		<li><a href="#">修改</a></li>
 																		<li><a href="#">刪除</a></li>
 																	</ul>
@@ -940,7 +1012,7 @@ a:HOVER {
 				$("#myModalReportVideo").modal('hide');
 				warning();
 			}
-			
+
 			function warning() {
 				swal({
 
@@ -952,6 +1024,25 @@ a:HOVER {
 			}
 		})
 	</script>
-
+		<script>
+		var count = 0;
+		$('#subAction').click(function() {
+			if (count == 0) {
+			$.post("MemberSubcriptionInsert_DeleteController", {
+					'memberID' : $('#reportMemberID').val(),
+					'memberTrackID' : $('#coursevoMemeberID').val()
+				}, function() {
+				alert('已加到您的追蹤講師囉');
+				count++;
+			});
+			$('#subAction').attr('disabled','false')
+			$('#subAction').text('已追蹤講師')
+		} else {
+			alert('已經追蹤過囉');
+			$('#subAction').attr('disabled','false')
+		}
+	
+		})
+	</script>
 </body>
 </html>

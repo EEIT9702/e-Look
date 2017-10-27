@@ -17,6 +17,12 @@
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
 <link href="<%=request.getContextPath()%>/_PJC/css/step1.css" rel="stylesheet">
 
+<!-- Sweet Alert -->
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/alan/sweet/sweetalert2.min.css">
+<script
+	src="<%=request.getContextPath()%>/alan/sweet/sweetalert2.min.js"></script>
+	
 <style>
 /* 影片區塊 */
 video {
@@ -545,19 +551,75 @@ video::-webkit-media-controls-panel {
 								</c:if>
 							</div>
 							<!-- 講師簡介 -->
-							<div role="tabpanel" class="tab-pane fade" id="Section2"
+									<div role="tabpanel" class="tab-pane fade" id="Section2"
 								style="font-size: 20px">
-								<c:if test="${!empty memberVo.memberID}">
-									<div class="col-md-1">
+						
+										<c:if test="${!empty memberVo.memberID}">
+									<div class="col-md-2 col-xs-3">
 										<figure>
 											<img
 												src="<%=request.getContextPath() %>/Image?MemberID=${memberVo.memberID}"
-												class="img-thumbnail pull-left">
-											<div style="text-align: center;">${memberVo.mName}</div>
+												class="img-thumbnail center-block img-circle"  />
+											<div style="text-align: center">${memberVo.mName}</div>
 										</figure>
+										<div>
+
+											<c:if test="${empty LoginOK}">
+												<c:choose>
+													<c:when test="${!empty loginerr}">
+														<a href="#" data-toggle="modal" data-target="#myModal">
+															<button type="button" class="btn btn-info"
+																style="width: 100%">追蹤講師</button>
+														</a>
+													</c:when>
+													<c:when test="${empty err}">
+														<a href="#" data-toggle="modal" data-target="#myModal">
+															<button type="button" class="btn btn-info"
+																style="width: 100%">追蹤講師</button>
+														</a>
+													</c:when>
+													<c:otherwise>
+														<a href="#" data-toggle="modal" data-target="#myModal">
+															<button type="button" class="btn btn-info"
+																style="width: 100%">追蹤講師</button>
+														</a>
+													</c:otherwise>
+												</c:choose>
+											</c:if>
+											<c:if test="${!empty LoginOK}">
+												<c:if test="${!empty memberSubscription}">													
+													<c:forEach items="${memberSubscription}" var="memberSubscription">
+														<c:choose>
+															<c:when	test="${memberSubscription.memberTrackID==courseVO.memberID}">
+																<c:set var="disabled" value="disabled" />
+																<c:set var="subName" value="已追蹤講師" />
+																<c:set var="sub1" value="ture" />
+															</c:when>
+															<c:when test="${!empty sub1}">
+															</c:when>
+															<c:otherwise>
+																<c:set var="disabled" value="" />
+																<c:set var="subName" value="追蹤講師" />
+															</c:otherwise>
+														</c:choose>
+													</c:forEach>
+												</c:if>
+												<c:if test="${empty memberSubscription}">
+													<c:set var="disabled" value="" />
+														<c:set var="subName" value="追蹤講師" />
+												</c:if>
+												<c:if test="${courseVO.memberID==LoginOK.memberID}">
+													<c:set var="disabled" value="disabled" />
+													<c:set var="subName" value="本人" />
+												</c:if>
+												<button type="button" class="btn btn-info" ${disabled} style="width: 100%" id="subAction">${subName}</button>
+												<input type="hidden" id="coursevoMemeberID" value="${courseVO.memberID}">
+											</c:if>
+										
+										</div>
 									</div>
 								</c:if>
-								<div class="pull-right">
+								<div class="col-md-10 col-xs-9">
 									<c:if test="${!empty memberVo.aboutme}">
 										<strong>關於我</strong>
 										<p>${memberVo.aboutme}</p>
@@ -584,7 +646,8 @@ video::-webkit-media-controls-panel {
 									<div class="col-md-11">
 
 										<div>
-											<span class="text-left">吳永志</span>
+											<!--測試用messageID -->
+											<span id="testMessage1" value="1002" class="text-left">吳永志</span>
 
 											<%
 												Date dNow = new Date();
@@ -597,7 +660,22 @@ video::-webkit-media-controls-panel {
 													<span class="glyphicon glyphicon-option-horizontal"></span>
 												</button>
 												<ul class="dropdown-menu">
-													<li><a href="#">檢舉</a></li>
+												<c:if test="${empty LoginOK}">
+													<c:choose>
+														<c:when test="${!empty loginerr}">
+															<li><a href="#" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>
+														</c:when>
+														<c:when test="${empty err}">	
+															<li><a href="#" href="#" data-toggle="modal" data-target="#myModal">檢舉</a></li>
+														</c:when>
+														<c:otherwise>
+															<li><a class="reportM" href="#" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>
+														</c:otherwise>
+												</c:choose>
+												</c:if>
+												<c:if test="${!empty LoginOK}">
+														<li><a class="reportM" href="#">檢舉</a></li>
+												</c:if>
 													<li><a href="#">修改</a></li>
 													<li><a href="#">刪除</a></li>
 												</ul>
@@ -649,7 +727,22 @@ video::-webkit-media-controls-panel {
 																		<span class="glyphicon glyphicon-option-horizontal"></span>
 																	</button>
 																	<ul class="dropdown-menu">
-																		<li><a href="#">檢舉</a></li>
+																	<c:if test="${empty LoginOK}">
+																		<c:choose>
+																			<c:when test="${!empty loginerr}">
+																				<li><a href="#" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>
+																			</c:when>
+																			<c:when test="${empty err}">	
+																				<li><a href="#" href="#" data-toggle="modal" data-target="#myModal">檢舉</a></li>
+																			</c:when>
+																			<c:otherwise>
+																				<li><a class="reportM" href="#" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>
+																			</c:otherwise>
+																	</c:choose>
+																	</c:if>
+																	<c:if test="${!empty LoginOK}">
+																			<li><a class="reportM" href="#">檢舉</a></li>
+																	</c:if>
 																		<li><a href="#">修改</a></li>
 																		<li><a href="#">刪除</a></li>
 																	</ul>
@@ -685,7 +778,22 @@ video::-webkit-media-controls-panel {
 																		<span class="glyphicon glyphicon-option-horizontal"></span>
 																	</button>
 																	<ul class="dropdown-menu">
-																		<li><a href="#">檢舉</a></li>
+																	<c:if test="${empty LoginOK}">
+																	<c:choose>
+																		<c:when test="${!empty loginerr}">
+																			<li><a href="#" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>
+																		</c:when>
+																		<c:when test="${empty err}">	
+																			<li><a href="#" href="#" data-toggle="modal" data-target="#myModal">檢舉</a></li>
+																		</c:when>
+																		<c:otherwise>
+																			<li><a class="reportM" href="#" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>
+																		</c:otherwise>
+																	</c:choose>
+																	</c:if>
+																	<c:if test="${!empty LoginOK}">
+																			<li><a class="reportM" href="#">檢舉</a></li>
+																	</c:if>
 																		<li><a href="#">修改</a></li>
 																		<li><a href="#">刪除</a></li>
 																	</ul>
@@ -755,6 +863,56 @@ video::-webkit-media-controls-panel {
 				$(this).tab('show');
 			});
 		});
+	</script>
+	<script>
+		$(function() {
+			//點擊檢舉留言
+			$('.reportM').on('click', function() {
+				warning();
+			})
+			//選取檢舉留言功能
+			function warning() {
+				swal({
+					title : '檢舉留言',
+					input : 'select',
+					inputOptions : {
+						'含有仇恨言論' : '含有仇恨言論',
+						'不雅內容' : '不雅內容',
+						'垃圾訊息' : '垃圾訊息'
+					},
+					inputPlaceholder : '請選擇檢舉事項',
+					confirmButtonText : '確認',
+					cancelButtonText : '取消',
+					showCancelButton : true,
+					inputValidator : function(value) {
+						return new Promise(function(resolve) {
+							resolve();
+						});
+					}
+				}).then(
+						function(result) {
+							if (result) {
+								console.log($('#testMessage1').attr('value'));
+								console.log($('#reportMemberID').val());
+								console.log(result);
+								$.post('InsertReportMessageController', {
+									'reportContent' : result,
+									'reportMemberID' : $('#reportMemberID')
+											.val(),
+									'reportMessageID' : $('#testMessage1')
+											.attr('value')
+								})
+								swal({
+
+									confirmButtonText : '確認',
+									type : 'success',
+									html : '檢舉 ' + result + ' 成功，管理員會盡快審核 '
+
+								});
+							}
+						});
+			}
+		})
 	</script>
 	<script>
 		$(function() {
@@ -858,6 +1016,26 @@ video::-webkit-media-controls-panel {
 			});
 		}
 	})
+	</script>
+	<script>
+		var count = 0;
+		$('#subAction').click(function() {
+			if (count == 0) {
+			$.post("MemberSubcriptionInsert_DeleteController", {
+					'memberID' : $('#reportMemberID').val(),
+					'memberTrackID' : $('#coursevoMemeberID').val()
+				}, function() {
+				alert('已加到您的追蹤講師囉');
+				count++;
+			});
+			$('#subAction').attr('disabled','false')
+			$('#subAction').text('已追蹤講師')
+		} else {
+			alert('已經追蹤過囉');
+			$('#subAction').attr('disabled','false')
+		}
+	
+		})
 	</script>
 
 </body>
