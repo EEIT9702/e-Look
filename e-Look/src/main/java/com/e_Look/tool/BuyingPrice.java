@@ -15,15 +15,21 @@ public class BuyingPrice {
 		CourseVO courseVO=cdao.findByPrimaryKey(courseID);
 		Integer oPrice = courseVO.getSoldPrice();
 		Integer price = oPrice;
-		CourseClassDetailsDAO ccddao = new CourseClassDetailsDAO();
-		List<CourseClassDetailsVO> ccdVOs = ccddao.findBycourseID(courseID);
-		for(CourseClassDetailsVO ccdVO:ccdVOs){
-			if(ccdVO.getCourseClassVO().getEventVO()!=null){
-				Date startDate = ccdVO.getCourseClassVO().getEventVO().geteStartDate();
-				Date endDate = ccdVO.getCourseClassVO().getEventVO().geteEndDate();
-				if(startDate.getTime()<=System.currentTimeMillis() && (endDate.getTime()+3600*1000*24) >=System.currentTimeMillis()){
-					if(discount>ccdVO.getCourseClassVO().getEventVO().getDiscount()){
-						discount=ccdVO.getCourseClassVO().getEventVO().getDiscount();
+		if(courseVO.getFundStartDate()!=null){
+			if(courseVO.getFundStartDate().getTime()<=System.currentTimeMillis() && System.currentTimeMillis() <= courseVO.getFundEndDate().getTime()+1000*3600*24){
+				discount=0.7;
+			}
+		}else{
+			CourseClassDetailsDAO ccddao = new CourseClassDetailsDAO();
+			List<CourseClassDetailsVO> ccdVOs = ccddao.findBycourseID(courseID);
+			for(CourseClassDetailsVO ccdVO:ccdVOs){
+				if(ccdVO.getCourseClassVO().getEventVO()!=null){
+					Date startDate = ccdVO.getCourseClassVO().getEventVO().geteStartDate();
+					Date endDate = ccdVO.getCourseClassVO().getEventVO().geteEndDate();
+					if(startDate.getTime()<=System.currentTimeMillis() && (endDate.getTime()+3600*1000*24) >=System.currentTimeMillis()){
+						if(discount>ccdVO.getCourseClassVO().getEventVO().getDiscount()){
+							discount=ccdVO.getCourseClassVO().getEventVO().getDiscount();
+						}
 					}
 				}
 			}

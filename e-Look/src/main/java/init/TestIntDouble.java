@@ -1,17 +1,17 @@
 package init;
 
+import java.sql.Date;
+
 public class TestIntDouble {
 
 	public static void main(String[] args) {
-		Double discount = 1.0;
-		Integer oPrice = 98;
+		java.util.Date jdate = new java.util.Date();
+		System.out.println(jdate);
 		
-		Integer price=null;
-		System.out.println(discount * oPrice);
-		price = (int) Math.round(discount * oPrice);
+		java.sql.Date sdate = (java.sql.Date)jdate;
+		System.out.println(sdate);
 		
-		System.out.println(price);
-
+		
 	}
 
 }
