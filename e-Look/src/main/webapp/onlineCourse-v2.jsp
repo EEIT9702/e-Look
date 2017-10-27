@@ -499,7 +499,7 @@ a:HOVER {
 					<c:if test="${!empty LoginOK}">
 						<c:choose>
 							<c:when test="${LoginOK.memberID==courseVO.memberID}">
-								<button type="button" class="btn btn-success center-block btn3d"
+								<button type="button" class="btn btn-success center-block "
 									style="width: 160px" disabled="disabled">已擁有</button>
 							</c:when>
 							<c:when test="${!empty LoginOK && !empty list2}">
@@ -507,13 +507,13 @@ a:HOVER {
 									<c:choose>
 										<c:when test="${courseVO.courseID==buycourse.courseID}">
 											<button type="button"
-												class="btn btn-success center-block btn3d"
+												class="btn btn-success center-block "
 												style="width: 160px" disabled="disabled">已擁有</button>
 										</c:when>
 										<c:when test="${!empty boo}"></c:when>
 										<c:otherwise>
 											<button id="intoShoppingCart" type="button"
-												class="btn btn-success center-block btn3d"
+												class="btn btn-success center-block "
 												style="width: 160px">加入購物車</button>
 										</c:otherwise>
 									</c:choose>
@@ -521,7 +521,7 @@ a:HOVER {
 							</c:when>
 							<c:otherwise>
 								<button id="intoShoppingCart" type="button"
-									class="btn btn-success center-block btn3d" style="width: 160px">加入購物車</button>
+									class="btn btn-success center-block " style="width: 160px">加入購物車</button>
 							</c:otherwise>
 						</c:choose>
 
@@ -1025,14 +1025,22 @@ a:HOVER {
 		})
 	</script>
 		<script>
+		var count = 0;
 		$('#subAction').click(function() {
-			alert("已加入收藏");
-			console.log($('#reportMemberID').val());
-			console.log($('#coursevoMemeberID').val());
+			if (count == 0) {
 			$.post("MemberSubcriptionInsert_DeleteController", {
 					'memberID' : $('#reportMemberID').val(),
 					'memberTrackID' : $('#coursevoMemeberID').val()
-				})
+				}, function() {
+				alert('已加到您的追蹤講師囉');
+				count++;
+			});
+			$('#subAction').attr('disabled','false')
+			$('#subAction').text('已追蹤講師')
+		} else {
+			alert('已經追蹤過囉');
+			$('#subAction').attr('disabled','false')
+		}
 	
 		})
 	</script>
