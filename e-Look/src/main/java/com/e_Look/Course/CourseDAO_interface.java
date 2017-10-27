@@ -15,4 +15,5 @@ public interface CourseDAO_interface {
 	public List<CourseVO> findBymemberID(Integer memberID,Integer status);
 	public void updateStatus(CourseVO courseVO);
 	public List<CourseVO> getAllonlineCourse();
+	public void postProposal(Integer courseID);
 }
