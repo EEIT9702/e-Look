@@ -610,6 +610,7 @@ a:HOVER {
 													</c:otherwise>
 												</c:choose>
 											</c:if>
+
 											<c:if test="${!empty LoginOK}">
 												<c:if test="${!empty memberSubscription}">													
 													<c:forEach items="${memberSubscription}" var="memberSubscription">
@@ -640,6 +641,7 @@ a:HOVER {
 												<input type="hidden" id="coursevoMemeberID" value="${courseVO.memberID}">
 											</c:if>
 										
+
 										</div>
 									</div>
 								</c:if>

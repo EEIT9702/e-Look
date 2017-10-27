@@ -25,8 +25,10 @@ import com.e_Look.member.model.MemberService;
 import com.e_Look.member.model.MemberVO;
 import com.e_Look.memberBookmarks.model.MemberBookmarksService;
 import com.e_Look.memberBookmarks.model.MemberBookmarksVO;
+
 import com.e_Look.memberSubscription.MemberSubscriptionService;
 import com.e_Look.memberSubscription.MemberSubscriptionVO;
+
 
 /**
  * Servlet Filter implementation class OnlineCourse
@@ -63,7 +65,9 @@ public class OnlineCourse implements Filter {
 					List<MemberBookmarksVO> mBookmarkList = null;
 					List<MemberSubscriptionVO> memberSubscriptionVO = null;
 					MemberBookmarksService memberBookmarksService = new MemberBookmarksService();
+
 					MemberSubscriptionService memberSubscriptionService =new MemberSubscriptionService();
+
 					if (memberVoOK != null) {
 
 						list2 = CourseService.getBuyCourse(memberVoOK.getMemberID());
@@ -73,11 +77,8 @@ public class OnlineCourse implements Filter {
 
 					if (mBookmarkList != null) {
 						request.setAttribute("mBookmarkList", mBookmarkList);
+
 					}
-					
-					
-					
-					
 					request.setAttribute("list", list);
 					request.setAttribute("list2", list2);
 					request.setAttribute("courseVO", courseVO);
@@ -89,7 +90,7 @@ public class OnlineCourse implements Filter {
 				}
 			}
 		}
-
+		
 	}
 
 	/**
