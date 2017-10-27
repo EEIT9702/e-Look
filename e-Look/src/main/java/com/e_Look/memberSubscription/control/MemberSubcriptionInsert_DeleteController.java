@@ -28,7 +28,7 @@ public class MemberSubcriptionInsert_DeleteController extends HttpServlet {
 			Integer memberID=Integer.parseInt(request.getParameter("memberID"));
 			Integer memberTrackID=Integer.parseInt(request.getParameter("memberTrackID"));
 			MemberSubscriptionService memberSubscriptionService=new MemberSubscriptionService();
-			memberSubscriptionService.insertMemberBookmarks(memberID, memberTrackID);
+			memberSubscriptionService.insertMemberSubscription(memberID, memberTrackID);
 			
 	}
 
