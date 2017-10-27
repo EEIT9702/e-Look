@@ -631,7 +631,7 @@ a:HOVER {
 		   if( confirm("確定刪除草稿嗎?")){
 			   $(this).parents('#click2').css("display","none")
 			    $.get('/e-Look/com.e_Look.Course.control/CourseEditControlloer', {
-				'courseID' : $(this).parents('#click2').find("input").val()
+				'courseID' : $(this).parents('#click2').find("input").val(),'member':"member"
 				//'memberID' : $(this).parents('#click2').find("input+input").val()
 			}, function() {
 			})

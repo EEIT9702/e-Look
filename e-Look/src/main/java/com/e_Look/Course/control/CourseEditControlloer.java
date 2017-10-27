@@ -33,9 +33,13 @@ public class CourseEditControlloer extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// Integer memberID= Integer.valueOf(request.getParameter("memberID"));
+		if(request.getParameter("member")!=null){
 		Integer courseID = Integer.valueOf(request.getParameter("courseID"));
 		CourseService courseService = new CourseService();
 		courseService.deleteCourse(courseID);
+		}else{
+			
+		}
 	}
 
 	/**
