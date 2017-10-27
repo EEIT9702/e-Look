@@ -15,6 +15,7 @@
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
 <!-- <!-- Bootstrap Core JavaScript -->
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
+<link href="<%=request.getContextPath()%>/_PJC/css/step1.css" rel="stylesheet">
 <style>
 /* 影片區塊 */
 video {
@@ -179,7 +180,7 @@ a:HOVER {
 }
 
 #radioReporter>span {
-	font-size: 30px;
+	font-size: 20px;
 	padding-left: 5px;
 }
 </style>
@@ -278,10 +279,10 @@ a:HOVER {
 				<div class="col-md-1 col-xs-4">
 					<img src="<%=request.getContextPath()%>/_Lyy/clock.png"
 						class="img-responsive center-block">
-					<h5 class="text-center">課程時間為 ${courseVO.courseLength}min</h5>
+					<h5 class="text-center"> ${courseVO.courseLength}分鐘</h5>
 				</div>
 				<!--加到最愛 -->
-				<c:if test="${!empty mBookmarkList}">
+						<c:if test="${!empty mBookmarkList}">
 					<c:forEach items="${mBookmarkList}" var="memberBookmsrks">
 						<c:choose>
 							<c:when test="${courseVO.courseID==memberBookmsrks.courseID}">
@@ -296,11 +297,9 @@ a:HOVER {
 						</c:choose>
 					</c:forEach>
 				</c:if>
-
 				<c:if test="${empty mBookmarkList}">
 					<c:set var="favor" value="favoriteclick2" />
 				</c:if>
-
 				<c:if test="${empty LoginOK}">
 					<c:choose>
 						<c:when test="${!empty loginerr}">
@@ -332,24 +331,23 @@ a:HOVER {
 						</c:otherwise>
 					</c:choose>
 				</c:if>
-
 				<c:if test="${!empty LoginOK}">
 					<div class="col-md-1 col-xs-4">
-						<a href="#" id="${favor}"><img
+						<a href="#" id="${favor}"> <img
 							src="<%=request.getContextPath()%>/img/favorite.png"
 							class="img-responsive center-block">
-							<h5 class="text-center">加到最愛</h5></a>
+							<h5 class="text-center">加到最愛</h5>
+						</a>
 					</div>
 				</c:if>
-				<input type="hidden" value="${courseVO.courseID}" id="mbcourseID"
-					name="courseID"> <input type="hidden"
-					value="${LoginOK.memberID}" id="mbmemberID" name="memberID">
+				<input type="hidden" value="${courseVO.courseID}" id="mbcourseID">
+				<input type="hidden" value="${LoginOK.memberID}" id="mbmemberID">
 				<!--分享連結 -->
 				<div class="col-md-1 col-xs-4 ">
-					<img src="<%=request.getContextPath()%>/_Lyy/share.png"
-						class="img-responsive center-block">
-					<div class="dropdown text-center" style="margin: 6px">
-						<a data-toggle="dropdown">分享連結 <span class="caret"></span></a>
+					<div class="dropdown text-center" >
+						<a data-toggle="dropdown"><img src="<%=request.getContextPath()%>/_Lyy/share.png"
+						class="img-responsive center-block" style="margin-bottom:7px">
+						分享連結 <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="#">FaceBook</a></li>
 							<li><a href="#">Google</a></li>
@@ -414,11 +412,11 @@ a:HOVER {
 									<button type="button" class="close pull-right"
 										data-dismiss="modal" aria-hidden="true">&times;</button>
 									<img src="<%=request.getContextPath()%>/img/warning.png"
-										width="42"> <span class="modal-title" id="myModalLabel"
-										style="font-size: 24px; color: red">檢舉影片</span>
+										width="32"> <span class="modal-title" id="myModalLabel"
+										style="font-size: 20px; color: red">檢舉影片</span>
 								</div>
-								<h2>檢舉的影片為:${courseVO.courseName}</h2>
-								<h2>你檢舉的內容為:</h2>
+								<h3><strong>檢舉的影片:</strong>${courseVO.courseName}</h3>
+								<h3><strong>檢舉的內容:</strong></h3>
 								<div class="modal-body" id="radioReporter">
 									<input type="radio" id="radioReporterCon" name="cont"
 										value="該影片侵犯著作權"><span>該影片侵犯著作權</span><br> <input
@@ -488,26 +486,26 @@ a:HOVER {
 					<c:if test="${!empty LoginOK}">
 						<c:choose>
 							<c:when test="${LoginOK.memberID==courseVO.memberID}">
-								<button type="button" class="btn btn-success center-block"
+								<button type="button" class="btn btn-success center-block btn3d"
 									style="width: 160px" disabled="disabled">已擁有</button>
 							</c:when>
 							<c:when test="${!empty LoginOK && !empty list2}">
 								<c:forEach var="buycourse" items='${list2}'>
 									<c:choose>
 										<c:when test="${courseVO.courseID==buycourse.courseID}">
-											<button type="button" class="btn btn-success center-block"
+											<button type="button" class="btn btn-success center-block btn3d"
 												style="width: 160px" disabled="disabled">已擁有</button>
 										</c:when>
 										<c:when test="${!empty boo}"></c:when>
 										<c:otherwise>
-											<button id="intoShoppingCart" type="button" class="btn btn-success center-block"
+											<button id="intoShoppingCart" type="button" class="btn btn-success center-block btn3d"
 												style="width: 160px">加入購物車</button>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
 							</c:when>
 							<c:otherwise>
-								<button id="intoShoppingCart" type="button" class="btn btn-success center-block"
+								<button id="intoShoppingCart" type="button" class="btn btn-success center-block btn3d"
 									style="width: 160px">加入購物車</button>
 							</c:otherwise>
 						</c:choose>
@@ -591,14 +589,14 @@ a:HOVER {
 													</c:otherwise>
 												</c:choose>
 											</c:if>
-											<c:if test="${!empty LoginOK}">
-												<c:when test="">
-													<button type="button" class="btn btn-info"style="width: 100%">追蹤講師</button>
-												</c:when>
-												<c:when test="">
-													<button type="button" class="btn btn-info"style="width: 100%">追蹤講師</button>
-												</c:when>
-											</c:if>
+<%-- 											<c:if test="${!empty LoginOK}"> --%>
+<%-- 												<c:when test=""> --%>
+<!-- 													<button type="button" class="btn btn-info"style="width: 100%">追蹤講師</button> -->
+<%-- 												</c:when> --%>
+<%-- 												<c:when test=""> --%>
+<!-- 													<button type="button" class="btn btn-info"style="width: 100%">追蹤講師</button> -->
+<%-- 												</c:when> --%>
+<%-- 											</c:if> --%>
 										</div>
 									</div>
 
