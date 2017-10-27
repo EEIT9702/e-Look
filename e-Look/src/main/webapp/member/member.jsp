@@ -199,8 +199,7 @@ a.clickable:hover {
 
 .profile-header-img {
 	padding: 30px 0;
-	width: 100px;
-	margin: auto;
+	
 	
 }
 
@@ -246,11 +245,14 @@ a:HOVER {
 		//BuyCourseDAO dao2 = new BuyCourseDAO();
 		BuyCourseService  CourseService =new BuyCourseService();
 		MemberBookmarksService memberBookmarksService=new MemberBookmarksService();
+		MemberSubscriptionService memberSubscriptionService=new MemberSubscriptionService();
 		List<CourseVO> list=dao.findBymemberID(memberVO.getMemberID(),2);
 		List<BuyCourseVO> buyCourselist = CourseService.getBuyCourse(memberVO.getMemberID());
 		List<CourseVO> list2 = new LinkedList<CourseVO>();
 		List<CourseVO> list3 = new LinkedList<CourseVO>();
 		List<CourseVO> list4=dao.findBymemberID(memberVO.getMemberID(),0);
+		List<CourseVO> list5 = new LinkedList<CourseVO>();
+		
 		if(buyCourselist!=null){
 			for(BuyCourseVO buyCoursevo: buyCourselist){
 				list2.add(dao.findByPrimaryKey(buyCoursevo.getCourseID()));
@@ -266,6 +268,7 @@ a:HOVER {
 		pageContext.setAttribute("list2",list2);
 		pageContext.setAttribute("list3",list3);
 		pageContext.setAttribute("list4",list4);
+		pageContext.setAttribute("list5",list5);
 		
 		
 %>
@@ -473,7 +476,7 @@ a:HOVER {
                        </div>
                        </a>
                     <div class="card-footer">
-                    <button class="btn-info btn-sm pull-right" style="margin-bottom: 5px;margin-top: 10px">取消訂閱</button>   
+                    <button class="btn-danger btn-sm center-block" style="margin-bottom: 5px;margin-top: 10px">取消訂閱</button>   
                      <input type="hidden" value="${mBookmark.courseID}">
                    <input type="hidden" value="${LoginOK.memberID}">
                     </div>
@@ -496,7 +499,7 @@ a:HOVER {
                        </div>
                        </a>
                     <div class="card-footer">
-                    <button class="btn-info btn-sm pull-right" style="margin-bottom: 5px;margin-top: 10px">取消訂閱</button>   
+                    <button class="btn-danger btn-sm center-block" style="margin-bottom: 5px;margin-top: 10px">取消訂閱</button>   
                      <input type="hidden" value="${mBookmark.courseID}">
                      <input type="hidden" value="${LoginOK.memberID}">
                     </div>
@@ -558,12 +561,13 @@ a:HOVER {
 						</div>
 						<div class="panel-body" style="display: none;">
 						<div id="click3" class=" col-md-3  col-sm-3" style="border: 1px solid #d4d4d5;" >
-							<div class="profile-header-img">
-								<img class="img-circle"
+							<div class="profile-header-img"style="width:120px;margin: auto;">
+							
+								<img class="img-circle"  
 									src="<%=request.getContextPath()%>/Image?MemberID=${LoginOK.memberID}" />
 								<!-- badge -->
                        			 <h5 style="text-align: center;">${LoginOK.mName}</h5>
-                       			 <button class="btn-danger btn-sm center-block"style="margin-bottom: 5px; margin-top: 10px">取消訂閱</button></a>
+                       			 <button class="btn-danger btn-sm center-block"style="margin-bottom: 5px; margin-top: 10px">取消訂閱</button>
 							</div>
 						 </div>                 
 						
@@ -653,14 +657,15 @@ a:HOVER {
 // 				 loadProduct(1);
 // 			})
 });
-		   $('#click3>div').on('click3','.profile-header-img>button:nth-child(1)',function(){
+		   $('#click3>.profile-header-img').on('click',function(){
+			   console.log("123")
 			   if( confirm("確定取消訂閱嗎?")){
 				   $(this).parents('#click3').css("display","none")
-				    $.get('/e-Look/MemberBookmarksInsertController', {
-					'courseID' : $(this).parents('#click').find("input").val(),
-					'memberID' : $(this).parents('#click').find("input+input").val()
-				}, function() {
-				})
+// 				    $.get('/e-Look/MemberSubcriptionInsert_DeleteController', {
+// 					'courseID' : $(this).parents('#click').find("input").val(),
+// 					'memberID' : $(this).parents('#click').find("input+input").val()
+// 				}, function() {
+// 				})
 			   }else{
 				   
 			   }	

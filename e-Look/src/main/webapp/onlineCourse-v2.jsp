@@ -591,14 +591,14 @@ a:HOVER {
 													</c:otherwise>
 												</c:choose>
 											</c:if>
-											<c:if test="${!empty LoginOK}">
-												<c:when test="">
-													<button type="button" class="btn btn-info"style="width: 100%">追蹤講師</button>
-												</c:when>
-												<c:when test="">
-													<button type="button" class="btn btn-info"style="width: 100%">追蹤講師</button>
-												</c:when>
-											</c:if>
+<%-- 											<c:if test="${!empty LoginOK}"> --%>
+<%-- 												<c:when test=""> --%>
+<!-- 													<button type="button" class="btn btn-info"style="width: 100%">追蹤講師</button> -->
+<%-- 												</c:when> --%>
+<%-- 												<c:when test=""> --%>
+<!-- 													<button type="button" class="btn btn-info"style="width: 100%">追蹤講師</button> -->
+<%-- 												</c:when> --%>
+<%-- 											</c:if> --%>
 										</div>
 									</div>
 
