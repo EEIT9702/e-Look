@@ -16,11 +16,14 @@
 <!-- <!-- Bootstrap Core JavaScript -->
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
 
-<link href="<%=request.getContextPath()%>/_PJC/css/step1.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/_PJC/css/step1.css"
+	rel="stylesheet">
 
 <!-- Sweet Alert -->
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/alan/sweet/sweetalert2.min.css">
-<script src="<%=request.getContextPath()%>/alan/sweet/sweetalert2.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/alan/sweet/sweetalert2.min.css">
+<script
+	src="<%=request.getContextPath()%>/alan/sweet/sweetalert2.min.js"></script>
 
 <style>
 /* 影片區塊 */
@@ -285,10 +288,10 @@ a:HOVER {
 				<div class="col-md-1 col-xs-4">
 					<img src="<%=request.getContextPath()%>/_Lyy/clock.png"
 						class="img-responsive center-block">
-					<h5 class="text-center"> ${courseVO.courseLength}分鐘</h5>
+					<h5 class="text-center">${courseVO.courseLength}分鐘</h5>
 				</div>
 				<!--加到最愛 -->
-						<c:if test="${!empty mBookmarkList}">
+				<c:if test="${!empty mBookmarkList}">
 					<c:forEach items="${mBookmarkList}" var="memberBookmsrks">
 						<c:choose>
 							<c:when test="${courseVO.courseID==memberBookmsrks.courseID}">
@@ -350,10 +353,11 @@ a:HOVER {
 				<input type="hidden" value="${LoginOK.memberID}" id="mbmemberID">
 				<!--分享連結 -->
 				<div class="col-md-1 col-xs-4 ">
-					<div class="dropdown text-center" >
-						<a data-toggle="dropdown"><img src="<%=request.getContextPath()%>/_Lyy/share.png"
-						class="img-responsive center-block" style="margin-bottom:7px">
-						分享連結 <span class="caret"></span></a>
+					<div class="dropdown text-center">
+						<a data-toggle="dropdown"><img
+							src="<%=request.getContextPath()%>/_Lyy/share.png"
+							class="img-responsive center-block" style="margin-bottom: 7px">
+							分享連結 <span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="#">FaceBook</a></li>
 							<li><a href="#">Google</a></li>
@@ -421,8 +425,11 @@ a:HOVER {
 										width="32"> <span class="modal-title" id="myModalLabel"
 										style="font-size: 20px; color: red">檢舉影片</span>
 								</div>
-								<h3><strong>檢舉的影片:</strong>${courseVO.courseName}</h3>
-								<h3><strong>檢舉的內容:</strong></h3>
+								<h3>
+									<strong>檢舉的影片:</strong>${courseVO.courseName}</h3>
+								<h3>
+									<strong>檢舉的內容:</strong>
+								</h3>
 								<div class="modal-body" id="radioReporter">
 									<input type="radio" id="radioReporterCon" name="cont"
 										value="該影片侵犯著作權"><span>該影片侵犯著作權</span><br> <input
@@ -469,22 +476,22 @@ a:HOVER {
 						<c:choose>
 							<c:when test="${!empty loginerr}">
 								<a href="#" href="#" data-toggle="modal" data-target="#myModal2">
-									<button id="intoShoppingCart" type="button" class="btn btn-success center-block"
-										style="width: 160px">加入購物車</button>
+									<button id="intoShoppingCart" type="button"
+										class="btn btn-success center-block" style="width: 160px">加入購物車</button>
 								</a>
 							</c:when>
 							<c:when test="${empty err}">
 
 								<a href="#" href="#" data-toggle="modal" data-target="#myModal">
-									<button id="intoShoppingCart" type="button" class="btn btn-success center-block"
-										style="width: 160px">加入購物車</button>
+									<button id="intoShoppingCart" type="button"
+										class="btn btn-success center-block" style="width: 160px">加入購物車</button>
 								</a>
 
 							</c:when>
 							<c:otherwise>
 								<a href="#" href="#" data-toggle="modal" data-target="#myModal2">
-									<button id="intoShoppingCart" type="button" class="btn btn-success center-block"
-										style="width: 160px">加入購物車</button>
+									<button id="intoShoppingCart" type="button"
+										class="btn btn-success center-block" style="width: 160px">加入購物車</button>
 								</a>
 							</c:otherwise>
 						</c:choose>
@@ -499,20 +506,22 @@ a:HOVER {
 								<c:forEach var="buycourse" items='${list2}'>
 									<c:choose>
 										<c:when test="${courseVO.courseID==buycourse.courseID}">
-											<button type="button" class="btn btn-success center-block btn3d"
+											<button type="button"
+												class="btn btn-success center-block btn3d"
 												style="width: 160px" disabled="disabled">已擁有</button>
 										</c:when>
 										<c:when test="${!empty boo}"></c:when>
 										<c:otherwise>
-											<button id="intoShoppingCart" type="button" class="btn btn-success center-block btn3d"
+											<button id="intoShoppingCart" type="button"
+												class="btn btn-success center-block btn3d"
 												style="width: 160px">加入購物車</button>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
 							</c:when>
 							<c:otherwise>
-								<button id="intoShoppingCart" type="button" class="btn btn-success center-block btn3d"
-									style="width: 160px">加入購物車</button>
+								<button id="intoShoppingCart" type="button"
+									class="btn btn-success center-block btn3d" style="width: 160px">加入購物車</button>
 							</c:otherwise>
 						</c:choose>
 
@@ -595,14 +604,14 @@ a:HOVER {
 													</c:otherwise>
 												</c:choose>
 											</c:if>
-<%-- 											<c:if test="${!empty LoginOK}"> --%>
-<%-- 												<c:when test=""> --%>
-<!-- 													<button type="button" class="btn btn-info"style="width: 100%">追蹤講師</button> -->
-<%-- 												</c:when> --%>
-<%-- 												<c:when test=""> --%>
-<!-- 													<button type="button" class="btn btn-info"style="width: 100%">追蹤講師</button> -->
-<%-- 												</c:when> --%>
-<%-- 											</c:if> --%>
+											<%-- 											<c:if test="${!empty LoginOK}"> --%>
+											<%-- 												<c:when test=""> --%>
+											<!-- 													<button type="button" class="btn btn-info"style="width: 100%">追蹤講師</button> -->
+											<%-- 												</c:when> --%>
+											<%-- 												<c:when test=""> --%>
+											<!-- 													<button type="button" class="btn btn-info"style="width: 100%">追蹤講師</button> -->
+											<%-- 												</c:when> --%>
+											<%-- 											</c:if> --%>
 										</div>
 									</div>
 
@@ -810,55 +819,54 @@ a:HOVER {
 		});
 	</script>
 	<script>
-	$(function() {
-		//點擊檢舉留言
-		$('.reportM').on('click',function(){
-			warning();
+		$(function() {
+			//點擊檢舉留言
+			$('.reportM').on('click', function() {
+				warning();
+			})
+			//選取檢舉留言功能
+			function warning() {
+				swal({
+					title : '檢舉留言',
+					input : 'select',
+					inputOptions : {
+						'含有仇恨言論' : '含有仇恨言論',
+						'不雅內容' : '不雅內容',
+						'垃圾訊息' : '垃圾訊息'
+					},
+					inputPlaceholder : '請選擇檢舉事項',
+					confirmButtonText : '確認',
+					cancelButtonText : '取消',
+					showCancelButton : true,
+					inputValidator : function(value) {
+						return new Promise(function(resolve) {
+							resolve();
+						});
+					}
+				}).then(
+						function(result) {
+							if (result) {
+								console.log($('#testMessage1').attr('value'));
+								console.log($('#reportMemberID').val());
+								console.log(result);
+								$.post('InsertReportMessageController', {
+									'reportContent' : result,
+									'reportMemberID' : $('#reportMemberID')
+											.val(),
+									'reportMessageID' : $('#testMessage1')
+											.attr('value')
+								})
+								swal({
+
+									confirmButtonText : '確認',
+									type : 'success',
+									html : '檢舉 ' + result + ' 成功，管理員會盡快審核 '
+
+								});
+							}
+						});
+			}
 		})
-		//選取檢舉留言功能
-		function warning() {
-			swal({
-				  title: '檢舉留言',
-				  input: 'select',
-				  inputOptions: {
-				    '含有仇恨言論': '含有仇恨言論',
-				    '不雅內容': '不雅內容',
-				    '垃圾訊息': '垃圾訊息'
-				  },
-				  inputPlaceholder: '請選擇檢舉事項',
-				  confirmButtonText: '確認',
-				  cancelButtonText: '取消',
-				  showCancelButton: true,
-				  inputValidator: function(value) {
-				    return new Promise(function(resolve) {
-				    	resolve();
-//		 		      if (value === '垃圾訊息') {
-//		 		        resolve();
-//		 		      } else {
-//		 		        reject('You need to select Ukraine :)');
-//		 		      }
-				    });
-				  }
-				}).then(function(result) {
-				  if (result) {
-					  console.log($('#testMessage1').attr('value'));
-					  console.log($('#reportMemberID').val());
-					  console.log(result);
-					  $.post('InsertReportMessageController',
-							  {'reportContent':result,
-						  		'reportMemberID':$('#reportMemberID').val(),
-						  		'reportMessageID':$('#testMessage1').attr('value')})
-				    swal({
-				    	
-				      confirmButtonText: '確認',
-				      type: 'success',
-				      html: '檢舉 ' + result + ' 成功，管理員會盡快審核 '
-				    	
-				    });
-				  }
-				});
-		}
-	})
 	</script>
 	<script>
 		$(function() {
@@ -928,12 +936,22 @@ a:HOVER {
 					'reportMemberID' : $('#reportMemberID').val(),
 					'reportCourseID' : $('#reportCourseID').val(),
 					'radioReporterCon' : $('#radioReporterCon:checked').val()
+				})
+				$("#myModalReportVideo").modal('hide');
+				warning();
+			}
+			
+			function warning() {
+				swal({
+
+					confirmButtonText : '確認',
+					type : 'success',
+					html : '檢舉成功，管理員會盡快審核 '
+
 				});
 			}
-			$("#myModalReportVideo").modal('hide');
-
 		})
 	</script>
-	
+
 </body>
 </html>

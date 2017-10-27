@@ -834,20 +834,30 @@ video::-webkit-media-controls-panel {
 		})
 	</script>
 	<script>
-		$('#reportAction').click(function() {
-			if ($('#radioReporterCon:checked').val() == null) {
-				$("#myModalReportVideo").modal('hide');
-				return;
-			} else {
-				$.post("ReportCourseInsertController", {
-					'reportMemberID' : $('#reportMemberID').val(),
-					'reportCourseID' : $('#reportCourseID').val(),
-					'radioReporterCon' : $('#radioReporterCon:checked').val()
-				});
-			}
+	$('#reportAction').click(function() {
+		if ($('#radioReporterCon:checked').val() == null) {
 			$("#myModalReportVideo").modal('hide');
+			return;
+		} else {
+			$.post("ReportCourseInsertController", {
+				'reportMemberID' : $('#reportMemberID').val(),
+				'reportCourseID' : $('#reportCourseID').val(),
+				'radioReporterCon' : $('#radioReporterCon:checked').val()
+			})
+			$("#myModalReportVideo").modal('hide');
+			warning();
+		}
+		
+		function warning() {
+			swal({
 
-		})
+				confirmButtonText : '確認',
+				type : 'success',
+				html : '檢舉成功，管理員會盡快審核 '
+
+			});
+		}
+	})
 	</script>
 
 </body>
