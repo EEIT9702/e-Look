@@ -251,10 +251,10 @@ padding-bottom: 5px;}
 			</table>
         </div>
         <footer><div id="div4">
-        <input type="submit"  value="儲存" > 
+        <input type="submit" class="button blue alt" value="儲存" > 
         <input type="hidden" name="eventID" id="updateEventID" value="">
 		<input type="hidden" name="action" value="update1">
-            <input type="button" data-dismiss="JDialog" class="btn primary" value="取消"></input>
+            &nbsp;<input type="button" data-dismiss="JDialog" class="btn primary button red alt" value="取消"></input>
             </div>
         </footer>
           

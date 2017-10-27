@@ -1940,7 +1940,7 @@ span{color: #ffffff;}
 		background: rgba(255, 255, 255, 0.025);
 		border-radius: 5px;
 		border: none;
-		border: solid 2px #FF5511;
+		border: solid 2px #ffffff;
 		color: inherit;
 /* 		display: block; */
 		outline: 0;
@@ -3268,7 +3268,7 @@ span{color: #ffffff;}
 /* Wrapper */
 
 	#wrapper > header {
-		padding: 11em 0 2.25em 0 ;
+		padding: 2em 0 0 0 ;
 	}
 
 		#wrapper > header .inner {
