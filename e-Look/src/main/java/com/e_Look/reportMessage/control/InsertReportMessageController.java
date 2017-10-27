@@ -36,7 +36,7 @@ public class InsertReportMessageController extends HttpServlet {
 		Integer messageID = Integer.valueOf(request.getParameter("reportMessageID"));
 		Integer reportMemberID = Integer.valueOf(request.getParameter("reportMemberID"));
 		String 	reportContent = request.getParameter("reportContent");
-		System.out.println("mID:" + messageID + ",rMbID:" + reportMemberID + ",rC:" +reportContent);
+		System.out.println("mID:" + messageID + ", rMbID:" + reportMemberID + ", rC:" +reportContent);
 		
 		ReportMessageService rmServ = new ReportMessageService();
 		rmServ.insertReportMessage(messageID, reportMemberID, reportContent);

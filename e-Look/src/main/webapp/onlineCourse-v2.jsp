@@ -15,6 +15,9 @@
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
 <!-- <!-- Bootstrap Core JavaScript -->
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
+<!-- Sweet Alert -->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/alan/sweet/sweetalert2.min.css">
+<script src="<%=request.getContextPath()%>/alan/sweet/sweetalert2.min.js"></script>
 <style>
 /* 影片區塊 */
 video {
@@ -630,7 +633,8 @@ a:HOVER {
 									<div class="col-md-11">
 
 										<div>
-											<span class="text-left">吳永志</span>
+											<!--測試用messageID -->
+											<span id="testMessage1" value="1001" class="text-left">吳永志</span>
 
 											<%
 												Date dNow = new Date();
@@ -643,7 +647,7 @@ a:HOVER {
 													<span class="glyphicon glyphicon-option-horizontal"></span>
 												</button>
 												<ul class="dropdown-menu">
-													<li><a href="#">檢舉</a></li>
+													<li><a class="reportM" href="#">檢舉</a></li>
 													<li><a href="#">修改</a></li>
 													<li><a href="#">刪除</a></li>
 												</ul>
@@ -695,7 +699,7 @@ a:HOVER {
 																		<span class="glyphicon glyphicon-option-horizontal"></span>
 																	</button>
 																	<ul class="dropdown-menu">
-																		<li><a href="#">檢舉</a></li>
+																		<li><a class="reportM" href="#">檢舉</a></li>
 																		<li><a href="#">修改</a></li>
 																		<li><a href="#">刪除</a></li>
 																	</ul>
@@ -731,7 +735,7 @@ a:HOVER {
 																		<span class="glyphicon glyphicon-option-horizontal"></span>
 																	</button>
 																	<ul class="dropdown-menu">
-																		<li><a href="#">檢舉</a></li>
+																		<li><a class="reportM" href="#">檢舉</a></li>
 																		<li><a href="#">修改</a></li>
 																		<li><a href="#">刪除</a></li>
 																	</ul>
@@ -804,7 +808,57 @@ a:HOVER {
 			});
 		});
 	</script>
-
+	<script>
+	$(function() {
+		//點擊檢舉留言
+		$('.reportM').on('click',function(){
+			warning();
+		})
+		//選取檢舉留言功能
+		function warning() {
+			swal({
+				  title: '檢舉留言',
+				  input: 'select',
+				  inputOptions: {
+				    '含有仇恨言論': '含有仇恨言論',
+				    '不雅內容': '不雅內容',
+				    '垃圾訊息': '垃圾訊息'
+				  },
+				  inputPlaceholder: '請選擇檢舉事項',
+				  confirmButtonText: '確認',
+				  cancelButtonText: '取消',
+				  showCancelButton: true,
+				  inputValidator: function(value) {
+				    return new Promise(function(resolve) {
+				    	resolve();
+//		 		      if (value === '垃圾訊息') {
+//		 		        resolve();
+//		 		      } else {
+//		 		        reject('You need to select Ukraine :)');
+//		 		      }
+				    });
+				  }
+				}).then(function(result) {
+				  if (result) {
+					  console.log($('#testMessage1').attr('value'));
+					  console.log($('#reportMemberID').val());
+					  console.log(result);
+					  $.post('InsertReportMessageController',
+							  {'reportContent':result,
+						  		'reportMemberID':$('#reportMemberID').val(),
+						  		'reportMessageID':$('#testMessage1').attr('value')})
+				    swal({
+				    	
+				      confirmButtonText: '確認',
+				      type: 'success',
+				      html: '檢舉 ' + result + ' 成功，管理員會盡快審核 '
+				    	
+				    });
+				  }
+				});
+		}
+	})
+	</script>
 	<script>
 		$(function() {
 			var flag1 = false;
