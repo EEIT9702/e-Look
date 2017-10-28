@@ -958,38 +958,6 @@ a {
 		})
 	</script>
 	<script>
-		$(function() {
-			var flag1 = false;
-			$('img').hover(over, out);
-			function over() {
-				if (!flag1) {
-					var movein = this.id.substr(6);
-					for (i = 1; i <= movein; i++) {
-						document.getElementById("idstar" + i).className = "nstar";
-						//	$('img:lt(i)').switchClass('s','n',1000);
-					}
-				}
-			}
-			function out() {
-				if (!flag1) {
-					var out = this.id.substr(6);
-					for (u = 1; u <= out; u++) {
-						document.getElementById("idstar" + u).className = "star";
-						//	$('div img:nth-child(u)').switchClass('n','s',1000);
-					}
-				}
-			}
-			$('img').click(function() {
-				if (!flag1) {
-					flag1 = true
-				}
-				;
-				// 			 document.getElementById("starnum").innerHTML = "你給" + this.id.substr(6) + "顆星";
-				//	       $.get("Buycourse",{"name":"score","score":this.id.substr(6)});
-			})
-		})
-	</script>
-	<script>
 		//判斷是否加入過最愛		
 		var count = 0;
 		$('#favoriteclick1').click(function() {
@@ -1086,6 +1054,14 @@ a {
 			    alert("感謝你的評分!" + "\nscore: " + score +"\n"+$('#reportMemberID').val()+"\n"+$('#reportCourseID').val());
 			  }
 		});
+	</script>
+	<script>
+	$(function(){
+		console.log($("#mbcourseID").val())
+		$.post('countScoreController',{'courseID':$("#mbcourseID").val()})
+		
+		
+	})
 	</script>
 </body>
 </html>
