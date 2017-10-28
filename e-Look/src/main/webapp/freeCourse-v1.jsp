@@ -33,7 +33,7 @@ video {
 #videoArea {
 	background-size: cover;
 	background-position: center;
-	height: 62%;
+	height: 510px;
 }
 
 #videoliststyle>li {
@@ -47,7 +47,7 @@ video {
 #videoArea>div>div>ul {
 	width: 100%;
 	color: white;
-	height: 83.2%;
+	height: 85.2%;
 	overflow-y: scroll;
 	margin: 0;
 	padding: 0;
@@ -81,16 +81,12 @@ video::-webkit-media-controls-panel {
 	text-align: center;
 	font-weight: bold;
 }
-
+/* 下方功能 (簡介)*/
 .tab .nav-tabs {
 	position: relative;
 	border-bottom: none;
 }
 
-/* .tab .nav-tabs li { */
-/* 	text-align: center; */
-/* 	margin-right: 10px; */
-/* } */
 .tab .nav-tabs li a {
 	display: block;
 	font-size: 18px;
@@ -158,33 +154,29 @@ video::-webkit-media-controls-panel {
 	margin-top: 0;
 }
 
-.star {
-	-webkit-filter: grayscale(1);
-}
-
-.nstar {
-	-webkit-filter: grayscale(0);
-}
-/* video::-webkit-media-controls { */
-/*   display:none; */
+/* .star { */
+/* 	-webkit-filter: grayscale(1); */
 /* } */
+/* .nstar { */
+/* 	-webkit-filter: grayscale(0); */
+/* } */
+/* 贊助 */
 #mysponer>.modal-dialog>.modal-content>.modal-header {
 	color: black;
 	background-color: #81C0C0;
 	border-top-left-radius: 8px;
 	border-top-right-radius: 8px
 }
-
+/* 留言板 */
 #messageHeader {
 	border: 1px solid black;
 	border-radius: 15px;
 	font-size: 18px;
 }
-
 #messageHeader>img {
 	width: 50px;
 }
-
+/* 檢舉留言 */
 #radioReporter {
 	padding-left: 50px;
 }
@@ -193,7 +185,11 @@ video::-webkit-media-controls-panel {
 	font-size: 20px;
 	padding-left: 5px;
 }
-
+/* <!--課程售價 --> */
+#soldPrice{
+border-right:1px solid #ADADAD;border-left:1px solid #ADADAD
+}
+a{text-decoration:none}
 </style>
 </head>
 <!-- 影片區 -->
@@ -242,7 +238,7 @@ video::-webkit-media-controls-panel {
 	
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12" >
+			<div class="col-md-12" style="margin-top:20px">
 				<!--空-->
 				<div class="col-md-1"></div>
 				<!--課程人數 -->
@@ -415,24 +411,13 @@ video::-webkit-media-controls-panel {
 
 				</c:if>
 				<!--課程售價 -->
-				<div class="col-md-2 col-xs-6 "style="border-right:1px solid gray">
+				<div class="col-md-2 col-xs-6 "id="soldPrice">
 					<h5>課程售價</h5>
 					<h2 style="text-align: center; font-weight: bold;">Free</h2>
 				</div>
 				<!--星星 -->
-				<div class="col-md-2 col-xs-6 center-block" >
-					<div style=" margin: 0 auto;margin-top: 12px">
-						<img id="idstar1" class="star"
-							src="<%=request.getContextPath()%>/star/ystar.png" /> <img
-							id="idstar2" class="star"
-							src="<%=request.getContextPath()%>/star/ystar.png" /> <img
-							id="idstar3" class="star "
-							src="<%=request.getContextPath()%>/star/ystar.png" /> <img
-							id="idstar4" class="star "
-							src="<%=request.getContextPath()%>/star/ystar.png" /> <img
-							id="idstar5" class="star "
-							src="<%=request.getContextPath()%>/star/ystar.png" />
-					</div>
+				<div class="col-md-2 col-xs-6"style="height:89px;border-right:1px solid #ADADAD;" >
+					
 					<!--贊助 -->
 					<button type="button" class="btn btn-primary center-block "
 						style="width: 160px" data-toggle="modal" data-target="#mysponer">贊助</button>
