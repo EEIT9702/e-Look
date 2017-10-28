@@ -24,10 +24,10 @@
 	href="<%=request.getContextPath()%>/alan/sweet/sweetalert2.min.css">
 <script
 	src="<%=request.getContextPath()%>/alan/sweet/sweetalert2.min.js"></script>
-
-
-<script
-	src="<%=request.getContextPath()%>/js/star.jss"></script>
+<!-- 星星 -->
+<script type="text/javascript"	src="<%=request.getContextPath()%>/_Lyy/jquery.raty.min.js"></script>
+<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<%-- <link type="text/css" rel="stylesheet"	href="<%=request.getContextPath()%>/_Lyy/application.css"> --%>
 <style>
 /* 影片區塊 */
 video {
@@ -194,7 +194,6 @@ video::-webkit-media-controls-panel {
 a {
 	text-decoration: none
 }
-
 </style>
 </head>
 <!-- 影片區 -->
@@ -462,7 +461,7 @@ a {
 				<div class="col-md-2 col-xs-6"
 					style="height: 89px; border-right: 1px solid #ADADAD;">
 
-
+					<div id="starTatol" style="margin:0 auto"></div>
 					<!-- 		加入購物車 -->
 					<c:if test="${empty LoginOK}">
 						<c:choose>
@@ -520,6 +519,7 @@ a {
 
 					</c:if>
 					<!-- 加入購物車結束 -->
+					
 				</div>
 
 			</div>
@@ -879,15 +879,23 @@ a {
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="Section4"
 								style="font-size: 20px">
+								
+								
 								<p>喜歡的話記得幫我們評分還有收藏唷</p>
-
+								<div id="star"></div>
 							</div>
+							
 						</div>
+						
 					</div>
+					
 				</div>
+				
 			</div>
 		</div>
+	
 	</div>
+	<div id="star"></div>
 	<c:remove var="err" scope="session" />
 	<c:remove var="loginerr" scope="session" />
 	<jsp:include page="/footer.jsp" />
@@ -1052,6 +1060,32 @@ a {
 			}
 
 		})
+	</script>
+	<script>
+// 	星星點評
+		$('#star').raty({
+			path : 'img',
+			width:150,
+			starOff  : 'star-off-big.png',
+			starOn   : 'star-on-big.png',
+			click: function(score, evt) {
+				$.post('updateScoreController',{'score':score,'memberID': $('#reportMemberID').val(),'courseID':$('#reportCourseID').val()})
+			    alert("感謝你的評分!" + "\nscore: " + score +"\n"+$('#reportMemberID').val()+"\n"+$('#reportCourseID').val());
+			  }
+		});
+	</script>
+	<script>
+// 	星星總分
+		$('#starTatol').raty({
+			path : 'img',
+			width:150,
+			starOff  : 'star-off-big.png',
+			starOn   : 'star-on-big.png',
+			click: function(score, evt) {
+				$.post('updateScoreController',{'score':score,'memberID': $('#reportMemberID').val(),'courseID':$('#reportCourseID').val()})
+			    alert("感謝你的評分!" + "\nscore: " + score +"\n"+$('#reportMemberID').val()+"\n"+$('#reportCourseID').val());
+			  }
+		});
 	</script>
 </body>
 </html>
