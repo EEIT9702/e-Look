@@ -20,7 +20,11 @@ public class BuyCourseService {
 		buyCourseVO.setCourseID(courseID);
 		dao.update(buyCourseVO);
 		
+	}
+	public Double avgScore(Integer courseID){
+		return dao.getAvgScore(courseID);
+		
+		
 		
 	}
-	
 }
