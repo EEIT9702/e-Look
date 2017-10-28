@@ -254,7 +254,7 @@ a:HOVER {
 							<div class="profile-header-img">
 								<img class="img-circle"
 									src="<%=request.getContextPath()%>/Image?MemberID=${LoginOK.memberID}" />
-								<!-- badge -->
+								<!-- badge -->	
 								<div class="rank-label-container">
 									<a href="<%=request.getContextPath()%>/member/memberEdit.jsp"><button type="button" class="btn btn-info  btn-xs">
 										編輯 <span class="glyphicon glyphicon-edit"></span>

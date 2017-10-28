@@ -177,7 +177,7 @@
 													<i class="glyphicon glyphicon-list"></i>
 												</div>
 												<div class="update-text">
-													<strong>步驟一123、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
+													<strong>步驟一、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
 												</div>
 											</div>
 										</div>
@@ -187,7 +187,7 @@
 													<i class="glyphicon glyphicon-picture"></i>
 												</div>
 												<div class="update-text">
-													<strong>步驟二、</strong> 輸入課程標題、上傳課程封面、選擇課程種類<a href="#"></a>
+													<strong>步驟二123456、</strong> 輸入課程標題、上傳課程封面、選擇課程種類<a href="#"></a>
 												</div>
 											</div>
 										</div>
@@ -283,7 +283,7 @@
 										<div class="row" style="margin-bottom: 25px">
 											<label for="exampleInputEmail1" style="font-size: 20pt">選擇課程類別(最多三項)</label>
 											<div>
-												<div style="font-size: 15pt">
+												<div style="font-size: 15pt" id="CourseClasscheckbox">
 
 													<INPUT TYPE="checkbox" NAME="CourseClass" value="101">生活
 													<INPUT TYPE="checkbox" NAME="CourseClass" value="102">藝術
@@ -455,6 +455,7 @@
 											<label>定價(最低售價為$10元)</label> <input type="text"
 												name="soldPrice" class="form-control" id="soldPrice"
 												value="${CoursedData.soldPrice}" style="font-size: 18px;">
+											<p id="soldPricewarning" style="color: red"></p>
 										</div>
 
 										<div class="form-group col-lg-6" style="font-size: 20px;">
@@ -471,9 +472,10 @@
 									<div class="col-md-12">
 										<div class="form-group col-lg-4" style="font-size: 20px;">
 											<label>開課門檻人數(最低為10人)</label> <input type="text"
-												name="targetStudentNumber" class="form-control" id=""
+												name="targetStudentNumber" class="form-control" id="targetStudentNumber"
 												value="${CoursedData.targetStudentNumber}"
 												style="font-size: 18px;">
+											<p id="targetStudentNumberwarning" style="color: red"></p>
 										</div>
 									</div>
 									<div class="col-md-12" style="margin-top: 2em;">
@@ -893,7 +895,7 @@
 		function checkEndTime(starttime, endtime) {
 			var starttime = $("#starttime").val();
 			var endtime = $("#endtime").val();
-			if (endtime < starttime) {
+			if (endtime < starttime && starttime+30 < endtime) {
 				return false;
 			} else {
 				return true;
@@ -934,13 +936,13 @@
 
 				if (starttime != "" && endtime != "") {
 					if (!checkEndTime(starttime, endtime)) {
-						$('endtime').val('');
-						alert("起始日期不能大於結束日期");
+						$('#endtime').val('');
+						alert("請輸入正確的日期範圍");
 						return;
 					}
-				}
 				$('#starttime').datetimepicker('setEndDate', endtime);
 				$('#starttime').datetimepicker('hide');
+				}
 			});
 
 		});
@@ -1167,9 +1169,17 @@
 				'courseID' : $('#courseID').val(),"getProposalData":"XXXXXXXX"
 			}, function(datas) {
 				console.log(datas);
+				if(datas.targetgroup ==""){
+					$('#targetgroupJSON').text("適合族群：尚未填寫相關資訊");
+ 					$('#targetgroupJSON').css( "color", "red" );
+				}else{
+					$('#targetgroupJSON').text("適合族群："+datas.targetgroup);
+ 					$('#targetgroupJSON').css( "color", "black" );
+				}
+				
 				$('#courseNameJSON').text("課程名稱："+datas.courseName);
 				$('#preToolJSON').text("所需工具："+datas.preTool);
-				$('#targetgroupJSON').text("適合族群："+datas.targetgroup);
+				
 				$('#soldPriceJSON').text("銷售金額："+datas.soldPrice+"元");
 				$('#fundDateDurationJSON').text("募資起迄時間："+datas.fundStartDate+" ~ "+datas.fundEndDate);
 				$('#courseStartDateJSON').text("開課日期："+datas.courseStartDate);
@@ -1200,6 +1210,51 @@
 		
 		//===============================================================
 			
+			//當checkbox改變傳送表單
+			$(':checkbox')
+				.change(
+						function(e) {
+
+							var formData = new FormData($('form')[3]);
+							console.log("從checkbox送課程類別送到資料庫囉!");
+							$
+									.ajax({
+										type : 'POST',
+										url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
+										data : formData,
+										processData : false,
+										contentType : false,
+										success : function() {
+											delay_till_last('id', function() {
+												$('#updateConfirm').text(
+														"變更已儲存至草稿");
+												$("#updateConfirm")
+														.fadeIn(1200);
+
+												$("#updateConfirm").fadeOut(
+														1500);
+
+											}, 1000);
+										}
+									})
+						})
+						//===============================================================
+							
+						$('#soldPrice').keyup(function(){
+								if($('#soldPrice').val()<10){
+									$('#soldPricewarning').text("請輸入大於10的數字")
+								}else{
+									$('#soldPricewarning').text("")
+								}
+							})
+						$('#targetStudentNumber').keyup(function(){
+								if($('#targetStudentNumber').val()<10){
+									$('#targetStudentNumberwarning').text("請輸入大於10的數字")
+								}else{
+									$('#targetStudentNumberwarning').text("")
+								}
+							})
+							
 	</script>
 
 
