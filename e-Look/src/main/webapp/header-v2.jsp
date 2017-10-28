@@ -166,7 +166,7 @@ font-size: 18px;
 									src="<%=request.getContextPath()%>/HeaderCssJs/004-gift.png"
 									height="28">免費課程</a></li>
 							<li style="padding-top:12px" class="tt"><a
-								href="<%=request.getContextPath()%>/CreateCourse.jsp"><img
+								href="<%=request.getContextPath()%>/CreateCourseCotroller"><img
 									src="<%=request.getContextPath()%>/HeaderCssJs/001-book.png"
 									height="28">我要開課</a></li>
 						</ul>
