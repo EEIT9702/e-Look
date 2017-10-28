@@ -187,7 +187,7 @@
 													<i class="glyphicon glyphicon-picture"></i>
 												</div>
 												<div class="update-text">
-													<strong>步驟二123456、</strong> 輸入課程標題、上傳課程封面、選擇課程種類<a href="#"></a>
+													<strong>步驟二123、</strong> 輸入課程標題、上傳課程封面、選擇課程種類<a href="#"></a>
 												</div>
 											</div>
 										</div>
@@ -486,12 +486,11 @@
 												data-link-format="yyyy-mm-dd">
 												<input class="form-control" style="font-size: 18px;"
 													type="text" value="${CoursedData.fundStartDate}" readonly
-													size="18" id="starttime" name="fundStartDate"><span
-													class="input-group-addon"> <span
-													class="glyphicon glyphicon-calendar"></span>
-												</span>
+													size="18" id="starttime" name="fundStartDate">
+													
+												
 											</div>
-											<!-- 											<input type="hidden" id="dtp_input1" value="" /><br /> -->
+											<!-- <input type="hidden" id="dtp_input1" value="" /><br /> -->
 										</div>
 									</div>
 									<div class="col-md-12" style="margin-top: 2em;">
@@ -502,10 +501,7 @@
 												data-link-format="yyyy-mm-dd">
 												<input class="form-control" style="font-size: 18px;"
 													type="text" value="${CoursedData.fundEndDate}" readonly
-													size="18" id="endtime" name="fundEndDate"><span
-													class="input-group-addon"> <span
-													class="glyphicon glyphicon-calendar"></span>
-												</span>
+													size="18" id="endtime" name="fundEndDate">
 											</div>
 											<!-- 											<input type="hidden" id="dtp_input2" value="" /><br /> -->
 										</div>
@@ -913,6 +909,7 @@
 				startView : 2,
 				minView : 2,
 				forceParse : 0,
+				defaultDate:new Date() ,
 				format : 'yyyy-mm-dd'
 			}).on('changeDate', function(ev) {
 				var starttime = $('#starttime').val();
@@ -940,9 +937,9 @@
 						alert("請輸入正確的日期範圍");
 						return;
 					}
+				}
 				$('#starttime').datetimepicker('setEndDate', endtime);
 				$('#starttime').datetimepicker('hide');
-				}
 			});
 
 		});
@@ -1123,6 +1120,34 @@
 										}
 									})
 						})
+$(document).ready(function(){
+$('#starttime').on('input propertychange',function(e) {
+
+			var formData = new FormData($('form')[3]);
+			console.log("送到資料庫囉!");
+			$
+					.ajax({
+						type : 'POST',
+						url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
+						data : formData,
+						processData : false,
+						contentType : false,
+						success : function() {
+							delay_till_last('id', function() {
+								$('#updateConfirm').text(
+										"變更已儲存至草稿");
+								$("#updateConfirm")
+										.fadeIn(1200);
+
+								$("#updateConfirm").fadeOut(
+										1500);
+
+							}, 1000);
+						}
+					})
+		})
+})
+
 
 		$('#inputfilename2')
 				.change(
@@ -1169,23 +1194,71 @@
 				'courseID' : $('#courseID').val(),"getProposalData":"XXXXXXXX"
 			}, function(datas) {
 				console.log(datas);
-				if(datas.targetgroup ==""){
-					$('#targetgroupJSON').text("適合族群：尚未填寫相關資訊");
- 					$('#targetgroupJSON').css( "color", "red" );
-				}else{
+				if(datas.targetgroup !=null){
 					$('#targetgroupJSON').text("適合族群："+datas.targetgroup);
  					$('#targetgroupJSON').css( "color", "black" );
+				}else{					
+ 					$('#targetgroupJSON').text("適合族群：尚未填寫相關資訊");
+ 					$('#targetgroupJSON').css( "color", "red" );
 				}
+				if(datas.courseName !=null){
+					$('#courseNameJSON').text("課程名稱："+datas.courseName);
+ 					$('#courseNameJSON').css( "color", "black" );
+				}else{				
+ 					$('#courseNameJSON').text("課程名稱：尚未填寫相關資訊");
+ 					$('#courseNameJSON').css( "color", "red" );
+				}
+				if(datas.preTool !=null){
+					$('#preToolJSON').text("所需工具："+datas.preTool);
+ 					$('#preToolJSON').css( "color", "black" );
+				}else{					
+ 					$('#preToolJSON').text("所需工具：尚未填寫相關資訊");
+ 					$('#preToolJSON').css( "color", "red" );
+				}
+				if(datas.soldPrice !=null){
+					$('#soldPriceJSON').text("銷售金額："+datas.soldPrice+"元");
+ 					$('#soldPriceJSON').css( "color", "black" );
+				}else{					
+ 					$('#soldPriceJSON').text("銷售金額：尚未填寫相關資訊");
+ 					$('#soldPriceJSON').css( "color", "red" );
+				}
+				if(datas.fundStartDate !=null){
+					$('#fundDateDurationJSON').text("募資起迄時間："+datas.fundStartDate+" ~ "+datas.fundEndDate);
+ 					$('#fundDateDurationJSON').css( "color", "black" );
+				}else{					
+ 					$('#fundDateDurationJSON').text("募資起迄時間：填寫資訊不完整");
+ 					$('#fundDateDurationJSON').css( "color", "red" );
+				}
+				if(datas.fundEndDate !=null){
+					$('#fundDateDurationJSON').text("募資起迄時間："+datas.fundStartDate+" ~ "+datas.fundEndDate);
+ 					$('#fundDateDurationJSON').css( "color", "black" );
+				}else{					
+ 					$('#fundDateDurationJSON').text("募資起迄時間：填寫資訊不完整");
+ 					$('#fundDateDurationJSON').css( "color", "red" );
+				}
+
 				
-				$('#courseNameJSON').text("課程名稱："+datas.courseName);
-				$('#preToolJSON').text("所需工具："+datas.preTool);
-				
-				$('#soldPriceJSON').text("銷售金額："+datas.soldPrice+"元");
-				$('#fundDateDurationJSON').text("募資起迄時間："+datas.fundStartDate+" ~ "+datas.fundEndDate);
-				$('#courseStartDateJSON').text("開課日期："+datas.courseStartDate);
-				$('#courseVideoNameJSON').text("上傳影片檔名："+datas.courseVideopathway);
-				$('#courseLengthJSON').text("影片長度："+datas.courseLength+"分鐘");
-				
+				if(datas.courseStartDate !=null){
+					$('#courseStartDateJSON').text("開課日期："+datas.courseStartDate);
+ 					$('#courseStartDateJSON').css( "color", "black" );
+				}else{					
+ 					$('#courseStartDateJSON').text("開課日期：尚未填寫相關資訊");
+ 					$('#courseStartDateJSON').css( "color", "red" );
+				}
+				if(datas.courseVideopathway !=null){
+					$('#courseVideoNameJSON').text("上傳影片檔名："+datas.courseVideopathway);
+ 					$('#courseVideoNameJSON').css( "color", "black" );
+				}else{					
+ 					$('#courseVideoNameJSON').text("上傳影片檔名：尚未上傳相關檔案");
+ 					$('#courseVideoNameJSON').css( "color", "red" );
+				}
+				if(datas.courseLength ==""){
+					$('#courseLengthJSON').text("影片長度：尚未填寫相關資訊");
+ 					$('#courseLengthJSON').css( "color", "red" );
+				}else{
+					$('#courseLengthJSON').text("影片長度："+datas.courseLength+"分鐘");
+ 					$('#courseLengthJSON').css( "color", "black" );
+				}									
 			})
 		})
 		//======================================================
