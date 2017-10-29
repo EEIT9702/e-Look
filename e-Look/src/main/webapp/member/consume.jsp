@@ -152,7 +152,7 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
 							</tr>
 						</thead>
 						<tbody>
-						
+
 						</tbody>
 					</table>
 				</div>
@@ -245,54 +245,37 @@ $(function(){
  })
  var OrderDetails;
  var Order;
- $("#dev-table").on("click","tbody>tr",function(){
+ $("#dev-table").on("click","tbody>tr.parent",function(){
 	  //console.log($(this).children("td").html())
 	  //console.log( $(this).attr("data"))
 	  var value=$(this).children("td").html()
-	  if( $(this).attr("data")===undefined){
-	  $(this).attr("data","1")
+	  if( $(this).attr("class")==="parent"){
+	  $(this).attr("class","parent data")
 		   var fragment = $(document.createDocumentFragment());
 	   	  $.each(OrderDetails,function(idx,OrderDetail){
 	   		 $.each(OrderDetail,function(idx,Order){
 	   			//console.log(Order.orderID);
 	   			//console.log(value);
 	   			if(value==Order.orderID){
-	   			var cell1 = $('<td></td>').text("1")
+	   			var cell1 = $('<td></td>').text("")
 	  		  	var cell2 = $('<td></td>').text(Order.courseVO.courseName)
-	  		  	var cell3 = $('<td></td>').text("2")
+	  		  	var cell3 = $('<td></td>').text("")
 	  		 	var cell4 = $('<td></td>').text(Order.buyingPrice)
-	  		  	var row = $('<tr></tr>').append([cell1,cell2,cell3,cell4]);   			
+	  		  	var row = $('<tr class="data1" style="background-color:#aebfec"></tr>').append([cell1,cell2,cell3,cell4]);   			
 	  		  	fragment.append(row);	
 	   		 }  
 	      	  });
 	   	  });
 	   	  $(this).after(fragment);
 	  }else{
-		  	$(this).attr("data")
-		  	$(this).removeAttr("data")
-			console.log($(this).html());
-		   var fragment = $(document.createDocumentFragment());
-			 $.each(Order,function(idx,order){
-				
-				
-				 if(value==order.orderID){
-					 console.log(order.orderID);
-					 console.log(value);
-			   		var count=0
-		   			var cell1 = $('<td></td>').text(order.orderID)
-		  		  	var cell2 = $('<td></td>').text("")
-		  		  	var cell3 = $('<td></td>').text(order.orderTime)
-		  		  	//console.log(OrderDetails[idx]);
-		   			$.each(OrderDetails[idx],function(idx,OrderDetails){
-		   				count=OrderDetails.buyingPrice+count
-		   			})
-		  		  	var cell4 = $('<td></td>').text(count)
-					fragment.append([cell1,cell2,cell3,cell4]);
-		   		 		//console.log(idx);
-				 }
-				
-		   	 }); 
-			 $(this).html(fragment);
+		  	$(this).attr("class")
+		  	//$(this).removeAttr("class")
+			console.log($(this).attr("class"));
+		  	 $(this).nextAll("tr").remove(".data1");
+		  	
+		  $(this).removeAttr("class")
+		  $(this).attr("class","parent")
+
 	  	}
 	  
 })
@@ -317,7 +300,7 @@ $(function(){
    				count=OrderDetails.buyingPrice+count
    			})
   		  	var cell4 = $('<td></td>').text(count)
-  		  	var row = $('<tr></tr>').append([cell1,cell2,cell3,cell4]);
+  		  	var row = $('<tr class="parent"></tr>').append([cell1,cell2,cell3,cell4]);
 					fragment.append(row);
    		 		//console.log(idx);
   		 	

@@ -225,6 +225,7 @@ a {
 							<c:choose>
 								<c:when test="${courseVO.courseID==buycourse.courseID}">
 										<c:set var="control" value="controls=controls" />
+										<c:set var="poster" value="" />
 										<c:set var="boo" value="true" />
 								</c:when>
 								<c:when test="${!empty boo}">

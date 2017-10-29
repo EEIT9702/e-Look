@@ -91,6 +91,8 @@ public class MemberFilter implements Filter {
 				for (MemberSubscriptionVO MemberSubscriptionVO : memberSubscriptionList) {
 					list5.add(memberService.getMember(MemberSubscriptionVO.getMemberTrackID()));
 				}
+				request.setAttribute("mycourseCount", list.size());
+				request.setAttribute("buycourseCount", list2.size());
 				request.setAttribute("list", list);
 				request.setAttribute("list2", list2);
 				request.setAttribute("list3", list3);
