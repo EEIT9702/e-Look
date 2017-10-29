@@ -739,7 +739,7 @@
         										data-btn-ok-class="btn-success"
         										data-btn-cancel-class="btn-danger">
 										<button type="button" id="postProposal" class="btn btn-primary btn-lg btn3d next-step">
-										<span class="glyphicon glyphicon-ok"></span>完成課程編輯並送出審核
+										<span class="glyphicon glyphicon-ok"></span>  完成課程編輯並送出審核
 										</button></a></li>
 									</ul>
 								</div>
