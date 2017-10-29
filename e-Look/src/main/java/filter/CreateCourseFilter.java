@@ -65,7 +65,7 @@ public class CreateCourseFilter implements Filter {
 			} else {
 				Integer courseID=Integer.valueOf(request.getParameter("CourseID"));
 				CourseService courseService = new CourseService();
-				CourseVO CourseVo=  courseService.getCourse(courseID);
+				CourseVO CourseVo=  courseService.getCourseData(courseID);
 				request.setAttribute("CourseID", courseID);
 				request.setAttribute("CoursedData", CourseVo);
 				chain.doFilter(request, response);

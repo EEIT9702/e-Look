@@ -272,4 +272,10 @@ public class OrderDAO_JDBC implements OrderDAO_interface {
 		
 	}
 
+	@Override
+	public List<OrderVO> getMemberAllOrder(Integer memberID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

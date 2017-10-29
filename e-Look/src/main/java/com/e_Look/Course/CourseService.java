@@ -2,6 +2,7 @@ package com.e_Look.Course;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.List;
 
 import javax.servlet.http.Part;
 
@@ -64,9 +65,7 @@ public class CourseService {
 		return dao.findByPrimaryKey(courseID);
 		
 	}
-	public CourseVO getCourse(Integer courseID){		
-		return dao.findByPrimaryKey(courseID);		
-	}
+
 	public void deleteCourse(Integer courseID) {
 
 			dao.delete(courseID);
@@ -74,5 +73,8 @@ public class CourseService {
 	}
 	public void updateProposalStatus(Integer courseID){
 			dao.postProposal(courseID);
+	}
+	public List<CourseVO> getAllCourseData(Integer memberID, Integer status){
+		return dao.findAllCourse(memberID, status);
 	}
 }

@@ -50,14 +50,12 @@ public class OnlineCourse implements Filter {
 				return;
 			}
 			else if (courseID != null) {
-				CourseDAO dao = new CourseDAO();
-				BuyCourseDAO dao2 = new BuyCourseDAO();
 				CourseService courseService = new CourseService();
-				CourseVO courseVO = courseService.getCourse(Integer.valueOf(courseID));
+				CourseVO courseVO = courseService.getCourseData(Integer.valueOf(courseID));
 				if (courseVO.getStatus() == 2) {
 					MemberService service = new MemberService();
 					MemberVO memberVo = service.getMember(courseVO.getMemberID());
-					List<CourseVO> list = dao.findBymemberID(courseVO.getMemberID(), 2);
+					List<CourseVO> list = courseService.getAllCourseData(courseVO.getMemberID(), 2);
 					HttpSession session = request.getSession();
 					MemberVO memberVoOK = (MemberVO) session.getAttribute("LoginOK");
 					BuyCourseService CourseService = new BuyCourseService();

@@ -225,6 +225,7 @@ a {
 							<c:choose>
 								<c:when test="${courseVO.courseID==buycourse.courseID}">
 										<c:set var="control" value="controls=controls" />
+										<c:set var="poster" value="" />
 										<c:set var="boo" value="true" />
 								</c:when>
 								<c:when test="${!empty boo}">
@@ -370,11 +371,19 @@ a {
 				</div>
 				<!--講義下載 -->
 				<div class="col-md-1 col-xs-4 ">
-					<a href="#"> <img
+					<c:if test="${!empty courseVO.paper}">
+					<a href="<%=request.getContextPath()%>/Paper?CourseID=${courseVO.courseID}"> <img
 						src="<%=request.getContextPath()%>/_Lyy/001-download.png"
 						class="img-responsive center-block">
 						<h5 class="text-center">講義下載</h5>
 					</a>
+				</c:if>
+				<c:if test="${empty courseVO.paper}">
+					<img
+						src="<%=request.getContextPath()%>/_Lyy/001-download.png"
+						class="img-responsive center-block">
+						<h5 class="text-center">講義下載</h5>
+					</c:if>
 				</div>
 				<!--影片檢舉 -->
 				<c:if test="${empty LoginOK}">
@@ -960,7 +969,7 @@ a {
 	</script>
 	<script>
 		//判斷是否加入過最愛		
-		var count = 0;
+		var count1 = 0;
 		$('#favoriteclick1').click(function() {
 			alert('已經加入過囉');
 		})
@@ -969,14 +978,14 @@ a {
 
 			console.log($("#mbcourseID").val())
 			console.log($("#mbmemberID").val())
-			if (count == 0) {
+			if (count1 == 0) {
 				$('#favoriteclick2').attr("id", "favoriteclick1")
 				$.post('MemberBookmarksInsertController', {
 					'courseID' : $("#mbcourseID").val(),
 					'memberID' : $("#mbmemberID").val()
 				}, function() {
 					alert('已經加到你的最愛囉');
-					count++;
+					count1++;
 				})
 			} else {
 				alert('已經加入過囉');
