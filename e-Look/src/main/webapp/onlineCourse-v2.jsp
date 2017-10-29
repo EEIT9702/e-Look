@@ -462,7 +462,7 @@ a {
 				<div class="col-md-2 col-xs-6"
 					style="height: 89px; border-right: 1px solid #ADADAD;">
 
-					<div id="starTatol" style="margin: 0 auto"></div>
+					<div id="starTatol" style="margin: 0 auto" data=></div>
 					<!-- 		加入購物車 -->
 					<c:if test="${empty LoginOK}">
 						<c:choose>
@@ -1031,6 +1031,7 @@ a {
 		})
 	</script>
 	<script>
+	flag=false;
 		// 	星星點評
 		$('#star').raty(
 				{
@@ -1038,38 +1039,48 @@ a {
 					width : 150,
 					starOff : 'star-off-big.png',
 					starOn : 'star-on-big.png',
-					click : function(score, evt) {
-						$.post('updateScoreController', {
-							'score' : score,
-							'memberID' : $('#reportMemberID').val(),
-							'courseID' : $('#reportCourseID').val()
-						})
-						alert("感謝你的評分!" + "\nscore: " + score + "\n"
-								+ $('#reportMemberID').val() + "\n"
-								+ $('#reportCourseID').val());
-					}
+					readOnly:function(){
+						if( $('#reportMemberID').val()==""|| $('#reportMemberID').val()==null){
+							return true;
+						
+					}},
+					
+					
+					click : function(score, evt) {					
+										$.post('updateScoreController', {
+											'score' : score,
+											'memberID' : $('#reportMemberID').val(),
+											'courseID' : $('#reportCourseID').val()
+										})
+										alert("感謝你的評分!" + "\nscore: " + score );
+								}
 				});
 	</script>
 
 	<script>
-	
+		var scoreJSON;
+		var value;
 		$(function() {
-			console.log($("#mbcourseID").val())
+			// 			console.log($("#mbcourseID").val())
 			$.post('countScoreController', {
 				'courseID' : $("#mbcourseID").val()
 			}, function(data) {
-				console.log(data)
-// 				$('#starTatol').raty(
-// 						{	path : 'img',
-// 							width : 150,
-// 							starOff : 'star-off-big.png',
-// 							starOn : 'star-on-big.png',
-// 							readOnly: true, score: data
-// 							}
-// 						});
+				// 				console.log(data);
+				scoreJSON = JSON.parse(data);
+				// 				console.log(scoreJSON);
+				value = Math.ceil(parseFloat(scoreJSON));
+				// 				console.log(value)
+				$('#starTatol').raty({
+					path : 'img',
+					width : 150,
+					starOff : 'star-off-big.png',
+					starOn : 'star-on-big.png',
+					readOnly : true,
+					score : value,
+
+				});
 			});
 		});
-		
 	</script>
 </body>
 </html>
