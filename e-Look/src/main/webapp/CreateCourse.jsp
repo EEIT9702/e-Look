@@ -32,6 +32,7 @@
 <script src="<%=request.getContextPath()%>/_PJC/js/jquery-ui.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath()%>/_PJC/js/autosize.js"></script>
+<script src="<%=request.getContextPath()%>/_PJC/js/bootstrap-confirmation.js"></script>
 <script
 	src="<%=request.getContextPath()%>/_PJC/js/bootstrap-datetimepicker.js"></script>
 <script
@@ -94,7 +95,6 @@
 			});
 </script>
 <script src="<%=request.getContextPath()%>/_PJC/js/upload1.js"></script>
-
 
 
 </head>
@@ -187,7 +187,7 @@
 													<i class="glyphicon glyphicon-picture"></i>
 												</div>
 												<div class="update-text">
-													<strong>步驟二123、</strong> 輸入課程標題、上傳課程封面、選擇課程種類<a href="#"></a>
+													<strong>步驟二、</strong> 輸入課程標題、上傳課程封面、選擇課程種類<a href="#"></a>
 												</div>
 											</div>
 										</div>
@@ -670,6 +670,7 @@
 									<div class="row col-list">
 										<div class="col-md-4 t1">
 											<div class="col-head text-center">
+												
 												<span class="glyphicon glyphicon-paperclip"
 													aria-hidden="true"></span>
 												<h2>課程簡介</h2>
@@ -734,11 +735,13 @@
 									<ul class="list-inline" style="margin-bottom: 80px">
 										<li><button type="button"
 												class="btn3d btn btn-default btn-lg prev-step">上一步</button></li>
-										<li><a href="<%=request.getContextPath()%>/HOME.jsp"><button
-													type="button" id="postProposal"
-													class="btn btn-success btn-lg btn3d next-step">
-													<span class="glyphicon glyphicon-ok"></span> 完成課程編輯並送出審核
-												</button></a></li>
+										<li><a href="<%=request.getContextPath()%>/HOME.jsp" title="恭喜您完成此次的課程編輯流程!" data-toggle="confirmation" data-singleton="true" data-placement="top" data-popout="true" data-btn-ok-label="送出" data-btn-ok-icon="glyphicon glyphicon-share-alt"
+        data-btn-ok-class="btn-success"
+        data-btn-cancel-label="取消" data-btn-cancel-icon="glyphicon glyphicon-ban-circle"
+        data-btn-cancel-class="btn-danger">
+										<button type="button" id="postProposal" class="btn btn-primary btn-lg btn3d next-step">
+										<span class="glyphicon glyphicon-ok"></span> 完成課程編輯並送出審核
+										</button></a></li>
 									</ul>
 								</div>
 								<div class="clearfix"></div>
@@ -1274,7 +1277,14 @@ $('#starttime').on('input propertychange',function(e) {
 				'data':{'courseID':$('#courseID').val()},
 				'success':function(result){
 					courseClass = result;
-					$('#courseClassJSON').text("課程所屬類別："+courseClass);					
+					if(courseClass !=""){
+						$('#courseClassJSON').text("課程所屬類別："+courseClass);
+						$('#courseClassJSON').css( "color", "black" );
+					}else{
+						$('#courseClassJSON').text("課程所屬類別：尚未勾選相關資訊");
+						$('#courseClassJSON').css( "color", "red" );
+					}
+										
 				}
 		});//$.ajax end
 	
@@ -1320,14 +1330,19 @@ $('#starttime').on('input propertychange',function(e) {
 									$('#soldPricewarning').text("")
 								}
 							})
-						$('#targetStudentNumber').keyup(function(){
+						$('#targetStudentNumber,#soldPrice').keyup(function(){
 								if($('#targetStudentNumber').val()<10){
 									$('#targetStudentNumberwarning').text("請輸入大於10的數字")
+									$('#targetStudentNumberwarning').css( "color", "red" );
 								}else{
-									$('#targetStudentNumberwarning').text("")
+									$('#targetStudentNumberwarning').css( "color", "black" );
+									$('#targetStudentNumberwarning').text(("即實際支付給您，作為開課的成本為"+parseInt($('#targetStudentNumber').val()*0.56*($('#soldPrice').val()))+"元"));
 								}
 							})
-							
+	//課程送出前警告視窗=================================					
+	$('[data-toggle="confirmation"]').confirmation({ title: 'Confirm!',
+	    content: '確定要將內容送至審核階段嗎?', btnOkLabel: "&nbsp;送出", btnCancelLabel: "&nbsp;取消" });
+	//===============================================
 	</script>
 
 
