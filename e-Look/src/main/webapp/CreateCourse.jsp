@@ -32,6 +32,7 @@
 <script src="<%=request.getContextPath()%>/_PJC/js/jquery-ui.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath()%>/_PJC/js/autosize.js"></script>
+<script src="<%=request.getContextPath()%>/_PJC/js/bootstrap-confirmation.js"></script>
 <script
 	src="<%=request.getContextPath()%>/_PJC/js/bootstrap-datetimepicker.js"></script>
 <script
@@ -94,7 +95,6 @@
 			});
 </script>
 <script src="<%=request.getContextPath()%>/_PJC/js/upload1.js"></script>
-
 
 
 </head>
@@ -177,7 +177,7 @@
 													<i class="glyphicon glyphicon-list"></i>
 												</div>
 												<div class="update-text">
-													<strong>步驟一123、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
+													<strong>步驟一、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
 												</div>
 											</div>
 										</div>
@@ -283,7 +283,7 @@
 										<div class="row" style="margin-bottom: 25px">
 											<label for="exampleInputEmail1" style="font-size: 20pt">選擇課程類別(最多三項)</label>
 											<div>
-												<div style="font-size: 15pt">
+												<div style="font-size: 15pt" id="CourseClasscheckbox">
 
 													<INPUT TYPE="checkbox" NAME="CourseClass" value="101">生活
 													<INPUT TYPE="checkbox" NAME="CourseClass" value="102">藝術
@@ -455,6 +455,7 @@
 											<label>定價(最低售價為$10元)</label> <input type="text"
 												name="soldPrice" class="form-control" id="soldPrice"
 												value="${CoursedData.soldPrice}" style="font-size: 18px;">
+											<p id="soldPricewarning" style="color: red"></p>
 										</div>
 
 										<div class="form-group col-lg-6" style="font-size: 20px;">
@@ -471,9 +472,10 @@
 									<div class="col-md-12">
 										<div class="form-group col-lg-4" style="font-size: 20px;">
 											<label>開課門檻人數(最低為10人)</label> <input type="text"
-												name="targetStudentNumber" class="form-control" id=""
+												name="targetStudentNumber" class="form-control" id="targetStudentNumber"
 												value="${CoursedData.targetStudentNumber}"
 												style="font-size: 18px;">
+											<p id="targetStudentNumberwarning" style="color: red"></p>
 										</div>
 									</div>
 									<div class="col-md-12" style="margin-top: 2em;">
@@ -484,12 +486,11 @@
 												data-link-format="yyyy-mm-dd">
 												<input class="form-control" style="font-size: 18px;"
 													type="text" value="${CoursedData.fundStartDate}" readonly
-													size="18" id="starttime" name="fundStartDate"><span
-													class="input-group-addon"> <span
-													class="glyphicon glyphicon-calendar"></span>
-												</span>
+													size="18" id="starttime" name="fundStartDate">
+													
+												
 											</div>
-											<!-- 											<input type="hidden" id="dtp_input1" value="" /><br /> -->
+											<!-- <input type="hidden" id="dtp_input1" value="" /><br /> -->
 										</div>
 									</div>
 									<div class="col-md-12" style="margin-top: 2em;">
@@ -500,10 +501,7 @@
 												data-link-format="yyyy-mm-dd">
 												<input class="form-control" style="font-size: 18px;"
 													type="text" value="${CoursedData.fundEndDate}" readonly
-													size="18" id="endtime" name="fundEndDate"><span
-													class="input-group-addon"> <span
-													class="glyphicon glyphicon-calendar"></span>
-												</span>
+													size="18" id="endtime" name="fundEndDate">
 											</div>
 											<!-- 											<input type="hidden" id="dtp_input2" value="" /><br /> -->
 										</div>
@@ -672,6 +670,7 @@
 									<div class="row col-list">
 										<div class="col-md-4 t1">
 											<div class="col-head text-center">
+												
 												<span class="glyphicon glyphicon-paperclip"
 													aria-hidden="true"></span>
 												<h2>課程簡介</h2>
@@ -736,11 +735,13 @@
 									<ul class="list-inline" style="margin-bottom: 80px">
 										<li><button type="button"
 												class="btn3d btn btn-default btn-lg prev-step">上一步</button></li>
-										<li><a href="<%=request.getContextPath()%>/HOME.jsp"><button
-													type="button" id="postProposal"
-													class="btn btn-success btn-lg btn3d next-step">
-													<span class="glyphicon glyphicon-ok"></span> 完成課程編輯並送出審核
-												</button></a></li>
+										<li><a href="<%=request.getContextPath()%>/HOME.jsp" title="恭喜您完成此次的課程編輯流程!" data-toggle="confirmation" data-singleton="true" data-placement="top" data-popout="true" data-btn-ok-label="送出" data-btn-ok-icon="glyphicon glyphicon-share-alt"
+        data-btn-ok-class="btn-success"
+        data-btn-cancel-label="取消" data-btn-cancel-icon="glyphicon glyphicon-ban-circle"
+        data-btn-cancel-class="btn-danger">
+										<button type="button" id="postProposal" class="btn btn-primary btn-lg btn3d next-step">
+										<span class="glyphicon glyphicon-ok"></span> 完成課程編輯並送出審核
+										</button></a></li>
 									</ul>
 								</div>
 								<div class="clearfix"></div>
@@ -893,7 +894,7 @@
 		function checkEndTime(starttime, endtime) {
 			var starttime = $("#starttime").val();
 			var endtime = $("#endtime").val();
-			if (endtime < starttime) {
+			if (endtime < starttime && starttime+30 < endtime) {
 				return false;
 			} else {
 				return true;
@@ -911,6 +912,7 @@
 				startView : 2,
 				minView : 2,
 				forceParse : 0,
+				defaultDate:new Date() ,
 				format : 'yyyy-mm-dd'
 			}).on('changeDate', function(ev) {
 				var starttime = $('#starttime').val();
@@ -934,8 +936,8 @@
 
 				if (starttime != "" && endtime != "") {
 					if (!checkEndTime(starttime, endtime)) {
-						$('endtime').val('');
-						alert("起始日期不能大於結束日期");
+						$('#endtime').val('');
+						alert("請輸入正確的日期範圍");
 						return;
 					}
 				}
@@ -1121,6 +1123,34 @@
 										}
 									})
 						})
+$(document).ready(function(){
+$('#starttime').on('input propertychange',function(e) {
+
+			var formData = new FormData($('form')[3]);
+			console.log("送到資料庫囉!");
+			$
+					.ajax({
+						type : 'POST',
+						url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
+						data : formData,
+						processData : false,
+						contentType : false,
+						success : function() {
+							delay_till_last('id', function() {
+								$('#updateConfirm').text(
+										"變更已儲存至草稿");
+								$("#updateConfirm")
+										.fadeIn(1200);
+
+								$("#updateConfirm").fadeOut(
+										1500);
+
+							}, 1000);
+						}
+					})
+		})
+})
+
 
 		$('#inputfilename2')
 				.change(
@@ -1167,15 +1197,71 @@
 				'courseID' : $('#courseID').val(),"getProposalData":"XXXXXXXX"
 			}, function(datas) {
 				console.log(datas);
-				$('#courseNameJSON').text("課程名稱："+datas.courseName);
-				$('#preToolJSON').text("所需工具："+datas.preTool);
-				$('#targetgroupJSON').text("適合族群："+datas.targetgroup);
-				$('#soldPriceJSON').text("銷售金額："+datas.soldPrice+"元");
-				$('#fundDateDurationJSON').text("募資起迄時間："+datas.fundStartDate+" ~ "+datas.fundEndDate);
-				$('#courseStartDateJSON').text("開課日期："+datas.courseStartDate);
-				$('#courseVideoNameJSON').text("上傳影片檔名："+datas.courseVideopathway);
-				$('#courseLengthJSON').text("影片長度："+datas.courseLength+"分鐘");
+				if(datas.targetgroup !=null){
+					$('#targetgroupJSON').text("適合族群："+datas.targetgroup);
+ 					$('#targetgroupJSON').css( "color", "black" );
+				}else{					
+ 					$('#targetgroupJSON').text("適合族群：尚未填寫相關資訊");
+ 					$('#targetgroupJSON').css( "color", "red" );
+				}
+				if(datas.courseName !=null){
+					$('#courseNameJSON').text("課程名稱："+datas.courseName);
+ 					$('#courseNameJSON').css( "color", "black" );
+				}else{				
+ 					$('#courseNameJSON').text("課程名稱：尚未填寫相關資訊");
+ 					$('#courseNameJSON').css( "color", "red" );
+				}
+				if(datas.preTool !=null){
+					$('#preToolJSON').text("所需工具："+datas.preTool);
+ 					$('#preToolJSON').css( "color", "black" );
+				}else{					
+ 					$('#preToolJSON').text("所需工具：尚未填寫相關資訊");
+ 					$('#preToolJSON').css( "color", "red" );
+				}
+				if(datas.soldPrice !=null){
+					$('#soldPriceJSON').text("銷售金額："+datas.soldPrice+"元");
+ 					$('#soldPriceJSON').css( "color", "black" );
+				}else{					
+ 					$('#soldPriceJSON').text("銷售金額：尚未填寫相關資訊");
+ 					$('#soldPriceJSON').css( "color", "red" );
+				}
+				if(datas.fundStartDate !=null){
+					$('#fundDateDurationJSON').text("募資起迄時間："+datas.fundStartDate+" ~ "+datas.fundEndDate);
+ 					$('#fundDateDurationJSON').css( "color", "black" );
+				}else{					
+ 					$('#fundDateDurationJSON').text("募資起迄時間：填寫資訊不完整");
+ 					$('#fundDateDurationJSON').css( "color", "red" );
+				}
+				if(datas.fundEndDate !=null){
+					$('#fundDateDurationJSON').text("募資起迄時間："+datas.fundStartDate+" ~ "+datas.fundEndDate);
+ 					$('#fundDateDurationJSON').css( "color", "black" );
+				}else{					
+ 					$('#fundDateDurationJSON').text("募資起迄時間：填寫資訊不完整");
+ 					$('#fundDateDurationJSON').css( "color", "red" );
+				}
+
 				
+				if(datas.courseStartDate !=null){
+					$('#courseStartDateJSON').text("開課日期："+datas.courseStartDate);
+ 					$('#courseStartDateJSON').css( "color", "black" );
+				}else{					
+ 					$('#courseStartDateJSON').text("開課日期：尚未填寫相關資訊");
+ 					$('#courseStartDateJSON').css( "color", "red" );
+				}
+				if(datas.courseVideopathway !=null){
+					$('#courseVideoNameJSON').text("上傳影片檔名："+datas.courseVideopathway);
+ 					$('#courseVideoNameJSON').css( "color", "black" );
+				}else{					
+ 					$('#courseVideoNameJSON').text("上傳影片檔名：尚未上傳相關檔案");
+ 					$('#courseVideoNameJSON').css( "color", "red" );
+				}
+				if(datas.courseLength ==""){
+					$('#courseLengthJSON').text("影片長度：尚未填寫相關資訊");
+ 					$('#courseLengthJSON').css( "color", "red" );
+				}else{
+					$('#courseLengthJSON').text("影片長度："+datas.courseLength+"分鐘");
+ 					$('#courseLengthJSON').css( "color", "black" );
+				}									
 			})
 		})
 		//======================================================
@@ -1191,7 +1277,14 @@
 				'data':{'courseID':$('#courseID').val()},
 				'success':function(result){
 					courseClass = result;
-					$('#courseClassJSON').text("課程所屬類別："+courseClass);					
+					if(courseClass !=""){
+						$('#courseClassJSON').text("課程所屬類別："+courseClass);
+						$('#courseClassJSON').css( "color", "black" );
+					}else{
+						$('#courseClassJSON').text("課程所屬類別：尚未勾選相關資訊");
+						$('#courseClassJSON').css( "color", "red" );
+					}
+										
 				}
 		});//$.ajax end
 	
@@ -1200,6 +1293,56 @@
 		
 		//===============================================================
 			
+			//當checkbox改變傳送表單
+			$(':checkbox')
+				.change(
+						function(e) {
+
+							var formData = new FormData($('form')[3]);
+							console.log("從checkbox送課程類別送到資料庫囉!");
+							$
+									.ajax({
+										type : 'POST',
+										url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
+										data : formData,
+										processData : false,
+										contentType : false,
+										success : function() {
+											delay_till_last('id', function() {
+												$('#updateConfirm').text(
+														"變更已儲存至草稿");
+												$("#updateConfirm")
+														.fadeIn(1200);
+
+												$("#updateConfirm").fadeOut(
+														1500);
+
+											}, 1000);
+										}
+									})
+						})
+						//===============================================================
+							
+						$('#soldPrice').keyup(function(){
+								if($('#soldPrice').val()<10){
+									$('#soldPricewarning').text("請輸入大於10的數字")
+								}else{
+									$('#soldPricewarning').text("")
+								}
+							})
+						$('#targetStudentNumber,#soldPrice').keyup(function(){
+								if($('#targetStudentNumber').val()<10){
+									$('#targetStudentNumberwarning').text("請輸入大於10的數字")
+									$('#targetStudentNumberwarning').css( "color", "red" );
+								}else{
+									$('#targetStudentNumberwarning').css( "color", "black" );
+									$('#targetStudentNumberwarning').text(("即實際支付給您，作為開課的成本為"+parseInt($('#targetStudentNumber').val()*0.56*($('#soldPrice').val()))+"元"));
+								}
+							})
+	//課程送出前警告視窗=================================					
+	$('[data-toggle="confirmation"]').confirmation({ title: 'Confirm!',
+	    content: '確定要將內容送至審核階段嗎?', btnOkLabel: "&nbsp;送出", btnCancelLabel: "&nbsp;取消" });
+	//===============================================
 	</script>
 
 
