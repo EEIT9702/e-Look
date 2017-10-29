@@ -221,7 +221,7 @@
 													<i class="glyphicon glyphicon-pencil"></i>
 												</div>
 												<div class="update-text">
-													<strong>步驟五、</strong> 課程內容主要說明
+													<strong>步驟五123、</strong> 課程內容主要說明
 												</div>
 											</div>
 										</div>
@@ -731,16 +731,15 @@
 
 
 
-								<div class="col-md-offset-4" style="margin-top: 80px">
+								<div class="col-md-offset-4" style="margin-top: 80px" id='#postProposalfinal'>
 									<ul class="list-inline" style="margin-bottom: 80px">
 										<li><button type="button"
 												class="btn3d btn btn-default btn-lg prev-step">上一步</button></li>
-										<li><a href="<%=request.getContextPath()%>/HOME.jsp" title="恭喜您完成此次的課程編輯流程!" data-toggle="confirmation" data-singleton="true" data-placement="top" data-popout="true" data-btn-ok-label="送出" data-btn-ok-icon="glyphicon glyphicon-share-alt"
-        data-btn-ok-class="btn-success"
-        data-btn-cancel-label="取消" data-btn-cancel-icon="glyphicon glyphicon-ban-circle"
-        data-btn-cancel-class="btn-danger">
+										<li><a href="<%=request.getContextPath()%>/HOME.jsp" title="恭喜您完成此次的課程編輯流程!" data-toggle="confirmation" data-singleton="true" data-placement="top" data-popout="true"
+        										data-btn-ok-class="btn-success"
+        										data-btn-cancel-class="btn-danger">
 										<button type="button" id="postProposal" class="btn btn-primary btn-lg btn3d next-step">
-										<span class="glyphicon glyphicon-ok"></span> 完成課程編輯並送出審核
+										<span class="glyphicon glyphicon-ok"></span>完成課程編輯並送出審核
 										</button></a></li>
 									</ul>
 								</div>
@@ -1183,12 +1182,12 @@ $('#starttime').on('input propertychange',function(e) {
 		// =====================================
 
 		//用goGet方法送到CourseEditControlloer，改變草稿的狀態	
-		$('#postProposal').click(function() {
-			$.get('/e-Look/com.e_Look.Course.control/CourseEditControlloer', {
-				'courseID' : $('#courseID').val()
-			}, function() {
-			})
-		})
+// 		$('#postProposalfinal').click(function() {
+// 			$.get('/e-Look/com.e_Look.Course.control/CourseEditControlloer', {
+// 				'courseID' : $('#courseID').val()
+// 			}, function() {
+// 			})
+// 		})
 		//======================================================
 			
 		//用goGet方法送到CourseEditControlloer，取得目前資料庫存入的課程內容	
@@ -1340,8 +1339,16 @@ $('#starttime').on('input propertychange',function(e) {
 								}
 							})
 	//課程送出前警告視窗=================================					
-	$('[data-toggle="confirmation"]').confirmation({ title: 'Confirm!',
-	    content: '確定要將內容送至審核階段嗎?', btnOkLabel: "&nbsp;送出", btnCancelLabel: "&nbsp;取消" });
+	$('[data-toggle="confirmation"]').confirmation({ 
+		title: 'Confirm!',
+		content: '確定要將內容送至審核階段嗎?',
+		btnOkLabel: "&nbsp;送出審核",
+		btnCancelLabel: "&nbsp;取消",
+		onConfirm:function(){$.get('/e-Look/com.e_Look.Course.control/CourseEditControlloer', {
+			'courseID' : $('#courseID').val()
+		}, function() {
+		})}	
+	});
 	//===============================================
 	</script>
 
