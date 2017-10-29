@@ -7,4 +7,5 @@ public void delete(Integer orderID);
 public OrderVO findMemberUncheckOrder(Integer memberID);
 public OrderVO findByPrimaryKey(Integer orderID);
 public List<OrderVO> getAll();
+public List<OrderVO> getMemberAllOrder(Integer memberID);
 }

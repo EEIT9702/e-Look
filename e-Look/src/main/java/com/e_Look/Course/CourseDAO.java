@@ -338,7 +338,7 @@ public class CourseDAO implements CourseDAO_interface {
 	
 	//會員後臺管理(選擇我的草稿、我開的課)、管理員後台待審核中的課程列表
 	@Override
-	public List<CourseVO> findBymemberID(Integer memberID, Integer status) {
+	public List<CourseVO> findAllCourse(Integer memberID, Integer status) {
 		List<CourseVO> CourseList = new LinkedList<CourseVO>();
 		Connection con = null;
 		PreparedStatement pstmt = null;

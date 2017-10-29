@@ -234,7 +234,7 @@ font-size: 18px;
 													height="26">會員中心</a></li>
 											<li style="padding-top: 0px;" role="presentation"
 												class="divider"></li>
-											<li class="text-center"><a href="#"><img align="left"
+											<li class="text-center"><a href="<%=request.getContextPath()%>/member/consume.jsp"><img align="left"
 													src="<%=request.getContextPath()%>/HeaderCssJs/wallet.png"
 													height="26">我的消費</a></li>
 											<li style="padding-top: 0px;" role="presentation"

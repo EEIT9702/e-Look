@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.e_Look.Course.CourseDAO;
+import com.e_Look.Course.CourseService;
 import com.e_Look.Course.CourseVO;
 import com.e_Look.buyCourse.model.BuyCourseService;
 import com.e_Look.buyCourse.model.BuyCourseVO;
@@ -58,6 +59,7 @@ public class MemberFilter implements Filter {
 			HttpServletResponse response = (HttpServletResponse) resp;
 
 			CourseDAO dao = new CourseDAO();
+			CourseService courseService =new CourseService();
 			MemberService memberService = new MemberService();
 			BuyCourseService CourseService = new BuyCourseService();
 			MemberBookmarksService memberBookmarksService = new MemberBookmarksService();
@@ -69,14 +71,14 @@ public class MemberFilter implements Filter {
 				return;
 			}
 			if (request.getParameter("memberID") == null) {
-				List<CourseVO> list = dao.findBymemberID(memberVO.getMemberID(),2);
+				List<CourseVO> list =courseService.getAllCourseData(memberVO.getMemberID(),2);
 				List<BuyCourseVO> buyCourselist = CourseService.getBuyCourse(memberVO.getMemberID());
 				List<CourseVO> list2 = new LinkedList<CourseVO>();
 				List<CourseVO> list3 = new LinkedList<CourseVO>();
-				List<CourseVO> list4 = dao.findBymemberID(memberVO.getMemberID(), 0);
+				List<CourseVO> list4 =courseService.getAllCourseData(memberVO.getMemberID(), 0);
 				List<MemberVO> list5 = new LinkedList<MemberVO>();
 				for (BuyCourseVO buyCoursevo : buyCourselist) {
-					list2.add(dao.findByPrimaryKey(buyCoursevo.getCourseID()));
+					list2.add(courseService.getCourseData(buyCoursevo.getCourseID()));
 				}
 				List<MemberBookmarksVO> mBookmarkList = memberBookmarksService
 						.findPrimaryMemberBookmarks(memberVO.getMemberID());
@@ -98,7 +100,7 @@ public class MemberFilter implements Filter {
 			} else {
 				Integer memberID = Integer.valueOf(request.getParameter("memberID"));
 				MemberVO membervo = memberService.getMember(memberID);
-				List<CourseVO> TeacherCourselist = dao.findBymemberID(memberID, 2);
+				List<CourseVO> TeacherCourselist = courseService.getAllCourseData(memberID, 2);
 				request.setAttribute("Submembervo", membervo);
 				request.setAttribute("TeacherCourselist", TeacherCourselist);
 				chain.doFilter(request, response);
