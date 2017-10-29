@@ -177,7 +177,7 @@
 													<i class="glyphicon glyphicon-list"></i>
 												</div>
 												<div class="update-text">
-													<strong>步驟一、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
+													<strong>步驟一123456、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
 												</div>
 											</div>
 										</div>
@@ -221,7 +221,7 @@
 													<i class="glyphicon glyphicon-pencil"></i>
 												</div>
 												<div class="update-text">
-													<strong>步驟五123、</strong> 課程內容主要說明
+													<strong>步驟五、</strong> 課程內容主要說明
 												</div>
 											</div>
 										</div>
@@ -972,10 +972,10 @@
 				document.querySelectorAll("#ProposalCourse input").forEach(
 						function(el) {
 							el.setAttribute("disabled", "disabled");
-							el.style = "opacity: 0.4;font-size: 18px;";
+							el.style = "opacity: 0;font-size: 18px;";
 						})
 				var formData = new FormData($('form')[3]);
-				console.log("圖片送到資料庫囉!");
+				console.log("課程銷售方式(免費)送到資料庫囉!");
 				$
 						.ajax({
 							type : 'POST',
@@ -996,13 +996,34 @@
 
 			}
 			if (selectr === "radio3") {
+				$('#targetStudentNumber').val("0");
+				$('#targetStudentNumberwarning').empty();
 				document.querySelector("#soldPrice")
 						.removeAttribute("readonly");
 				document.querySelector("#ProposalCourse").style = "opacity: 0.4;font-size: 18px;margin-top: 2em;";
 				document.querySelectorAll("#ProposalCourse input").forEach(
 						function(el) {
 							el.setAttribute("disabled", "disabled");
-							el.style = "opacity: 0.4;font-size: 18px;";
+							el.style = "opacity: 0;font-size: 18px;";
+						})
+						var formData = new FormData($('form')[3]);
+				console.log("課程銷售方式(線上)送到資料庫囉!");
+				$
+						.ajax({
+							type : 'POST',
+							url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
+							data : formData,
+							processData : false,
+							contentType : false,
+							success : function() {
+								delay_till_last('id', function() {
+									$('#updateConfirm').text("變更已儲存至草稿");
+									$("#updateConfirm").fadeIn(1200);
+
+									$("#updateConfirm").fadeOut(1500);
+
+								}, 1000);
+							}
 						})
 			}
 			if (selectr === "radio2") {
@@ -1013,6 +1034,25 @@
 						function(el) {
 							el.removeAttribute("disabled");
 							el.style = "opacity: 1;font-size: 18px;";
+						})
+						var formData = new FormData($('form')[3]);
+				console.log("課程銷售方式(募資)送到資料庫囉!");
+				$
+						.ajax({
+							type : 'POST',
+							url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
+							data : formData,
+							processData : false,
+							contentType : false,
+							success : function() {
+								delay_till_last('id', function() {
+									$('#updateConfirm').text("變更已儲存至草稿");
+									$("#updateConfirm").fadeIn(1200);
+
+									$("#updateConfirm").fadeOut(1500);
+
+								}, 1000);
+							}
 						})
 			}
 		};
@@ -1330,13 +1370,20 @@ $('#starttime').on('input propertychange',function(e) {
 								}
 							})
 						$('#targetStudentNumber,#soldPrice').keyup(function(){
+							if($('#targetStudentNumber').val()!=0){
 								if($('#targetStudentNumber').val()<10){
-									$('#targetStudentNumberwarning').text("請輸入大於10的數字")
-									$('#targetStudentNumberwarning').css( "color", "red" );
-								}else{
-									$('#targetStudentNumberwarning').css( "color", "black" );
-									$('#targetStudentNumberwarning').text(("即實際支付給您，作為開課的成本為"+parseInt($('#targetStudentNumber').val()*0.56*($('#soldPrice').val()))+"元"));
+									$('#targetStudentNumberwarning').text("請輸入大於10的數字");
+									$('#targetStudentNumberwarning').css(  "color", "red" );
 								}
+								else{
+									$('#targetStudentNumberwarning').css( "color", "black" );
+									$('#targetStudentNumberwarning').text(("即開設本次課程的最低成本為"+parseInt($('#targetStudentNumber').val()*0.56*($('#soldPrice').val()))+"元"));
+								}
+							}else {
+								$('#targetStudentNumberwarning').text("");
+								$('#targetStudentNumberwarning').empty();
+							}
+								
 							})
 	//課程送出前警告視窗=================================					
 	$('[data-toggle="confirmation"]').confirmation({ 
