@@ -462,7 +462,7 @@ a {
 				<div class="col-md-2 col-xs-6"
 					style="height: 89px; border-right: 1px solid #ADADAD;">
 
-					<div id="starTatol" style="margin: 0 auto" data=></div>
+					<div id="starTatol" style="margin: 0 auto" ></div>
 					<!-- 		加入購物車 -->
 					<c:if test="${empty LoginOK}">
 						<c:choose>
@@ -546,7 +546,7 @@ a {
 								aria-controls="messages" role="tab" data-toggle="tab">點評收藏</a></li>
 						</ul>
 						<!-- 課程簡介 -->
-						<div class="tab-content tabs">
+						<div class="tab-content tabs"> 
 							<div role="tabpanel" class="tab-pane fade in active"
 								id="Section1" style="font-size: 20px">
 								<c:if test="${!empty courseVO.preTool}">
@@ -1031,7 +1031,7 @@ a {
 		})
 	</script>
 	<script>
-	flag=false;
+	
 		// 	星星點評
 		$('#star').raty(
 				{

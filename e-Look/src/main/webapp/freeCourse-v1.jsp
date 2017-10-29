@@ -22,7 +22,10 @@
 	href="<%=request.getContextPath()%>/alan/sweet/sweetalert2.min.css">
 <script
 	src="<%=request.getContextPath()%>/alan/sweet/sweetalert2.min.js"></script>
-	
+	<!-- 星星 -->
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/_Lyy/jquery.raty.min.js"></script>
+<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
 <style>
 /* 影片區塊 */
 video {
@@ -417,7 +420,7 @@ a{text-decoration:none}
 				</div>
 				<!--星星 -->
 				<div class="col-md-2 col-xs-6"style="height:89px;border-right:1px solid #ADADAD;" >
-					
+					<div id="starTatol" style="margin: 0 auto" ></div>
 					<!--贊助 -->
 					<button type="button" class="btn btn-primary center-block "
 						style="width: 160px" data-toggle="modal" data-target="#mysponer">贊助</button>
@@ -832,7 +835,7 @@ a{text-decoration:none}
 								style="font-size: 20px">
 
 								<p>喜歡的話記得幫我們評分還有收藏唷</p>
-
+								<div id="star"></div>
 							</div>
 						</div>
 					</div>
@@ -1023,6 +1026,57 @@ a{text-decoration:none}
 	
 		})
 	</script>
+<script>
+	
+		// 	星星點評
+		$('#star').raty(
+				{
+					path : 'img',
+					width : 150,
+					starOff : 'star-off-big.png',
+					starOn : 'star-on-big.png',
+					readOnly:function(){
+						if( $('#reportMemberID').val()==""|| $('#reportMemberID').val()==null){
+							return true;
+						
+					}},
+					
+					
+					click : function(score, evt) {					
+										$.post('updateScoreController', {
+											'score' : score,
+											'memberID' : $('#reportMemberID').val(),
+											'courseID' : $('#reportCourseID').val()
+										})
+										alert("感謝你的評分!" + "\nscore: " + score );
+								}
+				});
+	</script>
 
+	<script>
+		var scoreJSON;
+		var value;
+		$(function() {
+			// 			console.log($("#mbcourseID").val())
+			$.post('countScoreController', {
+				'courseID' : $("#mbcourseID").val()
+			}, function(data) {
+				// 				console.log(data);
+				scoreJSON = JSON.parse(data);
+				// 				console.log(scoreJSON);
+				value = Math.ceil(parseFloat(scoreJSON));
+				// 				console.log(value)
+				$('#starTatol').raty({
+					path : 'img',
+					width : 150,
+					starOff : 'star-off-big.png',
+					starOn : 'star-on-big.png',
+					readOnly : true,
+					score : value,
+
+				});
+			});
+		});
+	</script>
 </body>
 </html>
