@@ -22,7 +22,7 @@
 <script src="js/jquery-ui.min.js" type="text/javascript" ></script>
 <script src="js/jdialog.min.js" type="text/javascript"></script>
 <script src="js/MODALit.min.js" type="text/javascript"></script>
-
+<link rel="Short Icon" type="image/x-icon" href="${initParam.icon}" />
 <title>eLook後台管理系統</title>
 </head>
 <style>
