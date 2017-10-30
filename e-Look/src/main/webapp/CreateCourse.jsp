@@ -7,8 +7,8 @@
 <jsp:useBean id="SYSTEM" class="init.GlobalService" scope="application" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${SYSTEM.systemName}</title>
-<link href="<%=request.getContextPath()%>/css/bootstrap.css"
-	rel="stylesheet">
+<%-- <link href="<%=request.getContextPath()%>/css/bootstrap.css" --%>
+<!-- 	rel="stylesheet"> -->
 <link href="<%=request.getContextPath()%>/_PJC/css/step1.css"
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/_PJC/css/step2.css"
@@ -450,7 +450,7 @@
 									</div>
 								</div>
 								<div class="container" style="margin-top: 2em;">
-									<div class="col-md-6">
+									<div class="col-md-7">
 										<div class="form-group col-lg-6" style="font-size: 20px;">
 											<label>定價(最低售價為$10元)</label> <input type="text"
 												name="soldPrice" class="form-control" id="soldPrice"
