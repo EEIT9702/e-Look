@@ -76,10 +76,10 @@
 		  <table id="reportTable" class="table table-bordered tstyle" style="">
                  <thead>
                     <tr>
-                       <th style="width:10%">檢舉編號</th>
+                       <th style="width:14%">檢舉留言編號</th>
                        <th style="width:20%">檢舉內容</th>
                        <th style="width:22%">留言內容</th>
-                       <th style="width:20%">檢舉時間</th>
+                       <th style="width:16%">檢舉時間</th>
                        <th style="width:10%">檢舉狀態</th>
                        <th style="width:18%">管理</th>
                     </tr>
@@ -89,8 +89,8 @@
                   <tfoot style="border-top:none">
 <!-- 	                 <form> -->
 	                 <tr>
+	                  <td><button type="button" value="hideHistory" onclick="self.location.href='breport-course.jsp'" class="btn btn-info">檢舉課程管理</button></td>
 	                  <td><input type="hidden" id="" name=""><span></span></td>
-	                  <td><button type="button" value="hideHistory" onclick="self.location.href='back_report_history-v2.jsp'" class="btn btn-info">檢舉課程管理</button></td>
 	                  <td><input type="hidden" id="" name=""><span></span></td>
 	                  <td><input type="hidden" id="" name=""><span></span></td>
 	                  <td><input type="hidden" id="" name=""><span></span></td>

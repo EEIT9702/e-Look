@@ -1,4 +1,4 @@
-package com.e_Look.reportMessage.control;
+package com.e_Look.ReportCourse.control;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,19 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.e_Look.reportMessage.model.ReportMessageService;
+import com.e_Look.ReportCourse.model.ReportCourseService;
 
 /**
- * Servlet implementation class ReportMessageControl
+ * Servlet implementation class ReportCourseControl
  */
-@WebServlet("/backstage/ReportMessageControl")
-public class ReportMessageControl extends HttpServlet {
+@WebServlet("/backstage/ReportCourseControl")
+public class ReportCourseControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		doPost(request, response);
 	}
@@ -29,7 +29,7 @@ public class ReportMessageControl extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
 		response.setHeader("Access-Control-Allow-Origin", "*");
@@ -37,37 +37,35 @@ public class ReportMessageControl extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		//用來到時使用out.println()把JSON格式輸出到網頁上
 		PrintWriter out = response.getWriter();
-
+		
 		/***************************1.接收請求參數****************************************/
 		int status = new Integer(request.getParameter("status"));
 		System.out.println("status = " + status);
-		Integer reportID=null;
+		Integer reportID = null;
 		/***************************2.開始查詢資料*****************************************/
-		//獲得點擊"遮蔽留言"或"不處理"所傳來的對應reportID
+		//獲得點擊"下架影片"或"不處理"所傳來的對應reportID
 		String reportIDSTR = request.getParameter("reportIDx");
-		if(status == 1){
-			System.out.println("status == 1");
+		if(status == 6){
+			System.out.println("status == 6");
 			if(reportIDSTR != null){
 				System.out.println("reportIDSTR = " + reportIDSTR);
 				reportID = Integer.parseInt(reportIDSTR);
-				//使用Service並傳入對應的reportID以及對 Message欄位所做出的判斷status
-				ReportMessageService rmServ = new ReportMessageService();
+				//使用Service並傳入對應的reportID以及對 Course欄位所做出的判斷status
+				ReportCourseService rcServ = new ReportCourseService();
 				System.out.println(reportID+"*****"+status);
-				rmServ.hideMessage(reportID,status);
+				rcServ.discontinuedCourse(reportID, status);
 			}
 		}else if(status == 2){
 			if(reportIDSTR != null){
 				reportID = Integer.parseInt(reportIDSTR);
-				//使用Service並傳入對應的reportID以及對 Message欄位所做出的判斷status
-				ReportMessageService rmServ = new ReportMessageService();
-				rmServ.jugeMessage(reportID,status);
+				//使用Service並傳入對應的reportID以及對 Course欄位所做出的判斷status
+				ReportCourseService rcServ = new ReportCourseService();
+				rcServ.jugeCourse(reportID, status);
 			}
 		}
-
 		
-		//使用Service,取出資料庫包裝好的JSON資料並輸出
-		ReportMessageService rmService = new ReportMessageService();
-		String jsonObj = rmService.getJSON(status);
+		ReportCourseService rcService = new ReportCourseService();
+		String jsonObj = rcService.getJSON(status);
 		out.println(jsonObj);
 	}
 
