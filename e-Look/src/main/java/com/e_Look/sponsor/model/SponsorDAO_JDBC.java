@@ -1,10 +1,12 @@
 package com.e_Look.sponsor.model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +20,7 @@ public class SponsorDAO_JDBC implements SponsorDAO_interface {
 	//String passwd = "123456";
 	
 	private static final String INSERT_SPONSOR =
-			"INSERT INTO Sponsor (courseID, SponsorName, money) VALUES (?,?,?) ";
+			"INSERT INTO Sponsor (courseID, SponsorName, money,dateSponsor) VALUES (?,?,?,?) ";
 	//寫著,但應該用不到
 	private static final String UPDATE_SPONSOR =
 			"UPDATE Sponsor SET SponsorName=?, money=? WHERE courseID=?";
@@ -26,9 +28,9 @@ public class SponsorDAO_JDBC implements SponsorDAO_interface {
 	private static final String DELETE_SPONSOR =
 		    "DELETE FROM Sponsor WHERE courseID =?";
 	private static final String SELECT_ONE_SPONSOR =
-			"SELECT courseID, SponsorName, money FROM Sponsor WHERE courseID=?";
+			"SELECT courseID, SponsorName, money,dateSponsor FROM Sponsor WHERE courseID=?";
 	private static final String SELECT_ALL_SPONSOR =
-			"SELECT courseID, SponsorName, money FROM Sponsor";
+			"SELECT courseID, SponsorName, money,dateSponsor FROM Sponsor";
 
 	@Override
 	public void insert(SponsorVO sponsorVO) {
@@ -41,6 +43,7 @@ public class SponsorDAO_JDBC implements SponsorDAO_interface {
 			pstmt.setInt(1, sponsorVO.getCourseID());
 			pstmt.setString(2, sponsorVO.getSponsorName());
 			pstmt.setInt(3, sponsorVO.getMoney());
+			pstmt.setDate(4, sponsorVO.getDateSponsor());
 			pstmt.executeUpdate();
 			
 			// Handle any driver errors
@@ -289,6 +292,7 @@ public class SponsorDAO_JDBC implements SponsorDAO_interface {
 				sponsorVO.setCourseID(rs.getInt("courseID"));
 				sponsorVO.setSponsorName(rs.getString("sponsorName"));
 				sponsorVO.setMoney(rs.getInt("money"));
+				sponsorVO.setDateSponsor(rs.getDate("dateSponsor"));
 				list.add(sponsorVO); // Store the row in the list
 			}
 
@@ -336,6 +340,10 @@ public class SponsorDAO_JDBC implements SponsorDAO_interface {
 //		sponsorVO1.setCourseID(200001);
 //		sponsorVO1.setSponsorName("王大明");
 //		sponsorVO1.setMoney(3000);
+//		SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
+//		Date date=Date.valueOf(sdf.format(System.currentTimeMillis()));
+//		System.out.println(date);
+//		sponsorVO1.setDateSponsor(date);
 //		dao.insert(sponsorVO1);
 		
 		//修改
@@ -357,15 +365,17 @@ public class SponsorDAO_JDBC implements SponsorDAO_interface {
 		
 		
 		//查詢課程募款金額
-		List<SponsorVO> list = dao.getCountMoney(200001);
-		int count=0;
-		for(SponsorVO sponsorVO : list){
+//		List<SponsorVO> list = dao.getCountMoney(200001);
+//		int count=0;
+//		for(SponsorVO sponsorVO : list){
 //			System.out.print(sponsorVO.getCourseID() + "  ");
 //			System.out.print(sponsorVO.getSponsorName() + "  ");
-			System.out.print(sponsorVO.getMoney());
-			count+=sponsorVO.getMoney();
-		}
-		System.out.println(count);
+//			
+//			System.out.print(sponsorVO.getMoney()+"  ");
+//			System.out.print(sponsorVO.getDateSponsor());
+//			count+=sponsorVO.getMoney();
+//		}
+//		System.out.println(count);
 //		System.out.println("---------------------------");
 		
 		//查詢全部
@@ -373,7 +383,8 @@ public class SponsorDAO_JDBC implements SponsorDAO_interface {
 //		for(SponsorVO sponsorVO : list){
 //			System.out.print(sponsorVO.getCourseID() + "  ");
 //			System.out.print(sponsorVO.getSponsorName() + "  ");
-//			System.out.println(sponsorVO.getMoney());
+//			System.out.print(sponsorVO.getMoney()+" ");
+//			System.out.println(sponsorVO.getDateSponsor());
 //		}
 	}
 
