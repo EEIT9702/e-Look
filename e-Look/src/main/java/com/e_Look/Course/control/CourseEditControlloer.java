@@ -60,6 +60,7 @@ public class CourseEditControlloer extends HttpServlet {
 		}
 		
 		
+		
 		 else {			
 				Integer courseID = Integer.valueOf(request.getParameter("courseID"));
 				CourseService courseService = new CourseService();

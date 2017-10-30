@@ -60,7 +60,7 @@ public class ReportMessageControl extends HttpServlet {
 				reportID = Integer.parseInt(reportIDSTR);
 				//使用Service並傳入對應的reportID以及對 Message欄位所做出的判斷status
 				ReportMessageService rmServ = new ReportMessageService();
-				rmServ.judeMessage(reportID,status);
+				rmServ.jugeMessage(reportID,status);
 			}
 		}
 

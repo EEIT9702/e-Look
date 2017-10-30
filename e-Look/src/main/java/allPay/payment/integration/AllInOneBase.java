@@ -1,6 +1,7 @@
 ﻿package allPay.payment.integration;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.net.URLDecoder;
 
 import org.w3c.dom.Document;
@@ -31,11 +32,12 @@ public class AllInOneBase {
 	protected static String[] ignorePayment;
 	public AllInOneBase() throws UnsupportedEncodingException{
 		Document doc;
-		
+		 String confPath = "/payment_conf.xml";
 		/* when using web project, please use the following code with try/catch wrapped*/
-			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-			String configPath = URLDecoder.decode(classLoader.getResource("/payment_conf.xml").getPath(), "UTF-8");
-			doc = AllPayFunction.xmlParser(configPath);
+			//ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+			//String configPath = URLDecoder.decode(classLoader.getResource("/payment_conf.xml").getPath(), "UTF-8");
+			URL fileURL = this.getClass().getResource(confPath);
+			doc = AllPayFunction.xmlParser(fileURL.toString());
 		/* when using testing code*/
 //		String paymentConfPath = "./src/main/resources/payment_conf.xml";
 //		doc = AllPayFunction.xmlParser(paymentConfPath);

@@ -7,8 +7,8 @@
 <jsp:useBean id="SYSTEM" class="init.GlobalService" scope="application" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${SYSTEM.systemName}</title>
-<link href="<%=request.getContextPath()%>/css/bootstrap.css"
-	rel="stylesheet">
+<%-- <link href="<%=request.getContextPath()%>/css/bootstrap.css" --%>
+<!-- 	rel="stylesheet"> -->
 <link href="<%=request.getContextPath()%>/_PJC/css/step1.css"
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/_PJC/css/step2.css"
@@ -250,7 +250,7 @@
 									</div>
 								</div>
 
-
+								
 								<!-- step1最終確認按鈕 -->
 								<div class="col-md-offset-3" style="margin-top: 20px">
 									<button type="button"
@@ -450,7 +450,7 @@
 									</div>
 								</div>
 								<div class="container" style="margin-top: 2em;">
-									<div class="col-md-6">
+									<div class="col-md-7">
 										<div class="form-group col-lg-6" style="font-size: 20px;">
 											<label>定價(最低售價為$10元)</label> <input type="text"
 												name="soldPrice" class="form-control" id="soldPrice"
@@ -1222,12 +1222,12 @@ $('#starttime').on('input propertychange',function(e) {
 		// =====================================
 
 		//用goGet方法送到CourseEditControlloer，改變草稿的狀態	
-// 		$('#postProposalfinal').click(function() {
-// 			$.get('/e-Look/com.e_Look.Course.control/CourseEditControlloer', {
-// 				'courseID' : $('#courseID').val()
-// 			}, function() {
-// 			})
-// 		})
+		$('#postProposalfinal').click(function() {
+			$.get('/e-Look/com.e_Look.Course.control/CourseEditControlloer', {
+				'courseID' : $('#courseID').val()
+			}, function() {
+			})
+		})
 		//======================================================
 			
 		//用goGet方法送到CourseEditControlloer，取得目前資料庫存入的課程內容	
@@ -1360,31 +1360,31 @@ $('#starttime').on('input propertychange',function(e) {
 										}
 									})
 						})
-						//===============================================================
-							
-						$('#soldPrice').keyup(function(){
-								if($('#soldPrice').val()<10){
-									$('#soldPricewarning').text("請輸入大於10的數字")
-								}else{
-									$('#soldPricewarning').text("")
-								}
-							})
-						$('#targetStudentNumber,#soldPrice').keyup(function(){
-							if($('#targetStudentNumber').val()!=0){
-								if($('#targetStudentNumber').val()<10){
-									$('#targetStudentNumberwarning').text("請輸入大於10的數字");
-									$('#targetStudentNumberwarning').css(  "color", "red" );
-								}
-								else{
-									$('#targetStudentNumberwarning').css( "color", "black" );
-									$('#targetStudentNumberwarning').text(("即開設本次課程的最低成本為"+parseInt($('#targetStudentNumber').val()*0.56*($('#soldPrice').val()))+"元"));
-								}
-							}else {
-								$('#targetStudentNumberwarning').text("");
-								$('#targetStudentNumberwarning').empty();
-							}
-								
-							})
+//===============================================================
+	
+$('#soldPrice').keyup(function(){
+		if($('#soldPrice').val()<10){
+			$('#soldPricewarning').text("請輸入大於10的數字")
+		}else{
+			$('#soldPricewarning').text("")
+		}
+	})
+$('#targetStudentNumber,#soldPrice').keyup(function(){
+	if($('#targetStudentNumber').val()!=0){
+		if($('#targetStudentNumber').val()<10){
+			$('#targetStudentNumberwarning').text("請輸入大於10的數字");
+			$('#targetStudentNumberwarning').css(  "color", "red" );
+		}
+		else{
+			$('#targetStudentNumberwarning').css( "color", "black" );
+			$('#targetStudentNumberwarning').text(("即開設本次課程的最低成本為"+parseInt($('#targetStudentNumber').val()*0.56*($('#soldPrice').val()))+"元"));
+		}
+	}else {
+		$('#targetStudentNumberwarning').text("");
+		$('#targetStudentNumberwarning').empty();
+	}
+		
+	})
 	//課程送出前警告視窗=================================					
 	$('[data-toggle="confirmation"]').confirmation({ 
 		title: 'Confirm!',

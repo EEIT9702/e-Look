@@ -15,10 +15,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>檢舉管理畫面</title>
+<link rel="Short Icon" type="image/x-icon" href="${initParam.icon}" />
+<title>遮蔽留言紀錄</title>
 <script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script>
 <!-- <script type="text/javascript" src="css/jquery.mmenu.js"></script> -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/table2.css">
 
 <style>
 .rtitle{
@@ -54,6 +56,9 @@
 /* 	valign="center; */
 /* 	valign="middle; */
 }
+#reportTable>tbody td{
+	vertical-align:middle;
+}
 </style>
 </head>
 <body>
@@ -61,7 +66,7 @@
 <section id="wrapper">
 <header>
 	<div class="inner">
-		<h2>檢舉管理</h2>
+		<h2>遮蔽留言紀錄</h2>
 		
 	</div>
 </header>
@@ -72,7 +77,7 @@
 		  <table id="reportTable" class="table table-bordered tstyle" style="">
                  <thead>
                     <tr>
-                       <th style="width:18%">檢舉編號</th>
+                       <th style="width:18%">檢舉留言編號</th>
                        <th style="width:27%">檢舉內容</th>
                        <th style="width:27%">留言內容</th>
                        <th style="width:28%">檢舉時間</th>
@@ -82,17 +87,20 @@
                  </thead>
                    <tbody>
                  </tbody>
-                  <tfoot>
-                 	<form>
-		                 <tr>
-			                  <td><input type="hidden" id="" name=""><span></span></td>
-			                  <td><input type="hidden" id="" name=""><span></span></td>
-			                  <td><input type="hidden" id="" name=""><span></span></td>
-			                  <td><button type="button" value="back_report" onclick="self.location.href='back_report-v2.jsp'" class="btn btn-success">檢舉管理</button></td>
-						</tr>
-	                 </form>
-                  </tfoot>
+<!--                   <tfoot style="border-top:none"> -->
+<!--                  	<form> -->
+<!-- 		                 <tr> -->
+<!-- 			                  <td><input type="hidden" id="" name=""><span></span></td> -->
+<!-- 			                  <td><input type="hidden" id="" name=""><span></span></td> -->
+<!-- 			                  <td><input type="hidden" id="" name=""><span></span></td> -->
+<!-- 			                  <td><button type="button" value="back_report" onclick="self.location.href='back_report-v2.jsp'" class="btn btn-success">檢舉留言管理</button></td> -->
+<!-- 						</tr> -->
+<!-- 	                 </form> -->
+<!--                   </tfoot> -->
             </table>
+   			<div class="col-md-3" style="float:right;margin-bottom:30px;">
+				<button type="button" value="hideHistory" onclick="self.location.href='back_report-v2.jsp'" class="btn btn-success" style="margin-right:68px;">檢舉留言管理</button>
+			</div>
 		</div>
 
 </div>

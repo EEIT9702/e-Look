@@ -52,7 +52,7 @@ public class OrderEdit extends HttpServlet {
 		}else{
 			Integer courseID=Integer.parseInt(request.getParameter("courseID"));
 			CourseVO courseVO=cdao.findByPrimaryKey(courseID);
-			OrderDetailsVO odVO = new OrderDetailsVO(orderVO.getOrderID(),courseVO , BuyingPrice.getBuyingPrice(courseID), courseVO.getSoldPrice());
+			OrderDetailsVO odVO = new OrderDetailsVO(orderVO,courseVO , BuyingPrice.getBuyingPrice(courseID), courseVO.getSoldPrice());
 			oddao.delete(odVO);
 		}
 		

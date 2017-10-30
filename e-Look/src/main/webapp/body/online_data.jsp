@@ -23,11 +23,11 @@
 
 
 <!--課程類別forEach Star -->
-<c:forEach var='freeCourse' items='${course.allonlineCourse}'>
+<%-- <c:forEach var='freeCourse' items='${course.allonlineCourse}'> --%>
 <%-- <c:if test="${courseClass.byCourseClassID == ${param.courseClass}"> --%>
 	
 <!--線上課程forEach Star -->
-<c:forEach var='onlineCourse' items='${course.allonlineCourse}'>
+<c:forEach var='onlineCourse' items='${course.allonlineCourse}' begin="${param.rowValueY}" end="${param.rowValueY + 3}">
 <c:if test="${onlineCourse.soldPrice > 0}">
 	<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width:341px;margin-bottom:20px;">
 		<div class="card card-inverse" style="background-color: white;">
@@ -39,7 +39,7 @@
 					<img src="<%=request.getContextPath() %>/Image?MemberID=${onlineCourse.memberID}" class="profile-avatar" alt="">
 				</figure>
 				<div class="card-text">
-					<a style="text-decoration: none; color: black"; href="<%=request.getContextPath() %>/onlineCourse-v2.jsp?CourseID=${freeCourse.courseID}">
+					<a style="text-decoration: none; color: black"; href="<%=request.getContextPath() %>/onlineCourse-v2.jsp?CourseID=${onlineCourse.courseID}">
 						<p id="title" class="card-title mt-3 multi_ellipsis">${onlineCourse.courseName}&nbsp;類別:${param.courseClass}</p>
 					</a>
 				</div>
@@ -60,7 +60,7 @@
 <!--線上課程forEach End -->
 
 <%-- </c:if> --%>
-</c:forEach>
+<%-- </c:forEach> --%>
 <!--課程類別forEach End -->
 
 

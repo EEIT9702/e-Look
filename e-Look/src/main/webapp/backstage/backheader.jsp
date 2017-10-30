@@ -6,7 +6,9 @@
 		<title>Generic - Solid State by HTML5 UP</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+<%-- 		<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-3.3.7-dist/css/bootstrap.css"> --%>
 		<link rel="stylesheet" href="assets/css/main.css" />
+		
 			<body>
 <!-- Header -->
 					<header id="header">
@@ -22,8 +24,8 @@
 							<ul class="links">
 								<li><a href="event.jsp">活動管理</a></li>
 								<li><a href="backAd.jsp">輪播管理</a></li>
-								<li><a href="#">課程審查</a></li>
-								<li><a href="#">收益報表</a></li>
+								<li><a href="CourseReview.jsp">課程審查</a></li>
+								<li><a href="backMoney.jsp">收益報表</a></li>
 								<li><a href="back_report-v2.jsp">檢舉管理</a></li>
 								<li><a href="backLogin.jsp">登出</a></li>
 							</ul>
