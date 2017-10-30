@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.sql.Date;
 import java.util.List;
 
+import com.e_Look.Course.CourseVO;
 import com.e_Look.CourseClassDetails.CourseClassDetailsDAO;
 import com.e_Look.CourseClassDetails.CourseClassDetailsVO;
 import com.e_Look.CourseClassDetails.CourseClassDetails_interface;
@@ -132,14 +133,17 @@ public class OrderSystemService {
 		int count = 0;
 		for(CourseClassVO ccVO:ccVOs){
 			List<CourseClassDetailsVO> ccdVOs = courseClassDetailsDAO.findBycourseClassID(ccVO.getCourseClassID());
+			Integer money = 0;
 			for(CourseClassDetailsVO ccdVO:ccdVOs){
-				ccdVO.getCourseVO();
-				
+				List<OrderDetailsVO> orderDetailsVOs = orderDetailsDAO.findByCourseID(ccdVO.getCourseVO().getCourseID());
+				for(OrderDetailsVO orderDetailsVO:orderDetailsVOs){
+					if(orderDetailsVO.getOrderVO().getOrderTime()!=null){
+						money+=orderDetailsVO.getBuyingPrice();
+					}
+				}
 			}
-			
-			
-			
-			
+			cMoney[count]=money;
+			count++;
 		}
 		return cMoney;
 	}
