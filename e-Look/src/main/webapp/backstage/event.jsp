@@ -19,7 +19,7 @@
   <script src="js/jquery.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
   <script src="js/jdialog.min.js" type="text/javascript"></script>
-
+<link rel="Short Icon" type="image/x-icon" href="${initParam.icon}" />
 <title>eLook後台管理系統</title>
 <style type="text/css">
 #delete{width: 200px;

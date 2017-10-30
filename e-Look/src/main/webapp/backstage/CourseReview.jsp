@@ -188,30 +188,30 @@ $(document).ready(function () {
 });
 
 
-//審核通過=================================================================
-$('#ReviewAllCourse>tbody').on('click','td>a:nth-child(1)',function(){
-	var id = $(this).parents('tr').find('td:nth-child(3)').text();
-	console.log(id);
-})
-//========================================================================
 
-	
-//審核不過，退回變成草稿====================================================
-$('#ReviewAllCourse>tbody').on('click','td>a:nth-child(2)',function(){
-	var id = $(this).parents('tr').find('td:nth-child(3)').text();
-	console.log(id);
-	$.get('/e-Look/com.e_Look.Course.control/CourseEditControlloer',{'courseID':id,"changeBacktoStatus0":"xxxxxxxxxx"},function(){
-		
-	})
-})
-//========================================================================	
-	
+
 
 
 $(function(){
 	loadReviewData();
-	
-	
+	//審核不過，退回變成草稿====================================================
+	$('#ReviewAllCourse>tbody').on('click','td>a:nth-child(2)',function(){
+		var id = $(this).parents('tr').find('td:nth-child(3)').text();
+		console.log(id+"此課程已變更為草稿狀態");
+		$.get('/e-Look/com.e_Look.Course.control/CourseEditControlloer',{'courseID':id,"rollbackEditorStatus":"xxxxxxxxxx"},function(){
+			loadReviewData();
+		})
+	})
+	//========================================================================	
+	//審核通過=================================================================
+	$('#ReviewAllCourse>tbody').on('click','td>a:nth-child(1)',function(){
+		var id = $(this).parents('tr').find('td:nth-child(3)').text();
+		console.log(id+"此課程已審核通過");
+		$.get('/e-Look/com.e_Look.Course.control/CourseEditControlloer',{'courseID':id,"changeStatustoOnlineStatus":"xxxxxxxxxx"},function(){
+			loadReviewData();
+		})
+	})
+	//========================================================================
 	
 })
 function loadReviewData(){
