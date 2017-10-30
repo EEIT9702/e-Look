@@ -347,10 +347,9 @@ function river(){
 	//判斷卷軸是否到底部
 	//有時候卷軸會多0.5  改>=的寫法可以解決這個問題
 	if( wst>=(dh-wh) || rowValueX==0 ){
-		rowValueX++;
 		$.get("<%= request.getContextPath() %>/body/fundraising_data.jsp",{"rowValueY":rowValueX,"keyWord":keyWord,"courseClass":courseClass},function(data){
 			$('#river').append(data)
-			
+			rowValueX += 4;
 		});
 	}
 }
