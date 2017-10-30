@@ -896,6 +896,7 @@ a{
 								style="font-size: 20px">
 								<p>喜歡的話記得幫我們評分還有收藏唷</p><span id="noLogin"></span>
 								<div id="star"></div>
+<%-- 								<input type="hidden" value="${list2.course}" id="buyCourseID"> --%>
 							</div>
 
 						</div>
