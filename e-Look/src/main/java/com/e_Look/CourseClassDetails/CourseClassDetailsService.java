@@ -15,7 +15,7 @@ public class CourseClassDetailsService {
 		List<CourseClassDetailsVO> freeccdVOs = new LinkedList<CourseClassDetailsVO>();
 		
 		for(CourseClassDetailsVO ccdVO : ccdVOs){
-			if(ccdVO.getCourseVO().getSoldPrice() == 0){
+			if(ccdVO.getCourseVO().getSoldPrice() == 0 && ccdVO.getCourseVO().getStatus() == 2){
 				freeccdVOs.add(ccdVO);
 			}
 		}
@@ -27,7 +27,7 @@ public class CourseClassDetailsService {
 		List<CourseClassDetailsVO> onlineccdVOs = new LinkedList<CourseClassDetailsVO>();
 		
 		for(CourseClassDetailsVO ccdVO : ccdVOs) {
-			if(ccdVO.getCourseVO().getSoldPrice() > 0) {
+			if(ccdVO.getCourseVO().getSoldPrice() > 0 && ccdVO.getCourseVO().getStatus() == 2) {
 				onlineccdVOs.add(ccdVO);
 			}
 		}
