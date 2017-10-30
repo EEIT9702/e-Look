@@ -22,11 +22,11 @@
 	</properties>
 	<dependencies>
 	<!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
-<!-- <dependency> -->
-<!--     <groupId>com.microsoft.sqlserver</groupId> -->
-<!--     <artifactId>mssql-jdbc</artifactId> -->
-<!--     <version>6.2.1.jre7</version> -->
-<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.microsoft.sqlserver</groupId> -->
+		<!-- <artifactId>mssql-jdbc</artifactId> -->
+		<!-- <version>6.2.1.jre7</version> -->
+		<!-- </dependency> -->
 
 		<!-- spring -->
 		<dependency>
@@ -117,9 +117,9 @@
 		</dependency>
 		<!-- simple.JSON -->
 		<dependency>
-		    <groupId>com.googlecode.json-simple</groupId>
-		    <artifactId>json-simple</artifactId>
-		    <version>1.1</version>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1</version>
 		</dependency>
 		<!-- commons-lang -->
 		<dependency>
@@ -155,7 +155,11 @@
 			<version>${log4jVersion}</version>
 			<scope>compile</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20090211</version>
+		</dependency>
 		<!--專題jar -->
 		<dependency>
 			<groupId>commons-io</groupId>

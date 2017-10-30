@@ -344,15 +344,15 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 		//刪除
 //		dao.delete(1007);
 		//查詢單一
-//		MessageVO messageVO3=dao.findByPrimaryKey(200001);
-//		System.out.println(messageVO3.getMessageID());
-//		System.out.println(messageVO3.getmContent());
-//		System.out.println(messageVO3.getmTime());
-//		System.out.println(messageVO3.getMessageID_response());
-//		System.out.println(messageVO3.getMemberID());
-//		System.out.println(messageVO3.getCourseID());
-//		System.out.println(messageVO3.getBought());
-//		System.out.println(messageVO3.getStatus());
+		MessageVO messageVO3=dao.findByPrimaryKey(200001);
+		System.out.println(messageVO3.getMessageID());
+		System.out.println(messageVO3.getmContent());
+		System.out.println(messageVO3.getmTime());
+		System.out.println(messageVO3.getMessageID_response());
+		System.out.println(messageVO3.getMemberID());
+		System.out.println(messageVO3.getCourseID());
+		System.out.println(messageVO3.getBought());
+		System.out.println(messageVO3.getStatus());
 
 		//查詢全部會員
 //		List<MessageVO> list=dao.getAll();
@@ -370,6 +370,12 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 //	
 
 
+	}
+
+	@Override
+	public List<MessageVO> findByPrimaryKeyM(Integer courseID) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

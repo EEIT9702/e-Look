@@ -24,7 +24,11 @@ f<%@ page language="java" contentType="text/html; charset=UTF-8"
 	href="<%=request.getContextPath()%>/alan/sweet/sweetalert2.min.css">
 <script
 	src="<%=request.getContextPath()%>/alan/sweet/sweetalert2.min.js"></script>
-
+<!-- 星星 -->
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/_Lyy/jquery.raty.min.js"></script>
+<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<%-- <link type="text/css" rel="stylesheet"	href="<%=request.getContextPath()%>/_Lyy/application.css"> --%>
 <style>
 /* 影片區塊 */
 video {
@@ -35,7 +39,7 @@ video {
 #videoArea {
 	background-size: cover;
 	background-position: center;
-	height: 62%;
+	height: 510px;
 }
 
 #videoliststyle>li {
@@ -49,7 +53,7 @@ video {
 #videoArea>div>div>ul {
 	width: 100%;
 	color: white;
-	height: 83.2%;
+	height: 85.2%;
 	overflow-y: scroll;
 	margin: 0;
 	padding: 0;
@@ -83,19 +87,15 @@ video::-webkit-media-controls-panel {
 	text-align: center;
 	font-weight: bold;
 }
-
+/* 下方功能 (簡介)*/
 .tab .nav-tabs {
 	position: relative;
 	border-bottom: none;
 }
 
-/* .tab .nav-tabs li { */
-/* 	text-align: center; */
-/* 	margin-right: 10px; */
-/* } */
 .tab .nav-tabs li a {
 	display: block;
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: 600;
 	color: #444;
 	padding: 10px 15px;
@@ -160,16 +160,13 @@ video::-webkit-media-controls-panel {
 	margin-top: 0;
 }
 
-.star {
-	-webkit-filter: grayscale(1);
-}
-
-.nstar {
-	-webkit-filter: grayscale(0);
-}
-/* video::-webkit-media-controls { */
-/*   display:none; */
+/* .star { */
+/* 	-webkit-filter: grayscale(1); */
 /* } */
+/* .nstar { */
+/* 	-webkit-filter: grayscale(0); */
+/* } */
+/* 留言板 */
 #messageHeader {
 	border: 1px solid black;
 	border-radius: 15px;
@@ -180,10 +177,7 @@ video::-webkit-media-controls-panel {
 	width: 50px;
 }
 
-a:HOVER {
-	color: white;
-}
-
+/* 檢舉留言 */
 #radioReporter {
 	padding-left: 50px;
 }
@@ -191,6 +185,15 @@ a:HOVER {
 #radioReporter>span {
 	font-size: 20px;
 	padding-left: 5px;
+}
+/* <!--課程售價 --> */
+#soldPrice {
+	border-right: 1px solid #ADADAD;
+	border-left: 1px solid #ADADAD;
+}
+
+a {
+	text-decoration: none
 }
 </style>
 </head>
@@ -222,6 +225,7 @@ a:HOVER {
 							<c:choose>
 								<c:when test="${courseVO.courseID==buycourse.courseID}">
 										<c:set var="control" value="controls=controls" />
+										<c:set var="poster" value="" />
 										<c:set var="boo" value="true" />
 								</c:when>
 								<c:when test="${!empty boo}">
@@ -275,7 +279,7 @@ a:HOVER {
 	<!-- 人數、時間 等等-->
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-12" style="margin-top: 20px">
 				<!--空-->
 				<div class="col-md-1 "></div>
 				<!--課程人數 -->
@@ -367,11 +371,19 @@ a:HOVER {
 				</div>
 				<!--講義下載 -->
 				<div class="col-md-1 col-xs-4 ">
-					<a href="#"> <img
+					<c:if test="${!empty courseVO.paper}">
+					<a href="<%=request.getContextPath()%>/Paper?CourseID=${courseVO.courseID}"> <img
 						src="<%=request.getContextPath()%>/_Lyy/001-download.png"
 						class="img-responsive center-block">
 						<h5 class="text-center">講義下載</h5>
 					</a>
+				</c:if>
+				<c:if test="${empty courseVO.paper}">
+					<img
+						src="<%=request.getContextPath()%>/_Lyy/001-download.png"
+						class="img-responsive center-block">
+						<h5 class="text-center">講義下載</h5>
+					</c:if>
 				</div>
 				<!--影片檢舉 -->
 				<c:if test="${empty LoginOK}">
@@ -451,48 +463,40 @@ a:HOVER {
 					</div>
 				</c:if>
 				<!--課程售價 -->
-				<div class="col-md-2 col-xs-6 ">
+				<div class="col-md-2 col-xs-6 " id="soldPrice">
 					<h5>課程售價</h5>
 					<h2 style="text-align: center; font-weight: bold;">NT${courseVO.soldPrice}</h2>
 				</div>
 				<!--星星 -->
-				<div class="col-md-2 col-xs-6 center-block">
-					<div style="width: 70px; margin: 0 auto">
-						<img id="idstar1" class="star"
-							src="<%=request.getContextPath()%>/star/ystar.png" /> <img
-							id="idstar2" class="star"
-							src="<%=request.getContextPath()%>/star/ystar.png" /> <img
-							id="idstar3" class="star "
-							src="<%=request.getContextPath()%>/star/ystar.png" /> <img
-							id="idstar4" class="star "
-							src="<%=request.getContextPath()%>/star/ystar.png" /> <img
-							id="idstar5" class="star "
-							src="<%=request.getContextPath()%>/star/ystar.png" />
-					</div>
+				<div class="col-md-2 col-xs-6"
+					style="height: 89px; border-right: 1px solid #ADADAD;">
 
-
+					<div id="starTatol" style="margin: 0 auto" ></div>
 					<!-- 		加入購物車 -->
 					<c:if test="${empty LoginOK}">
 						<c:choose>
 							<c:when test="${!empty loginerr}">
-								<a href="#" href="#" data-toggle="modal" data-target="#myModal2">
-									<button id="intoShoppingCart" type="button"
-										class="btn btn-success center-block" style="width: 160px">加入購物車</button>
-								</a>
+
+								<button id="intoShoppingCart" type="button" data-toggle="modal"
+									data-target="#myModal2" class="btn btn-success center-block"
+									style="width: 160px">加入購物車</button>
+
 							</c:when>
 							<c:when test="${empty err}">
 
-								<a href="#" href="#" data-toggle="modal" data-target="#myModal">
-									<button id="intoShoppingCart" type="button"
-										class="btn btn-success center-block" style="width: 160px">加入購物車</button>
-								</a>
+
+								<button id="intoShoppingCart" type="button" data-toggle="modal"
+									data-target="#myModal" class="btn btn-success center-block"
+									style="width: 160px">加入購物車</button>
+
 
 							</c:when>
 							<c:otherwise>
-								<a href="#" href="#" data-toggle="modal" data-target="#myModal2">
-									<button id="intoShoppingCart" type="button"
-										class="btn btn-success center-block" style="width: 160px">加入購物車</button>
-								</a>
+
+								<button id="intoShoppingCart" type="button" data-toggle="modal"
+									data-target="#myModal" class="btn btn-success center-block"
+									style="width: 160px">加入購物車</button>
+
 							</c:otherwise>
 						</c:choose>
 					</c:if>
@@ -506,15 +510,13 @@ a:HOVER {
 								<c:forEach var="buycourse" items='${list2}'>
 									<c:choose>
 										<c:when test="${courseVO.courseID==buycourse.courseID}">
-											<button type="button"
-												class="btn btn-success center-block "
+											<button type="button" class="btn btn-success center-block "
 												style="width: 160px" disabled="disabled">已擁有</button>
 										</c:when>
 										<c:when test="${!empty boo}"></c:when>
 										<c:otherwise>
 											<button id="intoShoppingCart" type="button"
-												class="btn btn-success center-block "
-												style="width: 160px">加入購物車</button>
+												class="btn btn-success center-block " style="width: 160px">加入購物車</button>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
@@ -527,7 +529,9 @@ a:HOVER {
 
 					</c:if>
 					<!-- 加入購物車結束 -->
+
 				</div>
+
 			</div>
 		</div>
 	</div>
@@ -551,7 +555,7 @@ a:HOVER {
 								aria-controls="messages" role="tab" data-toggle="tab">點評收藏</a></li>
 						</ul>
 						<!-- 課程簡介 -->
-						<div class="tab-content tabs">
+						<div class="tab-content tabs"> 
 							<div role="tabpanel" class="tab-pane fade in active"
 								id="Section1" style="font-size: 20px">
 								<c:if test="${!empty courseVO.preTool}">
@@ -583,7 +587,7 @@ a:HOVER {
 										<figure>
 											<img
 												src="<%=request.getContextPath() %>/Image?MemberID=${memberVo.memberID}"
-												class="img-thumbnail center-block img-circle"  />
+												class="img-thumbnail center-block img-circle" />
 											<div style="text-align: center">${memberVo.mName}</div>
 										</figure>
 										<div>
@@ -610,11 +614,14 @@ a:HOVER {
 													</c:otherwise>
 												</c:choose>
 											</c:if>
+
 											<c:if test="${!empty LoginOK}">
-												<c:if test="${!empty memberSubscription}">													
-													<c:forEach items="${memberSubscription}" var="memberSubscription">
+												<c:if test="${!empty memberSubscription}">
+													<c:forEach items="${memberSubscription}"
+														var="memberSubscription">
 														<c:choose>
-															<c:when	test="${memberSubscription.memberTrackID==courseVO.memberID}">
+															<c:when
+																test="${memberSubscription.memberTrackID==courseVO.memberID}">
 																<c:set var="disabled" value="disabled" />
 																<c:set var="subName" value="已追蹤講師" />
 																<c:set var="sub1" value="ture" />
@@ -630,16 +637,19 @@ a:HOVER {
 												</c:if>
 												<c:if test="${empty memberSubscription}">
 													<c:set var="disabled" value="" />
-														<c:set var="subName" value="追蹤講師" />
+													<c:set var="subName" value="追蹤講師" />
 												</c:if>
 												<c:if test="${courseVO.memberID==LoginOK.memberID}">
 													<c:set var="disabled" value="disabled" />
 													<c:set var="subName" value="本人" />
 												</c:if>
-												<button type="button" class="btn btn-info" ${disabled} style="width: 100%" id="subAction">${subName}</button>
-												<input type="hidden" id="coursevoMemeberID" value="${courseVO.memberID}">
+												<button type="button" class="btn btn-info" ${disabled}
+													style="width: 100%" id="subAction">${subName}</button>
+												<input type="hidden" id="coursevoMemeberID"
+													value="${courseVO.memberID}">
 											</c:if>
-										
+
+
 										</div>
 									</div>
 								</c:if>
@@ -684,22 +694,25 @@ a:HOVER {
 													<span class="glyphicon glyphicon-option-horizontal"></span>
 												</button>
 												<ul class="dropdown-menu">
-												<c:if test="${empty LoginOK}">
-													<c:choose>
-														<c:when test="${!empty loginerr}">
-															<li><a href="#" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>
-														</c:when>
-														<c:when test="${empty err}">	
-															<li><a href="#" href="#" data-toggle="modal" data-target="#myModal">檢舉</a></li>
-														</c:when>
-														<c:otherwise>
-															<li><a class="reportM" href="#" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>
-														</c:otherwise>
-												</c:choose>
-												</c:if>
-												<c:if test="${!empty LoginOK}">
+													<c:if test="${empty LoginOK}">
+														<c:choose>
+															<c:when test="${!empty loginerr}">
+																<li><a href="#" href="#" data-toggle="modal"
+																	data-target="#myModal2">檢舉</a></li>
+															</c:when>
+															<c:when test="${empty err}">
+																<li><a href="#" href="#" data-toggle="modal"
+																	data-target="#myModal">檢舉</a></li>
+															</c:when>
+															<c:otherwise>
+																<li><a class="reportM" href="#" href="#"
+																	data-toggle="modal" data-target="#myModal2">檢舉</a></li>
+															</c:otherwise>
+														</c:choose>
+													</c:if>
+													<c:if test="${!empty LoginOK}">
 														<li><a class="reportM" href="#">檢舉</a></li>
-												</c:if>
+													</c:if>
 													<li><a href="#">修改</a></li>
 													<li><a href="#">刪除</a></li>
 												</ul>
@@ -751,22 +764,25 @@ a:HOVER {
 																		<span class="glyphicon glyphicon-option-horizontal"></span>
 																	</button>
 																	<ul class="dropdown-menu">
-																	<c:if test="${empty LoginOK}">
-																		<c:choose>
-																			<c:when test="${!empty loginerr}">
-																				<li><a href="#" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>
-																			</c:when>
-																			<c:when test="${empty err}">	
-																				<li><a href="#" href="#" data-toggle="modal" data-target="#myModal">檢舉</a></li>
-																			</c:when>
-																			<c:otherwise>
-																				<li><a class="reportM" href="#" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>
-																			</c:otherwise>
-																	</c:choose>
-																	</c:if>
-																	<c:if test="${!empty LoginOK}">
+																		<c:if test="${empty LoginOK}">
+																			<c:choose>
+																				<c:when test="${!empty loginerr}">
+																					<li><a href="#" href="#" data-toggle="modal"
+																						data-target="#myModal2">檢舉</a></li>
+																				</c:when>
+																				<c:when test="${empty err}">
+																					<li><a href="#" href="#" data-toggle="modal"
+																						data-target="#myModal">檢舉</a></li>
+																				</c:when>
+																				<c:otherwise>
+																					<li><a class="reportM" href="#" href="#"
+																						data-toggle="modal" data-target="#myModal2">檢舉</a></li>
+																				</c:otherwise>
+																			</c:choose>
+																		</c:if>
+																		<c:if test="${!empty LoginOK}">
 																			<li><a class="reportM" href="#">檢舉</a></li>
-																	</c:if>
+																		</c:if>
 																		<li><a href="#">修改</a></li>
 																		<li><a href="#">刪除</a></li>
 																	</ul>
@@ -802,22 +818,25 @@ a:HOVER {
 																		<span class="glyphicon glyphicon-option-horizontal"></span>
 																	</button>
 																	<ul class="dropdown-menu">
-																	<c:if test="${empty LoginOK}">
-																		<c:choose>
-																			<c:when test="${!empty loginerr}">
-																				<li><a href="#" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>
-																			</c:when>
-																			<c:when test="${empty err}">	
-																				<li><a href="#" href="#" data-toggle="modal" data-target="#myModal">檢舉</a></li>
-																			</c:when>
-																			<c:otherwise>
-																				<li><a class="reportM" href="#" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>
-																			</c:otherwise>
-																	</c:choose>
-																	</c:if>
-																	<c:if test="${!empty LoginOK}">
+																		<c:if test="${empty LoginOK}">
+																			<c:choose>
+																				<c:when test="${!empty loginerr}">
+																					<li><a href="#" href="#" data-toggle="modal"
+																						data-target="#myModal2">檢舉</a></li>
+																				</c:when>
+																				<c:when test="${empty err}">
+																					<li><a href="#" href="#" data-toggle="modal"
+																						data-target="#myModal">檢舉</a></li>
+																				</c:when>
+																				<c:otherwise>
+																					<li><a class="reportM" href="#" href="#"
+																						data-toggle="modal" data-target="#myModal2">檢舉</a></li>
+																				</c:otherwise>
+																			</c:choose>
+																		</c:if>
+																		<c:if test="${!empty LoginOK}">
 																			<li><a class="reportM" href="#">檢舉</a></li>
-																	</c:if>
+																		</c:if>
 																		<li><a href="#">修改</a></li>
 																		<li><a href="#">刪除</a></li>
 																	</ul>
@@ -871,18 +890,26 @@ a:HOVER {
 							<div role="tabpanel" class="tab-pane fade" id="Section4"
 								style="font-size: 20px">
 
-								<p>喜歡的話記得幫我們評分還有收藏唷</p>
 
+								<p>喜歡的話記得幫我們評分還有收藏唷</p>
+								<div id="star"></div>
 							</div>
+
 						</div>
+
 					</div>
+
 				</div>
+
 			</div>
 		</div>
+
 	</div>
+	<div id="star"></div>
 	<c:remove var="err" scope="session" />
 	<c:remove var="loginerr" scope="session" />
 	<jsp:include page="/footer.jsp" />
+
 	<script>
 		$(document).ready(function() {
 			$(".col-md-4 a").click(function() {
@@ -941,40 +968,8 @@ a:HOVER {
 		})
 	</script>
 	<script>
-		$(function() {
-			var flag1 = false;
-			$('img').hover(over, out);
-			function over() {
-				if (!flag1) {
-					var movein = this.id.substr(6);
-					for (i = 1; i <= movein; i++) {
-						document.getElementById("idstar" + i).className = "nstar";
-						//	$('img:lt(i)').switchClass('s','n',1000);
-					}
-				}
-			}
-			function out() {
-				if (!flag1) {
-					var out = this.id.substr(6);
-					for (u = 1; u <= out; u++) {
-						document.getElementById("idstar" + u).className = "star";
-						//	$('div img:nth-child(u)').switchClass('n','s',1000);
-					}
-				}
-			}
-			$('img').click(function() {
-				if (!flag1) {
-					flag1 = true
-				}
-				;
-				// 			 document.getElementById("starnum").innerHTML = "你給" + this.id.substr(6) + "顆星";
-				//	       $.get("Buycourse",{"name":"score","score":this.id.substr(6)});
-			})
-		})
-	</script>
-	<script>
 		//判斷是否加入過最愛		
-		var count = 0;
+		var count1 = 0;
 		$('#favoriteclick1').click(function() {
 			alert('已經加入過囉');
 		})
@@ -983,14 +978,14 @@ a:HOVER {
 
 			console.log($("#mbcourseID").val())
 			console.log($("#mbmemberID").val())
-			if (count == 0) {
+			if (count1 == 0) {
 				$('#favoriteclick2').attr("id", "favoriteclick1")
 				$.post('MemberBookmarksInsertController', {
 					'courseID' : $("#mbcourseID").val(),
 					'memberID' : $("#mbmemberID").val()
 				}, function() {
 					alert('已經加到你的最愛囉');
-					count++;
+					count1++;
 				})
 			} else {
 				alert('已經加入過囉');
@@ -1024,25 +1019,77 @@ a:HOVER {
 			}
 		})
 	</script>
-		<script>
+	<script>
 		var count = 0;
 		$('#subAction').click(function() {
 			if (count == 0) {
-			$.post("MemberSubcriptionInsert_DeleteController", {
+				$.post("MemberSubcriptionInsert_DeleteController", {
 					'memberID' : $('#reportMemberID').val(),
 					'memberTrackID' : $('#coursevoMemeberID').val()
 				}, function() {
-				alert('已加到您的追蹤講師囉');
-				count++;
-			});
-			$('#subAction').attr('disabled','false')
-			$('#subAction').text('已追蹤講師')
-		} else {
-			alert('已經追蹤過囉');
-			$('#subAction').attr('disabled','false')
-		}
-	
+					alert('已加到您的追蹤講師囉');
+					count++;
+				});
+				$('#subAction').attr('disabled', 'false')
+				$('#subAction').text('已追蹤講師')
+			} else {
+				alert('已經追蹤過囉');
+				$('#subAction').attr('disabled', 'false')
+			}
+
 		})
+	</script>
+	<script>
+	
+		// 	星星點評
+		$('#star').raty(
+				{
+					path : 'img',
+					width : 150,
+					starOff : 'star-off-big.png',
+					starOn : 'star-on-big.png',
+					readOnly:function(){
+						if( $('#reportMemberID').val()==""|| $('#reportMemberID').val()==null){
+							return true;
+						
+					}},
+					
+					
+					click : function(score, evt) {					
+										$.post('updateScoreController', {
+											'score' : score,
+											'memberID' : $('#reportMemberID').val(),
+											'courseID' : $('#reportCourseID').val()
+										})
+										alert("感謝你的評分!" + "\nscore: " + score );
+								}
+				});
+	</script>
+
+	<script>
+		var scoreJSON;
+		var value;
+		$(function() {
+			// 			console.log($("#mbcourseID").val())
+			$.post('countScoreController', {
+				'courseID' : $("#mbcourseID").val()
+			}, function(data) {
+				// 				console.log(data);
+				scoreJSON = JSON.parse(data);
+				// 				console.log(scoreJSON);
+				value = Math.ceil(parseFloat(scoreJSON));
+				// 				console.log(value)
+				$('#starTatol').raty({
+					path : 'img',
+					width : 150,
+					starOff : 'star-off-big.png',
+					starOn : 'star-on-big.png',
+					readOnly : true,
+					score : value,
+
+				});
+			});
+		});
 	</script>
 </body>
 </html>

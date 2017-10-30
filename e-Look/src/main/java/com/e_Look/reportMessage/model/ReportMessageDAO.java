@@ -40,7 +40,7 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 	//DELETE_REPORTMESSAGE寫著,但應該用不到
 	private static final String DELETE_REPORT_MESSAGE =
 		    "DELETE FROM ReportMessage WHERE reportId =?";
-	private static final String SELECT_ONE_REPORT_MESSAGE =
+	private static final String SELECT_ONE_REPORT_COURSE =
 			"SELECT reportId, reportMessageID, reportMemberID, reportContent, reportTime, status FROM ReportMessage WHERE reportId=?";
 	private static final String SELECT_NOT_HANDLE_REPORT_MESSAGE =
 			"SELECT reportId, reportMessageID, reportMemberID, reportContent, reportTime, status FROM ReportMessage WHERE status=0";
@@ -185,7 +185,7 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 			//"SELECT reportId, reportMessageID, reportMemberID, reportContent, reportTime,
 			//status FROM ReportMessage WHERE reportId=?";
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_ONE_REPORT_MESSAGE);
+			pstmt = con.prepareStatement(SELECT_ONE_REPORT_COURSE);
 
 			pstmt.setInt(1, reportId);
 

@@ -14,8 +14,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <link rel="stylesheet" href="css/table.css">
     <link rel="stylesheet" href="css/button.css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css">
     <link rel="stylesheet" href="css/jdialog.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
   <script src="js/jquery.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
   <script src="js/jdialog.min.js" type="text/javascript"></script>
@@ -98,7 +98,7 @@ padding-bottom: 5px;}
 							<option value="語言">語言</option>
 							<option value="烹飪">烹飪</option>
 							<option value="程式">程式</option>
-							<option value="音樂">音樂</option>
+							<option value="藝術">藝術</option>
 					</select>&ensp;<select class="font courseclass" name="courseClass2">
 							<option value="null">無</option>
 							<option value="全部">全部</option>
@@ -113,7 +113,7 @@ padding-bottom: 5px;}
 							<option value="語言">語言</option>
 							<option value="烹飪">烹飪</option>
 							<option value="程式">程式</option>
-							<option value="音樂">音樂</option>
+							<option value="藝術">藝術</option>
 					</select>&ensp;<select class="font courseclass" name="courseClass3">
 							<option value="null">無</option>
 							<option value="全部">全部</option>
@@ -128,7 +128,7 @@ padding-bottom: 5px;}
 							<option value="語言">語言</option>
 							<option value="烹飪">烹飪</option>
 							<option value="程式">程式</option>
-							<option value="音樂">音樂</option>
+							<option value="藝術">藝術</option>
 					</select></td>
 					<td><input type="submit" class="button green alt"   value="新增">
 					<input type="hidden" name="action" value="insert">
@@ -215,7 +215,7 @@ padding-bottom: 5px;}
 							<option value="語言">語言</option>
 							<option value="烹飪">烹飪</option>
 							<option value="程式">程式</option>
-							<option value="音樂">音樂</option>
+							<option value="藝術">藝術</option>
 					</select>&ensp;<select class="font courseclass" name="courseClass2">
 							<option value="null">無</option>
 							<option value="全部">全部</option>
@@ -230,7 +230,7 @@ padding-bottom: 5px;}
 							<option value="語言">語言</option>
 							<option value="烹飪">烹飪</option>
 							<option value="程式">程式</option>
-							<option value="音樂">音樂</option>
+							<option value="藝術">藝術</option>
 					</select>&ensp;<select class="font courseclass" name="courseClass3">
 							<option value="null">無</option>
 							<option value="全部">全部</option>
@@ -245,7 +245,7 @@ padding-bottom: 5px;}
 							<option value="語言">語言</option>
 							<option value="烹飪">烹飪</option>
 							<option value="程式">程式</option>
-							<option value="音樂">音樂</option>
+							<option value="藝術">藝術</option>
 					</select></td>
 				</tr>
 			</table>

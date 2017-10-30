@@ -96,14 +96,14 @@ function refresh(){
 // 		alert(d.scrollHeight);
 	}
 	//為文件的滑鼠按下事件定義回呼
-	document.onmousedown = function(event) {
-		//滑鼠事件：0 > 沒按鍵, 1 > 按左鍵, 2 > 按右鍵, 3 > 按左鍵&右鍵
-		//4 > 按中間鍵, 5 > 按左鍵&中間鍵, 6 > 按右鍵&中間鍵, 7 > 按所有鍵
-		if (event.button == 2) {
-			//提示使用者禁用滑鼠右鍵
-			alert("禁用滑鼠右鍵!");
-		}	
-	}
+// 	document.onmousedown = function(event) {
+// 		//滑鼠事件：0 > 沒按鍵, 1 > 按左鍵, 2 > 按右鍵, 3 > 按左鍵&右鍵
+// 		//4 > 按中間鍵, 5 > 按左鍵&中間鍵, 6 > 按右鍵&中間鍵, 7 > 按所有鍵
+// 		if (event.button == 2) {
+// 			//提示使用者禁用滑鼠右鍵
+// 			alert("禁用滑鼠右鍵!");
+// 		}	
+// 	}
 	
 </script>
 <style type="text/css">

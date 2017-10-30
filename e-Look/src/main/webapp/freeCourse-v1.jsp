@@ -22,7 +22,10 @@
 	href="<%=request.getContextPath()%>/alan/sweet/sweetalert2.min.css">
 <script
 	src="<%=request.getContextPath()%>/alan/sweet/sweetalert2.min.js"></script>
-	
+	<!-- 星星 -->
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/_Lyy/jquery.raty.min.js"></script>
+<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
 <style>
 /* 影片區塊 */
 video {
@@ -33,7 +36,7 @@ video {
 #videoArea {
 	background-size: cover;
 	background-position: center;
-	height: 62%;
+	height: 510px;
 }
 
 #videoliststyle>li {
@@ -47,7 +50,7 @@ video {
 #videoArea>div>div>ul {
 	width: 100%;
 	color: white;
-	height: 83.2%;
+	height: 85.2%;
 	overflow-y: scroll;
 	margin: 0;
 	padding: 0;
@@ -81,16 +84,12 @@ video::-webkit-media-controls-panel {
 	text-align: center;
 	font-weight: bold;
 }
-
+/* 下方功能 (簡介)*/
 .tab .nav-tabs {
 	position: relative;
 	border-bottom: none;
 }
 
-/* .tab .nav-tabs li { */
-/* 	text-align: center; */
-/* 	margin-right: 10px; */
-/* } */
 .tab .nav-tabs li a {
 	display: block;
 	font-size: 18px;
@@ -158,33 +157,29 @@ video::-webkit-media-controls-panel {
 	margin-top: 0;
 }
 
-.star {
-	-webkit-filter: grayscale(1);
-}
-
-.nstar {
-	-webkit-filter: grayscale(0);
-}
-/* video::-webkit-media-controls { */
-/*   display:none; */
+/* .star { */
+/* 	-webkit-filter: grayscale(1); */
 /* } */
+/* .nstar { */
+/* 	-webkit-filter: grayscale(0); */
+/* } */
+/* 贊助 */
 #mysponer>.modal-dialog>.modal-content>.modal-header {
 	color: black;
 	background-color: #81C0C0;
 	border-top-left-radius: 8px;
 	border-top-right-radius: 8px
 }
-
+/* 留言板 */
 #messageHeader {
 	border: 1px solid black;
 	border-radius: 15px;
 	font-size: 18px;
 }
-
 #messageHeader>img {
 	width: 50px;
 }
-
+/* 檢舉留言 */
 #radioReporter {
 	padding-left: 50px;
 }
@@ -193,7 +188,11 @@ video::-webkit-media-controls-panel {
 	font-size: 20px;
 	padding-left: 5px;
 }
-
+/* <!--課程售價 --> */
+#soldPrice{
+border-right:1px solid #ADADAD;border-left:1px solid #ADADAD
+}
+a{text-decoration:none}
 </style>
 </head>
 <!-- 影片區 -->
@@ -239,9 +238,10 @@ video::-webkit-media-controls-panel {
 	</div>
 
 	<!-- 人數、時間 等等-->
+	
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-12" style="margin-top:20px">
 				<!--空-->
 				<div class="col-md-1"></div>
 				<!--課程人數 -->
@@ -332,11 +332,19 @@ video::-webkit-media-controls-panel {
 				</div>
 				<!--講義下載 -->
 				<div class="col-md-1 col-xs-4 ">
+					<c:if test="${!empty courseVO.paper}">
 					<a href="<%=request.getContextPath()%>/Paper?CourseID=${courseVO.courseID}"> <img
 						src="<%=request.getContextPath()%>/_Lyy/001-download.png"
 						class="img-responsive center-block">
 						<h5 class="text-center">講義下載</h5>
 					</a>
+				</c:if>
+				<c:if test="${empty courseVO.paper}">
+					<img
+						src="<%=request.getContextPath()%>/_Lyy/001-download.png"
+						class="img-responsive center-block">
+						<h5 class="text-center">講義下載</h5>
+					</c:if>
 				</div>
 				<!--影片檢舉 -->
 				<c:if test="${empty LoginOK}">
@@ -414,26 +422,15 @@ video::-webkit-media-controls-panel {
 
 				</c:if>
 				<!--課程售價 -->
-				<div class="col-md-2 col-xs-6 ">
+				<div class="col-md-2 col-xs-6 "id="soldPrice">
 					<h5>課程售價</h5>
 					<h2 style="text-align: center; font-weight: bold;">Free</h2>
 				</div>
 				<!--星星 -->
-				<div class="col-md-2 col-xs-6 center-block" style="margin-top: 10px">
-					<div style="width: 70px; margin: 0 auto">
-						<img id="idstar1" class="star"
-							src="<%=request.getContextPath()%>/star/ystar.png" /> <img
-							id="idstar2" class="star"
-							src="<%=request.getContextPath()%>/star/ystar.png" /> <img
-							id="idstar3" class="star "
-							src="<%=request.getContextPath()%>/star/ystar.png" /> <img
-							id="idstar4" class="star "
-							src="<%=request.getContextPath()%>/star/ystar.png" /> <img
-							id="idstar5" class="star "
-							src="<%=request.getContextPath()%>/star/ystar.png" />
-					</div>
+				<div class="col-md-2 col-xs-6"style="height:89px;border-right:1px solid #ADADAD;" >
+					<div id="starTatol" style="margin: 0 auto" ></div>
 					<!--贊助 -->
-					<button type="button" class="btn btn-primary center-block btn3d"
+					<button type="button" class="btn btn-primary center-block "
 						style="width: 160px" data-toggle="modal" data-target="#mysponer">贊助</button>
 					<div class="modal fade" id="mysponer" tabindex="-1" role="dialog"
 						aria-labelledby="myModalLabel" aria-hidden="true">
@@ -460,7 +457,7 @@ video::-webkit-media-controls-panel {
 										<table class="table">
 											<tbody>
 												<c:if test="${empty LoginOK}">
-													<c:set var="Name" value="user" />
+													<c:set var="Name" value="訪客" />
 												</c:if>
 												<c:if test="${!empty LoginOK}">
 													<c:set var="Name" value="${LoginOK.mName}" />
@@ -846,7 +843,7 @@ video::-webkit-media-controls-panel {
 								style="font-size: 20px">
 
 								<p>喜歡的話記得幫我們評分還有收藏唷</p>
-
+								<div id="star"></div>
 							</div>
 						</div>
 					</div>
@@ -1037,6 +1034,57 @@ video::-webkit-media-controls-panel {
 	
 		})
 	</script>
+<script>
+	
+		// 	星星點評
+		$('#star').raty(
+				{
+					path : 'img',
+					width : 150,
+					starOff : 'star-off-big.png',
+					starOn : 'star-on-big.png',
+					readOnly:function(){
+						if( $('#reportMemberID').val()==""|| $('#reportMemberID').val()==null){
+							return true;
+						
+					}},
+					
+					
+					click : function(score, evt) {					
+										$.post('updateScoreController', {
+											'score' : score,
+											'memberID' : $('#reportMemberID').val(),
+											'courseID' : $('#reportCourseID').val()
+										})
+										alert("感謝你的評分!" + "\nscore: " + score );
+								}
+				});
+	</script>
 
+	<script>
+		var scoreJSON;
+		var value;
+		$(function() {
+			// 			console.log($("#mbcourseID").val())
+			$.post('countScoreController', {
+				'courseID' : $("#mbcourseID").val()
+			}, function(data) {
+				// 				console.log(data);
+				scoreJSON = JSON.parse(data);
+				// 				console.log(scoreJSON);
+				value = Math.ceil(parseFloat(scoreJSON));
+				// 				console.log(value)
+				$('#starTatol').raty({
+					path : 'img',
+					width : 150,
+					starOff : 'star-off-big.png',
+					starOn : 'star-on-big.png',
+					readOnly : true,
+					score : value,
+
+				});
+			});
+		});
+	</script>
 </body>
 </html>

@@ -27,12 +27,19 @@ public class MessageDAO implements MessageDAO_interface {
 			e.printStackTrace();
 		}
 	}
+	//新增留言沒問題，但是新增回應要怎麼新增???
+	//SELECT_ONE_MESSAGE的回傳形態有問題，用messageVO接，應該只能接到一筆，應該改成用list接
+	
 	private static final String INSERT_MESSAGE = "insert into Message ( mContent,mTime,memberID,courseID,bought,status) values ( ?, ?, ?, ?, ?,?)";
-	private static final String UPDATE_MESSAGE = "update Message set mContent=?, mTime=? where messageID= ?";
-//	private static final String UPDATE_MESSAGE_RESPONSE = "update Message set mContent=?, mTime=? where messageID= ?";
+	private static final String UPDATE_MESSAGE = "update Message set mContent=?, mTime=? where messageID=?";
+//	private static final String UPDATE_MESSAGE_RESPONSE = "update Message set mContent=?, mTime=? where messageID_response= ?";
+	
+	
 	private static final String UPDATE_STATUS = "update Message set status=? where messageID= ?";
 	private static final String DELETE_MESSAGE = "delete from Message where messageID= ?";
+
 	private static final String SELECT_ONE_MESSAGE_M = "select messageID,mContent,mTime,messageID_response,memberID,courseID,bought,status from Message where messageID= ?";
+
 	private static final String SELECT_ONE_MESSAGE = "select messageID,mContent,mTime,messageID_response,memberID,courseID,bought,status from Message where courseID= ?";
 	private static final String SELECT_ALL_MESSAGE = "select messageID,mContent,mTime,messageID_response,memberID,courseID,bought,status from Message";	
 		
@@ -46,6 +53,7 @@ public class MessageDAO implements MessageDAO_interface {
 			
 			pstmt = con.prepareStatement(INSERT_MESSAGE,
 					Statement.RETURN_GENERATED_KEYS);
+			//"insert into Message ( mContent,mTime,memberID,courseID,bought,status) values ( ?, ?, ?, ?, ?,?)"
 			pstmt.setString(1, messageVO.getmContent());
 			Timestamp ts = new Timestamp(System.currentTimeMillis());
 			pstmt.setTimestamp(2, ts);
@@ -106,7 +114,7 @@ public class MessageDAO implements MessageDAO_interface {
 //				pstmt.setTimestamp(2, ts);
 //				pstmt.setInt(3, messageVO.getMessageID_response());
 //				
-//				pstmt.executeUpdate();
+//				pstmt.executeUpdate(); 
 			} else if (update.equalsIgnoreCase("status")) {
 				pstmt = con.prepareStatement(UPDATE_STATUS);
 				pstmt.setByte(1, messageVO.getStatus());

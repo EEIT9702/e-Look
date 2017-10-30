@@ -13,4 +13,18 @@ public class BuyCourseService {
 		return dao.findByMemberID(memberID);
 		
 	}
+	public void updateScore(Integer scoreStar,Integer memberID,Integer courseID){
+		BuyCourseVO buyCourseVO=new BuyCourseVO();
+		buyCourseVO.setScore(scoreStar);
+		buyCourseVO.setMemberID(memberID);
+		buyCourseVO.setCourseID(courseID);
+		dao.update(buyCourseVO);
+		
+	}
+	public Double avgScore(Integer courseID){
+		return dao.getAvgScore(courseID);
+		
+		
+		
+	}
 }

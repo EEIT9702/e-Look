@@ -30,9 +30,9 @@
 							<ul class="links">
 								<li><a href="event.jsp">活動管理</a></li>
 								<li><a href="backAd.jsp">輪播管理</a></li>
-								<li><a href="#">課程審查</a></li>
+								<li><a href="CourseReview.jsp">課程審查</a></li>
 								<li><a href="#">收益報表</a></li>
-								<li><a href="back_report.jsp">檢舉管理</a></li>
+								<li><a href="back_report-v2.jsp">檢舉管理</a></li>
 								<li><a href="backLogin.jsp">登出</a></li>
 							</ul>
 							<a href="#" class="close">Close</a>
@@ -42,7 +42,7 @@
 				<!-- Banner -->
 					<section id="banner">
 						<div class="inner">
-							<div class="logo"><span class="icon fa-diamond"></span></div>
+							<div class="logo"><span class="icon fa fa-eye fa-5x"></span></div>
 							<h2>歡迎使用e-LOOK後台管理系統</h2>
 							<p>請點選右上方menu選單 選擇需要操作業頁面</p>
 						</div>
