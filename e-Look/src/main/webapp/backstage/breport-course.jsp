@@ -147,7 +147,14 @@
 		    		//var cell2 = $('<td></td>').text(reportV.reportCourseID);
 		    		var cell3 = $('<td></td>').text(reportV.reportContent);
 		    		var cell4 = $('<td></td>').text(reportV.reportTime);
-		    		var cell5 = $('<td></td>').text(reportV.status);
+		    		//var cell5 = $('<td></td>').text(reportV.status);
+		    		if(reportV.status == 0){
+		    			var cell5 = $('<td></td>').text("待處理");
+		    		}else if(reportV.status == 1){
+		    			var cell5 = $('<td></td>').text("已下架");
+		    		}else{
+		    			var cell5 = $('<td></td>').text("不處理");
+		    		}
 		    		var cell6 = $('<td></td>').html('<button class="btn btn-primary" style="margin-right:10px;">下架影片</button>&nbsp;<button class="btn btn-warning">不處理</button></td>');
 		    		//<tr><td>
 		    		var row = $('<tr></tr>').append([cell0,cell2,cell3,cell4,cell5,cell6]);

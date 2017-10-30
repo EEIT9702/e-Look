@@ -151,7 +151,14 @@
 		    		var cell2 = $('<td></td>').text(report.reportContent);
 		    		var cell3 = $('<td></td>').text(report.mContent);
 		    		var cell4 = $('<td></td>').text(report.reportTime);
-		    		var cell5 = $('<td></td>').text(report.status);
+		    		//var cell5 = $('<td></td>').text(report.status);
+		    		if(report.status == 0){
+		    			var cell5 = $('<td></td>').text("待處理");
+		    		}else if(report.status == 1){
+		    			var cell5 = $('<td></td>').text("已遮蔽");
+		    		}else{
+		    			var cell5 = $('<td></td>').text("不處理");
+		    		}
 		    		var cell6 = $('<td></td>').html('<button class="btn btn-primary" style="margin-right:10px;">遮蔽內容</button>&nbsp;<button class="btn btn-warning">不處理</button></td>');
 // 		    		var cell7 = $('<td></td>').html('<input type="hidden" id="" name=""><span></span>');
 // 		    		var cell8 = $('<td></td>').html('<input type="hidden" id="" name=""><span></span>');

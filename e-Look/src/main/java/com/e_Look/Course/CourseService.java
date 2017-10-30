@@ -74,6 +74,12 @@ public class CourseService {
 	public void updateProposalStatus(Integer courseID){
 			dao.postProposal(courseID);
 	}
+	public void rollbacktoEditorStatus(Integer courseID){
+		dao.changeStatustoEditor(courseID);
+	}
+	public void changeStatustoOnlineStatus(Integer courseID){
+		dao.changeStatustoOnline(courseID);
+	}
 	public List<CourseVO> getAllCourseData(Integer memberID, Integer status){
 		return dao.findAllCourse(memberID, status);
 	}
