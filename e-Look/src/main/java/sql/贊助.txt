@@ -1,3 +1,12 @@
+
+drop table Sponsor
+CREATE TABLE Sponsor(
+	[courseID] [int] NOT NULL,
+	[SponsorName] [varchar](50) NULL,
+	[money] [int] NOT NULL,
+	[dateSponsor] [Date] Not NULL,
+) ON [PRIMARY]
+
 INSERT INTO Sponsor (courseID, SponsorName, money) VALUES (200001,100001,1000)
 INSERT INTO Sponsor (courseID, SponsorName, money) VALUES (200001,100002,500)
 INSERT INTO Sponsor (courseID, SponsorName, money) VALUES (200001,100003,100)
