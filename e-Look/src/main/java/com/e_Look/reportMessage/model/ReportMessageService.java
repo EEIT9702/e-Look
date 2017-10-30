@@ -44,7 +44,7 @@ public class ReportMessageService {
 		mdao.update(mVO, "status");
 	}
 	
-	public void judeMessage(Integer reportID,int status) {
+	public void jugeMessage(Integer reportID,int status) {
 		//用reportID及ReportMessageDAO去拿出rmVO物件
 		ReportMessageVO rmVO = dao.findByReportId(reportID);
 		//將ReportMessage的狀態設為2,審核結果為不處理
