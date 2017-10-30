@@ -250,7 +250,7 @@
 									</div>
 								</div>
 
-
+								
 								<!-- step1最終確認按鈕 -->
 								<div class="col-md-offset-3" style="margin-top: 20px">
 									<button type="button"

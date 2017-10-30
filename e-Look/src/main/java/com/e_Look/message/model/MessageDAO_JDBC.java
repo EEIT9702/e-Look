@@ -1,7 +1,6 @@
 package com.e_Look.message.model;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,8 +9,7 @@ import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.e_Look.member.model.MemberDAO_JDBC;
-import com.e_Look.member.model.MemberVO;
+import net.minidev.json.JSONValue;
 
 public class MessageDAO_JDBC implements MessageDAO_interface {
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
@@ -261,16 +259,16 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 	public static void main(String[] args) {
 		MessageDAO_JDBC dao = new MessageDAO_JDBC();
 //		//新增
-		MessageVO messageVO1= new MessageVO();
-		
-		messageVO1.setmContent("goodnews");
-		messageVO1.setmTime(new Timestamp(System.currentTimeMillis()));
-		messageVO1.setMemberID(100001);
-		messageVO1.setCourseID(200001);
-		messageVO1.setBought((long) 123);
-		messageVO1.setStatus((byte) 0);
-				
-		dao.insert(messageVO1);
+//		MessageVO messageVO1= new MessageVO();
+//		
+//		messageVO1.setmContent("goodnews");
+//		messageVO1.setmTime(new Timestamp(System.currentTimeMillis()));
+//		messageVO1.setMemberID(100001);
+//		messageVO1.setCourseID(200001);
+//		messageVO1.setBought((long) 123);
+//		messageVO1.setStatus((byte) 0);
+//				
+//		dao.insert(messageVO1);
 //		
 		//修改資料
 //		MessageVO messageVO2= new MessageVO();
@@ -290,19 +288,21 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 //		messageVO2.setMessageID(1007);
 //		dao.update(messageVO2, "status");
 	
-
+//		MessageVO messageVO4=dao.findByPrimaryKey(200002);
+//		String json= JSONValue.toJSONString(messageVO4);
+//		System.out.println(json);
 		//刪除
 //		dao.delete(1007);
 		//查詢單一
-		MessageVO messageVO3=dao.findByPrimaryKey(200001);
-		System.out.println(messageVO3.getMessageID());
-		System.out.println(messageVO3.getmContent());
-		System.out.println(messageVO3.getmTime());
-		System.out.println(messageVO3.getMessageID_response());
-		System.out.println(messageVO3.getMemberID());
-		System.out.println(messageVO3.getCourseID());
-		System.out.println(messageVO3.getBought());
-		System.out.println(messageVO3.getStatus());
+//		MessageVO messageVO3=dao.findByPrimaryKey(200001);
+//		System.out.println(messageVO3.getMessageID());
+//		System.out.println(messageVO3.getmContent());
+//		System.out.println(messageVO3.getmTime());
+//		System.out.println(messageVO3.getMessageID_response());
+//		System.out.println(messageVO3.getMemberID());
+//		System.out.println(messageVO3.getCourseID());
+//		System.out.println(messageVO3.getBought());
+//		System.out.println(messageVO3.getStatus());
 
 		//查詢全部會員
 //		List<MessageVO> list=dao.getAll();

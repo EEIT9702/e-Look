@@ -54,7 +54,7 @@ public class ShoppingCartIntoOrder extends HttpServlet {
 					scdao.delete(scVO);
 					OrderDetailsVO odVO=new OrderDetailsVO();
 					odVO.setCourseVO(courseVO);
-					odVO.setOrderID(orderVO.getOrderID());
+					odVO.setOrderVO(orderVO);
 					odVO.setOriginalPrice(courseVO.getSoldPrice());
 					//記得調整成特價後的價格
 					odVO.setBuyingPrice(courseVO.getSoldPrice());

@@ -71,7 +71,7 @@ public class CheckOutFilter implements Filter {
 					scdao.delete(scVO);
 					OrderDetailsVO odVO = new OrderDetailsVO();
 					odVO.setCourseVO(courseVO);
-					odVO.setOrderID(orderVO.getOrderID());
+					odVO.setOrderVO(orderVO);
 					odVO.setOriginalPrice(courseVO.getSoldPrice());
 					odVO.setBuyingPrice(BuyingPrice.getBuyingPrice(courseVO.getCourseID()));
 					if(odDAO.findByPrimaryKey(odVO)==null){
