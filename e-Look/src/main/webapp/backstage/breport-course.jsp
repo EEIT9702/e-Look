@@ -78,7 +78,6 @@
                  <tbody>
                  </tbody>
                   <tfoot style="border-top:none">
-<!-- 	                 <form> -->
 	                 <tr>
 	                  <td><button type="button" value="hideHistory" onclick="self.location.href='back_report-v2.jsp'" class="btn btn-info">檢舉留言管理</button></td>
 	                  <td><input type="hidden" id="" name=""><span></span></td>
@@ -87,7 +86,6 @@
 	                  <td><input type="hidden" id="" name=""><span></span></td>
 	                  <td><button type="button" value="hideHistory" onclick="self.location.href='breport_course_history.jsp'" class="btn btn-success">查詢下架影片記錄</button></td>
 	                 </tr>
-<!-- 	                 </form> -->
                   </tfoot>
 			</table>
 
@@ -110,7 +108,6 @@
 				})
 			});
 				
-			
 			//找td底下按鈕的第一個子元素-不處理鈕
 			$('#reportTable>tbody').on('click','td>button:nth-child(2)',function(){
 				//alert("edit")
@@ -132,14 +129,21 @@
 		    	var fragment = $(document.createDocumentFragment());
 		    	$.each(datas,function(idx,reportV){
 		    		//product = {}
-		    		var cell1 = $('<td></td>').text(reportV.reportID);
-		    		var cell2 = $('<td></td>').text(reportV.reportCourseID);
+		    		var cell0 = $('<td></td>').text(reportV.reportID);
+		    		if(reportV.soldPrice ==0){
+		    			var cell1_1 = $('<a></a>').attr('href','<%=request.getContextPath()%>/freeCourse-v1.jsp?CourseID='+reportV.reportCourseID);
+		    		}else{
+		    			var cell1_1 = $('<a></a>').attr('href','<%=request.getContextPath()%>/onlineCourse-v2.jsp?CourseID='+reportV.reportCourseID);
+		    		}
+		    		var cell1_2 = cell1_1.text(reportV.reportCourseID);
+		    		var cell2 = $('<td></td>').append(cell1_2);
+		    		//var cell2 = $('<td></td>').text(reportV.reportCourseID);
 		    		var cell3 = $('<td></td>').text(reportV.reportContent);
 		    		var cell4 = $('<td></td>').text(reportV.reportTime);
 		    		var cell5 = $('<td></td>').text(reportV.status);
 		    		var cell6 = $('<td></td>').html('<button class="btn btn-primary">下架影片</button>&nbsp;<button class="btn btn-warning">不處理</button></td>');
 		    		//<tr><td>
-		    		var row = $('<tr></tr>').append([cell1,cell2,cell3,cell4,cell5,cell6]);
+		    		var row = $('<tr></tr>').append([cell0,cell2,cell3,cell4,cell5,cell6]);
 		    		//放到容器裡
 		    		fragment.append(row);
 		    	})
