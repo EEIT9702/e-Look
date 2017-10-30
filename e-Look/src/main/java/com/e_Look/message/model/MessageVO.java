@@ -95,6 +95,14 @@ public class MessageVO implements Serializable {
 
 	public void setStatus(Byte status) {
 		this.status = status;
+	}
+
+
+	@Override
+	public String toString() {
+		return "MessageVO [messageID=" + messageID + ", mContent=" + mContent + ", mTime=" + mTime
+				+ ", messageID_response=" + messageID_response + ", memberID=" + memberID + ", courseID=" + courseID
+				+ ", bought=" + bought + ", status=" + status + "]";
 	};
 	
 	

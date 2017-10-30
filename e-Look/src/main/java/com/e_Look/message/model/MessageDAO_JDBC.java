@@ -28,7 +28,7 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 	private static final String DELETE_MESSAGE = "delete from Message where messageID= ?";
 	private static final String SELECT_ONE_MESSAGE = "select messageID,mContent,mTime,messageID_response,memberID,courseID,bought,status from Message where courseID= ?";
 	private static final String SELECT_ALL_MESSAGE = "select messageID,mContent,mTime,messageID_response,memberID,courseID,bought,status from Message";
-		
+	private static final String SELECT_ONE_MESSAGE_M = "select messageID,mContent,mTime,messageID_response,memberID,courseID,bought,status from Message where messageID= ?";	
 	
 	@Override
 	public void insert(MessageVO messageVO) {
@@ -160,7 +160,7 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 	}
 
 	@Override
-	public MessageVO findByPrimaryKey(Integer courseID) {
+	public MessageVO findByPrimaryKey(Integer messageID) {
 		MessageVO messageVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -169,7 +169,7 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 			Class.forName(driver);			
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(SELECT_ONE_MESSAGE);
-			pstmt.setInt(1, courseID);
+			pstmt.setInt(1, messageID);
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
 				messageVO = new MessageVO();
@@ -207,7 +207,57 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 				
 		return messageVO;
 	}
-
+	
+		
+	@Override
+	public List<MessageVO> findByPrimaryKeyM(Integer courseID) {
+		List<MessageVO> list = new LinkedList<MessageVO>();
+		MessageVO messageVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			Class.forName(driver);			
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(SELECT_ONE_MESSAGE);
+			pstmt.setInt(1, courseID);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				messageVO = new MessageVO();		
+				messageVO.setMessageID(rs.getInt(1));
+				messageVO.setmContent(rs.getString(2));
+				messageVO.setmTime(rs.getTimestamp(3));
+				messageVO.setMessageID_response(rs.getInt(4));
+				messageVO.setMemberID(rs.getInt(5));
+				messageVO.setCourseID(rs.getInt(6));
+				messageVO.setBought(rs.getLong(7));
+				messageVO.setStatus(rs.getByte(8));
+				
+				list.add(messageVO);}
+		} catch (ClassNotFoundException e) {
+					throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
+				} catch (SQLException e) {
+					throw new RuntimeException("A database error occured. "
+							+ e.getMessage());
+				} finally {
+					if (pstmt != null) {
+						try {
+							pstmt.close();
+						} catch (SQLException e) {
+							e.printStackTrace(System.err);
+						}
+					}
+					if (con != null) {
+						try {
+							con.close();
+						} catch (Exception e) {
+							e.printStackTrace(System.err);
+						}
+					}
+				}
+				
+		return list;
+	}
 	@Override
 	public List<MessageVO> getAll() {
 		List<MessageVO> list = new LinkedList<MessageVO>();

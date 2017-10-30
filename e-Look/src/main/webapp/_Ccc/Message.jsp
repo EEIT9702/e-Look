@@ -11,6 +11,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script>
 <style>
 #messageHeader{
 border:1px solid black;border-radius:15px
@@ -32,7 +33,7 @@ width:50px;
 
 					<div>
 						<span class="text-left">${LoginOK.mName}</span>
-
+						
 						<%
 							Date dNow = new Date();
 							SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -186,7 +187,7 @@ width:50px;
 					</div>  
 					</div>
 					</div>
-					
+	<%-- 				
 	 <c:forEach var="messageVO1" items="${messageVO}">
 		<tr align='center' valign='middle'>
 			<td>${messageVO1.messageID}</td>
@@ -214,39 +215,41 @@ width:50px;
 			    </FORM>
 			</td>
 		</tr>
-	</c:forEach> 
+	</c:forEach>  --%>
 		    				
 					
- 	<script src="js/jquery-1.12.3.min.js"></script> 
- 	<script src="js/jquery-ui.min.js"></script> 
+ 	<script src="<%=request.getContextPath() %>/js/jquery-1.12.3.min.js"></script> 
+ 	<script src="<%=request.getContextPath() %>/js/jquery-ui.min.js"></script> 
 	<script>
 	
 		$(function(){
-	 
+	 		
 		  //讀取
-		  
+		   courseID=$('input[name="courseID"]').value();
+		   alert(courseID);
 		   function loadMessage(courseID){
 			   
 		   }
-		    $.getJSON('Products',{'categoryID':id},function(datas){
-		    	  //datas = [] array
+		    $.get('/message/MessageController',{'courseID':courseID},function(messageVO1){
+		    	  
 		    	  var fragment = $(document.createDocumentFragment());
-		    	  $.each(datas,function(idx,product){
+		    	  $.each(messageVO1,function(name,value){
 		    		  //product = {}
-		    		  var cell1 = $('<td></td>').text(product.ProductID)
-		    		  var cell2 = $('<td></td>').text(product.ProductName)
-		    		  var cell3 = $('<td></td>').text(product.UnitPrice)
-		    		  var cell4 = $('<td></td>').text(product.UnitsInStock)
+		    		  var cell1 = $('<td></td>').text(messageVO1.messageID)
+		    		  var cell2 = $('<td></td>').text(messageVO1.mContent)
+		    		  var cell3 = $('<td></td>').text(messageVO1.mTime)
+		    		  var cell4 = $('<td></td>').text(messageVO1.messageID_response)
 		    		  var cell5 = $('<td></td>').html('<button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button> <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span></button>');
 		    		  //<tr><td>
 		    		  var row = $('<tr></tr>').append([cell1,cell2,cell3,cell4,cell5]);
 		    		  
 		    		  fragment.append(row);
 		    	  });
-		    	  $('#productTable>tbody').html(fragment);
+		    	  $('.messageContent').html(fragment);
 		    	  
 		    }) 
 		 })
-		  
+		 
+	</script>	  
 </body>
 </html>

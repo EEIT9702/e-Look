@@ -223,14 +223,20 @@ public class MessageDAO implements MessageDAO_interface {
 			while (rs.next()) {
 				messageVO = new MessageVO();		
 				messageVO.setMessageID(rs.getInt(1));
-				messageVO.setmContent(rs.getString(2));
-				messageVO.setmTime(rs.getTimestamp(3));
+				
+				String mContent=rs.getString(2);
+				messageVO.setmContent(mContent);
+				
+				Timestamp mTime=rs.getTimestamp(3);
+				messageVO.setmTime(mTime);
+				
 				messageVO.setMessageID_response(rs.getInt(4));
 				messageVO.setMemberID(rs.getInt(5));
 				messageVO.setCourseID(rs.getInt(6));
 				messageVO.setBought(rs.getLong(7));
 				messageVO.setStatus(rs.getByte(8));
-				
+				System.out.println(mContent);
+				System.out.println(mTime);
 				list.add(messageVO);
 			}
 			

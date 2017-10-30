@@ -1,11 +1,9 @@
 package com.e_Look.message.control;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.util.HashMap;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,17 +13,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.e_Look.Course.CourseVO;
-import com.e_Look.member.model.MemberService;
 import com.e_Look.member.model.MemberVO;
-import com.e_Look.message.model.MessageDAO;
 import com.e_Look.message.model.MessageService;
 import com.e_Look.message.model.MessageVO;
+
+import net.minidev.json.JSONValue;
 
 /**
  * Servlet implementation class MessageController
  */
-@WebServlet("/MessageController")
+@WebServlet("/_Ccc/MessageController")
 public class MessageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
@@ -41,22 +38,25 @@ public class MessageController extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 //		String messageID=requestuest.getParameter("messageID");
-		String mContent=request.getParameter("mContent").trim();
 //		String mTime=requestuest.getParameter("mTime");
 		
-//		Integer memberID = new Integer(requestuest.getParameter("memberID"));
+//		Integer memberID = new Integer(request.getParameter("memberID"));
 //		Integer courseID = new Integer(requestuest.getParameter("courseID"));
 //		Long bought= new Long(requestuest.getParameter("bought"));
 //		Byte status= new Byte(requestuest.getParameter("status"));
 		String action = request.getParameter("action");
 		String update = request.getParameter("update");
-//		
+		
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		response.setHeader("content-type", "text/html;charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = response.getWriter();
 				
 		HttpSession session = request.getSession(false);
 		
 				
       if ("insert".equals(action)) { 
-	
+       
 		MessageVO messageVO = null;
 		// 準備存放錯誤訊息的物件
 		
@@ -66,11 +66,16 @@ public class MessageController extends HttpServlet {
 //				if (status == 1) {
 //					errorMsgs.add("無法新增留言");
 //				}
-				try{			
-				if (mContent == null || mContent.trim().length() == 0) {
+				try{
+				    String mContent=request.getParameter("mContent").trim();	
+				    if (mContent == null || mContent.trim().length() == 0) {
 					errorMsgs.add("必須輸入內文");
 				}
-				
+					String str = request.getParameter("courseID");
+					
+					Integer courseID = null;
+					courseID = new Integer(str);
+					
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher rd = request.getRequestDispatcher("/_Ccc/Message.jsp");
 					rd.forward(request, response);
@@ -83,7 +88,7 @@ public class MessageController extends HttpServlet {
 //要再轉型   		MessageVO mb = new MessageVO(messageID, mContent, mTime, messageID_response, memberID,courseID,bought,status);
 				
 				MessageVO messageVO1= new MessageVO();
-//				messageVO1.setmContent(mContent);
+				messageVO1.setmContent(mContent);
 //				messageVO1.setmTime();
 				MemberVO member=(MemberVO)session.getAttribute("LoginOK");
 				Integer memberID = member.getMemberID();
@@ -94,15 +99,15 @@ public class MessageController extends HttpServlet {
 //				messageVO1.setStatus((byte) 1);
 				
 //				Integer memberID = 100001;
-				Integer courseID = 200001;
+//				Integer courseID = 200001;
 				Long bought= (long)123;
 				Byte status= 1;
 				
 				
-				messageVO = service.addMessage(mContent, memberID,courseID,bought,status);
+			//	messageVO = service.addMessage(mContent, memberID,courseID,bought,status);
 				session.setAttribute("MessageVO", messageVO);
 				session.setAttribute("MessageInsertOK", "新增留言成功");
-				response.sendRedirect(request.getContextPath() +"/_Ccc/Message.jsp");
+				response.sendRedirect(request.getContextPath() +"/_Ccc/Message3.jsp");
 				} catch (Exception e) {
 					errorMsgs.add("新增資料失敗:"+e.getMessage());
 					RequestDispatcher failureView = request
@@ -118,7 +123,7 @@ public class MessageController extends HttpServlet {
 			request.setAttribute("errorMsgs", errorMsgs);
 			
 			if ("message".equals(update)){    // 修改留言
-				
+			String mContent=request.getParameter("mContent").trim();	
 			try{Integer messageID_response = new Integer(request.getParameter("messageID_response"));
 					}catch(Exception e) {
 						errorMsgs.add("修改資料失敗:"+e.getMessage());
@@ -130,9 +135,9 @@ public class MessageController extends HttpServlet {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				Integer messageID = new Integer(request.getParameter("messageID").trim());
 				
-				if (mContent == null || mContent.trim().length() == 0) {
-					errorMsgs.add("必須輸入內文");
-				}
+//				if (mContent == null || mContent.trim().length() == 0) {
+//					errorMsgs.add("必須輸入內文");
+//				}
 				
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher rd = request.getRequestDispatcher("/_Ccc/Message.jsp");
@@ -160,7 +165,7 @@ public class MessageController extends HttpServlet {
 				Byte status= 1;
 				
 				/***************************2.開始修改資料*****************************************/			
-				messageVO = service.updateMessage(messageID,mContent, memberID,courseID,bought,status,update);
+				//messageVO = service.updateMessage(messageID,mContent, memberID,courseID,bought,status,update);
 
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
 				request.setAttribute("messageVO",messageVO); // 資料庫update成功後,正確的的empVO物件,存入requestuest
@@ -227,6 +232,7 @@ public class MessageController extends HttpServlet {
 				/***************************2.開始查詢資料*****************************************/
 				MessageService messageSvc = new MessageService();
 				List<MessageVO> messageVO = messageSvc.getOneMessageM(courseID);
+				
 				if (messageVO == null) {
 					errorMsgs.add("查無資料");
 				}
@@ -237,11 +243,17 @@ public class MessageController extends HttpServlet {
 					failureView.forward(request, response);
 					return;//程式中斷
 				}
-				System.out.println(111);
+				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
-				request.setAttribute("messageVO", messageVO); // 資料庫取出的VO物件,存入request
-				RequestDispatcher successView = request.getRequestDispatcher("/_Ccc/Message.jsp"); // 成功轉交 listOneEmp.jsp
-				successView.forward(request, response);
+				System.out.println(messageVO);
+				String jsonString = JSONValue.toJSONString(messageVO); 
+				System.out.print(jsonString);
+				out.println(jsonString);
+				
+//				request.setAttribute("messageVO", messageVO); // 資料庫取出的VO物件,存入request
+//				out.print(messageVO);
+//				RequestDispatcher successView = request.getRequestDispatcher("/_Ccc/Message3.jsp"); // 成功轉交 listOneEmp.jsp
+//				successView.forward(request, response);
 
 				/***************************其他可能的錯誤處理*************************************/
 			} catch (Exception e) {
