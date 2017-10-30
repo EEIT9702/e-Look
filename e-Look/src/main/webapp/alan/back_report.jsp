@@ -60,7 +60,7 @@
 </style>
 </head>
 <body>
-<jsp:include page="bheader.jsp"></jsp:include>
+<jsp:include page="<%=request.getContextPath()%>/backstage/bheader.jsp"></jsp:include>
 	<div class="rtitle" style="">
 		<h1 class="rh1" style="">檢舉管理</h1>
 	</div>

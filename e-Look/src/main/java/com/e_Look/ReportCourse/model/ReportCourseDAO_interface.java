@@ -10,6 +10,7 @@ public interface ReportCourseDAO_interface {
 	public ReportCourseVO findByReportId(Integer reportId);
 	public List<ReportCourseVO> getNotHandle(byte status);
 	public List<ReportCourseVO> getAll();
+	public String getJSON(Integer status);
 
 }
  

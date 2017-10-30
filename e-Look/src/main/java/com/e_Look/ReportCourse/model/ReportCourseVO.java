@@ -3,20 +3,23 @@ package com.e_Look.ReportCourse.model;
 import java.io.Serializable;
 import java.sql.Date;
 
+import com.e_Look.Course.CourseVO;
+
 public class ReportCourseVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer reportId;
-	private Integer reportCourseID;
+	//private Integer reportCourseID;
+	private CourseVO courseVO;
 	private Integer reportMemberID;
 	private String reportContent;
 	private Date reportTime;
 	private Byte status;
 	public ReportCourseVO(){}
-	public ReportCourseVO(Integer reportId,Integer reportCourseID,Integer reportMemberID,
+	public ReportCourseVO(Integer reportId,CourseVO courseVO,Integer reportMemberID,
 			String reportContent, Date reportTime, Byte status){
 		this.reportId = reportId;
-		this.reportCourseID=reportCourseID;
+		this.courseVO = courseVO;
 		this.reportMemberID = reportMemberID;
 		this.reportContent = reportContent;
 		this.reportTime = reportTime;
@@ -30,12 +33,12 @@ public class ReportCourseVO implements Serializable {
 		this.reportId = reportId;
 	}
 
-	public Integer getReportCourseID() {
-		return reportCourseID;
+	public CourseVO getCourseVO() {
+		return courseVO;
 	}
 
-	public void setReportCourseID(Integer reportCourseID) {
-		this.reportCourseID = reportCourseID;
+	public void setCourseVO(CourseVO courseVO) {
+		this.courseVO = courseVO;
 	}
 
 	public Integer getReportMemberID() {
