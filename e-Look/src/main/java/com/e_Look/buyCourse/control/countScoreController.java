@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.e_Look.Course.CourseService;
 import com.e_Look.buyCourse.model.BuyCourseService;
 
 import net.minidev.json.JSONValue;
@@ -27,14 +28,11 @@ public class countScoreController extends HttpServlet {
 		
 		Double Score1=buyCourseService.avgScore(courseID);
 		
-		
-		
-		
-		
+		CourseService courseService = new CourseService();
+		courseService.updateAVGScore(courseID, Score1);
 		
 		String Score=Score1.toString();
 		String scoreValue = JSONValue.toJSONString(Score);
-		
 		
 		System.out.println(scoreValue);
 		PrintWriter out =response.getWriter();
