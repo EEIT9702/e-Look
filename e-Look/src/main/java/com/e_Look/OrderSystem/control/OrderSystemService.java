@@ -132,7 +132,7 @@ public class OrderSystemService {
 		Integer[] cMoney = new Integer[ccVOs.size()];
 		int count = 0;
 		for(CourseClassVO ccVO:ccVOs){
-			List<CourseClassDetailsVO> ccdVOs = courseClassDetailsDAO.findBycourseClassID(ccVO.getCourseClassID());
+			List<CourseClassDetailsVO> ccdVOs = courseClassDetailsDAO.getBycourseClassID(ccVO.getCourseClassID());
 			Integer money = 0;
 			for(CourseClassDetailsVO ccdVO:ccdVOs){
 				List<OrderDetailsVO> orderDetailsVOs = orderDetailsDAO.findByCourseID(ccdVO.getCourseVO().getCourseID());

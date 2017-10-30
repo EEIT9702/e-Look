@@ -11,11 +11,8 @@
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/bootstrap.css"
 	rel="stylesheet">
-<!-- <!-- jQuery -->
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
-<!-- <!-- Bootstrap Core JavaScript -->
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
-
 <link href="<%=request.getContextPath()%>/_PJC/css/step1.css"
 	rel="stylesheet">
 
@@ -28,7 +25,7 @@
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/_Lyy/jquery.raty.min.js"></script>
 <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
-<%-- <link type="text/css" rel="stylesheet"	href="<%=request.getContextPath()%>/_Lyy/application.css"> --%>
+
 <style>
 /* 影片區塊 */
 video {
@@ -161,12 +158,6 @@ video::-webkit-media-controls-panel {
 	margin-top: 0;
 }
 
-/* .star { */
-/* 	-webkit-filter: grayscale(1); */
-/* } */
-/* .nstar { */
-/* 	-webkit-filter: grayscale(0); */
-/* } */
 /* 留言板 */
 #messageHeader {
 	border: 1px solid black;
@@ -193,7 +184,7 @@ video::-webkit-media-controls-panel {
 	border-left: 1px solid #ADADAD;
 }
 
-a{
+a {
 	text-decoration: none;
 }
 #videoArea::after{    display: block;
@@ -204,6 +195,7 @@ a{
     background-color: rgba(0,0,0,.5);
     padding:0;
     margin: 0;} 
+
 </style>
 </head>
 <!-- 影片區 -->
@@ -287,24 +279,24 @@ a{
 	</div>
 
 	<!-- 人數、時間 等等-->
-	<div class="container" style="font-size:18px"   >
+	<div class="container" style="font-size: 18px">
 		<div class="row">
 			<div class="col-md-12" style="margin-top: 20px">
 				<!--空-->
-				
-				
+
+
 				<div class="col-md-1 "></div>
 				<!--課程人數 -->
 				<div class="col-md-1 col-xs-4">
 					<img src="<%=request.getContextPath()%>/_Lyy/004-people.png"
 						class="img-responsive center-block img-circle">
-					<h5 class="text-center" style="font-size:18px">課程人數</h5>
+					<h5 class="text-center" style="font-size: 18px">課程人數</h5>
 				</div>
 				<!--課程時間 -->
 				<div class="col-md-1 col-xs-4">
 					<img src="<%=request.getContextPath()%>/_Lyy/clock.png"
 						class="img-responsive center-block img-circle ">
-					<h5 class="text-center" style="font-size:18px">${courseVO.courseLength}分鐘</h5>
+					<h5 class="text-center" style="font-size: 18px">${courseVO.courseLength}分鐘</h5>
 				</div>
 				<!--加到最愛 -->
 				<c:if test="${!empty mBookmarkList}">
@@ -331,8 +323,8 @@ a{
 							<div class="col-md-1 col-xs-4">
 								<a href="#" data-toggle="modal" data-target="#myModal2"> <img
 									src="<%=request.getContextPath()%>/img/favorite.png"
-									class="img-responsive center-block img-circle" >
-									<h5 class="text-center" style="font-size:18px">加到最愛</h5>
+									class="img-responsive center-block img-circle">
+									<h5 class="text-center" style="font-size: 18px">加到最愛</h5>
 								</a>
 							</div>
 						</c:when>
@@ -341,7 +333,7 @@ a{
 								<a href="#" data-toggle="modal" data-target="#myModal"> <img
 									src="<%=request.getContextPath()%>/img/favorite.png"
 									class="img-responsive center-block img-circle">
-									<h5 class="text-center"  style="font-size:18px">加到最愛</h5>
+									<h5 class="text-center" style="font-size: 18px">加到最愛</h5>
 								</a>
 							</div>
 						</c:when>
@@ -350,7 +342,7 @@ a{
 								<a href="#" data-toggle="modal" data-target="#myModal2"> <img
 									src="<%=request.getContextPath()%>/img/favorite.png"
 									class="img-responsive center-block img-circle">
-									<h5 class="text-center" style="font-size:18px">加到最愛</h5>
+									<h5 class="text-center" style="font-size: 18px">加到最愛</h5>
 								</a>
 							</div>
 						</c:otherwise>
@@ -361,7 +353,7 @@ a{
 						<a href="#" id="${favor}"> <img
 							src="<%=request.getContextPath()%>/img/favorite.png"
 							class="img-responsive center-block img-circle">
-							<h5 class="text-center" style="font-size:18px" >加到最愛</h5>
+							<h5 class="text-center" style="font-size: 18px">加到最愛</h5>
 						</a>
 					</div>
 				</c:if>
@@ -372,8 +364,8 @@ a{
 					<div class="dropdown text-center">
 						<a data-toggle="dropdown"><img
 							src="<%=request.getContextPath()%>/_Lyy/share.png"
-							class="img-responsive center-block img-circle" style="margin-bottom: 6px;text-decoration:none">
-							分享連結 </a>
+							class="img-responsive center-block img-circle"
+							style="margin-bottom: 6px; text-decoration: none"> 分享連結 </a>
 						<ul class="dropdown-menu">
 							<li><a href="#">FaceBook</a></li>
 							<li><a href="#">Google</a></li>
@@ -384,17 +376,17 @@ a{
 				<!--講義下載 -->
 				<div class="col-md-1 col-xs-4 ">
 					<c:if test="${!empty courseVO.paper}">
-					<a href="<%=request.getContextPath()%>/Paper?CourseID=${courseVO.courseID}"> <img
-						src="<%=request.getContextPath()%>/_Lyy/001-download.png"
-						class="img-responsive center-block img-circle">
-						<h5 class="text-center" style="font-size:18px" >講義下載</h5>
-					</a>
-				</c:if>
-				<c:if test="${empty courseVO.paper}">
-					<img
-						src="<%=request.getContextPath()%>/_Lyy/001-download.png"
-						class="img-responsive center-block img-circle">
-						<h5 class="text-center" style="font-size:18px">講義下載</h5>
+						<a
+							href="<%=request.getContextPath()%>/Paper?CourseID=${courseVO.courseID}">
+							<img src="<%=request.getContextPath()%>/_Lyy/001-download.png"
+							class="img-responsive center-block img-circle">
+							<h5 class="text-center" style="font-size: 18px">講義下載</h5>
+						</a>
+					</c:if>
+					<c:if test="${empty courseVO.paper}">
+						<img src="<%=request.getContextPath()%>/_Lyy/001-download.png"
+							class="img-responsive center-block img-circle">
+						<h5 class="text-center" style="font-size: 18px">講義下載</h5>
 					</c:if>
 				</div>
 				<!--影片檢舉 -->
@@ -405,7 +397,7 @@ a{
 								<a href="#" href="#" data-toggle="modal" data-target="#myModal2">
 									<img src="<%=request.getContextPath()%>/img/warning.png"
 									class="img-responsive center-block img-circle">
-									<h5 class="text-center" style="font-size:18px">影片檢舉</h5>
+									<h5 class="text-center" style="font-size: 18px">影片檢舉</h5>
 								</a>
 							</div>
 						</c:when>
@@ -414,7 +406,7 @@ a{
 								<a href="#" href="#" data-toggle="modal" data-target="#myModal">
 									<img src="<%=request.getContextPath()%>/img/warning.png"
 									class="img-responsive center-block img-circle">
-									<h5 class="text-center" style="font-size:18px">影片檢舉</h5>
+									<h5 class="text-center" style="font-size: 18px">影片檢舉</h5>
 								</a>
 							</div>
 						</c:when>
@@ -423,7 +415,7 @@ a{
 								<a href="#" href="#" data-toggle="modal" data-target="#myModal2">
 									<img src="<%=request.getContextPath()%>/img/warning.png"
 									class="img-responsive center-block img-circle">
-									<h5 class="text-center" style="font-size:18px">影片檢舉</h5>
+									<h5 class="text-center" style="font-size: 18px">影片檢舉</h5>
 								</a>
 							</div>
 						</c:otherwise>
@@ -434,7 +426,7 @@ a{
 						<a href="#" data-toggle="modal" data-target="#myModalReportVideo">
 							<img src="<%=request.getContextPath()%>/img/warning.png"
 							class="img-responsive center-block img-circle">
-							<h5 class="text-center" style="font-size:18px">影片檢舉</h5>
+							<h5 class="text-center" style="font-size: 18px">影片檢舉</h5>
 						</a>
 					</div>
 					<div class="modal fade" id="myModalReportVideo" tabindex="-1"
@@ -446,8 +438,8 @@ a{
 									<button type="button" class="close pull-right"
 										data-dismiss="modal" aria-hidden="true">&times;</button>
 									<img src="<%=request.getContextPath()%>/img/warning.png"
-										width="32"> <span class="modal-title img-circle" id="myModalLabel"
-										style="font-size: 18px; color: red">檢舉影片</span>
+										width="32"> <span class="modal-title img-circle"
+										id="myModalLabel" style="font-size: 18px; color: red">檢舉影片</span>
 								</div>
 								<h3>
 									<strong>檢舉的影片:</strong>${courseVO.courseName}</h3>
@@ -481,9 +473,9 @@ a{
 				</div>
 				<!--星星 -->
 				<div class="col-md-2 col-xs-6"
-					style="height: 89px; border-right: 1px solid #ADADAD" >
+					style="height: 89px; border-right: 1px solid #ADADAD">
 
-					<div id="starTatol" style="margin: 0 auto;padding-top:10px" ></div>
+					<div id="starTatol" style="margin: 0 auto; padding-top: 10px"></div>
 					<!-- 		加入購物車 -->
 					<c:if test="${empty LoginOK}">
 						<c:choose>
@@ -519,17 +511,19 @@ a{
 									style="width: 160px" disabled="disabled">已擁有</button>
 							</c:when>
 							<c:when test="${!empty LoginOK && !empty list2}">
-								<c:forEach var="buycourse" items='${list2}'>
+								<c:forEach var="buycourse" items='${list2}'
+									varStatus="varStatus">
 									<c:choose>
 										<c:when test="${courseVO.courseID==buycourse.courseID}">
 											<button type="button" class="btn btn-success center-block "
 												style="width: 160px" disabled="disabled">已擁有</button>
+											<c:set var="boo" value="true" />
 										</c:when>
 										<c:when test="${!empty boo}"></c:when>
-										<c:otherwise>
+										<c:when test="${varStatus.last && empty boo}">
 											<button id="intoShoppingCart" type="button"
 												class="btn btn-success center-block " style="width: 160px">加入購物車</button>
-										</c:otherwise>
+										</c:when>
 									</c:choose>
 								</c:forEach>
 							</c:when>
@@ -550,8 +544,8 @@ a{
 	<!--內容 -->
 
 	<div class="demo">
-	
-	
+
+
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
@@ -569,7 +563,7 @@ a{
 								aria-controls="messages" role="tab" data-toggle="tab">點評收藏</a></li>
 						</ul>
 						<!-- 課程簡介 -->
-						<div class="tab-content tabs"> 
+						<div class="tab-content tabs">
 							<div role="tabpanel" class="tab-pane fade in active"
 								id="Section1" style="font-size: 20px">
 								<c:if test="${!empty courseVO.preTool}">
@@ -903,9 +897,10 @@ a{
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="Section4"
 								style="font-size: 20px">
-								<p>喜歡的話記得幫我們評分還有收藏唷</p><span id="noLogin"></span>
+								<p>喜歡的話記得幫我們評分還有收藏唷</p>
+								<span id="noLogin"></span>
 								<div id="star"></div>
-<%-- 								<input type="hidden" value="${list2.course}" id="buyCourseID"> --%>
+<%-- 								<input type="hidden" value="${list2.courseID}" id="buyCourseID"> --%>
 							</div>
 
 						</div>
@@ -1053,7 +1048,6 @@ a{
 		})
 	</script>
 	<script>
-	
 		// 	星星點評
 		$('#star').raty(
 				{
@@ -1061,22 +1055,36 @@ a{
 					width : 150,
 					starOff : 'star-off-big.png',
 					starOn : 'star-on-big.png',
-					readOnly:function(){	
-						if($('#reportMemberID').val()==""|| $('#reportMemberID').val()==null){//沒有登入
+					readOnly : function() {
+						if ($('#reportMemberID').val() == ""
+								|| $('#reportMemberID').val() == null) {//沒有登入
 							$("#noLogin").text("(請先登入)")
 							return true;
-						}},
-					click : function(score, evt) {					
-										$.post('updateScoreController', {
-											'score' : score,
-											'memberID' : $('#reportMemberID').val(),
-											'courseID' : $('#reportCourseID').val()
-										})
-										alert("感謝你的評分!" + "\nscore: " + score );
-								}
+						} else	{
+// 							$.each($('#buyCourseID').val(), function() {
+// 									if ($('#buyCourseID').val() == $('#reportCourseID').val()) {
+// 										$("#noLogin").text("")
+// 										return false;
+// 								} else {
+// 									$("#noLogin").text("(你尚未購買該課程)")
+// 									return true;
+// 								}
+									
+// 						})
+							return false;
+						};
+
+					},
+					click : function(score, evt) {
+						$.post('updateScoreController', {
+							'score' : score,
+							'memberID' : $('#reportMemberID').val(),
+							'courseID' : $('#reportCourseID').val()
+						})
+						alert("感謝你的評分!" + "\nscore: " + score);
+					}
 				});
 	</script>
-
 	<script>
 		var scoreJSON;
 		var value;
@@ -1093,11 +1101,10 @@ a{
 				$('#starTatol').raty({
 					path : 'img',
 					width : 150,
-					starOff :'star-off-big.png',
-					starOn :'star-on-big.png',
+					starOff : 'star-off-big.png',
+					starOn : 'star-on-big.png',
 					readOnly : true,
 					score : value,
-
 				});
 			});
 		});

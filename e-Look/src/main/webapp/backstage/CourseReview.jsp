@@ -67,7 +67,7 @@
                     <table id="ReviewAllCourse" class="table table-striped table-bordered table-list">
                         <thead>
                         <tr>                            
-                            <th class="col-tools" style="color:black">審查結果15</th>
+                            <th class="col-tools" style="color:black">審查結果</th>
                             <th class="hidden-xs" style="color:black">會員編號</th>
                             <th class="col-text" style="color:black">課程編號</th>
                             <th class="col-text" style="color:black">課程標題</th>

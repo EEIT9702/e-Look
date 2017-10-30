@@ -18,18 +18,18 @@
 }
 
 </style>
-<jsp:useBean id="courseClass" scope="page" class="com.e_Look.courseClass.CourseClassDAO"/>
+<jsp:useBean id="cClassDetails" scope="page" class="com.e_Look.CourseClassDetails.CourseClassDetailsDAO"/>
 <jsp:useBean id="course" scope="page" class="com.e_Look.Course.CourseDAO"/>
 
 
 <!--課程類別forEach Star -->
-<%-- <c:forEach var='freeCourse' items='${course.allonlineCourse}'> --%>
+<%-- <c:forEach var='courseClass' items='${cClassDetails.bycourseClassID}'> --%>
 <%-- <c:if test="${courseClass.byCourseClassID == ${param.courseClass}"> --%>
 	
 <!--免費影片forEach Star -->
-<c:forEach var='freeCourse' items='${course.allonlineCourse}' begin="${param.rowValueY}" end="${param.rowValueY + 3}">
-<%-- <c:if test="${freeCourse.CourseClassID == ${param.courseClass}"> --%>
-<c:if test="${freeCourse.soldPrice == 0}">
+<c:forEach var='freeCourse' items='${course.allFreeCourse}' begin="${param.rowValueY}" end="${param.rowValueY + 3}">
+<%-- <c:if test="${freeCourse.soldPrice == 0}"> --%>
+<%-- 	<c:choose><c:when test="${courseClass.CourseClassID == param.courseClass || empty param.courseClass"> --%>
 	<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width:341px;margin-bottom:20px;">
 		<div class="card card-inverse" style="background-color: white;">
 			<a style="text-decoration: none; color: black"; href="<%=request.getContextPath() %>/freeCourse-v1.jsp?CourseID=${freeCourse.courseID}">
@@ -56,7 +56,7 @@
 			</div>
 		</div>
 	</div>
-</c:if>
+<%-- 	</c:when><c:otherwise></c:otherwise></c:choose> --%>
 <%-- </c:if> --%>
 </c:forEach>
 <!--免費影片forEach End -->
