@@ -459,7 +459,36 @@ public class CourseDAO implements CourseDAO_interface {
 	}
 
 }
-	
+	//審核不過，退回成草稿狀態
+		@Override
+		public void changeStatustoEditor(Integer courseID){
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			try{
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_Editor_Status);
+			pstmt.setInt(1,courseID);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
 	
 	
 	

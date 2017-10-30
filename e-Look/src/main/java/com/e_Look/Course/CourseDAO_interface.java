@@ -18,4 +18,5 @@ public interface CourseDAO_interface {
 	public List<CourseVO> getAllonlineCourse();
 	public void postProposal(Integer courseID);
 	public List<CourseVO> getAllReviewCourse();
+	public void changeStatustoEditor(Integer courseID);
 }

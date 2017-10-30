@@ -7,8 +7,8 @@
 <jsp:useBean id="SYSTEM" class="init.GlobalService" scope="application" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${SYSTEM.systemName}</title>
-<%-- <link href="<%=request.getContextPath()%>/css/bootstrap.css" --%>
-<!-- 	rel="stylesheet"> -->
+<link href="<%=request.getContextPath()%>/css/bootstrap.css"
+	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/_PJC/css/step1.css"
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/_PJC/css/step2.css"
@@ -177,7 +177,7 @@
 													<i class="glyphicon glyphicon-list"></i>
 												</div>
 												<div class="update-text">
-													<strong>步驟一、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
+													<strong>步驟一12、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
 												</div>
 											</div>
 										</div>
