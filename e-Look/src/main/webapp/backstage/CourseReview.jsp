@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<jsp:useBean id="SYSTEM" class="init.GlobalService" scope="application" />
+<link rel="Short Icon" type="image/x-icon" href="${initParam.icon}" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>eLook後台課程審核</title>
    	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-3.3.7-dist/css/bootstrap.css">
    	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/jquery-ui.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/backstage/css/CourseReview.css">
@@ -194,6 +194,7 @@ $(document).ready(function () {
 
 
 
+var ReviewDatas;
 
 $(function(){
 	loadReviewData();
@@ -213,9 +214,20 @@ $(function(){
 	if(confirm("確定此課程審核通過嗎?")){
 			var id = $(this).parents('tr').find('td:nth-child(3)').text();
 			console.log(id+"此課程已審核通過");
-			$.get('/e-Look/com.e_Look.Course.control/CourseEditControlloer',{'courseID':id,"changeStatustoOnlineStatus":"xxxxxxxxxx"},function(){
-				loadReviewData();
+			$.each(ReviewDatas,function(idx,Course){
+				if(id==Course.courseID && Course.targetStudentNumber>0){
+					$.get('/e-Look/com.e_Look.Course.control/CourseEditControlloer',{'courseID':id,"changeStatustoFundStatus":"xxxxxxxxxx"},function(){
+						loadReviewData();
+					})
+				}else if(id==Course.courseID && Course.targetStudentNumber==0){
+					$.get('/e-Look/com.e_Look.Course.control/CourseEditControlloer',{'courseID':id,"changeStatustoOnlineStatus":"xxxxxxxxxx"},function(){
+						loadReviewData();
+					})
+				}
 			})
+
+			
+			
 	}
 		})
 	//========================================================================
@@ -223,6 +235,7 @@ $(function(){
 })
 function loadReviewData(){
 	$.getJSON("/e-Look/ReviewCourseStatus",function(datas){
+		ReviewDatas = datas;
 		var fragment = $(document.createDocumentFragment());
 		console.log(datas);	
 		$.each(datas,function(idx,Course){

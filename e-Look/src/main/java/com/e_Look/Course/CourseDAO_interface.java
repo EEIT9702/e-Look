@@ -23,4 +23,5 @@ public interface CourseDAO_interface {
 	public List<CourseVO> getAllReviewCourse();
 	public void changeStatustoEditor(Integer courseID);
 	public void changeStatustoOnline(Integer courseID);
+	public void changeStatustoFund(Integer courseID);
 }
