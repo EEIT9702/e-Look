@@ -14,7 +14,7 @@
 <section id="wrapper">
 	<header>
 		<div class="inner">
-		<h2>課程審查</h2>
+		<h2>課程審查12</h2>
 		</div>
 	</header>
 </section>
@@ -24,9 +24,9 @@
         <nav class="navbar navbar-default">
             <div class="container">
                 <div class="navbar-header">
-                    <span class="navbar-brand">e-Look管理員您好000111</span>
+                    <span class="navbar-brand">e-Look管理員您好</span>
                 </div>
-                <p class="navbar-text">提醒您，應謹慎使用審查功能，避免影響網站會員的權益1310.458468</p>
+                <p class="navbar-text">提醒您，應謹慎使用審查功能，避免影響網站會員的權益</p>
             </div>
         </nav>
     </div>
@@ -63,7 +63,7 @@
                         <thead>
                         <tr>
                             <th class="col-check"><input type="checkbox" id="checkall" onclick="test()"/></th>
-                            <th class="col-tools"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+                            <th class="col-tools">審查結果
                             </th>
                             <th class="hidden-xs">會員編號</th>
                             <th class="col-text">課程編號</th>
@@ -75,10 +75,8 @@
                         <tr data-status="free">
                             <td align="center"><input type="checkbox" class="checkthis"/></td>
                             <td align="center">
-                                <a class="btn btn-default"><span class="glyphicon glyphicon-pencil"
-                                                                 aria-hidden="true"></span></a>
-                                <a class="btn btn-danger"><span class="glyphicon glyphicon-trash"
-                                                                aria-hidden="true"></span></a>
+                                <a class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
                             </td>
                             <td class="hidden-xs">1</td>
                             <td>John Doe</td>
