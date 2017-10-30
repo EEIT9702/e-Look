@@ -1,6 +1,8 @@
 package com.e_Look.sponsor.control;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -39,8 +41,11 @@ public class SponsorInserController extends HttpServlet {
 		
 		String addressSpon=sponsorMap.get("addressSpon").toString();
 		
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		Date opayDate=Date.valueOf(sdf.format(System.currentTimeMillis()));
+		
 		SponsorService sponsorService=new SponsorService();		
-		sponsorService.addNameMoney(courseID,SponsorName, money);
+		sponsorService.addNameMoney(courseID,SponsorName, money,opayDate);
 		
 		response.sendRedirect(addressSpon);
 		sessionSponsor.removeAttribute("sponsor");

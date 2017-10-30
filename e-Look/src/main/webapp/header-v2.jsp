@@ -19,6 +19,10 @@ if(shoppingCartList != null){
 <%-- <script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script> --%>
 <%-- <script src="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.js"></script> --%>
 <style>
+
+*{
+	text-decoration: none
+}
 .navbar {
 	background: rgba(255, 255, 255, 0.25);
 	border: none;

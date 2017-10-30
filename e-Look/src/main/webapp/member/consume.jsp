@@ -368,7 +368,7 @@ $(function(){
 /*----消費明細---*/
  $(function(){
 	 loadOrder($("#memberID").val())
-	 loadCourse($("#memberID").val())
+	// loadCourse($("#memberID").val())
  })
  var OrderDetails;
  var Order;
@@ -381,9 +381,10 @@ $(function(){
 		   var fragment = $(document.createDocumentFragment());
 	   	  $.each(OrderDetails,function(idx,OrderDetail){
 	   		 $.each(OrderDetail,function(idx,Order){
-	   			//console.log(Order.orderID);
-	   			//console.log(value);
-	   			if(value==Order.orderID){
+	   			console.log(Order.courseVO.orderID);
+	   			console.log(value);
+	   			console.log(Order.courseVO);
+	   			if(value==Order.orderVO.orderID){
 	   			var cell1 = $('<td></td>').text("")
 	  		  	var cell2 = $('<td></td>').text(Order.courseVO.courseName)
 	  		  	var cell3 = $('<td></td>').text("")
@@ -412,7 +413,7 @@ $(function(){
 	$.getJSON('/e-Look/MemberConsumeController',{'MemberID':memberID},function(datas){
 	   	 console.log(datas);
 	   	 if(datas.OrderDetails.length>0){
-	   	console.log(datas.OrderDetails);
+	   	//console.log(datas.OrderDetails);
 	   	OrderDetails=datas.OrderDetails;
 	   	Order=datas.order;
  	   	 var fragment = $(document.createDocumentFragment());
@@ -422,7 +423,7 @@ $(function(){
    			var cell1 = $('<td></td>').text(order.orderID)
   		  	var cell2 = $('<td></td>').text("")
   		  	var cell3 = $('<td></td>').text(order.orderTime)
-  		  	console.log(datas.OrderDetails[idx]);
+  		  	//console.log(datas.OrderDetails[idx]);
    			$.each(datas.OrderDetails[idx],function(idx,OrderDetails){
    				count=OrderDetails.buyingPrice+count
    			})
@@ -476,7 +477,7 @@ $(function(){
  
  function loadCourse(memberID){
 		$.getJSON('/e-Look/MemberIncomeController',{'MemberID':memberID},function(datas){
-		   	 console.log(datas);
+		   //	 console.log(datas);
 		   	
 	  	  });
 	}
