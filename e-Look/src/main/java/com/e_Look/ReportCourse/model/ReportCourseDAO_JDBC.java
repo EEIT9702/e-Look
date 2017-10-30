@@ -6,9 +6,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
-import com.e_Look.message.model.MessageVO;
+import org.json.simple.JSONValue;
+
 
 public class ReportCourseDAO_JDBC implements ReportCourseDAO_interface {
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
@@ -31,7 +35,11 @@ public class ReportCourseDAO_JDBC implements ReportCourseDAO_interface {
 			"SELECT reportId,reportCourseID,reportMemberID,reportContent,reportTime,status FROM ReportCourse WHERE status=?";
 	private static final String SELECT_ALL_REPORT_MESSAGE =
 			"SELECT reportId,reportCourseID,reportMemberID,reportContent,reportTime,status FROM ReportCourse";	
-		
+	
+	private static final String GET_JSON = "SELECT rc.reportID, rc.reportCourseID, rc.reportContent, rc.reportTime, rc.status,"
+			+ "rc.reportMemberID, c.courseID, c.soldPrice FROM Course c INNER JOIN ReportCourse rc "
+			+ "ON c.courseID = rc.reportCourseID WHERE rc.status=?";
+			
 	@Override
 	public void insert(ReportCourseVO ReportCourseVO) {
 		Connection con = null;
@@ -214,6 +222,74 @@ public class ReportCourseDAO_JDBC implements ReportCourseDAO_interface {
 		return reportCourseVO;
 	}
 
+	@Override
+	public String getJSON(Integer status) {
+		String jsonString;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			//SELECT rc.reportID, rc.reportCourseID, rc.reportContent, rc.reportTime, rc.status, 
+			//rc.reportMemberID, c.courseID, c.soldPrice
+			//FROM Course c INNER JOIN ReportCourse rc ON c.courseID = rc.reportCourseID
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_JSON);
+			pstmt.setInt(1, status);
+			rs = pstmt.executeQuery();
+			
+			 List l1 = new LinkedList();
+			 while (rs.next()) {
+				 Map m1 = new HashMap();  
+				 m1.put("reportID", rs.getString(1));   
+				 m1.put("reportCourseID", rs.getString(2));  
+				 m1.put("reportContent", rs.getString(3));   
+				 m1.put("reportTime", rs.getString(4)); 
+				 m1.put("status", rs.getString(5)); 
+				 m1.put("reportMemberID", rs.getString(6));
+				 m1.put("courseID", rs.getString(7));
+				 m1.put("soldPrice", rs.getString(8));
+				 l1.add(m1);
+			 }
+			 jsonString = JSONValue.toJSONString(l1);  
+			
+		// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return jsonString;
+	}
+	
 	@Override
 	public List<ReportCourseVO> getNotHandle(byte status) {
 		List<ReportCourseVO> list = new ArrayList<ReportCourseVO>();
