@@ -148,7 +148,7 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 	}
 
 	@Override
-	public List<CourseClassDetailsVO> findBycourseClassID(Integer CourseClassID) {
+	public List<CourseClassDetailsVO> getBycourseClassID(Integer CourseClassID) {
 		
 		List<CourseClassDetailsVO> findBycourseClassID = new LinkedList<CourseClassDetailsVO>();
 		Connection con = null;
