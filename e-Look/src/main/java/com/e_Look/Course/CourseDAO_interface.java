@@ -7,6 +7,7 @@ import com.e_Look.member.model.MemberVO;
 public interface CourseDAO_interface {
 	public Integer insert(CourseVO courseVO);
 	public void update(CourseVO courseVO);
+	public void updateAVGScore(CourseVO courseVO);
 	public void updateimage(CourseVO courseVO);
 	public void updatepaper(CourseVO courseVO);
 	public void updatecourseVideopathway(CourseVO courseVO);
