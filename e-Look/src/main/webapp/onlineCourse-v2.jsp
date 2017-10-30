@@ -11,11 +11,8 @@
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/bootstrap.css"
 	rel="stylesheet">
-<!-- <!-- jQuery -->
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
-<!-- <!-- Bootstrap Core JavaScript -->
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
-
 <link href="<%=request.getContextPath()%>/_PJC/css/step1.css"
 	rel="stylesheet">
 
@@ -28,7 +25,7 @@
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/_Lyy/jquery.raty.min.js"></script>
 <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
-<%-- <link type="text/css" rel="stylesheet"	href="<%=request.getContextPath()%>/_Lyy/application.css"> --%>
+
 <style>
 /* 影片區塊 */
 video {
@@ -160,12 +157,6 @@ video::-webkit-media-controls-panel {
 	margin-top: 0;
 }
 
-/* .star { */
-/* 	-webkit-filter: grayscale(1); */
-/* } */
-/* .nstar { */
-/* 	-webkit-filter: grayscale(0); */
-/* } */
 /* 留言板 */
 #messageHeader {
 	border: 1px solid black;
@@ -898,7 +889,7 @@ a {
 								<p>喜歡的話記得幫我們評分還有收藏唷</p>
 								<span id="noLogin"></span>
 								<div id="star"></div>
-								<%-- 								<input type="hidden" value="${list2.course}" id="buyCourseID"> --%>
+<%-- 								<input type="hidden" value="${list2.courseID}" id="buyCourseID"> --%>
 							</div>
 
 						</div>
@@ -1058,13 +1049,20 @@ a {
 								|| $('#reportMemberID').val() == null) {//沒有登入
 							$("#noLogin").text("(請先登入)")
 							return true;
-						} else if (true) {//判斷有無購買
-							$("#noLogin").text("(你尚未購買該課程)")
-							return true;
-						} else {
-							$("#noLogin").text("")
+						} else	{
+// 							$.each($('#buyCourseID').val(), function() {
+// 									if ($('#buyCourseID').val() == $('#reportCourseID').val()) {
+// 										$("#noLogin").text("")
+// 										return false;
+// 								} else {
+// 									$("#noLogin").text("(你尚未購買該課程)")
+// 									return true;
+// 								}
+									
+// 						})
 							return false;
-						}
+						};
+
 					},
 					click : function(score, evt) {
 						$.post('updateScoreController', {
@@ -1076,7 +1074,6 @@ a {
 					}
 				});
 	</script>
-
 	<script>
 		var scoreJSON;
 		var value;
@@ -1097,7 +1094,6 @@ a {
 					starOn : 'star-on-big.png',
 					readOnly : true,
 					score : value,
-
 				});
 			});
 		});
