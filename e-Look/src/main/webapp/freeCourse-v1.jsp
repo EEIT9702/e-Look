@@ -239,7 +239,7 @@ a{text-decoration:none}
 
 	<!-- 人數、時間 等等-->
 	
-	<div class="container">
+	<div class="container"style="font-size: 18px">
 		<div class="row">
 			<div class="col-md-12" style="margin-top:20px">
 				<!--空-->
@@ -248,13 +248,13 @@ a{text-decoration:none}
 				<div class="col-md-1 col-xs-4">
 					<img src="<%=request.getContextPath()%>/_Lyy/004-people.png"
 						class="img-responsive center-block " >
-					<h5 class="text-center">課程人數</h5>
+					<h5 class="text-center"style="font-size: 18px">課程人數</h5>
 				</div>
 				<!--課程時間 -->
 				<div class="col-md-1 col-xs-4">
 					<img src="<%=request.getContextPath()%>/_Lyy/clock.png"
 						class="img-responsive center-block">
-					<h5 class="text-center"> ${courseVO.courseLength}分鐘</h5>
+					<h5 class="text-center"  style="font-size: 18px"> ${courseVO.courseLength}分鐘</h5>
 				</div>
 				<!--加到最愛 -->
 				<c:if test="${!empty mBookmarkList}">
@@ -282,7 +282,7 @@ a{text-decoration:none}
 								<a href="#" data-toggle="modal" data-target="#myModal2"> <img
 									src="<%=request.getContextPath()%>/img/favorite.png"
 									class="img-responsive center-block">
-									<h5 class="text-center">加到最愛</h5>
+									<h5 class="text-center"style="font-size: 18px">加到最愛</h5>
 								</a>
 							</div>
 						</c:when>
@@ -291,7 +291,7 @@ a{text-decoration:none}
 								<a href="#" data-toggle="modal" data-target="#myModal"> <img
 									src="<%=request.getContextPath()%>/img/favorite.png"
 									class="img-responsive center-block">
-									<h5 class="text-center">加到最愛</h5>
+									<h5 class="text-center"style="font-size: 18px">加到最愛</h5>
 								</a>
 							</div>
 						</c:when>
@@ -300,7 +300,7 @@ a{text-decoration:none}
 								<a href="#" data-toggle="modal" data-target="#myModal2"> <img
 									src="<%=request.getContextPath()%>/img/favorite.png"
 									class="img-responsive center-block">
-									<h5 class="text-center">加到最愛</h5>
+									<h5 class="text-center"style="font-size: 18px">加到最愛</h5>
 								</a>
 							</div>
 						</c:otherwise>
@@ -311,7 +311,7 @@ a{text-decoration:none}
 						<a href="#" id="${favor}"> <img
 							src="<%=request.getContextPath()%>/img/favorite.png"
 							class="img-responsive center-block">
-							<h5 class="text-center">加到最愛</h5>
+							<h5 class="text-center"style="font-size: 18px">加到最愛</h5>
 						</a>
 					</div>
 				</c:if>
@@ -321,8 +321,8 @@ a{text-decoration:none}
 				<div class="col-md-1 col-xs-4 ">
 					<div class="dropdown text-center" >
 						<a data-toggle="dropdown"><img src="<%=request.getContextPath()%>/_Lyy/share.png"
-						class="img-responsive center-block" style="margin-bottom:7px">
-						分享連結 <span class="caret"></span></a>
+						class="img-responsive center-block" style="margin-bottom:7px" style="font-size: 18px">
+						分享連結 </a>
 						<ul class="dropdown-menu">
 							<li><a href="#">FaceBook</a></li>
 							<li><a href="#">Google</a></li>
@@ -336,14 +336,14 @@ a{text-decoration:none}
 					<a href="<%=request.getContextPath()%>/Paper?CourseID=${courseVO.courseID}"> <img
 						src="<%=request.getContextPath()%>/_Lyy/001-download.png"
 						class="img-responsive center-block">
-						<h5 class="text-center">講義下載</h5>
+						<h5 class="text-center"style="font-size: 18px">講義下載</h5>
 					</a>
 				</c:if>
 				<c:if test="${empty courseVO.paper}">
 					<img
 						src="<%=request.getContextPath()%>/_Lyy/001-download.png"
 						class="img-responsive center-block">
-						<h5 class="text-center">講義下載</h5>
+						<h5 class="text-center"style="font-size: 18px">講義下載</h5>
 					</c:if>
 				</div>
 				<!--影片檢舉 -->
@@ -354,7 +354,7 @@ a{text-decoration:none}
 								<a href="#" href="#" data-toggle="modal" data-target="#myModal2">
 									<img src="<%=request.getContextPath()%>/img/warning.png"
 									class="img-responsive center-block">
-									<h5 class="text-center">影片檢舉</h5>
+									<h5 class="text-center"style="font-size: 18px">影片檢舉</h5>
 								</a>
 							</div>
 						</c:when>
@@ -363,7 +363,7 @@ a{text-decoration:none}
 								<a href="#" href="#" data-toggle="modal" data-target="#myModal">
 									<img src="<%=request.getContextPath()%>/img/warning.png"
 									class="img-responsive center-block">
-									<h5 class="text-center">影片檢舉</h5>
+									<h5 class="text-center"style="font-size: 18px">影片檢舉</h5>
 								</a>
 							</div>
 						</c:when>
@@ -372,7 +372,7 @@ a{text-decoration:none}
 								<a href="#" href="#" data-toggle="modal" data-target="#myModal2">
 									<img src="<%=request.getContextPath()%>/img/warning.png"
 									class="img-responsive center-block">
-									<h5 class="text-center">影片檢舉</h5>
+									<h5 class="text-center"style="font-size: 18px">影片檢舉</h5>
 								</a>
 							</div>
 						</c:otherwise>
@@ -383,7 +383,7 @@ a{text-decoration:none}
 						<a href="#" data-toggle="modal" data-target="#myModalReportVideo">
 							<img src="<%=request.getContextPath()%>/img/warning.png"
 							class="img-responsive center-block">
-							<h5 class="text-center">影片檢舉</h5>
+							<h5 class="text-center"style="font-size: 18px">影片檢舉</h5>
 						</a>
 					</div>
 					<div class="modal fade" id="myModalReportVideo" tabindex="-1"
@@ -428,7 +428,8 @@ a{text-decoration:none}
 				</div>
 				<!--星星 -->
 				<div class="col-md-2 col-xs-6"style="height:89px;border-right:1px solid #ADADAD;" >
-					<div id="starTatol" style="margin: 0 auto" ></div>
+					<div id="starTatol" style="margin: 0 auto; padding-top: 10px"><span id="starText" class="pull-right"></span></div>
+					
 					<!--贊助 -->
 					<button type="button" class="btn btn-primary center-block "
 						style="width: 160px" data-toggle="modal" data-target="#mysponer">贊助</button>
@@ -843,7 +844,10 @@ a{text-decoration:none}
 								style="font-size: 20px">
 
 								<p>喜歡的話記得幫我們評分還有收藏唷</p>
+								<span id="noLogin"></span>
 								<div id="star"></div>
+								<input type="hidden" value="${courseVO.memberID}"
+									id="starMemberID">
 							</div>
 						</div>
 					</div>
@@ -1037,51 +1041,76 @@ a{text-decoration:none}
 <script>
 	
 		// 	星星點評
-		$('#star').raty(
+		
+		$(function(){
+			$('#star').raty(
 				{
 					path : 'img',
 					width : 150,
 					starOff : 'star-off-big.png',
 					starOn : 'star-on-big.png',
-					readOnly:function(){
-						if( $('#reportMemberID').val()==""|| $('#reportMemberID').val()==null){
+					readOnly :function() {
+						if ($('#reportMemberID').val() == ""|| $('#reportMemberID').val() == null) {//沒有登入
+							$("#noLogin").text("(請先登入)")
+							
 							return true;
-						
-					}},
-					
-					
-					click : function(score, evt) {					
-										$.post('updateScoreController', {
-											'score' : score,
-											'memberID' : $('#reportMemberID').val(),
-											'courseID' : $('#reportCourseID').val()
-										})
-										alert("感謝你的評分!" + "\nscore: " + score );
-								}
+						}else{
+						var memberID=$('#reportMemberID').val();
+							console.log(getJson(memberID));
+							return getJson(memberID);
+					}
+				},
+					click : function(score, evt) {
+						$.post('updateScoreController', {
+							'score' : score,
+							'memberID' : $('#reportMemberID').val(),
+							'courseID' : $('#reportCourseID').val()
+						})
+						alert("感謝你的評分!" + "\nscore: " + score);
+					}
 				});
+		});
+		
+		function getJson(memberID) {
+			var bool;
+			$.ajax({'url':'<%=request.getContextPath() %>/countScoreController',
+					'async':false,
+					'method':"GET",
+					'data':{'memberID':memberID},
+					'success':function(datas){
+						var datasJson=JSON.parse(datas);
+						console.log(datasJson.length)
+						console.log(datas);
+						console.log($('#reportMemberID').val());
+						console.log($('#starMemberID').val());
+						 if($('#starMemberID').val()==$('#reportMemberID').val()){
+							$("#noLogin").text("")	
+							bool=false
+							return bool;										
+						}
+					}	
+			});//$.ajax end
+			return bool;
+		}
 	</script>
-
 	<script>
 		var scoreJSON;
 		var value;
 		$(function() {
-			// 			console.log($("#mbcourseID").val())
+						
 			$.post('countScoreController', {
 				'courseID' : $("#mbcourseID").val()
 			}, function(data) {
-				// 				console.log(data);
 				scoreJSON = JSON.parse(data);
-				// 				console.log(scoreJSON);
 				value = Math.ceil(parseFloat(scoreJSON));
-				// 				console.log(value)
+				$('#starText').css({'font-size':'12px','padding-top':'5px'}).text("("+value+")")
 				$('#starTatol').raty({
 					path : 'img',
-					width : 150,
+					width : 160,
 					starOff : 'star-off-big.png',
 					starOn : 'star-on-big.png',
 					readOnly : true,
 					score : value,
-
 				});
 			});
 		});
