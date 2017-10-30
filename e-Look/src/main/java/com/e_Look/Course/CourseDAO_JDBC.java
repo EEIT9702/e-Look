@@ -32,7 +32,7 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 	private static final String SELECT_STATUS_Course = "select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore from Course where status= ?";
 	private static final String CHANGE_Course_Stage = "update Course set status=? where courseID= ?";
 	private static final String SELECT_ALL_ONLINECourse = "select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore from Course where  status= 2 ";
-	private static final String UPDATE_AVG_SCORE = "UPDATE Course SET avgScore=? WHERE memberID=? and courseID=?";
+	private static final String UPDATE_AVG_SCORE = "UPDATE Course SET avgScore=? WHERE courseID=?";
 	
 	
 	//以下為我要開課的功能
@@ -155,7 +155,7 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 	}
 
 	@Override
-	public void updateAVGScore(CourseVO courseVO) {
+	public void updateAVGScore(Integer courseID,Double avgScore ) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -164,9 +164,8 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE_AVG_SCORE);
 			
-			pstmt.setDouble(1, courseVO.getAvgScore());
-			pstmt.setInt(2, courseVO.getMemberID());
-			pstmt.setInt(3, courseVO.getCourseID());
+			pstmt.setDouble(1, avgScore);
+			pstmt.setInt(2, courseID);
 			pstmt.executeUpdate();
 				
 		}catch (ClassNotFoundException e) {

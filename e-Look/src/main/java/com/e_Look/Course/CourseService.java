@@ -77,4 +77,10 @@ public class CourseService {
 	public List<CourseVO> getAllCourseData(Integer memberID, Integer status){
 		return dao.findAllCourse(memberID, status);
 	}
+	public void updateAVGScore(Integer courseID ,Double avgScore) {
+		CourseVO courseVO = new CourseVO();
+		courseVO.setCourseID(courseID);
+		courseVO.setAvgScore(avgScore);
+		dao.updateAVGScore(courseID, avgScore);
+	}
 }
