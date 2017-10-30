@@ -17,6 +17,9 @@ import javax.sql.DataSource;
 
 import org.json.simple.JSONValue;
 
+import com.e_Look.Course.CourseDAO;
+import com.e_Look.Course.CourseVO;
+
 
 public class ReportCourseDAO implements ReportCourseDAO_interface {
 	private static DataSource ds = null;
@@ -37,9 +40,9 @@ public class ReportCourseDAO implements ReportCourseDAO_interface {
 		    "DELETE FROM ReportCourse WHERE reportId =?";
 	private static final String SELECT_ONE_REPORT_MESSAGE =
 			"SELECT reportId,reportCourseID,reportMemberID,reportContent,reportTime,status FROM ReportCourse WHERE reportId=?";
-	private static final String SELECT_NOT_HANDLE_REPORT_MESSAGE =
-			"SELECT reportId,reportCourseID,reportMemberID,reportContent,reportTime,status FROM ReportCourse WHERE status=?";
-	private static final String SELECT_ALL_REPORT_MESSAGE =
+	private static final String SELECT_NOT_HANDLE_REPORT_COURSE =
+			"SELECT reportId,reportCourseID,reportMemberID,reportContent,reportTime,status FROM ReportCourse WHERE status=0";
+	private static final String SELECT_ALL_REPORT_COURSE =
 			"SELECT reportId,reportCourseID,reportMemberID,reportContent,reportTime,status FROM ReportCourse";	
 	
 	private static final String GET_JSON = "SELECT rc.reportID, rc.reportCourseID, rc.reportContent, rc.reportTime, rc.status,"
@@ -54,7 +57,8 @@ public class ReportCourseDAO implements ReportCourseDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_REPORTCOURSE);
 
-			pstmt.setInt(1, ReportCourseVO.getReportCourseID());
+			//pstmt.setInt(1, ReportCourseVO.getReportCourseID());
+			pstmt.setInt(1, ReportCourseVO.getCourseVO().getCourseID());
 			pstmt.setInt(2,	ReportCourseVO.getReportMemberID());
 			pstmt.setString(3, ReportCourseVO.getReportContent());
 			
@@ -157,6 +161,7 @@ public class ReportCourseDAO implements ReportCourseDAO_interface {
 	@Override
 	public ReportCourseVO findByReportId(Integer reportId) {
 		ReportCourseVO reportCourseVO = null;
+		CourseVO courseVO = null;
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -172,6 +177,15 @@ public class ReportCourseDAO implements ReportCourseDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
+				reportCourseVO = new ReportCourseVO();
+				courseVO = new CourseVO();
+				
+				CourseDAO courseDAO = new CourseDAO();
+				Integer courseID = rs.getInt("reportCourseID");
+				courseVO = courseDAO.findByPrimaryKey(courseID);
+				
+				reportCourseVO.setCourseVO(courseVO);
+				
 				reportCourseVO.setReportId(rs.getInt("reportId"));
 				reportCourseVO.setReportMemberID(rs.getInt("reportMemberID"));
 				reportCourseVO.setReportContent(rs.getString("reportContent"));
@@ -278,6 +292,7 @@ public class ReportCourseDAO implements ReportCourseDAO_interface {
 	public List<ReportCourseVO> getNotHandle(byte status) {
 		List<ReportCourseVO> list = new ArrayList<ReportCourseVO>();
 		ReportCourseVO reportCourseVO = null;
+		CourseVO courseVO = null;
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -285,12 +300,20 @@ public class ReportCourseDAO implements ReportCourseDAO_interface {
 
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_NOT_HANDLE_REPORT_MESSAGE);
+			pstmt = con.prepareStatement(SELECT_NOT_HANDLE_REPORT_COURSE);
 			pstmt.setByte(1, status);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				reportCourseVO=new ReportCourseVO();
+				reportCourseVO = new ReportCourseVO();
+				courseVO = new CourseVO();
+				
+				CourseDAO courseDAO = new CourseDAO();
+				Integer courseID = rs.getInt("reportCourseID");
+				courseVO = courseDAO.findByPrimaryKey(courseID);
+				
+				reportCourseVO.setCourseVO(courseVO);
+				
 				reportCourseVO.setReportId(rs.getInt("reportId"));
 				reportCourseVO.setReportMemberID(rs.getInt("reportMemberID"));
 				reportCourseVO.setReportContent(rs.getString("reportContent"));
@@ -335,17 +358,27 @@ public class ReportCourseDAO implements ReportCourseDAO_interface {
 	public List<ReportCourseVO> getAll() {
 		List<ReportCourseVO> list = new ArrayList<ReportCourseVO>();
 		ReportCourseVO reportCourseVO = null;
+		CourseVO courseVO = null;
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_ALL_REPORT_MESSAGE);
+			pstmt = con.prepareStatement(SELECT_ALL_REPORT_COURSE);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				reportCourseVO=new ReportCourseVO();
+				reportCourseVO = new ReportCourseVO();
+				courseVO = new CourseVO();
+				
+				CourseDAO courseDAO = new CourseDAO();
+				Integer courseID = rs.getInt("reportCourseID");
+				courseVO = courseDAO.findByPrimaryKey(courseID);
+				
+				reportCourseVO.setCourseVO(courseVO);
+				
 				reportCourseVO.setReportId(rs.getInt("reportId"));
 				reportCourseVO.setReportMemberID(rs.getInt("reportMemberID"));
 				reportCourseVO.setReportContent(rs.getString("reportContent"));
