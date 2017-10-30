@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE>
-<link href="<%=request.getContextPath()%>/css/bootstrap.css"
+<link href="<%=request.getContextPath()%>/css/bootstrap-3.3.7-dist/css/bootstrap.css"
 	rel="stylesheet">
 <script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.js"></script>
