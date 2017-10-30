@@ -13,6 +13,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.e_Look.Course.CourseDAO;
+import com.e_Look.Order.model.OrderDAO;
 
 public class OrderDetailsDAO implements OrderDetailsDAO_interface {
 	private static DataSource ds = null;
@@ -31,7 +32,9 @@ public class OrderDetailsDAO implements OrderDetailsDAO_interface {
 	private static final String SELECT_ORDER_ORDERDETAILS = "select orderID,courseID,buyingPrice,originalPrice from OrderDetails where orderID = ?";
 	private static final String SELECT_ALL_ORDERDETAILS = "select orderID,courseID,buyingPrice,originalPrice from OrderDetails";
 	private static final String SELECT_ONE_ORDERDETAILS = "select orderID,courseID,buyingPrice,originalPrice from OrderDetails where orderID=? and courseID=?";
-
+	private static final String SELECT_ORDERDETAILS_BY_COURSEID = "select orderID,courseID,buyingPrice,originalPrice from OrderDetails where courseID=?";
+	
+	
 	@Override
 	public void insert(OrderDetailsVO orderDetailsVO) {
 		Connection con = null;
@@ -39,7 +42,7 @@ public class OrderDetailsDAO implements OrderDetailsDAO_interface {
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_ORDERDETAILS);
-			pstmt.setInt(1, orderDetailsVO.getOrderID());
+			pstmt.setInt(1, orderDetailsVO.getOrderVO().getOrderID());
 			pstmt.setInt(2, orderDetailsVO.getCourseVO().getCourseID());
 			pstmt.setInt(3, orderDetailsVO.getBuyingPrice());
 			pstmt.setInt(4, orderDetailsVO.getOriginalPrice());
@@ -71,11 +74,11 @@ public class OrderDetailsDAO implements OrderDetailsDAO_interface {
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_ORDERDETAILS);
-			pstmt.setInt(1, orderDetailsVO.getOrderID());
+			pstmt.setInt(1, orderDetailsVO.getOrderVO().getOrderID());
 			pstmt.setInt(2, orderDetailsVO.getCourseVO().getCourseID());
 			pstmt.setInt(3, orderDetailsVO.getBuyingPrice());
 			pstmt.setInt(4, orderDetailsVO.getOriginalPrice());
-			pstmt.setInt(5, orderDetailsVO.getOrderID());
+			pstmt.setInt(5, orderDetailsVO.getOrderVO().getOrderID());
 			pstmt.setInt(6, orderDetailsVO.getCourseVO().getCourseID());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -105,7 +108,7 @@ public class OrderDetailsDAO implements OrderDetailsDAO_interface {
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE_ORDERDETAILS);
-			pstmt.setInt(1, orderDetailsVO.getOrderID());
+			pstmt.setInt(1, orderDetailsVO.getOrderVO().getOrderID());
 			pstmt.setInt(2, orderDetailsVO.getCourseVO().getCourseID());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -132,6 +135,7 @@ public class OrderDetailsDAO implements OrderDetailsDAO_interface {
 	public List<OrderDetailsVO> findByOrderID(Integer orderID) {
 		List<OrderDetailsVO> list = new LinkedList<OrderDetailsVO>();
 		CourseDAO cdao = new CourseDAO();
+		OrderDAO odao = new OrderDAO();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -141,7 +145,7 @@ public class OrderDetailsDAO implements OrderDetailsDAO_interface {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				OrderDetailsVO vo = new OrderDetailsVO();
-				vo.setOrderID(rs.getInt(1));
+				vo.setOrderVO(odao.findByPrimaryKey(rs.getInt(1)));
 				vo.setCourseVO(cdao.findByPrimaryKey(rs.getInt(2)));
 				vo.setBuyingPrice(rs.getInt(3));
 				vo.setOriginalPrice(rs.getInt(4));
@@ -175,13 +179,14 @@ public class OrderDetailsDAO implements OrderDetailsDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		CourseDAO cdao = new CourseDAO();
+		OrderDAO odao = new OrderDAO();
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_ALL_ORDERDETAILS);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				OrderDetailsVO vo = new OrderDetailsVO();
-				vo.setOrderID(rs.getInt(1));
+				vo.setOrderVO(odao.findByPrimaryKey(rs.getInt(1)));
 				vo.setCourseVO(cdao.findByPrimaryKey(rs.getInt(2)));
 				vo.setBuyingPrice(rs.getInt(3));
 				vo.setOriginalPrice(rs.getInt(4));
@@ -214,16 +219,17 @@ public class OrderDetailsDAO implements OrderDetailsDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		CourseDAO cdao = new CourseDAO();
+		OrderDAO odao = new OrderDAO();
 		OrderDetailsVO orderDetailsVO2 = null;
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_ONE_ORDERDETAILS);
-			pstmt.setInt(1, orderDetailsVO.getOrderID());
+			pstmt.setInt(1, orderDetailsVO.getOrderVO().getOrderID());
 			pstmt.setInt(2, orderDetailsVO.getCourseVO().getCourseID());
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
 				orderDetailsVO2 = new OrderDetailsVO();
-				orderDetailsVO2.setOrderID(rs.getInt(1));
+				orderDetailsVO2.setOrderVO(odao.findByPrimaryKey(rs.getInt(1)));
 				orderDetailsVO2.setCourseVO(cdao.findByPrimaryKey(rs.getInt(2)));
 				orderDetailsVO2.setBuyingPrice(rs.getInt(3));
 				orderDetailsVO2.setOriginalPrice(rs.getInt(4));
@@ -247,6 +253,49 @@ public class OrderDetailsDAO implements OrderDetailsDAO_interface {
 			}
 		}
 		return orderDetailsVO2;
+	}
+
+	@Override
+	public List<OrderDetailsVO> findByCourseID(Integer courseID) {
+		List<OrderDetailsVO> list = new LinkedList<OrderDetailsVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		CourseDAO cdao = new CourseDAO();
+		OrderDAO odao = new OrderDAO();
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(SELECT_ORDERDETAILS_BY_COURSEID);
+			pstmt.setInt(1, courseID);
+			ResultSet rs=pstmt.executeQuery();
+			while(rs.next()){
+				OrderDetailsVO odVO = new OrderDetailsVO();
+				odVO.setOrderVO(odao.findByPrimaryKey(rs.getInt(1)));
+				odVO.setCourseVO(cdao.findByPrimaryKey(rs.getInt(2)));
+				odVO.setBuyingPrice(rs.getInt(3));
+				odVO.setOriginalPrice(rs.getInt(4));
+				list.add(odVO);
+			}
+	} catch (SQLException e) {
+		throw new RuntimeException("A database error occured. " + e.getMessage());
+	} finally {
+		if (pstmt != null) {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace(System.err);
+			}
+		}
+		if (con != null) {
+			try {
+				con.close();
+			} catch (Exception e) {
+				e.printStackTrace(System.err);
+			}
+		}
+	}
+		
+		
+		return list;
 	}
 
 }
