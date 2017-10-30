@@ -15,10 +15,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>檢舉管理畫面</title>
+<title>遮蔽留言紀錄</title>
 <script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script>
 <!-- <script type="text/javascript" src="css/jquery.mmenu.js"></script> -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/table2.css">
 
 <style>
 .rtitle{
@@ -61,7 +62,7 @@
 <section id="wrapper">
 <header>
 	<div class="inner">
-		<h2>檢舉管理</h2>
+		<h2>遮蔽留言紀錄</h2>
 		
 	</div>
 </header>
@@ -82,15 +83,15 @@
                  </thead>
                    <tbody>
                  </tbody>
-                  <tfoot>
-                 	<form>
+                  <tfoot style="border-top:none">
+<!--                  	<form> -->
 		                 <tr>
 			                  <td><input type="hidden" id="" name=""><span></span></td>
 			                  <td><input type="hidden" id="" name=""><span></span></td>
 			                  <td><input type="hidden" id="" name=""><span></span></td>
-			                  <td><button type="button" value="back_report" onclick="self.location.href='back_report-v2.jsp'" class="btn btn-success">檢舉管理</button></td>
+			                  <td><button type="button" value="back_report" onclick="self.location.href='back_report-v2.jsp'" class="btn btn-success">檢舉留言管理</button></td>
 						</tr>
-	                 </form>
+<!-- 	                 </form> -->
                   </tfoot>
             </table>
 		</div>
