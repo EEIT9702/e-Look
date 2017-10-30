@@ -15,7 +15,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>檢舉管理畫面</title>
+<title>檢舉留言管理畫面</title>
 <script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script>
 <!-- <script type="text/javascript" src="css/jquery.mmenu.js"></script> -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -76,27 +76,27 @@
 		  <table id="reportTable" class="table table-bordered tstyle" style="">
                  <thead>
                     <tr>
-                       <th style="width:10%">檢舉編號</th>
+                       <th style="width:14%">檢舉留言編號</th>
                        <th style="width:20%">檢舉內容</th>
                        <th style="width:22%">留言內容</th>
-                       <th style="width:20%">檢舉時間</th>
+                       <th style="width:16%">檢舉時間</th>
                        <th style="width:10%">檢舉狀態</th>
                        <th style="width:18%">管理</th>
                     </tr>
                  </thead>
                  <tbody>
                  </tbody>
-                  <tfoot>
-	                 <form>
+                  <tfoot style="border-top:none">
+<!-- 	                 <form> -->
 	                 <tr>
-	                  <td><input type="hidden" id="" name=""><span></span></td>
+	                  <td><button type="button" value="hideHistory" onclick="self.location.href='breport-course.jsp'" class="btn btn-info">檢舉課程管理</button></td>
 	                  <td><input type="hidden" id="" name=""><span></span></td>
 	                  <td><input type="hidden" id="" name=""><span></span></td>
 	                  <td><input type="hidden" id="" name=""><span></span></td>
 	                  <td><input type="hidden" id="" name=""><span></span></td>
 	                  <td><button type="button" value="hideHistory" onclick="self.location.href='back_report_history-v2.jsp'" class="btn btn-success">查詢遮蔽留言紀錄</button></td>
 	                 </tr>
-	                 </form>
+<!-- 	                 </form> -->
                   </tfoot>
 			</table>
 <!-- 			<table class="table table-bordered tstyle" style=""> -->
@@ -160,10 +160,17 @@
 		    		var cell4 = $('<td></td>').text(report.reportTime);
 		    		var cell5 = $('<td></td>').text(report.status);
 		    		var cell6 = $('<td></td>').html('<button class="btn btn-primary">遮蔽內容</button>&nbsp;<button class="btn btn-warning">不處理</button></td>');
+// 		    		var cell7 = $('<td></td>').html('<input type="hidden" id="" name=""><span></span>');
+// 		    		var cell8 = $('<td></td>').html('<input type="hidden" id="" name=""><span></span>');
+// 		    		var cell9 = $('<td></td>').html('<input type="hidden" id="" name=""><span></span>');
+// 		    		var cell10 = $('<td></td>').html('<input type="hidden" id="" name=""><span></span>');
+// 		    		var cell11 = $('<td></td>').html('<input type="hidden" id="" name=""><span></span>');
+// 		    		var cell12 = $('<td></td>').html('<button type="button" value="hideHistory" onclick="self.location.href="back_report_history-v2.jsp"" class="btn btn-success">查詢遮蔽留言紀錄</button>');
 		    		//<tr><td>
-		    		var row = $('<tr></tr>').append([cell1,cell2,cell3,cell4,cell5,cell6]);
+		    		var row1 = $('<tr></tr>').append([cell1,cell2,cell3,cell4,cell5,cell6]);
+		    		//var row2 = $('<tr></tr>').append([cell7,cell8,cell9,cell10,cell11,cell12]);
 		    		//放到容器裡
-		    		fragment.append(row);
+		    		fragment.append(row1);
 		    	})
 		    	$('#reportTable>tbody').html(fragment);
 		     })

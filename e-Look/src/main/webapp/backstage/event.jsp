@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="css/table.css">
     <link rel="stylesheet" href="css/button.css">
     <link rel="stylesheet" href="css/jdialog.min.css">
-     <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
   <script src="js/jquery.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
   <script src="js/jdialog.min.js" type="text/javascript"></script>
