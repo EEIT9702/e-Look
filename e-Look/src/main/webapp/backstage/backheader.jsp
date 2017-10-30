@@ -22,7 +22,7 @@
 							<ul class="links">
 								<li><a href="event.jsp">活動管理</a></li>
 								<li><a href="backAd.jsp">輪播管理</a></li>
-								<li><a href="#">課程審查</a></li>
+								<li><a href="CourseReview.jsp">課程審查</a></li>
 								<li><a href="#">收益報表</a></li>
 								<li><a href="back_report-v2.jsp">檢舉管理</a></li>
 								<li><a href="backLogin.jsp">登出</a></li>
