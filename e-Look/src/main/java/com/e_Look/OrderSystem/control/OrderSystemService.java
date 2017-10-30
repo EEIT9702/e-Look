@@ -2,7 +2,7 @@ package com.e_Look.OrderSystem.control;
 
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import com.e_Look.Order.model.*;
@@ -44,7 +44,7 @@ public class OrderSystemService {
 
 		SimpleDateFormat sfdForNo = new SimpleDateFormat("yyyyMMddHHmmss");
 		SimpleDateFormat sdfForDate = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		Date now = new Date();
+		java.util.Date now = new java.util.Date();
 
 		String merchantTradeNo = sfdForNo.format(now);
 		String oPayDate = sdfForDate.format(now);
@@ -103,4 +103,17 @@ public class OrderSystemService {
 			buyCourseDAO.insert(bcVO);
 		}
 	}
+	
+	public Integer getMoneyOfMonth(Date sDate,Date eDate){
+		Integer sumMoney = 0;
+		List<OrderVO> orderVOs = orderDAO.getOrderByDate(sDate, eDate);
+		for(OrderVO orderVO:orderVOs){
+			List<OrderDetailsVO> orderDetailsVOs = orderDetailsDAO.findByOrderID(orderVO.getOrderID());
+			for(OrderDetailsVO orderDetailsVO:orderDetailsVOs){
+				sumMoney+=orderDetailsVO.getBuyingPrice();
+			}
+		}
+		return sumMoney;
+	}
+	
 }
