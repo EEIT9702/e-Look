@@ -270,9 +270,7 @@
 														<p style="margin-top: 40px; font-size: 18px">課程售價：xxx元</p>
 													</div>
 												</div>
-												<div class="card-footer">
-													<button class="btn-info btn-sm pull-right"
-														style="margin-bottom: 5px; margin-top: 10px">加入書籤</button>
+												<div class="card-footer">												
 													<small>課程時間:yyy分鐘</small> <br> <small>購買人數:zzz人</small>
 
 												</div>
@@ -1236,20 +1234,39 @@ $('#starttime').on('input propertychange',function(e) {
  					$('#fundDateDurationJSON').css( "color", "red" );
 				}
 				if(datas.fundEndDate !=null){
+					if(datas.targetStudentNumber ==0){
+						$('#fundDateDurationJSON').text("募資起迄時間：無須填寫");
+	 					$('#fundDateDurationJSON').css( "color", "black" );
+					}else{
 					$('#fundDateDurationJSON').text("募資起迄時間："+datas.fundStartDate+" ~ "+datas.fundEndDate);
- 					$('#fundDateDurationJSON').css( "color", "black" );
-				}else{					
+ 					$('#fundDateDurationJSON').css( "color", "black" );}
+				}else{
+					if(datas.targetStudentNumber ==0){
+						$('#fundDateDurationJSON').text("募資起迄時間：無須填寫");
+	 					$('#fundDateDurationJSON').css( "color", "black" );
+					}else{
  					$('#fundDateDurationJSON').text("募資起迄時間：填寫資訊不完整");
  					$('#fundDateDurationJSON').css( "color", "red" );
+					}
 				}
 
 				
 				if(datas.courseStartDate !=null){
+					if(datas.targetStudentNumber ==0){
+						$('#courseStartDateJSON').text("開課日期：待審核通過立即開課");
+	 					$('#courseStartDateJSON').css( "color", "black" );
+					}else{
 					$('#courseStartDateJSON').text("開課日期："+datas.courseStartDate);
  					$('#courseStartDateJSON').css( "color", "black" );
-				}else{					
+					}
+				}else{
+					if(datas.targetStudentNumber ==0){
+						$('#courseStartDateJSON').text("開課日期：待審核通過立即開課");
+	 					$('#courseStartDateJSON').css( "color", "black" );
+					}else{
  					$('#courseStartDateJSON').text("開課日期：尚未填寫相關資訊");
  					$('#courseStartDateJSON').css( "color", "red" );
+					}
 				}
 				if(datas.courseVideopathway !=null){
 					$('#courseVideoNameJSON').text("上傳影片檔名："+datas.courseVideopathway);
