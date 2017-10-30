@@ -128,9 +128,10 @@ ul {
 .input-group input {
 	margin: 0px 2px
 }
-.price{
-float: right;
-font-weight: bold;
+
+.price {
+	float: right;
+	font-weight: bold;
 }
 </style>
 
@@ -141,7 +142,7 @@ font-weight: bold;
 </head>
 <body>
 	<jsp:include page="${contextPath}/login.jsp" flush="true" />
-	<input id="gbmemberID" type="hidden" value="${LoginOK.memberID}"/>
+	<input id="gbmemberID" type="hidden" value="${LoginOK.memberID}" />
 	<div class="container" style="margin-top: 50px">
 		<div class="row">
 			<section>
@@ -151,20 +152,20 @@ font-weight: bold;
 					<ul type="" class="nav nav-tabs" role="tablist">
 
 						<li role="presentation" class="active"><a href="#step1"
-							data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
+							data-toggle="tab" aria-controls="step1" role="tab" title="確認訂單內容">
 								<span class="round-tab"> <i
 									class="glyphicon glyphicon-list-alt"></i>
 							</span>
 						</a></li>
 
 						<li role="presentation" class="disabled"><a href="#step2"
-							data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
-								<span class="round-tab"> <i
+							data-toggle="tab" aria-controls="step2" role="tab"
+							title="前往歐付寶付款"> <span class="round-tab"> <i
 									class="glyphicon glyphicon-usd"></i>
 							</span>
 						</a></li>
 						<li role="presentation" class="disabled"><a href="#step3"
-							data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
+							data-toggle="tab" aria-controls="step3" role="tab" title="購買完成">
 								<span class="round-tab"> <i
 									class="glyphicon glyphicon-ok"></i>
 							</span>
@@ -172,15 +173,15 @@ font-weight: bold;
 
 					</ul>
 				</div>
-					<div class="tab-content">
-						<!-- step1start -->
-						<div class="tab-pane active" role="tabpanel" id="step1">
-							<div class="container">
-								<div class="row">
+				<div class="tab-content">
+					<!-- step1start -->
+					<div class="tab-pane active" role="tabpanel" id="step1">
+						<div class="container">
+							<div class="row">
 
-									<div class="span12">
-										<ul class="thumbnails" id="showdetails">
-											<!--  
+								<div class="span12">
+									<ul class="thumbnails" id="showdetails">
+										<!--  
 											<li class="span5 clearfix">
 												<div class="thumbnail clearfix">
 													<img src="<%=request.getContextPath()%>/img/02.jpg"
@@ -197,118 +198,21 @@ font-weight: bold;
 												</div>
 											</li>
 											-->
-										</ul>
-									</div>
-								</div>
-							</div>
-							<h4 id="total" class="text-right">總金額:8700元</h4>
-							<div class="col-md-4 pull-right" style="margin-top: 20px">
-								<form action="<%=request.getContextPath() %>/OrderoPayController" method="post" >
-									<button type="submit" class="btn btn-primary pull-right next-step">前往歐付寶結帳</button>
-								</form>
-							</div>
-						</div>
-						<!-- step1end -->
-						<!-- step3start -->
-						<div class="tab-pane" role="tabpanel" id="step3">
-							<div class="container">
-								<div class="row">
-									<div
-										class="well col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
-										<div class="row">
-											<div class="col-xs-6 col-sm-6 col-md-6">
-												<address>
-													<strong>Elf Cafe</strong> <br> 2135 Sunset Blvd <br>
-													Los Angeles, CA 90026 <br> <abbr title="Phone">P:</abbr>
-													(213) 484-6829
-												</address>
-											</div>
-											<div class="col-xs-6 col-sm-6 col-md-6 text-right">
-												<p>
-													<em>Date: 1st November, 2013</em>
-												</p>
-												<p>
-													<em>Receipt #: 34522677W</em>
-												</p>
-											</div>
-										</div>
-										<div class="row">
-											<div class="text-center">
-												<h1>Receipt</h1>
-											</div>
-
-											<table class="table table-hover">
-												<thead>
-													<tr>
-														<th>Product</th>
-														<th>#</th>
-														<th class="text-center">Price</th>
-														<th class="text-center">Total</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td class="col-md-9"><em>Baked Rodopa Sheep Feta</em></td>
-														<td class="col-md-1" style="text-align: center">2</td>
-														<td class="col-md-1 text-center">$13</td>
-														<td class="col-md-1 text-center">$26</td>
-													</tr>
-													<tr>
-														<td class="col-md-9"><em>Lebanese Cabbage Salad</em></td>
-														<td class="col-md-1" style="text-align: center">1</td>
-														<td class="col-md-1 text-center">$8</td>
-														<td class="col-md-1 text-center">$8</td>
-													</tr>
-													<tr>
-														<td class="col-md-9"><em>Baked Tart with Thyme
-																and Garlic</em></td>
-														<td class="col-md-1" style="text-align: center">3</td>
-														<td class="col-md-1 text-center">$16</td>
-														<td class="col-md-1 text-center">$48</td>
-													</tr>
-													<tr>
-														<td> </td>
-														<td> </td>
-														<td class="text-right">
-															<p>
-																<strong>Subtotal: </strong>
-															</p>
-															<p>
-																<strong>Tax: </strong>
-															</p>
-														</td>
-														<td class="text-center">
-															<p>
-																<strong>$6.94</strong>
-															</p>
-															<p>
-																<strong>$6.94</strong>
-															</p>
-														</td>
-													</tr>
-													<tr>
-														<td> </td>
-														<td> </td>
-														<td class="text-right"><h4>
-																<strong>Total: </strong>
-															</h4></td>
-														<td class="text-center text-danger"><h4>
-																<strong>$31.53</strong>
-															</h4></td>
-													</tr>
-												</tbody>
-											</table>
-											<button type="button" class="btn btn-danger ">
-												Pay Now   <span class="glyphicon glyphicon-chevron-right"></span>
-											</button>
-										</div>
-									</div>
+									</ul>
 								</div>
 							</div>
 						</div>
+						<h4 id="total" class="text-right">總金額:8700元</h4>
+						<div class="col-md-4 pull-right" style="margin-top: 20px">
+							<form action="<%=request.getContextPath()%>/OrderoPayController"
+								method="post">
+								<button type="submit"
+									class="btn btn-primary pull-right next-step">前往歐付寶結帳</button>
+							</form>
+						</div>
+					</div>
 
-
-			</div>
+				</div>
 			</section>
 		</div>
 	</div>
@@ -330,7 +234,7 @@ font-weight: bold;
 						var courseClass = getCourseClass(orderVO.courseVO.courseID);
 						var cell1 = $('<li>').addClass('span5 clearfix');
 						var cell2 = $('<div>').addClass('thumbnail clearfix');
-						var cell3 = $('<img>').addClass('pull-left span2 clearfix').css('margin-right','10px').attr({'alt':'','src':'<%=request.getContextPath() %>/CourseImage?CourseID='+orderVO.courseVO.courseID});
+						var cell3 = $('<img>').addClass('pull-left span2 clearfix').css('margin-right','10px').attr({'alt':'','src':'<%=request.getContextPath()%>/CourseImage?CourseID='+orderVO.courseVO.courseID});
 						var cell4 = $('<div>').addClass('caption');
 						var cell5 = $('<button>').addClass('btn btn-danger icon  pull-right').text('刪除').val(orderVO.courseVO.courseID).attr('type','button');
 						var cell6 = $('<h4>')
@@ -365,20 +269,18 @@ font-weight: bold;
 			})
 			function getCourseClass(courseID){
 				var courseClass="";
-				$.ajax({'url':'<%=request.getContextPath() %>/GetCourseClass',
-					'async':false,
-					'data':{'courseID':courseID},
-					'success':function(result){
+				$.ajax({'url':'<%=request.getContextPath()%>/GetCourseClass',
+					'async' : false,
+					'data' : {
+						'courseID' : courseID
+					},
+					'success' : function(result) {
 						courseClass = result;
 					}
-			});//$.ajax end
-			return courseClass;
-				
+				});//$.ajax end
+				return courseClass;
 			}
-			
-			
-			
-			
+
 		})
 	</script>
 </body>

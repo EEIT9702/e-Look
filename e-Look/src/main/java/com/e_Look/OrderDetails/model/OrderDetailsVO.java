@@ -3,30 +3,31 @@ package com.e_Look.OrderDetails.model;
 import java.io.Serializable;
 
 import com.e_Look.Course.CourseVO;
+import com.e_Look.Order.model.OrderVO;
 
 public class OrderDetailsVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private Integer orderID;
+	private OrderVO orderVO;
 	private CourseVO courseVO;
 	private Integer buyingPrice;
 	private Integer originalPrice;
 	public OrderDetailsVO(){
 		
 	}
-	public OrderDetailsVO(Integer orderID, CourseVO courseVO, Integer buyingPrice, Integer originalPrice) {
-		this.orderID = orderID;
+	public OrderDetailsVO(OrderVO orderVO, CourseVO courseVO, Integer buyingPrice, Integer originalPrice) {
+		this.orderVO = orderVO;
 		this.courseVO = courseVO;
 		this.buyingPrice = buyingPrice;
 		this.originalPrice = originalPrice;
 	}
 
 
-	public Integer getOrderID() {
-		return orderID;
+	public OrderVO getOrderVO() {
+		return orderVO;
 	}
-	public void setOrderID(Integer orderID) {
-		this.orderID = orderID;
+	public void setOrderVO(OrderVO orderVO) {
+		this.orderVO = orderVO;
 	}
 	public CourseVO getCourseVO() {
 		return courseVO;

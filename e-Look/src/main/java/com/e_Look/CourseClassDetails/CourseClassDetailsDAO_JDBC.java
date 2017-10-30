@@ -321,7 +321,7 @@ public class CourseClassDetailsDAO_JDBC implements CourseClassDetails_interface 
 //		CourseVO courseVO = cdao.findByPrimaryKey(200002);
 //	
 //		CourseClassDAO_JDBC ccdao = new CourseClassDAO_JDBC();
-//		CourseClassVO courseClassVO = ccdao.findByCourseClassID(101);
+//		CourseClassVO courseClassVO = ccdao.getByCourseClassID(109);
 //		dao.insert(courseVO, courseClassVO);
 		
 		//查詢全部

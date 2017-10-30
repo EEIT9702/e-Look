@@ -2,12 +2,19 @@ package com.e_Look.OrderSystem.control;
 
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
+import com.e_Look.Course.CourseVO;
+import com.e_Look.CourseClassDetails.CourseClassDetailsDAO;
+import com.e_Look.CourseClassDetails.CourseClassDetailsVO;
+import com.e_Look.CourseClassDetails.CourseClassDetails_interface;
 import com.e_Look.Order.model.*;
 import com.e_Look.OrderDetails.model.*;
 import com.e_Look.buyCourse.model.*;
+import com.e_Look.courseClass.CourseClassDAO;
+import com.e_Look.courseClass.CourseClassVO;
+import com.e_Look.courseClass.CourseClass_interface;
 import com.e_Look.tool.BuyingPrice;
 
 import allPay.payment.integration.AllInOne;
@@ -17,12 +24,17 @@ public class OrderSystemService {
 	private OrderDAO_interface orderDAO;
 	private OrderDetailsDAO_interface orderDetailsDAO;
 	private BuyCourseDAO_interface buyCourseDAO;
+	private CourseClass_interface courseClassDAO;
+	private CourseClassDetails_interface courseClassDetailsDAO;
+	
 	public static AllInOne all;
 
 	public OrderSystemService() {
 		orderDAO = new OrderDAO();
 		orderDetailsDAO = new OrderDetailsDAO();
 		buyCourseDAO = new BuyCourseDAO();
+		courseClassDAO =new CourseClassDAO();
+		courseClassDetailsDAO = new CourseClassDetailsDAO();
 	}
 
 	public void refreshOrderBuyingPrice(Integer memberID) {
@@ -44,7 +56,7 @@ public class OrderSystemService {
 
 		SimpleDateFormat sfdForNo = new SimpleDateFormat("yyyyMMddHHmmss");
 		SimpleDateFormat sdfForDate = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		Date now = new Date();
+		java.util.Date now = new java.util.Date();
 
 		String merchantTradeNo = sfdForNo.format(now);
 		String oPayDate = sdfForDate.format(now);
@@ -102,5 +114,37 @@ public class OrderSystemService {
 			bcVO.setCourseID(orderDetailVO.getCourseVO().getCourseID());
 			buyCourseDAO.insert(bcVO);
 		}
+	}
+	
+	public Integer getMoneyOfMonth(Date sDate,Date eDate){
+		Integer sumMoney = 0;
+		List<OrderVO> orderVOs = orderDAO.getOrderByDate(sDate, eDate);
+		for(OrderVO orderVO:orderVOs){
+			List<OrderDetailsVO> orderDetailsVOs = orderDetailsDAO.findByOrderID(orderVO.getOrderID());
+			for(OrderDetailsVO orderDetailsVO:orderDetailsVOs){
+				sumMoney+=orderDetailsVO.getBuyingPrice();
+			}
+		}
+		return sumMoney;
+	}
+	public Integer[] getMoneyOfCourseClass(){
+		List<CourseClassVO> ccVOs = courseClassDAO.getAll();
+		Integer[] cMoney = new Integer[ccVOs.size()];
+		int count = 0;
+		for(CourseClassVO ccVO:ccVOs){
+			List<CourseClassDetailsVO> ccdVOs = courseClassDetailsDAO.findBycourseClassID(ccVO.getCourseClassID());
+			Integer money = 0;
+			for(CourseClassDetailsVO ccdVO:ccdVOs){
+				List<OrderDetailsVO> orderDetailsVOs = orderDetailsDAO.findByCourseID(ccdVO.getCourseVO().getCourseID());
+				for(OrderDetailsVO orderDetailsVO:orderDetailsVOs){
+					if(orderDetailsVO.getOrderVO().getOrderTime()!=null){
+						money+=orderDetailsVO.getBuyingPrice();
+					}
+				}
+			}
+			cMoney[count]=money;
+			count++;
+		}
+		return cMoney;
 	}
 }

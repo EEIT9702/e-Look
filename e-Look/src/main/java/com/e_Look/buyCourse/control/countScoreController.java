@@ -28,11 +28,13 @@ public class countScoreController extends HttpServlet {
 		String Score=buyCourseService.avgScore(courseID).toString();
 		
 		String scoreValue = JSONValue.toJSONString(Score);
+		
+		
 		System.out.println(scoreValue);
 		PrintWriter out =response.getWriter();
 		
 		out.print(scoreValue);
-		
+		out.close();
 	}
 
 }
