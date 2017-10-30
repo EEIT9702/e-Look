@@ -101,6 +101,68 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
 .panel-body {
 	display: none;
 }
+/*     */
+
+
+
+
+/*	--------------------------------------------------
+	:: Table Filter
+	-------------------------------------------------- */
+.panel {
+	border: 1px solid #ddd;
+	background-color: #fcfcfc;
+}
+.panel .btn-group {
+	margin: 15px 0 30px;
+}
+.panel .btn-group .btn {
+	transition: background-color .3s ease;
+}
+.table-filter {
+	background-color: #fff;
+	border-bottom: 1px solid #eee;
+}
+.table-filter tbody tr:hover {
+	cursor: pointer;
+	background-color: #eee;
+}
+.table-filter tbody tr td {
+	padding: 10px;
+	vertical-align: middle;
+	border-top-color: #eee;
+}
+.table-filter tbody tr.selected td {
+	background-color: #eee;
+}
+.table-filter tr td:first-child {
+	width: 20px;
+}
+.table-filter tr td:nth-child(2) {
+	width: 20px;
+}
+.table-filter thead tr th {
+	width: 20px;
+}
+tbody tr td {
+	width: 20px;
+}
+
+
+
+span {
+	font-size: .8em;	
+}
+span.pagado {
+	color: #5cb85c;
+}
+span.pendiente {
+	color: #f0ad4e;
+}
+span.cancelado {
+	color: #d9534f;
+}
+
 </style>
 </head>
 <body>
@@ -162,10 +224,74 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
                 <!-- train section -->
                 <div class="bhoechie-tab-content">
                     <div>
-                      <h1 class="glyphicon glyphicon-road" style="font-size:12em;color:#55518a"></h1>
-                      <h2 style="margin-top: 0;color:#55518a">Cooming Soon</h2>
-                      <h3 style="margin-top: 0;color:#55518a">Train Reservation</h3>
-                    </div>
+                    <h1>課程收益</h1>
+					<div class="pull-right">
+							<div class="btn-group" >
+								<button style="font-size: 16px;" type="button" class="btn btn-default btn-filter" data-target="all">ALL</button>
+								<button style="font-size: 16px" type="button" class="btn btn-success btn-filter" data-target="pagado">線上課程</button>
+								<button style="font-size: 16px" type="button" class="btn btn-warning btn-filter" data-target="pendiente">免費課程</button>
+								<button style="font-size: 16px" type="button" class="btn btn-danger btn-filter" data-target="cancelado">募資課程</button>
+							</div>
+						</div>
+							<div class="table-container">
+								<table  class="table table-hover table2" >
+									<thead data-status="all">
+										<tr>
+											<th>課程種類</th>
+											<th>課程收益</th>
+										</tr>
+									</thead>
+									<thead data-status="pagado" style="display:none">
+										<tr>
+											<th>課程名稱</th>
+											<th>定價</th>
+											<th>購買人數</th>
+											<th>課程收益</th>
+										</tr>
+									</thead>
+									<thead data-status="pendiente" style="display:none">
+										<tr>
+											<th>課程名稱</th>
+											<th>贊助人</th>
+											<th>日期</th>
+											<th>金額</th>
+										</tr>
+									</thead>
+									<thead data-status="cancelado"style="display:none">
+										<tr>
+											<th>課程名稱</th>
+											<th>定價</th>
+											<th>人數</th>
+											<th>募資金額</th>
+										</tr>
+									</thead>
+									<tbody>
+									<tr data-status="all" id="all">
+											<td><span class="pagado">(Pagado)</span></td>
+											<td>2</td>
+										</tr>
+										<tr data-status="pagado" id="pagado" style="display:none">
+											<td><span class="pagado">(Pagado)</span></td>
+											<td>1</td>
+											<td>3</td>
+											<td>4</td>
+										</tr>
+										<tr data-status="pendiente" id="pendiente" style="display:none">
+										<td><span class="pagado">(Pagado)</span></td>
+											<td>2</td>
+											<td>3</td>
+											<td>4</td>
+										</tr>
+										<tr data-status="cancelado" id="cancelado" style="display:none">
+										<td><span class="pagado">(Pagado)</span></td>
+											<td>3</td>
+											<td>3</td>
+											<td>4</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
                 </div>
             </div>
         </div>
@@ -242,6 +368,7 @@ $(function(){
 /*----消費明細---*/
  $(function(){
 	 loadOrder($("#memberID").val())
+	 loadCourse($("#memberID").val())
  })
  var OrderDetails;
  var Order;
@@ -312,9 +439,47 @@ $(function(){
    	
   	  });
 }
+ /*收益課程*/
+ $(document).ready(function () {
+    $('.btn-filter').on('click', function () {
+      var $target = $(this).data('target');
+      if($target==="pagado"){
+    	  $('.table2 tbody tr').css('display', 'none');
+          $('.table2 tr[data-status="' + $target + '"]').fadeIn('slow');
+          $('.table2 thead[data-status="' + $target + '"]').fadeIn('slow');
+          $('.table2 thead[data-status!="' + $target + '"]').css('display', 'none');
+      }else if($target==="pendiente"){
+    	  $('.table2 tbody tr').css('display', 'none');
+          $('.table2 tr[data-status="' + $target + '"]').fadeIn('slow');
+          $('.table2 thead[data-status="' + $target + '"]').fadeIn('slow');
+          $('.table2 thead[data-status!="' + $target + '"]').css('display', 'none');
+      }else if($target==="cancelado"){
+    	  $('.table2 tbody tr').css('display', 'none');
+          $('.table2 tr[data-status="' + $target + '"]').fadeIn('slow');
+          $('.table2 thead[data-status="' + $target + '"]').fadeIn('slow');
+          $('.table2 thead[data-status!="' + $target + '"]').css('display', 'none');
+    }else if($target==="all"){
+  	  $('.table tbody tr').css('display', 'none');
+        $('.table2 tr[data-status="' + $target + '"]').fadeIn('slow');
+        $('.table2 thead[data-status="' + $target + '"]').fadeIn('slow');
+        $('.table2 thead[data-status!="' + $target + '"]').css('display', 'none');
+    }
+//       if ($target != 'all') {
+//         $('.table tbody tr').css('display', 'none');
+//         $('.table tr[data-status="' + $target + '"]').fadeIn('slow');
+//       } else {
+//         $('.table tbody tr').css('display', 'none').fadeIn('slow');
+//       }
+    });
+
+ });
  
- 
- 
+ function loadCourse(memberID){
+		$.getJSON('/e-Look/MemberIncomeController',{'MemberID':memberID},function(datas){
+		   	 console.log(datas);
+		   	
+	  	  });
+	}
 
  
 </script>
