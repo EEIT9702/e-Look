@@ -20,7 +20,6 @@ public class updateScoreController extends HttpServlet {
 
     }
 
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("utf-8");
@@ -31,9 +30,7 @@ public class updateScoreController extends HttpServlet {
 		
 		BuyCourseService buyCourseService=new BuyCourseService();
 		buyCourseService.updateScore(score, memberID, courseID);
-		
-		
-		
+	
 	}
 
 }

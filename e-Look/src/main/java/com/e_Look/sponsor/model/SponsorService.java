@@ -1,8 +1,10 @@
 package com.e_Look.sponsor.model;
 
+
 import java.io.UnsupportedEncodingException;
+
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import allPay.payment.integration.AllInOne;
@@ -13,13 +15,13 @@ public class SponsorService {
 	public SponsorService(){
 		dao=new SponsorDAO();
 	}
-	public void addNameMoney(Integer courseID, String SponsorName, Integer money){
+	public void addNameMoney(Integer courseID, String SponsorName, Integer money,Date dateSponsor){
 		SponsorVO sponsorVO=new SponsorVO();
 		
 		sponsorVO.setCourseID(courseID);
 		sponsorVO.setSponsorName(SponsorName);
 		sponsorVO.setMoney(money);
-		
+		sponsorVO.setDateSponsor(dateSponsor);
 		dao.insert(sponsorVO);
 	}
 	public int countMoney(Integer courseID){
@@ -37,8 +39,8 @@ public class SponsorService {
 		AioCheckOutOneTime obj = new AioCheckOutOneTime();
 		obj.setMerchantTradeNo(MerchantTradeNo+"s");
 		
-		SimpleDateFormat sfd=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		String opayDate=sfd.format(new Date());
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		String opayDate=sdf.format(System.currentTimeMillis());
 		
 		
 		obj.setItemName(itemName);
