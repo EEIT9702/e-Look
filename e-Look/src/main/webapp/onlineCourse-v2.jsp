@@ -40,6 +40,7 @@ video {
 	background-size: cover;
 	background-position: center;
 	height: 510px;
+	padding-left: 0;
 }
 
 #videoliststyle>li {
@@ -195,7 +196,14 @@ video::-webkit-media-controls-panel {
 a{
 	text-decoration: none;
 }
-
+#videoArea::after{    display: block;
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.5);
+    padding:0;
+    margin: 0;} 
 </style>
 </head>
 <!-- 影片區 -->
@@ -207,9 +215,10 @@ a{
 				<h1 align="center" id="videoTitle">${courseVO.courseName}</h1>
 				<div class="col-md-12 " id="videoArea"
 					style="background-image: url('<%=request.getContextPath() %>/CourseImage?CourseID=${courseVO.courseID}')">
+					
 					<input type="hidden" value="${courseVO.courseID}">
-					<div class="col-md-12">
-						<div class="col-md-8 col-xs-12" style="margin-right: -15px">
+					<div class="col-md-12" style="z-index: 10">
+						<div class="col-md-8 col-xs-12" style="margin-right: -15px;z-index: 10">
 
 							<c:choose>
 								<c:when test="${LoginOK.memberID==courseVO.memberID}">
