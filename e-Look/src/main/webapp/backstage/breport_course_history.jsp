@@ -2,15 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.e_Look.reportMessage.model.*"%>
-<%@ page import="com.e_Look.message.model.*"%>
-<%
-	ReportMessageDAO dao = new ReportMessageDAO();
-
-    List<ReportMessageVO> list = dao.getNotHandle();
-    pageContext.setAttribute("list",list);
-
-%>
 <!DOCTYPE>
 <html>
 <head>
@@ -73,12 +64,10 @@
 		  <table id="reportTable" class="table table-bordered tstyle" style="">
                  <thead>
                     <tr>
-                       <th style="width:18%">檢舉留言編號</th>
+                       <th style="width:18%">檢舉課程編號</th>
+                       <th style="width:27%">課程編號</th>
                        <th style="width:27%">檢舉內容</th>
-                       <th style="width:27%">留言內容</th>
                        <th style="width:28%">檢舉時間</th>
-<!--                        <th style="width:10%">檢舉狀態</th> -->
-<!--                        <th style="width:18%">處理方式</th> -->
                     </tr>
                  </thead>
                    <tbody>
@@ -89,7 +78,7 @@
 			                  <td><input type="hidden" id="" name=""><span></span></td>
 			                  <td><input type="hidden" id="" name=""><span></span></td>
 			                  <td><input type="hidden" id="" name=""><span></span></td>
-			                  <td><button type="button" value="back_report" onclick="self.location.href='back_report-v2.jsp'" class="btn btn-success">檢舉留言管理</button></td>
+			                  <td><button type="button" value="back_report" onclick="self.location.href='breport-course.jsp'" class="btn btn-success">檢舉課程管理</button></td>
 						</tr>
 <!-- 	                 </form> -->
                   </tfoot>
@@ -98,37 +87,38 @@
 
 </div>
 <script>
-		$(function(){
-			
-			//帶入1到loadReportMessage方法裡
-		    loadReportMessage(1);
-					
-		    //讀取檢舉
-		    //讀取到剛剛觸發帶入的值,並放入id
-		   function loadReportMessage(id){
-		    $.getJSON('ReportMessageControl',{"status":id},function(datas){
-		    	//console.log(datas)
+$(function(){
+	
+	//帶入0到loadReportCourse方法裡
+    loadReportCourse(1);
+	
+    //讀取檢舉
+    //讀取到剛剛觸發帶入的值,並放入id
+   function loadReportCourse(id){
+    $.getJSON('ReportCourseControl',{"status":id},function(datas){
+    	//console.log(datas)
 
-		    	//datas = [] array
-		    	//建一個fragment容器,並加上$()轉成jQuery物件去裝迴圈裡產生的物件
-		    	var fragment = $(document.createDocumentFragment());
-		    	$.each(datas,function(idx,report){
-		    		//product = {}
-		    		var cell1 = $('<td></td>').text(report.reportID);
-		    		var cell2 = $('<td></td>').text(report.reportContent);
-		    		var cell3 = $('<td></td>').text(report.mContent);
-		    		var cell4 = $('<td></td>').text(report.reportTime);
-		    		//<tr><td>
-		    		var row = $('<tr></tr>').append([cell1,cell2,cell3,cell4]);
-		    		//放到容器裡
-		    		fragment.append(row);
-		    	})
-		    	$('#reportTable>tbody').html(fragment);
-		     })
-	    	}
-			
-		//end of readyfunction
-		})
+    	//datas = [] array
+    	//建一個fragment容器,並加上$()轉成jQuery物件去裝迴圈裡產生的物件
+    	var fragment = $(document.createDocumentFragment());
+    	$.each(datas,function(idx,reportV){
+    		//product = {}
+    		var cell1 = $('<td></td>').text(reportV.reportID);
+    		var cell2 = $('<td></td>').text(reportV.reportCourseID);
+    		var cell3 = $('<td></td>').text(reportV.reportContent);
+    		var cell4 = $('<td></td>').text(reportV.reportTime);
+    		//<tr><td>
+    		var row = $('<tr></tr>').append([cell1,cell2,cell3,cell4]);
+    		//放到容器裡
+    		fragment.append(row);
+    	})
+    	$('#reportTable>tbody').html(fragment);
+     })
+	}
+
+	
+//end of loadReportCoursefunction
+})
 		
 </script>
 <script src="assets/js/jquery.scrollex.min.js"></script>
