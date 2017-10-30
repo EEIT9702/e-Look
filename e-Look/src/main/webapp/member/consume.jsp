@@ -261,7 +261,7 @@ $(function(){
 	  		  	var cell2 = $('<td></td>').text(Order.courseVO.courseName)
 	  		  	var cell3 = $('<td></td>').text("")
 	  		 	var cell4 = $('<td></td>').text(Order.buyingPrice)
-	  		  	var row = $('<tr class="data1" style="background-color:#aebfec"></tr>').append([cell1,cell2,cell3,cell4]);   			
+	  		  	var row = $('<tr class="data1" style="background-color:#D2E9FF"></tr>').append([cell1,cell2,cell3,cell4]);   			
 	  		  	fragment.append(row);	
 	   		 }  
 	      	  });
@@ -300,7 +300,7 @@ $(function(){
    				count=OrderDetails.buyingPrice+count
    			})
   		  	var cell4 = $('<td></td>').text(count)
-  		  	var row = $('<tr class="parent"></tr>').append([cell1,cell2,cell3,cell4]);
+  		  	var row = $('<tr class="parent" style="background-color:#C4E1FF"></tr>').append([cell1,cell2,cell3,cell4]);
 					fragment.append(row);
    		 		//console.log(idx);
   		 	
