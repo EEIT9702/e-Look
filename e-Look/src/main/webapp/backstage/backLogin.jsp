@@ -77,7 +77,7 @@ input[type="text"],
 				<!-- Banner -->
 					<section id="banner">
 						<div class="inner">
-							<div class="logo"><span class="icon fa-diamond"></span></div>
+							<div class="logo"><span class="icon fa fa-eye fa-5x"></span></div>
 							<h2>e-LOOK後台管理系統</h2>
 							<p>請先登入會員<a href="#menu">Login</a></p>
 							<p>${ErrMsg.errID}${ErrMsg.errpw}<p>
