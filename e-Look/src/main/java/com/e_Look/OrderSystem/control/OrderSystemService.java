@@ -5,9 +5,15 @@ import java.text.SimpleDateFormat;
 import java.sql.Date;
 import java.util.List;
 
+import com.e_Look.CourseClassDetails.CourseClassDetailsDAO;
+import com.e_Look.CourseClassDetails.CourseClassDetailsVO;
+import com.e_Look.CourseClassDetails.CourseClassDetails_interface;
 import com.e_Look.Order.model.*;
 import com.e_Look.OrderDetails.model.*;
 import com.e_Look.buyCourse.model.*;
+import com.e_Look.courseClass.CourseClassDAO;
+import com.e_Look.courseClass.CourseClassVO;
+import com.e_Look.courseClass.CourseClass_interface;
 import com.e_Look.tool.BuyingPrice;
 
 import allPay.payment.integration.AllInOne;
@@ -17,12 +23,17 @@ public class OrderSystemService {
 	private OrderDAO_interface orderDAO;
 	private OrderDetailsDAO_interface orderDetailsDAO;
 	private BuyCourseDAO_interface buyCourseDAO;
+	private CourseClass_interface courseClassDAO;
+	private CourseClassDetails_interface courseClassDetailsDAO;
+	
 	public static AllInOne all;
 
 	public OrderSystemService() {
 		orderDAO = new OrderDAO();
 		orderDetailsDAO = new OrderDetailsDAO();
 		buyCourseDAO = new BuyCourseDAO();
+		courseClassDAO =new CourseClassDAO();
+		courseClassDetailsDAO = new CourseClassDetailsDAO();
 	}
 
 	public void refreshOrderBuyingPrice(Integer memberID) {
@@ -115,5 +126,21 @@ public class OrderSystemService {
 		}
 		return sumMoney;
 	}
-	
+	public Integer[] getMoneyOfCourseClass(){
+		List<CourseClassVO> ccVOs = courseClassDAO.getAll();
+		Integer[] cMoney = new Integer[ccVOs.size()];
+		int count = 0;
+		for(CourseClassVO ccVO:ccVOs){
+			List<CourseClassDetailsVO> ccdVOs = courseClassDetailsDAO.findBycourseClassID(ccVO.getCourseClassID());
+			for(CourseClassDetailsVO ccdVO:ccdVOs){
+				ccdVO.getCourseVO();
+				
+			}
+			
+			
+			
+			
+		}
+		return cMoney;
+	}
 }
