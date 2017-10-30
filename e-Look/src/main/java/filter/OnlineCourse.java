@@ -25,8 +25,10 @@ import com.e_Look.member.model.MemberService;
 import com.e_Look.member.model.MemberVO;
 import com.e_Look.memberBookmarks.model.MemberBookmarksService;
 import com.e_Look.memberBookmarks.model.MemberBookmarksVO;
+
 import com.e_Look.memberSubscription.MemberSubscriptionService;
 import com.e_Look.memberSubscription.MemberSubscriptionVO;
+
 
 /**
  * Servlet Filter implementation class OnlineCourse
@@ -48,14 +50,12 @@ public class OnlineCourse implements Filter {
 				return;
 			}
 			else if (courseID != null) {
-				CourseDAO dao = new CourseDAO();
-				BuyCourseDAO dao2 = new BuyCourseDAO();
 				CourseService courseService = new CourseService();
-				CourseVO courseVO = courseService.getCourse(Integer.valueOf(courseID));
+				CourseVO courseVO = courseService.getCourseData(Integer.valueOf(courseID));
 				if (courseVO.getStatus() == 2) {
 					MemberService service = new MemberService();
 					MemberVO memberVo = service.getMember(courseVO.getMemberID());
-					List<CourseVO> list = dao.findBymemberID(courseVO.getMemberID(), 2);
+					List<CourseVO> list = courseService.getAllCourseData(courseVO.getMemberID(), 2);
 					HttpSession session = request.getSession();
 					MemberVO memberVoOK = (MemberVO) session.getAttribute("LoginOK");
 					BuyCourseService CourseService = new BuyCourseService();
@@ -63,7 +63,9 @@ public class OnlineCourse implements Filter {
 					List<MemberBookmarksVO> mBookmarkList = null;
 					List<MemberSubscriptionVO> memberSubscriptionVO = null;
 					MemberBookmarksService memberBookmarksService = new MemberBookmarksService();
+
 					MemberSubscriptionService memberSubscriptionService =new MemberSubscriptionService();
+
 					if (memberVoOK != null) {
 
 						list2 = CourseService.getBuyCourse(memberVoOK.getMemberID());
@@ -73,11 +75,8 @@ public class OnlineCourse implements Filter {
 
 					if (mBookmarkList != null) {
 						request.setAttribute("mBookmarkList", mBookmarkList);
+
 					}
-					
-					
-					
-					
 					request.setAttribute("list", list);
 					request.setAttribute("list2", list2);
 					request.setAttribute("courseVO", courseVO);
@@ -89,7 +88,7 @@ public class OnlineCourse implements Filter {
 				}
 			}
 		}
-
+		
 	}
 
 	/**

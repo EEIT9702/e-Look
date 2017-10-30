@@ -254,7 +254,7 @@ a:HOVER {
 							<div class="profile-header-img">
 								<img class="img-circle"
 									src="<%=request.getContextPath()%>/Image?MemberID=${LoginOK.memberID}" />
-								<!-- badge -->
+								<!-- badge -->	
 								<div class="rank-label-container">
 									<a href="<%=request.getContextPath()%>/member/memberEdit.jsp"><button type="button" class="btn btn-info  btn-xs">
 										編輯 <span class="glyphicon glyphicon-edit"></span>
@@ -292,13 +292,13 @@ a:HOVER {
                 <div class="col-md-6 user-pad text-center">
                 <div class="hero-widget well  well-lg">
                     <h3>已參加</h3>
-                    <h4>堂課</h4>
+                    <h4>${buycourseCount}堂課</h4>
                 </div>
                 </div>
                 <div class="col-md-6 user-pad text-center">
                 <div class="hero-widget well  well-lg">
                     <h3>已開設</h3>
-                    <h4>堂課</h4>
+                    <h4>${mycourseCount}堂課</h4>
                     </div>
                 </div>
             </div>

@@ -18,13 +18,7 @@
 
 <script src="<%=request.getContextPath()%>/js/raphael.js"></script>
 <script src="<%=request.getContextPath()%>/js/jquery.classyled.min.js"></script>
-<script>
-	$(document).ready(function() {
-		$(".col-md-4 a").click(function() {
-			$(this).tab('show');
-		});
-	});
-</script>
+
 
 <style>
 /* 影片區塊 */
@@ -37,8 +31,8 @@ video {
 #videoArea {
 	background-size: cover;
 	background-position: center;
-	height: 62%;
-	
+	height: 500px;
+/* 	62% */
 }
 
 video::-internal-media-controls-download-button {
@@ -76,6 +70,7 @@ border-left: 1px solid white
 #priceGroup>div>div{
 font-size: 18px; color: white;
 }
+/* 下方功能 (簡介)*/
 .tab .nav-tabs {
 	position: relative;
 	border-bottom: none;
@@ -88,7 +83,7 @@ font-size: 18px; color: white;
 
 .tab .nav-tabs li a {
 	display: block;
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: 600;
 	color: #444;
 	padding: 10px 15px;
@@ -152,14 +147,7 @@ font-size: 18px; color: white;
 	font-size: 24px;
 	margin-top: 0;
 }
-
-.star {
-	-webkit-filter: grayscale(1);
-}
-
-.nstar {
-	-webkit-filter: grayscale(0);
-}
+/* 留言板 */
 #messageHeader {
 	border: 1px solid black;
 	border-radius: 15px;
@@ -248,7 +236,7 @@ font-size: 18px; color: white;
 	</div>
 	<!--內容 -->
 
-		<div class="demo" style="padding-top:50px">
+	<div class="demo" style="margin-top:80px">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
@@ -269,7 +257,6 @@ font-size: 18px; color: white;
 						<div class="tab-content tabs">
 							<div role="tabpanel" class="tab-pane fade in active"
 								id="Section1" style="font-size: 20px">
-
 								<c:if test="${!empty courseVO.preTool}">
 									<strong>需要用到的工具（含種類、版本細節）</strong>
 									<p>${courseVO.preTool}</p>
@@ -294,18 +281,78 @@ font-size: 18px; color: white;
 							<!-- 講師簡介 -->
 							<div role="tabpanel" class="tab-pane fade" id="Section2"
 								style="font-size: 20px">
-
 								<c:if test="${!empty memberVo.memberID}">
-									<div class="col-md-1">
+									<div class="col-md-2 col-xs-3">
 										<figure>
 											<img
 												src="<%=request.getContextPath() %>/Image?MemberID=${memberVo.memberID}"
-												class="img-thumbnail pull-left">
-											<div style="text-align: center;">${memberVo.mName}</div>
+												class="img-thumbnail center-block img-circle" />
+											<div style="text-align: center">${memberVo.mName}</div>
 										</figure>
+										<div>
+
+											<c:if test="${empty LoginOK}">
+												<c:choose>
+													<c:when test="${!empty loginerr}">
+														<a href="#" data-toggle="modal" data-target="#myModal">
+															<button type="button" class="btn btn-info"
+																style="width: 100%">追蹤講師</button>
+														</a>
+													</c:when>
+													<c:when test="${empty err}">
+														<a href="#" data-toggle="modal" data-target="#myModal">
+															<button type="button" class="btn btn-info"
+																style="width: 100%">追蹤講師</button>
+														</a>
+													</c:when>
+													<c:otherwise>
+														<a href="#" data-toggle="modal" data-target="#myModal">
+															<button type="button" class="btn btn-info"
+																style="width: 100%">追蹤講師</button>
+														</a>
+													</c:otherwise>
+												</c:choose>
+											</c:if>
+
+											<c:if test="${!empty LoginOK}">
+												<c:if test="${!empty memberSubscription}">
+													<c:forEach items="${memberSubscription}"
+														var="memberSubscription">
+														<c:choose>
+															<c:when
+																test="${memberSubscription.memberTrackID==courseVO.memberID}">
+																<c:set var="disabled" value="disabled" />
+																<c:set var="subName" value="已追蹤講師" />
+																<c:set var="sub1" value="ture" />
+															</c:when>
+															<c:when test="${!empty sub1}">
+															</c:when>
+															<c:otherwise>
+																<c:set var="disabled" value="" />
+																<c:set var="subName" value="追蹤講師" />
+															</c:otherwise>
+														</c:choose>
+													</c:forEach>
+												</c:if>
+												<c:if test="${empty memberSubscription}">
+													<c:set var="disabled" value="" />
+													<c:set var="subName" value="追蹤講師" />
+												</c:if>
+												<c:if test="${courseVO.memberID==LoginOK.memberID}">
+													<c:set var="disabled" value="disabled" />
+													<c:set var="subName" value="本人" />
+												</c:if>
+												<button type="button" class="btn btn-info" ${disabled}
+													style="width: 100%" id="subAction">${subName}</button>
+												<input type="hidden" id="coursevoMemeberID"
+													value="${courseVO.memberID}">
+											</c:if>
+
+
+										</div>
 									</div>
 								</c:if>
-								<div class="pull-right">
+								<div class="col-md-10 col-xs-9">
 									<c:if test="${!empty memberVo.aboutme}">
 										<strong>關於我</strong>
 										<p>${memberVo.aboutme}</p>
@@ -323,7 +370,6 @@ font-size: 18px; color: white;
 								</div>
 							</div>
 							<!-- 留言板 -->
-							<!-- 留言板 -->
 							<div role="tabpanel" class="tab-pane fade" id="Section3">
 								<div class="col-md-12" id="messageHeader">
 									<div class="col-md-1">
@@ -333,7 +379,8 @@ font-size: 18px; color: white;
 									<div class="col-md-11">
 
 										<div>
-											<span class="text-left">吳永志</span>
+											<!--測試用messageID -->
+											<span id="testMessage1" value="1001" class="text-left">吳永志</span>
 
 											<%
 												Date dNow = new Date();
@@ -346,7 +393,25 @@ font-size: 18px; color: white;
 													<span class="glyphicon glyphicon-option-horizontal"></span>
 												</button>
 												<ul class="dropdown-menu">
-													<li><a href="#">檢舉</a></li>
+													<c:if test="${empty LoginOK}">
+														<c:choose>
+															<c:when test="${!empty loginerr}">
+																<li><a href="#" href="#" data-toggle="modal"
+																	data-target="#myModal2">檢舉</a></li>
+															</c:when>
+															<c:when test="${empty err}">
+																<li><a href="#" href="#" data-toggle="modal"
+																	data-target="#myModal">檢舉</a></li>
+															</c:when>
+															<c:otherwise>
+																<li><a class="reportM" href="#" href="#"
+																	data-toggle="modal" data-target="#myModal2">檢舉</a></li>
+															</c:otherwise>
+														</c:choose>
+													</c:if>
+													<c:if test="${!empty LoginOK}">
+														<li><a class="reportM" href="#">檢舉</a></li>
+													</c:if>
 													<li><a href="#">修改</a></li>
 													<li><a href="#">刪除</a></li>
 												</ul>
@@ -398,7 +463,25 @@ font-size: 18px; color: white;
 																		<span class="glyphicon glyphicon-option-horizontal"></span>
 																	</button>
 																	<ul class="dropdown-menu">
-																		<li><a href="#">檢舉</a></li>
+																		<c:if test="${empty LoginOK}">
+																			<c:choose>
+																				<c:when test="${!empty loginerr}">
+																					<li><a href="#" href="#" data-toggle="modal"
+																						data-target="#myModal2">檢舉</a></li>
+																				</c:when>
+																				<c:when test="${empty err}">
+																					<li><a href="#" href="#" data-toggle="modal"
+																						data-target="#myModal">檢舉</a></li>
+																				</c:when>
+																				<c:otherwise>
+																					<li><a class="reportM" href="#" href="#"
+																						data-toggle="modal" data-target="#myModal2">檢舉</a></li>
+																				</c:otherwise>
+																			</c:choose>
+																		</c:if>
+																		<c:if test="${!empty LoginOK}">
+																			<li><a class="reportM" href="#">檢舉</a></li>
+																		</c:if>
 																		<li><a href="#">修改</a></li>
 																		<li><a href="#">刪除</a></li>
 																	</ul>
@@ -434,7 +517,25 @@ font-size: 18px; color: white;
 																		<span class="glyphicon glyphicon-option-horizontal"></span>
 																	</button>
 																	<ul class="dropdown-menu">
-																		<li><a href="#">檢舉</a></li>
+																		<c:if test="${empty LoginOK}">
+																			<c:choose>
+																				<c:when test="${!empty loginerr}">
+																					<li><a href="#" href="#" data-toggle="modal"
+																						data-target="#myModal2">檢舉</a></li>
+																				</c:when>
+																				<c:when test="${empty err}">
+																					<li><a href="#" href="#" data-toggle="modal"
+																						data-target="#myModal">檢舉</a></li>
+																				</c:when>
+																				<c:otherwise>
+																					<li><a class="reportM" href="#" href="#"
+																						data-toggle="modal" data-target="#myModal2">檢舉</a></li>
+																				</c:otherwise>
+																			</c:choose>
+																		</c:if>
+																		<c:if test="${!empty LoginOK}">
+																			<li><a class="reportM" href="#">檢舉</a></li>
+																		</c:if>
 																		<li><a href="#">修改</a></li>
 																		<li><a href="#">刪除</a></li>
 																	</ul>
@@ -454,6 +555,8 @@ font-size: 18px; color: white;
 												</div>
 											</div>
 										</div>
+
+
 										<!-- 			<!--回應輸入表格-->
 										<div class="col-md-12">
 											<div class="panel-group">
@@ -495,6 +598,8 @@ font-size: 18px; color: white;
 			</div>
 		</div>
 	</div>
+<c:remove var="err" scope="session" />
+	<c:remove var="loginerr" scope="session" />
 	<jsp:include page="/footer.jsp" />
 </body>
 <script>
@@ -506,6 +611,13 @@ font-size: 18px; color: white;
 		backgroundColor : '	#272727',
 		size : 4,
 		fontType : 2,
+	});
+</script>
+<script>
+	$(document).ready(function() {
+		$(".col-md-4 a").click(function() {
+			$(this).tab('show');
+		});
 	});
 </script>
 </html>

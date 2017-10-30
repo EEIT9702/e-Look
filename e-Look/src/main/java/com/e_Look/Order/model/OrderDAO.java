@@ -30,6 +30,7 @@ public class OrderDAO implements OrderDAO_interface{
 	private static final String SELECT_Order = "select OrderID,memberID,orderTime from [Order] where OrderID=?";
 	private static final String SELECT_ALL_Order = "select OrderID,memberID,orderTime from [Order]";
 	private static final String SELECT_MEMBER_UNCHECK_Order = "select OrderID,memberID,orderTime from [Order] where memberID=? and orderTime is null";
+	private static final String SELECT_MEMBER_ALL_Order = "select OrderID,memberID,orderTime from [Order] where memberID=? ";
 	@Override
 	public void insert(OrderVO OrderVO) {
 		Connection conn =null;
@@ -250,5 +251,46 @@ public class OrderDAO implements OrderDAO_interface{
 		}
 		
 		return orderVO;
+	}
+
+
+
+	@Override
+	public List<OrderVO> getMemberAllOrder(Integer memberID) {
+		List<OrderVO> list = new LinkedList<OrderVO>();
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(SELECT_MEMBER_ALL_Order);
+			pstmt.setInt(1,memberID );
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				OrderVO OrderVO= new OrderVO();
+				OrderVO.setOrderID(rs.getInt(1));
+				OrderVO.setMemberID(rs.getInt(2));
+				OrderVO.setOrderTime(rs.getDate(3));
+				list.add(OrderVO);
+			}	
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
 	}
 }

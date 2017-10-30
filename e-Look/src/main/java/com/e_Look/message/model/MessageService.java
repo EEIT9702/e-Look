@@ -1,6 +1,5 @@
 package com.e_Look.message.model;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 public class MessageService {

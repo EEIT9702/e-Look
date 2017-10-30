@@ -12,7 +12,7 @@ public interface CourseDAO_interface {
 	public void updatecourseVideopathway(CourseVO courseVO);
 	public void delete(Integer courseID);
 	public CourseVO findByPrimaryKey(Integer courseID);
-	public List<CourseVO> findBymemberID(Integer memberID,Integer status);
+	public List<CourseVO> findAllCourse(Integer memberID,Integer status);
 	public void updateStatus(CourseVO courseVO);
 	public List<CourseVO> getAllonlineCourse();
 	public void postProposal(Integer courseID);

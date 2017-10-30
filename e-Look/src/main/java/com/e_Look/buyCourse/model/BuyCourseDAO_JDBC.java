@@ -253,15 +253,15 @@ public class BuyCourseDAO_JDBC implements BuyCourseDAO_interface{
 		//新增一筆購買
 //		BuyCourseVO buyCourseVO1 = new BuyCourseVO();
 //		buyCourseVO1.setMemberID(100001);
-//		buyCourseVO1.setCourseID(200001);
+//		buyCourseVO1.setCourseID(200002);
 //		dao.insert(buyCourseVO1);
 //		
 //		//修改(本DAO修改僅修改score欄位)
-//		BuyCourseVO buyCourseVO2 = new BuyCourseVO();
-//		buyCourseVO2.setMemberID(100001);
-//		buyCourseVO2.setCourseID(200001);
-//		buyCourseVO2.setScore(5);
-//		dao.update(buyCourseVO2);
+		BuyCourseVO buyCourseVO2 = new BuyCourseVO();
+		buyCourseVO2.setMemberID(100001);
+		buyCourseVO2.setCourseID(200001);
+		buyCourseVO2.setScore(5);
+		dao.update(buyCourseVO2);
 //		
 //		//刪除(本table不太會用到此方法)
 //		BuyCourseVO buyCourseVO3 = new BuyCourseVO();

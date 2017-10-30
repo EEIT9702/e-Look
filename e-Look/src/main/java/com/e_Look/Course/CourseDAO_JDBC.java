@@ -1,11 +1,6 @@
 package com.e_Look.Course;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,7 +10,7 @@ import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.e_Look.member.model.MemberVO;
+import org.json.simple.JSONValue;
 
 public class CourseDAO_JDBC implements CourseDAO_interface {
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
@@ -369,7 +364,7 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 	}
 
 	//會員後臺管理(選擇我的草稿、我開的課)、管理員後台待審核中的課程列表
-	public List<CourseVO> findBymemberID(Integer memberID,Integer status) {
+	public List<CourseVO> findAllCourse(Integer memberID,Integer status) {
 		List<CourseVO> CourseList = new LinkedList<CourseVO>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -510,13 +505,13 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 //		CourseVO2.setCourseID(200002);
 //		dao.update(CourseVO2);
 		//新增圖片
-		CourseVO CourseVO4 = new CourseVO();
-		CourseVO4.setcPhoto(new FileInputStream(new File("src/main/webapp/img/02.jpg")));
-
-		CourseVO4.setCourseID(200002);
-
-
-		dao.updateimage(CourseVO4);
+//		CourseVO CourseVO4 = new CourseVO();
+//		CourseVO4.setcPhoto(new FileInputStream(new File("src/main/webapp/img/02.jpg")));
+//
+//		CourseVO4.setCourseID(200002);
+//
+//
+//		dao.updateimage(CourseVO4);
 
 
 		//測試用：刪除草稿功能
@@ -552,7 +547,12 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 //		CourseVO4.setCourseID(200003);
 //		dao.updateStatus(CourseVO4);
 		
-
+		CourseVO proposalData=dao.findByPrimaryKey(200011);
+		String jsonString = JSONValue.toJSONString(proposalData);  
+		System.out.println(jsonString);
+		
+		
+		
 		
 		//請勿刪除(可能會用到)
 //		CourseVO2.setCourseID(200004);

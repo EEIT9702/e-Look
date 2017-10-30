@@ -19,6 +19,7 @@
 <script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script>
 <!-- <script type="text/javascript" src="css/jquery.mmenu.js"></script> -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/table2.css">
 
 <style>
 .rtitle{
@@ -94,22 +95,24 @@
 	                  <td><input type="hidden" id="" name=""><span></span></td>
 	                  <td><input type="hidden" id="" name=""><span></span></td>
 	                  <td><button type="button" value="hideHistory" onclick="self.location.href='back_report_history-v2.jsp'" class="btn btn-success">查詢遮蔽留言紀錄</button></td>
-<!-- 	                  <td><input type="hidden" id="reportID" name="reportID"><span></span></td> -->
-<!-- 	                  <td><input type="text" class="form-control" id="reportContent" name="reportContent" placeholder="檢舉內容"></td> -->
-<!-- 	                  <td><input type="text" class="form-control" id="mContent" name="mContent" placeholder="留言內容"></td> -->
-<!-- 	                  <td><input type="text" class="form-control" id="reportTime" name="reportTime" placeholder="檢舉時間"></td> -->
-<!-- 	                  <td><input type="text" class="form-control" id="status" name="status" placeholder="檢舉狀態"></td> -->
-<!-- 	                  <td> -->
-<!-- 						<button id="buttonAdd" type="button" class="btn btn-primary">確認</button>  -->
-<!-- 	                      <button id="buttonUpdate" type="button" class="btn btn-success">遮蔽留言</button></td> -->
 	                 </tr>
 	                 </form>
                   </tfoot>
-				 
-            </table>
-<!--             <div class="col-md-4"> -->
-<!--             	<a href="back_report_history.jsp" class="histiryBtn btn btn-success">查詢處理紀錄</a> -->
-<!--             </div> -->
+			</table>
+<!-- 			<table class="table table-bordered tstyle" style=""> -->
+<!--                   <tbody> -->
+<!-- 	                 <form> -->
+<!-- 	                 <tr> -->
+<!-- 	                  <td><input type="hidden" id="" name=""><span></span></td> -->
+<!-- 	                  <td><input type="hidden" id="" name=""><span></span></td> -->
+<!-- 	                  <td><input type="hidden" id="" name=""><span></span></td> -->
+<!-- 	                  <td><input type="hidden" id="" name=""><span></span></td> -->
+<!-- 	                  <td><input type="hidden" id="" name=""><span></span></td> -->
+<!-- 	                  <td><button type="button" value="hideHistory" onclick="self.location.href='back_report_history-v2.jsp'" class="btn btn-success">查詢遮蔽留言紀錄</button></td> -->
+<!-- 	                 </tr> -->
+<!-- 	                 </form> -->
+<!--                   </tbody> -->
+<!-- 			</table> -->
 		</div>
 
 </div>
@@ -118,24 +121,10 @@
 			
 			//帶入0到loadReportMessage方法裡
 		    loadReportMessage(0);
-					
-// 			//找td底下按鈕的第一個子元素-確認鈕
-// 			//$('#reportTable td>button:nth-child(1)').click(function(){
-// 			$('#reportTable>tbody').on('click','td>button:nth-child(1)',function(){
-// 				//用nth-child找父元素,因為往上不只一層,所以要用有s的,往上找到'tr',在往下撈所有的'td'
-// 				var id = $(this).parents('tr').find('td:nth-child(1)').text();
-// 				//alert(id);
-// 				$.get('ReportMessageControl',{'reportId':id},function(data){
-// 					//alert(data);
-// 					//檢舉狀態更改完要再重新載入
-// 					loadReportMessage(0);
-// 				})
-// 			})
 		
 			//遮蔽留言
 			//找td底下按鈕的第二個子元素-遮蔽留言
 			$('#reportTable>tbody').on('click','td>button:nth-child(1)',function(){
-				//alert("edit")
 				var reportIDy = $(this).parents('tr').children('td:first-child').text();
 				//Message的status設為1,reportMessage的status設為1
 				$.post('ReportMessageControl',{'reportIDx':reportIDy,'status':1},function(){
@@ -145,7 +134,6 @@
 				
 			
 			//找td底下按鈕的第一個子元素-不處理鈕
-			//$('#reportTable td>button:nth-child(1)').click(function(){
 			$('#reportTable>tbody').on('click','td>button:nth-child(2)',function(){
 				//alert("edit")
 				var reportIDy = $(this).parents('tr').children('td:first-child').text();
@@ -182,7 +170,7 @@
 	    	}
 
 			
-		//end of readyfunction
+		//end of loadReportMessagefunction
 		})
 		
 </script>
