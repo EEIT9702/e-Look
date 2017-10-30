@@ -15,6 +15,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="Short Icon" type="image/x-icon" href="${initParam.icon}" />
 <title>遮蔽留言紀錄</title>
 <script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script>
 <!-- <script type="text/javascript" src="css/jquery.mmenu.js"></script> -->
@@ -55,6 +56,9 @@
 /* 	valign="center; */
 /* 	valign="middle; */
 }
+#reportTable>tbody td{
+	vertical-align:middle;
+}
 </style>
 </head>
 <body>
@@ -83,17 +87,20 @@
                  </thead>
                    <tbody>
                  </tbody>
-                  <tfoot style="border-top:none">
+<!--                   <tfoot style="border-top:none"> -->
 <!--                  	<form> -->
-		                 <tr>
-			                  <td><input type="hidden" id="" name=""><span></span></td>
-			                  <td><input type="hidden" id="" name=""><span></span></td>
-			                  <td><input type="hidden" id="" name=""><span></span></td>
-			                  <td><button type="button" value="back_report" onclick="self.location.href='back_report-v2.jsp'" class="btn btn-success">檢舉留言管理</button></td>
-						</tr>
+<!-- 		                 <tr> -->
+<!-- 			                  <td><input type="hidden" id="" name=""><span></span></td> -->
+<!-- 			                  <td><input type="hidden" id="" name=""><span></span></td> -->
+<!-- 			                  <td><input type="hidden" id="" name=""><span></span></td> -->
+<!-- 			                  <td><button type="button" value="back_report" onclick="self.location.href='back_report-v2.jsp'" class="btn btn-success">檢舉留言管理</button></td> -->
+<!-- 						</tr> -->
 <!-- 	                 </form> -->
-                  </tfoot>
+<!--                   </tfoot> -->
             </table>
+   			<div class="col-md-3" style="float:right;margin-bottom:30px;">
+				<button type="button" value="hideHistory" onclick="self.location.href='back_report-v2.jsp'" class="btn btn-success" style="margin-right:68px;">檢舉留言管理</button>
+			</div>
 		</div>
 
 </div>
