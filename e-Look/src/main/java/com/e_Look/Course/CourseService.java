@@ -101,8 +101,9 @@ public class CourseService {
 	
 	public Integer countdown(Integer courseID) {
 		CourseVO courseVO = dao.findByPrimaryKey(courseID);
-		Long time = courseVO.getFundEndDate().getTime() - System.currentTimeMillis();
-		Integer day = (int)(time/1000/60/60/24);
+		Long timeMillis = courseVO.getFundEndDate().getTime() - System.currentTimeMillis();
+		Integer time = (int)(timeMillis/1000);
+		Integer day = time / (60*60*24);
 		if(day <=0 ){
 			return null;
 		}else{
