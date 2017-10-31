@@ -80,6 +80,9 @@ public class CourseService {
 	public void changeStatustoOnlineStatus(Integer courseID){
 		dao.changeStatustoOnline(courseID);
 	}
+	public void changeStatustoFundStatus(Integer courseID){
+		dao.changeStatustoFund(courseID);
+	}
 	public List<CourseVO> getAllCourseData(Integer memberID, Integer status){
 		return dao.findAllCourse(memberID, status);
 	}

@@ -37,6 +37,7 @@ video {
 	background-size: cover;
 	background-position: center;
 	height: 510px;
+	padding-left: 0;
 }
 
 #videoliststyle>li {
@@ -186,6 +187,15 @@ video::-webkit-media-controls-panel {
 a {
 	text-decoration: none;
 }
+#videoArea::after{    display: block;
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.5);
+    padding:0;
+    margin: 0;} 
+
 </style>
 </head>
 <!-- 影片區 -->
@@ -197,9 +207,10 @@ a {
 				<h1 align="center" id="videoTitle">${courseVO.courseName}</h1>
 				<div class="col-md-12 " id="videoArea"
 					style="background-image: url('<%=request.getContextPath() %>/CourseImage?CourseID=${courseVO.courseID}')">
+					
 					<input type="hidden" value="${courseVO.courseID}">
-					<div class="col-md-12">
-						<div class="col-md-8 col-xs-12" style="margin-right: -15px">
+					<div class="col-md-12" style="z-index: 10">
+						<div class="col-md-8 col-xs-12" style="margin-right: -15px;z-index: 10">
 
 							<c:choose>
 								<c:when test="${LoginOK.memberID==courseVO.memberID}">
@@ -272,8 +283,6 @@ a {
 		<div class="row">
 			<div class="col-md-12" style="margin-top: 20px">
 				<!--空-->
-
-
 				<div class="col-md-1 "></div>
 				<!--課程人數 -->
 				<div class="col-md-1 col-xs-4">
@@ -464,7 +473,7 @@ a {
 				<div class="col-md-2 col-xs-6"
 					style="height: 89px; border-right: 1px solid #ADADAD">
 
-					<div id="starTatol" style="margin: 0 auto; padding-top: 10px"></div>
+					<div id="starTatol" style="margin: 0 auto; padding-top: 10px"><span id="starText" class="pull-right"></span></div>
 					<!-- 		加入購物車 -->
 					<c:if test="${empty LoginOK}">
 						<c:choose>
@@ -533,9 +542,7 @@ a {
 	<!--內容 -->
 
 	<div class="demo">
-
-
-		<div class="container">
+	<div class="container">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="tab" role="tabpanel">
@@ -889,7 +896,8 @@ a {
 								<p>喜歡的話記得幫我們評分還有收藏唷</p>
 								<span id="noLogin"></span>
 								<div id="star"></div>
-<%-- 								<input type="hidden" value="${list2.courseID}" id="buyCourseID"> --%>
+								<input type="hidden" value="${courseVO.memberID}"
+									id="starMemberID">
 							</div>
 
 						</div>
@@ -1037,33 +1045,27 @@ a {
 		})
 	</script>
 	<script>
+	
 		// 	星星點評
-		$('#star').raty(
+		
+		$(function(){
+			$('#star').raty(
 				{
 					path : 'img',
 					width : 150,
 					starOff : 'star-off-big.png',
 					starOn : 'star-on-big.png',
-					readOnly : function() {
-						if ($('#reportMemberID').val() == ""
-								|| $('#reportMemberID').val() == null) {//沒有登入
+					readOnly :function() {
+						if ($('#reportMemberID').val() == ""|| $('#reportMemberID').val() == null) {//沒有登入
 							$("#noLogin").text("(請先登入)")
+							
 							return true;
-						} else	{
-// 							$.each($('#buyCourseID').val(), function() {
-// 									if ($('#buyCourseID').val() == $('#reportCourseID').val()) {
-// 										$("#noLogin").text("")
-// 										return false;
-// 								} else {
-// 									$("#noLogin").text("(你尚未購買該課程)")
-// 									return true;
-// 								}
-									
-// 						})
-							return false;
-						};
-
-					},
+						}else{
+						var memberID=$('#reportMemberID').val();
+							console.log(getJson(memberID));
+							return getJson(memberID);
+					}
+				},
 					click : function(score, evt) {
 						$.post('updateScoreController', {
 							'score' : score,
@@ -1073,23 +1075,56 @@ a {
 						alert("感謝你的評分!" + "\nscore: " + score);
 					}
 				});
+		});
+		
+		function getJson(memberID) {
+			var bool;
+			$.ajax({'url':'<%=request.getContextPath() %>/countScoreController',
+					'async':false,
+					'method':"GET",
+					'data':{'memberID':memberID},
+					'success':function(datas){
+						var datasJson=JSON.parse(datas);
+						console.log(datasJson.length)
+						console.log(datas);
+						console.log($('#reportMemberID').val());
+						console.log($('#starMemberID').val());
+						 if($('#starMemberID').val()==$('#reportMemberID').val()){
+							$("#noLogin").text("")	
+							bool=false
+							return bool;										
+						}else if($('#starMemberID').val()!=$('#reportMemberID').val()){
+							for(var i=0;i<=(datasJson.length-1);i++){
+								 if(datasJson[i].courseID==$('#reportCourseID').val())
+									{	
+										$("#noLogin").text("")
+										bool=false
+										return bool;
+									}
+							}
+							$("#noLogin").text("(請先購買該課程)")
+							bool=true;
+							return bool;
+						}
+					}	
+			});//$.ajax end
+			return bool;
+		}
 	</script>
 	<script>
 		var scoreJSON;
 		var value;
 		$(function() {
-			// 			console.log($("#mbcourseID").val())
+						
 			$.post('countScoreController', {
 				'courseID' : $("#mbcourseID").val()
 			}, function(data) {
-				// 				console.log(data);
 				scoreJSON = JSON.parse(data);
-				// 				console.log(scoreJSON);
 				value = Math.ceil(parseFloat(scoreJSON));
-				// 				console.log(value)
+				$('#starText').css({'font-size':'12px','padding-top':'5px'}).text("("+value+")")
 				$('#starTatol').raty({
 					path : 'img',
-					width : 150,
+					width : 160,
 					starOff : 'star-off-big.png',
 					starOn : 'star-on-big.png',
 					readOnly : true,

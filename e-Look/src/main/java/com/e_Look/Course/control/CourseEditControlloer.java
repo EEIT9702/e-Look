@@ -70,6 +70,12 @@ public class CourseEditControlloer extends HttpServlet {
 			CourseService courseService4 = new CourseService();
 			courseService4.changeStatustoOnlineStatus(courseID);
 		}
+		
+		else if(request.getParameter("changeStatustoFundStatus")!=null){
+			Integer courseID = Integer.valueOf(request.getParameter("courseID"));
+			CourseService courseService5 = new CourseService();
+			courseService5.changeStatustoFundStatus(courseID);
+		}
 	
 		 else {			
 				Integer courseID = Integer.valueOf(request.getParameter("courseID"));
