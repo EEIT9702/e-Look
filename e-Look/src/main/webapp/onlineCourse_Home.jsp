@@ -239,7 +239,7 @@ h5 {
 .gray1{
 -webkit-filter:grayscale(1);
 }
-
+#body{background-color: #FAEBD7;}
 </style>
 <script type="text/javascript">
 //為文件的滑鼠按下事件定義回呼
@@ -358,7 +358,7 @@ function river(){
 </head>
 
 
-<body style="margin-top:10px;">
+<body style="margin-top:10px;" id="body">
 
 
 <jsp:include page="${contextPath}/login.jsp" />
