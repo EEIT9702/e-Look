@@ -32,7 +32,6 @@
 <script src="<%=request.getContextPath()%>/_PJC/js/jquery-ui.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath()%>/_PJC/js/autosize.js"></script>
-<script src="<%=request.getContextPath()%>/_PJC/js/bootstrap-confirmation.js"></script>
 <script
 	src="<%=request.getContextPath()%>/_PJC/js/bootstrap-datetimepicker.js"></script>
 <script
@@ -177,7 +176,7 @@
 													<i class="glyphicon glyphicon-list"></i>
 												</div>
 												<div class="update-text">
-													<strong>步驟一、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
+													<strong>步驟一4444、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
 												</div>
 											</div>
 										</div>
@@ -731,16 +730,14 @@
 
 
 
-								<div class="col-md-offset-4" style="margin-top: 80px" id='#postProposalfinal'>
+								<div class="col-md-offset-4" style="margin-top: 80px">
 									<ul class="list-inline" style="margin-bottom: 80px">
 										<li><button type="button"
 												class="btn3d btn btn-default btn-lg prev-step">上一步</button></li>
-										<li><a href="<%=request.getContextPath()%>/HOME.jsp" title="恭喜您完成此次的課程編輯流程!" data-toggle="confirmation" data-singleton="true" data-placement="top" data-popout="true"
-        										data-btn-ok-class="btn-success"
-        										data-btn-cancel-class="btn-danger">
-										<button type="button" id="postProposal" class="btn btn-primary btn-lg btn3d next-step">
+										<li>
+										<button type="button" class="btn btn-primary btn-lg btn3d next-step" data-toggle="modal" data-target="#ConfirmBotton">
 										<span class="glyphicon glyphicon-ok"></span>  完成課程編輯並送出審核
-										</button></a></li>
+										</button></li>
 									</ul>
 								</div>
 								<div class="clearfix"></div>
@@ -751,6 +748,34 @@
 		</div>
 	</div>
 
+
+<!-- 模態框========================================================================================================================== -->
+<div class="modal fade" id="ConfirmBotton" tabindex="-1" role="dialog" aria-labelledby="ConfirmTitleLabel" aria-hidden="true" style="left: 50%;top: 50%;transform: translate(-50%,-50%);">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close pull-right" data-dismiss="modal" 
+						aria-hidden="true">×
+				</button>
+				<h4 class="modal-title" id="ConfirmTitleLabel" style="text-align: center;">
+					恭喜您!  即將完成課程編輯流程!
+				</h4>
+			</div>
+			<div class="modal-body" style="text-align: center;">
+				再次請您確認內容是否無誤? 若內容確認完畢，可點選"提交"，我們會盡快通知您審核結果
+			</div>
+			<div class="modal-footer" style="text-align: center;">
+				<button type="button" class="btn btn-danger" 
+						data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i>&nbsp;&nbsp;取消
+				</button>
+				<a href="<%=request.getContextPath()%>/HOME.jsp"><button type="button" class="btn btn-success" id="FinalConfirm"><i class="glyphicon glyphicon-ok"></i>
+				&nbsp;&nbsp;提交
+				</button></a>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- ====================================================================================================================================== -->
 
 	<script>
 		$(document).ready(function() {
@@ -1221,14 +1246,6 @@ $('#starttime').on('input propertychange',function(e) {
 		}
 		// =====================================
 
-		//用goGet方法送到CourseEditControlloer，改變草稿的狀態	
-		$('#postProposalfinal').click(function() {
-			$.get('/e-Look/com.e_Look.Course.control/CourseEditControlloer', {
-				'courseID' : $('#courseID').val()
-			}, function() {
-			})
-		})
-		//======================================================
 			
 		//用goGet方法送到CourseEditControlloer，取得目前資料庫存入的課程內容	
 		$('#getProposalData,#getProposalData2').click(function() {
@@ -1386,16 +1403,12 @@ $('#targetStudentNumber,#soldPrice').keyup(function(){
 		
 	})
 	//課程送出前警告視窗=================================					
-	$('[data-toggle="confirmation"]').confirmation({ 
-		title: 'Confirm!',
-		content: '確定要將內容送至審核階段嗎?',
-		btnOkLabel: "&nbsp;送出審核",
-		btnCancelLabel: "&nbsp;取消",
-		onConfirm:function(){$.get('/e-Look/com.e_Look.Course.control/CourseEditControlloer', {
+	$('#FinalConfirm').click(function(){
+		$.get('/e-Look/com.e_Look.Course.control/CourseEditControlloer', {
 			'courseID' : $('#courseID').val()
 		}, function() {
-		})}	
-	});
+		})
+	})
 	//===============================================
 	</script>
 
