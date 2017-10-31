@@ -147,7 +147,14 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
 tbody tr td {
 	width: 20px;
 }
+tbody{
+font-size: 22px
 
+}
+thead{
+font-size: 20px
+
+}
 
 
 span {
@@ -188,7 +195,8 @@ span.cancelado {
                 <!-- flight section -->
                 <div class="bhoechie-tab-content active">
                     <div>
-                      			<div class="col-md-12">
+                      <h1>消費紀錄</h1>
+                    <div class="col-md-12">
 				<div class="panel panel-success">
 					<div class="panel-heading">
 						<h3 class="panel-title">消費紀錄</h3>
@@ -395,7 +403,7 @@ $(function(){
 	  		  	var cell2 = $('<td></td>').text(Order.courseVO.courseName)
 	  		  	var cell3 = $('<td></td>').text("")
 	  		 	var cell4 = $('<td></td>').text(Order.buyingPrice)
-	  		  	var row = $('<tr class="data1" style="background-color:#D2E9FF"></tr>').append([cell1,cell2,cell3,cell4]);   			
+	  		  	var row = $('<tr class="data1" style="background-color:#acecfb"></tr>').append([cell1,cell2,cell3,cell4]);   			
 	  		  	fragment.append(row);	
 	   		 }  
 	      	  });
@@ -425,19 +433,20 @@ $(function(){
  	   	 var fragment = $(document.createDocumentFragment());
  		
 	   	 $.each(datas.order,function(idx,order){
+	   		 if(order.orderTime!=null){
 	   		var count=0
    			var cell1 = $('<td></td>').text(order.orderID)
-  		  	var cell2 = $('<td></td>').text("")
-  		  	var cell3 = $('<td></td>').text(order.orderTime)
+  		  	var cell2 = $('<td style="padding-left: 25px;"></td>').html("<img src='image/arrow-n.png'>")	  	
+  		  	var cell3 = $('<td></td>').text(order.orderTime)	  
   		  	//console.log(datas.OrderDetails[idx]);
    			$.each(datas.OrderDetails[idx],function(idx,OrderDetails){
    				count=OrderDetails.buyingPrice+count
    			})
   		  	var cell4 = $('<td></td>').text(count)
-  		  	var row = $('<tr class="parent" style="background-color:#C4E1FF"></tr>').append([cell1,cell2,cell3,cell4]);
+  		  	var row = $('<tr class="parent" style="background-color:#f3ffc4"></tr>').append([cell1,cell2,cell3,cell4]);
 					fragment.append(row);
    		 		//console.log(idx);
-  		 	
+	   		 }
    	 		 }); 
    	  	$('#dev-table>tbody').html(fragment);
 	   	 }else{
