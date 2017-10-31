@@ -211,50 +211,12 @@ a {
 					<input type="hidden" value="${courseVO.courseID}">
 					<div class="col-md-12" style="z-index: 10">
 						<div class="col-md-8 col-xs-12" style="margin-right: -15px;z-index: 10">
-
-							<c:choose>
-								<c:when test="${LoginOK.memberID==courseVO.memberID}">
-									<video controls="controls" id="vidoeControl">
+							<video controls="controls" id="vidoeControl">
 										<source
 											src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}"
 											type="video/mp4">
-									</video>
-
-								</c:when>
-								<c:when test="${!empty LoginOK && !empty list2}">
-									<video
-										<c:forEach var="buycourse"  items='${list2}'>
-							<c:choose>
-								<c:when test="${courseVO.courseID==buycourse.courseID}">
-										<c:set var="control" value="controls=controls" />
-										<c:set var="poster" value="" />
-										<c:set var="boo" value="true" />
-								</c:when>
-								<c:when test="${!empty boo}">
-								</c:when>
-								<c:otherwise> 
-									<c:set var="poster" value="poster=_Lyy/poster.png" />
-									<c:set var="control" value=""/>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-										<c:out value="${poster}"/> <c:out value="${control}"/>
-										id="vidoeControl">
-										<source
-											src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}"
-											type="video/mp4">
-									</video>
-								</c:when>
-								<c:otherwise>
-									<video poster="<%=request.getContextPath()%>/_Lyy/poster.png"
-										id="vidoeControl">
-										<source
-											src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}"
-											type="video/mp4">
-									</video>
-								</c:otherwise>
-							</c:choose>
-						</div>
+							</video>
+							</div>
 						<div class="col-md-4 col-xs-12" id="videoDivListStyle">
 							<div>
 								<h3>推薦課程</h3>
@@ -899,13 +861,9 @@ a {
 								<input type="hidden" value="${courseVO.memberID}"
 									id="starMemberID">
 							</div>
-
 						</div>
-
 					</div>
-
 				</div>
-
 			</div>
 		</div>
 
