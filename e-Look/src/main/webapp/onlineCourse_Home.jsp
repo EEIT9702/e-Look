@@ -239,9 +239,10 @@ h5 {
 .gray1{
 -webkit-filter:grayscale(1);
 }
-
+#body{background-color: #FAEBD7;}
 </style>
 <script type="text/javascript">
+/*
 //為文件的滑鼠按下事件定義回呼
 document.onmousedown = function(event) {
 	//滑鼠事件：0 > 沒按鍵, 1 > 按左鍵, 2 > 按右鍵, 3 > 按左鍵&右鍵
@@ -251,7 +252,7 @@ document.onmousedown = function(event) {
 		alert("禁用滑鼠右鍵!");
 	}
 }
-
+*/
 /*展示廣告圖片*/
 function showAdPic() {
 	//獲得廣告的DOM
@@ -352,7 +353,7 @@ function river(){
 </head>
 
 
-<body style="margin-top:10px;">
+<body style="margin-top:10px;" id="body">
 
 
 <jsp:include page="${contextPath}/login.jsp" />

@@ -23,14 +23,13 @@
 video {
 	width: 100%;
 	height: 100%;
-
 }
 
 #videoArea {
 	background-size: cover;
 	background-position: center;
 	height: 487px;
-/* 	62% */
+	/* 	62% */
 }
 
 video::-internal-media-controls-download-button {
@@ -57,16 +56,20 @@ video::-webkit-media-controls-panel {
 	text-align: center;
 	font-weight: bold;
 }
-#peopleNumber>div>p{
-font-size: 18px;
- color: white
+
+#peopleNumber>div>p {
+	font-size: 18px;
+	color: white
 }
-#priceGroup>div{
-border-right: 1px solid white; 
-border-left: 1px solid white
+
+#priceGroup>div {
+	border-right: 1px solid white;
+	border-left: 1px solid white
 }
-#priceGroup>div>div{
-font-size: 18px; color: white;
+
+#priceGroup>div>div {
+	font-size: 18px;
+	color: white;
 }
 /* 下方功能 (簡介)*/
 .tab .nav-tabs {
@@ -155,6 +158,7 @@ font-size: 18px; color: white;
 #messageHeader>img {
 	width: 50px;
 }
+
 #videoTitle {
 	background-color: rgba(0%, 10%, 20%, 0.3);
 	color: white;
@@ -168,28 +172,29 @@ font-size: 18px; color: white;
 		<div class="container">
 			<div class="row">
 
-			<h1 align="center" id="videoTitle">${courseVO.courseName}</h1>
-				<div class="col-md-12 " id="videoArea" >
+				<h1 align="center" id="videoTitle">${courseVO.courseName}</h1>
+				<div class="col-md-12 " id="videoArea">
 
 					<div class="col-md-12">
 						<div class="col-md-8 col-xs-12" style="margin-right: -15px">
 							<div class="m">
-							<video controls="controls" id="vidoeControl" poster="<%=request.getContextPath()%>/_Lyy/videobackground.jpg">
-								<source
-									src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}"
-									type="video/mp4">
-							</video>
+								<video controls="controls" id="vidoeControl"
+									poster="<%=request.getContextPath()%>/_Lyy/videobackground.jpg">
+									<source
+										src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}"
+										type="video/mp4">
+								</video>
 							</div>
 						</div>
 						<div class="col-md-4 col-xs-12" id="videoDivListStyle">
-							<div>   
-								<h2 style="color:white;text-align:center">募資進行中</h2>
-								<div style="margin: 15px 0"id="peopleNumber">
+							<div>
+								<h2 style="color: white; text-align: center">募資進行中</h2>
+								<div style="margin: 15px 0" id="peopleNumber">
 									<div class="pull-left">
-										<p style="font-size:22px">目標人數100人</p>
+										<p style="font-size: 22px">目標人數564565人</p>
 									</div>
 									<div class="pull-right">
-										<p style="font-size:22px">達成30%</p>
+										<p style="font-size: 22px">達成30%</p>
 									</div>
 									<div class="clearfix"></div>
 									<div class="progress progress-striped active">
@@ -200,34 +205,40 @@ font-size: 18px; color: white;
 								</div>
 								<div style="margin: 15px 0">
 									<div style="text-align: center; color: white">
-										<p style="font-size: 22px; color: white">剩餘時間 ( 天:時:分:秒 ) </p>
+										<p style="font-size: 22px; color: white">剩餘時間 ( 天:時:分:秒 )
+										</p>
 									</div>
 									<div class="led3  text-center "></div>
 								</div>
 
 								<div style="margin: 15px 0" id="priceGroup">
 									<div class="col-md-6 ">
-										<div class="text-left"style="font-size:22px">原始價格</div>
-										<div class="text-right" style="	text-decoration:line-through;font-size:22px">NT1234</div>
+										<div class="text-left" style="font-size: 22px">原始價格</div>
+										<div class="text-right"
+											style="text-decoration: line-through; font-size: 22px">${courseVO.soldPrice}</div>
 									</div>
 									<div class="col-md-6">
-										<div class="text-left"style="font-size:22px">募資價格</div>
-										<div class="text-right"style="font-size:22px">NT1000</div>
+										<div class="text-left" style="font-size: 22px">募資價格</div>
+										<div class="text-right" style="font-size: 22px">${courseVO.soldPrice}*0.7</div>
 									</div>
 								</div>
 								<button type="button" class="btn-warning btn-lg"
 									style="width: 100%; margin: 20px 0">我要加入募資</button>
-								<div >
-									<div class=" text-center"style="font-size: 18px; color: white">
+								<div>
+									<div class=" text-center" style="font-size: 18px; color: white">
 										有興趣可以
-										<div class="btn-group" >
-											<button type="button" class="btn btn-default btn-sm dropdown-toggle"data-toggle="dropdown">分享 </button>
-											<ul class="dropdown-menu" style="position:absoulte;z-index:5555">
+										<div class="btn-group">
+											<button type="button"
+												class="btn btn-default btn-sm dropdown-toggle"
+												data-toggle="dropdown" style="font-size: 18px">分享</button>
+											<ul class="dropdown-menu"
+												style="position: absoulte; z-index: 5555">
 												<li><a href="#">FaceBook</a></li>
 												<li><a href="#">Google</a></li>
 											</ul>
-											來加快募資速度唷
+
 										</div>
+										來加快募資速度唷
 									</div>
 								</div>
 							</div>
@@ -239,7 +250,7 @@ font-size: 18px; color: white;
 	</div>
 	<!--內容 -->
 
-	<div class="demo" style="margin-top:80px">
+	<div class="demo" style="margin-top: 80px">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
@@ -253,7 +264,7 @@ font-size: 18px; color: white;
 								aria-controls="home" role="tab" data-toggle="tab">講師簡介</a></li>
 							<li role="presentation"><a href="#Section3"
 								aria-controls="profile" role="tab" data-toggle="tab">課程討論</a></li>
-							
+
 						</ul>
 						<!-- 課程簡介 -->
 						<div class="tab-content tabs">
@@ -586,26 +597,29 @@ font-size: 18px; color: white;
 										</div>
 									</div>
 								</div>
-							
+
 							</div>
-							
+
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-<c:remove var="err" scope="session" />
+	<input type="hidden" value="${courseVO.fundEndDate}" id="fundEndDate">
+	<c:remove var="err" scope="session" />
 	<c:remove var="loginerr" scope="session" />
 	<jsp:include page="/footer.jsp" />
 </body>
 <script>
+	var fundEndDate = $('#fundEndDate').val().replace("-", ":");
+	var fundEndDate1 = fundEndDate.replace("-", ":");
 	$('.led3').ClassyLED({
 		type : 'countdown',
 		format : 'ddd:hh:mm:ss',
-		countTo : '2017:11:17',
+		countTo : fundEndDate1,
 		color : '#af0',
-		backgroundColor : '	#272727',
+		backgroundColor : '#272727',
 		size : 4,
 		fontType : 2,
 	});
