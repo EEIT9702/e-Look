@@ -874,6 +874,17 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 
 
 
+	@Override
+	public void changeStatustoFund(Integer courseID) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+
+
 
 
 

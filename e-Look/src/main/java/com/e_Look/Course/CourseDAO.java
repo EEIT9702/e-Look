@@ -32,6 +32,7 @@ public class CourseDAO implements CourseDAO_interface {
 	private static final String UPDATE_Course_CourseVideopathway ="update Course set CourseVideopathway=? where courseID= ?";
 	private static final String UPDATE_Proposal_Status = "update Course set Status=1 where courseID=?";
 	private static final String UPDATE_Editor_Status = "update Course set Status=0 where courseID=?";
+	private static final String UPDATE_Fund_Status = "update Course set Status=3 where courseID=?";
 	private static final String UPDATE_Online_Status = "update Course set Status=2 where courseID=?";
 	private static final String DELETE_Course = "delete from Course where courseID= ?";
 	private static final String SELECT_ONE_Course = "select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore from Course where courseID= ?";
@@ -523,7 +524,36 @@ public class CourseDAO implements CourseDAO_interface {
 				}
 
 			}
-	
+				//審核通過，改為募資中的狀態
+				@Override
+				public void changeStatustoFund(Integer courseID){
+					Connection con = null;
+					PreparedStatement pstmt = null;
+					try{
+					con = ds.getConnection();
+					pstmt = con.prepareStatement(UPDATE_Fund_Status);
+					pstmt.setInt(1,courseID);
+					pstmt.executeUpdate();
+				} catch (SQLException e) {
+					throw new RuntimeException("A database error occured. " + e.getMessage());
+				} finally {
+					if (pstmt != null) {
+						try {
+							pstmt.close();
+						} catch (SQLException e) {
+							e.printStackTrace(System.err);
+						}
+					}
+					if (con != null) {
+						try {
+							con.close();
+						} catch (Exception e) {
+							e.printStackTrace(System.err);
+						}
+					}
+				}
+
+			}
 	
 	//管理員改變課程狀態(通過審核、下架等等....)
 	@Override

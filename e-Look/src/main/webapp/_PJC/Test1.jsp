@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-		<title>TinyMCE - Setup</title>
+		<title>TinyMCE - Setup1</title>
 	</head>
 	<body>
 		<form id="get-data-form" method="post">
@@ -39,7 +39,7 @@
 			        console.log(ed.getContent());
 			        $("#courseContent").val(ed.getContent());
 			    });
-			}}); 
+			}});
 
 		</script>
 		
