@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<jsp:useBean id="SYSTEM" class="init.GlobalService" scope="application" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
    	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-3.3.7-dist/css/bootstrap.css">
@@ -13,7 +14,7 @@
 <jsp:include page="backheader.jsp"></jsp:include>			
 <section id="wrapper">
 	<header>
-		<div class="inner">
+		<div align="center" class="inner">
 		<h2>課程審查</h2>
 		</div>
 	</header>
@@ -21,14 +22,16 @@
 
 <div class="container">
     <div class="row">
-        <nav class="navbar navbar-default">
+
             <div class="container">
                 <div class="navbar-header">
-                    <span class="navbar-brand">e-Look管理員您好</span>
-                </div>
-                <p class="navbar-text">提醒您，應謹慎使用審查功能，避免影響網站會員的權益</p>
+                    <span class="navbar-brand">e-Look管理員您好：</span>
+                </div>       
             </div>
-        </nav>
+            <div class="container-fluid">
+                <p class="navbar-text">提醒您，應謹慎使用審查功能，避免影響網站會員的權益</p>
+                </div>
+
     </div>
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
@@ -44,7 +47,7 @@
                             <div class="pull-right">
                                 <div class="btn-group" data-toggle="buttons">
                                     <label class="btn btn-success btn-filter active" data-target="free">
-                                        <input type="radio" name="options" id="option1" autocomplete="off" checked>免費課程
+                                        <input type="radio" name="options" id="option1" autocomplete="off">免費課程
                                     </label>
                                     <label class="btn btn-warning btn-filter" data-target="online">
                                         <input type="radio" name="options" id="option2" autocomplete="off">線上付費
@@ -52,8 +55,8 @@
                                     <label class="btn btn-info btn-filter" data-target="fund">
                                         <input type="radio" name="options" id="option3" autocomplete="off">募資課程
                                     </label>
-                                    <label class="btn btn-default btn-filter" data-target="all">
-                                        <input type="radio" name="options" id="option4" autocomplete="off"> All
+                                    <label class="btn btn-default btn-filter" data-target="all" style="color:black;font-weight: 900">
+                                        <input type="radio" name="options" id="option4" autocomplete="off" checked> All
                                     </label>
                                 </div>
                             </div>
@@ -155,11 +158,11 @@
         </div>
     </div>
     <div class="row">
-        <nav class="navbar navbar-default">
+        
             <div class="container-fluid">
                 <p class="navbar-text">貼心提醒：審查募資課程時，應以"募資啟始日"來判斷優先順序</p>
             </div>
-        </nav>
+        
     </div>
 </div>
 
@@ -195,22 +198,26 @@ $(document).ready(function () {
 $(function(){
 	loadReviewData();
 	//審核不過，退回變成草稿====================================================
-	$('#ReviewAllCourse>tbody').on('click','td>a:nth-child(2)',function(){
-		var id = $(this).parents('tr').find('td:nth-child(3)').text();
-		console.log(id+"此課程已變更為草稿狀態");
-		$.get('/e-Look/com.e_Look.Course.control/CourseEditControlloer',{'courseID':id,"rollbackEditorStatus":"xxxxxxxxxx"},function(){
-			loadReviewData();
+		$('#ReviewAllCourse>tbody').on('click','td>a:nth-child(2)',function(){
+	if(confirm("確定要退回為草稿狀態嗎?")){
+			var id = $(this).parents('tr').find('td:nth-child(3)').text();
+			console.log(id+"此課程已變更為草稿狀態");
+			$.get('/e-Look/com.e_Look.Course.control/CourseEditControlloer',{'courseID':id,"rollbackEditorStatus":"xxxxxxxxxx"},function(){
+				loadReviewData();
+			})
+	}		
 		})
-	})
 	//========================================================================	
 	//審核通過=================================================================
-	$('#ReviewAllCourse>tbody').on('click','td>a:nth-child(1)',function(){
-		var id = $(this).parents('tr').find('td:nth-child(3)').text();
-		console.log(id+"此課程已審核通過");
-		$.get('/e-Look/com.e_Look.Course.control/CourseEditControlloer',{'courseID':id,"changeStatustoOnlineStatus":"xxxxxxxxxx"},function(){
-			loadReviewData();
+		$('#ReviewAllCourse>tbody').on('click','td>a:nth-child(1)',function(){
+	if(confirm("確定此課程審核通過嗎?")){
+			var id = $(this).parents('tr').find('td:nth-child(3)').text();
+			console.log(id+"此課程已審核通過");
+			$.get('/e-Look/com.e_Look.Course.control/CourseEditControlloer',{'courseID':id,"changeStatustoOnlineStatus":"xxxxxxxxxx"},function(){
+				loadReviewData();
+			})
+	}
 		})
-	})
 	//========================================================================
 	
 })
