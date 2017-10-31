@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.util.Date"%>
+<%@ page import="com.e_Look.Course.*" %>
 <style>
 .card-text a {
 	text-decoration: none;
@@ -44,7 +46,7 @@
 						<fmt:setLocale value="zh-TW" />
 						<fmt:formatNumber value="${fundCourse.soldPrice}" type="currency"/>
 					</p>
-					<p style="font-size:18px;float:right;">剩${fundCourse.courseLength}天</p>
+					<p style="font-size:18px;float:right;">募資截止日：<fmt:formatDate value="${fundCourse.fundEndDate}" type="date"/></p>
 				</div>
 				<div class="progress" style="clear:both;">
 					<div class="progress-bar progress-bar-warning progress-bar-striped active" 
