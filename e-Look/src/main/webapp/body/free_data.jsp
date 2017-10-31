@@ -56,7 +56,7 @@ if(ccName != null){
 				</figure>
 				<div class="card-text">
 					<a style="text-decoration: none; color: black"; href="<%=request.getContextPath() %>/freeCourse-v1.jsp?CourseID=${freeCourse.courseVO.courseID}">
-						<p id="title" class="card-title mt-3 multi_ellipsis">${freeCourse.courseVO.courseName}&nbsp;類別:${param.courseClass}</p>
+						<p id="title" class="card-title mt-3 multi_ellipsis">${freeCourse.courseVO.courseName}</p>
 					</a>
 				</div>
 				<div>
@@ -85,7 +85,7 @@ if(ccName != null){
 				</figure>
 				<div class="card-text">
 					<a style="text-decoration: none; color: black"; href="<%=request.getContextPath() %>/freeCourse-v1.jsp?CourseID=${courseVO.courseID}">
-						<p id="title" class="card-title mt-3 multi_ellipsis">${courseVO.courseName}&nbsp;類別:${param.courseClass}</p>
+						<p id="title" class="card-title mt-3 multi_ellipsis">${courseVO.courseName}</p>
 					</a>
 				</div>
 				<div>
