@@ -269,8 +269,9 @@ function showAdPic() {
 
 	/*瀑布流關鍵*/
 var rowValueX = 0;
-var keyWord;
-var courseClass;
+var keyWord="";
+var courseClass="";
+var lastClickClass;
 	//初載入 事件繫結
 $(function() {
 	//showAdPic();
@@ -291,30 +292,22 @@ $(function() {
 	var	wh = $(window).height();
 	//整份文件
 	var	dh =$(document).height();
-	console.log(wst+"---"+dh+"---"+wh);
+	//console.log(wst+"---"+dh+"---"+wh);
 	$(window).scroll(river);
 	
 	$('.text-center').click(function(){
-		$('.text-center').children('img').toggleClass('gray1')
-		$(this).children('img').toggleClass('gray1');
-		
-		if($(this).children('img').hasClass('gray1')){
-			$('.text-center').children('img').addClass('gray1')
-			$(this).children('img').toggleClass('gray1');	
-		}
-
-		if($(this).children('p').text()==courseClass){
-			courseClass="";
+		if(lastClickClass==$(this).children('p').attr('alt')){
+			courseClass= "" ;
+			$('.text-center').children('img').removeClass('gray1');
+			lastClickClass="";		
 		}else{
-			//courseClass=$(this).children('p').text()
-			courseClass = $(this).children('p').attr("alt");
-			cCName = $(this).children('p').text();
-			console.log("courseClass = " + courseClass + ", cCName = " + cCName);
+			courseClass=$(this).children('p').attr('alt');
+			$('.text-center').children('img').addClass('gray1');
+			$(this).children('img').removeClass('gray1');
+			lastClickClass=$(this).children('p').attr('alt');
 		}
-		
 		keyWord="";
 		refreshRiver();
-		
 	})
 	
 	$('#searchicon').click(clickSearch);
@@ -322,7 +315,7 @@ $(function() {
 	
 function clickSearch(){
 	keyWord=$('#keyWord').val();
-	console.log("clickSearch() keyWord = " + keyWord);
+	//console.log("clickSearch() keyWord = " + keyWord);
 	$.get('/e-Look/SearchController.do',{'keyWord':keyWord},function(){
 		
 	})
@@ -346,6 +339,7 @@ function river(){
 	//console.log(wst+"---"+dh+"---"+wh+","+wh+","+(dh-wh));
 	//判斷卷軸是否到底部
 	//有時候卷軸會多0.5  改>=的寫法可以解決這個問題
+	console.log(courseClass+"river()"+keyWord);
 	if( wst>=(dh-wh) || rowValueX==0 ){
 		$.get("<%= request.getContextPath() %>/body/online_data.jsp",{"rowValueY":rowValueX,"keyWord":keyWord,"courseClass":courseClass},function(data){
 			$('#river').append(data)
@@ -369,7 +363,7 @@ function river(){
 	<div class="row">
 	<div class="col-md-8 col-sm-10 col-xs-12 cclass">
 
-		<div class="col-md-1 col-sm-2 col-xs-3 text-center" style="" >
+		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
 			<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/life.svg"><p alt="101" class="pstyle">生活</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
