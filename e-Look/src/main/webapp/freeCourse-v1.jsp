@@ -494,6 +494,8 @@ a{text-decoration:none}
 									</div>
 									<input type="hidden" value="${courseVO.courseID}"
 										name="courseID">
+										<input type="hidden" value="${courseVO.courseName}"
+										name="courseName">
 								</form>
 
 							</div>

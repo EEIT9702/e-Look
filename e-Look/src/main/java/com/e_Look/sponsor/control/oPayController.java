@@ -32,6 +32,7 @@ public class oPayController extends HttpServlet {
 		String SponsorName=request.getParameter("SponsorName");
 		String money=request.getParameter("money");
 		String courseID=request.getParameter("courseID");
+		String courseName=request.getParameter("courseName");
 		//用時間當oPay流水號
 		SimpleDateFormat sfd=new SimpleDateFormat("yyyyMMddHHmmss");
 		String MerchantTradeNo=sfd.format(new Date());
@@ -52,7 +53,7 @@ public class oPayController extends HttpServlet {
 
 		
 		SponsorService SponsorService=new SponsorService();
-		String formElement=SponsorService.getOPay(MerchantTradeNo,courseID, money,url);
+		String formElement=SponsorService.getOPay(MerchantTradeNo,courseName, money,url);
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out =response.getWriter();
 		
