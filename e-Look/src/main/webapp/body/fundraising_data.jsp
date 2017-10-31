@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.util.Date"%>
+<%@ page import="com.e_Look.Course.*" %>
 <style>
 .card-text a {
 	text-decoration: none;
@@ -42,20 +44,20 @@
 				<div style="margin-top:40px;">
 					<p style="font-size:18px;float:left;">預購價：
 						<fmt:setLocale value="zh-TW" />
-						<fmt:formatNumber value="${fundCourse.soldPrice+10}" type="currency"/>
+						<fmt:formatNumber value="${fundCourse.soldPrice}" type="currency"/>
 					</p>
-					<p style="font-size:18px;float:right;">剩${fundCourse.courseLength}天</p>
+					<p style="font-size:18px;float:right;">募資截止日：<fmt:formatDate value="${fundCourse.fundEndDate}" type="date"/></p>
 				</div>
 				<div class="progress" style="clear:both;">
 					<div class="progress-bar progress-bar-warning progress-bar-striped active" 
 					role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" 
 					style="width:100%">
-					<p style="display:none"><fmt:formatNumber type="percent" value="${(fundCourse.soldPrice+1)/fundCourse.courseLength}" maxFractionDigits="0"/></p>
+					<p style="display:none"><fmt:formatNumber type="percent" value="${1/fundCourse.targetStudentNumber}" maxFractionDigits="0"/></p>
 					
 					</div>
 				</div>
 				<div>
-					<p style="font-size:18px;text-align:center;clear:both;padding-top:8px;">已募資${fundCourse.soldPrice+1}/${fundCourse.courseLength}人</p>
+					<p style="font-size:18px;text-align:center;clear:both;padding-top:8px;">已募資1/${fundCourse.targetStudentNumber}人</p>
 				</div>
 			</div>
 

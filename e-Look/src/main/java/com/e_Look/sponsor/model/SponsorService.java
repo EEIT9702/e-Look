@@ -58,4 +58,10 @@ public class SponsorService {
 		
 	} 
 	
+	public List<SponsorVO> getSponsor(Integer courseID){
+		
+		
+		return dao.getCountMoney(courseID);
+	}
+	
 }

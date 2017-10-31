@@ -265,25 +265,31 @@ span.cancelado {
 											<th>募資金額</th>
 										</tr>
 									</thead>
-									<tbody>
-									<tr data-status="all" id="all">
+									<tbody data-status="all" id="all">
+									<tr>
 											<td><span class="pagado">(Pagado)</span></td>
 											<td>2</td>
-										</tr>
-										<tr data-status="pagado" id="pagado" style="display:none">
+									</tr>
+									</tbody>
+									<tbody data-status="pagado" id="pagado" style="display:none">
+										<tr >
 											<td><span class="pagado">(Pagado)</span></td>
 											<td>1</td>
 											<td>3</td>
 											<td>4</td>
 										</tr>
-										<tr data-status="pendiente" id="pendiente" style="display:none">
+										</tbody>
+										<tbody data-status="pendiente" id="pendiente" style="display:none">
+										<tr >
 										<td><span class="pagado">(Pagado)</span></td>
 											<td>2</td>
 											<td>3</td>
 											<td>4</td>
 										</tr>
-										<tr data-status="cancelado" id="cancelado" style="display:none">
-										<td><span class="pagado">(Pagado)</span></td>
+										</tbody>
+										<tbody data-status="cancelado" id="cancelado" style="display:none">
+										<tr>
+											<td><span class="pagado">(Pagado)</span></td>
 											<td>3</td>
 											<td>3</td>
 											<td>4</td>
@@ -368,7 +374,7 @@ $(function(){
 /*----消費明細---*/
  $(function(){
 	 loadOrder($("#memberID").val())
-	// loadCourse($("#memberID").val())
+	 loadCourse($("#memberID").val())
  })
  var OrderDetails;
  var Order;
@@ -381,9 +387,9 @@ $(function(){
 		   var fragment = $(document.createDocumentFragment());
 	   	  $.each(OrderDetails,function(idx,OrderDetail){
 	   		 $.each(OrderDetail,function(idx,Order){
-	   			console.log(Order.courseVO.orderID);
-	   			console.log(value);
-	   			console.log(Order.courseVO);
+	   			//console.log(Order.courseVO.orderID);
+	   			//console.log(value);
+	   			//console.log(Order.courseVO);
 	   			if(value==Order.orderVO.orderID){
 	   			var cell1 = $('<td></td>').text("")
 	  		  	var cell2 = $('<td></td>').text(Order.courseVO.courseName)
@@ -398,7 +404,7 @@ $(function(){
 	  }else{
 		  	$(this).attr("class")
 		  	//$(this).removeAttr("class")
-			console.log($(this).attr("class"));
+			//console.log($(this).attr("class"));
 		  	 $(this).nextAll("tr").remove(".data1");
 		  	
 		  $(this).removeAttr("class")
@@ -411,7 +417,7 @@ $(function(){
  
  function loadOrder(memberID){
 	$.getJSON('/e-Look/MemberConsumeController',{'MemberID':memberID},function(datas){
-	   	 console.log(datas);
+	   	 //console.log(datas);
 	   	 if(datas.OrderDetails.length>0){
 	   	//console.log(datas.OrderDetails);
 	   	OrderDetails=datas.OrderDetails;
@@ -441,27 +447,34 @@ $(function(){
   	  });
 }
  /*收益課程*/
+ 
+ 
  $(document).ready(function () {
     $('.btn-filter').on('click', function () {
       var $target = $(this).data('target');
+      
       if($target==="pagado"){
-    	  $('.table2 tbody tr').css('display', 'none');
-          $('.table2 tr[data-status="' + $target + '"]').fadeIn('slow');
+//     	  $('.table2 tbody tr').css('display', 'none');
+ 		$('.table2 tbody[data-status!="' + $target + '"]').css('display', 'none');
+          $('.table2 tbody[data-status="' + $target + '"]').fadeIn('slow');
           $('.table2 thead[data-status="' + $target + '"]').fadeIn('slow');
           $('.table2 thead[data-status!="' + $target + '"]').css('display', 'none');
       }else if($target==="pendiente"){
-    	  $('.table2 tbody tr').css('display', 'none');
-          $('.table2 tr[data-status="' + $target + '"]').fadeIn('slow');
+    	 // $('.table2 tbody tr').css('display', 'none');
+    	  $('.table2 tbody[data-status!="' + $target + '"]').css('display', 'none');
+          $('.table2 tbody[data-status="' + $target + '"]').fadeIn('slow');
           $('.table2 thead[data-status="' + $target + '"]').fadeIn('slow');
           $('.table2 thead[data-status!="' + $target + '"]').css('display', 'none');
       }else if($target==="cancelado"){
-    	  $('.table2 tbody tr').css('display', 'none');
-          $('.table2 tr[data-status="' + $target + '"]').fadeIn('slow');
+//     	  $('.table2  tbody tr').css('display', 'none');
+          $('.table2 tbody[data-status="' + $target + '"]').fadeIn('slow');
+          $('.table2 tbody[data-status!="' + $target + '"]').css('display', 'none');
           $('.table2 thead[data-status="' + $target + '"]').fadeIn('slow');
           $('.table2 thead[data-status!="' + $target + '"]').css('display', 'none');
     }else if($target==="all"){
-  	  $('.table tbody tr').css('display', 'none');
-        $('.table2 tr[data-status="' + $target + '"]').fadeIn('slow');
+  	  //$('.table2 tbody').css('display', 'none');
+  	   $('.table2 tbody[data-status!="' + $target + '"]').css('display', 'none');
+        $('.table2 tbody[data-status="' + $target + '"]').fadeIn('slow');
         $('.table2 thead[data-status="' + $target + '"]').fadeIn('slow');
         $('.table2 thead[data-status!="' + $target + '"]').css('display', 'none');
     }
@@ -474,15 +487,126 @@ $(function(){
     });
 
  });
+ var freeCourses;
+ var fundraisingCourses;
+ var onlineCourses;
+ var CoursesNames;
+ 
  
  function loadCourse(memberID){
+	 var fragment1 = $(document.createDocumentFragment());//all
+	 var fragment2 = $(document.createDocumentFragment());//pagado
+	 var fragment3 = $(document.createDocumentFragment());//pendiente
+	 var fragment4 = $(document.createDocumentFragment());//cancelado
 		$.getJSON('/e-Look/MemberIncomeController',{'MemberID':memberID},function(datas){
-		   //	 console.log(datas);
-		   	
-	  	  });
-	}
+		   console.log(datas);
+		   freeCourses=datas.freeCourse;
+		   onlineCourses=datas.onlineCourse;
+		   fundraisingCourses=datas.fundraisingCourse;
+		   CoursesNames=datas.CourseName;
+	 		if (freeCourses.length == 0 && fundraisingCourses.length==0&& onlineCourses.length==0) {
+			$('#all').html("沒有課程收益");
+			$('#pendiente').html("沒有免費課程收益");
+			$('#cancelado').html("沒有募資課程收益");
+			$('#pagado').html("沒有線上課程收益");
+		} else {
+				//免費課程
+				if (freeCourses.length == 0) {
+					$('#pendiente').html("沒有免費課程收益");
+				} else {
+					var count=0;
+					$.each(freeCourses,function(idx,freeCourse){
+						//console.log(freeCourse)
+						
+						$.each(freeCourse,function(idx,free){
+							var cell1 = $('<td></td>').text(CoursesNames[idx])
+							var cell2 = $('<td></td>').text(free.SponsorName)
+				  		  	var cell3 = $('<td></td>').text(free.dateSponsor)
+				  		  	count=free.money+count;
+							var cell4 = $('<td></td>').text(free.money)
+							var row =$('<tr></tr>').append([cell1,cell2,cell3,cell4]);
+							fragment3.append(row);
+							
+						})						
+					})
+				$('#pendiente').html(fragment3);
+					var cell1 = $('<td></td>').text("免費課程")
+		  		  	var cell2 = $('<td></td>').text(count)
+		  		 	var row1 =$('<tr></tr>').append([cell1,cell2]);
+					fragment1.append(row1)
+				}
+				//募資課程
+				if (fundraisingCourses.length == 0) {
+					$('#cancelado').html("沒有募資課程收益");
+				} else {
+					var count=0;
+					$.each(fundraisingCourses,function(idx,fundraisingCourse){
+						//console.log(fundraisingCourse)
+						//console.log(fundraisingCourse[0].buyingPrice)
+							var cell1 = $('<td></td>').text(fundraisingCourse[0].courseVO.courseName)
+							$.each(fundraisingCourse,function(idx,fund){
+								count=fund.buyingPrice*0.56+count;
+							})
+							
+							var cell2 = $('<td></td>').text(fundraisingCourse[0].buyingPrice)
+				  		  	var cell3 = $('<td></td>').text(fundraisingCourse.length)
+							var cell4 = $('<td></td>').text(Math.round(fundraisingCourse[0].buyingPrice*fundraisingCourse.length*0.56))
+							var row =$('<tr></tr>').append([cell1,cell2,cell3,cell4]);
+							fragment4.append(row);
+					})
+					$('#cancelado').html(fragment4);
+					var cell1 = $('<td></td>').text("募資課程")
+		  		  	var cell2 = $('<td></td>').text(Math.ceil(count))
+		  		 	var row1 =$('<tr></tr>').append([cell1,cell2]);
+					fragment1.append(row1)
+				}
+				
+				
+				//線上課程
+				if (onlineCourses.length == 0) {
+					$('#pagado').html("沒有線上課程收益");
+				} else {
+					var count=0;
+					$.each(onlineCourses,function(idx,onlineCourse){
+						//console.log(onlineCourse[0].buyingPrice)
+						//console.log(fundraisingCourse[0].buyingPrice)
+							var cell1 = $('<td></td>').text(onlineCourse[0].courseVO.courseName)
+							$.each(onlineCourse,function(idx,online){
+								count=online.originalPrice*0.8+count;
+								
+							})
+							
+							var cell2 = $('<td></td>').text(onlineCourse[0].buyingPrice)
+				  		  	var cell3 = $('<td></td>').text(onlineCourse.length)
+							var cell4 = $('<td></td>').text(Math.round(onlineCourse[0].buyingPrice*onlineCourse.length*0.8))
+							var row =$('<tr></tr>').append([cell1,cell2,cell3,cell4]);
+							fragment2.append(row);
+					})
+					console.log(count);
+					$('#pagado').html(fragment2);
+					var cell1 = $('<td></td>').text("線上課程")
+		  		  	var cell2 = $('<td></td>').text(Math.ceil(count))
+		  		 	var row1 =$('<tr></tr>').append([cell1,cell2]);
+					fragment1.append(row1)
+					
+				}
+				
+				
+				$('#all').html(fragment1);
+			}
+		});
+		
 
- 
+		
+		
+}
+		
+		
+		
+		
+	
+		  
+	
 </script>
 
 </body>

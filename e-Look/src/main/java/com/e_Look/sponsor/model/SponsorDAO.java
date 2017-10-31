@@ -204,6 +204,7 @@ public class SponsorDAO implements SponsorDAO_interface {
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_ONE_SPONSOR);
+			pstmt.setInt(1, courseID);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				SponsorVO = new SponsorVO();

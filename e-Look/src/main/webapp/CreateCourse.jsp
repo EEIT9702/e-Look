@@ -7,6 +7,7 @@
 <jsp:useBean id="SYSTEM" class="init.GlobalService" scope="application" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${SYSTEM.systemName}</title>
+<LINK REL="SHORTCUT ICON" HREF="http://www.mydomain.com/myicon.ico">
 <link href="<%=request.getContextPath()%>/css/bootstrap.css"
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/_PJC/css/step1.css"
@@ -40,59 +41,6 @@
 	src="<%=request.getContextPath()%>/_PJC/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
 <script
 	src="<%=request.getContextPath()%>/_PJC/tinymce/js/tinymce/tinymce.js"></script>
-<script>
-		tinymce.init({ selector:'#texteditor',language_url:'<%=request.getContextPath()%>/_PJC/tinymce/js/tinymce/langs/zh_TW.js',
-				height : "500px",
-				plugins : [
-						"advlist autolink link image lists charmap print preview hr anchor pagebreak",
-						"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-						"save table contextmenu directionality emoticons template paste textcolor" ],
-				/* toolbar */
-				toolbar : "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
-				setup : function(ed) {
-					ed
-							.on(
-									'keyup',
-									function(e) {
-										// 			        console.log(ed.getContent());
-										$("#courseContent")
-												.val(ed.getContent());
-										var formData = new FormData(
-												$('form')[3]);
-										console.log("從文字編輯器欄位送資料到資料庫囉!");
-										$
-												.ajax({
-													type : 'POST',
-													url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
-													data : formData,
-													processData : false,
-													contentType : false,
-													success : function() {
-
-														delay_till_last(
-																'id',
-																function() {
-																	$(
-																			'#updateConfirm')
-																			.text(
-																					"變更已儲存至草稿");
-																	$(
-																			"#updateConfirm")
-																			.fadeIn(
-																					1200);
-																	$(
-																			"#updateConfirm")
-																			.fadeOut(
-																					1500);
-																}, 1000);
-
-													}
-
-												});
-									});
-				}
-			});
-</script>
 <script src="<%=request.getContextPath()%>/_PJC/js/upload1.js"></script>
 
 
@@ -176,7 +124,7 @@
 													<i class="glyphicon glyphicon-list"></i>
 												</div>
 												<div class="update-text">
-													<strong>步驟一4444、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
+													<strong>步驟一、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
 												</div>
 											</div>
 										</div>
@@ -356,7 +304,7 @@
 												學生會需要用到的工具（含種類、版本細節）</div>
 											<div class="[ form-group ][ form-group-textarea ]">
 												<textarea name="preTool" placeholder="請輸入課程中，可能會使用到的工具"
-													class="form-control" data-toggle="floatLabel"
+													data-toggle="floatLabel" class="form-control"
 													data-value="no-js" style="font-size: 18px"
 													form="TotalContent">${CoursedData.preTool}</textarea>
 												<label for="customStyle" style="">(例：Photoshop CC
@@ -543,12 +491,11 @@
 											</div>
 											<div class="[ form-group ][ form-group-textarea ]"
 												id="get-data-form">
-												<textarea class="tinymce form-control" id="texteditor"
-													placeholder="請輸入課程中，可能會使用到的工具" class="form-control"
+												<textarea class="tinymce" id="texteditor"	
 													data-toggle="floatLabel" data-value="no-js"
 													style="font-size: 18px" form="TotalContent">${CoursedData.courseContent}</textarea>
-												<input type="hidden" value="" id="courseContent"
-													name="courseContent">
+												<input name="image" type="file" id="upload" class="hidden" onchange="">
+												<input name="courseContent" type="hidden" value="" id="courseContent">
 											</div>
 										</div>
 									</div>
@@ -1410,6 +1357,72 @@ $('#targetStudentNumber,#soldPrice').keyup(function(){
 		})
 	})
 	//===============================================
+		
+	$(document).ready(function() {
+			  tinymce.init({
+			    selector: "#texteditor",
+			    language_url:'<%=request.getContextPath()%>/_PJC/tinymce/js/tinymce/langs/zh_TW.js',
+			    height : "500px",
+			    theme: "modern",
+			    paste_data_images: true,
+			    plugins: [
+			      "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+			      "searchreplace wordcount visualblocks visualchars code fullscreen",
+			      "insertdatetime media nonbreaking save table contextmenu directionality",
+			      "emoticons template paste textcolor colorpicker textpattern"
+			    ],
+			    toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+			    toolbar2: "print preview media | forecolor backcolor emoticons",
+			    image_advtab: true,
+			    file_picker_callback: function(callback, value, meta) {
+			      if (meta.filetype == 'image') {
+			        $('#upload').trigger('click');
+			        $('#upload').on('change', function() {
+			          var file = this.files[0];
+			          var reader = new FileReader();
+			          reader.onload = function(e) {
+			            callback(e.target.result, {
+			              alt: ''
+			            });
+			          };
+			          reader.readAsDataURL(file);
+			        });
+			      }
+			    },
+			    templates: [{
+			      title: 'Test template 1',
+			      content: 'Test 1'
+			    }, {
+			      title: 'Test template 2',
+			      content: 'Test 2'
+			    }],
+			    setup : function(ed) {
+					ed.on('keyup',function(e) {
+										//console.log(ed.getContent());
+										$("#courseContent").val(ed.getContent());
+										var formData = new FormData($('form')[3]);
+										console.log("從文字編輯器欄位送資料到資料庫囉!");
+										$.ajax({
+												type : 'POST',
+												url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
+												data : formData,
+												processData : false,
+												contentType : false,
+												success : function() {delay_till_last('id',
+																function() {
+																	$('#updateConfirm').text("變更已儲存至草稿");
+																	$("#updateConfirm").fadeIn(1200);
+																	$("#updateConfirm").fadeOut(1500);
+																}, 1000);
+													}
+
+												});
+									});
+				}
+			  });
+		
+		
+		});
 	</script>
 
 
