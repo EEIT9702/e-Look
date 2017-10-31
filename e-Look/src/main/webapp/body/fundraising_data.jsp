@@ -50,7 +50,7 @@
 						
 					%>
 <%-- 					<p class="fundend" style="font-size:18px;float:right;">募資截止日：<fmt:formatDate value="${fundCourse.fundEndDate}" type="date"/></p> --%>
-					<p class="fundend" style="font-size:18px;float:right;">${fundCourse.fundEndDate}</p>
+					<p class="fundend" style="font-size:18px;float:right;" alt="${fundCourse.fundEndDate}"></p>
 				</div>
 				<div class="progress" style="clear:both;">
 					<div class="progress-bar progress-bar-warning progress-bar-striped active" 
@@ -83,13 +83,16 @@
 			console.log($(this).val());
 			$(this).attr('style','width:'+$(this).text());
 		})	
-		var endVal = $('.fundend').val();
+		//var endVal = $('.fundend').val();
+		var endVal = $('.fundend').attr("alt");
 		$('.fundend').each(function(){
-			//console.log($(this).val());
-			var ed = new Date($(this).text());
+			console.log($(this).attr("alt"));
+			var ed = new Date($(this).attr("alt"));
 			var now = new Date();
 			var time = ed.getTime() - now.getTime();
-			var ntime = parseInt(time/1000/60/60/24);
+			time /= 1000;
+			var ntime = time / (24*60*60);
+			ntime = Math.floor(ntime);
 			console.log(ntime);
 			$(this).text("倒數" + ntime + "天")
 		})	
