@@ -8,7 +8,7 @@
 	String ccName = request.getParameter("courseClass");
 	CourseClassDetailsDAO ccddao = new CourseClassDetailsDAO();
 	CourseDAO cdao = new CourseDAO();
-	if(ccName != null) {
+	if(ccName.length() != 0) {
 		Integer ccID = Integer.parseInt(ccName);
 		
 		CourseClassDetailsService ccdServ = new CourseClassDetailsService();
