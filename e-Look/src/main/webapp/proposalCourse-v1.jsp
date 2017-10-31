@@ -595,17 +595,20 @@ font-size: 18px; color: white;
 			</div>
 		</div>
 	</div>
+	<input type="hidden" value="${courseVO.fundEndDate}" id="fundEndDate">
 <c:remove var="err" scope="session" />
 	<c:remove var="loginerr" scope="session" />
 	<jsp:include page="/footer.jsp" />
 </body>
 <script>
+var fundEndDate=$('#fundEndDate').val().replace("-",":");
+var fundEndDate1=fundEndDate.replace("-",":");
 	$('.led3').ClassyLED({
 		type : 'countdown',
 		format : 'ddd:hh:mm:ss',
-		countTo : '2017:11:17',
+		countTo : fundEndDate1,
 		color : '#af0',
-		backgroundColor : '	#272727',
+		backgroundColor : '#272727',
 		size : 4,
 		fontType : 2,
 	});

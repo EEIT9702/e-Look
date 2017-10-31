@@ -242,6 +242,7 @@ h5 {
 #body{background-color: #FAEBD7;}
 </style>
 <script type="text/javascript">
+/*
 //為文件的滑鼠按下事件定義回呼
 document.onmousedown = function(event) {
 	//滑鼠事件：0 > 沒按鍵, 1 > 按左鍵, 2 > 按右鍵, 3 > 按左鍵&右鍵
@@ -251,6 +252,7 @@ document.onmousedown = function(event) {
 		alert("禁用滑鼠右鍵!");
 	}
 }
+*/
 
 /*展示廣告圖片*/
 function showAdPic() {
