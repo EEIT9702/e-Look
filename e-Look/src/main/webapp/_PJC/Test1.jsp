@@ -4,6 +4,7 @@
 <html>
 <head>
 		<title>TinyMCE - Setup5</title>
+		<LINK REL="SHORTCUT ICON" HREF="http://www.mydomain.com/myicon.ico">
 	</head>
 	<body>
 		<form id="get-data-form" method="post">
@@ -11,7 +12,7 @@
 
 			<textarea class="tinymce" id="texteditor"></textarea>						
 
-			<input type="hidden" value="" id="courseContent">
+			<input name="image" type="file" id="upload" class="hidden" onchange="">
 		</form>
 
 
@@ -25,48 +26,6 @@
 		<script src="<%=request.getContextPath()%>/_PJC/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
 		<script src="<%=request.getContextPath()%>/_PJC/tinymce/js/tinymce/tinymce.js"></script>		
 		<script>
-// 		tinymce.init({ selector:'#texteditor',
-<%-- 			language_url:'<%=request.getContextPath()%>/_PJC/tinymce/js/tinymce/langs/zh_TW.js', --%>
-// 			plugins: [
-// 			  		"advlist autolink link image lists charmap print preview hr anchor pagebreak",
-// 			  		"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-// 			  		"save table contextmenu directionality emoticons template paste textcolor image"
-// 			  	],
-// 			  	file_picker_callback: function(callback, value, meta) {
-// 			  	    // Provide file and text for the link dialog
-// 			  	    if (meta.filetype == 'file') {
-// 			  	      callback('mypage.html', {text: 'My text'});
-// 			  	    }
-
-// 			  	    // Provide image and alt text for the image dialog
-// 			  	    if (meta.filetype == 'image') {
-// 			  	      callback('myimage.jpg', {alt: 'My alt text'});
-// 			  	    }
-
-// 			  	    // Provide alternative source and posted for the media dialog
-// 			  	    if (meta.filetype == 'media') {
-// 			  	      callback('movie.mp4', {source2: 'alt.ogg', poster: 'image.jpg'});
-// 			  	    }
-// 			  	  },
-// 			  	/* toolbar */
-// 			  	toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons | image",			
-// 			  	menubar: "insert",
-// 			  	image_caption: true,
-// 			  	image_list: [
-// 			  	    {title: 'My image 1', value: 'https://www.tinymce.com/my1.gif'},
-// 			  	    {title: 'My image 2', value: 'http://www.moxiecode.com/my2.gif'}
-// 			  	  ],
-			  	
-// 			  	setup: function(ed) {
-// 			    ed.on('keyup', function(e) {
-// 			        console.log(ed.getContent());
-// 			        $("#courseContent").val(ed.getContent());
-// 			    });
-// 			}
-// 			  	  });
-
-		
-				
 		$(document).ready(function() {
 			  tinymce.init({
 			    selector: "#texteditor",

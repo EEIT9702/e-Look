@@ -40,6 +40,10 @@
     <filter-name>OnlineCourseFilter</filter-name>
     <url-pattern>/freeCourse-v1.jsp</url-pattern>
   </filter-mapping>
+   <filter-mapping>
+    <filter-name>OnlineCourseFilter</filter-name>
+    <url-pattern>/proposalCourse-v1.jsp</url-pattern>
+  </filter-mapping>
   <filter-mapping>
     <filter-name>CheckOutFilter</filter-name>
     <url-pattern>/settled.jsp</url-pattern>
