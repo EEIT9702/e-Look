@@ -24,20 +24,20 @@ public class countScoreController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		Integer memberID= Integer.parseInt(request.getParameter("memberID"));
-		System.out.println(memberID);
+//		System.out.println(memberID);
 		
 		BuyCourseService buyCourseService = new BuyCourseService();
 		List<BuyCourseVO> buyList=buyCourseService.findCourseID(memberID);
 		String scoreValue = JSONValue.toJSONString(buyList);
 		PrintWriter out =response.getWriter();
-		System.out.println(scoreValue);
+//		System.out.println(scoreValue);
 		out.print(scoreValue);
 		out.close();
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		Integer courseID= Integer.parseInt(request.getParameter("courseID"));
-		System.out.println(courseID);
+//		System.out.println(courseID);
 		
 		
 		
@@ -52,7 +52,7 @@ public class countScoreController extends HttpServlet {
 		String Score=Score1.toString();
 		String scoreValue = JSONValue.toJSONString(Score);
 		
-		System.out.println(scoreValue);
+//		System.out.println(scoreValue);
 		PrintWriter out =response.getWriter();
 		
 		out.print(scoreValue);

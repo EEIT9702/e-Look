@@ -190,7 +190,7 @@ a:HOVER {
 	<div class="container">
 		<div class="row" style="padding-left: 40px">
 			<!--for each  -->
-			<c:forEach var='listcourse' items='${course.allonlineCourse}'>
+			<c:forEach var='listcourse' items='${course.allonlineCourse}' begin="1" end="8">
 				<c:if test="${listcourse.soldPrice>0}">
 					<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course"
 						style="width: 341px">

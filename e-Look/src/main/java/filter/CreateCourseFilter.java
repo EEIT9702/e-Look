@@ -36,7 +36,7 @@ public class CreateCourseFilter implements Filter {
 		if (req instanceof HttpServletRequest && resp instanceof HttpServletResponse) {
 			HttpServletRequest request = (HttpServletRequest) req;
 			HttpServletResponse response = (HttpServletResponse) resp;
-			System.out.println(request.getHeader("referer"));
+//			System.out.println(request.getHeader("referer"));
 			// 判斷有從會員中心送來的請求
 			if (request.getParameter("CourseID") == null) {
 				// 判斷"向"哪一個網頁發出請求，當.indexOf()的值不等於-1時，表示對CreateCourse.jsp發出請求
