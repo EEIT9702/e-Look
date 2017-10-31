@@ -8,5 +8,6 @@ public interface BuyCourseDAO_interface {
      public void delete(BuyCourseVO buyCourseVO);
      public Double getAvgScore(Integer courseID);
      public List<BuyCourseVO> findByMemberID(Integer memberID);
+     public List<BuyCourseVO> getByCourseID(Integer courseID);
      public List<BuyCourseVO> getAll();
 }
