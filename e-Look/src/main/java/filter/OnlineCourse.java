@@ -83,6 +83,38 @@ public class OnlineCourse implements Filter {
 					request.setAttribute("memberVo", memberVo);
 					request.setAttribute("memberSubscription", memberSubscriptionVO);
 					chain.doFilter(request, response);
+				}else if(courseVO.getStatus() == 3){
+					MemberService service = new MemberService();
+					MemberVO memberVo = service.getMember(courseVO.getMemberID());
+					List<CourseVO> list = courseService.getAllCourseData(courseVO.getMemberID(), 2);
+					HttpSession session = request.getSession();
+					MemberVO memberVoOK = (MemberVO) session.getAttribute("LoginOK");
+					BuyCourseService CourseService = new BuyCourseService();
+					List<BuyCourseVO> list2 = null;
+					List<MemberBookmarksVO> mBookmarkList = null;
+					List<MemberSubscriptionVO> memberSubscriptionVO = null;
+					MemberBookmarksService memberBookmarksService = new MemberBookmarksService();
+
+					MemberSubscriptionService memberSubscriptionService =new MemberSubscriptionService();
+
+					if (memberVoOK != null) {
+
+						list2 = CourseService.getBuyCourse(memberVoOK.getMemberID());
+						mBookmarkList = memberBookmarksService.findPrimaryMemberBookmarks(memberVoOK.getMemberID());
+						memberSubscriptionVO=memberSubscriptionService.findPrimaryMemberBookmarks(memberVoOK.getMemberID());
+					}
+
+					if (mBookmarkList != null) {
+						request.setAttribute("mBookmarkList", mBookmarkList);
+
+					}
+					request.setAttribute("list", list);
+					request.setAttribute("list2", list2);
+					request.setAttribute("courseVO", courseVO);
+					request.setAttribute("memberVo", memberVo);
+					request.setAttribute("memberSubscription", memberSubscriptionVO);
+					chain.doFilter(request, response);
+					
 				}else{
 					response.sendRedirect(request.getContextPath()+"/HOME.jsp");
 				}
