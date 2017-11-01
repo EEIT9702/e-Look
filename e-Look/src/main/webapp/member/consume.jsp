@@ -183,11 +183,11 @@ span.cancelado {
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 bhoechie-tab-container">
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 bhoechie-tab-menu">
               <div class="list-group">
-                <a href="#" class="list-group-item active text-center">
-                  <h4 class="glyphicon glyphicon-shopping-cart"></h4><br/>消費記錄
+                <a href="#" class="list-group-item active text-center" style="font-size: 20px">
+                  <h4 class="glyphicon glyphicon-shopping-cart" style="font-size: 20px"></h4><br/>消費記錄
                 </a>
-                <a href="#" class="list-group-item text-center">
-                  <h4 class="glyphicon glyphicon-usd"></h4><br/>課程收益
+                <a href="#" class="list-group-item text-center" style="font-size: 20px">
+                  <h4 class="glyphicon glyphicon-usd" style="font-size: 20px"></h4><br/>課程收益
                 </a>
               </div>
             </div>

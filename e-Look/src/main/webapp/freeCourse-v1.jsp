@@ -197,7 +197,7 @@ a{text-decoration:none}
 </style>
 </head>
 <!-- 影片區 -->
-<body oncontextmenu="window.event.returnValue=false">
+<body oncontextmenu="window.event.returnValue=false" style="margin-top:20px"> 
 	<jsp:include page="/login.jsp" flush="true" />
 	<div class="container-fluid">
 		<div class="container">
@@ -209,11 +209,26 @@ a{text-decoration:none}
 					<div class="col-md-12">
 						<div class="col-md-8 col-xs-12" style="margin-right: -15px">
 
-							<video controls="controls" id="vidoeControl">
+							<video controls="controls" id="vidoeControl" >
 								<source
 									src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}"
 									type="video/mp4">
 							</video>
+							<script>
+						 	var b=true;
+						 		$('video').click(function(){
+						 			if(b){
+									this.play();
+									b=false;
+						 			}else{
+						 				this.pause();
+										b=true;
+						 			}
+								})
+						 		
+				
+								
+							</script>
 						</div>
 						<div class="col-md-4 col-xs-12" id="videoDivListStyle">
 							<div>
@@ -433,7 +448,7 @@ a{text-decoration:none}
 					
 					<!--贊助 -->
 					<button type="button" class="btn btn-primary center-block "
-						style="width: 160px" data-toggle="modal" data-target="#mysponer">贊助</button>
+						style="width: 160px;font-size:22px" data-toggle="modal" data-target="#mysponer">贊助</button>
 					<div class="modal fade" id="mysponer" tabindex="-1" role="dialog"
 						aria-labelledby="myModalLabel" aria-hidden="true">
 

@@ -233,7 +233,7 @@ font-size: 18px;
 										id="dropdownMenu1" data-toggle="dropdown"><img
 											src="<%=request.getContextPath() %>/Image?MemberID=${LoginOK.memberID}"
 											height="40" class="" /><span class="caret"></span></a>
-										<ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="font-size: 18px;">
+										<ul class="nav dropdown-menu" aria-labelledby="dropdownMenu1" style="font-size: 18px;">
 											<li class="text-center"><a
 												href="<%=request.getContextPath()%>/member/member.jsp"><img
 													align="left"
