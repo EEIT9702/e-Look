@@ -214,21 +214,7 @@ a{text-decoration:none}
 									src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}"
 									type="video/mp4">
 							</video>
-							<script>
-						 	var b=true;
-						 		$('video').click(function(){
-						 			if(b){
-									this.play();
-									b=false;
-						 			}else{
-						 				this.pause();
-										b=true;
-						 			}
-								})
-						 		
-				
-								
-							</script>
+						
 						</div>
 						<div class="col-md-4 col-xs-12" id="videoDivListStyle">
 							<div>
@@ -1133,5 +1119,17 @@ a{text-decoration:none}
 			});
 		});
 	</script>
+		<script>
+		var b=true;
+ 		$('video').click(function(){
+ 			if(b){
+			this.play();
+			b=false;
+ 			}else{
+ 				this.pause();
+				b=true;
+ 			}
+		})
+		</script>
 </body>
 </html>
