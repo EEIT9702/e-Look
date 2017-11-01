@@ -382,7 +382,8 @@ GO
 CREATE TABLE [dbo].[Sponsor](
 	[courseID] [int] NOT NULL,
 	[SponsorName] [varchar](50) NULL,
-	[money] [int] NOT NULL
+	[money] [int] NOT NULL,
+	[dateSponsor] [date] NOT NULL
 ) ON [PRIMARY]
 
 GO
