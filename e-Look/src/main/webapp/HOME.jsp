@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE>
 <link href="<%=request.getContextPath()%>/css/bootstrap-3.3.7-dist/css/bootstrap.css"
 	rel="stylesheet">
@@ -216,7 +217,7 @@ a:HOVER {
 					</div>
 					<div class="card-footer">
 						
-						<small>課程時間:${listcourse.courseLength}分鐘</small> <br> <small>購買人數:zzz人</small>
+						<small>課程時間:${listcourse.courseLength}分鐘</small> <br> <small  class="number" alt="${listcourse.courseID}" >購買人數:zzz人</small>
 					</div>
 
 				</div>
@@ -252,7 +253,7 @@ a:HOVER {
 		</div>
 		<div class="card-footer">
 			
-			<small>課程時間:${listcourse.courseLength}分鐘</small> <br> <small>購買人數:zzz人</small>
+			<small>課程時間:${listcourse.courseLength}分鐘</small> <br> <small class="number" alt="${listcourse.courseID}">購買人數:zzz人</small>
 		</div>
 	</div>
 	</div>
@@ -262,6 +263,10 @@ a:HOVER {
 
 	</div>
 	</div>
+	
+	
+	<jsp:useBean id="fundcourse" scope="page" class="com.e_Look.Course.CourseDAO" />
+	
 	<div class="container">
 		<div class="row">
 
@@ -272,7 +277,7 @@ a:HOVER {
 				<div class="col-md-6">
 					<div class="text-right" style="margin-top: 10px">
 						<a class="btu"
-							href="<%=request.getContextPath()%>/progressUpload.jsp">>>更多課程</a>
+							href="<%=request.getContextPath()%>/fundraisingCourse.jsp">>>更多課程</a>
 					</div>
 				</div>
 			</div>
@@ -282,113 +287,115 @@ a:HOVER {
 	<div class="container">
 		<div class="row" style="padding-left: 40px">
 			<!-- 	1 -->
+			<c:forEach var='fundCourse' items='${fundcourse.allFundRaiseCourse}' begin="0" end="7">
 			<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course"
 				style="width: 341px">
 				<div class="card card-inverse" style="background-color: white;">
-					<img class="card-img-top"
-						src="<%=request.getContextPath()%>/img/請上傳課程封面.png" alt="course"
-						id="wizardPicturePreview" title="">
-					<div class="card-block">
-						<figure class="profile">
-							<img src="<%=request.getContextPath()%>/img/eLook_LOGO1.png"
-								class="profile-avatar" alt="">
-						</figure>
-						<div class="card-text">
-							<p id="title" class="card-title mt-3 multi_ellipsis">這裡請輸入課程標題</p>
-						</div>
-						<div>
-							<p style="margin-top: 40px; font-size: 18px">課程售價：xxx元</p>
-						</div>
-					</div>
-					<div class="card-footer">
-						<button class="btn-info btn-sm pull-right"
-							style="margin-bottom: 5px; margin-top: 10px">加入書籤</button>
-						<small>課程時間:yyy分鐘</small> <br> <small>購買人數:zzz人</small>
+								<a style="text-decoration: none; color: black"; href="<%=request.getContextPath() %>/proposalCourse-v1.jsp?CourseID=${fundCourse.courseID}">
+				<img class="card-img-top img-rounded center-block" src="<%=request.getContextPath() %>/CourseImage?CourseID=${fundCourse.courseID}" alt="course" id="wizardPicturePreview" title="" style="width:98%">
+			</a>
+			<div class="card-block">
+				<figure class="profile">
+					<img src="<%=request.getContextPath() %>/Image?MemberID=${fundCourse.memberID}" class="profile-avatar" alt="">
+				</figure>
+				<div class="card-text">
+					<a style="text-decoration: none; color: black"; href="<%=request.getContextPath() %>/proposalCourse-v1.jsp?CourseID=${fundCourse.courseID}">
+						<p id="title" class="card-title mt-3 multi_ellipsis">${fundCourse.courseName}</p>
+					</a>
+				</div>
+				<div style="margin-top:40px;">
+					<p style="font-size:18px;float:left;">預購價：
+						<fmt:setLocale value="zh-TW" />
+						<fmt:formatNumber value="${fundCourse.soldPrice}" type="currency"/>
+					</p>
+<%-- 					<p class="fundend" style="font-size:18px;float:right;">募資截止日：<fmt:formatDate value="${fundCourse.fundEndDate}" type="date"/></p> --%>
+					<p class="fundend" style="font-size:18px;float:right;" alt="${fundCourse.fundEndDate}"></p>
+				</div>
+				<div class="progress" style="clear:both;">
+					<div class="progress-bar progress-bar-warning progress-bar-striped active" 
+					role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" 
+					style="width:100%" alt="${fundCourse.targetStudentNumber}" data="${fundCourse.courseID}">
+					<p style="display:none"></p>
+					
 					</div>
 				</div>
-			</div>
-			<!-- 2 -->
-			<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course"
-				style="width: 341px">
-				<div class="card card-inverse" style="background-color: white;">
-					<img class="card-img-top"
-						src="<%=request.getContextPath()%>/img/請上傳課程封面.png" alt="course"
-						id="wizardPicturePreview" title="">
-					<div class="card-block">
-						<figure class="profile">
-							<img src="<%=request.getContextPath()%>/img/eLook_LOGO1.png"
-								class="profile-avatar" alt="">
-						</figure>
-						<div class="card-text">
-							<p id="title" class="card-title mt-3 multi_ellipsis">這裡請輸入課程標題</p>
-						</div>
-						<div>
-							<p style="margin-top: 40px; font-size: 18px">課程售價：xxx元</p>
-						</div>
-					</div>
-					<div class="card-footer">
-						<button class="btn-info btn-sm pull-right"
-							style="margin-bottom: 5px; margin-top: 10px">加入書籤</button>
-						<small>課程時間:yyy分鐘</small> <br> <small>購買人數:zzz人</small>
-					</div>
+				<div>
+					<p style="font-size:18px;text-align:center;clear:both;padding-top:8px;" class="fund" alt="${fundCourse.targetStudentNumber}" data="${fundCourse.courseID}" >已募資1/${fundCourse.targetStudentNumber}人</p>
 				</div>
 			</div>
-			<!-- 			3 -->
-			<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course"
-				style="width: 341px">
-				<div class="card card-inverse" style="background-color: white;">
-					<img class="card-img-top"
-						src="<%=request.getContextPath()%>/img/請上傳課程封面.png" alt="course"
-						id="wizardPicturePreview" title="">
-					<div class="card-block">
-						<figure class="profile">
-							<img src="<%=request.getContextPath()%>/img/eLook_LOGO1.png"
-								class="profile-avatar" alt="">
-						</figure>
-						<div class="card-text">
-							<p id="title" class="card-title mt-3 multi_ellipsis">這裡請輸入課程標題</p>
-						</div>
-						<div>
-							<p style="margin-top: 40px; font-size: 18px">課程售價：xxx元</p>
-						</div>
-					</div>
-					<div class="card-footer">
-						<button class="btn-info btn-sm pull-right"
-							style="margin-bottom: 5px; margin-top: 10px">加入書籤</button>
-						<small>課程時間:yyy分鐘</small> <br> <small>購買人數:zzz人</small>
-					</div>
 				</div>
 			</div>
-			<!-- 4 -->
-			<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course"
-				style="width: 341px">
-				<div class="card card-inverse" style="background-color: white;">
-					<img class="card-img-top"
-						src="<%=request.getContextPath()%>/img/請上傳課程封面.png" alt="course"
-						id="wizardPicturePreview" title="">
-					<div class="card-block">
-						<figure class="profile">
-							<img src="<%=request.getContextPath()%>/img/eLook_LOGO1.png"
-								class="profile-avatar" alt="">
-						</figure>
-						<div class="card-text">
-							<p id="title" class="card-title mt-3 multi_ellipsis">這裡請輸入課程標題</p>
-						</div>
-						<div>
-							<p style="margin-top: 40px; font-size: 18px">課程售價：xxx元</p>
-						</div>
-					</div>
-					<div class="card-footer">
-						<button class="btn-info btn-sm pull-right"
-							style="margin-bottom: 5px; margin-top: 10px">加入書籤</button>
-						<small>課程時間:yyy分鐘</small> <br> <small>購買人數:zzz人</small>
-					</div>
-				</div>
-			</div>
+			</c:forEach>
+
 		</div>
 	</div>
 	<c:remove var="err" scope="session" />
 	<c:remove var="loginerr" scope="session" />
 	<jsp:include page="/footer.jsp" />
+	<script>
+	$(function(){
+		
+		
+		
+		$('.progress-bar').each(function(){
+			var i=$(this);
+			$.getJSON('/e-Look/GetBuyCourseNumber',{'courseID':$(this).attr("data")},function(datas){
+				//console.log($(this).html())
+				count=(datas.length/i.attr("alt"))*100
+				//console.log(i.children("p").html())
+				//console.log(count)
+ 				i.children("p").html(parseInt(count)+"%")
+ 				//console.log(i.children("p").html())
+ 				
+ 				var pbVal = $('.progress-bar').text();
+				//var endVal = $($('.fundend')[1]).val();
+				$('.progress-bar').removeAttr('style');
+				$('.progress-bar').each(function(){
+					//console.log($(this).text());
+					console.log($(this).val());
+					$(this).attr('style','width:'+$(this).text());
+				})	
+			})
+		})
+		//console.log($('.progress-bar').text());
+		
+		//var endVal = $('.fundend').val();
+		var endVal = $('.fundend').attr("alt");
+		$('.fundend').each(function(){
+			console.log($(this).attr("alt"));
+			var ed = new Date($(this).attr("alt"));
+			var now = new Date();
+			var time = ed.getTime() - now.getTime();
+			time /= 1000;
+			var ntime = time / (24*60*60);
+			ntime = Math.floor(ntime);
+			console.log(ntime);
+			$(this).text("倒數" + ntime + "天")
+		})
+		
+		$('.number').each(function(){
+		var i=$(this);
+			
+			$.getJSON('/e-Look/GetBuyCourseNumber',{'courseID':$(this).attr("alt")},function(datas){
+				//console.log($(this).html())
+				i.html("購買人數:"+datas.length+"人")
+			})
+
+		})
+		
+		$('.fund').each(function(){
+			var i=$(this);
+			$.getJSON('/e-Look/GetBuyCourseNumber',{'courseID':$(this).attr("data")},function(datas){
+				//console.log($(this).html())
+				i.html("已募資"+datas.length+"/"+i.attr("alt")+"人")
+			})
+
+		})
+		
+			
+
+	
+	})
+</script>
 </body>
 </html>
