@@ -48,7 +48,7 @@ if(ccName.length() != 0){
 	<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width:341px;margin-bottom:20px;">
 		<div class="card card-inverse" style="background-color: white;">
 			<a style="text-decoration: none; color: black"; href="<%=request.getContextPath() %>/freeCourse-v1.jsp?CourseID=${freeCourse.courseVO.courseID}">
-				<img class="card-img-top" src="<%=request.getContextPath() %>/CourseImage?CourseID=${freeCourse.courseVO.courseID}" alt="course" id="wizardPicturePreview" title="">
+				<img class="card-img-top img-rounded center-block" src="<%=request.getContextPath() %>/CourseImage?CourseID=${freeCourse.courseVO.courseID}" alt="course" id="wizardPicturePreview" title="" style="width:98%">
 			</a>
 			<div class="card-block">
 				<figure class="profile">
@@ -77,7 +77,7 @@ if(ccName.length() != 0){
 	<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width:341px;margin-bottom:20px;">
 		<div class="card card-inverse" style="background-color: white;">
 			<a style="text-decoration: none; color: black"; href="<%=request.getContextPath() %>/freeCourse-v1.jsp?CourseID=${courseVO.courseID}">
-				<img class="card-img-top" src="<%=request.getContextPath() %>/CourseImage?CourseID=${courseVO.courseID}" alt="course" id="wizardPicturePreview" title="">
+				<img class="card-img-top img-rounded center-block" src="<%=request.getContextPath() %>/CourseImage?CourseID=${courseVO.courseID}" alt="course" id="wizardPicturePreview" title="" style="width:98%">
 			</a>
 			<div class="card-block">
 				<figure class="profile">
