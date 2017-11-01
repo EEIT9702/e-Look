@@ -173,9 +173,12 @@ font-size: 18px;
 
 							<li style="padding-top:12px" class="tt"><a
 								href="<%=request.getContextPath()%>/CreateCourseCotroller"><img
-
 									src="<%=request.getContextPath()%>/HeaderCssJs/001-book.png"
 									height="28">我要開課</a></li>
+							<li style="padding-top:12px" class="tt"><a
+								href="<%=request.getContextPath()%>/backstage/backHome1.jsp"><img
+									src="<%=request.getContextPath()%>/_Lyy/175x175bb.jpg"
+									height="28">暗黑破壞神</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<c:choose>
@@ -233,7 +236,7 @@ font-size: 18px;
 										id="dropdownMenu1" data-toggle="dropdown"><img
 											src="<%=request.getContextPath() %>/Image?MemberID=${LoginOK.memberID}"
 											height="40" class="" /><span class="caret"></span></a>
-										<ul class="nav dropdown-menu" aria-labelledby="dropdownMenu1" style="font-size: 18px;">
+										<ul class="nav dropdown-menu" aria-labelledby="dropdownMenu1" style="font-size: 18px;border-radius:5px">
 											<li class="text-center"><a
 												href="<%=request.getContextPath()%>/member/member.jsp"><img
 													align="left"
@@ -356,6 +359,7 @@ $(function(){
 	$(function(){
 		$('#intoShoppingCart').on('click',function(){
 			if($("#mbcourseID").val()>1){
+			console.log("cart!!!")
 					$.post('<%= request.getContextPath()%>/InsertShoppingCart',{
 						'memberID':$("#mbmemberID").val(),
 						'courseID':$("#mbcourseID").val()

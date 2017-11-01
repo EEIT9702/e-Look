@@ -152,6 +152,7 @@ a:HOVER {
 #div1 {
 	width: 100%;
 }
+s
 #body{background-color: #FAEBD7;}
 </style>
 <head>
@@ -217,7 +218,7 @@ a:HOVER {
 					</div>
 					<div class="card-footer">
 						
-						<small>課程時間:${listcourse.courseLength}分鐘</small> <br> <small  class="number" alt="${listcourse.courseID}" >購買人數:zzz人</small>
+						<small style="font-size: 18px;">課程時間:${listcourse.courseLength}分鐘</small> <br> <small style="font-size: 18px;"  class="number" alt="${listcourse.courseID}" >購買人數:zzz人</small>
 					</div>
 
 				</div>
@@ -253,7 +254,7 @@ a:HOVER {
 		</div>
 		<div class="card-footer">
 			
-			<small>課程時間:${listcourse.courseLength}分鐘</small> <br> <small class="number" alt="${listcourse.courseID}">購買人數:zzz人</small>
+			<small style="font-size: 18px;" >課程時間:${listcourse.courseLength}分鐘</small> <br> <small style="font-size: 18px;" class="number" alt="${listcourse.courseID}">購買人數:zzz人</small>
 		</div>
 	</div>
 	</div>

@@ -37,6 +37,9 @@ if(ccName.length() != 0){
 	text-decoration: none;
 	color: black;
 }
+small, .small {
+    font-size: 15px;
+}
 </style>
 
 <jsp:useBean id="course" scope="page" class="com.e_Look.Course.CourseDAO"/>
@@ -64,9 +67,9 @@ if(ccName.length() != 0){
 				</div>
 			</div>
 			<div class="card-footer">
-				<small>課程時間:${freeCourse.courseVO.courseLength}分鐘</small>
+				<small style="font-size: 18px;">課程時間:${freeCourse.courseVO.courseLength}分鐘</small>
 				<br>
-				<small>購買人數:xxx人</small>
+				<small style="font-size: 18px;" class="number" alt="${freeCourse.courseVO.courseID}">購買人數:xxx人</small>
 			</div>
 		</div>
 	</div>
@@ -93,9 +96,9 @@ if(ccName.length() != 0){
 				</div>
 			</div>
 			<div class="card-footer">
-				<small>課程時間:${courseVO.courseLength}分鐘</small>
+				<small style="font-size: 18px;">課程時間:${courseVO.courseLength}分鐘</small>
 				<br>
-				<small class="number" alt="${courseVO.courseID}">購買人數:xxx人</small>
+				<small style="font-size: 18px;" class="number" alt="${courseVO.courseID}">購買人數:xxx人</small>
 			</div>
 		</div>
 	</div>

@@ -219,35 +219,31 @@ video::-webkit-media-controls-panel {
 									</div>
 									<div class="col-md-6">
 										<div class="text-left" style="font-size: 22px">募資價格</div>
-										<fmt:formatNumber type="number"
-											value="${courseVO.soldPrice*0.7}" maxFractionDigits="0"
-											var="num" />
-										<div class="text-right" style="font-size: 22px">${num}</div>
+										<div class="text-right" style="font-size: 22px"id="price"></div>
 									</div>
 								</div>
 								<c:if test="${empty LoginOK}">
 									<c:choose>
 										<c:when test="${!empty loginerr}">
 											<button type="button" class="btn-warning btn-lg"
-												data-toggle="modal" data-target="#myModal"
+												data-toggle="modal" data-target="#myModal" id="intoShoppingCart"
 												style="width: 100%; font-size: 22px; margin: 20px 0">我要加入募資</button>
-
 										</c:when>
 										<c:when test="${empty err}">
 											<button type="button" class="btn-warning btn-lg"
-												data-toggle="modal" data-target="#myModal"
+												data-toggle="modal" data-target="#myModal" id="intoShoppingCart"
 												style="width: 100%; font-size: 22px; margin: 20px 0">我要加入募資</button>
 
 
 										</c:when>
 										<c:otherwise>
 											<button type="button" class="btn-warning btn-lg"
-												data-toggle="modal" data-target="#myModal"
+												data-toggle="modal" data-target="#myModal" id="intoShoppingCart"
 												style="width: 100%; font-size: 22px; margin: 20px 0">我要加入募資</button>
 										</c:otherwise>
 									</c:choose>
 								</c:if>
-								<c:if test="${!empty LoginOK}">
+							<c:if test="${!empty LoginOK}">
 									<c:choose>
 										<c:when test="${LoginOK.memberID==courseVO.memberID}">
 											<button type="button" class="btn-warning btn-lg"
@@ -267,20 +263,18 @@ video::-webkit-media-controls-panel {
 													</c:when>
 													<c:when test="${!empty boo}"></c:when>
 													<c:when test="${varStatus.last && empty boo}">
-														<button type="button" class="btn-warning btn-lg"
+														<button type="button" class="btn-warning btn-lg" id="intoShoppingCart"
 															style="width: 100%; font-size: 22px; margin: 20px 0">我要加入募資</button>
 													</c:when>
 												</c:choose>
 											</c:forEach>
 										</c:when>
 										<c:otherwise>
-											<button type="button" class="btn-warning btn-lg"
+											<button type="button" class="btn-warning btn-lg" id="intoShoppingCart"
 												style="width: 100%; font-size: 22px; margin: 20px 0">我要加入募資</button>
 										</c:otherwise>
 									</c:choose>
 								</c:if>
-								
-								
 							</div>
 						</div>
 					</div>
@@ -306,10 +300,11 @@ video::-webkit-media-controls-panel {
 								aria-controls="profile" role="tab" data-toggle="tab">課程討論</a></li>
 
 						</ul>
-						<!-- 課程簡介 -->
+				<!-- 課程簡介 -->
 						<div class="tab-content tabs">
 							<div role="tabpanel" class="tab-pane fade in active"
 								id="Section1" style="font-size: 20px">
+
 								<c:if test="${!empty courseVO.preTool}">
 									<strong>需要用到的工具（含種類、版本細節）</strong>
 									<p>${courseVO.preTool}</p>
@@ -334,12 +329,13 @@ video::-webkit-media-controls-panel {
 							<!-- 講師簡介 -->
 							<div role="tabpanel" class="tab-pane fade" id="Section2"
 								style="font-size: 20px">
-								<c:if test="${!empty memberVo.memberID}">
+						
+										<c:if test="${!empty memberVo.memberID}">
 									<div class="col-md-2 col-xs-3">
 										<figure>
 											<img
 												src="<%=request.getContextPath() %>/Image?MemberID=${memberVo.memberID}"
-												class="img-thumbnail center-block img-circle" />
+												class="img-thumbnail center-block img-circle"  />
 											<div style="text-align: center">${memberVo.mName}</div>
 										</figure>
 										<div>
@@ -366,14 +362,11 @@ video::-webkit-media-controls-panel {
 													</c:otherwise>
 												</c:choose>
 											</c:if>
-
 											<c:if test="${!empty LoginOK}">
-												<c:if test="${!empty memberSubscription}">
-													<c:forEach items="${memberSubscription}"
-														var="memberSubscription">
+												<c:if test="${!empty memberSubscription}">													
+													<c:forEach items="${memberSubscription}" var="memberSubscription">
 														<c:choose>
-															<c:when
-																test="${memberSubscription.memberTrackID==courseVO.memberID}">
+															<c:when	test="${memberSubscription.memberTrackID==courseVO.memberID}">
 																<c:set var="disabled" value="disabled" />
 																<c:set var="subName" value="已追蹤講師" />
 																<c:set var="sub1" value="ture" />
@@ -389,19 +382,16 @@ video::-webkit-media-controls-panel {
 												</c:if>
 												<c:if test="${empty memberSubscription}">
 													<c:set var="disabled" value="" />
-													<c:set var="subName" value="追蹤講師" />
+														<c:set var="subName" value="追蹤講師" />
 												</c:if>
 												<c:if test="${courseVO.memberID==LoginOK.memberID}">
 													<c:set var="disabled" value="disabled" />
 													<c:set var="subName" value="本人" />
 												</c:if>
-												<button type="button" class="btn btn-info" ${disabled}
-													style="width: 100%" id="subAction">${subName}</button>
-												<input type="hidden" id="coursevoMemeberID"
-													value="${courseVO.memberID}">
+												<button type="button" class="btn btn-info" ${disabled} style="width: 100%" id="subAction">${subName}</button>
+												<input type="hidden" id="coursevoMemeberID" value="${courseVO.memberID}">
 											</c:if>
-
-
+										
 										</div>
 									</div>
 								</c:if>
@@ -422,7 +412,7 @@ video::-webkit-media-controls-panel {
 									</c:if>
 								</div>
 							</div>
-							<!-- 留言板 -->
+						<!-- 留言板 -->
 							<div role="tabpanel" class="tab-pane fade" id="Section3">
 								<div class="col-md-12" id="messageHeader">
 									<div class="col-md-1">
@@ -430,7 +420,6 @@ video::-webkit-media-controls-panel {
 											class="img-thumbnail pull-left">
 									</div>
 									<div class="col-md-11">
-
 										<div>
 											<!--測試用messageID -->
 											<span id="testMessage1" value="1001" class="text-left">吳永志</span>
@@ -608,8 +597,6 @@ video::-webkit-media-controls-panel {
 												</div>
 											</div>
 										</div>
-
-
 										<!-- 			<!--回應輸入表格-->
 										<div class="col-md-12">
 											<div class="panel-group">
@@ -644,8 +631,9 @@ video::-webkit-media-controls-panel {
 			</div>
 		</div>
 	</div>
-	<input type="hidden" value="${courseVO.courseID}" id="sponsorCourseVO">
+	<input type="hidden" value="${courseVO.courseID}" id="mbcourseID">
 	<input type="hidden" value="${courseVO.fundEndDate}" id="fundEndDate">
+	<input type="hidden" value="${LoginOK.memberID}" id="mbmemberID">
 	<input type="hidden" value="${courseVO.targetStudentNumber}"
 		id="targetStudentNumber">
 	<c:remove var="err" scope="session" />
@@ -656,7 +644,7 @@ video::-webkit-media-controls-panel {
 <script>
 $(function(){
 		$.getJSON("/e-Look/BuyCourseNumber", {
-			'courseID' : $('#sponsorCourseVO').val()
+			'courseID' : $('#mbcourseID').val()
 		}, function(data) {
 			var buyStudentNumber = parseInt(data);
 			var targetStudentNumber = parseInt($('#targetStudentNumber').val())
@@ -689,5 +677,31 @@ $(function(){
 		});
 	});
 </script>
+<script>
+$(function(){
+	$.getJSON('/e-Look/GetBuyingPrice',{'courseID':$('#mbcourseID').val()},function(price){
+		$('#price').text(price)
+	})
+})
+</script>
+	<script>
+		var count = 0;
+		$('#subAction').click(function() {
+			if (count == 0) {
+				$.post("MemberSubcriptionInsert_DeleteController", {
+					'memberID' : $('#mbmemberID').val(),
+					'memberTrackID' : $('#coursevoMemeberID').val()
+				}, function() {
+					alert('已加到您的追蹤講師囉');
+					count++;
+				});
+				$('#subAction').attr('disabled', 'false')
+				$('#subAction').text('已追蹤講師')
+			} else {
+				alert('已經追蹤過囉');
+				$('#subAction').attr('disabled', 'false')
+			}
 
+		})
+	</script>
 </html>
