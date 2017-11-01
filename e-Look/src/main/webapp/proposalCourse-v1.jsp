@@ -229,20 +229,20 @@ video::-webkit-media-controls-panel {
 									<c:choose>
 										<c:when test="${!empty loginerr}">
 											<button type="button" class="btn-warning btn-lg"
-												data-toggle="modal" data-target="#myModal"
+												data-toggle="modal" data-target="#myModal" id="intoShoppingCart"
 												style="width: 100%; font-size: 22px; margin: 20px 0">我要加入募資</button>
 
 										</c:when>
 										<c:when test="${empty err}">
 											<button type="button" class="btn-warning btn-lg"
-												data-toggle="modal" data-target="#myModal"
+												data-toggle="modal" data-target="#myModal" id="intoShoppingCart"
 												style="width: 100%; font-size: 22px; margin: 20px 0">我要加入募資</button>
 
 
 										</c:when>
 										<c:otherwise>
 											<button type="button" class="btn-warning btn-lg"
-												data-toggle="modal" data-target="#myModal"
+												data-toggle="modal" data-target="#myModal" id="intoShoppingCart"
 												style="width: 100%; font-size: 22px; margin: 20px 0">我要加入募資</button>
 										</c:otherwise>
 									</c:choose>
@@ -267,14 +267,14 @@ video::-webkit-media-controls-panel {
 													</c:when>
 													<c:when test="${!empty boo}"></c:when>
 													<c:when test="${varStatus.last && empty boo}">
-														<button type="button" class="btn-warning btn-lg"
+														<button type="button" class="btn-warning btn-lg" id="intoShoppingCart"
 															style="width: 100%; font-size: 22px; margin: 20px 0">我要加入募資</button>
 													</c:when>
 												</c:choose>
 											</c:forEach>
 										</c:when>
 										<c:otherwise>
-											<button type="button" class="btn-warning btn-lg"
+											<button type="button" class="btn-warning btn-lg" id="intoShoppingCart"
 												style="width: 100%; font-size: 22px; margin: 20px 0">我要加入募資</button>
 										</c:otherwise>
 									</c:choose>
@@ -644,8 +644,9 @@ video::-webkit-media-controls-panel {
 			</div>
 		</div>
 	</div>
-	<input type="hidden" value="${courseVO.courseID}" id="sponsorCourseVO">
+	<input type="hidden" value="${courseVO.courseID}" id="mbcourseID">
 	<input type="hidden" value="${courseVO.fundEndDate}" id="fundEndDate">
+	<input type="hidden" value="${LoginOK.memberID}" id="mbmemberID">
 	<input type="hidden" value="${courseVO.targetStudentNumber}"
 		id="targetStudentNumber">
 	<c:remove var="err" scope="session" />
@@ -656,7 +657,7 @@ video::-webkit-media-controls-panel {
 <script>
 $(function(){
 		$.getJSON("/e-Look/BuyCourseNumber", {
-			'courseID' : $('#sponsorCourseVO').val()
+			'courseID' : $('#mbcourseID').val()
 		}, function(data) {
 			var buyStudentNumber = parseInt(data);
 			var targetStudentNumber = parseInt($('#targetStudentNumber').val())

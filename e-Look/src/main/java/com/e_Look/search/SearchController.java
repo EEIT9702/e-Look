@@ -1,15 +1,15 @@
 package com.e_Look.search;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.servlet.DispatcherServlet;
+import net.minidev.json.JSONValue;
 
 /**
  * Servlet implementation class SearchController
@@ -19,22 +19,20 @@ public class SearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		SearchService ss = new SearchService();
 		SearchDAO dao=new SearchDAO();
 		String keyWord=request.getParameter("keyWord");
-		String[] kk = keyWord.split(" ");
-		for(String k:kk){
-			//System.out.println(k);
-			if(k.length()>=1){
-				SearchVO searchVO=new SearchVO();
-				searchVO.setKeyWord(k);
-				dao.insert(searchVO);
-			}
+		if(keyWord.length()>0){
+			keyWord=keyWord.toLowerCase();
+			SearchVO searchVO = new SearchVO();
+			searchVO.setKeyWord(keyWord);
+			dao.insert(searchVO);
 		}
-//		response.sendRedirect(getServletContext().getContextPath()+"/body/body_river.jsp");
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/body/freeCourse_Home.jsp");
-		rd.forward(request, response);
-		
+		String[] strary = ss.getKeyWordRank();
+		String jsonstrary = JSONValue.toJSONString(strary);
+		PrintWriter rw = response.getWriter();
+		rw.print(jsonstrary);
+		rw.close();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
