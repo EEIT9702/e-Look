@@ -23,7 +23,6 @@ public class SearchDAO_JDBC implements SearchDAO_interface {
 	private static final String UPDATE_SEARCH = "update Search set keyWord=? , enterTime=? where keyWord=? and enterTime=?";
 	private static final String DELETE_SEARCH = "delete from Search where keyWord=? and enterTime=?";
 	private static final String DELETE_DATE_SEARCH = "delete from Search where enterTime < ?";
-	private static final String SELECT_SEARCH_RANK = "select keyWord, count(*) as keywordcount from Search group by keyword order by keywordcount desc";
 	private static final String SELECT_ALL_SEARCH = "select keyWord,enterTime from Search";
 
 	@Override
@@ -160,48 +159,6 @@ public class SearchDAO_JDBC implements SearchDAO_interface {
 		}
 	}
 
-	@Override
-	public List<SearchVO> getKeywordRank(Integer i) {
-		List<SearchVO> list = new ArrayList<SearchVO>();
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(SELECT_SEARCH_RANK);
-			ResultSet rs = pstmt.executeQuery();
-			Integer i2 =1;
-			while (rs.next() && i2<=i) {
-				SearchVO searchVO = new SearchVO(); 
-				searchVO.setKeyWord(rs.getString("keyword"));
-				list.add(searchVO);
-				i2++;
-			}
-			
-			
-
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		return list;
-	}
 
 	@Override
 	public List<SearchVO> getAll() {
@@ -251,14 +208,6 @@ public class SearchDAO_JDBC implements SearchDAO_interface {
 		searchVO.setEnterTime(new Date(System.currentTimeMillis()));
 		dao.insert(searchVO);
 		
-		//searchVO.getEnterTime()不會有值 
-		//印出來的是按照熱門程度排序的關鍵字
-		//這組DAO可能只能用JDBC來寫
-		List<SearchVO> list0=dao.getKeywordRank(2);
-		for(SearchVO searchVO1:list0){
-			System.out.println(searchVO1.getKeyWord()+"\t");
-			
-		}
 
 //		List<SearchVO> list = dao.getAll();
 //		for(SearchVO searchVO2:list){

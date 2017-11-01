@@ -306,7 +306,9 @@ a:HOVER {
 				<div style="margin-top:40px;">
 					<p style="font-size:18px;float:left;">預購價：
 						<fmt:setLocale value="zh-TW" />
-						<fmt:formatNumber value="${fundCourse.soldPrice*0.7}" type="currency"/>
+
+						<fmt:formatNumber value="${fundCourse.soldPrice*0.7}" type="currency" maxFractionDigits="0"/>
+
 					</p>
 <%-- 					<p class="fundend" style="font-size:18px;float:right;">募資截止日：<fmt:formatDate value="${fundCourse.fundEndDate}" type="date"/></p> --%>
 					<p class="fundend" style="font-size:18px;float:right;" alt="${fundCourse.fundEndDate}"></p>

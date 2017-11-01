@@ -1,6 +1,7 @@
 package com.e_Look.shoppingCart.control;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -46,7 +47,10 @@ public class LoadShoppingCart extends HttpServlet {
 			ShoppingCartDAO dao = new ShoppingCartDAO();
 			List<CourseVO> courseVOs = dao.findByMemberID(memberID);
 			String jsonString = JSONValue.toJSONString(courseVOs);  
-			response.getWriter().print(jsonString);
+			PrintWriter rw = response.getWriter();
+			rw.print(jsonString);
+			rw.close();
+			
 		}
 		
 		

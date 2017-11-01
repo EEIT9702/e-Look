@@ -48,25 +48,20 @@
 				<div style="margin-top:40px;">
 					<p style="font-size:18px;float:left;">預購價：
 						<fmt:setLocale value="zh-TW" />
-						<fmt:formatNumber value="${fundCourse.soldPrice*0.7}" type="currency"/>
+						<fmt:formatNumber value="${fundCourse.soldPrice*0.7}" type="currency" maxFractionDigits="0"/>
 					</p>
-<%-- 					<p class="fundend" style="font-size:18px;float:right;">募資截止日：<fmt:formatDate value="${fundCourse.fundEndDate}" type="date"/></p> --%>
 					<p class="fundend" style="font-size:18px;float:right;" alt="${fundCourse.fundEndDate}"></p>
 				</div>
 				<div class="progress" style="clear:both;">
 					<div class="progress-bar progress-bar-warning progress-bar-striped active" 
 					role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" 
-					style="width:100%">
-					<p style="display:none"><fmt:formatNumber type="percent" value="${1/fundCourse.targetStudentNumber}" maxFractionDigits="0"/></p>
+					style="width:100%" alt="${fundCourse.courseID}" alt2="${fundCourse.targetStudentNumber}">
+					<p style="display:none"></p>
 					
 					</div>
 				</div>
 				<div>
-<%-- 				<c:forEach var='bCourse' items='${buycourse.all}'> --%>
-<%-- 					<c:if test="${fundCourse.courseID == bCourse.courseID}"> --%>
-						<p style="font-size:18px;text-align:center;clear:both;padding-top:8px;">已募資/${fundCourse.targetStudentNumber}人</p>
-<%-- 					</c:if> --%>
-<%-- 				</c:forEach> --%>
+					<p class="buyNum" style="font-size:18px;text-align:center;clear:both;padding-top:8px;" alt="${fundCourse.courseID}" alt2="${fundCourse.targetStudentNumber}"></p>
 				</div>
 			</div>
 
@@ -81,29 +76,57 @@
 <script>
 	$(function(){
 		//console.log($('.progress-bar').text());
-		var pbVal = $('.progress-bar').text();
+// 		var pbVal = $('.progress-bar').text();
 		//var endVal = $($('.fundend')[1]).val();
-		$('.progress-bar').removeAttr('style');
-		$('.progress-bar').each(function(){
+// 		$('.progress-bar').removeAttr('style');
+// 		$('.progress-bar').each(function(){
 			//console.log($(this).text());
-			console.log($(this).val());
-			$(this).attr('style','width:'+$(this).text());
-		})	
+// 			console.log($(this).val());
+// 			$(this).attr('style','width:'+$(this).text());
+// 		})	
+		
 		//var endVal = $('.fundend').val();
 		var endVal = $('.fundend').attr("alt");
 		$('.fundend').each(function(){
-			console.log($(this).attr("alt"));
+			//console.log($(this).attr("alt"));
 			var ed = new Date($(this).attr("alt"));
 			var now = new Date();
 			var time = ed.getTime() - now.getTime();
 			time /= 1000;
 			var ntime = time / (24*60*60);
 			ntime = Math.floor(ntime);
-			console.log(ntime);
+			//console.log(ntime);
 			$(this).text("倒數" + ntime + "天")
 		})	
 		
 		
+		$(".buyNum").each(function(){
+			var i = $(this);
+			console.log(i.attr("alt") + "--" + i.attr("alt2"));
+			$.getJSON("/e-Look/BuyCourseNumber", {
+				"courseID":$(this).attr("alt")},
+				function(data){
+					var targetNum = i.attr("alt2")
+					i.text("已募資 " + data + " / " + targetNum + " 人");
+			})
+		})
+		
+	
+		$('.progress-bar').each(function(){
+			var b = $(this);
+			$.getJSON("/e-Look/BuyCourseNumber", {"courseID":$(this).attr("alt")},function(data){
+					num = (data/b.attr("alt2"))*100;
+					b.children("p").html(Math.floor(num) + "%")
+					var pbVal = $('.progress-bar').text();
+					$('.progress-bar').removeAttr("style");
+					$('.progress-bar').each(function(){
+						$(this).attr('style','width:'+ $(this).text());
+					})
+			})
+			
+			
+			
+		})	
 		
 	})
 
