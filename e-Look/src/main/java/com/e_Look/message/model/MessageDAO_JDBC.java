@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,13 +21,14 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 	//第二組密碼
 	//String passwd = "123456";
 	private static final String INSERT_MESSAGE = "insert into Message ( mContent,mTime,memberID,courseID,bought,status) values ( ?, ?, ?, ?, ?,?)";
+	private static final String INSERT_MESSAGE_RESPONSE = "insert into Message ( mContent,mTime,messageID_response,memberID,courseID,bought,status) values (?, ?, ?, ?, ?, ?,?)";
 	private static final String UPDATE_MESSAGE = "update Message set mContent=?, mTime=? where messageID= ?";
 	private static final String UPDATE_MESSAGE_RESPONSE = "update Message set mContent=?, mTime=? where messageID_response= ?";
 	private static final String UPDATE_STATUS = "update Message set status=? where messageID= ?";
 	private static final String DELETE_MESSAGE = "delete from Message where messageID= ?";
 	private static final String SELECT_ONE_MESSAGE = "select messageID,mContent,mTime,messageID_response,memberID,courseID,bought,status from Message where courseID= ?";
 	private static final String SELECT_ALL_MESSAGE = "select messageID,mContent,mTime,messageID_response,memberID,courseID,bought,status from Message";
-		
+	private static final String SELECT_ONE_MESSAGE_M = "select messageID,mContent,mTime,messageID_response,memberID,courseID,bought,status from Message where messageID= ?";	
 	
 	@Override
 	public void insert(MessageVO messageVO) {
@@ -70,6 +72,54 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 
 	}
 
+	@Override
+	public void insert_re(MessageVO messageVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			Class.forName(driver);			
+			con = DriverManager.getConnection(url, userid, passwd);
+			
+			pstmt = con.prepareStatement(INSERT_MESSAGE_RESPONSE
+					);
+			pstmt.setString(1, messageVO.getmContent());
+			Timestamp ts = new Timestamp(System.currentTimeMillis());
+			pstmt.setTimestamp(2, ts);
+			pstmt.setInt(3, messageVO.getMessageID_response());
+			pstmt.setInt(4, messageVO.getMemberID());
+			pstmt.setInt(5, messageVO.getCourseID());
+			pstmt.setLong(6, messageVO.getBought());
+			pstmt.setByte(7, messageVO.getStatus());
+			
+			pstmt.executeUpdate();
+			
+			int id = 0;
+			
+			
+			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. "
+					+ e.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}}
+		}
+	
 	@Override
 	public void update(MessageVO messageVO, String update) {
 		Connection con = null;
@@ -158,7 +208,7 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 	}
 
 	@Override
-	public MessageVO findByPrimaryKey(Integer courseID) {
+	public MessageVO findByPrimaryKey(Integer messageID) {
 		MessageVO messageVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -167,7 +217,7 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 			Class.forName(driver);			
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(SELECT_ONE_MESSAGE);
-			pstmt.setInt(1, courseID);
+			pstmt.setInt(1, messageID);
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
 				messageVO = new MessageVO();
@@ -205,7 +255,9 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 				
 		return messageVO;
 	}
-
+	
+		
+	
 	@Override
 	public List<MessageVO> getAll() {
 		List<MessageVO> list = new LinkedList<MessageVO>();
@@ -324,8 +376,52 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 
 	@Override
 	public List<MessageVO> findByPrimaryKeyM(Integer courseID) {
-		// TODO Auto-generated method stub
-		return null;
+		List<MessageVO> list = new LinkedList<MessageVO>();
+		MessageVO messageVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			Class.forName(driver);			
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(SELECT_ONE_MESSAGE);
+			pstmt.setInt(1, courseID);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				messageVO = new MessageVO();		
+				messageVO.setMessageID(rs.getInt(1));
+				messageVO.setmContent(rs.getString(2));
+				messageVO.setmTime(rs.getTimestamp(3));
+				messageVO.setMessageID_response(rs.getInt(4));
+				messageVO.setMemberID(rs.getInt(5));
+				messageVO.setCourseID(rs.getInt(6));
+				messageVO.setBought(rs.getLong(7));
+				messageVO.setStatus(rs.getByte(8));
+				
+				list.add(messageVO);}
+		} catch (ClassNotFoundException e) {
+					throw new RuntimeException("Couldn't load database driver. "+ e.getMessage());
+				} catch (SQLException e) {
+					throw new RuntimeException("A database error occured. "
+							+ e.getMessage());
+				} finally {
+					if (pstmt != null) {
+						try {
+							pstmt.close();
+						} catch (SQLException e) {
+							e.printStackTrace(System.err);
+						}
+					}
+					if (con != null) {
+						try {
+							con.close();
+						} catch (Exception e) {
+							e.printStackTrace(System.err);
+						}
+					}
+				}
+				
+		return list;
 	}
 
 }
