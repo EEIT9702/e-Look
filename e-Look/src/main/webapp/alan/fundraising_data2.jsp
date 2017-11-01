@@ -55,7 +55,7 @@
 						List<Integer> fcVOs = new LinkedList<Integer>();
 						BuyCourseService bcServ = new BuyCourseService();
 						for(CourseVO cVO: cVOs){
-							fcVOs.add(bcServ.getClickNumber(cVO.getCourseID()));
+							fcVOs.add(bcServ.getBuyCourseNumber(cVO.getCourseID()));
 						}
 					%>
 <%-- 					<p class="fundend" style="font-size:18px;float:right;">募資截止日：<fmt:formatDate value="${fundCourse.fundEndDate}" type="date"/></p> --%>

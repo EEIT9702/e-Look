@@ -279,22 +279,8 @@ video::-webkit-media-controls-panel {
 										</c:otherwise>
 									</c:choose>
 								</c:if>
-								<!-- 								<div> -->
-								<!-- 									<div class=" text-center" style="font-size: 18px; color: white"> -->
-
-								<!-- 										<div class="dropdown"> -->
-								<!-- 												有興趣可以 -->
-								<!-- 											<button type="button" -->
-								<!-- 												class="btn btn-info btn-xs dropdown-toggle"	data-toggle="dropdown" id="menu1"style="font-size: 18px">分享</button> -->
-								<!-- 											<ul class="dropdown-menu"role="menu" aria-labelledby="menu1"> -->
-								<!-- 												<li role="presentation"><a href="#" role="menuitem">FaceBook</a></li> -->
-								<!-- 												<li role="presentation"><a href="#" role="menuitem">Google</a></li> -->
-								<!-- 											</ul> -->
-								<!-- 											來加快募資速度唷 -->
-								<!-- 										</div> -->
-
-								<!-- 									</div> -->
-								<!-- 								</div> -->
+								
+								
 							</div>
 						</div>
 					</div>
@@ -703,4 +689,5 @@ $(function(){
 		});
 	});
 </script>
+
 </html>
