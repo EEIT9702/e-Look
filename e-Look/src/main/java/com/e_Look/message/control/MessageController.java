@@ -67,10 +67,10 @@ public class MessageController extends HttpServlet {
 //					errorMsgs.add("無法新增留言");
 //				}
 				try{
-				    String mContent=request.getParameter("mContent").trim();	//留言
-				    if (mContent == null || mContent.trim().length() == 0) {
-					errorMsgs.add("必須輸入內文");
-				}
+				    String mContent=request.getParameter("mContent");	//留言
+				    if (mContent == null || mContent.length() == 0) {
+				    	errorMsgs.add("必須輸入內文");
+				    }
 					String str = request.getParameter("courseID");             //courseID
 					
 					Integer courseID = null;
