@@ -27,19 +27,13 @@ public class MessageDAO implements MessageDAO_interface {
 			e.printStackTrace();
 		}
 	}
-	//新增留言沒問題，但是新增回應要怎麼新增???
-	//SELECT_ONE_MESSAGE的回傳形態有問題，用messageVO接，應該只能接到一筆，應該改成用list接
-	
 	private static final String INSERT_MESSAGE = "insert into Message ( mContent,mTime,memberID,courseID,bought,status) values ( ?, ?, ?, ?, ?,?)";
-	private static final String UPDATE_MESSAGE = "update Message set mContent=?, mTime=? where messageID=?";
-//	private static final String UPDATE_MESSAGE_RESPONSE = "update Message set mContent=?, mTime=? where messageID_response= ?";
-	
-	
+	private static final String INSERT_MESSAGE_RESPONSE = "insert into Message ( mContent,mTime,messageID_response,memberID,courseID,bought,status) values (?, ?, ?, ?, ?, ?,?)";
+	private static final String UPDATE_MESSAGE = "update Message set mContent=?, mTime=? where messageID= ?";
+//	private static final String UPDATE_MESSAGE_RESPONSE = "update Message set mContent=?, mTime=? where messageID= ?";
 	private static final String UPDATE_STATUS = "update Message set status=? where messageID= ?";
 	private static final String DELETE_MESSAGE = "delete from Message where messageID= ?";
-
 	private static final String SELECT_ONE_MESSAGE_M = "select messageID,mContent,mTime,messageID_response,memberID,courseID,bought,status from Message where messageID= ?";
-
 	private static final String SELECT_ONE_MESSAGE = "select messageID,mContent,mTime,messageID_response,memberID,courseID,bought,status from Message where courseID= ?";
 	private static final String SELECT_ALL_MESSAGE = "select messageID,mContent,mTime,messageID_response,memberID,courseID,bought,status from Message";	
 		
@@ -53,7 +47,6 @@ public class MessageDAO implements MessageDAO_interface {
 			
 			pstmt = con.prepareStatement(INSERT_MESSAGE,
 					Statement.RETURN_GENERATED_KEYS);
-			//"insert into Message ( mContent,mTime,memberID,courseID,bought,status) values ( ?, ?, ?, ?, ?,?)"
 			pstmt.setString(1, messageVO.getmContent());
 			Timestamp ts = new Timestamp(System.currentTimeMillis());
 			pstmt.setTimestamp(2, ts);
@@ -66,6 +59,58 @@ public class MessageDAO implements MessageDAO_interface {
 			
 			int id = 0;
 			generatedKeys = pstmt.getGeneratedKeys();
+			if (generatedKeys.next()) {
+				id = generatedKeys.getInt(1);
+			} else {
+				throw new SQLException(
+						"Creating user failed, no generated key obtained.");
+			}
+			
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+	}
+	
+	@Override
+	public void insert_re(MessageVO messageVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet generatedKeys = null;
+		try {
+			con = ds.getConnection();
+			
+			pstmt = con.prepareStatement(INSERT_MESSAGE_RESPONSE,
+					Statement.RETURN_GENERATED_KEYS);
+			pstmt.setString(1, messageVO.getmContent());
+			Timestamp ts = new Timestamp(System.currentTimeMillis());
+			pstmt.setTimestamp(2, ts);
+			pstmt.setInt(3, messageVO.getMessageID_response());
+			pstmt.setInt(4, messageVO.getMemberID());
+			pstmt.setInt(5, messageVO.getCourseID());
+			pstmt.setLong(6, messageVO.getBought());
+			pstmt.setByte(7, messageVO.getStatus());
+			
+			pstmt.executeUpdate();
+			
+			int id = 0;
+			
+			generatedKeys = pstmt.getGeneratedKeys();
+			
 			if (generatedKeys.next()) {
 				id = generatedKeys.getInt(1);
 			} else {
@@ -114,7 +159,7 @@ public class MessageDAO implements MessageDAO_interface {
 //				pstmt.setTimestamp(2, ts);
 //				pstmt.setInt(3, messageVO.getMessageID_response());
 //				
-//				pstmt.executeUpdate(); 
+//				pstmt.executeUpdate();
 			} else if (update.equalsIgnoreCase("status")) {
 				pstmt = con.prepareStatement(UPDATE_STATUS);
 				pstmt.setByte(1, messageVO.getStatus());
@@ -231,20 +276,14 @@ public class MessageDAO implements MessageDAO_interface {
 			while (rs.next()) {
 				messageVO = new MessageVO();		
 				messageVO.setMessageID(rs.getInt(1));
-				
-				String mContent=rs.getString(2);
-				messageVO.setmContent(mContent);
-				
-				Timestamp mTime=rs.getTimestamp(3);
-				messageVO.setmTime(mTime);
-				
+				messageVO.setmContent(rs.getString(2));
+				messageVO.setmTime(rs.getTimestamp(3));
 				messageVO.setMessageID_response(rs.getInt(4));
 				messageVO.setMemberID(rs.getInt(5));
 				messageVO.setCourseID(rs.getInt(6));
 				messageVO.setBought(rs.getLong(7));
 				messageVO.setStatus(rs.getByte(8));
-				System.out.println(mContent);
-				System.out.println(mTime);
+				
 				list.add(messageVO);
 			}
 			

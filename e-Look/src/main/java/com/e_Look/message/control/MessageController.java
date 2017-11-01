@@ -67,11 +67,11 @@ public class MessageController extends HttpServlet {
 //					errorMsgs.add("無法新增留言");
 //				}
 				try{
-				    String mContent=request.getParameter("mContent").trim();	
+				    String mContent=request.getParameter("mContent").trim();	//留言
 				    if (mContent == null || mContent.trim().length() == 0) {
 					errorMsgs.add("必須輸入內文");
 				}
-					String str = request.getParameter("courseID");
+					String str = request.getParameter("courseID");             //courseID
 					
 					Integer courseID = null;
 					courseID = new Integer(str);
@@ -90,23 +90,32 @@ public class MessageController extends HttpServlet {
 				MessageVO messageVO1= new MessageVO();
 				messageVO1.setmContent(mContent);
 //				messageVO1.setmTime();
-				MemberVO member=(MemberVO)session.getAttribute("LoginOK");
-				Integer memberID = member.getMemberID();
+//				MemberVO member=(MemberVO)session.getAttribute("LoginOK");
+//				Integer memberID = member.getMemberID();
 //				messageVO1.setMemberID(member.getMemberID());
-//				messageVO1.setMemberID(100001);
+				messageVO1.setMemberID(100001);
 //				messageVO1.setCourseID(200001);
-//				messageVO1.setBought((long) 123);
-//				messageVO1.setStatus((byte) 1);
-				
+				messageVO1.setBought((long) 123);
+				messageVO1.setStatus((byte) 1);
+				Integer memberID=Integer.valueOf(request.getParameter("memberID"));
+				Integer messageID_response=Integer.valueOf(request.getParameter("messageID_response"));
 //				Integer memberID = 100001;
 //				Integer courseID = 200001;
 				Long bought= (long)123;
 				Byte status= 1;
 				
+				if(messageID_response>0){
+					messageVO = service.addReMessage(mContent,messageID_response,memberID,courseID,bought,status);
+					}else{
+				    messageVO = service.addMessage(mContent,memberID,courseID,bought,status);};
 				
-			//	messageVO = service.addMessage(mContent, memberID,courseID,bought,status);
 				session.setAttribute("MessageVO", messageVO);
 				session.setAttribute("MessageInsertOK", "新增留言成功");
+				System.out.println(messageVO);
+				
+				String jsonString = JSONValue.toJSONString(messageVO); 
+				out.println(jsonString);
+				
 				response.sendRedirect(request.getContextPath() +"/_Ccc/Message3.jsp");
 				} catch (Exception e) {
 					errorMsgs.add("新增資料失敗:"+e.getMessage());
@@ -247,6 +256,7 @@ public class MessageController extends HttpServlet {
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				System.out.println(messageVO);
 				String jsonString = JSONValue.toJSONString(messageVO); 
+		
 				System.out.print(jsonString);
 				out.println(jsonString);
 				
