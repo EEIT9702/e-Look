@@ -253,7 +253,6 @@ document.onmousedown = function(event) {
 	}
 }
 */
-
 /*展示廣告圖片*/
 function showAdPic() {
 	//獲得廣告的DOM
@@ -271,57 +270,64 @@ function showAdPic() {
 
 	/*瀑布流關鍵*/
 var rowValueX = 0;
-var keyWord = "";
-var courseClass ="";
+var keyWord="";
+var courseClass="";
 var lastClickClass;
+var lastRow = true;
 	//初載入 事件繫結
 $(function() {
-	//showAdPic();
-	//init();
+	loadKeyword();
 	river();
-	$('#submit').click(function(e){
-		
-		e.preventDefault();
-		clickSearch();
-	})
-	$('#submit').on('click', function(){
-		
-	})
-	
-	//卷軸初載入高度為0
-	var	wst = $(window).scrollTop();
-	//視窗高度
-	var	wh = $(window).height();
-	//整份文件
-	var	dh =$(document).height();
-	//console.log(wst+"---"+dh+"---"+wh);
+	$('.keyword').on('click','.keywordlink',clickKeyword)
+	$('#submit').click(newsubmit);
 	$(window).scroll(river);
-	
-	$('.text-center').click(function(){
-		if(lastClickClass == $(this).children("p").attr("alt")) {
-			courseClass = "";
-			$('.text-center').children("img").removeClass("gray1");
-			lastClickClass = "";
-		} else {
-			courseClass = $(this).children("p").attr("alt");
-			$('.text-center').children("img").addClass("gray1");
-			$(this).children("img").removeClass("gray1");
-			lastClickClass = $(this).children("p").attr("alt");
-		}
-		keyWord = "";
-		refreshRiver();		
-	})
-	
+	$('.text-center').click(clickClass);
 	$('#searchicon').click(clickSearch);
 });
+function clickKeyword(){
+	keyWord1=$(this).text();
+	keyWord=keyWord1.trim();
+	refreshRiver();	
+	loadKeyword();
+}
+function newsubmit(e){
+	e.preventDefault();
+	clickSearch();
+}
+	
+function clickClass(){
+	if(lastClickClass==$(this).children('p').attr('alt')){
+		courseClass= "" ;
+		$('.text-center').children('img').removeClass('gray1');
+		lastClickClass="";		
+	}else{
+		courseClass=$(this).children('p').attr('alt');
+		$('.text-center').children('img').addClass('gray1');
+		$(this).children('img').removeClass('gray1');
+		lastClickClass=$(this).children('p').attr('alt');
+	}
+	keyWord="";
+	refreshRiver();
+}
+	
+function loadKeyword(){
+	$('.keyword').text('');
+	$.get('<%=request.getContextPath() %>/SearchController.do',{'keyWord':keyWord},function(datas){
+		var fg = $(document.createDocumentFragment());
+		$.each(datas,function(index,value){
+			if(index<3){
+				var cell1 = $('<span>').addClass('keywordlink').text(value+' ')
+				fg.append(cell1);					
+			}
+		})
+		$('.keyword').append(fg);
+	},'json');
+}
 	
 function clickSearch(){
-	keyWord=$('#keyWord').val();
-	//console.log("clickSearch() keyWord = " + keyWord);
-	$.get('/e-Look/SearchController.do',{'keyWord':keyWord},function(){
-		
-	})
-	$('#keyWord').val("");
+	keyWord1=$('#keyWord').val();
+	keyWord=keyWord1.trim();
+	loadKeyword();
 	refreshRiver();		
 }
 function refreshRiver(){
@@ -337,17 +343,21 @@ function river(){
 	var	wh = $(window).height();
 	//整份文件
 	var	dh =$(document).height();
-	//$('a[href="#menu1"]').text(wst+"---"+dh+"---"+wh)
-	//console.log(wst+"---"+dh+"---"+wh+","+wh+","+(dh-wh));
+	//console.log("捲軸高度:"+wst+" 視窗高度:"+wh+" 文件高度:"+dh+" 文件高度-視窗高度:"+(dh-wh));
 	//判斷卷軸是否到底部
 	//有時候卷軸會多0.5  改>=的寫法可以解決這個問題
-	console.log(courseClass + "river()" + keyWord);
-	if( wst>=(dh-wh) || rowValueX==0 ){
+	if( (wst+300>=(dh-wh) || rowValueX<=4) && lastRow ){
+		lastRow=false;
+		console.log(courseClass+"river()"+keyWord);
 		$.get("<%= request.getContextPath() %>/body/free_data.jsp",{"rowValueY":rowValueX,"keyWord":keyWord,"courseClass":courseClass},function(data){
 			$('#river').append(data)
-		rowValueX+=4;
-			
+			rowValueX+=4;
+			lastRow=true;
+			if(rowValueX<=4){
+				river();
+			}
 		});
+		
 	}
 }
 </script>
@@ -426,9 +436,7 @@ function river(){
 	<div class="col-md-12 col-sm-12 col-xs-12">
 	<p class="hotkeyword text-left">熱門：
 		<span class="keyword">
-			<c:forEach var="searchVO" items="<%= new SearchDAO().getKeywordRank(4) %>" >
-				${searchVO.keyWord}&nbsp;
-			</c:forEach>
+
 		</span>
 	</p>
 	</div>
