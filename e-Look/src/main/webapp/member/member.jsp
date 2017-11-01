@@ -445,8 +445,44 @@ a:HOVER {
 						</div>
 					</div>
 				</div>
+				
 				<div class="col-md-12" style="margin: 25px 0;">
 					<div class="panel panel-info">
+						<div class="panel-heading clickable panel-collapsed">
+							<h3 class="panel-title">審核中的課程</h3>
+							<span class="pull-right "><i
+								class="glyphicon glyphicon-plus"></i></span>
+						</div>
+						<div class="panel-body" style="display: none;">
+
+							<c:forEach var="couser" items="${list6}">
+							
+							<div class=" col-md-4  col-sm-4" style="width: 211px">
+								<div class="card card-inverse">
+									<img class="card-img-top"
+										src="<%=request.getContextPath()%>/CourseImage?CourseID=${couser.courseID}"
+										alt="course" id="wizardPicturePreview" title="">
+									<div class="card-block">
+										<figure class="profile">
+											<img
+												src="<%=request.getContextPath()%>/Image?MemberID=${couser.memberID}"
+												class="profile-avatar" alt="">
+										</figure>
+										<div class="card-text">
+											<p id="title" class="card-title mt-3 multi_ellipsis">${couser.courseName}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						
+							</c:forEach>
+					
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-md-12" style="margin: 25px 0;">
+					<div class="panel panel-primary">
 						<div class="panel-heading clickable panel-collapsed">
 							<h3 class="panel-title">我的收藏課程</h3>
 							<span class="pull-right "><i
@@ -506,7 +542,7 @@ a:HOVER {
 				</div>
 				
 				<div class="col-md-12" style="margin: 25px 0;">
-					<div class="panel panel-primary">
+					<div class="panel panel-info">
 						<div class="panel-heading clickable panel-collapsed">
 							<h3 class="panel-title">我的草稿</h3>
 							<span class="pull-right "><i
@@ -546,7 +582,7 @@ a:HOVER {
 				</div>
 				</div>
 				<div class="col-md-12" style="margin: 25px 0;">
-					<div class="panel panel-info">
+					<div class="panel panel-primary">
 						<div class="panel-heading clickable panel-collapsed">
 							<h3 class="panel-title">我的追蹤講師</h3>
 							<span class="pull-right "><i

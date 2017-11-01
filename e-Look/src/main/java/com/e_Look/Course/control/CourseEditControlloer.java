@@ -40,6 +40,9 @@ public class CourseEditControlloer extends HttpServlet {
 		// Integer memberID= Integer.valueOf(request.getParameter("memberID"));
 		if(request.getParameter("member")!=null){
 		Integer courseID = Integer.valueOf(request.getParameter("courseID"));
+		
+		CourseClassDetailsDAO dao1 = new CourseClassDetailsDAO();
+		dao1.delete(courseID);
 		CourseService courseService = new CourseService();
 		courseService.deleteCourse(courseID);
 		}
