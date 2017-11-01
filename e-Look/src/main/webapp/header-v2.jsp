@@ -356,6 +356,7 @@ $(function(){
 	$(function(){
 		$('#intoShoppingCart').on('click',function(){
 			if($("#mbcourseID").val()>1){
+			console.log("cart!!!")
 					$.post('<%= request.getContextPath()%>/InsertShoppingCart',{
 						'memberID':$("#mbmemberID").val(),
 						'courseID':$("#mbcourseID").val()

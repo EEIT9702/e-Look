@@ -467,9 +467,7 @@ function checkHeight() {
 	<div class="col-md-12 col-sm-12 col-xs-12">
 	<p class="hotkeyword text-left">熱門：
 		<span class="keyword">
-			<c:forEach var="searchVO" items="<%= new SearchDAO().getKeywordRank(4) %>" >
-				${searchVO.keyWord}&nbsp;
-			</c:forEach>
+
 		</span>
 	</p>
 	</div>
