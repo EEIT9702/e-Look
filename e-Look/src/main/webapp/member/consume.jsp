@@ -101,6 +101,75 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
 .panel-body {
 	display: none;
 }
+/*     */
+
+
+
+
+/*	--------------------------------------------------
+	:: Table Filter
+	-------------------------------------------------- */
+.panel {
+	border: 1px solid #ddd;
+	background-color: #fcfcfc;
+}
+.panel .btn-group {
+	margin: 15px 0 30px;
+}
+.panel .btn-group .btn {
+	transition: background-color .3s ease;
+}
+.table-filter {
+	background-color: #fff;
+	border-bottom: 1px solid #eee;
+}
+.table-filter tbody tr:hover {
+	cursor: pointer;
+	background-color: #eee;
+}
+.table-filter tbody tr td {
+	padding: 10px;
+	vertical-align: middle;
+	border-top-color: #eee;
+}
+.table-filter tbody tr.selected td {
+	background-color: #eee;
+}
+.table-filter tr td:first-child {
+	width: 20px;
+}
+.table-filter tr td:nth-child(2) {
+	width: 20px;
+}
+.table-filter thead tr th {
+	width: 20px;
+}
+tbody tr td {
+	width: 20px;
+}
+tbody{
+font-size: 22px
+
+}
+thead{
+font-size: 20px
+
+}
+
+
+span {
+	font-size: .8em;	
+}
+span.pagado {
+	color: #5cb85c;
+}
+span.pendiente {
+	color: #f0ad4e;
+}
+span.cancelado {
+	color: #d9534f;
+}
+
 </style>
 </head>
 <body>
@@ -126,7 +195,8 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
                 <!-- flight section -->
                 <div class="bhoechie-tab-content active">
                     <div>
-                      			<div class="col-md-12">
+                      <h1>消費紀錄</h1>
+                    <div class="col-md-12">
 				<div class="panel panel-success">
 					<div class="panel-heading">
 						<h3 class="panel-title">消費紀錄</h3>
@@ -162,10 +232,80 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
                 <!-- train section -->
                 <div class="bhoechie-tab-content">
                     <div>
-                      <h1 class="glyphicon glyphicon-road" style="font-size:12em;color:#55518a"></h1>
-                      <h2 style="margin-top: 0;color:#55518a">Cooming Soon</h2>
-                      <h3 style="margin-top: 0;color:#55518a">Train Reservation</h3>
-                    </div>
+                    <h1>課程收益</h1>
+					<div class="pull-right">
+							<div class="btn-group" >
+								<button style="font-size: 16px;" type="button" class="btn btn-default btn-filter" data-target="all">ALL</button>
+								<button style="font-size: 16px" type="button" class="btn btn-success btn-filter" data-target="pagado">線上課程</button>
+								<button style="font-size: 16px" type="button" class="btn btn-warning btn-filter" data-target="pendiente">免費課程</button>
+								<button style="font-size: 16px" type="button" class="btn btn-danger btn-filter" data-target="cancelado">募資課程</button>
+							</div>
+						</div>
+							<div class="table-container">
+								<table  class="table table-hover table2" >
+									<thead data-status="all">
+										<tr>
+											<th>課程種類</th>
+											<th>課程收益</th>
+										</tr>
+									</thead>
+									<thead data-status="pagado" style="display:none">
+										<tr>
+											<th>課程名稱</th>
+											<th>定價</th>
+											<th>購買人數</th>
+											<th>課程收益</th>
+										</tr>
+									</thead>
+									<thead data-status="pendiente" style="display:none">
+										<tr>
+											<th>課程名稱</th>
+											<th>贊助人</th>
+											<th>日期</th>
+											<th>金額</th>
+										</tr>
+									</thead>
+									<thead data-status="cancelado"style="display:none">
+										<tr>
+											<th>課程名稱</th>
+											<th>定價</th>
+											<th>人數</th>
+											<th>募資金額</th>
+										</tr>
+									</thead>
+									<tbody data-status="all" id="all">
+									<tr>
+											<td><span class="pagado">(Pagado)</span></td>
+											<td>2</td>
+									</tr>
+									</tbody>
+									<tbody data-status="pagado" id="pagado" style="display:none">
+										<tr >
+											<td><span class="pagado">(Pagado)</span></td>
+											<td>1</td>
+											<td>3</td>
+											<td>4</td>
+										</tr>
+										</tbody>
+										<tbody data-status="pendiente" id="pendiente" style="display:none">
+										<tr >
+										<td><span class="pagado">(Pagado)</span></td>
+											<td>2</td>
+											<td>3</td>
+											<td>4</td>
+										</tr>
+										</tbody>
+										<tbody data-status="cancelado" id="cancelado" style="display:none">
+										<tr>
+											<td><span class="pagado">(Pagado)</span></td>
+											<td>3</td>
+											<td>3</td>
+											<td>4</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
                 </div>
             </div>
         </div>
@@ -242,6 +382,7 @@ $(function(){
 /*----消費明細---*/
  $(function(){
 	 loadOrder($("#memberID").val())
+	 loadCourse($("#memberID").val())
  })
  var OrderDetails;
  var Order;
@@ -254,14 +395,15 @@ $(function(){
 		   var fragment = $(document.createDocumentFragment());
 	   	  $.each(OrderDetails,function(idx,OrderDetail){
 	   		 $.each(OrderDetail,function(idx,Order){
-	   			//console.log(Order.orderID);
+	   			//console.log(Order.courseVO.orderID);
 	   			//console.log(value);
-	   			if(value==Order.orderID){
+	   			//console.log(Order.courseVO);
+	   			if(value==Order.orderVO.orderID){
 	   			var cell1 = $('<td></td>').text("")
 	  		  	var cell2 = $('<td></td>').text(Order.courseVO.courseName)
 	  		  	var cell3 = $('<td></td>').text("")
 	  		 	var cell4 = $('<td></td>').text(Order.buyingPrice)
-	  		  	var row = $('<tr class="data1" style="background-color:#aebfec"></tr>').append([cell1,cell2,cell3,cell4]);   			
+	  		  	var row = $('<tr class="data1" style="background-color:#acecfb"></tr>').append([cell1,cell2,cell3,cell4]);   			
 	  		  	fragment.append(row);	
 	   		 }  
 	      	  });
@@ -270,7 +412,7 @@ $(function(){
 	  }else{
 		  	$(this).attr("class")
 		  	//$(this).removeAttr("class")
-			console.log($(this).attr("class"));
+			//console.log($(this).attr("class"));
 		  	 $(this).nextAll("tr").remove(".data1");
 		  	
 		  $(this).removeAttr("class")
@@ -283,27 +425,28 @@ $(function(){
  
  function loadOrder(memberID){
 	$.getJSON('/e-Look/MemberConsumeController',{'MemberID':memberID},function(datas){
-	   	 console.log(datas);
+	   	 //console.log(datas);
 	   	 if(datas.OrderDetails.length>0){
-	   	console.log(datas.OrderDetails);
+	   	//console.log(datas.OrderDetails);
 	   	OrderDetails=datas.OrderDetails;
 	   	Order=datas.order;
  	   	 var fragment = $(document.createDocumentFragment());
  		
 	   	 $.each(datas.order,function(idx,order){
+	   		 if(order.orderTime!=null){
 	   		var count=0
    			var cell1 = $('<td></td>').text(order.orderID)
-  		  	var cell2 = $('<td></td>').text("")
-  		  	var cell3 = $('<td></td>').text(order.orderTime)
-  		  	console.log(datas.OrderDetails[idx]);
+  		  	var cell2 = $('<td style="padding-left: 25px;"></td>').html("<img src='image/arrow-n.png'>")	  	
+  		  	var cell3 = $('<td></td>').text(order.orderTime)	  
+  		  	//console.log(datas.OrderDetails[idx]);
    			$.each(datas.OrderDetails[idx],function(idx,OrderDetails){
    				count=OrderDetails.buyingPrice+count
    			})
   		  	var cell4 = $('<td></td>').text(count)
-  		  	var row = $('<tr class="parent"></tr>').append([cell1,cell2,cell3,cell4]);
+  		  	var row = $('<tr class="parent" style="background-color:#f3ffc4"></tr>').append([cell1,cell2,cell3,cell4]);
 					fragment.append(row);
    		 		//console.log(idx);
-  		 	
+	   		 }
    	 		 }); 
    	  	$('#dev-table>tbody').html(fragment);
 	   	 }else{
@@ -312,11 +455,167 @@ $(function(){
    	
   	  });
 }
+ /*收益課程*/
  
  
- 
+ $(document).ready(function () {
+    $('.btn-filter').on('click', function () {
+      var $target = $(this).data('target');
+      
+      if($target==="pagado"){
+//     	  $('.table2 tbody tr').css('display', 'none');
+ 		$('.table2 tbody[data-status!="' + $target + '"]').css('display', 'none');
+          $('.table2 tbody[data-status="' + $target + '"]').fadeIn('slow');
+          $('.table2 thead[data-status="' + $target + '"]').fadeIn('slow');
+          $('.table2 thead[data-status!="' + $target + '"]').css('display', 'none');
+      }else if($target==="pendiente"){
+    	 // $('.table2 tbody tr').css('display', 'none');
+    	  $('.table2 tbody[data-status!="' + $target + '"]').css('display', 'none');
+          $('.table2 tbody[data-status="' + $target + '"]').fadeIn('slow');
+          $('.table2 thead[data-status="' + $target + '"]').fadeIn('slow');
+          $('.table2 thead[data-status!="' + $target + '"]').css('display', 'none');
+      }else if($target==="cancelado"){
+//     	  $('.table2  tbody tr').css('display', 'none');
+          $('.table2 tbody[data-status="' + $target + '"]').fadeIn('slow');
+          $('.table2 tbody[data-status!="' + $target + '"]').css('display', 'none');
+          $('.table2 thead[data-status="' + $target + '"]').fadeIn('slow');
+          $('.table2 thead[data-status!="' + $target + '"]').css('display', 'none');
+    }else if($target==="all"){
+  	  //$('.table2 tbody').css('display', 'none');
+  	   $('.table2 tbody[data-status!="' + $target + '"]').css('display', 'none');
+        $('.table2 tbody[data-status="' + $target + '"]').fadeIn('slow');
+        $('.table2 thead[data-status="' + $target + '"]').fadeIn('slow');
+        $('.table2 thead[data-status!="' + $target + '"]').css('display', 'none');
+    }
+//       if ($target != 'all') {
+//         $('.table tbody tr').css('display', 'none');
+//         $('.table tr[data-status="' + $target + '"]').fadeIn('slow');
+//       } else {
+//         $('.table tbody tr').css('display', 'none').fadeIn('slow');
+//       }
+    });
 
+ });
+ var freeCourses;
+ var fundraisingCourses;
+ var onlineCourses;
+ var CoursesNames;
  
+ 
+ function loadCourse(memberID){
+	 var fragment1 = $(document.createDocumentFragment());//all
+	 var fragment2 = $(document.createDocumentFragment());//pagado
+	 var fragment3 = $(document.createDocumentFragment());//pendiente
+	 var fragment4 = $(document.createDocumentFragment());//cancelado
+		$.getJSON('/e-Look/MemberIncomeController',{'MemberID':memberID},function(datas){
+		   console.log(datas);
+		   freeCourses=datas.freeCourse;
+		   onlineCourses=datas.onlineCourse;
+		   fundraisingCourses=datas.fundraisingCourse;
+		   CoursesNames=datas.CourseName;
+	 		if (freeCourses.length == 0 && fundraisingCourses.length==0&& onlineCourses.length==0) {
+			$('#all').html("沒有課程收益");
+			$('#pendiente').html("沒有免費課程收益");
+			$('#cancelado').html("沒有募資課程收益");
+			$('#pagado').html("沒有線上課程收益");
+		} else {
+				//免費課程
+				if (freeCourses.length == 0) {
+					$('#pendiente').html("沒有免費課程收益");
+				} else {
+					var count=0;
+					$.each(freeCourses,function(idx,freeCourse){
+						//console.log(freeCourse)
+						
+						$.each(freeCourse,function(idx,free){
+							var cell1 = $('<td></td>').text(CoursesNames[idx])
+							var cell2 = $('<td></td>').text(free.SponsorName)
+				  		  	var cell3 = $('<td></td>').text(free.dateSponsor)
+				  		  	count=free.money+count;
+							var cell4 = $('<td></td>').text(free.money)
+							var row =$('<tr></tr>').append([cell1,cell2,cell3,cell4]);
+							fragment3.append(row);
+							
+						})						
+					})
+				$('#pendiente').html(fragment3);
+					var cell1 = $('<td></td>').text("免費課程")
+		  		  	var cell2 = $('<td></td>').text(count)
+		  		 	var row1 =$('<tr></tr>').append([cell1,cell2]);
+					fragment1.append(row1)
+				}
+				//募資課程
+				if (fundraisingCourses.length == 0) {
+					$('#cancelado').html("沒有募資課程收益");
+				} else {
+					var count=0;
+					$.each(fundraisingCourses,function(idx,fundraisingCourse){
+						//console.log(fundraisingCourse)
+						//console.log(fundraisingCourse[0].buyingPrice)
+							var cell1 = $('<td></td>').text(fundraisingCourse[0].courseVO.courseName)
+							$.each(fundraisingCourse,function(idx,fund){
+								count=fund.buyingPrice*0.56+count;
+							})
+							
+							var cell2 = $('<td></td>').text(fundraisingCourse[0].buyingPrice)
+				  		  	var cell3 = $('<td></td>').text(fundraisingCourse.length)
+							var cell4 = $('<td></td>').text(Math.round(fundraisingCourse[0].buyingPrice*fundraisingCourse.length*0.56))
+							var row =$('<tr></tr>').append([cell1,cell2,cell3,cell4]);
+							fragment4.append(row);
+					})
+					$('#cancelado').html(fragment4);
+					var cell1 = $('<td></td>').text("募資課程")
+		  		  	var cell2 = $('<td></td>').text(Math.ceil(count))
+		  		 	var row1 =$('<tr></tr>').append([cell1,cell2]);
+					fragment1.append(row1)
+				}
+				
+				
+				//線上課程
+				if (onlineCourses.length == 0) {
+					$('#pagado').html("沒有線上課程收益");
+				} else {
+					var count=0;
+					$.each(onlineCourses,function(idx,onlineCourse){
+						//console.log(onlineCourse[0].buyingPrice)
+						//console.log(fundraisingCourse[0].buyingPrice)
+							var cell1 = $('<td></td>').text(onlineCourse[0].courseVO.courseName)
+							$.each(onlineCourse,function(idx,online){
+								count=online.originalPrice*0.8+count;
+								
+							})
+							
+							var cell2 = $('<td></td>').text(onlineCourse[0].buyingPrice)
+				  		  	var cell3 = $('<td></td>').text(onlineCourse.length)
+							var cell4 = $('<td></td>').text(Math.round(onlineCourse[0].buyingPrice*onlineCourse.length*0.8))
+							var row =$('<tr></tr>').append([cell1,cell2,cell3,cell4]);
+							fragment2.append(row);
+					})
+					console.log(count);
+					$('#pagado').html(fragment2);
+					var cell1 = $('<td></td>').text("線上課程")
+		  		  	var cell2 = $('<td></td>').text(Math.ceil(count))
+		  		 	var row1 =$('<tr></tr>').append([cell1,cell2]);
+					fragment1.append(row1)
+					
+				}
+				
+				
+				$('#all').html(fragment1);
+			}
+		});
+		
+
+		
+		
+}
+		
+		
+		
+		
+	
+		  
+	
 </script>
 
 </body>

@@ -23,15 +23,15 @@ public class SponsorDAO implements SponsorDAO_interface {
 		}
 	}
 
-	private static final String INSERT_SPONSOR = "INSERT INTO Sponsor (courseID, SponsorName, money) VALUES (?,?,?) ";
+	private static final String INSERT_SPONSOR = "INSERT INTO Sponsor (courseID, SponsorName, money,dateSponsor) VALUES (?,?,?,?) ";
 	// 寫著,但應該用不到
 	private static final String UPDATE_SPONSOR = "UPDATE Sponsor SET SponsorName=?, money=? WHERE courseID=?";
 	// 寫著,但應該用不到
 	private static final String DELETE_SPONSOR = "DELETE FROM Sponsor WHERE courseID =?";
 	
-	private static final String SELECT_ONE_SPONSOR = "SELECT courseID, SponsorName, money FROM Sponsor WHERE courseID=?";
+	private static final String SELECT_ONE_SPONSOR = "SELECT courseID, SponsorName, money,dateSponsor FROM Sponsor WHERE courseID=?";
 
-	private static final String SELECT_ALL_SPONSOR = "SELECT courseID, SponsorName, money FROM Sponsor";
+	private static final String SELECT_ALL_SPONSOR = "SELECT courseID, SponsorName, money,dateSponsor FROM Sponsor";
 
 	@Override
 	public void insert(SponsorVO sponsorVO) {
@@ -43,6 +43,7 @@ public class SponsorDAO implements SponsorDAO_interface {
 			pstmt.setInt(1, sponsorVO.getCourseID());
 			pstmt.setString(2, sponsorVO.getSponsorName());
 			pstmt.setInt(3, sponsorVO.getMoney());
+			pstmt.setDate(4, sponsorVO.getDateSponsor());
 			pstmt.executeUpdate();
 
 			// Handle any SQL errors
@@ -203,12 +204,14 @@ public class SponsorDAO implements SponsorDAO_interface {
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_ONE_SPONSOR);
+			pstmt.setInt(1, courseID);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				SponsorVO = new SponsorVO();
 				SponsorVO.setCourseID(rs.getInt("courseID"));
 				SponsorVO.setSponsorName(rs.getString("SponsorName"));
 				SponsorVO.setMoney(rs.getInt("money"));
+				SponsorVO.setDateSponsor(rs.getDate("dateSponsor"));
 				CountMoney.add(SponsorVO);
 			}
 		} catch (SQLException se) {
@@ -261,6 +264,7 @@ public class SponsorDAO implements SponsorDAO_interface {
 				sponsorVO.setCourseID(rs.getInt("courseID"));
 				sponsorVO.setSponsorName(rs.getString("sponsorName"));
 				sponsorVO.setMoney(rs.getInt("money"));
+				sponsorVO.setDateSponsor(rs.getDate("dateSponsor"));
 				list.add(sponsorVO); // Store the row in the list
 			}
 

@@ -7,8 +7,9 @@
 <jsp:useBean id="SYSTEM" class="init.GlobalService" scope="application" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${SYSTEM.systemName}</title>
-<%-- <link href="<%=request.getContextPath()%>/css/bootstrap.css" --%>
-<!-- 	rel="stylesheet"> -->
+<LINK REL="SHORTCUT ICON" HREF="http://www.mydomain.com/myicon.ico">
+<link href="<%=request.getContextPath()%>/css/bootstrap.css"
+	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/_PJC/css/step1.css"
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/_PJC/css/step2.css"
@@ -32,7 +33,6 @@
 <script src="<%=request.getContextPath()%>/_PJC/js/jquery-ui.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath()%>/_PJC/js/autosize.js"></script>
-<script src="<%=request.getContextPath()%>/_PJC/js/bootstrap-confirmation.js"></script>
 <script
 	src="<%=request.getContextPath()%>/_PJC/js/bootstrap-datetimepicker.js"></script>
 <script
@@ -41,59 +41,6 @@
 	src="<%=request.getContextPath()%>/_PJC/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
 <script
 	src="<%=request.getContextPath()%>/_PJC/tinymce/js/tinymce/tinymce.js"></script>
-<script>
-		tinymce.init({ selector:'#texteditor',language_url:'<%=request.getContextPath()%>/_PJC/tinymce/js/tinymce/langs/zh_TW.js',
-				height : "500px",
-				plugins : [
-						"advlist autolink link image lists charmap print preview hr anchor pagebreak",
-						"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-						"save table contextmenu directionality emoticons template paste textcolor" ],
-				/* toolbar */
-				toolbar : "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
-				setup : function(ed) {
-					ed
-							.on(
-									'keyup',
-									function(e) {
-										// 			        console.log(ed.getContent());
-										$("#courseContent")
-												.val(ed.getContent());
-										var formData = new FormData(
-												$('form')[3]);
-										console.log("從文字編輯器欄位送資料到資料庫囉!");
-										$
-												.ajax({
-													type : 'POST',
-													url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
-													data : formData,
-													processData : false,
-													contentType : false,
-													success : function() {
-
-														delay_till_last(
-																'id',
-																function() {
-																	$(
-																			'#updateConfirm')
-																			.text(
-																					"變更已儲存至草稿");
-																	$(
-																			"#updateConfirm")
-																			.fadeIn(
-																					1200);
-																	$(
-																			"#updateConfirm")
-																			.fadeOut(
-																					1500);
-																}, 1000);
-
-													}
-
-												});
-									});
-				}
-			});
-</script>
 <script src="<%=request.getContextPath()%>/_PJC/js/upload1.js"></script>
 
 
@@ -250,7 +197,7 @@
 									</div>
 								</div>
 
-
+								
 								<!-- step1最終確認按鈕 -->
 								<div class="col-md-offset-3" style="margin-top: 20px">
 									<button type="button"
@@ -323,9 +270,7 @@
 														<p style="margin-top: 40px; font-size: 18px">課程售價：xxx元</p>
 													</div>
 												</div>
-												<div class="card-footer">
-													<button class="btn-info btn-sm pull-right"
-														style="margin-bottom: 5px; margin-top: 10px">加入書籤</button>
+												<div class="card-footer">												
 													<small>課程時間:yyy分鐘</small> <br> <small>購買人數:zzz人</small>
 
 												</div>
@@ -357,7 +302,7 @@
 												學生會需要用到的工具（含種類、版本細節）</div>
 											<div class="[ form-group ][ form-group-textarea ]">
 												<textarea name="preTool" placeholder="請輸入課程中，可能會使用到的工具"
-													class="form-control" data-toggle="floatLabel"
+													data-toggle="floatLabel" class="form-control"
 													data-value="no-js" style="font-size: 18px"
 													form="TotalContent">${CoursedData.preTool}</textarea>
 												<label for="customStyle" style="">(例：Photoshop CC
@@ -544,12 +489,11 @@
 											</div>
 											<div class="[ form-group ][ form-group-textarea ]"
 												id="get-data-form">
-												<textarea class="tinymce form-control" id="texteditor"
-													placeholder="請輸入課程中，可能會使用到的工具" class="form-control"
+												<textarea class="tinymce" id="texteditor"	
 													data-toggle="floatLabel" data-value="no-js"
 													style="font-size: 18px" form="TotalContent">${CoursedData.courseContent}</textarea>
-												<input type="hidden" value="" id="courseContent"
-													name="courseContent">
+												<input name="image" type="file" id="upload" class="hidden" onchange="">
+												<input name="courseContent" type="hidden" value="" id="courseContent">
 											</div>
 										</div>
 									</div>
@@ -731,16 +675,14 @@
 
 
 
-								<div class="col-md-offset-4" style="margin-top: 80px" id='#postProposalfinal'>
+								<div class="col-md-offset-4" style="margin-top: 80px">
 									<ul class="list-inline" style="margin-bottom: 80px">
 										<li><button type="button"
 												class="btn3d btn btn-default btn-lg prev-step">上一步</button></li>
-										<li><a href="<%=request.getContextPath()%>/HOME.jsp" title="恭喜您完成此次的課程編輯流程!" data-toggle="confirmation" data-singleton="true" data-placement="top" data-popout="true"
-        										data-btn-ok-class="btn-success"
-        										data-btn-cancel-class="btn-danger">
-										<button type="button" id="postProposal" class="btn btn-primary btn-lg btn3d next-step">
+										<li>
+										<button type="button" class="btn btn-primary btn-lg btn3d next-step" data-toggle="modal" data-target="#ConfirmBotton">
 										<span class="glyphicon glyphicon-ok"></span>  完成課程編輯並送出審核
-										</button></a></li>
+										</button></li>
 									</ul>
 								</div>
 								<div class="clearfix"></div>
@@ -751,6 +693,34 @@
 		</div>
 	</div>
 
+
+<!-- 模態框========================================================================================================================== -->
+<div class="modal fade" id="ConfirmBotton" tabindex="-1" role="dialog" aria-labelledby="ConfirmTitleLabel" aria-hidden="true" style="left: 50%;top: 50%;transform: translate(-50%,-50%);">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close pull-right" data-dismiss="modal" 
+						aria-hidden="true">×
+				</button>
+				<h4 class="modal-title" id="ConfirmTitleLabel" style="text-align: center;">
+					恭喜您!  即將完成課程編輯流程!
+				</h4>
+			</div>
+			<div class="modal-body" style="text-align: center;">
+				再次請您確認內容是否無誤? 若內容確認完畢，可點選"提交"，我們會盡快通知您審核結果
+			</div>
+			<div class="modal-footer" style="text-align: center;">
+				<button type="button" class="btn btn-danger" 
+						data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i>&nbsp;&nbsp;取消
+				</button>
+				<a href="<%=request.getContextPath()%>/HOME.jsp"><button type="button" class="btn btn-success" id="FinalConfirm"><i class="glyphicon glyphicon-ok"></i>
+				&nbsp;&nbsp;提交
+				</button></a>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- ====================================================================================================================================== -->
 
 	<script>
 		$(document).ready(function() {
@@ -1221,14 +1191,6 @@ $('#starttime').on('input propertychange',function(e) {
 		}
 		// =====================================
 
-		//用goGet方法送到CourseEditControlloer，改變草稿的狀態	
-// 		$('#postProposalfinal').click(function() {
-// 			$.get('/e-Look/com.e_Look.Course.control/CourseEditControlloer', {
-// 				'courseID' : $('#courseID').val()
-// 			}, function() {
-// 			})
-// 		})
-		//======================================================
 			
 		//用goGet方法送到CourseEditControlloer，取得目前資料庫存入的課程內容	
 		$('#getProposalData,#getProposalData2').click(function() {
@@ -1272,20 +1234,39 @@ $('#starttime').on('input propertychange',function(e) {
  					$('#fundDateDurationJSON').css( "color", "red" );
 				}
 				if(datas.fundEndDate !=null){
+					if(datas.targetStudentNumber ==0){
+						$('#fundDateDurationJSON').text("募資起迄時間：無須填寫");
+	 					$('#fundDateDurationJSON').css( "color", "black" );
+					}else{
 					$('#fundDateDurationJSON').text("募資起迄時間："+datas.fundStartDate+" ~ "+datas.fundEndDate);
- 					$('#fundDateDurationJSON').css( "color", "black" );
-				}else{					
+ 					$('#fundDateDurationJSON').css( "color", "black" );}
+				}else{
+					if(datas.targetStudentNumber ==0){
+						$('#fundDateDurationJSON').text("募資起迄時間：無須填寫");
+	 					$('#fundDateDurationJSON').css( "color", "black" );
+					}else{
  					$('#fundDateDurationJSON').text("募資起迄時間：填寫資訊不完整");
  					$('#fundDateDurationJSON').css( "color", "red" );
+					}
 				}
 
 				
 				if(datas.courseStartDate !=null){
+					if(datas.targetStudentNumber ==0){
+						$('#courseStartDateJSON').text("開課日期：待審核通過立即開課");
+	 					$('#courseStartDateJSON').css( "color", "black" );
+					}else{
 					$('#courseStartDateJSON').text("開課日期："+datas.courseStartDate);
  					$('#courseStartDateJSON').css( "color", "black" );
-				}else{					
+					}
+				}else{
+					if(datas.targetStudentNumber ==0){
+						$('#courseStartDateJSON').text("開課日期：待審核通過立即開課");
+	 					$('#courseStartDateJSON').css( "color", "black" );
+					}else{
  					$('#courseStartDateJSON').text("開課日期：尚未填寫相關資訊");
  					$('#courseStartDateJSON').css( "color", "red" );
+					}
 				}
 				if(datas.courseVideopathway !=null){
 					$('#courseVideoNameJSON').text("上傳影片檔名："+datas.courseVideopathway);
@@ -1360,43 +1341,105 @@ $('#starttime').on('input propertychange',function(e) {
 										}
 									})
 						})
-						//===============================================================
-							
-						$('#soldPrice').keyup(function(){
-								if($('#soldPrice').val()<10){
-									$('#soldPricewarning').text("請輸入大於10的數字")
-								}else{
-									$('#soldPricewarning').text("")
-								}
-							})
-						$('#targetStudentNumber,#soldPrice').keyup(function(){
-							if($('#targetStudentNumber').val()!=0){
-								if($('#targetStudentNumber').val()<10){
-									$('#targetStudentNumberwarning').text("請輸入大於10的數字");
-									$('#targetStudentNumberwarning').css(  "color", "red" );
-								}
-								else{
-									$('#targetStudentNumberwarning').css( "color", "black" );
-									$('#targetStudentNumberwarning').text(("即開設本次課程的最低成本為"+parseInt($('#targetStudentNumber').val()*0.56*($('#soldPrice').val()))+"元"));
-								}
-							}else {
-								$('#targetStudentNumberwarning').text("");
-								$('#targetStudentNumberwarning').empty();
-							}
-								
-							})
+//===============================================================
+	
+$('#soldPrice').keyup(function(){
+		if($('#soldPrice').val()<10){
+			$('#soldPricewarning').text("請輸入大於10的數字")
+		}else{
+			$('#soldPricewarning').text("")
+		}
+	})
+$('#targetStudentNumber,#soldPrice').keyup(function(){
+	if($('#targetStudentNumber').val()!=0){
+		if($('#targetStudentNumber').val()<10){
+			$('#targetStudentNumberwarning').text("請輸入大於10的數字");
+			$('#targetStudentNumberwarning').css(  "color", "red" );
+		}
+		else{
+			$('#targetStudentNumberwarning').css( "color", "black" );
+			$('#targetStudentNumberwarning').text(("即開設本次課程的最低成本為"+parseInt($('#targetStudentNumber').val()*0.56*($('#soldPrice').val()))+"元"));
+		}
+	}else {
+		$('#targetStudentNumberwarning').text("");
+		$('#targetStudentNumberwarning').empty();
+	}
+		
+	})
 	//課程送出前警告視窗=================================					
-	$('[data-toggle="confirmation"]').confirmation({ 
-		title: 'Confirm!',
-		content: '確定要將內容送至審核階段嗎?',
-		btnOkLabel: "&nbsp;送出審核",
-		btnCancelLabel: "&nbsp;取消",
-		onConfirm:function(){$.get('/e-Look/com.e_Look.Course.control/CourseEditControlloer', {
+	$('#FinalConfirm').click(function(){
+		$.get('/e-Look/com.e_Look.Course.control/CourseEditControlloer', {
 			'courseID' : $('#courseID').val()
 		}, function() {
-		})}	
-	});
+		})
+	})
 	//===============================================
+		
+	$(document).ready(function() {
+			  tinymce.init({
+			    selector: "#texteditor",
+			    language_url:'<%=request.getContextPath()%>/_PJC/tinymce/js/tinymce/langs/zh_TW.js',
+			    height : "500px",
+			    theme: "modern",
+			    paste_data_images: true,
+			    plugins: [
+			      "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+			      "searchreplace wordcount visualblocks visualchars code fullscreen",
+			      "insertdatetime media nonbreaking save table contextmenu directionality",
+			      "emoticons template paste textcolor colorpicker textpattern"
+			    ],
+			    toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+			    toolbar2: "print preview media | forecolor backcolor emoticons",
+			    image_advtab: true,
+			    file_picker_callback: function(callback, value, meta) {
+			      if (meta.filetype == 'image') {
+			        $('#upload').trigger('click');
+			        $('#upload').on('change', function() {
+			          var file = this.files[0];
+			          var reader = new FileReader();
+			          reader.onload = function(e) {
+			            callback(e.target.result, {
+			              alt: ''
+			            });
+			          };
+			          reader.readAsDataURL(file);
+			        });
+			      }
+			    },
+			    templates: [{
+			      title: 'Test template 1',
+			      content: 'Test 1'
+			    }, {
+			      title: 'Test template 2',
+			      content: 'Test 2'
+			    }],
+			    setup : function(ed) {
+					ed.on('keyup',function(e) {
+										//console.log(ed.getContent());
+										$("#courseContent").val(ed.getContent());
+										var formData = new FormData($('form')[3]);
+										console.log("從文字編輯器欄位送資料到資料庫囉!");
+										$.ajax({
+												type : 'POST',
+												url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
+												data : formData,
+												processData : false,
+												contentType : false,
+												success : function() {delay_till_last('id',
+																function() {
+																	$('#updateConfirm').text("變更已儲存至草稿");
+																	$("#updateConfirm").fadeIn(1200);
+																	$("#updateConfirm").fadeOut(1500);
+																}, 1000);
+													}
+
+												});
+									});
+				}
+			  });
+		
+		
+		});
 	</script>
 
 

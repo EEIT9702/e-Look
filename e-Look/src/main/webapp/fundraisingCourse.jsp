@@ -239,9 +239,10 @@ h5 {
 .gray1{
 -webkit-filter:grayscale(1);
 }
-
+#body{background-color: #FAEBD7;}
 </style>
 <script type="text/javascript">
+/*
 //為文件的滑鼠按下事件定義回呼
 document.onmousedown = function(event) {
 	//滑鼠事件：0 > 沒按鍵, 1 > 按左鍵, 2 > 按右鍵, 3 > 按左鍵&右鍵
@@ -251,6 +252,7 @@ document.onmousedown = function(event) {
 		alert("禁用滑鼠右鍵!");
 	}
 }
+*/
 
 /*展示廣告圖片*/
 function showAdPic() {
@@ -347,10 +349,9 @@ function river(){
 	//判斷卷軸是否到底部
 	//有時候卷軸會多0.5  改>=的寫法可以解決這個問題
 	if( wst>=(dh-wh) || rowValueX==0 ){
-		rowValueX++;
 		$.get("<%= request.getContextPath() %>/body/fundraising_data.jsp",{"rowValueY":rowValueX,"keyWord":keyWord,"courseClass":courseClass},function(data){
 			$('#river').append(data)
-			
+			rowValueX += 4;
 		});
 	}
 }
@@ -358,7 +359,7 @@ function river(){
 </head>
 
 
-<body style="margin-top:10px;">
+<body style="margin-top:10px;" id="body">
 
 
 <jsp:include page="${contextPath}/login.jsp" />

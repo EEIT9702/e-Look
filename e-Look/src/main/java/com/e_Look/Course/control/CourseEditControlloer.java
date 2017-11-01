@@ -59,16 +59,31 @@ public class CourseEditControlloer extends HttpServlet {
 			out.print(jsonString1);
 		}
 		
+		else if(request.getParameter("rollbackEditorStatus")!=null){
+			Integer courseID = Integer.valueOf(request.getParameter("courseID"));
+			CourseService courseService3 = new CourseService();
+			courseService3.rollbacktoEditorStatus(courseID);
+		}
 		
+		else if(request.getParameter("changeStatustoOnlineStatus")!=null){
+			Integer courseID = Integer.valueOf(request.getParameter("courseID"));
+			CourseService courseService4 = new CourseService();
+			courseService4.changeStatustoOnlineStatus(courseID);
+		}
+		
+		else if(request.getParameter("changeStatustoFundStatus")!=null){
+			Integer courseID = Integer.valueOf(request.getParameter("courseID"));
+			CourseService courseService5 = new CourseService();
+			courseService5.changeStatustoFundStatus(courseID);
+		}
+	
 		 else {			
 				Integer courseID = Integer.valueOf(request.getParameter("courseID"));
 				CourseService courseService = new CourseService();
 				courseService.updateProposalStatus(courseID);
 		}
 		
-		
-		
-		
+	
 	}
 
 	/**

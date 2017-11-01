@@ -31,12 +31,20 @@ public class CourseDAO implements CourseDAO_interface {
 	private static final String UPDATE_Course_PAPER ="update Course set paper=? where courseID= ?";
 	private static final String UPDATE_Course_CourseVideopathway ="update Course set CourseVideopathway=? where courseID= ?";
 	private static final String UPDATE_Proposal_Status = "update Course set Status=1 where courseID=?";
+	private static final String UPDATE_Editor_Status = "update Course set Status=0 where courseID=?";
+	private static final String UPDATE_Fund_Status = "update Course set Status=3 where courseID=?";
+	private static final String UPDATE_Online_Status = "update Course set Status=2 where courseID=?";
 	private static final String DELETE_Course = "delete from Course where courseID= ?";
 	private static final String SELECT_ONE_Course = "select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore from Course where courseID= ?";
 	private static final String SELECT_ALL_Course = "select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore from Course where memberID= ? and status= ?";
-	private static final String SELECT_STATUS_Course = "select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore from Course where status= ?";
+	private static final String SELECT_ALL_ReviewCourse = "select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore from Course where status= 1";
 	private static final String CHANGE_Course_Stage = "update Course set status=? where courseID= ?";
 	private static final String SELECT_ALL_ONLINECourse = "select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore from Course where  status= 2 ";
+	private static final String UPDATE_AVG_SCORE = "UPDATE Course SET avgScore=? WHERE courseID=?";
+	private static final String SELECT_ALL_FREE_COURSE = "SELECT courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore FROM Course WHERE status=2 AND soldPrice=0";
+	private static final String SELECT_ALL_ONLINE_COURSE = "SELECT courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore FROM Course WHERE status=2 AND soldPrice>0";
+	private static final String SELECT_ALL_FUNDRAISE_COURSE = "SELECT courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore FROM Course WHERE status=3";
+	
 	@Override
 	public Integer insert(CourseVO courseVO) {
 		Connection con = null;
@@ -140,6 +148,41 @@ public class CourseDAO implements CourseDAO_interface {
 			}
 		}
 	}
+	//更新平均分數
+	@Override
+	public void updateAVGScore(Integer courseID,Double avgScore) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try{
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_AVG_SCORE);
+			
+			pstmt.setDouble(1, avgScore);
+			pstmt.setInt(2, courseID);
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. "
+					+ e.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+	}
+	
 	//以下為更新圖片的功能
 	@Override
 	public void updateimage(CourseVO courseVO) {
@@ -421,9 +464,96 @@ public class CourseDAO implements CourseDAO_interface {
 	}
 
 }
-	
-	
-	
+	//審核不過，退回成草稿狀態
+		@Override
+		public void changeStatustoEditor(Integer courseID){
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			try{
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(UPDATE_Editor_Status);
+			pstmt.setInt(1,courseID);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+		//審核通過，改為上線狀態
+				@Override
+				public void changeStatustoOnline(Integer courseID){
+					Connection con = null;
+					PreparedStatement pstmt = null;
+					try{
+					con = ds.getConnection();
+					pstmt = con.prepareStatement(UPDATE_Online_Status);
+					pstmt.setInt(1,courseID);
+					pstmt.executeUpdate();
+				} catch (SQLException e) {
+					throw new RuntimeException("A database error occured. " + e.getMessage());
+				} finally {
+					if (pstmt != null) {
+						try {
+							pstmt.close();
+						} catch (SQLException e) {
+							e.printStackTrace(System.err);
+						}
+					}
+					if (con != null) {
+						try {
+							con.close();
+						} catch (Exception e) {
+							e.printStackTrace(System.err);
+						}
+					}
+				}
+
+			}
+				//審核通過，改為募資中的狀態
+				@Override
+				public void changeStatustoFund(Integer courseID){
+					Connection con = null;
+					PreparedStatement pstmt = null;
+					try{
+					con = ds.getConnection();
+					pstmt = con.prepareStatement(UPDATE_Fund_Status);
+					pstmt.setInt(1,courseID);
+					pstmt.executeUpdate();
+				} catch (SQLException e) {
+					throw new RuntimeException("A database error occured. " + e.getMessage());
+				} finally {
+					if (pstmt != null) {
+						try {
+							pstmt.close();
+						} catch (SQLException e) {
+							e.printStackTrace(System.err);
+						}
+					}
+					if (con != null) {
+						try {
+							con.close();
+						} catch (Exception e) {
+							e.printStackTrace(System.err);
+						}
+					}
+				}
+
+			}
 	
 	//管理員改變課程狀態(通過審核、下架等等....)
 	@Override
@@ -456,6 +586,172 @@ public class CourseDAO implements CourseDAO_interface {
 			}
 		}
 	}
+	
+	//顯示所有status2的免費課程
+	@Override
+	public List<CourseVO> getAllFreeCourse() {
+		List<CourseVO> CourseList = new LinkedList<CourseVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try{
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(SELECT_ALL_FREE_COURSE);
+			ResultSet  rs=pstmt.executeQuery();
+			while(rs.next()){
+				CourseVO courseVO=new CourseVO();
+				courseVO.setCourseID(rs.getInt(1));
+				courseVO.setCourseName(rs.getString(2));
+				courseVO.setcPhoto(rs.getBinaryStream(3));
+				courseVO.setPreTool(rs.getString(4));
+				courseVO.setBackground(rs.getString(5));
+				courseVO.setAbility(rs.getString(6));
+				courseVO.setTargetgroup(rs.getString(7));
+				courseVO.setSoldPrice(rs.getInt(8));
+				courseVO.setCourseLength(rs.getInt(9));
+				courseVO.setTargetStudentNumber(rs.getInt(10));
+				courseVO.setFundStartDate(rs.getDate(11));
+				courseVO.setFundEndDate(rs.getDate(12));
+				courseVO.setCourseStartDate(rs.getDate(13));
+				courseVO.setCourseVideopathway(rs.getString(14));
+				courseVO.setPaper(rs.getBinaryStream(15));
+				courseVO.setStatus(rs.getInt(16));
+				courseVO.setCourseContent(rs.getString(17));
+				courseVO.setMemberID(rs.getInt(18));
+				courseVO.setAvgScore(rs.getDouble(19));
+				CourseList.add(courseVO);			
+		}
+			
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return CourseList;
+	}
+	
+	//顯示所有status2的付費課程
+	@Override
+	public List<CourseVO> getAllOnlineCourse() {
+		List<CourseVO> CourseList = new LinkedList<CourseVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try{
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(SELECT_ALL_ONLINE_COURSE);
+			ResultSet  rs=pstmt.executeQuery();
+			while(rs.next()){
+				CourseVO courseVO=new CourseVO();
+				courseVO.setCourseID(rs.getInt(1));
+				courseVO.setCourseName(rs.getString(2));
+				courseVO.setcPhoto(rs.getBinaryStream(3));
+				courseVO.setPreTool(rs.getString(4));
+				courseVO.setBackground(rs.getString(5));
+				courseVO.setAbility(rs.getString(6));
+				courseVO.setTargetgroup(rs.getString(7));
+				courseVO.setSoldPrice(rs.getInt(8));
+				courseVO.setCourseLength(rs.getInt(9));
+				courseVO.setTargetStudentNumber(rs.getInt(10));
+				courseVO.setFundStartDate(rs.getDate(11));
+				courseVO.setFundEndDate(rs.getDate(12));
+				courseVO.setCourseStartDate(rs.getDate(13));
+				courseVO.setCourseVideopathway(rs.getString(14));
+				courseVO.setPaper(rs.getBinaryStream(15));
+				courseVO.setStatus(rs.getInt(16));
+				courseVO.setCourseContent(rs.getString(17));
+				courseVO.setMemberID(rs.getInt(18));
+				courseVO.setAvgScore(rs.getDouble(19));
+				CourseList.add(courseVO);			
+		}
+			
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return CourseList;
+	}
+	
+	//顯示所有status3的募資課程
+	@Override
+	public List<CourseVO> getAllFundRaiseCourse() {
+		List<CourseVO> CourseList = new LinkedList<CourseVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try{
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(SELECT_ALL_FUNDRAISE_COURSE);
+			ResultSet  rs=pstmt.executeQuery();
+			while(rs.next()){
+				CourseVO courseVO=new CourseVO();
+				courseVO.setCourseID(rs.getInt(1));
+				courseVO.setCourseName(rs.getString(2));
+				courseVO.setcPhoto(rs.getBinaryStream(3));
+				courseVO.setPreTool(rs.getString(4));
+				courseVO.setBackground(rs.getString(5));
+				courseVO.setAbility(rs.getString(6));
+				courseVO.setTargetgroup(rs.getString(7));
+				courseVO.setSoldPrice(rs.getInt(8));
+				courseVO.setCourseLength(rs.getInt(9));
+				courseVO.setTargetStudentNumber(rs.getInt(10));
+				courseVO.setFundStartDate(rs.getDate(11));
+				courseVO.setFundEndDate(rs.getDate(12));
+				courseVO.setCourseStartDate(rs.getDate(13));
+				courseVO.setCourseVideopathway(rs.getString(14));
+				courseVO.setPaper(rs.getBinaryStream(15));
+				courseVO.setStatus(rs.getInt(16));
+				courseVO.setCourseContent(rs.getString(17));
+				courseVO.setMemberID(rs.getInt(18));
+				courseVO.setAvgScore(rs.getDouble(19));
+				CourseList.add(courseVO);			
+		}
+			
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return CourseList;
+	}
+	
 	//顯示所有status2的課程(顯示首頁的熱門課程等....)
 	@Override
 	public List<CourseVO> getAllonlineCourse() {
@@ -510,6 +806,60 @@ public class CourseDAO implements CourseDAO_interface {
 		return CourseList;
 	}
 
+	
+	//顯示所有待審核(status1)的課程(顯示首頁的熱門課程等....)
+		@Override
+		public List<CourseVO> getAllReviewCourse() {
+			List<CourseVO> CourseList = new LinkedList<CourseVO>();
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			try{
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(SELECT_ALL_ReviewCourse);
+				ResultSet  rs=pstmt.executeQuery();
+				while(rs.next()){
+					CourseVO courseVO=new CourseVO();
+					courseVO.setCourseID(rs.getInt(1));
+					courseVO.setCourseName(rs.getString(2));
+					courseVO.setcPhoto(rs.getBinaryStream(3));
+					courseVO.setPreTool(rs.getString(4));
+					courseVO.setBackground(rs.getString(5));
+					courseVO.setAbility(rs.getString(6));
+					courseVO.setTargetgroup(rs.getString(7));
+					courseVO.setSoldPrice(rs.getInt(8));
+					courseVO.setCourseLength(rs.getInt(9));
+					courseVO.setTargetStudentNumber(rs.getInt(10));
+					courseVO.setFundStartDate(rs.getDate(11));
+					courseVO.setFundEndDate(rs.getDate(12));
+					courseVO.setCourseStartDate(rs.getDate(13));
+					courseVO.setCourseVideopathway(rs.getString(14));
+					courseVO.setPaper(rs.getBinaryStream(15));
+					courseVO.setStatus(rs.getInt(16));
+					courseVO.setCourseContent(rs.getString(17));
+					courseVO.setMemberID(rs.getInt(18));
+					courseVO.setAvgScore(rs.getDouble(19));
+					CourseList.add(courseVO);			
+			}
+			} catch (SQLException e) {
+				throw new RuntimeException("A database error occured. " + e.getMessage());
+			} finally {
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException e) {
+						e.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return CourseList;
+		}
 	
 	
 }

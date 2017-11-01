@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE>
-<link href="<%=request.getContextPath()%>/css/bootstrap.css"
+<link href="<%=request.getContextPath()%>/css/bootstrap-3.3.7-dist/css/bootstrap.css"
 	rel="stylesheet">
 <script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.js"></script>
@@ -190,7 +190,7 @@ a:HOVER {
 	<div class="container">
 		<div class="row" style="padding-left: 40px">
 			<!--for each  -->
-			<c:forEach var='listcourse' items='${course.allonlineCourse}'>
+			<c:forEach var='listcourse' items='${course.allonlineCourse}' begin="1" end="8">
 				<c:if test="${listcourse.soldPrice>0}">
 					<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course"
 						style="width: 341px">

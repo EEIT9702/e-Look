@@ -10,4 +10,7 @@ public class OrderDetailsService {
 	public List<OrderDetailsVO> findByOrderID(Integer orderID){
 		return dao.findByOrderID(orderID);
 	}
+	public List<OrderDetailsVO> findByCourseID(Integer orderID){
+		return dao.findByCourseID(orderID);
+	}
 }

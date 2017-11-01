@@ -74,7 +74,41 @@ public class CourseService {
 	public void updateProposalStatus(Integer courseID){
 			dao.postProposal(courseID);
 	}
+	public void rollbacktoEditorStatus(Integer courseID){
+		dao.changeStatustoEditor(courseID);
+	}
+	public void changeStatustoOnlineStatus(Integer courseID){
+		dao.changeStatustoOnline(courseID);
+	}
+	public void changeStatustoFundStatus(Integer courseID){
+		dao.changeStatustoFund(courseID);
+	}
 	public List<CourseVO> getAllCourseData(Integer memberID, Integer status){
 		return dao.findAllCourse(memberID, status);
 	}
+
+	public List<CourseVO> getAllReviewCourseData(){
+		return dao.getAllReviewCourse();
+	}
+	
+
+	public void updateAVGScore(Integer courseID ,Double avgScore) {
+		CourseVO courseVO = new CourseVO();
+		courseVO.setCourseID(courseID);
+		courseVO.setAvgScore(avgScore);
+		dao.updateAVGScore(courseID, avgScore);
+	}
+	
+	public Integer countdown(Integer courseID) {
+		CourseVO courseVO = dao.findByPrimaryKey(courseID);
+		Long timeMillis = courseVO.getFundEndDate().getTime() - System.currentTimeMillis();
+		Integer time = (int)(timeMillis/1000);
+		Integer day = time / (60*60*24);
+		if(day <=0 ){
+			return null;
+		}else{
+			return day;			
+		}
+	}
+
 }

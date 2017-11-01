@@ -239,9 +239,10 @@ h5 {
 .gray1{
 -webkit-filter:grayscale(1);
 }
-
+#body{background-color: #FAEBD7;}
 </style>
 <script type="text/javascript">
+/*
 //為文件的滑鼠按下事件定義回呼
 document.onmousedown = function(event) {
 	//滑鼠事件：0 > 沒按鍵, 1 > 按左鍵, 2 > 按右鍵, 3 > 按左鍵&右鍵
@@ -251,7 +252,7 @@ document.onmousedown = function(event) {
 		alert("禁用滑鼠右鍵!");
 	}
 }
-
+*/
 /*展示廣告圖片*/
 function showAdPic() {
 	//獲得廣告的DOM
@@ -269,8 +270,9 @@ function showAdPic() {
 
 	/*瀑布流關鍵*/
 var rowValueX = 0;
-var keyWord;
-var courseClass;
+var keyWord="";
+var courseClass="";
+var lastClickClass;
 	//初載入 事件繫結
 $(function() {
 	//showAdPic();
@@ -291,30 +293,22 @@ $(function() {
 	var	wh = $(window).height();
 	//整份文件
 	var	dh =$(document).height();
-	console.log(wst+"---"+dh+"---"+wh);
+	//console.log(wst+"---"+dh+"---"+wh);
 	$(window).scroll(river);
 	
 	$('.text-center').click(function(){
-		$('.text-center').children('img').toggleClass('gray1')
-		$(this).children('img').toggleClass('gray1');
-		
-		if($(this).children('img').hasClass('gray1')){
-			$('.text-center').children('img').addClass('gray1')
-			$(this).children('img').toggleClass('gray1');	
-		}
-
-		if($(this).children('p').text()==courseClass){
-			courseClass="";
+		if(lastClickClass==$(this).children('p').attr('alt')){
+			courseClass= "" ;
+			$('.text-center').children('img').removeClass('gray1');
+			lastClickClass="";		
 		}else{
-			//courseClass=$(this).children('p').text()
-			courseClass = $(this).children('p').attr("alt");
-			cCName = $(this).children('p').text();
-			console.log("courseClass = " + courseClass + ", cCName = " + cCName);
+			courseClass=$(this).children('p').attr('alt');
+			$('.text-center').children('img').addClass('gray1');
+			$(this).children('img').removeClass('gray1');
+			lastClickClass=$(this).children('p').attr('alt');
 		}
-		
 		keyWord="";
 		refreshRiver();
-		
 	})
 	
 	$('#searchicon').click(clickSearch);
@@ -322,7 +316,7 @@ $(function() {
 	
 function clickSearch(){
 	keyWord=$('#keyWord').val();
-	console.log("clickSearch() keyWord = " + keyWord);
+	//console.log("clickSearch() keyWord = " + keyWord);
 	$.get('/e-Look/SearchController.do',{'keyWord':keyWord},function(){
 		
 	})
@@ -346,10 +340,11 @@ function river(){
 	//console.log(wst+"---"+dh+"---"+wh+","+wh+","+(dh-wh));
 	//判斷卷軸是否到底部
 	//有時候卷軸會多0.5  改>=的寫法可以解決這個問題
+	console.log(courseClass+"river()"+keyWord);
 	if( wst>=(dh-wh) || rowValueX==0 ){
-		rowValueX++;
 		$.get("<%= request.getContextPath() %>/body/online_data.jsp",{"rowValueY":rowValueX,"keyWord":keyWord,"courseClass":courseClass},function(data){
 			$('#river').append(data)
+		rowValueX+=4;
 			
 		});
 	}
@@ -358,7 +353,7 @@ function river(){
 </head>
 
 
-<body style="margin-top:10px;">
+<body style="margin-top:10px;" id="body">
 
 
 <jsp:include page="${contextPath}/login.jsp" />
@@ -369,7 +364,7 @@ function river(){
 	<div class="row">
 	<div class="col-md-8 col-sm-10 col-xs-12 cclass">
 
-		<div class="col-md-1 col-sm-2 col-xs-3 text-center" style="" >
+		<div class="col-md-1 col-sm-2 col-xs-3 text-center">
 			<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/life.svg"><p alt="101" class="pstyle">生活</p>
 		</div>
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center">

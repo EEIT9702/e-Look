@@ -19,6 +19,10 @@ if(shoppingCartList != null){
 <%-- <script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script> --%>
 <%-- <script src="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.js"></script> --%>
 <style>
+
+*{
+	text-decoration: none
+}
 .navbar {
 	background: rgba(255, 255, 255, 0.25);
 	border: none;
@@ -166,8 +170,10 @@ font-size: 18px;
 								href="<%=request.getContextPath()%>/freeCourse_Home.jsp"><img
 									src="<%=request.getContextPath()%>/HeaderCssJs/004-gift.png"
 									height="28">免費課程</a></li>
+
 							<li style="padding-top:12px" class="tt"><a
 								href="<%=request.getContextPath()%>/CreateCourseCotroller"><img
+
 									src="<%=request.getContextPath()%>/HeaderCssJs/001-book.png"
 									height="28">我要開課</a></li>
 						</ul>

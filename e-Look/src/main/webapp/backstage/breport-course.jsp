@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="Short Icon" type="image/x-icon" href="${initParam.icon}" />
 <title>檢舉課程管理畫面</title>
 <script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script>
 <!-- <script type="text/javascript" src="css/jquery.mmenu.js"></script> -->
@@ -49,6 +50,9 @@
 .histiryBtn a{
 	text-decoration: none;
 }
+#reportTable>tbody td{
+	vertical-align:middle;
+}
 </style>
 </head>
 <body>
@@ -77,18 +81,21 @@
                  </thead>
                  <tbody>
                  </tbody>
-                  <tfoot style="border-top:none">
-	                 <tr>
-	                  <td><button type="button" value="hideHistory" onclick="self.location.href='back_report-v2.jsp'" class="btn btn-info">檢舉留言管理</button></td>
-	                  <td><input type="hidden" id="" name=""><span></span></td>
-	                  <td><input type="hidden" id="" name=""><span></span></td>
-	                  <td><input type="hidden" id="" name=""><span></span></td>
-	                  <td><input type="hidden" id="" name=""><span></span></td>
-	                  <td><button type="button" value="hideHistory" onclick="self.location.href='breport_course_history.jsp'" class="btn btn-success">查詢下架影片記錄</button></td>
-	                 </tr>
-                  </tfoot>
+<!--                   <tfoot style="border-top:none"> -->
+<!-- 	                 <tr> -->
+<!-- 	                  <td><button type="button" value="hideHistory" onclick="self.location.href='back_report-v2.jsp'" class="btn btn-info">檢舉留言管理</button></td> -->
+<!-- 	                  <td><input type="hidden" id="" name=""><span></span></td> -->
+<!-- 	                  <td><input type="hidden" id="" name=""><span></span></td> -->
+<!-- 	                  <td><input type="hidden" id="" name=""><span></span></td> -->
+<!-- 	                  <td><input type="hidden" id="" name=""><span></span></td> -->
+<!-- 	                  <td><button type="button" value="hideHistory" onclick="self.location.href='breport_course_history.jsp'" class="btn btn-success">查詢下架影片記錄</button></td> -->
+<!-- 	                 </tr> -->
+<!--                   </tfoot> -->
 			</table>
-
+			<div class="col-md-4" style="float:right;margin-bottom:30px;">
+				<button type="button" value="hideHistory" onclick="self.location.href='back_report-v2.jsp'" class="btn btn-info" style="margin-right:22px;">檢舉留言管理</button>
+				<button type="button" value="hideHistory" onclick="self.location.href='breport_course_history.jsp'" class="btn btn-success" style="margin-right:6px;">查詢下架影片記錄</button>
+			</div>
 		</div>
 
 </div>
@@ -140,8 +147,15 @@
 		    		//var cell2 = $('<td></td>').text(reportV.reportCourseID);
 		    		var cell3 = $('<td></td>').text(reportV.reportContent);
 		    		var cell4 = $('<td></td>').text(reportV.reportTime);
-		    		var cell5 = $('<td></td>').text(reportV.status);
-		    		var cell6 = $('<td></td>').html('<button class="btn btn-primary">下架影片</button>&nbsp;<button class="btn btn-warning">不處理</button></td>');
+		    		//var cell5 = $('<td></td>').text(reportV.status);
+		    		if(reportV.status == 0){
+		    			var cell5 = $('<td></td>').text("待處理");
+		    		}else if(reportV.status == 1){
+		    			var cell5 = $('<td></td>').text("已下架");
+		    		}else{
+		    			var cell5 = $('<td></td>').text("不處理");
+		    		}
+		    		var cell6 = $('<td></td>').html('<button class="btn btn-primary" style="margin-right:10px;">下架影片</button>&nbsp;<button class="btn btn-warning">不處理</button></td>');
 		    		//<tr><td>
 		    		var row = $('<tr></tr>').append([cell0,cell2,cell3,cell4,cell5,cell6]);
 		    		//放到容器裡
