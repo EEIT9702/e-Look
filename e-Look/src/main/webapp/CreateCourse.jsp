@@ -124,7 +124,7 @@
 													<i class="glyphicon glyphicon-list"></i>
 												</div>
 												<div class="update-text">
-													<strong>步驟一12、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
+													<strong>步驟一、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
 												</div>
 											</div>
 										</div>
@@ -149,6 +149,7 @@
 												</div>
 											</div>
 										</div>
+
 
 										<div class="col-md-12">
 											<div class="update-nag element-animation4">
@@ -951,6 +952,7 @@
 
 			}
 			if (selectr === "radio3") {
+				$("#soldPrice").val("10");
 				$('#targetStudentNumber').val("0");
 				$('#targetStudentNumberwarning').empty();
 				document.querySelector("#soldPrice")
@@ -982,6 +984,8 @@
 						})
 			}
 			if (selectr === "radio2") {
+				$("#soldPrice").val("10");
+				$("#targetStudentNumber").val("10");
 				document.querySelector("#soldPrice")
 						.removeAttribute("readonly");
 				document.querySelector("#ProposalCourse").style = "opacity: 1;font-size: 18px;margin-top: 2em;";
@@ -1398,6 +1402,7 @@ $('#targetStudentNumber,#soldPrice').keyup(function(){
 			      title: 'Test template 2',
 			      content: 'Test 2'
 			    }],
+			    toolbar_items_size:'large',
 			    setup : function(ed) {
 					ed.on('keyup',function(e) {
 										//console.log(ed.getContent());
