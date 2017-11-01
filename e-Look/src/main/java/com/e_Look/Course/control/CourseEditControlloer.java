@@ -11,13 +11,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONObject;
-
 import com.e_Look.Course.CourseService;
 import com.e_Look.Course.CourseVO;
 import com.e_Look.CourseClassDetails.CourseClassDetailsDAO;
 import com.e_Look.courseClass.CourseClassDAO;
 import com.e_Look.courseClass.CourseClassVO;
+import com.e_Look.emailSystem.CourseReviewFailureEmail;
+import com.e_Look.member.model.MemberService;
+import com.e_Look.member.model.MemberVO;
 
 import net.minidev.json.JSONValue;
 
@@ -66,6 +67,10 @@ public class CourseEditControlloer extends HttpServlet {
 			Integer courseID = Integer.valueOf(request.getParameter("courseID"));
 			CourseService courseService3 = new CourseService();
 			courseService3.rollbacktoEditorStatus(courseID);
+			CourseVO courseVO=courseService3.getCourseData(courseID);
+			MemberService memberService =new MemberService();
+			MemberVO memberVO=memberService.getMember(courseVO.getMemberID());
+			CourseReviewFailureEmail.sendmail(memberVO, courseVO);
 		}
 		
 		else if(request.getParameter("changeStatustoOnlineStatus")!=null){
