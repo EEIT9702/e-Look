@@ -394,25 +394,23 @@
 										</div>
 									</div>
 								</div>
-								<div class="container" style="margin-top: 2em;">
-									<div class="col-md-7">
-										<div class="form-group col-lg-6" style="font-size: 20px;">
+								<div class="container alert alert-info" style="margin-top: 2em;">
+									<div class="col-md-12">
+										<div class="form-group col-lg-4" style="font-size: 20px;">
 											<label>定價(最低售價為$10元)</label> <input type="text"
 												name="soldPrice" class="form-control" id="soldPrice"
 												value="${CoursedData.soldPrice}" style="font-size: 18px;">
 											<p id="soldPricewarning" style="color: red"></p>
 										</div>
 
-										<div class="form-group col-lg-6" style="font-size: 20px;">
+										<div class="form-group col-lg-4" style="font-size: 20px;">
 											<label>預計課程長度(以分鐘為單位)</label> <input type="text"
 												name="courseLength" class="form-control" id=""
 												value="${CoursedData.courseLength}" style="font-size: 18px;">
 										</div>
-
-
 									</div>
 								</div>
-								<div class="container" style="margin-top: 2em; font-size: 18px;"
+								<div class="container alert alert-info" style="margin-top: 2em; font-size: 18px;"
 									id="ProposalCourse">
 									<div class="col-md-12">
 										<div class="form-group col-lg-4" style="font-size: 20px;">
@@ -423,51 +421,37 @@
 											<p id="targetStudentNumberwarning" style="color: red"></p>
 										</div>
 									</div>
-									<div class="col-md-12" style="margin-top: 2em;">
-										<div class="form-group col-lg-4" style="font-size: 20px;">
-											<label>募資起始日期</label>
-											<div class="input-group date" data-date=""
+									<div class="form-group col-md-12 date" style="margin-top: 2em;" data-date=""
 												data-date-format="yyyy-mm-dd" data-link-field="dtp_input1"
 												data-link-format="yyyy-mm-dd">
+										<div class="form-group col-lg-4" style="font-size: 20px;">
+											<label>募資起始日期</label>											
 												<input class="form-control" style="font-size: 18px;"
 													type="text" value="${CoursedData.fundStartDate}" readonly
-													size="18" id="starttime" name="fundStartDate">
-													
-												
-											</div>
-											<!-- <input type="hidden" id="dtp_input1" value="" /><br /> -->
+													size="20" id="starttime" name="fundStartDate">
+										</div>
+										<div class="form-group col-lg-4" style="font-size: 20px;">
+											<label>募資結束日期</label>
+												<input class="form-control" style="font-size: 18px;"
+													type="text" value="${CoursedData.fundEndDate}" readonly
+													size="20" id="endtime" name="fundEndDate">
 										</div>
 									</div>
 									<div class="col-md-12" style="margin-top: 2em;">
 										<div class="form-group col-lg-4" style="font-size: 20px;">
-											<label>募資結束日期(最高天數為30天)</label>
-											<div class="input-group date" data-date=""
-												data-date-format="yyyy-mm-dd" data-link-field="dtp_input2"
-												data-link-format="yyyy-mm-dd">
-												<input class="form-control" style="font-size: 18px;"
-													type="text" value="${CoursedData.fundEndDate}" readonly
-													size="18" id="endtime" name="fundEndDate">
-											</div>
-											<!-- 											<input type="hidden" id="dtp_input2" value="" /><br /> -->
-										</div>
-									</div>
-									<div class="col-md-12" style="margin-top: 2em;">
-										<div class="form-group col-lg-6" style="font-size: 20px;">
-											<label>募資結束後的備課天數</label> <label>(最高天數為60天)</label> <input
+											<label>備課天數</label><input
 												type="text" name="" class="form-control" id="prepareDate"
 												value="" style="font-size: 18px">
 										</div>
 									</div>
 									<div class="col-md-12" style="margin-top: 0.5em;">
-										<div class="form-group col-lg-6" style="font-size: 20px;">
+										<div class="form-group col-lg-4" style="font-size: 20px;">
 											<label>課程預計上線日期：</label><input type="hidden"
 												id="endofproposal" name="courseStartDate"
 												value="${CoursedData.courseStartDate}"><span></span>
 										</div>
 									</div>
 								</div>
-
-
 								<ul class="list-inline pull-right" style="margin-bottom: 80px">
 									<li><button type="button"
 											class="btn3d btn btn-default btn-lg prev-step">上一步</button></li>
@@ -859,7 +843,7 @@
 		$('textarea').each(function() {
 			autosize(this);
 		}).on('autosize:resized');
-
+//募資選擇日期，避免起始日期大於結束日期=====================================================================
 		function checkEndTime(starttime, endtime) {
 			var starttime = $("#starttime").val();
 			var endtime = $("#endtime").val();
@@ -869,9 +853,9 @@
 				return true;
 			}
 		};
-
-		$(function() {
-
+//========================================================================================================
+//日曆選擇器(起始日期、結束日期)=============================================================================		
+	$(function() {
 			$('#starttime').datetimepicker({
 				language : 'zh-TW',
 				weekStart : 1,
@@ -915,8 +899,9 @@
 			});
 
 		});
-
-		$("#prepareDate").keyup(
+//=============================================================================================================
+//自動計算出備課天數加上結束日期後，換算日期是幾號==================================================================
+	$("#prepareDate").keyup(
 				function() {
 					var endtime = $('#endtime').val();
 					var Dates = new Date(endtime);
@@ -931,7 +916,7 @@
 							Dates.getFullYear() + "-" + (Dates.getMonth() + 1)
 									+ "-" + Dates.getDate());
 				});
-
+//==============================================================================================================
 		function select() {
 			var selectr = document.querySelector("#CourseList input:checked").value;
 			if (selectr === "radio1") {
@@ -1133,7 +1118,7 @@
 									})
 						})
 $(document).ready(function(){
-$('#starttime').on('input propertychange',function(e) {
+$('#starttime,#endtime').change(function(e) {
 
 			var formData = new FormData($('form')[3]);
 			console.log("送到資料庫囉!");
@@ -1147,7 +1132,7 @@ $('#starttime').on('input propertychange',function(e) {
 						success : function() {
 							delay_till_last('id', function() {
 								$('#updateConfirm').text(
-										"變更已儲存至草稿");
+										"日期變更已儲存至草稿");
 								$("#updateConfirm")
 										.fadeIn(1200);
 
@@ -1358,7 +1343,7 @@ $('#targetStudentNumber,#soldPrice').keyup(function(){
 		}
 		else{
 			$('#targetStudentNumberwarning').css( "color", "black" );
-			$('#targetStudentNumberwarning').text(("即開設本次課程的最低成本為"+parseInt($('#targetStudentNumber').val()*0.56*($('#soldPrice').val()))+"元"));
+			$('#targetStudentNumberwarning').text(("當達到開課門檻人數，講師可獲得："+parseInt($('#targetStudentNumber').val()*0.56*($('#soldPrice').val()))+"元，    作為開課的資金成本"));
 		}
 	}else {
 		$('#targetStudentNumberwarning').text("");
@@ -1395,7 +1380,7 @@ $('#targetStudentNumber,#soldPrice').keyup(function(){
 			      if (meta.filetype == 'image') {
 			        $('#upload').trigger('click');
 			        $('#upload').on('change', function() {
-			          var file = this.files[0];
+			          var file = this.files[0];			         
 			          var reader = new FileReader();
 			          reader.onload = function(e) {
 			            callback(e.target.result, {
