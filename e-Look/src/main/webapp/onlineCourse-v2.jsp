@@ -290,7 +290,7 @@ a {
 				<div class="col-md-1 col-xs-4">
 					<img src="<%=request.getContextPath()%>/_Lyy/004-people.png"
 						class="img-responsive center-block img-circle">
-					<h5 class="text-center" style="font-size: 18px">課程人數</h5>
+					<h5 class="text-center" style="font-size: 18px"id="buyStudentNumber"></h5>
 				</div>
 				<!--課程時間 -->
 				<div class="col-md-1 col-xs-4">
@@ -569,22 +569,27 @@ a {
 								<c:if test="${!empty courseVO.preTool}">
 									<strong>需要用到的工具（含種類、版本細節）</strong>
 									<p>${courseVO.preTool}</p>
+									<hr style="border:0.5px solid black">   
 								</c:if>
 								<c:if test="${!empty courseVO.background}">
 									<strong>需要具有哪些背景知識？</strong>
 									<p>${courseVO.background}</p>
+									<hr style="border:0.5px solid black">  
 								</c:if>
 								<c:if test="${!empty courseVO.ability}">
 									<strong>上完課後，學生可以學到並做出的東西</strong>
 									<p>${courseVO.ability}</p>
+									<hr style="border:0.5px solid black">  
 								</c:if>
 								<c:if test="${!empty courseVO.targetgroup}">
 									<strong>哪些人適合這堂課？</strong>
 									<p>${courseVO.targetgroup}</p>
+									<hr style="border:0.5px solid black">  
 								</c:if>
 								<c:if test="${!empty courseVO.courseContent}">
 									<strong>課程簡介</strong>
 									<p>${courseVO.courseContent}</p>
+									 
 								</c:if>
 							</div>
 							<!-- 講師簡介 -->
@@ -665,12 +670,12 @@ a {
 									<c:if test="${!empty memberVo.aboutme}">
 										<strong>關於我</strong>
 										<p>${memberVo.aboutme}</p>
-										<hr>
+										<hr style="border:0.5px solid black"> 
 									</c:if>
 									<c:if test="${!empty memberVo.skill}">
 										<strong>專長</strong>
 										<p>${memberVo.skill}</p>
-										<hr>
+										<hr style="border:0.5px solid black"> 
 									</c:if>
 									<c:if test="${!empty memberVo.hobby}">
 										<strong>興趣</strong>
@@ -968,8 +973,10 @@ a {
 
 								});
 							}
-						});
+				});
 			}
+			
+			
 		})
 	</script>
 	<script>
@@ -1062,7 +1069,7 @@ a {
 							return true;
 						}else{
 						var memberID=$('#reportMemberID').val();
-							console.log(getJson(memberID));
+// 							console.log(getJson(memberID));
 							return getJson(memberID);
 					}
 				},
@@ -1079,8 +1086,7 @@ a {
 		
 		function getJson(memberID) {
 			var bool;
-			$.ajax({'url':'<%=request.getContextPath()%>
-		/countScoreController',
+			$.ajax({'url':'/e-Look/countScoreController',
 						'async' : false,
 						'method' : "GET",
 						'data' : {
@@ -1141,5 +1147,14 @@ a {
 			});
 		});
 	</script>
-</body>
+	<script>
+	$(function(){
+		$.getJSON("/e-Look/BuyCourseNumber",{'courseID':$("#mbcourseID").val()},
+				function(data){
+					var buyStudentNumber=parseInt(data);
+					$("#buyStudentNumber").text(buyStudentNumber+"人")
+			})
+	})
+	</script>
+	</body>
 </html>

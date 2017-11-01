@@ -29,7 +29,7 @@ public class BuyCourseService {
 		return dao.findByMemberID(memberID);
 	
 	}
-	public Integer getClickNumber(Integer courseID) {
+	public Integer getBuyCourseNumber(Integer courseID) {
 		List<BuyCourseVO> bcVO = dao.getByCourseID(courseID);
 		Integer bsize = bcVO.size();
 		System.out.println("bsize = " + bsize);
