@@ -219,10 +219,7 @@ video::-webkit-media-controls-panel {
 									</div>
 									<div class="col-md-6">
 										<div class="text-left" style="font-size: 22px">募資價格</div>
-										<fmt:formatNumber type="number"
-											value="${courseVO.soldPrice*0.7}" maxFractionDigits="0"
-											var="num" />
-										<div class="text-right" style="font-size: 22px">${num}</div>
+										<div class="text-right" style="font-size: 22px"id="price"></div>
 									</div>
 								</div>
 								<c:if test="${empty LoginOK}">
@@ -231,7 +228,6 @@ video::-webkit-media-controls-panel {
 											<button type="button" class="btn-warning btn-lg"
 												data-toggle="modal" data-target="#myModal" id="intoShoppingCart"
 												style="width: 100%; font-size: 22px; margin: 20px 0">我要加入募資</button>
-
 										</c:when>
 										<c:when test="${empty err}">
 											<button type="button" class="btn-warning btn-lg"
@@ -247,7 +243,7 @@ video::-webkit-media-controls-panel {
 										</c:otherwise>
 									</c:choose>
 								</c:if>
-								<c:if test="${!empty LoginOK}">
+							<c:if test="${!empty LoginOK}">
 									<c:choose>
 										<c:when test="${LoginOK.memberID==courseVO.memberID}">
 											<button type="button" class="btn-warning btn-lg"
@@ -279,8 +275,6 @@ video::-webkit-media-controls-panel {
 										</c:otherwise>
 									</c:choose>
 								</c:if>
-								
-								
 							</div>
 						</div>
 					</div>
@@ -689,6 +683,13 @@ $(function(){
 			$(this).tab('show');
 		});
 	});
+</script>
+<script>
+$(function(){
+	$.getJSON('/e-Look/GetBuyingPrice',{'courseID':$('#mbcourseID').val()},function(price){
+		$('#price').text(price)
+	})
+})
 </script>
 
 </html>
