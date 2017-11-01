@@ -1,6 +1,6 @@
 .wizard .nav-tabs { 
          position: relative; 
-         margin: 40px auto; 
+         margin: 10px auto; 
         margin-bottom: 0; 
          border-bottom-color: #e0e0e0; 
      } 
@@ -40,7 +40,7 @@ span.round-tab {
     position: absolute;
     left: 0;
     text-align: center;
-    font-size: 25px;
+    font-size: 35px;
 }
 span.round-tab i{
     color:#555555;
