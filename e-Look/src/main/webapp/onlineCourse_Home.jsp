@@ -240,6 +240,9 @@ h5 {
 -webkit-filter:grayscale(1);
 }
 #body{background-color: #FAEBD7;}
+.keywordlink{
+	cursor: pointer;
+}
 </style>
 <script type="text/javascript">
 /*
@@ -275,17 +278,26 @@ var courseClass="";
 var lastClickClass;
 	//初載入 事件繫結
 $(function() {
+	loadKeyword();
+	
+	$('.keyword').on('click','.keywordlink',function(){
+		
+		keyWord1=$(this).text();
+		keyWord=keyWord1.trim();
+		refreshRiver();	
+		loadKeyword();
+	})
+	
 	//showAdPic();
 	//init();
 	river();
 	$('#submit').click(function(e){
-		
 		e.preventDefault();
 		clickSearch();
 	})
-	$('#submit').on('click', function(){
+	/*$('#submit').on('click', function(){
 		
-	})
+	})*/
 	
 	//卷軸初載入高度為0
 	var	wst = $(window).scrollTop();
@@ -313,14 +325,24 @@ $(function() {
 	
 	$('#searchicon').click(clickSearch);
 });
+function loadKeyword(){
+	$('.keyword').text('');
+	$.get('<%=request.getContextPath() %>/SearchController.do',{'keyWord':keyWord},function(datas){
+		var fg = $(document.createDocumentFragment());
+		$.each(datas,function(index,value){
+			if(index<3){
+				var cell1 = $('<span>').addClass('keywordlink').text(value+' ')
+				fg.append(cell1);					
+			}
+		})
+		$('.keyword').append(fg);
+	},'json');
+}
 	
 function clickSearch(){
-	keyWord=$('#keyWord').val();
-	//console.log("clickSearch() keyWord = " + keyWord);
-	$.get('/e-Look/SearchController.do',{'keyWord':keyWord},function(){
-		
-	})
-	$('#keyWord').val("");
+	keyWord1=$('#keyWord').val();
+	keyWord=keyWord1.trim();
+	loadKeyword();
 	refreshRiver();		
 }
 function refreshRiver(){
@@ -337,11 +359,11 @@ function river(){
 	//整份文件
 	var	dh =$(document).height();
 	//$('a[href="#menu1"]').text(wst+"---"+dh+"---"+wh)
-	//console.log(wst+"---"+dh+"---"+wh+","+wh+","+(dh-wh));
+	console.log("捲軸高度:"+wst+" 視窗高度:"+wh+" 文件高度:"+dh+" 文件高度-視窗高度:"+(dh-wh));
 	//判斷卷軸是否到底部
 	//有時候卷軸會多0.5  改>=的寫法可以解決這個問題
 	console.log(courseClass+"river()"+keyWord);
-	if( wst>=(dh-wh) || rowValueX==0 ){
+	if( wst>=(dh-wh-1) || rowValueX==0 ){
 		$.get("<%= request.getContextPath() %>/body/online_data.jsp",{"rowValueY":rowValueX,"keyWord":keyWord,"courseClass":courseClass},function(data){
 			$('#river').append(data)
 		rowValueX+=4;
@@ -425,9 +447,7 @@ function river(){
 	<div class="col-md-12 col-sm-12 col-xs-12">
 	<p class="hotkeyword text-left">熱門：
 		<span class="keyword">
-			<c:forEach var="searchVO" items="<%= new SearchDAO().getKeywordRank(4) %>" >
-				${searchVO.keyWord}&nbsp;
-			</c:forEach>
+
 		</span>
 	</p>
 	</div>
