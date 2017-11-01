@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="java.util.*,java.text.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE >
 <html>
 <head>
@@ -28,8 +29,7 @@ video {
 #videoArea {
 	background-size: cover;
 	background-position: center;
-	height: 487px;
-	/* 	62% */
+	height: 560px;
 }
 
 video::-internal-media-controls-download-button {
@@ -171,36 +171,36 @@ video::-webkit-media-controls-panel {
 	<div class="container-fluid">
 		<div class="container">
 			<div class="row">
-
 				<h1 align="center" id="videoTitle">${courseVO.courseName}</h1>
 				<div class="col-md-12 " id="videoArea">
 
-					<div class="col-md-12">
-						<div class="col-md-8 col-xs-12" style="margin-right: -15px">
-							
-								<video controls="controls" id="vidoeControl"
-									poster="<%=request.getContextPath()%>/_Lyy/videobackground.jpg">
-									<source
-										src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}"
-										type="video/mp4">
-								</video>
-						
+					<div class="col-md-12" style="z-index: 10">
+						<div class="col-md-8 col-xs-12"
+							style="margin-right: -15px; z-index: 10">
+
+							<video controls="controls" id="vidoeControl"
+								poster="<%=request.getContextPath() %>/CourseImage?CourseID=${courseVO.courseID}">
+								<source
+									src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}"
+									type="video/mp4">
+							</video>
+
 						</div>
 						<div class="col-md-4 col-xs-12" id="videoDivListStyle">
 							<div>
 								<h2 style="color: white; text-align: center">募資進行中</h2>
 								<div style="margin: 15px 0" id="peopleNumber">
 									<div class="pull-left">
-										<p style="font-size: 22px">目標人數564565人</p>
+										<p style="font-size: 22px">目標人數${courseVO.targetStudentNumber}人</p>
 									</div>
 									<div class="pull-right">
-										<p style="font-size: 22px">達成30%</p>
+										<p style="font-size: 22px" id="targetPersent"></p>
 									</div>
 									<div class="clearfix"></div>
-									<div class="progress progress-striped active">
-										<div class="progress-bar progress-bar-info" role="progressbar"
-											aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-											style="width: 30%;"></div>
+									<div class="progress ">
+										<div class="progress-bar progress-bar-striped active"
+											role="progressbar" aria-valuemin="0" aria-valuemax="100"
+											id="targetBar"></div>
 									</div>
 								</div>
 								<div style="margin: 15px 0">
@@ -219,28 +219,82 @@ video::-webkit-media-controls-panel {
 									</div>
 									<div class="col-md-6">
 										<div class="text-left" style="font-size: 22px">募資價格</div>
-										<div class="text-right" style="font-size: 22px">${courseVO.soldPrice*0.8}</div>
+										<fmt:formatNumber type="number"
+											value="${courseVO.soldPrice*0.7}" maxFractionDigits="0"
+											var="num" />
+										<div class="text-right" style="font-size: 22px">${num}</div>
 									</div>
 								</div>
-								<button type="button" class="btn-warning btn-lg"
-									style="width: 100%; margin: 20px 0">我要加入募資</button>
-								<div>
-									<div class=" text-center" style="font-size: 18px; color: white">
-										有興趣可以
-										<div class="btn-group">
-											<button type="button"
-												class="btn btn-default btn-sm dropdown-toggle"
-												data-toggle="dropdown" style="font-size: 18px">分享</button>
-											<ul class="dropdown-menu"
-												style="position: absoulte; z-index: 5555">
-												<li><a href="#">FaceBook</a></li>
-												<li><a href="#">Google</a></li>
-											</ul>
+								<c:if test="${empty LoginOK}">
+									<c:choose>
+										<c:when test="${!empty loginerr}">
+											<button type="button" class="btn-warning btn-lg"
+												data-toggle="modal" data-target="#myModal"
+												style="width: 100%; font-size: 22px; margin: 20px 0">我要加入募資</button>
 
-										</div>
-										來加快募資速度唷
-									</div>
-								</div>
+										</c:when>
+										<c:when test="${empty err}">
+											<button type="button" class="btn-warning btn-lg"
+												data-toggle="modal" data-target="#myModal"
+												style="width: 100%; font-size: 22px; margin: 20px 0">我要加入募資</button>
+
+
+										</c:when>
+										<c:otherwise>
+											<button type="button" class="btn-warning btn-lg"
+												data-toggle="modal" data-target="#myModal"
+												style="width: 100%; font-size: 22px; margin: 20px 0">我要加入募資</button>
+										</c:otherwise>
+									</c:choose>
+								</c:if>
+								<c:if test="${!empty LoginOK}">
+									<c:choose>
+										<c:when test="${LoginOK.memberID==courseVO.memberID}">
+											<button type="button" class="btn-warning btn-lg"
+												style="width: 100%; font-size: 22px; margin: 20px 0"
+												disabled="disabled">已募資</button>
+										</c:when>
+										<c:when test="${!empty LoginOK && !empty list2}">
+											<c:forEach var="buycourse" items='${list2}'
+												varStatus="varStatus">
+												<c:choose>
+													<c:when test="${courseVO.courseID==buycourse.courseID}">
+														<button type="button" class="btn-warning btn-lg"
+															style="width: 100%; font-size: 22px; margin: 20px 0"
+															disabled="disabled">已募資</button>
+
+														<c:set var="boo" value="true" />
+													</c:when>
+													<c:when test="${!empty boo}"></c:when>
+													<c:when test="${varStatus.last && empty boo}">
+														<button type="button" class="btn-warning btn-lg"
+															style="width: 100%; font-size: 22px; margin: 20px 0">我要加入募資</button>
+													</c:when>
+												</c:choose>
+											</c:forEach>
+										</c:when>
+										<c:otherwise>
+											<button type="button" class="btn-warning btn-lg"
+												style="width: 100%; font-size: 22px; margin: 20px 0">我要加入募資</button>
+										</c:otherwise>
+									</c:choose>
+								</c:if>
+								<!-- 								<div> -->
+								<!-- 									<div class=" text-center" style="font-size: 18px; color: white"> -->
+
+								<!-- 										<div class="dropdown"> -->
+								<!-- 												有興趣可以 -->
+								<!-- 											<button type="button" -->
+								<!-- 												class="btn btn-info btn-xs dropdown-toggle"	data-toggle="dropdown" id="menu1"style="font-size: 18px">分享</button> -->
+								<!-- 											<ul class="dropdown-menu"role="menu" aria-labelledby="menu1"> -->
+								<!-- 												<li role="presentation"><a href="#" role="menuitem">FaceBook</a></li> -->
+								<!-- 												<li role="presentation"><a href="#" role="menuitem">Google</a></li> -->
+								<!-- 											</ul> -->
+								<!-- 											來加快募資速度唷 -->
+								<!-- 										</div> -->
+
+								<!-- 									</div> -->
+								<!-- 								</div> -->
 							</div>
 						</div>
 					</div>
@@ -604,11 +658,31 @@ video::-webkit-media-controls-panel {
 			</div>
 		</div>
 	</div>
+	<input type="hidden" value="${courseVO.courseID}" id="sponsorCourseVO">
 	<input type="hidden" value="${courseVO.fundEndDate}" id="fundEndDate">
+	<input type="hidden" value="${courseVO.targetStudentNumber}"
+		id="targetStudentNumber">
 	<c:remove var="err" scope="session" />
 	<c:remove var="loginerr" scope="session" />
 	<jsp:include page="/footer.jsp" />
 </body>
+
+<script>
+$(function(){
+		$.getJSON("/e-Look/BuyCourseNumber", {
+			'courseID' : $('#sponsorCourseVO').val()
+		}, function(data) {
+			var buyStudentNumber = parseInt(data);
+			var targetStudentNumber = parseInt($('#targetStudentNumber').val())
+			var targetBar = buyStudentNumber / targetStudentNumber * 100;
+			targetBarEx = parseInt(targetBar);
+			$('#targetPersent').text("已達成" + targetBarEx + "%");
+			$('#targetBar').attr('style', 'width:' + targetBarEx + '%');
+
+		})
+
+	})
+</script>
 <script>
 	var fundEndDate = $('#fundEndDate').val().replace("-", ":");
 	var fundEndDate1 = fundEndDate.replace("-", ":");

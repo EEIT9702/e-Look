@@ -77,6 +77,7 @@ public class MemberFilter implements Filter {
 				List<CourseVO> list3 = new LinkedList<CourseVO>();
 				List<CourseVO> list4 =courseService.getAllCourseData(memberVO.getMemberID(), 0);
 				List<MemberVO> list5 = new LinkedList<MemberVO>();
+				List<CourseVO> list6 =courseService.getAllCourseData(memberVO.getMemberID(), 1);
 				for (BuyCourseVO buyCoursevo : buyCourselist) {
 					list2.add(courseService.getCourseData(buyCoursevo.getCourseID()));
 				}
@@ -98,6 +99,7 @@ public class MemberFilter implements Filter {
 				request.setAttribute("list3", list3);
 				request.setAttribute("list4", list4);
 				request.setAttribute("list5", list5);
+				request.setAttribute("list6", list6);
 				chain.doFilter(request, response);
 			} else {
 				Integer memberID = Integer.valueOf(request.getParameter("memberID"));
