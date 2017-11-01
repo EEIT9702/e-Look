@@ -3,7 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.Date"%>
+<%@ page import="java.util.List"%>
+<%@ page import="java.util.LinkedList"%>
 <%@ page import="com.e_Look.Course.*" %>
+<%@ page import="com.e_Look.buyCourse.model.*" %>
 <style>
 .card-text a {
 	text-decoration: none;
@@ -23,10 +26,11 @@
 </style>
 
 <jsp:useBean id="course" scope="page" class="com.e_Look.Course.CourseDAO"/>
-
+<jsp:useBean id="buycourse" scope="page" class="com.e_Look.buyCourse.model.BuyCourseDAO"/>
 	
 <!--線上課程forEach Star -->
-<c:forEach var='fundCourse' items='${course.allFundRaiseCourse}' begin="${param.rowValueY}" end="${param.rowValueY + 3}">
+
+<c:forEach var='fundCourse' items='${course.allFundRaiseCourse}' begin="${param.rowValueY}" end="${param.rowValueY + 3}" varStatus="status">
 	<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width:341px;margin-bottom:20px;">
 		<div class="card card-inverse" style="background-color: white;">
 			<a style="text-decoration: none; color: black"; href="<%=request.getContextPath() %>/proposalCourse-v1.jsp?CourseID=${fundCourse.courseID}">
@@ -44,11 +48,8 @@
 				<div style="margin-top:40px;">
 					<p style="font-size:18px;float:left;">預購價：
 						<fmt:setLocale value="zh-TW" />
-						<fmt:formatNumber value="${fundCourse.soldPrice}" type="currency"/>
+						<fmt:formatNumber value="${fundCourse.soldPrice*0.7}" type="currency"/>
 					</p>
-					<%  
-						
-					%>
 <%-- 					<p class="fundend" style="font-size:18px;float:right;">募資截止日：<fmt:formatDate value="${fundCourse.fundEndDate}" type="date"/></p> --%>
 					<p class="fundend" style="font-size:18px;float:right;" alt="${fundCourse.fundEndDate}"></p>
 				</div>
@@ -61,13 +62,24 @@
 					</div>
 				</div>
 				<div>
-					<p style="font-size:18px;text-align:center;clear:both;padding-top:8px;">已募資1/${fundCourse.targetStudentNumber}人</p>
+				<% int count = 0, bcount = 0, max = 0; %>
+				<c:forEach var='bCourse' items='${buycourse.all}'>
+					<c:if test="${fundCourse.courseID == bCourse.courseID}">
+					<% count++; bcount++; %>
+					<% if(count > max){max = count;} %>
+						<% if(count / max == 1) {   %>
+						<p style="font-size:18px;text-align:center;clear:both;padding-top:8px;">已募資<%= max%>/${fundCourse.targetStudentNumber}人</p>
+						<% } %>
+					</c:if>
+			
+				</c:forEach>
 				</div>
 			</div>
 
 		</div>
 	</div>
 </c:forEach>
+
 <!--線上課程forEach End -->
 
 
