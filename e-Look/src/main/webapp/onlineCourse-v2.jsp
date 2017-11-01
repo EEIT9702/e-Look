@@ -1156,5 +1156,17 @@ a {
 			})
 	})
 	</script>
+	<script>
+		var b=true;
+ 		$('video').click(function(){
+ 			if(b){
+			this.play();
+			b=false;
+ 			}else{
+ 				this.pause();
+				b=true;
+ 			}
+		})
+		</script>
 	</body>
 </html>
