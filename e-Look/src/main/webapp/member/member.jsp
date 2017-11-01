@@ -421,6 +421,7 @@ a:HOVER {
 						<div class="panel-body" style="display: none;">
 
 							<c:forEach var="buycouser" items="${list2}">
+							<c:if test="${buycouser.soldPrice>0&&buycouser.targetStudentNumber==0}">
 							<a style="text-decoration: none; color:black"; href="<%=request.getContextPath() %>/onlineCourse-v2.jsp?CourseID=${buycouser.courseID}">
 							<div class=" col-md-4  col-sm-4" style="width: 211px">
 								<div class="card card-inverse">
@@ -440,6 +441,28 @@ a:HOVER {
 								</div>
 							</div>
 							</a>
+							</c:if>
+							<c:if test="${buycouser.targetStudentNumber>0}">
+							<a style="text-decoration: none; color:black"; href="<%=request.getContextPath() %>/proposalCourse-v1.jsp?CourseID=${buycouser.courseID}">
+							<div class=" col-md-4  col-sm-4" style="width: 211px">
+								<div class="card card-inverse">
+									<img class="card-img-top"
+										src="<%=request.getContextPath()%>/CourseImage?CourseID=${buycouser.courseID}"
+										alt="course" id="wizardPicturePreview" title="">
+									<div class="card-block">
+										<figure class="profile">
+											<img
+												src="<%=request.getContextPath()%>/Image?MemberID=${buycouser.memberID}"
+												class="profile-avatar" alt="">
+										</figure>
+										<div class="card-text">
+											<p id="title" class="card-title mt-3 multi_ellipsis">${buycouser.courseName}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							</a>
+							</c:if>
 							</c:forEach>
 					
 						</div>
