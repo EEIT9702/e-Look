@@ -15,7 +15,23 @@ public class MessageService {
 		MessageVO messageVO = new MessageVO();
 
 		messageVO.setmContent(mContent);
+        //mTime時間由dao產生
+		messageVO.setMemberID(memberID);
+		messageVO.setCourseID(courseID);
+		messageVO.setBought(bought);
+		messageVO.setStatus(status);
+		dao.insert(messageVO);
 
+		return messageVO;
+	}
+	
+	public MessageVO addReMessage(String mContent,Integer messageID_response,Integer memberID,Integer courseID, Long bought, Byte status)
+	   {
+
+		MessageVO messageVO = new MessageVO();
+
+		messageVO.setmContent(mContent);
+		messageVO.setMessageID_response(messageID_response);
 		messageVO.setMemberID(memberID);
 		messageVO.setCourseID(courseID);
 		messageVO.setBought(bought);

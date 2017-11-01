@@ -36,7 +36,8 @@ video {
 #videoArea {
 	background-size: cover;
 	background-position: center;
-	height: 510px;
+	height: 520px;
+	padding-left: 0;
 }
 
 #videoliststyle>li {

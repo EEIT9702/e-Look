@@ -309,7 +309,7 @@ $(function() {
 			lastClickClass = $(this).children("p").attr("alt");
 		}
 		keyWord = "";
-		refreshRiver		
+		refreshRiver();		
 	})
 	
 	$('#searchicon').click(clickSearch);
