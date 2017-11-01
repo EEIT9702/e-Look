@@ -94,13 +94,27 @@
 			<div class="card-footer">
 				<small>課程時間:${courseVO.courseLength}分鐘</small>
 				<br>
-				<small>購買人數:sss人</small>
+				<small class="number" alt="${courseVO.courseID}">購買人數:sss人</small>
 			</div>
 		</div>
 	</div>
 </c:forEach>
 </c:otherwise>
 </c:choose>
+<script>
+$(function(){
+	$('.number').each(function(){
+	var i=$(this);
+		
+		$.getJSON('/e-Look/GetBuyCourseNumber',{'courseID':$(this).attr("alt")},function(datas){
+			//console.log($(this).html())
+			i.html("購買人數:"+datas.length+"人")
+		})
+	})
+	
+})
+
+</script>
 <!--線上課程forEach End -->
 
 			

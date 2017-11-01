@@ -314,13 +314,13 @@ a:HOVER {
 				<div class="progress" style="clear:both;">
 					<div class="progress-bar progress-bar-warning progress-bar-striped active" 
 					role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" 
-					style="width:100%">
-					<p style="display:none"><fmt:formatNumber type="percent" value="${15/fundCourse.targetStudentNumber}" maxFractionDigits="0"/></p>
+					style="width:100%" alt="${fundCourse.targetStudentNumber}" data="${fundCourse.courseID}">
+					<p style="display:none"></p>
 					
 					</div>
 				</div>
 				<div>
-					<p style="font-size:18px;text-align:center;clear:both;padding-top:8px;">已募資1/${fundCourse.targetStudentNumber}人</p>
+					<p style="font-size:18px;text-align:center;clear:both;padding-top:8px;" class="fund" alt="${fundCourse.targetStudentNumber}" data="${fundCourse.courseID}" >已募資1/${fundCourse.targetStudentNumber}人</p>
 				</div>
 			</div>
 				</div>
@@ -334,15 +334,31 @@ a:HOVER {
 	<jsp:include page="/footer.jsp" />
 	<script>
 	$(function(){
-		//console.log($('.progress-bar').text());
-		var pbVal = $('.progress-bar').text();
-		//var endVal = $($('.fundend')[1]).val();
-		$('.progress-bar').removeAttr('style');
+		
+		
+		
 		$('.progress-bar').each(function(){
-			//console.log($(this).text());
-			console.log($(this).val());
-			$(this).attr('style','width:'+$(this).text());
-		})	
+			var i=$(this);
+			$.getJSON('/e-Look/GetBuyCourseNumber',{'courseID':$(this).attr("data")},function(datas){
+				//console.log($(this).html())
+				count=(datas.length/i.attr("alt"))*100
+				//console.log(i.children("p").html())
+				//console.log(count)
+ 				i.children("p").html(parseInt(count)+"%")
+ 				//console.log(i.children("p").html())
+ 				
+ 				var pbVal = $('.progress-bar').text();
+				//var endVal = $($('.fundend')[1]).val();
+				$('.progress-bar').removeAttr('style');
+				$('.progress-bar').each(function(){
+					//console.log($(this).text());
+					console.log($(this).val());
+					$(this).attr('style','width:'+$(this).text());
+				})	
+			})
+		})
+		//console.log($('.progress-bar').text());
+		
 		//var endVal = $('.fundend').val();
 		var endVal = $('.fundend').attr("alt");
 		$('.fundend').each(function(){
@@ -361,24 +377,25 @@ a:HOVER {
 		var i=$(this);
 			
 			$.getJSON('/e-Look/GetBuyCourseNumber',{'courseID':$(this).attr("alt")},function(datas){
-				console.log($(this).html())
+				//console.log($(this).html())
 				i.html("購買人數:"+datas.length+"人")
 			})
-// 			var ed = new Date($(this).attr("alt"));
-// 			var now = new Date();
-// 			var time = ed.getTime() - now.getTime();
-// 			time /= 1000;
-// 			var ntime = time / (24*60*60);
-// 			ntime = Math.floor(ntime);
-// 			console.log(ntime);
-// 			$(this).text("倒數" + ntime + "天")
+
 		})
 		
-		
-		
-		
-	})
+		$('.fund').each(function(){
+			var i=$(this);
+			$.getJSON('/e-Look/GetBuyCourseNumber',{'courseID':$(this).attr("data")},function(datas){
+				//console.log($(this).html())
+				i.html("已募資"+datas.length+"/"+i.attr("alt")+"人")
+			})
 
+		})
+		
+			
+
+	
+	})
 </script>
 </body>
 </html>
