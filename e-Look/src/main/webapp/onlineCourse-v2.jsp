@@ -22,8 +22,7 @@ f<%@ page language="java" contentType="text/html; charset=UTF-8"
 <script
 	src="<%=request.getContextPath()%>/alan/sweet/sweetalert2.min.js"></script>
 <!-- 星星 -->
-<script type="text/javascript"
-	src="<%=request.getContextPath()%>/_Lyy/jquery.raty.min.js"></script>
+<script type="text/javascript"src="<%=request.getContextPath()%>/_Lyy/jquery.raty.min.js"></script>
 <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
 
 <style>
