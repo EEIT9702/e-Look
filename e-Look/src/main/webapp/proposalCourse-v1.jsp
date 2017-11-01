@@ -300,10 +300,11 @@ video::-webkit-media-controls-panel {
 								aria-controls="profile" role="tab" data-toggle="tab">課程討論</a></li>
 
 						</ul>
-						<!-- 課程簡介 -->
+				<!-- 課程簡介 -->
 						<div class="tab-content tabs">
 							<div role="tabpanel" class="tab-pane fade in active"
 								id="Section1" style="font-size: 20px">
+
 								<c:if test="${!empty courseVO.preTool}">
 									<strong>需要用到的工具（含種類、版本細節）</strong>
 									<p>${courseVO.preTool}</p>
@@ -328,12 +329,13 @@ video::-webkit-media-controls-panel {
 							<!-- 講師簡介 -->
 							<div role="tabpanel" class="tab-pane fade" id="Section2"
 								style="font-size: 20px">
-								<c:if test="${!empty memberVo.memberID}">
+						
+										<c:if test="${!empty memberVo.memberID}">
 									<div class="col-md-2 col-xs-3">
 										<figure>
 											<img
 												src="<%=request.getContextPath() %>/Image?MemberID=${memberVo.memberID}"
-												class="img-thumbnail center-block img-circle" />
+												class="img-thumbnail center-block img-circle"  />
 											<div style="text-align: center">${memberVo.mName}</div>
 										</figure>
 										<div>
@@ -360,14 +362,11 @@ video::-webkit-media-controls-panel {
 													</c:otherwise>
 												</c:choose>
 											</c:if>
-
 											<c:if test="${!empty LoginOK}">
-												<c:if test="${!empty memberSubscription}">
-													<c:forEach items="${memberSubscription}"
-														var="memberSubscription">
+												<c:if test="${!empty memberSubscription}">													
+													<c:forEach items="${memberSubscription}" var="memberSubscription">
 														<c:choose>
-															<c:when
-																test="${memberSubscription.memberTrackID==courseVO.memberID}">
+															<c:when	test="${memberSubscription.memberTrackID==courseVO.memberID}">
 																<c:set var="disabled" value="disabled" />
 																<c:set var="subName" value="已追蹤講師" />
 																<c:set var="sub1" value="ture" />
@@ -383,19 +382,16 @@ video::-webkit-media-controls-panel {
 												</c:if>
 												<c:if test="${empty memberSubscription}">
 													<c:set var="disabled" value="" />
-													<c:set var="subName" value="追蹤講師" />
+														<c:set var="subName" value="追蹤講師" />
 												</c:if>
 												<c:if test="${courseVO.memberID==LoginOK.memberID}">
 													<c:set var="disabled" value="disabled" />
 													<c:set var="subName" value="本人" />
 												</c:if>
-												<button type="button" class="btn btn-info" ${disabled}
-													style="width: 100%" id="subAction">${subName}</button>
-												<input type="hidden" id="coursevoMemeberID"
-													value="${courseVO.memberID}">
+												<button type="button" class="btn btn-info" ${disabled} style="width: 100%" id="subAction">${subName}</button>
+												<input type="hidden" id="coursevoMemeberID" value="${courseVO.memberID}">
 											</c:if>
-
-
+										
 										</div>
 									</div>
 								</c:if>
@@ -416,7 +412,7 @@ video::-webkit-media-controls-panel {
 									</c:if>
 								</div>
 							</div>
-							<!-- 留言板 -->
+						<!-- 留言板 -->
 							<div role="tabpanel" class="tab-pane fade" id="Section3">
 								<div class="col-md-12" id="messageHeader">
 									<div class="col-md-1">
@@ -424,7 +420,6 @@ video::-webkit-media-controls-panel {
 											class="img-thumbnail pull-left">
 									</div>
 									<div class="col-md-11">
-
 										<div>
 											<!--測試用messageID -->
 											<span id="testMessage1" value="1001" class="text-left">吳永志</span>
@@ -602,8 +597,6 @@ video::-webkit-media-controls-panel {
 												</div>
 											</div>
 										</div>
-
-
 										<!-- 			<!--回應輸入表格-->
 										<div class="col-md-12">
 											<div class="panel-group">
@@ -691,5 +684,24 @@ $(function(){
 	})
 })
 </script>
+	<script>
+		var count = 0;
+		$('#subAction').click(function() {
+			if (count == 0) {
+				$.post("MemberSubcriptionInsert_DeleteController", {
+					'memberID' : $('#mbmemberID').val(),
+					'memberTrackID' : $('#coursevoMemeberID').val()
+				}, function() {
+					alert('已加到您的追蹤講師囉');
+					count++;
+				});
+				$('#subAction').attr('disabled', 'false')
+				$('#subAction').text('已追蹤講師')
+			} else {
+				alert('已經追蹤過囉');
+				$('#subAction').attr('disabled', 'false')
+			}
 
+		})
+	</script>
 </html>
