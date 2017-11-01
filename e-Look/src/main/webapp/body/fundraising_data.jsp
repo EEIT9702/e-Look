@@ -62,17 +62,11 @@
 					</div>
 				</div>
 				<div>
-				<% int count = 0, bcount = 0, max = 0; %>
-				<c:forEach var='bCourse' items='${buycourse.all}'>
-					<c:if test="${fundCourse.courseID == bCourse.courseID}">
-					<% count++; bcount++; %>
-					<% if(count > max){max = count;} %>
-						<% if(count / max == 1) {   %>
-						<p style="font-size:18px;text-align:center;clear:both;padding-top:8px;">已募資<%= max%>/${fundCourse.targetStudentNumber}人</p>
-						<% } %>
-					</c:if>
-			
-				</c:forEach>
+<%-- 				<c:forEach var='bCourse' items='${buycourse.all}'> --%>
+<%-- 					<c:if test="${fundCourse.courseID == bCourse.courseID}"> --%>
+						<p style="font-size:18px;text-align:center;clear:both;padding-top:8px;">已募資/${fundCourse.targetStudentNumber}人</p>
+<%-- 					</c:if> --%>
+<%-- 				</c:forEach> --%>
 				</div>
 			</div>
 
