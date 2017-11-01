@@ -177,14 +177,14 @@ video::-webkit-media-controls-panel {
 
 					<div class="col-md-12">
 						<div class="col-md-8 col-xs-12" style="margin-right: -15px">
-							<div class="m">
+							
 								<video controls="controls" id="vidoeControl"
 									poster="<%=request.getContextPath()%>/_Lyy/videobackground.jpg">
 									<source
 										src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}"
 										type="video/mp4">
 								</video>
-							</div>
+						
 						</div>
 						<div class="col-md-4 col-xs-12" id="videoDivListStyle">
 							<div>
@@ -219,7 +219,7 @@ video::-webkit-media-controls-panel {
 									</div>
 									<div class="col-md-6">
 										<div class="text-left" style="font-size: 22px">募資價格</div>
-										<div class="text-right" style="font-size: 22px">${courseVO.soldPrice}*0.7</div>
+										<div class="text-right" style="font-size: 22px">${courseVO.soldPrice*0.8}</div>
 									</div>
 								</div>
 								<button type="button" class="btn-warning btn-lg"
@@ -597,9 +597,7 @@ video::-webkit-media-controls-panel {
 										</div>
 									</div>
 								</div>
-
 							</div>
-
 						</div>
 					</div>
 				</div>
