@@ -115,7 +115,7 @@ SET ANSI_PADDING ON
 GO
 CREATE TABLE [dbo].[Course](
 	[courseID] [int] IDENTITY(200001,1) NOT NULL,
-	[courseName] [nvarchar](20) NULL,
+	[courseName] [nvarchar](max) NULL,
 	[cPhoto] [varbinary](max) NULL,
 	[preTool] [nvarchar](500) NULL,
 	[background] [nvarchar](500) NULL,
