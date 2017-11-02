@@ -249,7 +249,7 @@ function loadReviewData(){
 			var cell1 = $('<td align="center"></td>').html('<button class="btn btn-success"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button><button class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>')
 			var cell2 = $('<td></td>').text(Course.memberID)
 			var cell3 = $('<td></td>').text(Course.courseID)
-			var cell4 = $('<td></td>').html('<a href="/e-Look/ReviewingCoursePage.jsp?CourseID='+Course.courseID+'" style="color:black">'+Course.courseName+'</a>')
+			var cell4 = $('<td></td>').html('<a href="/e-Look/ReviewingCoursePage.jsp?CourseID='+Course.courseID+'" style="color:black" target="_blank">'+Course.courseName+'</a>')
 			var cell5 = $('<td></td>').text(Course.fundEndDate)
 			
 			if(Course.soldPrice==0){
