@@ -250,7 +250,7 @@ a{text-decoration:none}
 				<div class="col-md-1 col-xs-4">
 					<img src="<%=request.getContextPath()%>/_Lyy/004-people.png"
 						class="img-responsive center-block " >
-					<h5 class="text-center"style="font-size: 18px">課程人數</h5>
+					<h5 class="text-center"style="font-size: 18px" id="buyStudentNumber"></h5>
 				</div>
 				<!--課程時間 -->
 				<div class="col-md-1 col-xs-4">
@@ -1158,6 +1158,16 @@ a{text-decoration:none}
 			});
 		});
 	</script>
+	<script>
+	$(function(){
+		$.getJSON("/e-Look/BuyCourseNumber",{'courseID':$("#mbcourseID").val()},
+				function(data){
+					var buyStudentNumber=parseInt(data);
+					$("#buyStudentNumber").text(buyStudentNumber+"人")
+			})
+	})
+	</script>
+	
 		<script>
 		var b=true;
  		$('video').click(function(){
