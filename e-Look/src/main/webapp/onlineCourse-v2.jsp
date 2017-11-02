@@ -656,55 +656,49 @@ a {
 						<!-- 切板位置 -->
 							<c:forEach items="${messageVOList}" var="messageVO">
 									
-									<c:if test="${messageVO.messageID_response==0}">
+									<c:if test="${messageVO.messageID_response>=0}">
 										<div class="col-md-1">
 											<img src="<%=request.getContextPath() %>/Image?MemberID=${messageVO.memberID}"class="img-thumbnail pull-left">
 										</div>
-									</c:if>
-								
+									
 									<div class="col-md-11">
 										<div><span id="testMessage1"class="text-left">${messageVO.memberID}</span>
 												<span>${messageVO.mTime}</span>
- 								
+<!-- 											<div class="dropdown pull-right"> -->
+<!-- 												<button class="btn dropdown-toggle btn-default"type="button" data-toggle="dropdown" style="height: 30px"> -->
+<!-- 												<span class="glyphicon glyphicon-option-horizontal"></span> -->
+<!-- 												</button> -->
+<!-- 												<ul class="dropdown-menu"> -->
+<%-- 													<c:if test="${empty LoginOK}"> --%>
+<%-- 														<c:choose> --%>
+<%-- 															<c:when test="${!empty loginerr}"> --%>
+<!-- 																<li><a href="#" href="#" data-toggle="modal" -->
+<!-- 																	data-target="#myModal2">檢舉</a></li> -->
+<%-- 															</c:when> --%>
+<%-- 															<c:when test="${empty err}"> --%>
+<!-- 																<li><a href="#" href="#" data-toggle="modal" -->
+<!-- 																	data-target="#myModal">檢舉</a></li> -->
+<%-- 															</c:when> --%>
+<%-- 															<c:otherwise> --%>
+<!-- 																<li><a class="reportM" href="#" href="#" -->
+<!-- 																	data-toggle="modal" data-target="#myModal2">檢舉</a></li> -->
+<%-- 															</c:otherwise> --%>
+<%-- 														</c:choose> --%>
+<%-- 													</c:if> --%>
+<%-- 													<c:if test="${!empty LoginOK}"> --%>
+<!-- 														<li><a class="reportM" href="#">檢舉</a></li> -->
+<%-- 													</c:if> --%>
+<!-- 													<li><a href="#">修改</a></li> -->
+<!-- 													<li><a href="#">刪除</a></li> -->
+<!-- 												</ul> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
 										<div style="border-bottom: 1px solid black">
 											<p>${messageVO.mContent}</p>
 										</div>
-
-										<!--第一個回應 -->
-										
-										<div class="col-md-12">
-											<div class="panel-group">
-												<div class="panel">
-													<div class="panel-heading">
-														<h4 class="panel-title " style="padding-bottom: 10px">
-															<a data-toggle="collapse" href="#collapse1">回應記錄</a>
-														</h4>
-													</div>
-													<div id="collapse1" class="panel-collapse collapse ">
-														<c:if test="${messageVO.messageID_response==messageVO.messageID}">
-
-														<div>
-															<div class="col-md-1">
-																<img
-																	src="<%=request.getContextPath()%>/img/imember_image.png"
-																	class="img-thumbnail pull-left">
-															</div>
-															<div class="col-md-11 "
-																style="border-bottom: 1px solid black">
-																<span>吳永志</span>
-																<span>time</span>
-																<div class="dropdown pull-right">																	
-																	</div>
-																		<p>${messageVO.mContent}</p>
-																	</div>
-																</div>
-														
-														</c:if>
-													</div>
-												</div>
-											</div>
-										</div>
 									
+								
+										
 										<!-- 			<!--回應輸入表格-->
 										<div class="col-md-12">
 											<div class="panel-group">
@@ -732,7 +726,7 @@ a {
 										</div>
 									</div>
 								</div>
-								
+								</c:if>
 							</c:forEach>
 						</div>
 							
