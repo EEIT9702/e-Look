@@ -649,72 +649,30 @@ a {
 									</c:if>
 								</div>
 							</div>
-							<!-- 留言板 -->
-							<div role="tabpanel" class="tab-pane fade" id="Section3">
-								<div class="col-md-12" id="messageHeader">
-									<div class="col-md-1">
-										<img src="<%=request.getContextPath()%>/img/imember_image.png"
-											class="img-thumbnail pull-left">
-									</div>
+						<!-- 留言板 -->
+						<div role="tabpanel" class="tab-pane fade" id="Section3">
+							<div class="col-md-12" id="messageHeader">
+								
+						<!-- 切板位置 -->
+							<c:forEach items="${messageVOList}" var="messageVO">
+									
+									<c:if test="${messageVO.messageID_response==0}">
+										<div class="col-md-1">
+											<img src="<%=request.getContextPath() %>/Image?MemberID=${messageVO.memberID}"class="img-thumbnail pull-left">
+										</div>
+									</c:if>
+								
 									<div class="col-md-11">
-
-										<div>
-											<!--測試用messageID -->
-											<span id="testMessage1" value="1001" class="text-left">吳永志</span>
-
-											<%
-												Date dNow = new Date();
-												SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-												out.print("<span align=\"center\">" + ft.format(dNow) + "</span>");
-											%>
-											<div class="dropdown pull-right">
-												<button class="btn dropdown-toggle btn-default "
-													type="button" data-toggle="dropdown" style="height: 30px">
-													<span class="glyphicon glyphicon-option-horizontal"></span>
-												</button>
-												<ul class="dropdown-menu">
-													<c:if test="${empty LoginOK}">
-														<c:choose>
-															<c:when test="${!empty loginerr}">
-																<li><a href="#" href="#" data-toggle="modal"
-																	data-target="#myModal2">檢舉</a></li>
-															</c:when>
-															<c:when test="${empty err}">
-																<li><a href="#" href="#" data-toggle="modal"
-																	data-target="#myModal">檢舉</a></li>
-															</c:when>
-															<c:otherwise>
-																<li><a class="reportM" href="#" href="#"
-																	data-toggle="modal" data-target="#myModal2">檢舉</a></li>
-															</c:otherwise>
-														</c:choose>
-													</c:if>
-													<c:if test="${!empty LoginOK}">
-														<li><a class="reportM" href="#">檢舉</a></li>
-													</c:if>
-													<li><a href="#">修改</a></li>
-													<li><a href="#">刪除</a></li>
-												</ul>
-											</div>
-
-										</div>
-
+										<div><span id="testMessage1"class="text-left">${messageVO.memberID}</span>
+												<span>${messageVO.mTime}</span>
+ 								
 										<div style="border-bottom: 1px solid black">
-
-											<p>With Bootstrap 2, we added optional mobile friendly
-												styles for key aspects of the framework. With Bootstrap 3,
-												we've rewritten the project to be mobile friendly from the
-												start. Instead of adding on optional mobile styles, they're
-												baked right into the core. In fact, Bootstrap is mobile
-												first. Mobile first styles can be found throughout the
-												entire library instead of in separate files. To ensure
-												proper rendering and touch zooming, add the viewport meta
-												tag to your</p>
+											<p>${messageVO.mContent}</p>
 										</div>
 
-
+										<!--第一個回應 -->
+										
 										<div class="col-md-12">
-
 											<div class="panel-group">
 												<div class="panel">
 													<div class="panel-heading">
@@ -723,7 +681,8 @@ a {
 														</h4>
 													</div>
 													<div id="collapse1" class="panel-collapse collapse ">
-														<!--第一個回應 -->
+														<c:if test="${messageVO.messageID_response==messageVO.messageID}">
+
 														<div>
 															<div class="col-md-1">
 																<img
@@ -733,110 +692,19 @@ a {
 															<div class="col-md-11 "
 																style="border-bottom: 1px solid black">
 																<span>吳永志</span>
-																<%
-																	out.print("<span align=\"center\">" + ft.format(dNow) + "</span>");
-																%>
-																<div class="dropdown pull-right">
-																	<button class="btn dropdown-toggle btn-default "
-																		type="button" data-toggle="dropdown"
-																		style="height: 30px">
-																		<span class="glyphicon glyphicon-option-horizontal"></span>
-																	</button>
-																	<ul class="dropdown-menu">
-																		<c:if test="${empty LoginOK}">
-																			<c:choose>
-																				<c:when test="${!empty loginerr}">
-																					<li><a href="#" href="#" data-toggle="modal"
-																						data-target="#myModal2">檢舉</a></li>
-																				</c:when>
-																				<c:when test="${empty err}">
-																					<li><a href="#" href="#" data-toggle="modal"
-																						data-target="#myModal">檢舉</a></li>
-																				</c:when>
-																				<c:otherwise>
-																					<li><a class="reportM" href="#" href="#"
-																						data-toggle="modal" data-target="#myModal2">檢舉</a></li>
-																				</c:otherwise>
-																			</c:choose>
-																		</c:if>
-																		<c:if test="${!empty LoginOK}">
-																			<li><a class="reportM" href="#">檢舉</a></li>
-																		</c:if>
-																		<li><a href="#">修改</a></li>
-																		<li><a href="#">刪除</a></li>
-																	</ul>
+																<span>time</span>
+																<div class="dropdown pull-right">																	
+																	</div>
+																		<p>${messageVO.mContent}</p>
+																	</div>
 																</div>
-																<p>With Bootstrap 2, we added optional mobile
-																	friendly styles for key aspects of the framework. With
-																	Bootstrap 3, we've rewritten the project to be mobile
-																	friendly from the start. Instead of adding on optional
-																	mobile styles, they're baked right into the core. In
-																	fact, Bootstrap is mobile first. Mobile first styles
-																	can be found throughout the entire library instead of
-																	in separate files. To ensure proper rendering and touch
-																	zooming, add the viewport meta tag to your</p>
-															</div>
-														</div>
-														<!--第二個回應 -->
-														<div>
-															<div class="col-md-1">
-																<img
-																	src="<%=request.getContextPath()%>/img/imember_image.png"
-																	class="img-thumbnail pull-left">
-															</div>
-															<div class="col-md-11 "
-																style="border-bottom: 1px solid black">
-																<span>吳永志</span>
-																<%
-																	out.print("<span align=\"center\">" + ft.format(dNow) + "</span>");
-																%>
-																<div class="dropdown pull-right">
-																	<button class="btn dropdown-toggle btn-default "
-																		type="button" data-toggle="dropdown"
-																		style="height: 30px">
-																		<span class="glyphicon glyphicon-option-horizontal"></span>
-																	</button>
-																	<ul class="dropdown-menu">
-																		<c:if test="${empty LoginOK}">
-																			<c:choose>
-																				<c:when test="${!empty loginerr}">
-																					<li><a href="#" href="#" data-toggle="modal"
-																						data-target="#myModal2">檢舉</a></li>
-																				</c:when>
-																				<c:when test="${empty err}">
-																					<li><a href="#" href="#" data-toggle="modal"
-																						data-target="#myModal">檢舉</a></li>
-																				</c:when>
-																				<c:otherwise>
-																					<li><a class="reportM" href="#" href="#"
-																						data-toggle="modal" data-target="#myModal2">檢舉</a></li>
-																				</c:otherwise>
-																			</c:choose>
-																		</c:if>
-																		<c:if test="${!empty LoginOK}">
-																			<li><a class="reportM" href="#">檢舉</a></li>
-																		</c:if>
-																		<li><a href="#">修改</a></li>
-																		<li><a href="#">刪除</a></li>
-																	</ul>
-																</div>
-																<p>With Bootstrap 2, we added optional mobile
-																	friendly styles for key aspects of the framework. With
-																	Bootstrap 3, we've rewritten the project to be mobile
-																	friendly from the start. Instead of adding on optional
-																	mobile styles, they're baked right into the core. In
-																	fact, Bootstrap is mobile first. Mobile first styles
-																	can be found throughout the entire library instead of
-																	in separate files. To ensure proper rendering and touch
-																	zooming, add the viewport meta tag to your</p>
-															</div>
-														</div>
+														
+														</c:if>
 													</div>
 												</div>
 											</div>
 										</div>
-
-
+									
 										<!-- 			<!--回應輸入表格-->
 										<div class="col-md-12">
 											<div class="panel-group">
@@ -864,6 +732,10 @@ a {
 										</div>
 									</div>
 								</div>
+								
+							</c:forEach>
+						</div>
+							
 								<!-- 點評收藏 -->
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="Section4"
@@ -881,7 +753,7 @@ a {
 		</div>
 
 	</div>
-	<div id="star"></div>
+
 	<c:remove var="err" scope="session" />
 	<c:remove var="loginerr" scope="session" />
 	<jsp:include page="/footer.jsp" />
@@ -1149,5 +1021,6 @@ a {
  			}
 		})
 		</script>
+
 	</body>
 </html>
