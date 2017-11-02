@@ -47,14 +47,11 @@
 				</div>
 				<div style="margin-top:40px;">
 				<p style="font-size:18px;float:left;">預購價：
-<%-- 				<c:choose> --%>
-<%-- 				<c:when test="${fundCourse.fundStartDate}"> --%>
-						<fmt:setLocale value="zh-TW" />
-						<fmt:formatNumber value="${fundCourse.soldPrice*0.7}" type="currency" maxFractionDigits="0"/>
-<%-- 				</c:when> --%>
-<%-- 				</c:choose> --%>
+					<fmt:setLocale value="zh-TW" />
+					<fmt:formatNumber value="${fundCourse.soldPrice*0.7}" type="currency" maxFractionDigits="0"/>
 				</p>
-					<p class="fundend" style="font-size:18px;float:right;" alt="${fundCourse.fundEndDate}"></p>
+				<!-- 倒數幾天 -->
+				<p class="fundend" style="font-size:18px;float:right;" alt="${fundCourse.fundEndDate}"></p>
 				</div>
 				<div class="card-footer" style="clear:both;"></div>
 				<div class="progress" style="clear:both;">
@@ -92,8 +89,8 @@
 // 			$(this).attr('style','width:'+$(this).text());
 // 		})	
 		
-		//var endVal = $('.fundend').val();
-		var endVal = $('.fundend').attr("alt");
+		
+		//var endVal = $('.fundend').attr("alt");
 		$('.fundend').each(function(){
 			//console.log($(this).attr("alt"));
 			var ed = new Date($(this).attr("alt"));
@@ -109,7 +106,7 @@
 		
 		$(".buyNum").each(function(){
 			var i = $(this);
-			console.log(i.attr("alt") + "--" + i.attr("alt2"));
+			//console.log(i.attr("alt") + "--" + i.attr("alt2"));
 			$.getJSON("/e-Look/BuyCourseNumber", {
 				"courseID":$(this).attr("alt")},
 				function(data){
