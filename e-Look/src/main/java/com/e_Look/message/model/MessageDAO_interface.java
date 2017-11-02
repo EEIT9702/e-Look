@@ -8,5 +8,6 @@ public interface MessageDAO_interface {
     public void delete(Integer messageID);
     public MessageVO findByPrimaryKey(Integer messageID);
     public List<MessageVO> findAllResponse(Integer messageID_response);
+    public List<MessageVO> findMessageByCourseID(Integer courseID);
     public List<MessageVO> getAll();
 }

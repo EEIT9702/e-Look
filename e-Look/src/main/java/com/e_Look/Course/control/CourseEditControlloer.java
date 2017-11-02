@@ -47,7 +47,9 @@ public class CourseEditControlloer extends HttpServlet {
 			 List<CourseVO> AllFundCourse=courseService.getAllFundRaiseCourse();
 			 //第一種取值的方式
 			 for(int i=0;i<AllFundCourse.size();i++){
+
 				//System.out.println("募資起始時間："+AllFundCourse.get(i).getFundEndDate());
+
 				 long FundEndTime=AllFundCourse.get(i).getFundEndDate().getTime();
 				 long currentDate = System.currentTimeMillis();
 				if(FundEndTime<=currentDate){	

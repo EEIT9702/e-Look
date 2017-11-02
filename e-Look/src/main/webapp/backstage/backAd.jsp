@@ -92,7 +92,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
 			</thead>
 			<tbody>
 				<c:forEach var="AdVO" items="${list}">
-					<tr>
+					<tr id="tr1">
 						<td align="center">${AdVO.adID}</td>
 						<td align="center">${AdVO.fileName}</td>
 						<td align="center">${AdVO.status}</td>
@@ -106,7 +106,9 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
 								style="display: inline;">
 								<input type="button" name="update" class="button cyan alt"
 									data-toggle="JDialog" data-target="update" value="修改">
-								<input type="hidden" name="adID" value="${AdVO.adID}"> <input
+								<input type="hidden" name="adID" value="${AdVO.adID}"> 
+								<input type="hidden" name="adFile" value="${AdVO.adFile}"> 
+								<input
 									type="button" name="delete" class="button red alt"
 									data-toggle="JDialog" data-target="delete" value="刪除">
 							</FORM></td>
@@ -201,8 +203,8 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
 
 						<tr>
 							<td id="td1"></td>
-							<td><input type="text" name="fileName"></td>
-							<td><input type="file" name="adFile"></td>
+							<td><input type="text" name="fileName" id="adName"></td>
+							<td><input type="file" name="adFile"id="adFile"></td>
 							<td><select name="status">
 									<option value="0">展示</option>
 									<option value="1">隱藏</option>
@@ -278,9 +280,10 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
 
 		$('tbody input[name="update"]').on('click', function() {
 			var event1 = $(this).parent().children('input:eq(1)').val();
+			var adName=$(this).parents('#tr1').children('td:eq(1)').text();
 			$('#updateAdID').val(event1);
 			$('#td1').text(event1);
-
+		   $('#adName').val(adName);	 
 		})
 		$('tbody input[name="delete"]').on('click', function() {
 			var event2 = $(this).parent().children('input:eq(1)').val();
