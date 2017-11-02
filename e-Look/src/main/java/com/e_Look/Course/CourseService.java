@@ -2,6 +2,7 @@ package com.e_Look.Course;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.http.Part;
@@ -83,12 +84,18 @@ public class CourseService {
 	public void changeStatustoFundStatus(Integer courseID){
 		dao.changeStatustoFund(courseID);
 	}
+	public void updateStatus(CourseVO courseVO){
+		dao.updateStatus(courseVO);
+	}
 	public List<CourseVO> getAllCourseData(Integer memberID, Integer status){
 		return dao.findAllCourse(memberID, status);
 	}
 
 	public List<CourseVO> getAllReviewCourseData(){
 		return dao.getAllReviewCourse();
+	}
+	public List<CourseVO> getAllFundRaiseCourse(){
+		return dao.getAllFundRaiseCourse();
 	}
 	
 
@@ -110,5 +117,28 @@ public class CourseService {
 			return day;			
 		}
 	}
-
+	public List<CourseVO> getOnlineCourseByCourseName(String keyWord){
+		List<CourseVO> courseVOs = dao.getAllOnlineCourseNotFree();
+		List<CourseVO> courseVOs2 = new LinkedList<CourseVO>();
+		for(CourseVO courseVO:courseVOs){
+			if(courseVO.getCourseName().indexOf(keyWord)!=-1){
+				courseVOs2.add(courseVO);
+			}
+			
+		}
+		return courseVOs2;
+	}
+	
+	public List<CourseVO> getFreeCourseByCourseName(String keyWord){
+		List<CourseVO> courseVOs = dao.getAllFreeCourse();
+		List<CourseVO> courseVOs2 = new LinkedList<CourseVO>();
+		for(CourseVO courseVO:courseVOs){
+			if(courseVO.getCourseName().indexOf(keyWord)!=-1){
+				courseVOs2.add(courseVO);
+			}
+			
+		}
+		return courseVOs2;
+	}
+	
 }

@@ -46,12 +46,17 @@
 					</a>
 				</div>
 				<div style="margin-top:40px;">
-					<p style="font-size:18px;float:left;">預購價：
+				<p style="font-size:18px;float:left;">預購價：
+<%-- 				<c:choose> --%>
+<%-- 				<c:when test="${fundCourse.fundStartDate}"> --%>
 						<fmt:setLocale value="zh-TW" />
 						<fmt:formatNumber value="${fundCourse.soldPrice*0.7}" type="currency" maxFractionDigits="0"/>
-					</p>
+<%-- 				</c:when> --%>
+<%-- 				</c:choose> --%>
+				</p>
 					<p class="fundend" style="font-size:18px;float:right;" alt="${fundCourse.fundEndDate}"></p>
 				</div>
+				<div class="card-footer" style="clear:both;"></div>
 				<div class="progress" style="clear:both;">
 					<div class="progress-bar progress-bar-warning progress-bar-striped active" 
 					role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" 
@@ -60,9 +65,11 @@
 					
 					</div>
 				</div>
+				
 				<div>
 					<p class="buyNum" style="font-size:18px;text-align:center;clear:both;padding-top:8px;" alt="${fundCourse.courseID}" alt2="${fundCourse.targetStudentNumber}"></p>
 				</div>
+				
 			</div>
 
 		</div>

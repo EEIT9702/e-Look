@@ -9,6 +9,6 @@ public interface ShoppingCartDAO_interface {
 	//deprecated
 	public void update(ShoppingCartVO shoppingCartVO,ShoppingCartVO shoppingCartVO2);
 	public void delete(ShoppingCartVO shoppingCartVO);
-	public List<CourseVO> findByMemberID(Integer memberID);
+	public List<ShoppingCartVO> findByMemberID(Integer memberID);
 	public List<ShoppingCartVO> getAll();
 }
