@@ -4,6 +4,7 @@
 <%@ page import="com.e_Look.CourseClassDetails.*" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.e_Look.Course.*" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	String ccName = request.getParameter("courseClass");
 	CourseClassDetailsDAO ccddao = new CourseClassDetailsDAO();
@@ -90,7 +91,10 @@ small, .small {
 					</a>
 				</div>
 				<div>
-					<p style="margin-top: 40px; font-size: 18px">課程售價：${courseVO.soldPrice}</p>
+					<p style="margin-top: 40px; font-size: 18px">課程售價：
+					<fmt:setLocale value="zh-TW" />
+					<fmt:formatNumber value="${courseVO.soldPrice*0.7}" type="currency" maxFractionDigits="0"/>
+					</p>
 				</div>
 			</div>
 			<div class="card-footer">
