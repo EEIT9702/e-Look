@@ -52,6 +52,7 @@ public class CourseEditControlloer extends HttpServlet {
 				 long currentDate = System.currentTimeMillis();
 				if(FundEndTime<=currentDate){
 					
+					
 					if(BuyCourseService.getBuyCourseNumber(AllFundCourse.get(i).getCourseID())>=AllFundCourse.get(i).getTargetStudentNumber()){
 						CourseVO  courseVO =  new CourseVO();
 						courseVO.setStatus(4);
