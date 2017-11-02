@@ -13,7 +13,6 @@ public class MessageService {
 	   {
 
 		MessageVO messageVO = new MessageVO();
-
 		messageVO.setmContent(mContent);
         //mTime時間由dao產生
 		messageVO.setMemberID(memberID);
@@ -68,7 +67,7 @@ public class MessageService {
 		return dao.findByPrimaryKey(messageID);
 	}
 	public List<MessageVO> getOneMessageM(Integer courseID) {
-		return dao.findByPrimaryKeyM(courseID);
+		return null;
 	}
 
 	public List<MessageVO> getAll() {

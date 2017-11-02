@@ -25,7 +25,7 @@
 		request.setAttribute("ccdVOs", ccdVOs);
 		
 	} else {
-		List<CourseVO> courseVO = cdao.getAllOnlineCourse();
+		List<CourseVO> courseVO = cdao.getAllOnlineCourseNotFree();
 		request.setAttribute("courseVO", courseVO);
 	}
 %>
@@ -69,7 +69,10 @@ small, .small {
 					</a>
 				</div>
 				<div>
-					<p style="margin-top: 40px; font-size: 18px">課程售價：${onlineCourse.courseVO.soldPrice}</p>
+					<p style="margin-top: 40px; font-size: 18px">課程售價：
+					<fmt:setLocale value="zh-TW" />
+					<fmt:formatNumber value="${onlineCourse.courseVO.soldPrice}" type="currency" maxFractionDigits="0"/>
+					</p>
 				</div>
 			</div>
 			<div class="card-footer">
@@ -100,7 +103,7 @@ small, .small {
 				<div>
 					<p style="margin-top: 40px; font-size: 18px">課程售價：
 					<fmt:setLocale value="zh-TW" />
-					<fmt:formatNumber value="${courseVO.soldPrice*0.7}" type="currency" maxFractionDigits="0"/>
+					<fmt:formatNumber value="${courseVO.soldPrice}" type="currency" maxFractionDigits="0"/>
 					</p>
 				</div>
 			</div>
