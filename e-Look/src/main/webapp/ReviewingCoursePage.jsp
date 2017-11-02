@@ -6,7 +6,7 @@ f<%@ page language="java" contentType="text/html; charset=UTF-8"
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>收費課程</title>
+<title>課程內容審查頁面</title>
 <link href="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.css"
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/bootstrap.css"
@@ -14,6 +14,8 @@ f<%@ page language="java" contentType="text/html; charset=UTF-8"
 <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
 <link href="<%=request.getContextPath()%>/_PJC/css/step1.css"
+	rel="stylesheet">
+<link href="<%=request.getContextPath()%>/_PJC/css/ReviewingCoursePage.css"
 	rel="stylesheet">
 
 <!-- Sweet Alert -->
@@ -204,57 +206,43 @@ a {
 	<jsp:include page="/login.jsp" flush="true" />
 	<div class="container-fluid">
 		<div class="container">
+		<h1 class="text-center">管理員正在審查中...</h1>
+		<br>
+		<br>
+	<div class="row">
+        <div class="col-sm-6">
+            <div id="tb-testimonial" class="testimonial testimonial-info">
+                <div class="testimonial-section">
+                    1. 確認影片是否完整無損壞
+                    <br>
+                    2. 課程標題與影片內容是否相符
+                    <br>
+                    3. 影片、課程簡介，都應避免色情、暴力、不雅言語及闡述政治立場之內容
+                    <br>
+                    4. 如有附講義，內容也須一併確認
+                </div>
+                
+            </div>   
+		</div>
+	</div>
 			<div class="row">
 				<h1 align="center" id="videoTitle">${courseVO.courseName}</h1>
 				<div class="col-md-12 " id="videoArea"
 					style="background-image: url('<%=request.getContextPath() %>/CourseImage?CourseID=${courseVO.courseID}')">
 
-					<input type="hidden" value="${courseVO.courseID}">
+					
 					<div class="col-md-12" style="z-index: 10">
 						<div class="col-md-8 col-xs-12"
 							style="margin-right: -15px; z-index: 10">
-							<c:choose>
-								<c:when test="${LoginOK.memberID==courseVO.memberID}">
-									<video controls="controls" id="vidoeControl">
+
+									<video controls="controls"
+										id="vidoeControl">
 										<source
 											src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}"
 											type="video/mp4">
 									</video>
 
-								</c:when>
-								<c:when test="${!empty LoginOK && !empty list2}">
-									<video
-										<c:forEach var="buycourse"  items='${list2}'>
-							<c:choose>
-								<c:when test="${courseVO.courseID==buycourse.courseID}">
-										<c:set var="control" value="controls=controls" />
-										<c:set var="poster" value="" />
-										<c:set var="boo" value="true" />
-								</c:when>
-								<c:when test="${!empty boo}">
-								</c:when>
-								<c:otherwise> 
-									<c:set var="poster" value="poster=_Lyy/poster.png" />
-									<c:set var="control" value=""/>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-										<c:out value="${poster}"/> <c:out value="${control}"/>
-										id="vidoeControl">
-										<source
-											src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}"
-											type="video/mp4">
-									</video>
-								</c:when>
-								<c:otherwise>
-									<video poster="<%=request.getContextPath()%>/_Lyy/poster.png"
-										id="vidoeControl">
-										<source
-											src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}"
-											type="video/mp4">
-									</video>
-								</c:otherwise>
-							</c:choose>
+
 						</div>
 						<div class="col-md-4 col-xs-12" id="videoDivListStyle">
 							<div>
@@ -457,9 +445,9 @@ a {
 							<c:when test="${empty err}">
 
 
-								<button id="intoShoppingCart" type="button" data-toggle="modal"
-									data-target="#myModal" class="btn btn-success center-block"
-									style="width: 160px">加入購物車</button>
+<!-- 								<button id="intoShoppingCart" type="button" data-toggle="modal" -->
+<!-- 									data-target="#myModal" class="btn btn-success center-block" -->
+<!-- 									style="width: 160px">加入購物車</button> -->
 
 
 							</c:when>
@@ -518,7 +506,7 @@ a {
 					<div class="tab" role="tabpanel">
 
 						<ul class="nav nav-tabs" role="tablist"
-							style="background-color: #efd391">
+							style="background-color: #eef9fc">
 							<li role="presentation" class="active"><a href="#Section1"
 								aria-controls="home" role="tab" data-toggle="tab">課程簡介</a></li>
 							<li role="presentation"><a href="#Section2"
@@ -649,56 +637,194 @@ a {
 									</c:if>
 								</div>
 							</div>
-						<!-- 留言板 -->
-						<div role="tabpanel" class="tab-pane fade" id="Section3">
-							<div class="col-md-12" id="messageHeader">
-								
-						<!-- 切板位置 -->
-							<c:forEach items="${messageVOList}" var="messageVO">
-									
-									<c:if test="${messageVO.messageID_response>=0}">
-										<div class="col-md-1">
-											<img src="<%=request.getContextPath() %>/Image?MemberID=${messageVO.memberID}"class="img-thumbnail pull-left">
-										</div>
-									
+							<!-- 留言板 -->
+							<div role="tabpanel" class="tab-pane fade" id="Section3">
+								<div class="col-md-12" id="messageHeader">
+									<div class="col-md-1">
+										<img src="<%=request.getContextPath()%>/img/imember_image.png"
+											class="img-thumbnail pull-left">
+									</div>
 									<div class="col-md-11">
-										<div><span id="testMessage1"class="text-left">${messageVO.memberID}</span>
-												<span>${messageVO.mTime}</span>
-<!-- 											<div class="dropdown pull-right"> -->
-<!-- 												<button class="btn dropdown-toggle btn-default"type="button" data-toggle="dropdown" style="height: 30px"> -->
-<!-- 												<span class="glyphicon glyphicon-option-horizontal"></span> -->
-<!-- 												</button> -->
-<!-- 												<ul class="dropdown-menu"> -->
-<%-- 													<c:if test="${empty LoginOK}"> --%>
-<%-- 														<c:choose> --%>
-<%-- 															<c:when test="${!empty loginerr}"> --%>
-<!-- 																<li><a href="#" href="#" data-toggle="modal" -->
-<!-- 																	data-target="#myModal2">檢舉</a></li> -->
-<%-- 															</c:when> --%>
-<%-- 															<c:when test="${empty err}"> --%>
-<!-- 																<li><a href="#" href="#" data-toggle="modal" -->
-<!-- 																	data-target="#myModal">檢舉</a></li> -->
-<%-- 															</c:when> --%>
-<%-- 															<c:otherwise> --%>
-<!-- 																<li><a class="reportM" href="#" href="#" -->
-<!-- 																	data-toggle="modal" data-target="#myModal2">檢舉</a></li> -->
-<%-- 															</c:otherwise> --%>
-<%-- 														</c:choose> --%>
-<%-- 													</c:if> --%>
-<%-- 													<c:if test="${!empty LoginOK}"> --%>
-<!-- 														<li><a class="reportM" href="#">檢舉</a></li> -->
-<%-- 													</c:if> --%>
-<!-- 													<li><a href="#">修改</a></li> -->
-<!-- 													<li><a href="#">刪除</a></li> -->
-<!-- 												</ul> -->
-<!-- 											</div> -->
-<!-- 										</div> -->
-										<div style="border-bottom: 1px solid black">
-											<p>${messageVO.mContent}</p>
+
+										<div>
+											<!--測試用messageID -->
+											<span id="testMessage1" value="1001" class="text-left">吳永志</span>
+
+											<%
+												Date dNow = new Date();
+												SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+												out.print("<span align=\"center\">" + ft.format(dNow) + "</span>");
+											%>
+											<div class="dropdown pull-right">
+												<button class="btn dropdown-toggle btn-default "
+													type="button" data-toggle="dropdown" style="height: 30px">
+													<span class="glyphicon glyphicon-option-horizontal"></span>
+												</button>
+												<ul class="dropdown-menu">
+													<c:if test="${empty LoginOK}">
+														<c:choose>
+															<c:when test="${!empty loginerr}">
+																<li><a href="#" href="#" data-toggle="modal"
+																	data-target="#myModal2">檢舉</a></li>
+															</c:when>
+															<c:when test="${empty err}">
+																<li><a href="#" href="#" data-toggle="modal"
+																	data-target="#myModal">檢舉</a></li>
+															</c:when>
+															<c:otherwise>
+																<li><a class="reportM" href="#" href="#"
+																	data-toggle="modal" data-target="#myModal2">檢舉</a></li>
+															</c:otherwise>
+														</c:choose>
+													</c:if>
+													<c:if test="${!empty LoginOK}">
+														<li><a class="reportM" href="#">檢舉</a></li>
+													</c:if>
+													<li><a href="#">修改</a></li>
+													<li><a href="#">刪除</a></li>
+												</ul>
+											</div>
+
 										</div>
-									
-								
-										
+
+										<div style="border-bottom: 1px solid black">
+
+											<p>With Bootstrap 2, we added optional mobile friendly
+												styles for key aspects of the framework. With Bootstrap 3,
+												we've rewritten the project to be mobile friendly from the
+												start. Instead of adding on optional mobile styles, they're
+												baked right into the core. In fact, Bootstrap is mobile
+												first. Mobile first styles can be found throughout the
+												entire library instead of in separate files. To ensure
+												proper rendering and touch zooming, add the viewport meta
+												tag to your</p>
+										</div>
+
+
+										<div class="col-md-12">
+
+											<div class="panel-group">
+												<div class="panel">
+													<div class="panel-heading">
+														<h4 class="panel-title " style="padding-bottom: 10px">
+															<a data-toggle="collapse" href="#collapse1">回應記錄</a>
+														</h4>
+													</div>
+													<div id="collapse1" class="panel-collapse collapse ">
+														<!--第一個回應 -->
+														<div>
+															<div class="col-md-1">
+																<img
+																	src="<%=request.getContextPath()%>/img/imember_image.png"
+																	class="img-thumbnail pull-left">
+															</div>
+															<div class="col-md-11 "
+																style="border-bottom: 1px solid black">
+																<span>吳永志</span>
+																<%
+																	out.print("<span align=\"center\">" + ft.format(dNow) + "</span>");
+																%>
+																<div class="dropdown pull-right">
+																	<button class="btn dropdown-toggle btn-default "
+																		type="button" data-toggle="dropdown"
+																		style="height: 30px">
+																		<span class="glyphicon glyphicon-option-horizontal"></span>
+																	</button>
+																	<ul class="dropdown-menu">
+																		<c:if test="${empty LoginOK}">
+																			<c:choose>
+																				<c:when test="${!empty loginerr}">
+																					<li><a href="#" href="#" data-toggle="modal"
+																						data-target="#myModal2">檢舉</a></li>
+																				</c:when>
+																				<c:when test="${empty err}">
+																					<li><a href="#" href="#" data-toggle="modal"
+																						data-target="#myModal">檢舉</a></li>
+																				</c:when>
+																				<c:otherwise>
+																					<li><a class="reportM" href="#" href="#"
+																						data-toggle="modal" data-target="#myModal2">檢舉</a></li>
+																				</c:otherwise>
+																			</c:choose>
+																		</c:if>
+																		<c:if test="${!empty LoginOK}">
+																			<li><a class="reportM" href="#">檢舉</a></li>
+																		</c:if>
+																		<li><a href="#">修改</a></li>
+																		<li><a href="#">刪除</a></li>
+																	</ul>
+																</div>
+																<p>With Bootstrap 2, we added optional mobile
+																	friendly styles for key aspects of the framework. With
+																	Bootstrap 3, we've rewritten the project to be mobile
+																	friendly from the start. Instead of adding on optional
+																	mobile styles, they're baked right into the core. In
+																	fact, Bootstrap is mobile first. Mobile first styles
+																	can be found throughout the entire library instead of
+																	in separate files. To ensure proper rendering and touch
+																	zooming, add the viewport meta tag to your</p>
+															</div>
+														</div>
+														<!--第二個回應 -->
+														<div>
+															<div class="col-md-1">
+																<img
+																	src="<%=request.getContextPath()%>/img/imember_image.png"
+																	class="img-thumbnail pull-left">
+															</div>
+															<div class="col-md-11 "
+																style="border-bottom: 1px solid black">
+																<span>吳永志</span>
+																<%
+																	out.print("<span align=\"center\">" + ft.format(dNow) + "</span>");
+																%>
+																<div class="dropdown pull-right">
+																	<button class="btn dropdown-toggle btn-default "
+																		type="button" data-toggle="dropdown"
+																		style="height: 30px">
+																		<span class="glyphicon glyphicon-option-horizontal"></span>
+																	</button>
+																	<ul class="dropdown-menu">
+																		<c:if test="${empty LoginOK}">
+																			<c:choose>
+																				<c:when test="${!empty loginerr}">
+																					<li><a href="#" href="#" data-toggle="modal"
+																						data-target="#myModal2">檢舉</a></li>
+																				</c:when>
+																				<c:when test="${empty err}">
+																					<li><a href="#" href="#" data-toggle="modal"
+																						data-target="#myModal">檢舉</a></li>
+																				</c:when>
+																				<c:otherwise>
+																					<li><a class="reportM" href="#" href="#"
+																						data-toggle="modal" data-target="#myModal2">檢舉</a></li>
+																				</c:otherwise>
+																			</c:choose>
+																		</c:if>
+																		<c:if test="${!empty LoginOK}">
+																			<li><a class="reportM" href="#">檢舉</a></li>
+																		</c:if>
+																		<li><a href="#">修改</a></li>
+																		<li><a href="#">刪除</a></li>
+																	</ul>
+																</div>
+																<p>With Bootstrap 2, we added optional mobile
+																	friendly styles for key aspects of the framework. With
+																	Bootstrap 3, we've rewritten the project to be mobile
+																	friendly from the start. Instead of adding on optional
+																	mobile styles, they're baked right into the core. In
+																	fact, Bootstrap is mobile first. Mobile first styles
+																	can be found throughout the entire library instead of
+																	in separate files. To ensure proper rendering and touch
+																	zooming, add the viewport meta tag to your</p>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+
 										<!-- 			<!--回應輸入表格-->
 										<div class="col-md-12">
 											<div class="panel-group">
@@ -726,10 +852,6 @@ a {
 										</div>
 									</div>
 								</div>
-								</c:if>
-							</c:forEach>
-						</div>
-							
 								<!-- 點評收藏 -->
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="Section4"
@@ -747,274 +869,18 @@ a {
 		</div>
 
 	</div>
-
+	<div id="star"></div>
 	<c:remove var="err" scope="session" />
 	<c:remove var="loginerr" scope="session" />
 	<jsp:include page="/footer.jsp" />
 
-	<script>
-		$(document).ready(function() {
-			$(".col-md-4 a").click(function() {
-				$(this).tab('show');
-			});
-		});
-	</script>
-	<script>
-		$(function() {
-			//點擊檢舉留言
-			$('.reportM').on('click', function() {
-				warning();
-			})
-			//選取檢舉留言功能
-			function warning() {
-				swal({
-					title : '檢舉留言',
-					input : 'select',
-					inputOptions : {
-						'含有仇恨言論' : '含有仇恨言論',
-						'不雅內容' : '不雅內容',
-						'垃圾訊息' : '垃圾訊息'
-					},
-					inputPlaceholder : '請選擇檢舉事項',
-					confirmButtonText : '確認',
-					cancelButtonText : '取消',
-					showCancelButton : true,
-					inputValidator : function(value) {
-						return new Promise(function(resolve) {
-							resolve();
-						});
-					}
-				}).then(
-						function(result) {
-							if (result) {
-								console.log($('#testMessage1').attr('value'));
-								console.log($('#reportMemberID').val());
-								console.log(result);
-								$.post('InsertReportMessageController', {
-									'reportContent' : result,
-									'reportMemberID' : $('#reportMemberID')
-											.val(),
-									'reportMessageID' : $('#testMessage1')
-											.attr('value')
-								})
-								swal({
 
-									confirmButtonText : '確認',
-									type : 'success',
-									html : '檢舉 ' + result + ' 成功，管理員會盡快審核 '
-
-								});
-							}
-				});
-			}
-			
-			
-		})
-	</script>
-	<script>
-		//判斷是否加入過最愛		
-		var count1 = 0;
-		$('#favoriteclick1').click(function() {
-			alert('已經加入過囉');
-		})
-
-		$("#favoriteclick2").click(function() {
-
-			console.log($("#mbcourseID").val())
-			console.log($("#mbmemberID").val())
-			if (count1 == 0) {
-				$('#favoriteclick2').attr("id", "favoriteclick1")
-				$.post('MemberBookmarksInsertController', {
-					'courseID' : $("#mbcourseID").val(),
-					'memberID' : $("#mbmemberID").val()
-				}, function() {
-					alert('已經加到你的最愛囉');
-					count1++;
-				})
-			} else {
-				alert('已經加入過囉');
-			}
-
-		})
-	</script>
-	<script>
-	$(function() {
-		$('.reportAction').click(function() {
-				warningV();
-			})
-
-			function warningV() {
-				swal({
-					title : '檢舉影片',
-					input : 'select',
-					inputOptions : {
-						'該影片侵犯著作權' : '該影片侵犯著作權',
-						'該影片含有不雅內容' : '該影片含有不雅內容',
-						'該影片無法播放' : '該影片無法播放'
-					},
-					inputPlaceholder : '請選擇檢舉事項',
-					confirmButtonText : '確認',
-					cancelButtonText : '取消',
-					showCancelButton : true,
-					inputValidator : function(value) {
-						return new Promise(function(resolve) {
-							resolve();
-						});
-					}
-				}).then(function(result) {
-						if (result) {
-			 				$.post("ReportCourseInsertController", {
-		 					'reportMemberID' : $('#reportMemberID').val(),
-		 					'reportCourseID' : $('#reportCourseID').val(),
-		 					'radioReporterCon' : result
-							})
-							swal({
-								confirmButtonText : '確認',
-								type : 'success',
-								html : '檢舉 ' + result + ' 成功，管理員會盡快審核 '
-							});
-						}
-					});
-			}	
-		});
-	</script>
-	<script>
-		var count = 0;
-		$('#subAction').click(function() {
-			if (count == 0) {
-				$.post("MemberSubcriptionInsert_DeleteController", {
-					'memberID' : $('#reportMemberID').val(),
-					'memberTrackID' : $('#coursevoMemeberID').val()
-				}, function() {
-					alert('已加到您的追蹤講師囉');
-					count++;
-				});
-				$('#subAction').attr('disabled', 'false')
-				$('#subAction').text('已追蹤講師')
-			} else {
-				alert('已經追蹤過囉');
-				$('#subAction').attr('disabled', 'false')
-			}
-
-		})
-	</script>
-	<script>
 	
-		// 	星星點評
-		
-		$(function(){
-			$('#star').raty(
-				{
-					path : 'img',
-					width : 150,
-					starOff : 'star-off-big.png',
-					starOn : 'star-on-big.png',
-					readOnly :function() {
-						if ($('#reportMemberID').val() == ""|| $('#reportMemberID').val() == null) {//沒有登入
-							$("#noLogin").text("(請先登入)")
-							
-							return true;
-						}else{
-						var memberID=$('#reportMemberID').val();
-// 							console.log(getJson(memberID));
-							return getJson(memberID);
-					}
-				},
-					click : function(score, evt) {
-						$.post('updateScoreController', {
-							'score' : score,
-							'memberID' : $('#reportMemberID').val(),
-							'courseID' : $('#reportCourseID').val()
-						})
-						alert("感謝你的評分!" + "\nscore: " + score);
-					}
-				});
-		});
-		
-		function getJson(memberID) {
-			var bool;
-			$.ajax({'url':'/e-Look/countScoreController',
-						'async' : false,
-						'method' : "GET",
-						'data' : {
-							'memberID' : memberID
-						},
-						'success' : function(datas) {
-							var datasJson = JSON.parse(datas);
-							console.log(datasJson.length)
-							console.log(datas);
-							console.log($('#reportMemberID').val());
-							console.log($('#starMemberID').val());
-							if ($('#starMemberID').val() == $('#reportMemberID')
-									.val()) {
-								$("#noLogin").text("")
-								bool = false
-								return bool;
-							} else if ($('#starMemberID').val() != $(
-									'#reportMemberID').val()) {
-								for (var i = 0; i <= (datasJson.length - 1); i++) {
-									if (datasJson[i].courseID == $(
-											'#reportCourseID').val()) {
-										$("#noLogin").text("")
-										bool = false
-										return bool;
-									}
-								}
-								$("#noLogin").text("(請先購買該課程)")
-								bool = true;
-								return bool;
-							}
-						}
-					});//$.ajax end
-			return bool;
-		}
-	</script>
-	<script>
-		var scoreJSON;
-		var value;
-		$(function() {
+	
+	
+	
 
-			$.post('countScoreController', {
-				'courseID' : $("#mbcourseID").val()
-			}, function(data) {
-				scoreJSON = JSON.parse(data);
-				value = Math.ceil(parseFloat(scoreJSON));
-				$('#starText').css({
-					'font-size' : '12px',
-					'padding-top' : '5px'
-				}).text("(" + value + ")")
-				$('#starTatol').raty({
-					path : 'img',
-					width : 160,
-					starOff : 'star-off-big.png',
-					starOn : 'star-on-big.png',
-					readOnly : true,
-					score : value,
-				});
-			});
-		});
-	</script>
-	<script>
-	$(function(){
-		$.getJSON("/e-Look/BuyCourseNumber",{'courseID':$("#mbcourseID").val()},
-				function(data){
-					var buyStudentNumber=parseInt(data);
-					$("#buyStudentNumber").text(buyStudentNumber+"人")
-			})
-	})
-	</script>
-	<script>
-		var b=true;
- 		$('video').click(function(){
- 			if(b){
-			this.play();
-			b=false;
- 			}else{
- 				this.pause();
-				b=true;
- 			}
-		})
-		</script>
-
+	
+	
 	</body>
 </html>
