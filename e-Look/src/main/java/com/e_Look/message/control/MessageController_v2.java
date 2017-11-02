@@ -22,7 +22,9 @@ import net.minidev.json.JSONValue;
 /**
  * Servlet implementation class MessageController
  */
+
 @WebServlet("/MessageController_v2")
+
 public class MessageController_v2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
