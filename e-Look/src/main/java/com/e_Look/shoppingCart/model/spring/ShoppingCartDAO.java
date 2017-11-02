@@ -1,5 +1,6 @@
 package com.e_Look.shoppingCart.model.spring;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
@@ -35,18 +36,18 @@ public class ShoppingCartDAO implements ShoppingCartDAO_interface {
 
 
 	@Override
-	public List<CourseVO> findByMemberID(Integer memberID) {
-		List<CourseVO> list = null;
-//		final String GET_MEMBER_COURSE = "from ShoppingCartVO where memberID ="+memberID;
-//		
-//		list = (List<CourseVO>) hibernateTemplate.find("from ShoppingCartVO where memberID");
-		
+	public List<ShoppingCartVO> findByMemberID(Integer memberID) {
+		List<ShoppingCartVO> list = new LinkedList<ShoppingCartVO>();
+		list=(List<ShoppingCartVO>) hibernateTemplate.get(ShoppingCartVO.class, memberID);
 		return list;
 	}
 
 	@Override
 	public List<ShoppingCartVO> getAll() {
-		return null;
+		List<ShoppingCartVO> list = new LinkedList<ShoppingCartVO>();
+		list=(List<ShoppingCartVO>) hibernateTemplate.find("from ShoppingCartVO");
+		
+		return list;
 	}
 
 	
@@ -59,14 +60,22 @@ public class ShoppingCartDAO implements ShoppingCartDAO_interface {
 		vo.setMemberID(100001);
 		vo.setCourseID(200001);
 		
-		dao.insert(vo);
-		dao.delete(vo);
+		//dao.insert(vo);
+		//dao.delete(vo);
 		
+		
+		
+		List<ShoppingCartVO> list1 = dao.findByMemberID(100001);
+		for(ShoppingCartVO shoppingCartVO:list1){
+			System.out.print(shoppingCartVO.getMemberID());
+			System.out.println(shoppingCartVO.getCourseID());
+		}
+		List<ShoppingCartVO> aa = dao.getAll();
+		System.out.println("======================================================");
+		for(ShoppingCartVO ss:aa){
+			System.out.print(ss.getCourseID());
+			System.out.println(ss.getMemberID());
+		}
 	}
-	
-	
-	
-	
-	
 	
 }
