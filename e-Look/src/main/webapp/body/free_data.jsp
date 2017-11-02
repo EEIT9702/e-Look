@@ -6,21 +6,37 @@
 <%@ page import="com.e_Look.Course.*" %>
 <%
 //接收參數
-String ccName = request.getParameter("courseClass");
+
+
+String keyWord = request.getParameter("keyWord");
+String courseClass = request.getParameter("courseClass");
+CourseClassDetailsService ccdServ = new CourseClassDetailsService();
+CourseService cServ = new CourseService();
 CourseClassDetailsDAO ccddao = new CourseClassDetailsDAO();
 CourseDAO cdao = new CourseDAO();
-if(ccName.length() != 0){
-	Integer ccID = Integer.parseInt(ccName);
-	
-	CourseClassDetailsService ccdServ = new CourseClassDetailsService();
+
+
+
+if(courseClass.length() != 0  && keyWord.length() != 0){
+	Integer ccID = Integer.parseInt(courseClass);
+	List<CourseClassDetailsVO> ccdVOs =ccdServ.getFreeCourse(ccID, keyWord);		
+	request.setAttribute("ccdVOs", ccdVOs);
+}else if(keyWord.length() != 0){
+	List<CourseVO> courseVOs = cServ.getFreeCourseByCourseName(keyWord);
+	request.setAttribute("courseVOs", courseVOs);
+}else if(courseClass.length() != 0) {
+	Integer ccID = Integer.parseInt(courseClass);
 	List<CourseClassDetailsVO> ccdVOs = ccdServ.getFreeCourse(ccID);
 	request.setAttribute("ccdVOs", ccdVOs);
-	
-	
-}else {
+} else {
 	List<CourseVO> courseVOs =cdao.getAllFreeCourse();
 	request.setAttribute("courseVOs", courseVOs);
 }
+
+
+
+
+
 %>
 <style>
 .card-text a {
@@ -49,7 +65,7 @@ small, .small {
 <c:when test="${!empty ccdVOs}">
 <c:forEach var='freeCourse' items='${ccdVOs}' begin="${param.rowValueY}" end="${param.rowValueY + 3}">
 	<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width:341px;margin-bottom:20px;">
-		<div class="card card-inverse" style="background-color: white;">
+		<div class="card card-inverse" >
 			<a style="text-decoration: none; color: black"; href="<%=request.getContextPath() %>/freeCourse-v1.jsp?CourseID=${freeCourse.courseVO.courseID}">
 				<img class="card-img-top img-rounded center-block" src="<%=request.getContextPath() %>/CourseImage?CourseID=${freeCourse.courseVO.courseID}" alt="course" id="wizardPicturePreview" title="" style="width:98%">
 			</a>
@@ -78,7 +94,7 @@ small, .small {
 <c:otherwise>
 <c:forEach var='courseVO' items='${courseVOs}' begin="${param.rowValueY}" end="${param.rowValueY + 3}">
 	<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width:341px;margin-bottom:20px;">
-		<div class="card card-inverse" style="background-color: white;">
+		<div class="card card-inverse" >
 			<a style="text-decoration: none; color: black"; href="<%=request.getContextPath() %>/freeCourse-v1.jsp?CourseID=${courseVO.courseID}">
 				<img class="card-img-top img-rounded center-block" src="<%=request.getContextPath() %>/CourseImage?CourseID=${courseVO.courseID}" alt="course" id="wizardPicturePreview" title="" style="width:98%">
 			</a>

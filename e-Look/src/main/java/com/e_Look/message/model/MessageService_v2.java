@@ -40,7 +40,10 @@ public class MessageService_v2 {
 		dao.update(messageVO,update);
 //		return dao.findByPrimaryKey(messageID);
 	}
-
+	public List<MessageVO> findCourseRe(Integer courseID){
+		return dao.findMessageByCourseID(courseID);
+	} 
+	
 	public MessageVO getOneMessage(Integer messageID) {
 		return dao.findByPrimaryKey(messageID);
 	}

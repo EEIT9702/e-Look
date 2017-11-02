@@ -25,6 +25,7 @@ public class MessageDAO_JDBC_v2 implements MessageDAO_interface {
 	private static final String UPDATE_STATUS = "update Message set status=? where messageID= ?";
 	// 刪除用不到
 	private static final String DELETE_MESSAGE = "delete from Message where messageID= ?";
+	private static final String SELECT_MESSAGE_BY_COURSEID = "select messageID,mContent,mTime,messageID_response,memberID,courseID,status from Message where courseID= ?";
 	private static final String SELECT_ONE_MESSAGE = "select messageID,mContent,mTime,messageID_response,memberID,courseID,status from Message where messageID= ?";
 	private static final String SELECT_RESPONSE = "select messageID,mContent,mTime,messageID_response,memberID,courseID,status from Message where messageID_response= ?";
 	private static final String SELECT_ALL_MESSAGE = "select messageID,mContent,mTime,messageID_response,memberID,courseID,status from Message";	
@@ -354,6 +355,55 @@ public class MessageDAO_JDBC_v2 implements MessageDAO_interface {
 
 		return list;
 	}
+	@Override
+	public List<MessageVO> findMessageByCourseID(Integer courseID) {
+		List<MessageVO> list = new ArrayList<MessageVO>();
+		MessageVO messageVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(SELECT_MESSAGE_BY_COURSEID);
+//"select messageID,mContent,mTime,messageID_response,memberID,courseID,status from Message where courseID= ?";
+			pstmt.setInt(1, courseID);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				messageVO = new MessageVO();		
+				messageVO.setMessageID(rs.getInt(1));
+				messageVO.setmContent(rs.getString(2));
+				messageVO.setmTime(rs.getTimestamp(3));
+				messageVO.setMessageID_response(rs.getInt(4));
+				messageVO.setMemberID(rs.getInt(5));
+				messageVO.setCourseID(rs.getInt(6));
+				messageVO.setStatus(rs.getByte(7));
+				
+				list.add(messageVO);
+			}
+			
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
 	public static void main(String[] args) {
 		MessageDAO_JDBC_v2 dao = new MessageDAO_JDBC_v2();
 		//新增
@@ -415,8 +465,18 @@ public class MessageDAO_JDBC_v2 implements MessageDAO_interface {
 //			System.out.print(m.getMemberID()+" ");
 //			System.out.println(m.getStatus());
 //		}
-		
-		
+		//查詢該課程多筆留言
+//		List<MessageVO> messageVO=dao.findMessageByCourseID(200002);
+//		for(MessageVO m:messageVO){
+//			System.out.print(m.getMessageID()+" ");
+//			System.out.print(m.getmTime()+" ");
+//			System.out.print(m.getmContent()+" ");
+//			System.out.print(m.getMessageID_response()+" ");
+//			System.out.print(m.getCourseID()+" ");
+//			System.out.print(m.getMemberID()+" ");
+//			System.out.println(m.getStatus());
+//		}
+//		
 		//查詢全部
 //		List<MessageVO> messageVO=dao.getAll();
 //		for(MessageVO m:messageVO){
@@ -430,4 +490,6 @@ public class MessageDAO_JDBC_v2 implements MessageDAO_interface {
 //		}
 		
 	}
+
+
 }

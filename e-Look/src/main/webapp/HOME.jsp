@@ -34,6 +34,7 @@ h5 {
 	border: none;
 	border-radius: .28571429rem;
 	box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+	background-color: #f2fef1;
 }
 
 .card-block {
@@ -75,7 +76,7 @@ h5 {
 	padding: .75em 1em;
 	color: gray;
 	border-top: 1px solid rgba(0, 0, 0, .05) !important;
-	background: #fff;
+background-color: #f2fef1;
 }
 
 .card-inverse .btn {
@@ -152,7 +153,7 @@ a:HOVER {
 #div1 {
 	width: 100%;
 }
-s
+
 #body{background-color: #FAEBD7;}
 </style>
 <head>
@@ -198,7 +199,7 @@ s
 						style="width: 341px">
 						<a style="text-decoration: none; color: black"
 							 href="<%=request.getContextPath() %>/onlineCourse-v2.jsp?CourseID=${listcourse.courseID}">
-							<div class="card card-inverse" style="background-color: white;">
+							<div class="card card-inverse" >
 								<img class="card-img-top img-rounded center-block"
 									src="<%=request.getContextPath() %>/CourseImage?CourseID=${listcourse.courseID}"
 									alt="course" id="wizardPicturePreview" title="" style="width:98%">
@@ -234,7 +235,7 @@ s
 			style="width: 341px">
 			<a style="text-decoration: none; color: black"
 				 href="<%=request.getContextPath() %>/freeCourse-v1.jsp?CourseID=${listcourse.courseID}">
-				<div class="card card-inverse" style="background-color: white;">
+				<div class="card card-inverse" >
 					<img class="card-img-top img-rounded center-block"
 									src="<%=request.getContextPath() %>/CourseImage?CourseID=${listcourse.courseID}"
 									alt="course" id="wizardPicturePreview" title="" style="width:98%">
@@ -291,7 +292,7 @@ s
 			<c:forEach var='fundCourse' items='${fundcourse.allFundRaiseCourse}' begin="0" end="7">
 			<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course"
 				style="width: 341px">
-				<div class="card card-inverse" style="background-color: white;">
+				<div class="card card-inverse" >
 								<a style="text-decoration: none; color: black"; href="<%=request.getContextPath() %>/proposalCourse-v1.jsp?CourseID=${fundCourse.courseID}">
 				<img class="card-img-top img-rounded center-block" src="<%=request.getContextPath() %>/CourseImage?CourseID=${fundCourse.courseID}" alt="course" id="wizardPicturePreview" title="" style="width:98%">
 			</a>
@@ -314,6 +315,7 @@ s
 <%-- 					<p class="fundend" style="font-size:18px;float:right;">募資截止日：<fmt:formatDate value="${fundCourse.fundEndDate}" type="date"/></p> --%>
 					<p class="fundend" style="font-size:18px;float:right;" alt="${fundCourse.fundEndDate}"></p>
 				</div>
+				<div class="card-footer" style="clear:both;"></div>
 				<div class="progress" style="clear:both;">
 					<div class="progress-bar progress-bar-warning progress-bar-striped active" 
 					role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" 
