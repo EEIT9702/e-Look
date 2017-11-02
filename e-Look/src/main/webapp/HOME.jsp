@@ -152,7 +152,7 @@ a:HOVER {
 #div1 {
 	width: 100%;
 }
-s
+
 #body{background-color: #FAEBD7;}
 </style>
 <head>
