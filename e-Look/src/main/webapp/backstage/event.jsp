@@ -56,7 +56,7 @@ padding-bottom: 5px;}
 	</thead>
 	<tbody>
 <c:forEach var="eLookEventVO" items="${list}"> 
-					<tr>
+					<tr  id="tr1">
 						<td>${eLookEventVO.eventID}</td>
 						<td>${eLookEventVO.eventName}</td>
 						<td>${eLookEventVO.eStartDate}</td>
@@ -196,12 +196,12 @@ padding-bottom: 5px;}
           
 				<tr>
 				    <td id="td1"></td>
-					<td><input type="text" name="eventName"  class="inputtext"></td>
-					<td><input type="text" name="eStartDate"  class="inputtext thedate" readonly="readonly"></td>
-					<td><input type="text" name="eEndDate" class="inputtext thedate2" readonly="readonly"> </td>
-					<td><input type="text" name="discount" class="inputtext"></td>
+					<td><input type="text" name="eventName"  class="inputtext" id="eventName1"></td>
+					<td><input type="text" name="eStartDate"  class="inputtext thedate" id="eStartDate1" readonly="readonly"></td>
+					<td><input type="text" name="eEndDate" class="inputtext thedate2" id="eEndDate1" readonly="readonly"> </td>
+					<td><input type="text" name="discount" class="inputtext" id="discount1"></td>
 					<td><select class="font courseclass"
-						name="courseClass1">
+						name="courseClass1" id="courseClass1">
 							<option value="null">無</option>
 							<option value="全部">全部</option>
 							<option value="生活">生活</option>
@@ -216,7 +216,7 @@ padding-bottom: 5px;}
 							<option value="烹飪">烹飪</option>
 							<option value="程式">程式</option>
 							<option value="藝術">藝術</option>
-					</select>&ensp;<select class="font courseclass" name="courseClass2">
+					</select>&ensp;<select class="font courseclass" name="courseClass2" id="courseClass2">
 							<option value="null">無</option>
 							<option value="全部">全部</option>
 							<option value="生活">生活</option>
@@ -231,7 +231,7 @@ padding-bottom: 5px;}
 							<option value="烹飪">烹飪</option>
 							<option value="程式">程式</option>
 							<option value="藝術">藝術</option>
-					</select>&ensp;<select class="font courseclass" name="courseClass3">
+					</select>&ensp;<select class="font courseclass" name="courseClass3" id="courseClass3">
 							<option value="null">無</option>
 							<option value="全部">全部</option>
 							<option value="生活">生活</option>
@@ -287,8 +287,17 @@ $("#update").jDialog({
 
 		$('tbody input[name="update"]').on('click',function(){
 			var event2=$(this).parent().children('input:eq(1)').val();
-			$('#updateEventID').val(event2);
+			var eventName=$(this).parents('#tr1').children('td:eq(1)').text();
+			var eStartDate=$(this).parents('#tr1').children('td:eq(2)').text();
+			var eEndDate=$(this).parents('#tr1').children('td:eq(3)').text();
+			var discount=$(this).parents('#tr1').children('td:eq(4)').text();
+			var discount=$(this).parents('#tr1').children('td:eq(4)').text();
+		$('#updateEventID').val(event2);
 		$('#td1').text(event2);
+		$('#eventName1').val(eventName);
+		$('#eStartDate1').val(eStartDate);
+		$('#eEndDate1').val(eEndDate);
+		$('#discount1').val(discount);
 		})	
 	
 		
