@@ -16,6 +16,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.e_Look.member.model.MemberDAO;
+
 
 
 public class MessageDAO implements MessageDAO_interface {
@@ -54,7 +56,7 @@ public class MessageDAO implements MessageDAO_interface {
 			pstmt.setString(1, messageVO.getmContent());
 			Timestamp ts = new Timestamp(System.currentTimeMillis());
 			pstmt.setTimestamp(2, ts);
-			pstmt.setInt(3, messageVO.getMemberID());
+			pstmt.setInt(3, messageVO.getMemberVO().getMemberID());
 			pstmt.setInt(4, messageVO.getCourseID());
 			pstmt.setByte(5, messageVO.getStatus());
 			pstmt.executeUpdate();
@@ -101,7 +103,7 @@ public class MessageDAO implements MessageDAO_interface {
 						Timestamp ts = new Timestamp(System.currentTimeMillis());
 						pstmt.setTimestamp(2, ts);
 						pstmt.setInt(3, messageVO.getMessageID_response());
-						pstmt.setInt(4, messageVO.getMemberID());
+						pstmt.setInt(4, messageVO.getMemberVO().getMemberID());
 						pstmt.setInt(5, messageVO.getCourseID());
 						pstmt.setByte(6, messageVO.getStatus());
 						pstmt.executeUpdate();
@@ -236,6 +238,7 @@ public class MessageDAO implements MessageDAO_interface {
 
 	@Override
 	public MessageVO findByPrimaryKey(Integer messageID) {
+		MemberDAO dao = new MemberDAO();
 		MessageVO messageVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -251,7 +254,7 @@ public class MessageDAO implements MessageDAO_interface {
 				messageVO.setmContent(rs.getString(2));
 				messageVO.setmTime(rs.getTimestamp(3));
 				messageVO.setMessageID_response(rs.getInt(4));
-				messageVO.setMemberID(rs.getInt(5));
+				messageVO.setMemberVO(dao.findByPrimaryKey(rs.getInt(5)));
 				messageVO.setCourseID(rs.getInt(6));
 				messageVO.setStatus(rs.getByte(7));
 				
@@ -288,6 +291,7 @@ public class MessageDAO implements MessageDAO_interface {
 		MessageVO messageVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		MemberDAO dao = new MemberDAO();
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_MESSAGE_BY_COURSEID);
@@ -300,7 +304,7 @@ public class MessageDAO implements MessageDAO_interface {
 				messageVO.setmContent(rs.getString(2));
 				messageVO.setmTime(rs.getTimestamp(3));
 				messageVO.setMessageID_response(rs.getInt(4));
-				messageVO.setMemberID(rs.getInt(5));
+				messageVO.setMemberVO(dao.findByPrimaryKey(rs.getInt(5)));
 				messageVO.setCourseID(rs.getInt(6));
 				messageVO.setStatus(rs.getByte(7));
 				
@@ -331,6 +335,7 @@ public class MessageDAO implements MessageDAO_interface {
 
 	@Override
 	public List<MessageVO> findAllResponse(Integer messageID_response) {
+		MemberDAO dao = new MemberDAO();
 		List<MessageVO> list = new ArrayList<MessageVO>();
 		MessageVO messageVO = null;
 		Connection con = null;
@@ -347,7 +352,7 @@ public class MessageDAO implements MessageDAO_interface {
 				messageVO.setmContent(rs.getString(2));
 				messageVO.setmTime(rs.getTimestamp(3));
 				messageVO.setMessageID_response(rs.getInt(4));
-				messageVO.setMemberID(rs.getInt(5));
+				messageVO.setMemberVO(dao.findByPrimaryKey(rs.getInt(5)));
 				messageVO.setCourseID(rs.getInt(6));
 				messageVO.setStatus(rs.getByte(7));
 				
@@ -379,7 +384,7 @@ public class MessageDAO implements MessageDAO_interface {
 	@Override
 	public List<MessageVO> getAll() {
 		List<MessageVO> list = new LinkedList<MessageVO>();
-
+		MemberDAO dao = new MemberDAO();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -393,7 +398,7 @@ public class MessageDAO implements MessageDAO_interface {
 				messageVO.setmContent(rs.getString(2));
 				messageVO.setmTime(rs.getTimestamp(3));
 				messageVO.setMessageID_response(rs.getInt(4));
-				messageVO.setMemberID(rs.getInt(5));
+				messageVO.setMemberVO(dao.findByPrimaryKey(rs.getInt(5)));
 				messageVO.setCourseID(rs.getInt(6));
 				messageVO.setStatus(rs.getByte(7));
 				
