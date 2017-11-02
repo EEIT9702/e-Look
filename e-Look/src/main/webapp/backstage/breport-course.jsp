@@ -60,7 +60,7 @@
 <section id="wrapper">
 <header>
 	<div class="inner">
-		<h2>檢舉管理</h2>
+		<h2>檢舉課程管理</h2>
 		
 	</div>
 </header>

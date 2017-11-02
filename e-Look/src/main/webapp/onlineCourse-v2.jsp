@@ -22,8 +22,7 @@ f<%@ page language="java" contentType="text/html; charset=UTF-8"
 <script
 	src="<%=request.getContextPath()%>/alan/sweet/sweetalert2.min.js"></script>
 <!-- 星星 -->
-<script type="text/javascript"
-	src="<%=request.getContextPath()%>/_Lyy/jquery.raty.min.js"></script>
+<script type="text/javascript"src="<%=request.getContextPath()%>/_Lyy/jquery.raty.min.js"></script>
 <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
 
 <style>
@@ -423,47 +422,14 @@ a {
 				</c:if>
 				<c:if test="${!empty LoginOK}">
 					<div class="col-md-1 col-xs-4">
-						<a href="#" data-toggle="modal" data-target="#myModalReportVideo">
+						<a class="reportAction" href="#" data-toggle="modal" data-target="#myModalReportVideo">
 							<img src="<%=request.getContextPath()%>/img/warning.png"
 							class="img-responsive center-block img-circle">
 							<h5 class="text-center" style="font-size: 18px">影片檢舉</h5>
 						</a>
-					</div>
-					<div class="modal fade" id="myModalReportVideo" tabindex="-1"
-						role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header"
-									style="background-color: #FFC78E; border-top-right-radius: 8px; border-top-left-radius: 8px">
-									<button type="button" class="close pull-right"
-										data-dismiss="modal" aria-hidden="true">&times;</button>
-									<img src="<%=request.getContextPath()%>/img/warning.png"
-										width="32"> <span class="modal-title img-circle"
-										id="myModalLabel" style="font-size: 18px; color: red">檢舉影片</span>
-								</div>
-								<h3>
-									<strong>檢舉的影片:</strong>${courseVO.courseName}</h3>
-								<h3>
-									<strong>檢舉的內容:</strong>
-								</h3>
-								<div class="modal-body" id="radioReporter">
-									<input type="radio" id="radioReporterCon" name="cont"
-										value="該影片侵犯著作權"><span>該影片侵犯著作權</span><br> <input
-										type="radio" id="radioReporterCon" name="cont"
-										value="該影片含有不雅內容"><span>該影片含有不雅內容</span><br> <input
-										type="radio" id="radioReporterCon" name="cont" value="該影片無法播放"><span>該影片無法播放</span><br>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-default"
-										data-dismiss="modal">離開</button>
-									<button type="button" class="btn btn-warning" id="reportAction"
-										data-toggle="modal" data-target="#myModalReportVideo1">提交檢舉</button>
-								</div>
-								<input type="hidden" id="reportMemberID"
+						<input type="hidden" id="reportMemberID"
 									value="${LoginOK.memberID}" /> <input type="hidden"
 									id="reportCourseID" value="${courseVO.courseID}" />
-							</div>
-						</div>
 					</div>
 				</c:if>
 				<!--課程售價 -->
@@ -1006,30 +972,45 @@ a {
 		})
 	</script>
 	<script>
-		$('#reportAction').click(function() {
-			if ($('#radioReporterCon:checked').val() == null) {
-				$("#myModalReportVideo").modal('hide');
-				return;
-			} else {
-				$.post("ReportCourseInsertController", {
-					'reportMemberID' : $('#reportMemberID').val(),
-					'reportCourseID' : $('#reportCourseID').val(),
-					'radioReporterCon' : $('#radioReporterCon:checked').val()
-				})
-				$("#myModalReportVideo").modal('hide');
-				warning();
-			}
+	$(function() {
+		$('.reportAction').click(function() {
+				warningV();
+			})
 
-			function warning() {
+			function warningV() {
 				swal({
-
+					title : '檢舉影片',
+					input : 'select',
+					inputOptions : {
+						'該影片侵犯著作權' : '該影片侵犯著作權',
+						'該影片含有不雅內容' : '該影片含有不雅內容',
+						'該影片無法播放' : '該影片無法播放'
+					},
+					inputPlaceholder : '請選擇檢舉事項',
 					confirmButtonText : '確認',
-					type : 'success',
-					html : '檢舉成功，管理員會盡快審核 '
-
-				});
-			}
-		})
+					cancelButtonText : '取消',
+					showCancelButton : true,
+					inputValidator : function(value) {
+						return new Promise(function(resolve) {
+							resolve();
+						});
+					}
+				}).then(function(result) {
+						if (result) {
+			 				$.post("ReportCourseInsertController", {
+		 					'reportMemberID' : $('#reportMemberID').val(),
+		 					'reportCourseID' : $('#reportCourseID').val(),
+		 					'radioReporterCon' : result
+							})
+							swal({
+								confirmButtonText : '確認',
+								type : 'success',
+								html : '檢舉 ' + result + ' 成功，管理員會盡快審核 '
+							});
+						}
+					});
+			}	
+		});
 	</script>
 	<script>
 		var count = 0;
@@ -1156,5 +1137,17 @@ a {
 			})
 	})
 	</script>
+	<script>
+		var b=true;
+ 		$('video').click(function(){
+ 			if(b){
+			this.play();
+			b=false;
+ 			}else{
+ 				this.pause();
+				b=true;
+ 			}
+		})
+		</script>
 	</body>
 </html>

@@ -32,7 +32,7 @@ public class BuyCourseService {
 	public Integer getBuyCourseNumber(Integer courseID) {
 		List<BuyCourseVO> bcVO = dao.getByCourseID(courseID);
 		Integer bsize = bcVO.size();
-		System.out.println("bsize = " + bsize);
+		//System.out.println("bsize = " + bsize);
 		return bsize;
 	}
 }

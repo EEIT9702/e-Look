@@ -23,10 +23,10 @@ public class BuyCourseNumber extends HttpServlet {
 		BuyCourseService buyCourseService=new BuyCourseService();
 		Integer courseID= Integer.parseInt(request.getParameter("courseID"));
 		Integer number=buyCourseService.getBuyCourseNumber(courseID);
-		System.out.println(number);
+//		System.out.println(number);
 		String numberPeople=JSONValue.toJSONString(number);
 		PrintWriter out =response.getWriter();
-		System.out.println(numberPeople);
+//		System.out.println(numberPeople);
 		out.print(numberPeople);
 		out.close();
 	} 

@@ -69,7 +69,7 @@
 <section id="wrapper">
 <header>
 	<div class="inner">
-		<h2>檢舉管理</h2>
+		<h2>檢舉留言管理</h2>
 		
 	</div>
 </header>
