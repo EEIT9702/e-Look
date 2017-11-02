@@ -20,6 +20,7 @@ import com.e_Look.message.model.MessageVO;
 import net.minidev.json.JSONValue;
 
 @WebServlet("/MessageController_v2")
+
 public class MessageController_v2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
