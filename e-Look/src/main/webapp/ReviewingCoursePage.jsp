@@ -1,4 +1,4 @@
-f<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
 	import="java.util.*,java.text.*,com.e_Look.Course.*,com.e_Look.member.model.*,com.e_Look.buyCourse.model.*,javax.servlet.http.HttpSession"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -6,6 +6,7 @@ f<%@ page language="java" contentType="text/html; charset=UTF-8"
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="Short Icon" type="image/x-icon" href="${initParam.icon}" />
 <title>課程內容審查頁面</title>
 <link href="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.css"
 	rel="stylesheet">
@@ -25,7 +26,7 @@ f<%@ page language="java" contentType="text/html; charset=UTF-8"
 	src="<%=request.getContextPath()%>/alan/sweet/sweetalert2.min.js"></script>
 <!-- 星星 -->
 <script type="text/javascript"src="<%=request.getContextPath()%>/_Lyy/jquery.raty.min.js"></script>
-<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<link rel="Short Icon" type="image/x-icon" href="${initParam.icon}" />
 
 <style>
 /* 影片區塊 */
@@ -203,7 +204,9 @@ a {
 </head>
 <!-- 影片區 -->
 <body oncontextmenu="window.event.returnValue=false">
+	<div style="display: none;">
 	<jsp:include page="/login.jsp" flush="true" />
+	</div>
 	<div class="container-fluid">
 		<div class="container">
 		<h1 class="text-center">管理員正在審查中...</h1>
@@ -225,6 +228,7 @@ a {
             </div>   
 		</div>
 	</div>
+	
 			<div class="row">
 				<h1 align="center" id="videoTitle">${courseVO.courseName}</h1>
 				<div class="col-md-12 " id="videoArea"
@@ -249,16 +253,7 @@ a {
 								<h3>推薦課程</h3>
 							</div>
 							<ul id="videoliststyle">
-								<c:forEach var="course" items='${list}'>
-									<c:if test="${course.soldPrice>0}">
-										<li><a style="color: white; text-decoration: none;"
-											href="<%=request.getContextPath() %>/onlineCourse-v2.jsp?CourseID=${course.courseID}">${course.courseName}</a></li>
-									</c:if>
-									<c:if test="${course.soldPrice==0}">
-										<li><a style="color: white; text-decoration: none;"
-											href="<%=request.getContextPath() %>/freeCourse-v1.jsp?CourseID=${course.courseID}">${course.courseName}</a></li>
-									</c:if>
-								</c:forEach>
+								
 							</ul>
 						</div>
 					</div>
@@ -286,66 +281,14 @@ a {
 					<h5 class="text-center" style="font-size: 18px">${courseVO.courseLength}分鐘</h5>
 				</div>
 				<!--加到最愛 -->
-				<c:if test="${!empty mBookmarkList}">
-					<c:forEach items="${mBookmarkList}" var="memberBookmsrks">
-						<c:choose>
-							<c:when test="${courseVO.courseID==memberBookmsrks.courseID}">
-								<c:set var="favor" value="favoriteclick1" />
-								<c:set var="favor1" value="ture" />
-							</c:when>
-							<c:when test="${!empty favor1}">
-							</c:when>
-							<c:otherwise>
-								<c:set var="favor" value="favoriteclick2" />
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-				</c:if>
-				<c:if test="${empty mBookmarkList}">
-					<c:set var="favor" value="favoriteclick2" />
-				</c:if>
-				<c:if test="${empty LoginOK}">
-					<c:choose>
-						<c:when test="${!empty loginerr}">
-							<div class="col-md-1 col-xs-4">
-								<a href="#" data-toggle="modal" data-target="#myModal2"> <img
-									src="<%=request.getContextPath()%>/img/favorite.png"
-									class="img-responsive center-block img-circle">
-									<h5 class="text-center" style="font-size: 18px">加到最愛</h5>
-								</a>
-							</div>
-						</c:when>
-						<c:when test="${empty err}">
-							<div class="col-md-1 col-xs-4">
-								<a href="#" data-toggle="modal" data-target="#myModal"> <img
-									src="<%=request.getContextPath()%>/img/favorite.png"
-									class="img-responsive center-block img-circle">
-									<h5 class="text-center" style="font-size: 18px">加到最愛</h5>
-								</a>
-							</div>
-						</c:when>
-						<c:otherwise>
-							<div class="col-md-1 col-xs-4">
-								<a href="#" data-toggle="modal" data-target="#myModal2"> <img
-									src="<%=request.getContextPath()%>/img/favorite.png"
-									class="img-responsive center-block img-circle">
-									<h5 class="text-center" style="font-size: 18px">加到最愛</h5>
-								</a>
-							</div>
-						</c:otherwise>
-					</c:choose>
-				</c:if>
-				<c:if test="${!empty LoginOK}">
 					<div class="col-md-1 col-xs-4">
-						<a href="#" id="${favor}"> <img
+						<a href="#" > <img
 							src="<%=request.getContextPath()%>/img/favorite.png"
 							class="img-responsive center-block img-circle">
 							<h5 class="text-center" style="font-size: 18px">加到最愛</h5>
 						</a>
 					</div>
-				</c:if>
 				<input type="hidden" value="${courseVO.courseID}" id="mbcourseID">
-				<input type="hidden" value="${LoginOK.memberID}" id="mbmemberID">
 				<!--分享連結 -->
 				<div class="col-md-1 col-xs-4 ">
 					<div class="dropdown text-center">
@@ -377,38 +320,6 @@ a {
 					</c:if>
 				</div>
 				<!--影片檢舉 -->
-				<c:if test="${empty LoginOK}">
-					<c:choose>
-						<c:when test="${!empty loginerr}">
-							<div class="col-md-1 col-xs-4">
-								<a href="#" href="#" data-toggle="modal" data-target="#myModal2">
-									<img src="<%=request.getContextPath()%>/img/warning.png"
-									class="img-responsive center-block img-circle">
-									<h5 class="text-center" style="font-size: 18px">影片檢舉</h5>
-								</a>
-							</div>
-						</c:when>
-						<c:when test="${empty err}">
-							<div class="col-md-1 col-xs-4">
-								<a href="#" href="#" data-toggle="modal" data-target="#myModal">
-									<img src="<%=request.getContextPath()%>/img/warning.png"
-									class="img-responsive center-block img-circle">
-									<h5 class="text-center" style="font-size: 18px">影片檢舉</h5>
-								</a>
-							</div>
-						</c:when>
-						<c:otherwise>
-							<div class="col-md-1 col-xs-4">
-								<a href="#" href="#" data-toggle="modal" data-target="#myModal2">
-									<img src="<%=request.getContextPath()%>/img/warning.png"
-									class="img-responsive center-block img-circle">
-									<h5 class="text-center" style="font-size: 18px">影片檢舉</h5>
-								</a>
-							</div>
-						</c:otherwise>
-					</c:choose>
-				</c:if>
-				<c:if test="${!empty LoginOK}">
 					<div class="col-md-1 col-xs-4">
 						<a class="reportAction" href="#" data-toggle="modal" data-target="#myModalReportVideo">
 							<img src="<%=request.getContextPath()%>/img/warning.png"
@@ -419,11 +330,10 @@ a {
 									value="${LoginOK.memberID}" /> <input type="hidden"
 									id="reportCourseID" value="${courseVO.courseID}" />
 					</div>
-				</c:if>
 				<!--課程售價 -->
 				<div class="col-md-2 col-xs-6 " id="soldPrice">
 					<h4>課程售價</h4>
-					<h2 style="text-align: center; font-weight: bold;">NT${courseVO.soldPrice}</h2>
+					<h2 style="text-align: center; font-weight: bold;">NT ${courseVO.soldPrice}</h2>
 				</div>
 				<!--星星 -->
 				<div class="col-md-2 col-xs-6"
@@ -433,63 +343,7 @@ a {
 						<span id="starText" class="pull-right"></span>
 					</div>
 					<!-- 		加入購物車 -->
-					<c:if test="${empty LoginOK}">
-						<c:choose>
-							<c:when test="${!empty loginerr}">
-
-								<button id="intoShoppingCart" type="button" data-toggle="modal"
-									data-target="#myModal2" class="btn btn-success center-block"
-									style="width: 160px">加入購物車</button>
-
-							</c:when>
-							<c:when test="${empty err}">
-
-
-<!-- 								<button id="intoShoppingCart" type="button" data-toggle="modal" -->
-<!-- 									data-target="#myModal" class="btn btn-success center-block" -->
-<!-- 									style="width: 160px">加入購物車</button> -->
-
-
-							</c:when>
-							<c:otherwise>
-
-								<button id="intoShoppingCart" type="button" data-toggle="modal"
-									data-target="#myModal" class="btn btn-success center-block"
-									style="width: 160px">加入購物車</button>
-
-							</c:otherwise>
-						</c:choose>
-					</c:if>
-					<c:if test="${!empty LoginOK}">
-						<c:choose>
-							<c:when test="${LoginOK.memberID==courseVO.memberID}">
-								<button type="button" class="btn btn-success center-block "
-									style="width: 160px" disabled="disabled">已擁有</button>
-							</c:when>
-							<c:when test="${!empty LoginOK && !empty list2}">
-								<c:forEach var="buycourse" items='${list2}'
-									varStatus="varStatus">
-									<c:choose>
-										<c:when test="${courseVO.courseID==buycourse.courseID}">
-											<button type="button" class="btn btn-success center-block "
-												style="width: 160px" disabled="disabled">已擁有</button>
-											<c:set var="boo" value="true" />
-										</c:when>
-										<c:when test="${!empty boo}"></c:when>
-										<c:when test="${varStatus.last && empty boo}">
-											<button id="intoShoppingCart" type="button"
-												class="btn btn-success center-block " style="width: 160px">加入購物車</button>
-										</c:when>
-									</c:choose>
-								</c:forEach>
-							</c:when>
-							<c:otherwise>
-								<button id="intoShoppingCart" type="button"
-									class="btn btn-success center-block " style="width: 160px">加入購物車</button>
-							</c:otherwise>
-						</c:choose>
-
-					</c:if>
+					
 					<!-- 加入購物車結束 -->
 
 				</div>
@@ -549,7 +403,6 @@ a {
 							<!-- 講師簡介 -->
 							<div role="tabpanel" class="tab-pane fade" id="Section2"
 								style="font-size: 20px">
-								<c:if test="${!empty memberVo.memberID}">
 									<div class="col-md-2 col-xs-3">
 										<figure>
 											<img
@@ -559,67 +412,9 @@ a {
 										</figure>
 										<div>
 
-											<c:if test="${empty LoginOK}">
-												<c:choose>
-													<c:when test="${!empty loginerr}">
-														<a href="#" data-toggle="modal" data-target="#myModal">
-															<button type="button" class="btn btn-info"
-																style="width: 100%">追蹤講師</button>
-														</a>
-													</c:when>
-													<c:when test="${empty err}">
-														<a href="#" data-toggle="modal" data-target="#myModal">
-															<button type="button" class="btn btn-info"
-																style="width: 100%">追蹤講師</button>
-														</a>
-													</c:when>
-													<c:otherwise>
-														<a href="#" data-toggle="modal" data-target="#myModal">
-															<button type="button" class="btn btn-info"
-																style="width: 100%">追蹤講師</button>
-														</a>
-													</c:otherwise>
-												</c:choose>
-											</c:if>
-
-											<c:if test="${!empty LoginOK}">
-												<c:if test="${!empty memberSubscription}">
-													<c:forEach items="${memberSubscription}"
-														var="memberSubscription">
-														<c:choose>
-															<c:when
-																test="${memberSubscription.memberTrackID==courseVO.memberID}">
-																<c:set var="disabled" value="disabled" />
-																<c:set var="subName" value="已追蹤講師" />
-																<c:set var="sub1" value="ture" />
-															</c:when>
-															<c:when test="${!empty sub1}">
-															</c:when>
-															<c:otherwise>
-																<c:set var="disabled" value="" />
-																<c:set var="subName" value="追蹤講師" />
-															</c:otherwise>
-														</c:choose>
-													</c:forEach>
-												</c:if>
-												<c:if test="${empty memberSubscription}">
-													<c:set var="disabled" value="" />
-													<c:set var="subName" value="追蹤講師" />
-												</c:if>
-												<c:if test="${courseVO.memberID==LoginOK.memberID}">
-													<c:set var="disabled" value="disabled" />
-													<c:set var="subName" value="本人" />
-												</c:if>
-												<button type="button" class="btn btn-info" ${disabled}
-													style="width: 100%" id="subAction">${subName}</button>
-												<input type="hidden" id="coursevoMemeberID"
-													value="${courseVO.memberID}">
-											</c:if>
-
 
 										</div>
 									</div>
-								</c:if>
 								<div class="col-md-10 col-xs-9">
 									<c:if test="${!empty memberVo.aboutme}">
 										<strong>關於我</strong>
@@ -870,8 +665,8 @@ a {
 
 	</div>
 	<div id="star"></div>
-	<c:remove var="err" scope="session" />
-	<c:remove var="loginerr" scope="session" />
+<%-- 	<c:remove var="err" scope="session" /> --%>
+<%-- 	<c:remove var="loginerr" scope="session" /> --%>
 	<jsp:include page="/footer.jsp" />
 
 

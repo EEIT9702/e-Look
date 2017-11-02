@@ -1,4 +1,4 @@
-f<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
 	import="java.util.*,java.text.*,com.e_Look.Course.*,com.e_Look.member.model.*,com.e_Look.buyCourse.model.*,javax.servlet.http.HttpSession"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -6,6 +6,7 @@ f<%@ page language="java" contentType="text/html; charset=UTF-8"
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>收費課程</title>
 <link href="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.css"
 	rel="stylesheet">
@@ -24,6 +25,7 @@ f<%@ page language="java" contentType="text/html; charset=UTF-8"
 <!-- 星星 -->
 <script type="text/javascript"src="<%=request.getContextPath()%>/_Lyy/jquery.raty.min.js"></script>
 <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<link rel="Short Icon" type="image/x-icon" href="${initParam.icon}" />
 
 <style>
 /* 影片區塊 */

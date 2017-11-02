@@ -54,7 +54,7 @@
   </filter-mapping>
     <filter-mapping>
     <filter-name>ReviewCourseFilter</filter-name>
-    <url-pattern></url-pattern>
+    <url-pattern>/ReviewingCoursePage.jsp</url-pattern>
   </filter-mapping>
   
 </web-app>
