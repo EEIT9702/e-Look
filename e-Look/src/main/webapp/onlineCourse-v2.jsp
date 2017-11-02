@@ -649,89 +649,163 @@ a {
 									</c:if>
 								</div>
 							</div>
-						<!-- 留言板 -->
-						<div role="tabpanel" class="tab-pane fade" id="Section3">
-							<div class="col-md-12" id="messageHeader">
-								
-						<!-- 切板位置 -->
-							<c:forEach items="${messageVOList}" var="messageVO">
-									
-									<c:if test="${messageVO.messageID_response>=0}">
-										<div class="col-md-1">
-											<img src="<%=request.getContextPath() %>/Image?MemberID=${messageVO.memberID}"class="img-thumbnail pull-left">
-										</div>
-									
-									<div class="col-md-11">
-										<div><span id="testMessage1"class="text-left">${messageVO.memberID}</span>
-												<span>${messageVO.mTime}</span>
-<!-- 											<div class="dropdown pull-right"> -->
-<!-- 												<button class="btn dropdown-toggle btn-default"type="button" data-toggle="dropdown" style="height: 30px"> -->
-<!-- 												<span class="glyphicon glyphicon-option-horizontal"></span> -->
-<!-- 												</button> -->
-<!-- 												<ul class="dropdown-menu"> -->
-<%-- 													<c:if test="${empty LoginOK}"> --%>
-<%-- 														<c:choose> --%>
-<%-- 															<c:when test="${!empty loginerr}"> --%>
-<!-- 																<li><a href="#" href="#" data-toggle="modal" -->
-<!-- 																	data-target="#myModal2">檢舉</a></li> -->
-<%-- 															</c:when> --%>
-<%-- 															<c:when test="${empty err}"> --%>
-<!-- 																<li><a href="#" href="#" data-toggle="modal" -->
-<!-- 																	data-target="#myModal">檢舉</a></li> -->
-<%-- 															</c:when> --%>
-<%-- 															<c:otherwise> --%>
-<!-- 																<li><a class="reportM" href="#" href="#" -->
-<!-- 																	data-toggle="modal" data-target="#myModal2">檢舉</a></li> -->
-<%-- 															</c:otherwise> --%>
-<%-- 														</c:choose> --%>
-<%-- 													</c:if> --%>
-<%-- 													<c:if test="${!empty LoginOK}"> --%>
-<!-- 														<li><a class="reportM" href="#">檢舉</a></li> -->
-<%-- 													</c:if> --%>
-<!-- 													<li><a href="#">修改</a></li> -->
-<!-- 													<li><a href="#">刪除</a></li> -->
-<!-- 												</ul> -->
-<!-- 											</div> -->
-<!-- 										</div> -->
-										<div style="border-bottom: 1px solid black">
-											<p>${messageVO.mContent}</p>
-										</div>
-									
-								
-										
-										<!-- 			<!--回應輸入表格-->
-										<div class="col-md-12">
-											<div class="panel-group">
-												<div class="panel">
-													<div class="panel-heading">
-														<h4 class="panel-title ">
-															<a data-toggle="collapse" href="#collapse2">我要回應</a>
-														</h4>
-													</div>
-													<div id="collapse2" class="panel-collapse collapse ">
-														<div>
-															<p>內容:</p>
-															<form action="" method="post">
-																<div class="form-group">
-																	<textarea class="form-control" rows="5" id="comment"></textarea>
-																</div>
-																<div class="text-right">
-																	<input type="submit">
-																</div>
-															</form>
-														</div>
-													</div>
+		<!-- 留言板 -->
+							
+							
+			<div role="tabpanel" class="tab-pane fade" id="Section3">
+					
+	<!-- 留言板內容 -->
+				<c:if test="${empty messageVOList}">
+					<div style="text-align:center"><h4>尚未有留言</h4></div>
+					<div style="text-align:center"><h4>成為第一個發文的人吧！</h4></div>
+					<div style="text-align:center"><img src="<%=request.getContextPath() %>/_Lyy/chat.png"></div>
+				</c:if>
+				<c:if test="${!empty messageVOList}">
+				<div class="col-md-12" id="messageHeader">
+				<c:forEach items="${messageVOList}" var="messageVO">
+		<!--重複的地方開始 -->
+					<c:if test="${messageVO.messageID_response==0}">
+					<div class="col-md-1">
+						<img src="<%=request.getContextPath() %>/Image?MemberID=${messageVO.memberID}"
+							class="img-thumbnail pull-left">
+					</div>
+					<div class="col-md-11">
+						<div>
+							<span id="testMessage1"  class="text-left">吳永志</span>
+							<span>時間</span>
+							<div class="dropdown pull-right">
+								<button class="btn dropdown-toggle btn-default "
+									type="button" data-toggle="dropdown" style="height: 30px">
+									<span class="glyphicon glyphicon-option-horizontal"></span>
+								</button>
+								<ul class="dropdown-menu">
+									<c:if test="${empty LoginOK}">
+										<c:choose>
+											<c:when test="${!empty loginerr}">
+												<li><a href="#" href="#" data-toggle="modal"
+													data-target="#myModal2">檢舉</a></li>
+											</c:when>
+											<c:when test="${empty err}">
+												<li><a href="#" href="#" data-toggle="modal"
+													data-target="#myModal">檢舉</a></li>
+											</c:when>
+											<c:otherwise>
+												<li><a class="reportM" href="#" href="#"
+													data-toggle="modal" data-target="#myModal2">檢舉</a></li>
+											</c:otherwise>
+										</c:choose>
+									</c:if>
+									<c:if test="${!empty LoginOK}">
+										<li><a class="reportM" href="#">檢舉</a></li>
+									</c:if>
+									<li><a href="#">修改</a></li>
+									<li><a href="#">刪除</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<div style="border-bottom: 1px solid black">
+							<p>With Bootstrap 2, we added optional mobile friendly
+							</p>
+						</div>
+					<!--抓取messageID -->
+						<input type="hidden" value="${messageVO.messageID}" id="messageID">
+					<!--第一個回應 開始-->
+					
+						<div class="col-md-12">
+							<div class="panel-group">
+								<div class="panel">
+									<div class="panel-heading">
+										<h4 class="panel-title ">
+											<a data-toggle="collapse" href="#collapse1">回應記錄</a>
+										</h4>
+									</div>
+									<div id="collapse1" class="panel-collapse collapse ">
+									<!--第一個回應 內容-->
+										<div>
+											<div class="col-md-1">
+												<img src="<%=request.getContextPath()%>/img/imember_image.png"class="img-thumbnail pull-left">
+											</div>
+											<div class="col-md-11"style="border-bottom: 1px solid black">
+												<span>吳永志</span>
+												<span>時間</span>
+												<div class="dropdown pull-right">
+												<button class="btn dropdown-toggle btn-default"type="button" data-toggle="dropdown" style="height: 30px">
+												<span class="glyphicon glyphicon-option-horizontal"></span>
+												</button>
+												<ul class="dropdown-menu">
+														<c:if test="${empty LoginOK}">
+															<c:choose>
+																<c:when test="${!empty loginerr}">
+																	<li><a href="#"data-toggle="modal"data-target="#myModal2">檢舉</a></li>
+																</c:when>
+																<c:when test="${empty err}">
+																	<li><a href="#"data-toggle="modal"data-target="#myModal">檢舉</a></li>
+																</c:when>
+																<c:otherwise>
+																	<li><a class="reportM" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>
+																</c:otherwise>
+															</c:choose>
+														</c:if>
+														<c:if test="${!empty LoginOK}">
+															<li><a class="reportM" href="#">檢舉</a></li>
+														</c:if>
+														<li><a href="#">修改</a></li>
+														<li><a href="#">刪除</a></li>
+												</ul>
 												</div>
+												<p>With Bootstrap 2, we added optional mobile</p>
+											</div>
+										</div>
+										<!--第一個回應 內容結束-->
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--第一個回應結束-->
+					
+					
+
+						<!--回應輸入表格結束-->
+						<div class="col-md-12">  
+							<div class="panel-group">
+								<div class="panel">
+									<div class="panel-heading">
+										<h4 class="panel-title ">
+											<a data-toggle="collapse" href="#collapse2">我要回應</a>
+										</h4>
+									</div>
+									<div id="collapse2" class="panel-collapse collapse ">
+										<div>
+											<p>內容:</p>
+											<div class="form-group">
+												<textarea class="form-control" rows="5" id="comment"></textarea>
+											</div>
+											<div class="text-right">
+												<button>123</button>
 											</div>
 										</div>
 									</div>
 								</div>
-								</c:if>
-							</c:forEach>
-						</div>
-							
-								<!-- 點評收藏 -->
 							</div>
+						</div>
+					</div>
+						<!-- 回應輸入表格結束-->
+						</c:if>
+					</c:forEach>
+					</div>
+					</c:if>
+					<!-- 重複結束 -->
+					
+					
+					
+				</div>
+			<!-- 留言板結束-->
+		
+		
+		
+		
+							<!-- 點評收藏 -->
 							<div role="tabpanel" class="tab-pane fade" id="Section4"
 								style="font-size: 20px">
 								<p>喜歡的話記得幫我們評分還有收藏唷</p>
@@ -747,7 +821,7 @@ a {
 		</div>
 
 	</div>
-
+	<div id="star"></div>
 	<c:remove var="err" scope="session" />
 	<c:remove var="loginerr" scope="session" />
 	<jsp:include page="/footer.jsp" />
@@ -1015,6 +1089,5 @@ a {
  			}
 		})
 		</script>
-
 	</body>
 </html>
