@@ -42,6 +42,7 @@ h5 {
 	border: none;
 	border-radius: .28571429rem;
 	box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+background-color: #f2fef1;
 }
 
 .card-block {
@@ -83,7 +84,7 @@ h5 {
 	padding: .75em 1em;
 	color: gray;
 	border-top: 1px solid rgba(0, 0, 0, .05) !important;
-	background: #fff;
+background-color: #f2fef1;
 }
 
 .card-inverse .btn {
