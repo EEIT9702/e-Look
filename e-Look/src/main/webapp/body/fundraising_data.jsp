@@ -46,7 +46,7 @@
 					</a>
 				</div>
 				<div style="margin-top:40px;">
-				<p class="buyprice" style="font-size:18px;float:left; alt="${fundCourse.courseID}">
+				<p style="font-size:18px;float:left;">預購價：
 					<fmt:setLocale value="zh-TW" />
 					<fmt:formatNumber value="${fundCourse.soldPrice*0.7}" type="currency" maxFractionDigits="0"/>
 				</p>
