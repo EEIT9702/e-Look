@@ -110,5 +110,12 @@ public class CourseService {
 			return day;			
 		}
 	}
-
+	public List<CourseVO> getOnlineCourseBycName(String keyWord){
+		dao.getAllonlineCourse();
+		dao.getAllonlineCourse();
+		
+		
+		
+		return null;
+	}
 }
