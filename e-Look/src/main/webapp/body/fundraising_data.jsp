@@ -32,7 +32,7 @@
 
 <c:forEach var='fundCourse' items='${course.allFundRaiseCourse}' begin="${param.rowValueY}" end="${param.rowValueY + 3}" varStatus="status">
 	<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width:341px;margin-bottom:20px;">
-		<div class="card card-inverse" style="background-color: white;">
+		<div class="card card-inverse" >
 			<a style="text-decoration: none; color: black"; href="<%=request.getContextPath() %>/proposalCourse-v1.jsp?CourseID=${fundCourse.courseID}">
 				<img class="card-img-top img-rounded center-block" src="<%=request.getContextPath() %>/CourseImage?CourseID=${fundCourse.courseID}" alt="course" id="wizardPicturePreview" title="" style="width:98%">
 			</a>
@@ -46,12 +46,17 @@
 					</a>
 				</div>
 				<div style="margin-top:40px;">
-					<p style="font-size:18px;float:left;">預購價：
+				<p style="font-size:18px;float:left;">預購價：
+<%-- 				<c:choose> --%>
+<%-- 				<c:when test="${fundCourse.fundStartDate}"> --%>
 						<fmt:setLocale value="zh-TW" />
 						<fmt:formatNumber value="${fundCourse.soldPrice*0.7}" type="currency" maxFractionDigits="0"/>
-					</p>
+<%-- 				</c:when> --%>
+<%-- 				</c:choose> --%>
+				</p>
 					<p class="fundend" style="font-size:18px;float:right;" alt="${fundCourse.fundEndDate}"></p>
 				</div>
+				<div class="card-footer" style="clear:both;"></div>
 				<div class="progress" style="clear:both;">
 					<div class="progress-bar progress-bar-warning progress-bar-striped active" 
 					role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" 
@@ -60,9 +65,11 @@
 					
 					</div>
 				</div>
+				
 				<div>
 					<p class="buyNum" style="font-size:18px;text-align:center;clear:both;padding-top:8px;" alt="${fundCourse.courseID}" alt2="${fundCourse.targetStudentNumber}"></p>
 				</div>
+				
 			</div>
 
 		</div>

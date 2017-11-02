@@ -28,6 +28,8 @@ import com.e_Look.memberBookmarks.model.MemberBookmarksVO;
 
 import com.e_Look.memberSubscription.MemberSubscriptionService;
 import com.e_Look.memberSubscription.MemberSubscriptionVO;
+import com.e_Look.message.model.MessageService_v2;
+import com.e_Look.message.model.MessageVO;
 
 
 /**
@@ -55,15 +57,28 @@ public class OnlineCourse implements Filter {
 				if (courseVO.getStatus() == 2) {
 					MemberService service = new MemberService();
 					MemberVO memberVo = service.getMember(courseVO.getMemberID());
+					
+					
 					List<CourseVO> list = courseService.getAllCourseData(courseVO.getMemberID(), 2);
 					HttpSession session = request.getSession();
 					MemberVO memberVoOK = (MemberVO) session.getAttribute("LoginOK");
 					BuyCourseService CourseService = new BuyCourseService();
+					
 					List<BuyCourseVO> list2 = null;
+					
 					List<MemberBookmarksVO> mBookmarkList = null;
 					List<MemberSubscriptionVO> memberSubscriptionVO = null;
+					
+					//留言板
+					MessageService_v2 messageService =new MessageService_v2();
+					List<MessageVO> messageVOList = null;
+					messageVOList=messageService.findCourseRe(courseVO.getCourseID());
+					for(MessageVO m:messageVOList){
+						System.out.println(m.getMessageID_response());
+					}
+					//收藏影片
 					MemberBookmarksService memberBookmarksService = new MemberBookmarksService();
-
+					//收藏講師
 					MemberSubscriptionService memberSubscriptionService =new MemberSubscriptionService();
 
 					if (memberVoOK != null) {
@@ -82,7 +97,10 @@ public class OnlineCourse implements Filter {
 					request.setAttribute("courseVO", courseVO);
 					request.setAttribute("memberVo", memberVo);
 					request.setAttribute("memberSubscription", memberSubscriptionVO);
+					request.setAttribute("messageVOList", messageVOList);
 					chain.doFilter(request, response);
+					
+					
 				}else if(courseVO.getStatus() == 3){
 					MemberService service = new MemberService();
 					MemberVO memberVo = service.getMember(courseVO.getMemberID());
@@ -96,7 +114,10 @@ public class OnlineCourse implements Filter {
 					MemberBookmarksService memberBookmarksService = new MemberBookmarksService();
 
 					MemberSubscriptionService memberSubscriptionService =new MemberSubscriptionService();
-
+					//留言板
+					MessageService_v2 messageService =new MessageService_v2();
+					List<MessageVO> messageVOList = null;
+					messageVOList=messageService.findCourseRe(courseVO.getCourseID());
 					if (memberVoOK != null) {
 
 						list2 = CourseService.getBuyCourse(memberVoOK.getMemberID());
@@ -112,6 +133,7 @@ public class OnlineCourse implements Filter {
 					request.setAttribute("list2", list2);
 					request.setAttribute("courseVO", courseVO);
 					request.setAttribute("memberVo", memberVo);
+					request.setAttribute("messageVOList", messageVOList);
 					request.setAttribute("memberSubscription", memberSubscriptionVO);
 					chain.doFilter(request, response);
 					
