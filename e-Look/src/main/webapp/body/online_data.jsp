@@ -6,17 +6,24 @@
 <%@ page import="com.e_Look.Course.*" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
-	String ccName = request.getParameter("courseClass");
+	String courseClass = request.getParameter("courseClass");
+	String keyWord = request.getParameter("keyWord");
 	CourseClassDetailsDAO ccddao = new CourseClassDetailsDAO();
 	CourseDAO cdao = new CourseDAO();
-	if(ccName.length() != 0) {
-		Integer ccID = Integer.parseInt(ccName);
-		
-		CourseClassDetailsService ccdServ = new CourseClassDetailsService();
-		List<CourseClassDetailsVO> ccdVOs = ccdServ.getOnlineCourse(ccID);
-		
+	CourseService cServ=new CourseService();
+	CourseClassDetailsService ccdServ = new CourseClassDetailsService();
+	
+	if(courseClass.length() != 0  && keyWord.length() != 0){
+		Integer ccID = Integer.parseInt(courseClass);
+		List<CourseClassDetailsVO> ccdVOs = ccdServ.getOnlineCourse(ccID, keyWord);
 		request.setAttribute("ccdVOs", ccdVOs);
-		
+	}else if(keyWord.length() != 0){
+		List<CourseVO> courseVOs=cServ.getOnlineCourseByCourseName(keyWord);
+		request.setAttribute("courseVO", courseVOs);
+	}else if(courseClass.length() != 0) {
+		Integer ccID = Integer.parseInt(courseClass);
+		List<CourseClassDetailsVO> ccdVOs = ccdServ.getOnlineCourse(ccID);
+		request.setAttribute("ccdVOs", ccdVOs);
 	} else {
 		List<CourseVO> courseVO = cdao.getAllOnlineCourseNotFree();
 		request.setAttribute("courseVO", courseVO);

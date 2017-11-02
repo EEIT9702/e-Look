@@ -21,6 +21,19 @@ public class CourseClassDetailsService {
 		}
 		return freeccdVOs;
 	}
+	
+	public List<CourseClassDetailsVO> getFreeCourse(Integer courseClassID,String keyWord){
+		List<CourseClassDetailsVO> ccdVOs = dao.getBycourseClassID(courseClassID);
+		List<CourseClassDetailsVO> freeccdVOs = new LinkedList<CourseClassDetailsVO>();
+		
+		for(CourseClassDetailsVO ccdVO : ccdVOs){
+			if(ccdVO.getCourseVO().getSoldPrice() == 0 && ccdVO.getCourseVO().getStatus() == 2 && ccdVO.getCourseVO().getCourseName().indexOf(keyWord)>=0){
+				freeccdVOs.add(ccdVO);
+			}
+		}
+		return freeccdVOs;
+	}
+	
 
 	public List<CourseClassDetailsVO> getOnlineCourse(Integer courseClassID) {
 		List<CourseClassDetailsVO> ccdVOs = dao.getBycourseClassID(courseClassID);
@@ -33,6 +46,22 @@ public class CourseClassDetailsService {
 		}
 		return onlineccdVOs;
 	}
+	
+	public List<CourseClassDetailsVO> getOnlineCourse(Integer courseClassID,String keyWord) {
+		List<CourseClassDetailsVO> ccdVOs = dao.getBycourseClassID(courseClassID);
+		List<CourseClassDetailsVO> onlineccdVOs = new LinkedList<CourseClassDetailsVO>();
+		for(CourseClassDetailsVO ccdVO : ccdVOs) {
+			if(ccdVO.getCourseVO().getSoldPrice() > 0 && ccdVO.getCourseVO().getStatus() == 2 && ccdVO.getCourseVO().getCourseName().indexOf(keyWord)>=0 ) {
+				onlineccdVOs.add(ccdVO);
+			}
+		}
+		return onlineccdVOs;
+	}
+	
+	
+	
+	
+	
 	
 	public List<CourseClassDetailsVO> getFoundRaiseCourse(Integer courseClassID) {
 		List<CourseClassDetailsVO> ccdVOs = dao.getBycourseClassID(courseClassID);

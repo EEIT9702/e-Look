@@ -240,6 +240,9 @@ h5 {
 -webkit-filter:grayscale(1);
 }
  #body{background-color: #FAEBD7;}
+ .keywordlink{
+	cursor: pointer;
+}
 </style>
 <script type="text/javascript">
 /*

@@ -6,21 +6,37 @@
 <%@ page import="com.e_Look.Course.*" %>
 <%
 //接收參數
-String ccName = request.getParameter("courseClass");
+
+
+String keyWord = request.getParameter("keyWord");
+String courseClass = request.getParameter("courseClass");
+CourseClassDetailsService ccdServ = new CourseClassDetailsService();
+CourseService cServ = new CourseService();
 CourseClassDetailsDAO ccddao = new CourseClassDetailsDAO();
 CourseDAO cdao = new CourseDAO();
-if(ccName.length() != 0){
-	Integer ccID = Integer.parseInt(ccName);
-	
-	CourseClassDetailsService ccdServ = new CourseClassDetailsService();
+
+
+
+if(courseClass.length() != 0  && keyWord.length() != 0){
+	Integer ccID = Integer.parseInt(courseClass);
+	List<CourseClassDetailsVO> ccdVOs =ccdServ.getFreeCourse(ccID, keyWord);		
+	request.setAttribute("ccdVOs", ccdVOs);
+}else if(keyWord.length() != 0){
+	List<CourseVO> courseVOs = cServ.getFreeCourseByCourseName(keyWord);
+	request.setAttribute("courseVOs", courseVOs);
+}else if(courseClass.length() != 0) {
+	Integer ccID = Integer.parseInt(courseClass);
 	List<CourseClassDetailsVO> ccdVOs = ccdServ.getFreeCourse(ccID);
 	request.setAttribute("ccdVOs", ccdVOs);
-	
-	
-}else {
+} else {
 	List<CourseVO> courseVOs =cdao.getAllFreeCourse();
 	request.setAttribute("courseVOs", courseVOs);
 }
+
+
+
+
+
 %>
 <style>
 .card-text a {
