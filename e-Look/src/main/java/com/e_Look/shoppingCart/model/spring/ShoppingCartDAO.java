@@ -36,18 +36,14 @@ public class ShoppingCartDAO implements ShoppingCartDAO_interface {
 
 
 	@Override
-	public List<ShoppingCartVO> findByMemberID(Integer memberID) {
-		List<ShoppingCartVO> list = new LinkedList<ShoppingCartVO>();
-		list=(List<ShoppingCartVO>) hibernateTemplate.get(ShoppingCartVO.class, memberID);
-		return list;
+	public List findByMemberID(Integer memberID) {
+		return hibernateTemplate.find("from ShoppingCartVO where memberID=?", memberID);
 	}
+
 
 	@Override
 	public List<ShoppingCartVO> getAll() {
-		List<ShoppingCartVO> list = new LinkedList<ShoppingCartVO>();
-		list=(List<ShoppingCartVO>) hibernateTemplate.find("from ShoppingCartVO");
-		
-		return list;
+		return (List<ShoppingCartVO>) hibernateTemplate.find("from ShoppingCartVO");
 	}
 
 	
@@ -67,13 +63,13 @@ public class ShoppingCartDAO implements ShoppingCartDAO_interface {
 		
 		List<ShoppingCartVO> list1 = dao.findByMemberID(100001);
 		for(ShoppingCartVO shoppingCartVO:list1){
-			System.out.print(shoppingCartVO.getMemberID());
+			System.out.print(shoppingCartVO.getMemberID()+"\t");
 			System.out.println(shoppingCartVO.getCourseID());
 		}
 		List<ShoppingCartVO> aa = dao.getAll();
 		System.out.println("======================================================");
 		for(ShoppingCartVO ss:aa){
-			System.out.print(ss.getCourseID());
+			System.out.print(ss.getCourseID()+"\t");
 			System.out.println(ss.getMemberID());
 		}
 	}
