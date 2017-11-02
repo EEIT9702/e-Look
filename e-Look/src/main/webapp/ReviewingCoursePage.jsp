@@ -230,52 +230,19 @@ a {
 				<div class="col-md-12 " id="videoArea"
 					style="background-image: url('<%=request.getContextPath() %>/CourseImage?CourseID=${courseVO.courseID}')">
 
-					<input type="hidden" value="${courseVO.courseID}">
+					
 					<div class="col-md-12" style="z-index: 10">
 						<div class="col-md-8 col-xs-12"
 							style="margin-right: -15px; z-index: 10">
-							<c:choose>
-								<c:when test="${LoginOK.memberID==courseVO.memberID}">
-									<video controls="controls" id="vidoeControl">
+
+									<video controls="controls"
+										id="vidoeControl">
 										<source
 											src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}"
 											type="video/mp4">
 									</video>
 
-								</c:when>
-								<c:when test="${!empty LoginOK && !empty list2}">
-									<video
-										<c:forEach var="buycourse"  items='${list2}'>
-							<c:choose>
-								<c:when test="${courseVO.courseID==buycourse.courseID}">
-										<c:set var="control" value="controls=controls" />
-										<c:set var="poster" value="" />
-										<c:set var="boo" value="true" />
-								</c:when>
-								<c:when test="${!empty boo}">
-								</c:when>
-								<c:otherwise> 
-									<c:set var="poster" value="poster=_Lyy/poster.png" />
-									<c:set var="control" value=""/>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-										<c:out value="${poster}"/> <c:out value="${control}"/>
-										id="vidoeControl">
-										<source
-											src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}"
-											type="video/mp4">
-									</video>
-								</c:when>
-								<c:otherwise>
-									<video poster="<%=request.getContextPath()%>/_Lyy/poster.png"
-										id="vidoeControl">
-										<source
-											src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}"
-											type="video/mp4">
-									</video>
-								</c:otherwise>
-							</c:choose>
+
 						</div>
 						<div class="col-md-4 col-xs-12" id="videoDivListStyle">
 							<div>
@@ -907,268 +874,13 @@ a {
 	<c:remove var="loginerr" scope="session" />
 	<jsp:include page="/footer.jsp" />
 
-	<script>
-		$(document).ready(function() {
-			$(".col-md-4 a").click(function() {
-				$(this).tab('show');
-			});
-		});
-	</script>
-	<script>
-		$(function() {
-			//點擊檢舉留言
-			$('.reportM').on('click', function() {
-				warning();
-			})
-			//選取檢舉留言功能
-			function warning() {
-				swal({
-					title : '檢舉留言',
-					input : 'select',
-					inputOptions : {
-						'含有仇恨言論' : '含有仇恨言論',
-						'不雅內容' : '不雅內容',
-						'垃圾訊息' : '垃圾訊息'
-					},
-					inputPlaceholder : '請選擇檢舉事項',
-					confirmButtonText : '確認',
-					cancelButtonText : '取消',
-					showCancelButton : true,
-					inputValidator : function(value) {
-						return new Promise(function(resolve) {
-							resolve();
-						});
-					}
-				}).then(
-						function(result) {
-							if (result) {
-								console.log($('#testMessage1').attr('value'));
-								console.log($('#reportMemberID').val());
-								console.log(result);
-								$.post('InsertReportMessageController', {
-									'reportContent' : result,
-									'reportMemberID' : $('#reportMemberID')
-											.val(),
-									'reportMessageID' : $('#testMessage1')
-											.attr('value')
-								})
-								swal({
 
-									confirmButtonText : '確認',
-									type : 'success',
-									html : '檢舉 ' + result + ' 成功，管理員會盡快審核 '
-
-								});
-							}
-				});
-			}
-			
-			
-		})
-	</script>
-	<script>
-		//判斷是否加入過最愛		
-		var count1 = 0;
-		$('#favoriteclick1').click(function() {
-			alert('已經加入過囉');
-		})
-
-		$("#favoriteclick2").click(function() {
-
-			console.log($("#mbcourseID").val())
-			console.log($("#mbmemberID").val())
-			if (count1 == 0) {
-				$('#favoriteclick2').attr("id", "favoriteclick1")
-				$.post('MemberBookmarksInsertController', {
-					'courseID' : $("#mbcourseID").val(),
-					'memberID' : $("#mbmemberID").val()
-				}, function() {
-					alert('已經加到你的最愛囉');
-					count1++;
-				})
-			} else {
-				alert('已經加入過囉');
-			}
-
-		})
-	</script>
-	<script>
-	$(function() {
-		$('.reportAction').click(function() {
-				warningV();
-			})
-
-			function warningV() {
-				swal({
-					title : '檢舉影片',
-					input : 'select',
-					inputOptions : {
-						'該影片侵犯著作權' : '該影片侵犯著作權',
-						'該影片含有不雅內容' : '該影片含有不雅內容',
-						'該影片無法播放' : '該影片無法播放'
-					},
-					inputPlaceholder : '請選擇檢舉事項',
-					confirmButtonText : '確認',
-					cancelButtonText : '取消',
-					showCancelButton : true,
-					inputValidator : function(value) {
-						return new Promise(function(resolve) {
-							resolve();
-						});
-					}
-				}).then(function(result) {
-						if (result) {
-			 				$.post("ReportCourseInsertController", {
-		 					'reportMemberID' : $('#reportMemberID').val(),
-		 					'reportCourseID' : $('#reportCourseID').val(),
-		 					'radioReporterCon' : result
-							})
-							swal({
-								confirmButtonText : '確認',
-								type : 'success',
-								html : '檢舉 ' + result + ' 成功，管理員會盡快審核 '
-							});
-						}
-					});
-			}	
-		});
-	</script>
-	<script>
-		var count = 0;
-		$('#subAction').click(function() {
-			if (count == 0) {
-				$.post("MemberSubcriptionInsert_DeleteController", {
-					'memberID' : $('#reportMemberID').val(),
-					'memberTrackID' : $('#coursevoMemeberID').val()
-				}, function() {
-					alert('已加到您的追蹤講師囉');
-					count++;
-				});
-				$('#subAction').attr('disabled', 'false')
-				$('#subAction').text('已追蹤講師')
-			} else {
-				alert('已經追蹤過囉');
-				$('#subAction').attr('disabled', 'false')
-			}
-
-		})
-	</script>
-	<script>
 	
-		// 	星星點評
-		
-		$(function(){
-			$('#star').raty(
-				{
-					path : 'img',
-					width : 150,
-					starOff : 'star-off-big.png',
-					starOn : 'star-on-big.png',
-					readOnly :function() {
-						if ($('#reportMemberID').val() == ""|| $('#reportMemberID').val() == null) {//沒有登入
-							$("#noLogin").text("(請先登入)")
-							
-							return true;
-						}else{
-						var memberID=$('#reportMemberID').val();
-// 							console.log(getJson(memberID));
-							return getJson(memberID);
-					}
-				},
-					click : function(score, evt) {
-						$.post('updateScoreController', {
-							'score' : score,
-							'memberID' : $('#reportMemberID').val(),
-							'courseID' : $('#reportCourseID').val()
-						})
-						alert("感謝你的評分!" + "\nscore: " + score);
-					}
-				});
-		});
-		
-		function getJson(memberID) {
-			var bool;
-			$.ajax({'url':'/e-Look/countScoreController',
-						'async' : false,
-						'method' : "GET",
-						'data' : {
-							'memberID' : memberID
-						},
-						'success' : function(datas) {
-							var datasJson = JSON.parse(datas);
-							console.log(datasJson.length)
-							console.log(datas);
-							console.log($('#reportMemberID').val());
-							console.log($('#starMemberID').val());
-							if ($('#starMemberID').val() == $('#reportMemberID')
-									.val()) {
-								$("#noLogin").text("")
-								bool = false
-								return bool;
-							} else if ($('#starMemberID').val() != $(
-									'#reportMemberID').val()) {
-								for (var i = 0; i <= (datasJson.length - 1); i++) {
-									if (datasJson[i].courseID == $(
-											'#reportCourseID').val()) {
-										$("#noLogin").text("")
-										bool = false
-										return bool;
-									}
-								}
-								$("#noLogin").text("(請先購買該課程)")
-								bool = true;
-								return bool;
-							}
-						}
-					});//$.ajax end
-			return bool;
-		}
-	</script>
-	<script>
-		var scoreJSON;
-		var value;
-		$(function() {
+	
+	
+	
 
-			$.post('countScoreController', {
-				'courseID' : $("#mbcourseID").val()
-			}, function(data) {
-				scoreJSON = JSON.parse(data);
-				value = Math.ceil(parseFloat(scoreJSON));
-				$('#starText').css({
-					'font-size' : '12px',
-					'padding-top' : '5px'
-				}).text("(" + value + ")")
-				$('#starTatol').raty({
-					path : 'img',
-					width : 160,
-					starOff : 'star-off-big.png',
-					starOn : 'star-on-big.png',
-					readOnly : true,
-					score : value,
-				});
-			});
-		});
-	</script>
-	<script>
-	$(function(){
-		$.getJSON("/e-Look/BuyCourseNumber",{'courseID':$("#mbcourseID").val()},
-				function(data){
-					var buyStudentNumber=parseInt(data);
-					$("#buyStudentNumber").text(buyStudentNumber+"人")
-			})
-	})
-	</script>
-	<script>
-		var b=true;
- 		$('video').click(function(){
- 			if(b){
-			this.play();
-			b=false;
- 			}else{
- 				this.pause();
-				b=true;
- 			}
-		})
-		</script>
+	
+	
 	</body>
 </html>
