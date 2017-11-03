@@ -658,6 +658,7 @@ a {
 			<div role="tabpanel" class="tab-pane fade" id="Section3">
 					
 	<!-- 留言板內容 -->
+				
 				<c:if test="${empty messageVOList}">
 					<div style="text-align:center"><h4>尚未有留言</h4></div>
 					<div style="text-align:center"><h4>成為第一個發文的人吧！</h4></div>
@@ -668,11 +669,11 @@ a {
 				<c:forEach items="${messageVOList}" var="messageVO">
 		<!--留言重複的地方開始 -->
 					<c:if test="${messageVO.messageID_response==0}">
-					<div class="col-md-1">
+					<div class="col-md-1 col-xs-2">
 						<img src="<%=request.getContextPath() %>/Image?MemberID=${messageVO.memberVO.memberID}"
 							class="img-thumbnail pull-left">
 					</div>
-					<div class="col-md-11">
+					<div class="col-md-11 col-xs-10">
 						<div>
 							<span id="testMessage1"  class="text-left">${messageVO.memberVO.mName}</span>
 							<fmt:parseDate value="${messageVO.mTime}" pattern="yyyy-MM-dd HH:mm:ss" var="date"/>
@@ -687,15 +688,15 @@ a {
 									<c:if test="${empty LoginOK}">
 										<c:choose>
 											<c:when test="${!empty loginerr}">
-												<li><a href="#" href="#" data-toggle="modal"
+												<li><a href="#" data-toggle="modal"
 													data-target="#myModal2">檢舉</a></li>
 											</c:when>
 											<c:when test="${empty err}">
-												<li><a href="#" href="#" data-toggle="modal"
+												<li><a href="#"  data-toggle="modal"
 													data-target="#myModal">檢舉</a></li>
 											</c:when>
 											<c:otherwise>
-												<li><a class="reportM" href="#" href="#"
+												<li><a class="reportM" href="#" 
 													data-toggle="modal" data-target="#myModal2">檢舉</a></li>
 											</c:otherwise>
 										</c:choose>
@@ -704,7 +705,7 @@ a {
 										<li><a class="reportM" href="#">檢舉</a></li>
 									</c:if>
 									<li><a href="#">修改</a></li>
-									<li><a href="#">刪除</a></li>
+									
 								</ul>
 							</div>
 						</div>
@@ -726,6 +727,7 @@ a {
 										</h4>
 									</div>
 									<div id="${messageVO.messageID}" class="panel-collapse collapse ">
+									
 									<!--第一個回應 內容-->
 <!-- 										<div> -->
 <!-- 											<div class="col-md-1"> -->
@@ -741,60 +743,55 @@ a {
 <!-- 												<ul class="dropdown-menu"> -->
 <!-- 													<li><a class="reportM" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>								 -->
 <!-- 													<li><a href="#">修改</a></li> -->
-<!-- 													<li><a href="#">刪除</a></li> -->
 <!-- 												</ul> -->
 <!-- 												</div> -->
-<!-- 												<p>With Bootstrap 2, we added optional mobile</p> -->
+<!-- 												<p><textarea>With Bootstrap 2, we added optional mobile</p> -->
 <!-- 											</div> -->
 <!-- 										</div> -->
-										<!--第一個回應 內容結束-->
+										<!--第一個回應 內容結束-->					
 									</div>
 								</div>
 							</div>
 						</div>
 						<!--第一個回應結束-->
-					
-					
-
 						<!--回應輸入表格結束-->
+						<c:if test="${empty LoginOK}"></c:if>
+						<c:if test="${!empty LoginOK}">
 						<div class="col-md-12">  
 							<div class="panel-group">
 								<div class="panel">
 									<div class="panel-heading">
 										<h4 class="panel-title ">
-											<a data-toggle="collapse" href="#collapse2">我要回應</a>
+											<a data-toggle="collapse" href="#${messageVO.messageID+messageVO.messageID}">我要回應</a>
 										</h4>
 									</div>
-									<div id="collapse2" class="panel-collapse collapse ">
+									<div id="${messageVO.messageID+messageVO.messageID}" class="panel-collapse collapse">
 										<div>
 											<p>內容:</p>
 											<div class="form-group">
 												<textarea class="form-control" rows="5" id="comment"></textarea>
 											</div>
 											<div class="text-right">
-												<button>123</button>
+												<button class="btn-default" id="inpContent" >送出${messageVO.messageID}</button>
+												
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+						</c:if>
 					</div>
 						<!-- 回應輸入表格結束-->
 						</c:if>
 					</c:forEach>
 					</div>
 					</c:if>
+					
 					<!-- 重複結束 -->
-					
-					
 					
 				</div>
 			<!-- 留言板結束-->
-		
-		
-		
-		
 							<!-- 點評收藏 -->
 							<div role="tabpanel" class="tab-pane fade" id="Section4"
 								style="font-size: 20px">
@@ -1081,79 +1078,70 @@ a {
 		</script>
 		<script>
 		$(function(){
-			
-			
-		})
-		
-		
-		</script>
-		
-		<script>
-		
-		$(function(){
-			//var fg = $("<div></div>").addClass('panel-collapse collapse').attr('id','collapse1');
+			message();
+			function message(){
 			$(".messageID").each(function(){
 				$.getJSON('/e-Look/MessageController_v2',{'messageID':$(this).val()},function(responses){
 					var fg = $(document.createDocumentFragment());
-					
 					$.each(responses,function(index,response){
 					console.log(response);
 					var div1=$('<div></div>')
-					var div2=$('<div></div>').addClass('col-md-1 ');
-					var img1=$('<img></img').addClass('img-thumbnail pull-left').attr('src','<%=request.getContextPath()%>/Image?MemberID='+response.memberVO.memberID);
-					div2.append(img1);
-					var div3=$('<div></div>').addClass('col-md-11 ').attr('style','border-bottom: 1px solid black')
-					var span1=$('<span></span>').text(response.memberVO.mName)
+					var div2=$('<div></div>').addClass('col-md-1 col-xs-2');
+					var img1=$('<img></img').addClass('img-thumbnail pull-left').attr({'src':'<%=request.getContextPath()%>/Image?MemberID='+response.memberID,'style':'padding-top:10px'});
+						div2.append(img1);
+					var div3=$('<div></div>').addClass('col-md-11 col-xs-10').attr('style','border-bottom: 1px solid black;padding-top:10px;margin-bottom:20px')
+					var span1=$('<span></span>').text(response.name)
 					var span2=$('<span></span>').text(response.mTime)
-					var div4=$('<div></div>').addClass('dropdown pull-right')
-						var button=$('<button></button>').addClass('btn dropdown-toggle btn-default').attr({'data-toggle':'dropdown','style':'height:30px'})
-						var	span3=$('<span></span>').addClass('glyphicon glyphicon-option-horizontal')
-						button.append(span3)
+					
+					var div4=$('<div></div>').addClass('dropdown pull-right').attr('style','margin-right:-30px')
+							var button=$('<button></button>').addClass('btn dropdown-toggle btn-default').attr({'data-toggle':'dropdown','style':'height:30px'})
+							var	span3=$('<span></span>').addClass('glyphicon glyphicon-option-horizontal')
 					var ul=$('<ul></ul>').addClass("dropdown-menu")
 					var li1=$('<li></li>')
-					var a1=$('<a></a>').addClass("reportM").attr({'href':'#','data-toggle':'modal','data-target':'#myModal2'}).text('檢舉')
-						li1.append(a1)
+					var a1=$('<a></a>').addClass("reportM").attr({'href':'#','data-toggle':'modal','data-target':'#myModal2'}).text('檢舉')					
 					var li2=$('<li></li>')
 					var a2=$('<a></a>').attr('href','#').text('修改')
-						li2.append(a2)
-					var li3=$('<li></li>')
-					var a3=$('<a></a>').attr('href','#').text('刪除')	
-						li3.append(a3)
-						ul.append([a1,a2,a3])
-						div4.append([button.append(span3),ul.append([a1,a2,a3])])
 					var p =$('<p></p>').text(response.mContent)
 					
-					div3.append([span1,span2,button.append(span3),div4.append([button.append(span3),ul.append([a1,a2,a3])]),p])
-					div1.append([div2.append(img1),div3.append([span1,span2,button.append(span3),div4.append([button.append(span3),ul.append([a1,a2,a3])]),p])])
-					fg.append(div1.append([div2.append(img1),div3.append([span1,span2,button.append(span3),div4.append([button.append(span3),ul.append([a1,a2,a3])]),p])]))
+								li1.append(a1)
+		 						li2.append(a2)
+		 					ul.append([li1,li2])
+		 					button.append(span3)
+ 					div4.append([ul,button,p])
+ 					div3.append([div4,span1,span2,p])
+ 					div1.append([div2,div3])
+					fg.append(div1)
 					$('#'+response.messageID_response).append(fg);
-// 				<div>
-// 					<div class="col-md-1">
-<%-- 						<img src="<%=request.getContextPath()%>/img/imember_image.png"class="img-thumbnail pull-left"> --%>
-// 					</div>
-// 					<div class="col-md-11"style="border-bottom: 1px solid black">
-// 						<span>吳永志</span>
-// 						<span>時間</span>
-// 						<div class="dropdown pull-right">
-// 							<button class="btn dropdown-toggle btn-default" data-toggle="dropdown" style="height: 30px">
-// 								<span class="glyphicon glyphicon-option-horizontal"></span>
-// 							</button>
-// 							<ul class="dropdown-menu">
-// 								<li><a class="reportM" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>								
-// 								<li><a href="#">修改</a></li>
-// 								<li><a href="#">刪除</a></li>
-// 							</ul>
-// 						</div>
-// 						<p>With Bootstrap 2, we added optional mobile</p>
-// 					</div>
-// 				</div>
 					})
 				});
-			})
-			
+			})	
+			}
 		});
 		
-		
+		</script>
+		<script>
+		$(function(){
+			$("button").on("click","td>button:nth-child(2)",function(){
+				   var tds = $(this).parents('tr').find("td");
+					  $('#ProductID').val(tds.eq(0).text())
+					  $('#ProductID+span').text(tds.eq(0).text())
+					  $('#ProductName').val(tds.eq(1).text())
+					  $('#UnitPrice').val(tds.eq(2).text())
+					  $('#UnitsInStock').val(tds.eq(3).text())
+			   });
+			
+		})
+		</script>
+		<script>
+// 		$(function(){
+// 			$('.panel-collapse>div').on('click','.text-right>.btn-default',function(){
+// 				alert($(this).html());
+// 					$.post('/e-Look/InputMessageController',{'':},function(){
+// 					message();
+				
+// 				})
+// 			})
+// 		})
 		</script>
 	</body>
 </html>
