@@ -49,7 +49,7 @@ public class MessageController_v2 extends HttpServlet {
 			list.add(messageMap);
 		}
 		String messageJSON=JSONValue.toJSONString(list);
-		System.out.println(messageJSON);
+//		System.out.println(messageJSON);
 		out.print(messageJSON);
 		
 		

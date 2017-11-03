@@ -715,7 +715,7 @@ a {
 							</p>
 						</div>
 					<!--抓取messageID -->
-						<input type="hidden"  value="${messageVO.messageID}" class="messageID">
+						
 					<!--第一個回應 開始-->
 					
 						<div class="col-md-12">
@@ -726,8 +726,7 @@ a {
 											<a data-toggle="collapse" href="#${messageVO.messageID}">回應記錄</a>
 										</h4>
 									</div>
-									<div id="${messageVO.messageID}" class="panel-collapse collapse ">
-									
+									<div id="${messageVO.messageID}" class="panel-collapse collapse mess">
 									<!--第一個回應 內容-->
 <!-- 										<div> -->
 <!-- 											<div class="col-md-1"> -->
@@ -772,9 +771,10 @@ a {
 												<textarea class="form-control" rows="5" id="comment"></textarea>
 											</div>
 											<div class="text-right">
-												<button class="btn-default" id="inpContent" >送出${messageVO.messageID}</button>
+												<button class="btn-default" id="inpContent" name="${messageVO.messageID}">送出</button>
 												
 											</div>
+											<input type="hidden"  value="${messageVO.messageID}" class="messageID">
 										</div>
 									</div>
 								</div>
@@ -785,6 +785,7 @@ a {
 						<!-- 回應輸入表格結束-->
 						</c:if>
 					</c:forEach>
+					
 					</div>
 					</c:if>
 					
@@ -1078,8 +1079,26 @@ a {
 		</script>
 		<script>
 		$(function(){
-			message();
+			message();	
+					$('.panel-collapse>div').on('click','.text-right>.btn-default',function(){
+//	 				alert($(this).html());
+					var $this=$(this)
+//	 				alert($this.parents('div').children('input').val())
+//	 				alert($this.parents('.panel-collapse').find('textarea').val())
+						$.post('/e-Look/InputMessageController',
+								{'mContent':$this.parents('.panel-collapse').find('textarea').val(),
+								 'courseID':$('#mbcourseID').val(),
+								 'messageID_response':$this.parents('div').children('input').val(),
+								 'memberID':$('#mbmemberID').val()},function(){				
+								 message();	
+								 $this.parents('.panel-collapse').find('textarea').val("")
+								 $this.parents('.panel-collapse').find('textarea').val("")
+								 var name=$this.attr('name');
+								 $('#'+name).addClass("in");
+						})
+					})
 			function message(){
+			$('.mess').empty()
 			$(".messageID").each(function(){
 				$.getJSON('/e-Look/MessageController_v2',{'messageID':$(this).val()},function(responses){
 					var fg = $(document.createDocumentFragment());
@@ -1133,15 +1152,7 @@ a {
 		})
 		</script>
 		<script>
-// 		$(function(){
-// 			$('.panel-collapse>div').on('click','.text-right>.btn-default',function(){
-// 				alert($(this).html());
-// 					$.post('/e-Look/InputMessageController',{'':},function(){
-// 					message();
-				
-// 				})
-// 			})
-// 		})
+		
 		</script>
 	</body>
 </html>

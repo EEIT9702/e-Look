@@ -2,6 +2,7 @@ package com.e_Look.message.model;
 
 import java.util.List;
 
+import com.e_Look.member.model.MemberDAO;
 import com.e_Look.member.model.MemberDAO_interface;
 import com.e_Look.member.model.MemberVO;
 
@@ -10,8 +11,8 @@ public class MessageService {
 	private MemberDAO_interface memberDAO;
 	public MessageService() {
 		dao = new MessageDAO();
+		memberDAO= new MemberDAO();
 	}
-
 	public void addMessage(String mContent,Integer memberID,Integer courseID, Byte status)
 	   {
 		MemberVO memberVO = memberDAO.findByPrimaryKey(memberID);
@@ -27,22 +28,28 @@ public class MessageService {
 	
 	public void addResponse(String mContent,Integer messageID_response,Integer memberID,Integer courseID, Byte status)
 	   {
+//		System.out.println(mContent);
+//		System.out.println(courseID);
+//		System.out.println(messageID_response);
+//		System.out.println(memberID);
+//		System.out.println(status);
 		MemberVO memberVO = memberDAO.findByPrimaryKey(memberID);
+		System.out.println(memberVO);
 		MessageVO messageVO = new MessageVO();
 		messageVO.setmContent(mContent);
 		messageVO.setMessageID_response(messageID_response);
 		messageVO.setMemberVO(memberVO);
 		messageVO.setCourseID(courseID);
 		messageVO.setStatus(status);
-		dao.insert(messageVO);
+		dao.insert_re(messageVO);
 	}
 		
-	public void updateMessage(Integer messageID,String mContent, String update) {
+	public void updateMessage(Integer messageID,String mContent) {
 
 		MessageVO messageVO = new MessageVO();
 		messageVO.setMessageID(messageID);
 		messageVO.setmContent(mContent);
-		dao.update(messageVO,update);
+		dao.update(messageVO);
 //		return dao.findByPrimaryKey(messageID);
 	}
 	public List<MessageVO> findCourseRe(Integer courseID){
