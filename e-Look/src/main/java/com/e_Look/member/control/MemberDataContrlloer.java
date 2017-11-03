@@ -38,7 +38,7 @@ public class MemberDataContrlloer extends HttpServlet {
 			Integer memberID = new Integer(request.getParameter("memberID"));
 			String email = request.getParameter("email");
 			service = new MemberService();
-			if(request.getPart("memberphoto").getSize()==0){
+			if(request.getPart("memberphoto")==null){
 			
 			String mName = request.getParameter("mName");
 			
@@ -55,7 +55,9 @@ public class MemberDataContrlloer extends HttpServlet {
 			memberVO = service.getMemberMail(email);
 			session.setAttribute("LoginOK", memberVO);
 			}else{
+				if(request.getPart("memberphoto").getSize()>0){
 				service.updateMemberImage(memberID, request.getPart("memberphoto"));
+				}
 			}
 			
 		}else{

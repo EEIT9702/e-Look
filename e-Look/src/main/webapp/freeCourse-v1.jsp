@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>免費課程</title>
 <link href="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.css"
 	rel="stylesheet">
@@ -25,7 +26,8 @@
 	<!-- 星星 -->
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/_Lyy/jquery.raty.min.js"></script>
-<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+
+<link rel="Short Icon" type="image/x-icon" href="${initParam.icon}" />
 <style>
 /* 影片區塊 */
 video {

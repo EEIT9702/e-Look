@@ -233,7 +233,7 @@ font-size: 18px;
 							<c:choose>
 								<c:when test="${!empty LoginOK}">
 									<li class="dropdown "><a href="#" class=" dropdown-toggle"
-										id="dropdownMenu1" data-toggle="dropdown"><img
+										id="dropdownMenu1" data-toggle="dropdown"><img id="changeimage"
 											src="<%=request.getContextPath() %>/Image?MemberID=${LoginOK.memberID}"
 											height="40" class="" /><span class="caret"></span></a>
 										<ul class="nav dropdown-menu" aria-labelledby="dropdownMenu1" style="font-size: 18px;border-radius:5px">

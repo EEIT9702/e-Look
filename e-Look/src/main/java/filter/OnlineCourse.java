@@ -72,6 +72,7 @@ public class OnlineCourse implements Filter {
 					//留言板
 					MessageService messageService =new MessageService();
 					List<MessageVO> messageVOList = null;
+					
 					messageVOList=messageService.findCourseRe(courseVO.getCourseID());
 					for(MessageVO m:messageVOList){
 						System.out.println(m.getMessageID_response());

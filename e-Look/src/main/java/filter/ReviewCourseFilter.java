@@ -32,12 +32,12 @@ import com.e_Look.memberSubscription.MemberSubscriptionVO;
 @WebFilter(filterName = "ReviewCourseFilter", dispatcherTypes = { DispatcherType.REQUEST })
 public class ReviewCourseFilter implements Filter {
 
-    /**
-     * Default constructor. 
-     */
-    public ReviewCourseFilter() {
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * Default constructor.
+	 */
+	public ReviewCourseFilter() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Filter#destroy()
@@ -49,89 +49,39 @@ public class ReviewCourseFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
+			throws IOException, ServletException {
 		if (req instanceof HttpServletRequest && resp instanceof HttpServletResponse) {
 			HttpServletRequest request = (HttpServletRequest) req;
 			HttpServletResponse response = (HttpServletResponse) resp;
 			String courseID = request.getParameter("CourseID");
-			if (courseID == null||courseID.length()==0) {
-				response.sendRedirect(request.getContextPath()+"/HOME.jsp");
+			if (courseID == null || courseID.length() == 0) {
+				response.sendRedirect(request.getContextPath() + "/HOME.jsp");
 				return;
-			}			else if (courseID != null) {
-				CourseService courseService = new CourseService();
-				CourseVO courseVO = courseService.getCourseData(Integer.valueOf(courseID));
-				if (courseVO.getStatus() == 2) {
-					MemberService service = new MemberService();
-					MemberVO memberVo = service.getMember(courseVO.getMemberID());
-					List<CourseVO> list = courseService.getAllCourseData(courseVO.getMemberID(), 2);
-					HttpSession session = request.getSession();
-					MemberVO memberVoOK = (MemberVO) session.getAttribute("LoginOK");
-					BuyCourseService CourseService = new BuyCourseService();
-					List<BuyCourseVO> list2 = null;
-					List<MemberBookmarksVO> mBookmarkList = null;
-					List<MemberSubscriptionVO> memberSubscriptionVO = null;
-					MemberBookmarksService memberBookmarksService = new MemberBookmarksService();
-
-					MemberSubscriptionService memberSubscriptionService =new MemberSubscriptionService();
-
-					if (memberVoOK != null) {
-
-						list2 = CourseService.getBuyCourse(memberVoOK.getMemberID());
-						mBookmarkList = memberBookmarksService.findPrimaryMemberBookmarks(memberVoOK.getMemberID());
-						memberSubscriptionVO=memberSubscriptionService.findPrimaryMemberBookmarks(memberVoOK.getMemberID());
+			} else if (courseID != null) {
+				
+				if (request.getHeader("referer")!=null||request.getHeader("referer").indexOf("CourseReview.jsp") != -1) {
+					CourseService courseService = new CourseService();
+					CourseVO courseVO = courseService.getCourseData(Integer.valueOf(courseID));
+					if (courseVO.getStatus() == 1) {
+						MemberService service = new MemberService();
+						MemberVO memberVo = service.getMember(courseVO.getMemberID());
+						request.setAttribute("courseVO", courseVO);
+						request.setAttribute("memberVo", memberVo);
+						chain.doFilter(request, response);
+					} else {
+						response.sendRedirect(request.getContextPath() + "/HOME.jsp");
+						return;
 					}
-
-					if (mBookmarkList != null) {
-						request.setAttribute("mBookmarkList", mBookmarkList);
-
-					}
-					request.setAttribute("list", list);
-					request.setAttribute("list2", list2);
-					request.setAttribute("courseVO", courseVO);
-					request.setAttribute("memberVo", memberVo);
-					request.setAttribute("memberSubscription", memberSubscriptionVO);
-					chain.doFilter(request, response);
-				}else if(courseVO.getStatus() == 3){
-					MemberService service = new MemberService();
-					MemberVO memberVo = service.getMember(courseVO.getMemberID());
-					List<CourseVO> list = courseService.getAllCourseData(courseVO.getMemberID(), 2);
-					HttpSession session = request.getSession();
-					MemberVO memberVoOK = (MemberVO) session.getAttribute("LoginOK");
-					BuyCourseService CourseService = new BuyCourseService();
-					List<BuyCourseVO> list2 = null;
-					List<MemberBookmarksVO> mBookmarkList = null;
-					List<MemberSubscriptionVO> memberSubscriptionVO = null;
-					MemberBookmarksService memberBookmarksService = new MemberBookmarksService();
-
-					MemberSubscriptionService memberSubscriptionService =new MemberSubscriptionService();
-
-					if (memberVoOK != null) {
-
-						list2 = CourseService.getBuyCourse(memberVoOK.getMemberID());
-						mBookmarkList = memberBookmarksService.findPrimaryMemberBookmarks(memberVoOK.getMemberID());
-						memberSubscriptionVO=memberSubscriptionService.findPrimaryMemberBookmarks(memberVoOK.getMemberID());
-					}
-
-					if (mBookmarkList != null) {
-						request.setAttribute("mBookmarkList", mBookmarkList);
-
-					}
-					request.setAttribute("list", list);
-					request.setAttribute("list2", list2);
-					request.setAttribute("courseVO", courseVO);
-					request.setAttribute("memberVo", memberVo);
-					request.setAttribute("memberSubscription", memberSubscriptionVO);
-					chain.doFilter(request, response);
-					
-				}else{
-					response.sendRedirect(request.getContextPath()+"/HOME.jsp");
+				}else {
+					response.sendRedirect(request.getContextPath() + "/HOME.jsp");
+					return;
 				}
 			}
-		
-			chain.doFilter(request, response);
-		
+			
+
 		}
-		
+
 	}
 
 	/**
