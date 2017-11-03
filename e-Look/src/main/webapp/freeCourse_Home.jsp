@@ -188,22 +188,26 @@ background-color: #f2fef1;
 /* 熱門關鍵字 */
 .outBorder{
 /* 	margin-left:5%; */
-	width:220px;
+	width:450px;
 	height:40px;
 	border:3px solid orange;
 	border-radius:25px;
+	float:right;
 }
 .middleborder{
-	padding-left:14px;
-	padding-top:3px;
-	padding-bottom:3px;
+ 	padding-left:14px;
+/* 	padding-left:1vw; */
+/* 	padding-top:3px; */
+/* 	padding-bottom:3px; */
 }
 .inputarea{
 	border:none !important;
-	width:160px !important;
+/* 	width:20.5vw !important; */
+	width:395px !important;
+	float:left;
 }
 .searchImg{
-	float:right;
+ 	float:right;
 }
 .searchImg div:hover{
 /* 	top: 2px !important; */
@@ -211,7 +215,9 @@ background-color: #f2fef1;
 }
 
 .searchicon{
-	width:30px;
+/* 	height:auto; */
+  width:30px;
+/*  width:1.6vw; */
 	cursor: pointer;
 }
 
@@ -234,7 +240,7 @@ background-color: #f2fef1;
 	left: 4px;
 }
 .searchKey{
- 	margin-left:20%;
+/*  	margin-left:20%; */
 	
 }
 .gray1{
@@ -377,7 +383,7 @@ function river(){
 <!-- form按鈕圖式star -->
 <div class="formDiv container" >
 	<div class="row">
-	<div class="col-md-8 col-sm-10 col-xs-12 cclass">
+	<div class="col-md-8 col-sm-10 col-xs-12 col-lg-8 cclass">
 
 		<div class="col-md-1 col-sm-2 col-xs-3 text-center ccicon">
 			<img class="svgIcon" src="<%=request.getContextPath() %>/alan/img/life.svg"><p alt="101" class="pstyle">生活</p>
@@ -418,8 +424,8 @@ function river(){
 	
 
 	</div><!-- /col-md-10 -->
-	<div class="col-md-2 col-sm-0 col-xs-0"></div>
-	<div class="col-md-2 col-sm-2 col-xs-6">
+	<div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
+	<div class="col-md-12 col-sm-12 col-xs-12 col=lg-12">
 	<form class="navbar-form navbar-left" id="searchKey" method="get" action="">
 	
 		<div class="input-group outBorder" style="">
@@ -444,7 +450,8 @@ function river(){
 		</span>
 	</p>
 	</div>
-	</div><!-- /col-md-2 -->
+	</div>
+	</div><!-- /col-md-4 -->
 	<!-- 黑分隔線 -->
 	<div class="col-md-12 col-sm-12 col-xs-12" style="border:1px solid black;margin-bottom:20px"></div>
 	</div>
