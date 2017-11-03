@@ -100,7 +100,7 @@ public class MessageDAO implements MessageDAO_interface {
 			pstmt = con.prepareStatement(INSERT_MESSAGE_RESPONSE);
 			// "insert into Message (mContent,mTime,messageID_response,memberID,courseID,status)values (?, ?, ?, ?, ?, ?)"
 						pstmt.setString(1, messageVO.getmContent());
-						Timestamp ts = new Timestamp(System.currentTimeMillis());
+						Timestamp ts = new Timestamp(System.currentTimeMillis()/1000);
 						pstmt.setTimestamp(2, ts);
 						pstmt.setInt(3, messageVO.getMessageID_response());
 						pstmt.setInt(4, messageVO.getMemberVO().getMemberID());
@@ -138,7 +138,7 @@ public class MessageDAO implements MessageDAO_interface {
 				pstmt = con.prepareStatement(UPDATE_MESSAGE);
 //"update Message set mContent=?, mTime=? where messageID= ?";
 				pstmt.setString(1, messageVO.getmContent());
-				Timestamp ts = new Timestamp(System.currentTimeMillis());
+				Timestamp ts = new Timestamp(System.currentTimeMillis()/1000);
 				pstmt.setTimestamp(2, ts);
 				pstmt.setInt(3, messageVO.getMessageID());	
 				
