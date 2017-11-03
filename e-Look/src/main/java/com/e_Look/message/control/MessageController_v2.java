@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.e_Look.member.model.MemberVO;
-import com.e_Look.message.model.MessageService;
 import com.e_Look.message.model.MessageVO;
 
 import net.minidev.json.JSONValue;

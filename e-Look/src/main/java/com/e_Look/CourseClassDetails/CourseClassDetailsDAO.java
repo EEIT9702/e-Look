@@ -119,7 +119,7 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 	public void delete(Integer courseID) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
+		System.out.println(courseID);
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE_COURSE_N_CLASS);

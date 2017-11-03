@@ -38,7 +38,7 @@ public class ReportMessageService {
 		rmVO.setStatus((byte) 1);
 		dao.update(rmVO);
 		
-		Integer memberID = rmVO.getMessageVO().getMemberID();
+		Integer memberID = rmVO.getMessageVO().getMemberVO().getMemberID();
 		
 		MessageVO mVO = rmVO.getMessageVO();		
 		//將傳進來的status訊息狀態設定進去Message裡

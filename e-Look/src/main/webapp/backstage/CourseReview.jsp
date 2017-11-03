@@ -9,10 +9,11 @@
    	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-3.3.7-dist/css/bootstrap.css">
    	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/jquery-ui.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/backstage/css/CourseReview.css">
-
 </head>
+
 <body>
-<jsp:include page="backheader.jsp"></jsp:include>			
+<jsp:include page="backheader.jsp"></jsp:include>	
+		
 <section id="wrapper">
 	<header>
 		<div align="center" class="inner">
@@ -23,10 +24,9 @@
 
 <div class="container">
     <div class="row">
-
             <div class="container">
                 <div class="navbar-header">
-                    <span class="navbar-brand">e-Look管理員您好：</span>
+                    <span class="navbar-brand">e-Look管理員您好80：</span>
                 </div>       
             </div>
             <div class="container-fluid">
@@ -200,7 +200,7 @@ var ReviewDatas;
 $(function(){
 	loadReviewData();
 	//審核不過，退回變成草稿====================================================
-		$('#ReviewAllCourse>tbody').on('click','td>a:nth-child(2)',function(){
+		$('#ReviewAllCourse>tbody').on('click','td>button:nth-child(2)',function(){
 	if(confirm("確定要退回為草稿狀態嗎?")){
 			var id = $(this).parents('tr').find('td:nth-child(3)').text();
 			console.log(id+"此課程已變更為草稿狀態");
@@ -211,7 +211,7 @@ $(function(){
 		})
 	//========================================================================	
 	//審核通過=================================================================
-		$('#ReviewAllCourse>tbody').on('click','td>a:nth-child(1)',function(){
+		$('#ReviewAllCourse>tbody').on('click','td>button:nth-child(1)',function(){
 	if(confirm("確定此課程審核通過嗎?")){
 			var id = $(this).parents('tr').find('td:nth-child(3)').text();
 			console.log(id+"此課程已審核通過");
@@ -240,10 +240,10 @@ function loadReviewData(){
 		var fragment = $(document.createDocumentFragment());
 		console.log(datas);	
 		$.each(datas,function(idx,Course){
-			var cell1 = $('<td align="center"></td>').html('<a class="btn btn-success"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a><a class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>')
+			var cell1 = $('<td align="center"></td>').html('<button class="btn btn-success"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button><button class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>')
 			var cell2 = $('<td></td>').text(Course.memberID)
-			var cell3 = $('<td></td>').text( Course.courseID)
-			var cell4 = $('<td></td>').text(Course.courseName)
+			var cell3 = $('<td></td>').text(Course.courseID)
+			var cell4 = $('<td></td>').html('<a href="/e-Look/ReviewingCoursePage.jsp?CourseID='+Course.courseID+'" style="color:black" target="_blank">'+Course.courseName+'</a>')
 			var cell5 = $('<td></td>').text(Course.fundEndDate)
 			
 			if(Course.soldPrice==0){

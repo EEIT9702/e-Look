@@ -28,7 +28,7 @@ import com.e_Look.memberBookmarks.model.MemberBookmarksVO;
 
 import com.e_Look.memberSubscription.MemberSubscriptionService;
 import com.e_Look.memberSubscription.MemberSubscriptionVO;
-import com.e_Look.message.model.MessageService_v2;
+import com.e_Look.message.model.MessageService;
 import com.e_Look.message.model.MessageVO;
 
 
@@ -70,8 +70,9 @@ public class OnlineCourse implements Filter {
 					List<MemberSubscriptionVO> memberSubscriptionVO = null;
 					
 					//留言板
-					MessageService_v2 messageService =new MessageService_v2();
+					MessageService messageService =new MessageService();
 					List<MessageVO> messageVOList = null;
+					
 					messageVOList=messageService.findCourseRe(courseVO.getCourseID());
 					for(MessageVO m:messageVOList){
 						System.out.println(m.getMessageID_response());
@@ -115,7 +116,7 @@ public class OnlineCourse implements Filter {
 
 					MemberSubscriptionService memberSubscriptionService =new MemberSubscriptionService();
 					//留言板
-					MessageService_v2 messageService =new MessageService_v2();
+					MessageService messageService =new MessageService();
 					List<MessageVO> messageVOList = null;
 					messageVOList=messageService.findCourseRe(courseVO.getCourseID());
 					if (memberVoOK != null) {

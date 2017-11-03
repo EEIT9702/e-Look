@@ -3,6 +3,8 @@ package com.e_Look.message.model;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+import com.e_Look.member.model.MemberVO;
+
 public class MessageVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -10,7 +12,7 @@ public class MessageVO implements Serializable {
 	private String mContent;
 	private Timestamp mTime;
 	private Integer messageID_response;
-	private Integer memberID;
+	private MemberVO memberVO;
 	private Integer courseID;
 	private Long bought;
 	private Byte status;
@@ -18,13 +20,13 @@ public class MessageVO implements Serializable {
 	public MessageVO(){}
 	
 
-	public MessageVO(Integer messageID,String mContent,Timestamp mTime, Integer messageID_response, Integer memberID,
+	public MessageVO(Integer messageID,String mContent,Timestamp mTime, Integer messageID_response, MemberVO memberVO,
 			Integer courseID, Long bought, Byte status) {
 		this.messageID = messageID;
 		this.mContent = mContent;
 		this.mTime = mTime;
 		this.messageID_response = messageID_response;
-		this.memberID = memberID;
+		this.memberVO = memberVO;
 		this.courseID = courseID;
 		this.bought = bought;
 		this.status = status;
@@ -63,12 +65,12 @@ public class MessageVO implements Serializable {
 		this.messageID_response = messageID_response;
 	}
 
-	public Integer getMemberID() {
-		return memberID;
+	public MemberVO getMemberVO() {
+		return memberVO;
 	}
 
-	public void setMemberID(Integer memberID) {
-		this.memberID = memberID;
+	public void setMemberVO(MemberVO memberVO) {
+		this.memberVO = memberVO;
 	}
 
 	public Integer getCourseID() {
