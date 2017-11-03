@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"
 	import="java.util.*,java.text.*,com.e_Look.Course.*,com.e_Look.member.model.*,com.e_Look.buyCourse.model.*,javax.servlet.http.HttpSession"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE >
 <html>
 <head>
@@ -665,16 +666,18 @@ a {
 				<c:if test="${!empty messageVOList}">
 				<div class="col-md-12" id="messageHeader">
 				<c:forEach items="${messageVOList}" var="messageVO">
-		<!--重複的地方開始 -->
+		<!--留言重複的地方開始 -->
 					<c:if test="${messageVO.messageID_response==0}">
 					<div class="col-md-1">
-						<img src="<%=request.getContextPath() %>/Image?MemberID=${messageVO.memberID}"
+						<img src="<%=request.getContextPath() %>/Image?MemberID=${messageVO.memberVO.memberID}"
 							class="img-thumbnail pull-left">
 					</div>
 					<div class="col-md-11">
 						<div>
-							<span id="testMessage1"  class="text-left">吳永志</span>
-							<span>時間</span>
+							<span id="testMessage1"  class="text-left">${messageVO.memberVO.mName}</span>
+							<fmt:parseDate value="${messageVO.mTime}" pattern="yyyy-MM-dd HH:mm:ss" var="date"/>
+							<fmt:formatDate value="${date}" pattern="yyyy-MM-dd HH:mm:ss" var="messageDate"/>
+							<span>${messageDate}</span>
 							<div class="dropdown pull-right">
 								<button class="btn dropdown-toggle btn-default "
 									type="button" data-toggle="dropdown" style="height: 30px">
@@ -706,12 +709,12 @@ a {
 							</div>
 						</div>
 
-						<div style="border-bottom: 1px solid black">
-							<p>With Bootstrap 2, we added optional mobile friendly
+						<div style="border-bottom: 1px solid black">	
+							<p>${messageVO.mContent}+++${messageVO.messageID}
 							</p>
 						</div>
 					<!--抓取messageID -->
-						<input type="hidden" value="${messageVO.messageID}" id="messageID">
+						<input type="hidden"  value="${messageVO.messageID}" class="messageID">
 					<!--第一個回應 開始-->
 					
 						<div class="col-md-12">
@@ -719,46 +722,31 @@ a {
 								<div class="panel">
 									<div class="panel-heading">
 										<h4 class="panel-title ">
-											<a data-toggle="collapse" href="#collapse1">回應記錄</a>
+											<a data-toggle="collapse" href="#${messageVO.messageID}">回應記錄</a>
 										</h4>
 									</div>
-									<div id="collapse1" class="panel-collapse collapse ">
+									<div id="${messageVO.messageID}" class="panel-collapse collapse ">
 									<!--第一個回應 內容-->
-										<div>
-											<div class="col-md-1">
-												<img src="<%=request.getContextPath()%>/img/imember_image.png"class="img-thumbnail pull-left">
-											</div>
-											<div class="col-md-11"style="border-bottom: 1px solid black">
-												<span>吳永志</span>
-												<span>時間</span>
-												<div class="dropdown pull-right">
-												<button class="btn dropdown-toggle btn-default"type="button" data-toggle="dropdown" style="height: 30px">
-												<span class="glyphicon glyphicon-option-horizontal"></span>
-												</button>
-												<ul class="dropdown-menu">
-														<c:if test="${empty LoginOK}">
-															<c:choose>
-																<c:when test="${!empty loginerr}">
-																	<li><a href="#"data-toggle="modal"data-target="#myModal2">檢舉</a></li>
-																</c:when>
-																<c:when test="${empty err}">
-																	<li><a href="#"data-toggle="modal"data-target="#myModal">檢舉</a></li>
-																</c:when>
-																<c:otherwise>
-																	<li><a class="reportM" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>
-																</c:otherwise>
-															</c:choose>
-														</c:if>
-														<c:if test="${!empty LoginOK}">
-															<li><a class="reportM" href="#">檢舉</a></li>
-														</c:if>
-														<li><a href="#">修改</a></li>
-														<li><a href="#">刪除</a></li>
-												</ul>
-												</div>
-												<p>With Bootstrap 2, we added optional mobile</p>
-											</div>
-										</div>
+<!-- 										<div> -->
+<!-- 											<div class="col-md-1"> -->
+<%-- 												<img src="<%=request.getContextPath()%>/img/imember_image.png"class="img-thumbnail pull-left"> --%>
+<!-- 											</div> -->
+<!-- 											<div class="col-md-11"style="border-bottom: 1px solid black"> -->
+<!-- 												<span>吳永志</span> -->
+<!-- 												<span>時間</span> -->
+<!-- 												<div class="dropdown pull-right"> -->
+<!-- 												<button class="btn dropdown-toggle btn-default"type="button" data-toggle="dropdown" style="height: 30px"> -->
+<!-- 												<span class="glyphicon glyphicon-option-horizontal"></span> -->
+<!-- 												</button> -->
+<!-- 												<ul class="dropdown-menu"> -->
+<!-- 													<li><a class="reportM" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>								 -->
+<!-- 													<li><a href="#">修改</a></li> -->
+<!-- 													<li><a href="#">刪除</a></li> -->
+<!-- 												</ul> -->
+<!-- 												</div> -->
+<!-- 												<p>With Bootstrap 2, we added optional mobile</p> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
 										<!--第一個回應 內容結束-->
 									</div>
 								</div>
@@ -1090,6 +1078,82 @@ a {
 				b=true;
  			}
 		})
+		</script>
+		<script>
+		$(function(){
+			
+			
+		})
+		
+		
+		</script>
+		
+		<script>
+		
+		$(function(){
+			//var fg = $("<div></div>").addClass('panel-collapse collapse').attr('id','collapse1');
+			$(".messageID").each(function(){
+				$.getJSON('/e-Look/MessageController_v2',{'messageID':$(this).val()},function(responses){
+					var fg = $(document.createDocumentFragment());
+					
+					$.each(responses,function(index,response){
+					console.log(response);
+					var div1=$('<div></div>')
+					var div2=$('<div></div>').addClass('col-md-1 ');
+					var img1=$('<img></img').addClass('img-thumbnail pull-left').attr('src','<%=request.getContextPath()%>/Image?MemberID='+response.memberVO.memberID);
+					div2.append(img1);
+					var div3=$('<div></div>').addClass('col-md-11 ').attr('style','border-bottom: 1px solid black')
+					var span1=$('<span></span>').text(response.memberVO.mName)
+					var span2=$('<span></span>').text(response.mTime)
+					var div4=$('<div></div>').addClass('dropdown pull-right')
+						var button=$('<button></button>').addClass('btn dropdown-toggle btn-default').attr({'data-toggle':'dropdown','style':'height:30px'})
+						var	span3=$('<span></span>').addClass('glyphicon glyphicon-option-horizontal')
+						button.append(span3)
+					var ul=$('<ul></ul>').addClass("dropdown-menu")
+					var li1=$('<li></li>')
+					var a1=$('<a></a>').addClass("reportM").attr({'href':'#','data-toggle':'modal','data-target':'#myModal2'}).text('檢舉')
+						li1.append(a1)
+					var li2=$('<li></li>')
+					var a2=$('<a></a>').attr('href','#').text('修改')
+						li2.append(a2)
+					var li3=$('<li></li>')
+					var a3=$('<a></a>').attr('href','#').text('刪除')	
+						li3.append(a3)
+						ul.append([a1,a2,a3])
+						div4.append([button.append(span3),ul.append([a1,a2,a3])])
+					var p =$('<p></p>').text(response.mContent)
+					
+					div3.append([span1,span2,button.append(span3),div4.append([button.append(span3),ul.append([a1,a2,a3])]),p])
+					div1.append([div2.append(img1),div3.append([span1,span2,button.append(span3),div4.append([button.append(span3),ul.append([a1,a2,a3])]),p])])
+					fg.append(div1.append([div2.append(img1),div3.append([span1,span2,button.append(span3),div4.append([button.append(span3),ul.append([a1,a2,a3])]),p])]))
+					$('#'+response.messageID_response).append(fg);
+// 				<div>
+// 					<div class="col-md-1">
+<%-- 						<img src="<%=request.getContextPath()%>/img/imember_image.png"class="img-thumbnail pull-left"> --%>
+// 					</div>
+// 					<div class="col-md-11"style="border-bottom: 1px solid black">
+// 						<span>吳永志</span>
+// 						<span>時間</span>
+// 						<div class="dropdown pull-right">
+// 							<button class="btn dropdown-toggle btn-default" data-toggle="dropdown" style="height: 30px">
+// 								<span class="glyphicon glyphicon-option-horizontal"></span>
+// 							</button>
+// 							<ul class="dropdown-menu">
+// 								<li><a class="reportM" href="#" data-toggle="modal" data-target="#myModal2">檢舉</a></li>								
+// 								<li><a href="#">修改</a></li>
+// 								<li><a href="#">刪除</a></li>
+// 							</ul>
+// 						</div>
+// 						<p>With Bootstrap 2, we added optional mobile</p>
+// 					</div>
+// 				</div>
+					})
+				});
+			})
+			
+		});
+		
+		
 		</script>
 	</body>
 </html>

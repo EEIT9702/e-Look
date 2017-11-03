@@ -343,7 +343,7 @@ public class MessageDAO implements MessageDAO_interface {
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_RESPONSE);
-//"select messageID,mContent,mTime,messageID_response,memberID,courseID,status from Message where courseID= ?";
+//"select messageID,mContent,mTime,messageID_response,memberID,courseID,status from Message where messageID_response= ?";
 			pstmt.setInt(1, messageID_response);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
