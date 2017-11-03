@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.e_Look.member.model.MemberDAO;
+import com.e_Look.member.model.MemberVO;
 
 public class MessageDAO_JDBC implements MessageDAO_interface {
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
@@ -411,15 +412,17 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 	}
 	public static void main(String[] args) {
 		MessageDAO_JDBC dao = new MessageDAO_JDBC();
+		MemberDAO memberDAO=new MemberDAO();
 		//新增
-//		MessageVO messageVO1 = new MessageVO();
-//		messageVO1.setmContent("第2筆留言");
-//		messageVO1.setmTime(new Timestamp(System.currentTimeMillis()));
-//		messageVO1.setMemberID(100002);
-//		messageVO1.setCourseID(200002);
-//		messageVO1.setStatus((byte) 0);
-//		int id =dao.insert(messageVO1);
-//		System.out.println(id);
+		
+		MessageVO messageVO1 = new MessageVO();
+		messageVO1.setmContent("第3筆留言");
+		messageVO1.setmTime(new Timestamp(System.currentTimeMillis()));
+		messageVO1.setMemberVO(memberDAO.findByPrimaryKey(100004));;
+		messageVO1.setCourseID(200002);
+		messageVO1.setStatus((byte) 0);
+		int id =dao.insert(messageVO1);
+		System.out.println(id);
 		
 		//更新留言
 //		MessageVO messageVO2 = new MessageVO();
@@ -460,25 +463,25 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 		
 		
 		//查詢多個回應
-//		List<MessageVO> messageVO=dao.findAllResponse(1002);
+//		List<MessageVO> messageVO=dao.findAllResponse(1001);
 //		for(MessageVO m:messageVO){
 //			System.out.print(m.getMessageID()+" ");
 //			System.out.print(m.getmTime()+" ");
 //			System.out.print(m.getmContent()+" ");
 //			System.out.print(m.getMessageID_response()+" ");
 //			System.out.print(m.getCourseID()+" ");
-//			System.out.print(m.getMemberID()+" ");
+//			System.out.print(m.getMemberVO().getMemberID()+" ");
 //			System.out.println(m.getStatus());
 //		}
 		//查詢該課程多筆留言
-//		List<MessageVO> messageVO=dao.findMessageByCourseID(200002);
+//		List<MessageVO> messageVO=dao.findMessageByCourseID(200003);
 //		for(MessageVO m:messageVO){
 //			System.out.print(m.getMessageID()+" ");
 //			System.out.print(m.getmTime()+" ");
 //			System.out.print(m.getmContent()+" ");
 //			System.out.print(m.getMessageID_response()+" ");
 //			System.out.print(m.getCourseID()+" ");
-//			System.out.print(m.getMemberID()+" ");
+//			System.out.print(m.getMemberVO().getMemberID()+" ");
 //			System.out.println(m.getStatus());
 //		}
 //		
