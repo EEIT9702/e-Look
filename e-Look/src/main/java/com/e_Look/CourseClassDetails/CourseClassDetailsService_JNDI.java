@@ -7,7 +7,7 @@ public class CourseClassDetailsService_JNDI {
 	private CourseClassDetails_interface dao;
 	
 	public CourseClassDetailsService_JNDI() {
-		dao = new CourseClassDetailsDAO();
+		dao = new CourseClassDetailsDAO_JNDI();
 	}
 	
 	public List<CourseClassDetailsVO> getFreeCourse(Integer courseClassID){
