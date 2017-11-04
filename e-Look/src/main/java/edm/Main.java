@@ -33,7 +33,8 @@ public class Main extends java.lang.Thread {
             fr.close();
  
             // 名單
-            fis = new java.io.FileReader(p.getProperty("edmList"));
+            //fis = new java.io.FileReader(p.getProperty("edmList"));
+            fis = new java.io.FileReader("C:\\Users\\MSI-GL72-6QF\\Desktop\\list.txt");
             bis = new java.io.BufferedReader(fis);
  
             while ((str = bis.readLine()) != null) {
@@ -43,14 +44,6 @@ public class Main extends java.lang.Thread {
             bis.close();
             fis = null;
             bis = null;
- 
-            // 取得網頁內容
-//            WebModule web = new WebModule();
-//            if (web.doGet(p.getProperty("edmUrl"), null, null, "utf-8")) {
-//                content = web.getContent();
-//            } else {
-//                throw new java.io.IOException("取得網頁資料錯誤!");
-//            }
             
           content = "親愛的會員您好<br><br>推薦您前三名熱門課程：<br><br>"
         		  	+ "<img src='/webapp/body/img/001.jpg'/><br>"
@@ -64,7 +57,7 @@ public class Main extends java.lang.Thread {
  
             // 郵件標題
             //this.subject = p.getProperty("edmSubject", "utf-8");
-            this.subject = "e-Look電子月刊";
+            //this.subject = "e-Look電子月刊";
  
         } catch (java.io.IOException e) {
             //log.info(e.getMessage());

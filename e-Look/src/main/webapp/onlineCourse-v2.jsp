@@ -163,7 +163,6 @@ video::-webkit-media-controls-panel {
 /* 留言板 */
 #messageHeader {
 	border: 1px solid black;
-	border-radius: 15px;
 	font-size: 18px;
 }
 
@@ -658,17 +657,52 @@ a {
 			<div role="tabpanel" class="tab-pane fade" id="Section3">
 					
 	<!-- 留言板內容 -->
-				
-				<c:if test="${empty messageVOList}">
-					<div style="text-align:center"><h4>尚未有留言</h4></div>
-					<div style="text-align:center"><h4>成為第一個發文的人吧！</h4></div>
-					<div style="text-align:center"><img src="<%=request.getContextPath() %>/_Lyy/chat.png"></div>
-				</c:if>
-				<c:if test="${!empty messageVOList}">
 				<div class="col-md-12" id="messageHeader">
+				<c:if test="${empty messageVOList}">					
+						<c:if test="${empty LoginOK}">
+							<div style="text-align:center"><h4>尚未有留言</h4></div>
+							<div style="text-align:center"><h4>成為第一個發文的人吧！</h4></div>
+							<div style="text-align:center"><img src="<%=request.getContextPath() %>/_Lyy/chat.png"></div>
+							<div style="text-align:center"><h4>(需登入且有購買該課程者)</h4></div>
+						</c:if>
+						<c:if test="${!empty LoginOK}">
+							<c:forEach items="${list2}" var="buycourse" varStatus="varStatus">
+								<c:choose>
+								<c:when test="${!empty flag}"></c:when>
+								<c:when test="${buycourse.courseID==courseVO.courseID}">
+									<div class="col-md-12" id="inputMessage">
+										<div style="text-align:center"><h4>尚未有留言</h4></div>
+										<div style="text-align:center"><h4>成為第一個發文的人吧！</h4></div>
+										<img  class="col-md-1 img-thumbnail"src="<%=request.getContextPath() %>/Image?MemberID=${LoginOK.memberID}"/>
+										<div class="col-md-11"><textarea class="form-control inputMessage" rows="7" style="margin-left:30px"></textarea></div>
+										<div class="text-right"><button class="text-right" style="margin:15px">送出</button></div>					
+									</div>		
+									<c:set var="flag" value="true"></c:set>
+									
+								</c:when>
+								<c:when test="${varStatus.last && empty flag}">  
+									<div style="text-align:center"><h4>尚未有留言</h4></div>
+									<div style="text-align:center"><h4>成為第一個發文的人吧！</h4></div>
+									<div style="text-align:center"><img src="<%=request.getContextPath() %>/_Lyy/chat.png"></div>
+									<div style="text-align:center"><h4>(你還沒有購買該課程唷)</h4></div>
+								</c:when>
+								</c:choose>
+							</c:forEach>
+							<c:if test="${empty list2}">
+									<div style="text-align:center"><h4>尚未有留言</h4></div>
+									<div style="text-align:center"><h4>成為第一個發文的人吧！</h4></div>
+									<div style="text-align:center"><img src="<%=request.getContextPath() %>/_Lyy/chat.png"></div>
+									<div style="text-align:center"><h4>(你還沒有購買該課程唷)</h4></div>
+							</c:if>
+						</c:if>				
+				</c:if>
+				
+				
+				<c:if test="${!empty messageVOList}">		
 				<c:forEach items="${messageVOList}" var="messageVO">
 		<!--留言重複的地方開始 -->
 					<c:if test="${messageVO.messageID_response==0}">
+					
 					<div class="col-md-1 col-xs-2">
 						<img src="<%=request.getContextPath() %>/Image?MemberID=${messageVO.memberVO.memberID}"
 							class="img-thumbnail pull-left">
@@ -705,19 +739,16 @@ a {
 										<li><a class="reportM" href="#">檢舉</a></li>
 									</c:if>
 									<li><a href="#">修改</a></li>
-									
 								</ul>
 							</div>
 						</div>
-
 						<div style="border-bottom: 1px solid black">	
-							<p>${messageVO.mContent}+++${messageVO.messageID}
-							</p>
+							<p>${messageVO.mContent}+++${messageVO.messageID}</p>
 						</div>
+						<input type="hidden"  value="${messageVO.messageID}" class="messageID">
 					<!--抓取messageID -->
 						
 					<!--第一個回應 開始-->
-					
 						<div class="col-md-12">
 							<div class="panel-group">
 								<div class="panel">
@@ -753,15 +784,14 @@ a {
 							</div>
 						</div>
 						<!--第一個回應結束-->
-						<!--回應輸入表格結束-->
-						<c:if test="${empty LoginOK}"></c:if>
+						<!--回應輸入表格-->
 						<c:if test="${!empty LoginOK}">
 						<div class="col-md-12">  
 							<div class="panel-group">
 								<div class="panel">
 									<div class="panel-heading">
 										<h4 class="panel-title ">
-											<a data-toggle="collapse" href="#${messageVO.messageID+messageVO.messageID}">我要回應</a>
+											<a data-toggle="collapse" href="#${messageVO.messageID+messageVO.messageID}">我要回應</a>	
 										</h4>
 									</div>
 									<div id="${messageVO.messageID+messageVO.messageID}" class="panel-collapse collapse">
@@ -772,9 +802,7 @@ a {
 											</div>
 											<div class="text-right">
 												<button class="btn-default" id="inpContent" name="${messageVO.messageID}">送出</button>
-												
 											</div>
-											<input type="hidden"  value="${messageVO.messageID}" class="messageID">
 										</div>
 									</div>
 								</div>
@@ -785,11 +813,44 @@ a {
 						<!-- 回應輸入表格結束-->
 						</c:if>
 					</c:forEach>
-					
-					</div>
-					</c:if>
-					
 					<!-- 重複結束 -->
+					<c:if test="${!empty LoginOK}">
+<!-- 					判斷登入時有無購買課程 -->
+							<c:forEach items="${list2}" var="buycourse" varStatus="varStatus">
+								<c:choose>
+								<c:when test="${!empty msage}"></c:when>
+								<c:when test="${buycourse.courseID==courseVO.courseID}">
+									<div class="col-md-12" id="inputMessage">
+										<img class="col-md-1 img-thumbnail" style="margin-top:20px"src="<%=request.getContextPath() %>/Image?MemberID=${LoginOK.memberID}"/>
+										<div class="col-md-11"><h4 style="margin-left:30px">留言內容</h4><textarea class="form-control inputMessage" rows="7" style="margin-left:30px"></textarea></div>
+										<div class="text-right" style="margin-bottom:10px"><button  class="text-right" style="margin:15px" >送出</button></div>					
+									</div>		
+									<c:set var="msage" value="true"></c:set>
+								</c:when>
+								<c:when test="${varStatus.last && empty msage}">
+									<div class="col-md-12">
+										<img class="col-md-1 img-thumbnail" style="margin-top:20px"src="<%=request.getContextPath() %>/Image?MemberID=${LoginOK.memberID}"/>
+										<div class="col-md-11" style="margin-bottom:10px"><h4 style="margin-left:30px">留言內容</h4><textarea class="form-control" rows="7" style="margin-left:30px" readOnly>(尚未購買)</textarea></div>
+									</div>	
+								</c:when>
+								</c:choose>
+							</c:forEach>
+							<c:if test="${empty list2}">  
+									<div class="col-md-12">
+										<img  class="col-md-1 img-thumbnail" style="margin-top:20px"src="<%=request.getContextPath() %>/img/imember_image.png"/>
+										<div class="col-md-11" style="margin-bottom:10px"><h4 style="margin-left:30px">留言內容</h4><textarea class="form-control" rows="7" style="margin-left:30px" readOnly>(您尚未登入或購買)</textarea></div>
+									</div>
+							</c:if>
+						</c:if>
+						<c:if test="${empty LoginOK}">
+							<div class="col-md-12">
+								<img  class="col-md-1 img-thumbnail" style="margin-top:20px"src="<%=request.getContextPath() %>/img/imember_image.png"/>
+								<div class="col-md-11" style="margin-bottom:10px"><h4 style="margin-left:30px">留言內容</h4><textarea class="form-control" rows="7" style="margin-left:30px" readOnly>(您尚未登入或購買)</textarea></div>
+							</div>
+						</c:if>
+					</c:if>
+					</div>
+					
 					
 				</div>
 			<!-- 留言板結束-->
@@ -807,13 +868,11 @@ a {
 				</div>
 			</div>
 		</div>
-
 	</div>
 	<div id="star"></div>
 	<c:remove var="err" scope="session" />
 	<c:remove var="loginerr" scope="session" />
 	<jsp:include page="/footer.jsp" />
-
 	<script>
 		$(document).ready(function() {
 			$(".col-md-4 a").click(function() {
@@ -860,28 +919,22 @@ a {
 											.attr('value')
 								})
 								swal({
-
 									confirmButtonText : '確認',
 									type : 'success',
 									html : '檢舉 ' + result + ' 成功，管理員會盡快審核 '
-
 								});
-							}
+						}
 				});
 			}
-			
-			
 		})
 	</script>
 	<script>
-		//判斷是否加入過最愛		
+//判斷是否加入過最愛		
 		var count1 = 0;
 		$('#favoriteclick1').click(function() {
 			alert('已經加入過囉');
 		})
-
 		$("#favoriteclick2").click(function() {
-
 			console.log($("#mbcourseID").val())
 			console.log($("#mbmemberID").val())
 			if (count1 == 0) {
@@ -896,7 +949,6 @@ a {
 			} else {
 				alert('已經加入過囉');
 			}
-
 		})
 	</script>
 	<script>
@@ -904,7 +956,6 @@ a {
 		$('.reportAction').click(function() {
 				warningV();
 			})
-
 			function warningV() {
 				swal({
 					title : '檢舉影片',
@@ -935,12 +986,13 @@ a {
 								type : 'success',
 								html : '檢舉 ' + result + ' 成功，管理員會盡快審核 '
 							});
-						}
-					});
+					}
+				});
 			}	
 		});
 	</script>
 	<script>
+// 	追蹤講師
 		var count = 0;
 		$('#subAction').click(function() {
 			if (count == 0) {
@@ -957,13 +1009,10 @@ a {
 				alert('已經追蹤過囉');
 				$('#subAction').attr('disabled', 'false')
 			}
-
 		})
 	</script>
 	<script>
-	
-		// 	星星點評
-		
+// 	星星點評
 		$(function(){
 			$('#star').raty(
 				{
@@ -974,7 +1023,6 @@ a {
 					readOnly :function() {
 						if ($('#reportMemberID').val() == ""|| $('#reportMemberID').val() == null) {//沒有登入
 							$("#noLogin").text("(請先登入)")
-							
 							return true;
 						}else{
 						var memberID=$('#reportMemberID').val();
@@ -992,14 +1040,12 @@ a {
 					}
 				});
 		});
-		
 		function getJson(memberID) {
 			var bool;
 			$.ajax({'url':'/e-Look/countScoreController',
 						'async' : false,
 						'method' : "GET",
-						'data' : {
-							'memberID' : memberID
+						'data' : {'memberID' : memberID
 						},
 						'success' : function(datas) {
 							var datasJson = JSON.parse(datas);
@@ -1032,10 +1078,10 @@ a {
 		}
 	</script>
 	<script>
+// 	顯示星星分數
 		var scoreJSON;
 		var value;
 		$(function() {
-
 			$.post('countScoreController', {
 				'courseID' : $("#mbcourseID").val()
 			}, function(data) {
@@ -1057,6 +1103,7 @@ a {
 		});
 	</script>
 	<script>
+// 	購買課程人數
 	$(function(){
 		$.getJSON("/e-Look/BuyCourseNumber",{'courseID':$("#mbcourseID").val()},
 				function(data){
@@ -1066,6 +1113,7 @@ a {
 	})
 	</script>
 	<script>
+// 影片點擊控制
 		var b=true;
  		$('video').click(function(){
  			if(b){
@@ -1078,20 +1126,20 @@ a {
 		})
 		</script>
 		<script>
+// 	留言版專區
 		$(function(){
 			message();	
 					$('.panel-collapse>div').on('click','.text-right>.btn-default',function(){
-//	 				alert($(this).html());
+	 				alert($(this).html());
 					var $this=$(this)
-//	 				alert($this.parents('div').children('input').val())
-//	 				alert($this.parents('.panel-collapse').find('textarea').val())
+	 				alert($this.parents('div').children('input').val())
+	 				alert($this.parents('.panel-collapse').find('textarea').val())
 						$.post('/e-Look/InputMessageController',
 								{'mContent':$this.parents('.panel-collapse').find('textarea').val(),
 								 'courseID':$('#mbcourseID').val(),
 								 'messageID_response':$this.parents('div').children('input').val(),
 								 'memberID':$('#mbmemberID').val()},function(){				
 								 message();	
-								 $this.parents('.panel-collapse').find('textarea').val("")
 								 $this.parents('.panel-collapse').find('textarea').val("")
 								 var name=$this.attr('name');
 								 $('#'+name).addClass("in");
@@ -1121,7 +1169,6 @@ a {
 					var li2=$('<li></li>')
 					var a2=$('<a></a>').attr('href','#').text('修改')
 					var p =$('<p></p>').text(response.mContent)
-					
 								li1.append(a1)
 		 						li2.append(a2)
 		 					ul.append([li1,li2])
@@ -1136,7 +1183,19 @@ a {
 			})	
 			}
 		});
-		
+		//輸入留言
+		$("#inputMessage>div>button").on('click',function(){
+// 			alert($(this).parents('#inputMessage').find('.inputMessage').val());
+			var valueText=$(this).parents('#inputMessage').find('.inputMessage').val()
+			if(valueText==null||valueText==""){	
+				alert("請輸入留言");
+			}else{
+				$.post('/e-Look/MessageController_v2',{'mContent':valueText,'memberID':$('#mbmemberID').val(),'courseID':$('#mbcourseID').val()},function(){
+					$(this).parents('#inputMessage').find('.inputMessage').val("");
+					document.location.href=location.href;
+			})
+			}
+		})
 		</script>
 		<script>
 		$(function(){
@@ -1148,11 +1207,7 @@ a {
 					  $('#UnitPrice').val(tds.eq(2).text())
 					  $('#UnitsInStock').val(tds.eq(3).text())
 			   });
-			
 		})
-		</script>
-		<script>
-		
 		</script>
 	</body>
 </html>

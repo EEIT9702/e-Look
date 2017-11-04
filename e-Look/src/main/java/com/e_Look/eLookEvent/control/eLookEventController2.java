@@ -11,14 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.e_Look.courseClass.CourseClassDAO;
-import com.e_Look.courseClass.CourseClassVO;
 import com.e_Look.eLookEvent.eLookEventDAO;
 import com.e_Look.eLookEvent.eLookEventService;
 import com.e_Look.eLookEvent.eLookEventVO;
 
-@WebServlet("/backstage/elookeventinsert")
-public class eLookEventController extends HttpServlet {
+@WebServlet("/backstage/elookeventinsert2")
+public class eLookEventController2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -34,9 +32,7 @@ public class eLookEventController extends HttpServlet {
 		Map<String, String> errorMsgs = new HashMap<String, String>();
 		req.setAttribute("ErrMsg", errorMsgs);
 
-//		int ccID1 = new Integer(req.getParameter("ccID1"));
-//		int ccID2 = new Integer(req.getParameter("ccID2"));
-//		int ccID3 = new Integer(req.getParameter("ccID3"));
+
 		/****************************(insert)*/
 		
 		if ("insert".equals(action)) { // 來自eLookEvent.jsp的請求
@@ -81,10 +77,6 @@ public class eLookEventController extends HttpServlet {
 				//
 				// Integer courseClass3 = new Integer(req.getParameter("courseClass3").trim());
 				//
-				//Integer eventID1 = new Integer (req.getParameter("courseClass1"));
-//				CourseClassDAO ccdao = new CourseClassDAO();
-//				CourseClassVO courseClassVO = new CourseClassVO();
-//				eLookEventDAO eeDAO = new eLookEventDAO();
 				eLookEventVO eLookEventVO = new eLookEventVO();
 				eLookEventVO.setEventName(eventName);
 				eLookEventVO.seteStartDate(eStartDate);
@@ -118,7 +110,7 @@ public class eLookEventController extends HttpServlet {
 
 				eLookEventDAO dao=new eLookEventDAO();
 				dao.insert(eLookEventVO);
-				//CourseClassDAO ccdao = new CourseClassDAO();
+				
 				
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 				RequestDispatcher successView = req.getRequestDispatcher("event.jsp"); // 新增成功後轉交listAllEmp.jsp
