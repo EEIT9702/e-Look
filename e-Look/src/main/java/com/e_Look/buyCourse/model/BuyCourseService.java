@@ -36,7 +36,7 @@ public class BuyCourseService {
 		
 	}
 	public Double avgScore(Integer courseID){
-		return dao.getAvgScore(courseID);
+		return dao.getAvgScore(courseID); 
 	
 	}
 	public List<BuyCourseVO> findCourseID(Integer memberID){
