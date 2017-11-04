@@ -4,23 +4,18 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import com.e_Look.Course.CourseDAO;
 import com.e_Look.Course.CourseDAO_JDBC;
 import com.e_Look.Course.CourseDAO_interface;
 import com.e_Look.Course.CourseVO;
-import com.e_Look.member.model.MemberDAO_interface;
 
-public class BuyCourseService {
+public class BuyCourseService_JNDI {
 	private BuyCourseDAO_interface dao;
 	//private CourseDAO_interface cdao;
 
-	public BuyCourseService() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config-jndi.xml");
-        // 建立DAO物件
-		 dao =(BuyCourseDAO_interface) context.getBean("buyCourseDAO");
+	public BuyCourseService_JNDI() {
+		dao = new BuyCourseDAO();
+		//cdao = new CourseDAO();
 	}
 	public List<BuyCourseVO> getBuyCourse(Integer memberID){
 		
@@ -43,10 +38,6 @@ public class BuyCourseService {
 		return dao.findByMemberID(memberID);
 	
 	}
-	public List<BuyCourseVO> getByCourseID(Integer courseID){
-		return dao.getByCourseID(courseID);
-		
-	}
 	public Integer getBuyCourseNumber(Integer courseID) {
 		List<BuyCourseVO> bcVO = dao.getByCourseID(courseID);
 		Integer bsize = bcVO.size();
@@ -54,12 +45,7 @@ public class BuyCourseService {
 		return bsize;
 	}
 	
-	
-	
-	
-	
-	
-	/*public List<CourseVO> getTopThreeBuyCourse(Integer topNum) {
+	public List<CourseVO> getTopThreeBuyCourse(Integer topNum) {
 		BuyCourseDAO_JDBC bdao = new BuyCourseDAO_JDBC();
 		CourseDAO_JDBC cdao = new CourseDAO_JDBC();
 		List<BuyCourseVO> bcVOs = bdao.getAll();
@@ -94,5 +80,5 @@ public class BuyCourseService {
 		
 		
 		return cVO;
-	}*/
+	}
 }

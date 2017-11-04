@@ -42,7 +42,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
         <property name="hibernateProperties"> 
             <props> 
                 <prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop> 
-                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.show_sql">false</prop>
                 <prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
                 <prop key="hibernate.transaction.coordinator_class">jdbc</prop>
 				<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate5.SpringSessionContext</prop>
@@ -69,7 +69,10 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
          <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>     
         
-        
+             <!-- buyCourseDAO -->   
+         <bean id="buyCourseDAO" class="com.e_Look.buyCourse.model.BuyCourseDAO">
+         <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>       
         
         
          
