@@ -1,14 +1,9 @@
 package com.e_Look.member.model;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.Serializable;
-import java.sql.Date;
 import java.util.List;
 
-import org.apache.commons.io.IOUtils;
-import org.hibernate.Session;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.orm.hibernate5.HibernateTemplate;

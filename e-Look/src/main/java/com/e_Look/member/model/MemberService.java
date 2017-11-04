@@ -9,14 +9,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Date;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import com.e_Look.emailSystem.MemberCheckEmail;
 
 public class MemberService {
 	private MemberDAO_interface dao;

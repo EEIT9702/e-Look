@@ -8,11 +8,11 @@ public class AdVO implements Serializable{
 	
 	private Integer adID;
 	private String fileName;
-	private InputStream adFile;
+	private byte[] adFile;
 	private Byte status;
 	public AdVO(){}
 	
-	public AdVO(Integer adID, String fileName, InputStream adFile, Byte status){
+	public AdVO(Integer adID, String fileName, byte[] adFile, Byte status){
 		this.adID = adID;
 		this.fileName = fileName;
 		this.adFile = adFile;
@@ -32,10 +32,10 @@ public class AdVO implements Serializable{
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-	public InputStream getAdFile() {
+	public byte[] getAdFile() {
 		return adFile;
 	}
-	public void setAdFile(InputStream adFile) {
+	public void setAdFile(byte[] adFile) {
 		this.adFile = adFile;
 	}
 	public Byte getStatus() {

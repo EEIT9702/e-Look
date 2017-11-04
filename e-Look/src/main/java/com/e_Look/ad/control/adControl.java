@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import com.e_Look.ad.AdDAO;
+import org.apache.commons.io.IOUtils;
+
+import com.e_Look.ad.AdService;
 import com.e_Look.ad.AdVO;
 
 @MultipartConfig(location = "", fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 1024, maxRequestSize = 1024
@@ -27,6 +29,7 @@ public class adControl extends HttpServlet {
 
         req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
+		AdService adservice =new AdService();
 		Map<String, String> errorMsgs = new HashMap<String, String>();
 		req.setAttribute("ErrMsg", errorMsgs);
 //新增
@@ -38,13 +41,12 @@ public class adControl extends HttpServlet {
 				}
 				Part part=req.getPart("adFile");
 				InputStream adFile = part.getInputStream();
-
+				byte[] bytes = IOUtils.toByteArray(adFile);
 				AdVO adVO = new AdVO();
 				adVO.setFileName(fileName);
-				adVO.setAdFile(adFile);
+				adVO.setAdFile(bytes);
 				adVO.setStatus(Byte.parseByte(req.getParameter("status")));
-				AdDAO dao = new AdDAO();
-				dao.insert(adVO);
+				adservice.addAd(adVO);
 
 				RequestDispatcher successView = req.getRequestDispatcher("backAd.jsp"); 
 				successView.forward(req, res);
@@ -69,11 +71,11 @@ public class adControl extends HttpServlet {
 				
 				AdVO adVO = new AdVO();
 				adVO.setFileName(fileName);
-				adVO.setAdFile(adFile);
+				byte[] bytes = IOUtils.toByteArray(adFile);
+				adVO.setAdFile(bytes);
 				adVO.setStatus(Byte.parseByte(req.getParameter("status")));
 				adVO.setAdID(adID);
-				AdDAO dao = new AdDAO();
-				dao.update(adVO);
+				adservice.updateAd(adVO);
 
 				RequestDispatcher successView = req.getRequestDispatcher("backAd.jsp"); 
 				successView.forward(req, res);
@@ -88,8 +90,7 @@ public class adControl extends HttpServlet {
 	if("delete".equals(action)) {
 	   try { Integer adID=new Integer(req.getParameter("adID").trim());
 	    System.out.println(adID);
-	    AdDAO dao = new AdDAO();
-		dao.delete(adID);
+		adservice.delete(adID);
 		
 		String url = "backAd.jsp";
 		RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁

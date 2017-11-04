@@ -19,8 +19,8 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
         <property name="dataSource" ref="dataSource"/> 
         <property name="mappingResources"> 
             <list> 
-<!--                 <value>com/e_Look/ad/Ad.hbm.xml</value>  -->
-<!--                 <value>com/e_Look/backStage/login/model/Manager.hbm.xml</value>  -->
+                <value>com/e_Look/ad/Ad.hbm.xml</value> 
+                <value>com/e_Look/backStage/login/model/Manager.hbm.xml</value> 
                 <value>com/e_Look/buyCourse/model/BuyCourse.hbm.xml</value> 
 <!--                 <value>com/e_Look/Course/Course.hbm.xml</value>  -->
                 <value>com/e_Look/courseClass/CourseClass.hbm.xml</value> 
@@ -54,11 +54,20 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
         <property name="sessionFactory" ref="sessionFactory"/> 
     </bean>    
     
+    
+        <!-- adDAO -->   
+         <bean id="adDAO" class="com.e_Look.ad.AdDAO">
+         <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean> 
+    
      <!-- memeberDAO -->   
      <bean id="memberDAO" class="com.e_Look.member.model.MemberDAO">
          <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>   
-        
+      <!-- managerDAO -->   
+         <bean id="managerDAO" class="com.e_Look.backStage.login.model.ManagerDAO">
+         <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>     
         
         
         
