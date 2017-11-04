@@ -33,7 +33,6 @@ public class MessageDAO implements MessageDAO_interface {
 	private static final String INSERT_MESSAGE = "insert into Message ( mContent,mTime,memberID,courseID,status) values ( ?, ?, ?, ?,?)";
 	private static final String INSERT_MESSAGE_RESPONSE = "insert into Message ( mContent,mTime,messageID_response,memberID,courseID,status) values (?, ?, ?, ?, ?,?)";
 	private static final String UPDATE_MESSAGE = "update Message set mContent=?, mTime=? where messageID= ?";
-	private static final String UPDATE_MESSAGE_RESPONSE = "update Message set mContent=?, mTime=? where  messageID=?";
 	private static final String UPDATE_STATUS = "update Message set status=? where messageID= ?";
 	// 刪除用不到
 	private static final String DELETE_MESSAGE = "delete from Message where messageID= ?";
@@ -100,7 +99,7 @@ public class MessageDAO implements MessageDAO_interface {
 			pstmt = con.prepareStatement(INSERT_MESSAGE_RESPONSE);
 			// "insert into Message (mContent,mTime,messageID_response,memberID,courseID,status)values (?, ?, ?, ?, ?, ?)"
 						pstmt.setString(1, messageVO.getmContent());
-						Timestamp ts = new Timestamp(System.currentTimeMillis()/1000);
+						Timestamp ts = new Timestamp(System.currentTimeMillis());
 						pstmt.setTimestamp(2, ts);
 						pstmt.setInt(3, messageVO.getMessageID_response());
 						pstmt.setInt(4, messageVO.getMemberVO().getMemberID());
@@ -129,12 +128,12 @@ public class MessageDAO implements MessageDAO_interface {
 				}
 
 	@Override
-	public void update(MessageVO messageVO, String update) {
+	public void update(MessageVO messageVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
-			if (update.equalsIgnoreCase("message")) {
+		
 				pstmt = con.prepareStatement(UPDATE_MESSAGE);
 //"update Message set mContent=?, mTime=? where messageID= ?";
 				pstmt.setString(1, messageVO.getmContent());
@@ -143,15 +142,7 @@ public class MessageDAO implements MessageDAO_interface {
 				pstmt.setInt(3, messageVO.getMessageID());	
 				
 				pstmt.executeUpdate();
-			} else if (update.equalsIgnoreCase("messageresponse")) {
-				pstmt = con.prepareStatement(UPDATE_MESSAGE_RESPONSE);
-//"update Message set mContent=?, mTime=? where messageID= ?";
-				pstmt.setString(1, messageVO.getmContent());
-				Timestamp ts = new Timestamp(System.currentTimeMillis());
-				pstmt.setTimestamp(2, ts);
-				pstmt.setInt(3, messageVO.getMessageID());
-				pstmt.executeUpdate();
-			} 
+			  
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		} finally {

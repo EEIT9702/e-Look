@@ -4,7 +4,7 @@ import java.util.List;
 public interface MessageDAO_interface {
 	public Integer insert(MessageVO messageVO);
 	public void insert_re(MessageVO messageVO);
-	public void update(MessageVO messageVO,String update);
+	public void update(MessageVO messageVO);
     public void delete(Integer messageID);
     public MessageVO findByPrimaryKey(Integer messageID);
     public List<MessageVO> findAllResponse(Integer messageID_response);
