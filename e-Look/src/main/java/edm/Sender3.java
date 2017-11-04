@@ -16,7 +16,7 @@ import javax.mail.internet.*;
 import com.e_Look.Course.CourseVO;
 import com.e_Look.buyCourse.model.BuyCourseMailService;
  
-public class Sender extends java.lang.Thread {
+public class Sender3 extends java.lang.Thread {
     //private String content;
     // log
     //private org.apache.log4j.Logger log;
@@ -28,7 +28,7 @@ public class Sender extends java.lang.Thread {
     private Properties p;
  
     // 建構
-    public Sender(String to, String subject, String content, Properties p) {
+    public Sender3(String to, String subject, String content, Properties p) {
         super();
         //this.content = content;
         this.to = to;
@@ -85,7 +85,7 @@ public class Sender extends java.lang.Thread {
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(
                     to));
             // 設定標題
-            message.setSubject("e-Look電子月刊3");
+            message.setSubject("e-Look電子月刊");
  
             // 設定寄件日期
             message.setSentDate(new Date());
@@ -100,32 +100,35 @@ public class Sender extends java.lang.Thread {
             Multipart multipart = new MimeMultipart();
  
             /**/
+
+            
+            
             // 文字部份，注意 img src 部份要用 cid:接下面附檔的header
             MimeBodyPart textPart = new MimeBodyPart();
             StringBuffer html = new StringBuffer();
             //original
+            //for( CourseVO cVO:cVOs){
+            
             html.append("<h2>親愛的會員您好，</h2>");
             html.append("<h2>推薦您前三名熱門課程：</h2>");
-            int count = 0;
             for( CourseVO cVO:cVOs){
-        	//html.append("<img style='width:300px;' src='cid:image'/><br>");
-        	html.append("<img style='width:300px;' src='cid:image' alt='" + cVO.getCourseID() + "'/><br>");
+        	html.append("<img style='width:300px;' src='cid:image'/><br>");
+            //html.append("<h3 style='margin-left:100px;'><a href='http://localhost:8081/e-Look/freeCourse-v1.jsp?CourseID=200026'>photoshop入門</a></h3><br>");
             if(cVO.getSoldPrice() == 0) {
-            	count++;
-            	//html.append("<img style='width:300px;' src='cid:image' alt='" + cVO.getCourseID() + "'/><br>");
-            	html.append("<h3 style=''><a href='http://localhost:8081/e-Look/freeCourse-v1.jsp?CourseID="
+            	html.append("<h3 style='margin-left:100px;'><a href='http://localhost:8081/e-Look/freeCourse-v1.jsp?CourseID="
     			+ cVO.getCourseID() + "'>" + cVO.getCourseName() +"</a><br>");
-            }else if(cVO.getSoldPrice() > 0){
-            	count++;
-            	//html.append("<img style='width:300px;' src='cid:image'/><br>");
-            	//html.append("<img style='width:300px;' src='cid:image' alt='" + cVO.getCourseID() + "'/><br>");
-            	html.append("<h3 style=''><a href='http://localhost:8081/e-Look/onlineCourse-v2.jsp?CourseID="
+            }else{
+            	html.append("<h3 style='margin-left:100px;'><a href='http://localhost:8081/e-Look/onlineCourse-v2.jsp?CourseID="
     			+ cVO.getCourseID() + "'>" + cVO.getCourseName() +"</a><br>");
             }
-            System.out.println("count = " + count);
+            textPart.setContent(html.toString(), "text/html; charset=UTF-8");
+
             // 圖檔部份，注意 html 用 cid:image，則header要設<image>
             MimeBodyPart picturePart = new MimeBodyPart();
+            //FileDataSource fds = new FileDataSource("src/main/webapp/body/img/001.jpg");
     		URL url  = new URL("http://localhost:8081/e-Look/CourseImage?CourseID=" + cVO.getCourseID());
+            //FileDataSource fds = new FileDataSource("http://localhost:8081/e-Look/CourseImage?CourseID=" + cVO.getCourseID());
+            //FileDataSource fds = new FileDataSource("C:\\Users\\MSI-GL72-6QF\\Desktop\\project_elements\\sc2\\nova_513.jpg");
             URLDataSource fds = new URLDataSource(url);
             //要找讀取遠端ulr路徑的方法
             picturePart.setDataHandler(new DataHandler(fds));
@@ -134,10 +137,10 @@ public class Sender extends java.lang.Thread {
 
             multipart.addBodyPart(picturePart);
             }
-            textPart.setContent(html.toString(), "text/html; charset=UTF-8");
             multipart.addBodyPart(textPart);
             message.setContent(multipart);
 
+            
             /**/
  
             // 將multipart加到mail的message裡

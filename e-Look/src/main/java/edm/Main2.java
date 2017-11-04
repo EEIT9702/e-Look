@@ -2,7 +2,7 @@ package edm;
 
 import java.util.Properties;
  
-public class Main extends java.lang.Thread {
+public class Main2 extends java.lang.Thread {
     private org.apache.log4j.Logger log;
     private java.util.ArrayList<String> toList;
  
@@ -10,9 +10,10 @@ public class Main extends java.lang.Thread {
     private String content;
     private String subject;
  
-    public Main() throws java.io.IOException {
+    public Main2() throws java.io.IOException {
         super();
  
+        //log = org.apache.log4j.Logger.getLogger(this.getClass());
         java.io.FileReader fis = null;
         java.io.BufferedReader bis = null;
         toList = new java.util.ArrayList<String>();
@@ -20,6 +21,7 @@ public class Main extends java.lang.Thread {
         try {
             // 從外部取得設定檔資料
             p = new Properties();
+           // log.info(this.getClass().getResource("/mail.properties").getPath());
             java.io.FileReader fr = new java.io.FileReader("src\\main\\java\\edm\\mail.properties");
             java.io.BufferedReader br = new java.io.BufferedReader(fr);
             String str;
@@ -31,6 +33,7 @@ public class Main extends java.lang.Thread {
             fr.close();
  
             // 名單
+            //fis = new java.io.FileReader(p.getProperty("edmList"));
             fis = new java.io.FileReader("C:\\Users\\MSI-GL72-6QF\\Desktop\\list.txt");
             bis = new java.io.BufferedReader(fis);
  
@@ -41,8 +44,13 @@ public class Main extends java.lang.Thread {
             bis.close();
             fis = null;
             bis = null;
-
+            
+            // 郵件標題
+            //this.subject = p.getProperty("edmSubject", "utf-8");
+            //this.subject = "e-Look電子月刊";
+ 
         } catch (java.io.IOException e) {
+            //log.info(e.getMessage());
         	System.out.println("log.info(e.getMessage()");
  
             throw e;
@@ -101,7 +109,7 @@ public class Main extends java.lang.Thread {
     }
  
     public static void main(String args[]) throws java.io.IOException {
-    	Main m = new Main();
+    	Main2 m = new Main2();
         m.start();
         //System.out.println("Mail Sent");
     }
