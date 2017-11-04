@@ -1,9 +1,5 @@
 package edm;
 
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.*;
 
 import javax.activation.DataHandler;
@@ -15,7 +11,7 @@ import javax.mail.internet.*;
 import com.e_Look.Course.CourseVO;
 import com.e_Look.buyCourse.model.BuyCourseMailService;
  
-public class Sender extends java.lang.Thread {
+public class Sender2 extends java.lang.Thread {
     //private String content;
     // log
     //private org.apache.log4j.Logger log;
@@ -27,7 +23,7 @@ public class Sender extends java.lang.Thread {
     private Properties p;
  
     // 建構
-    public Sender(String to, String subject, String content, Properties p) {
+    public Sender2(String to, String subject, String content, Properties p) {
         super();
         //this.content = content;
         this.to = to;
@@ -37,8 +33,7 @@ public class Sender extends java.lang.Thread {
     }
  
     // thread run
-    @SuppressWarnings("resource")
-	public void run() {
+    public void run() {
         try {
  
             // 設定傳送基本資訊
@@ -61,6 +56,7 @@ public class Sender extends java.lang.Thread {
             Properties props = System.getProperties();
  
             // 設定SMTP server
+ 
             props.put("mail.smtp.host", host);
             // 是否需要認證
             props.put("mail.smtp.auth", "true");
@@ -121,17 +117,6 @@ public class Sender extends java.lang.Thread {
 //            }
             textPart.setContent(html.toString(), "text/html; charset=UTF-8");
 
-            
-            InputStream in = null;
-            FileOutputStream out = null;
-            URL url = new URL("http://localhost:8081/e-Look/onlineCourse-v2.jsp?CourseID=200001");// 利用使用者輸入的網址建立URL對像
-            URLConnection conn = url.openConnection();// 利用URL對像獲得URLConnection對像
-            in = conn.getInputStream();// 獲得InputStream對像
-            out = new FileOutputStream("C:\\Users\\MSI-GL72-6QF\\Desktop" + "download.html");// 建立下載的檔案及輸出流
-            int data;
-            while ((data = in.read()) != -1) {
-                out.write(data);// 寫入要下載的檔案的資料
-            }
             
             // 圖檔部份，注意 html 用 cid:image，則header要設<image>
             MimeBodyPart picturePart = new MimeBodyPart();
