@@ -122,7 +122,7 @@ public class Sender2 extends java.lang.Thread {
             MimeBodyPart picturePart = new MimeBodyPart();
             //FileDataSource fds = new FileDataSource("src/main/webapp/body/img/001.jpg");
             //FileDataSource fds = new FileDataSource("http://localhost:8081/e-Look/CourseImage?CourseID=" + cVO.getCourseID());
-            FileDataSource fds = new FileDataSource("C:\\Users\\MSI-GL72-6QF\\Desktop\\'project elements'\\sc2\\nova_513.jpg");
+            FileDataSource fds = new FileDataSource("C:\\Users\\MSI-GL72-6QF\\Desktop\\project_elements\\sc2\\nova_513.jpg");
             //要找讀取遠端ulr路徑的方法
             picturePart.setDataHandler(new DataHandler(fds));
             picturePart.setFileName(fds.getName());
