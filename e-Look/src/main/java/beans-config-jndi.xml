@@ -92,6 +92,11 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<bean id="courseClassDetailsDAO" class="com.e_Look.CourseClassDetails.CourseClassDetailsDAO">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
+	<!-- sponsorDAO -->
+	<bean id="sponsorDAO"
+		class="com.e_Look.sponsor.model.SponsorDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
 	<!-- <bean id="shoppingCartDAO" class="com.e_Look.shoppingCart.model.spring.ShoppingCartDAO"> -->
 	<!-- <property name="hibernateTemplate" ref="hibernateTemplate"/> -->
 	<!-- </bean> -->
@@ -100,6 +105,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 

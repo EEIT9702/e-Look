@@ -7,17 +7,13 @@ import java.text.SimpleDateFormat;
 import java.sql.Date;
 import java.util.List;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import allPay.payment.integration.AllInOne;
 import allPay.payment.integration.domain.*;
-public class SponsorService { 
+public class SponsorService_JNDI { 
 	private SponsorDAO_interface dao;
 	public static AllInOne all;
-	public SponsorService(){
-		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config-jndi.xml");
-		dao= (SponsorDAO_interface) context.getBean("sponsorDAO");
+	public SponsorService_JNDI(){
+		dao=new SponsorDAO_JNDI();
 	}
 	public void addNameMoney(Integer courseID, String SponsorName, Integer money,Date dateSponsor){
 		SponsorVO sponsorVO=new SponsorVO();
