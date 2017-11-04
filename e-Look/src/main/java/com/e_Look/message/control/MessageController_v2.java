@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -57,8 +58,19 @@ public class MessageController_v2 extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("Utf-8");
 		
+		String mContent=request.getParameter("mContent");
+		Integer courseID=Integer.parseInt(request.getParameter("courseID"));
+		Integer memberID=Integer.parseInt(request.getParameter("memberID"));
+		Byte status=0;
+		System.out.println(mContent);
+		System.out.println(courseID);
+
+		System.out.println(memberID);
+		MessageService messageService = new MessageService();
+		messageService.addMessage(mContent, memberID, courseID, status);
 		
-		
+	
 	}
 }
