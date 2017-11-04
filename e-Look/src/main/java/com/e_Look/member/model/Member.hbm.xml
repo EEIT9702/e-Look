@@ -13,7 +13,7 @@
             <property name="email" column="email" />
             <property name="mPassword" column="mPassword" />
             <property name="mName" column="mName" />
-            <property name="mPhoto" column="mPhoto" />
+            <property name="mPhoto" column="mPhoto" type="binary"/>
             <property name="aboutme" column="aboutme" />
             <property name="skill" column="skill" />
             <property name="hobby" column="hobby" />

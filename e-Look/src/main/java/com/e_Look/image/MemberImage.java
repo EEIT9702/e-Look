@@ -18,6 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import com.e_Look.member.model.MemberService;
+import com.e_Look.member.model.MemberVO;
+
 /**
  * Servlet implementation class Image
  */
@@ -32,53 +35,12 @@ public class MemberImage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String MemberID=request.getParameter("MemberID");
-		InputStream is = null;
+		MemberService service =new MemberService();
+		MemberVO memberVo=service.getMember(Integer.valueOf(MemberID));
 		ServletOutputStream os=null;
-		DataSource ds = null;
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/eLookDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement("select mPhoto from Member where memberID=? ");
-			pstmt.setInt(1, Integer.valueOf(MemberID));
-			ResultSet  rs=pstmt.executeQuery();
-			
-			if(rs.next()){
-				 is= rs.getBinaryStream(1);
-				 response.setContentType("image/jpeg");
-				 os = response.getOutputStream();
-				 int count = 0;
-					byte[] bytes = new byte[8192];
-					while ((count = is.read(bytes)) != -1) {
-						os.write(bytes, 0, count);
-					}
-			}
-		} catch (SQLException e) {
-		
-			e.printStackTrace();
-		}finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		
-		}
+		response.setContentType("image/jpeg");
+		 os = response.getOutputStream();
+		 os.write(memberVo.getmPhoto());
 	}
 
 

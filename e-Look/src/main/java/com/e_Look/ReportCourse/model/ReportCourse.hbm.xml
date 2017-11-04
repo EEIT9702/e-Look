@@ -8,7 +8,7 @@
     	<id name="reportId" column="reportId">
     		<generator class="identity"/>
     	</id>
-    	<many-to-one name="courseVO" class="com.e_Look.Course.model.CourseVO" lazy="false">
+    	<many-to-one name="courseVO" class="com.e_Look.Course.CourseVO" lazy="false">
     		<column name="reportCourseID"/>
     	</many-to-one>
     	<property name="reportMemberID" column="reportMemberID"></property>

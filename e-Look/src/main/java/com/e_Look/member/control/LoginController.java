@@ -97,6 +97,7 @@ public class LoginController extends HttpServlet {
 			String mName=request.getParameter("mName");
 			String mPhoto=request.getParameter("mPhoto");
 			memberVO = service.getMemberMail(email);
+			System.out.println(memberVO);
 			if(memberVO==null){
 				
 				service.insertGoogleMember(email, mName, mPhoto);

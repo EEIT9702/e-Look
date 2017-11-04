@@ -7,7 +7,7 @@
 		<id name="reportId" column="reportId">
 			<generator class="identity"></generator>
 		</id>
-		<many-to-one name="messageVO" class="com.e_Look_message.model.MessageVO" lazy="false">
+		<many-to-one name="messageVO" class="com.e_Look.message.model.MessageVO" lazy="false">
 			<column name="reportMessageID"/>
 		</many-to-one>
 		<property name="reportMemberID" column="reportMemberID"/>

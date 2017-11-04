@@ -12,7 +12,7 @@ public class MemberVO implements Serializable {
 	private String email;
 	private String mPassword;
 	private String mName;
-	private InputStream  mPhoto;
+	private byte[]  mPhoto;
 	private String  aboutme;
 	private String skill;
 	private String hobby;
@@ -71,11 +71,11 @@ public class MemberVO implements Serializable {
 		this.mName = mName;
 	}
 
-	public InputStream getmPhoto() {
+	public byte[] getmPhoto() {
 		return mPhoto;
 	}
 
-	public void setmPhoto(InputStream mPhoto) {
+	public void setmPhoto(byte[] mPhoto) {
 		this.mPhoto = mPhoto;
 	}
 

@@ -13,17 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 
 import org.apache.commons.io.IOUtils;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.e_Look.emailSystem.MemberCheckEmail;
 
-public class MemberService {
+public class MemberService_JNDI {
 	private MemberDAO_interface dao;
-	public MemberService(){
-		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config-jndi.xml");
-        // 建立DAO物件
-		 dao =(MemberDAO_interface) context.getBean("memberDAO");
+	public MemberService_JNDI(){
+		dao=new MemberDAO();
 	}
 	public MemberVO getMemberMail(String email){ 
 		return dao.findByPrimaryKey(email);

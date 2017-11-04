@@ -3,6 +3,7 @@ package com.e_Look.member.model;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -11,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
+
+import org.apache.commons.io.IOUtils;
 
 
 @SuppressWarnings("unused")
@@ -51,7 +54,7 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 			pstmt.setString(1,memberVO.getEmail());
 			pstmt.setString(2,memberVO.getmPassword());
 			pstmt.setString(3,memberVO.getmName());
-			pstmt.setBlob(4,memberVO.getmPhoto());
+			pstmt.setBytes(4,memberVO.getmPhoto());
 			pstmt.setString(5,memberVO.getAboutme());
 			pstmt.setString(6,memberVO.getSkill());
 			pstmt.setString(7,memberVO.getHobby());
@@ -92,7 +95,7 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			
 				pstmt = con.prepareStatement(UPDATE_MEMBER_IMAGE);
-				pstmt.setBlob(1, memberVO.getmPhoto());
+				pstmt.setBytes(1, memberVO.getmPhoto());
 				pstmt.setInt(2, memberVO.getMemberID());
 				pstmt.executeUpdate();
 			
@@ -133,7 +136,7 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 			pstmt.setString(1,memberVO.getEmail());
 			pstmt.setString(2,memberVO.getmPassword());
 			pstmt.setString(3,memberVO.getmName());
-			pstmt.setBlob(4,memberVO.getmPhoto());
+			pstmt.setBytes(4,memberVO.getmPhoto());
 			pstmt.setString(5,memberVO.getAboutme());
 			pstmt.setString(6,memberVO.getSkill());
 			pstmt.setString(7,memberVO.getHobby());
@@ -224,7 +227,7 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 				memberVO.setEmail(rs.getString(2));
 				memberVO.setmPassword(rs.getString(3));
 				memberVO.setmName(rs.getString(4));
-				memberVO.setmPhoto(rs.getBinaryStream(5));
+				memberVO.setmPhoto(rs.getBytes(5));
 				memberVO.setAboutme(rs.getString(6));
 				memberVO.setSkill(rs.getString(7));
 				memberVO.setHobby(rs.getString(8));
@@ -273,7 +276,7 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 				memberVO.setEmail(rs.getString(2));
 				memberVO.setmPassword(rs.getString(3));
 				memberVO.setmName(rs.getString(4));
-				memberVO.setmPhoto(rs.getBinaryStream(5));
+				memberVO.setmPhoto(rs.getBytes(5));
 				memberVO.setAboutme(rs.getString(6));
 				memberVO.setSkill(rs.getString(7));
 				memberVO.setHobby(rs.getString(8));
@@ -322,7 +325,7 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 				memberVO.setEmail(rs.getString(2));
 				memberVO.setmPassword(rs.getString(3));
 				memberVO.setmName(rs.getString(4));
-				memberVO.setmPhoto(rs.getBinaryStream(5));
+				memberVO.setmPhoto(rs.getBytes(5));
 				memberVO.setAboutme(rs.getString(6));
 				memberVO.setSkill(rs.getString(7));
 				memberVO.setHobby(rs.getString(8));
@@ -356,7 +359,7 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 		return list;
 	}
 	
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws IOException {
 		MemberDAO_JDBC dao = new MemberDAO_JDBC();
 //		//新增會員
 		MemberVO memberVO1= new MemberVO();
@@ -367,7 +370,9 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 		memberVO1.setStatus((byte) 0);
 		memberVO1.setCount(1);
 		/*331行 是讀取硬碟路徑寫入資料庫方法*/
-		memberVO1.setmPhoto(new FileInputStream(new File("src/main/webapp/img/imember_image.png")));
+		byte[] bytes = IOUtils.toByteArray(new FileInputStream(new File("src/main/webapp/img/imember_image.png")));
+		memberVO1.setmPhoto(bytes);
+//		memberVO1.setmPhoto(new FileInputStream(new File("src/main/webapp/img/imember_image.png")));
 		/*333行~341行 是讀取網路圖片寫入資料庫方法*/
 //		try {
 //			HttpURLConnection con = (HttpURLConnection)(new URL("http://graph.facebook.com/106384896774920/picture?type=large").openConnection());
@@ -403,7 +408,7 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 		//刪除會員
 //		dao.delete(100008);
 		//查詢單一會員
-		MemberVO memberVO3=dao.findByPrimaryKey(100001);
+		MemberVO memberVO3=dao.findByPrimaryKey(100010);
 		System.out.println(memberVO3.getMemberID());
 		System.out.println(memberVO3.getEmail());
 		System.out.println(memberVO3.getmPassword());
