@@ -670,11 +670,11 @@ a {
 								<c:choose>
 								<c:when test="${!empty flag}"></c:when>
 								<c:when test="${buycourse.courseID==courseVO.courseID}">
-									<div class="col-md-12">
+									<div class="col-md-12" id="inputMessage">
 										<div style="text-align:center"><h4>尚未有留言</h4></div>
 										<div style="text-align:center"><h4>成為第一個發文的人吧！</h4></div>
 										<img  class="col-md-1 img-thumbnail"src="<%=request.getContextPath() %>/Image?MemberID=${LoginOK.memberID}"/>
-										<div class="col-md-11"><textarea class="form-control" rows="7" style="margin-left:30px"></textarea></div>
+										<div class="col-md-11"><textarea class="form-control inputMessage" rows="7" style="margin-left:30px"></textarea></div>
 										<div class="text-right"><button class="text-right" style="margin:15px">送出</button></div>					
 									</div>		
 									<c:set var="flag" value="true"></c:set>
@@ -702,7 +702,7 @@ a {
 				<c:forEach items="${messageVOList}" var="messageVO">
 		<!--留言重複的地方開始 -->
 					<c:if test="${messageVO.messageID_response==0}">
-					<input type="hidden"  value="${messageVO.messageID}" class="messageID">
+					
 					<div class="col-md-1 col-xs-2">
 						<img src="<%=request.getContextPath() %>/Image?MemberID=${messageVO.memberVO.memberID}"
 							class="img-thumbnail pull-left">
@@ -745,6 +745,7 @@ a {
 						<div style="border-bottom: 1px solid black">	
 							<p>${messageVO.mContent}+++${messageVO.messageID}</p>
 						</div>
+						<input type="hidden"  value="${messageVO.messageID}" class="messageID">
 					<!--抓取messageID -->
 						
 					<!--第一個回應 開始-->
@@ -784,14 +785,13 @@ a {
 						</div>
 						<!--第一個回應結束-->
 						<!--回應輸入表格-->
-						
 						<c:if test="${!empty LoginOK}">
 						<div class="col-md-12">  
 							<div class="panel-group">
 								<div class="panel">
 									<div class="panel-heading">
 										<h4 class="panel-title ">
-											<a data-toggle="collapse" href="#${messageVO.messageID+messageVO.messageID}">我要回應</a>
+											<a data-toggle="collapse" href="#${messageVO.messageID+messageVO.messageID}">我要回應</a>	
 										</h4>
 									</div>
 									<div id="${messageVO.messageID+messageVO.messageID}" class="panel-collapse collapse">
@@ -803,7 +803,6 @@ a {
 											<div class="text-right">
 												<button class="btn-default" id="inpContent" name="${messageVO.messageID}">送出</button>
 											</div>
-											
 										</div>
 									</div>
 								</div>
@@ -815,23 +814,24 @@ a {
 						</c:if>
 					</c:forEach>
 					<!-- 重複結束 -->
+					<c:if test="${!empty LoginOK}">
 <!-- 					判斷登入時有無購買課程 -->
 							<c:forEach items="${list2}" var="buycourse" varStatus="varStatus">
 								<c:choose>
 								<c:when test="${!empty msage}"></c:when>
+								<c:when test="${buycourse.courseID==courseVO.courseID}">
+									<div class="col-md-12" id="inputMessage">
+										<img class="col-md-1 img-thumbnail" style="margin-top:20px"src="<%=request.getContextPath() %>/Image?MemberID=${LoginOK.memberID}"/>
+										<div class="col-md-11"><h4 style="margin-left:30px">留言內容</h4><textarea class="form-control inputMessage" rows="7" style="margin-left:30px"></textarea></div>
+										<div class="text-right" style="margin-bottom:10px"><button  class="text-right" style="margin:15px" >送出</button></div>					
+									</div>		
+									<c:set var="msage" value="true"></c:set>
+								</c:when>
 								<c:when test="${varStatus.last && empty msage}">
 									<div class="col-md-12">
 										<img class="col-md-1 img-thumbnail" style="margin-top:20px"src="<%=request.getContextPath() %>/Image?MemberID=${LoginOK.memberID}"/>
 										<div class="col-md-11" style="margin-bottom:10px"><h4 style="margin-left:30px">留言內容</h4><textarea class="form-control" rows="7" style="margin-left:30px" readOnly>(尚未購買)</textarea></div>
 									</div>	
-								</c:when>
-								<c:when test="${buycourse.courseID==courseVO.courseID}">
-									<div class="col-md-12">
-										<img class="col-md-1 img-thumbnail" style="margin-top:20px"src="<%=request.getContextPath() %>/Image?MemberID=${LoginOK.memberID}"/>
-										<div class="col-md-11"><h4 style="margin-left:30px">留言內容</h4><textarea class="form-control" rows="7" style="margin-left:30px"></textarea></div>
-										<div class="text-right" style="margin-bottom:10px"><button class="text-right" style="margin:15px">送出</button></div>					
-									</div>		
-									<c:set var="msage" value="true"></c:set>
 								</c:when>
 								</c:choose>
 							</c:forEach>
@@ -841,6 +841,13 @@ a {
 										<div class="col-md-11" style="margin-bottom:10px"><h4 style="margin-left:30px">留言內容</h4><textarea class="form-control" rows="7" style="margin-left:30px" readOnly>(您尚未登入或購買)</textarea></div>
 									</div>
 							</c:if>
+						</c:if>
+						<c:if test="${empty LoginOK}">
+							<div class="col-md-12">
+								<img  class="col-md-1 img-thumbnail" style="margin-top:20px"src="<%=request.getContextPath() %>/img/imember_image.png"/>
+								<div class="col-md-11" style="margin-bottom:10px"><h4 style="margin-left:30px">留言內容</h4><textarea class="form-control" rows="7" style="margin-left:30px" readOnly>(您尚未登入或購買)</textarea></div>
+							</div>
+						</c:if>
 					</c:if>
 					</div>
 					
@@ -1123,11 +1130,10 @@ a {
 		$(function(){
 			message();	
 					$('.panel-collapse>div').on('click','.text-right>.btn-default',function(){
-//	 				alert($(this).html());
+	 				alert($(this).html());
 					var $this=$(this)
-					
-//	 				alert($this.parents('div').children('input').val())
-//	 				alert($this.parents('.panel-collapse').find('textarea').val())
+	 				alert($this.parents('div').children('input').val())
+	 				alert($this.parents('.panel-collapse').find('textarea').val())
 						$.post('/e-Look/InputMessageController',
 								{'mContent':$this.parents('.panel-collapse').find('textarea').val(),
 								 'courseID':$('#mbcourseID').val(),
@@ -1177,7 +1183,19 @@ a {
 			})	
 			}
 		});
-		
+		//輸入留言
+		$("#inputMessage>div>button").on('click',function(){
+// 			alert($(this).parents('#inputMessage').find('.inputMessage').val());
+			var valueText=$(this).parents('#inputMessage').find('.inputMessage').val()
+			if(valueText==null||valueText==""){	
+				alert("請輸入留言");
+			}else{
+				$.post('/e-Look/MessageController_v2',{'mContent':valueText,'memberID':$('#mbmemberID').val(),'courseID':$('#mbcourseID').val()},function(){
+					$(this).parents('#inputMessage').find('.inputMessage').val("");
+					document.location.href=location.href;
+			})
+			}
+		})
 		</script>
 		<script>
 		$(function(){
