@@ -8,6 +8,7 @@ import java.util.*;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
+import javax.activation.URLDataSource;
 import javax.mail.*;
  
 import javax.mail.internet.*;
@@ -84,71 +85,59 @@ public class Sender extends java.lang.Thread {
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(
                     to));
             // 設定標題
-            message.setSubject("e-Look電子月刊");
+            message.setSubject("e-Look電子月刊3");
  
             // 設定寄件日期
             message.setSentDate(new Date());
             
             
             //t++
-//            BuyCourseMailService bcServ = new BuyCourseMailService();
-//            List<CourseVO> cVOs = bcServ.getTopThreeBuyCourse(3);
-//            for( CourseVO cVO:cVOs){
+            BuyCourseMailService bcServ = new BuyCourseMailService();
+            List<CourseVO> cVOs = bcServ.getTopThreeBuyCourse(3);
+         
             
             // 建立郵件本文內容
             Multipart multipart = new MimeMultipart();
  
             /**/
-
-            
-            
             // 文字部份，注意 img src 部份要用 cid:接下面附檔的header
             MimeBodyPart textPart = new MimeBodyPart();
             StringBuffer html = new StringBuffer();
             //original
-            //for( CourseVO cVO:cVOs){
-            
             html.append("<h2>親愛的會員您好，</h2>");
             html.append("<h2>推薦您前三名熱門課程：</h2>");
-            html.append("<img style='width:300px;' src='cid:image'/><br>");
-            html.append("<h3 style='margin-left:100px;'><a href='http://localhost:8081/e-Look/freeCourse-v1.jsp?CourseID=200026'>photoshop入門</a></h3><br>");
-//            if(cVO.getSoldPrice() == 0) {
-//            	html.append("<h3 style='margin-left:100px;'><a href='http://localhost:8081/e-Look/freeCourse-v1.jsp?CourseID="
-//    			+ cVO.getCourseID() + "'>" + cVO.getCourseName() +"</a><br>");
-//            }else{
-//            	html.append("<h3 style='margin-left:100px;'><a href='http://localhost:8081/e-Look/onlineCourse-v2.jsp?CourseID="
-//    			+ cVO.getCourseID() + "'>" + cVO.getCourseName() +"</a><br>");
-//            }
-            textPart.setContent(html.toString(), "text/html; charset=UTF-8");
-
-            
-            InputStream in = null;
-            FileOutputStream out = null;
-            URL url = new URL("http://localhost:8081/e-Look/onlineCourse-v2.jsp?CourseID=200001");// 利用使用者輸入的網址建立URL對像
-            URLConnection conn = url.openConnection();// 利用URL對像獲得URLConnection對像
-            in = conn.getInputStream();// 獲得InputStream對像
-            out = new FileOutputStream("C:\\Users\\MSI-GL72-6QF\\Desktop" + "download.html");// 建立下載的檔案及輸出流
-            int data;
-            while ((data = in.read()) != -1) {
-                out.write(data);// 寫入要下載的檔案的資料
+            int count = 0;
+            for( CourseVO cVO:cVOs){
+        	//html.append("<img style='width:300px;' src='cid:image'/><br>");
+        	html.append("<img style='width:300px;' src='cid:image' alt='" + cVO.getCourseID() + "'/><br>");
+            if(cVO.getSoldPrice() == 0) {
+            	count++;
+            	//html.append("<img style='width:300px;' src='cid:image' alt='" + cVO.getCourseID() + "'/><br>");
+            	html.append("<h3 style=''><a href='http://localhost:8081/e-Look/freeCourse-v1.jsp?CourseID="
+    			+ cVO.getCourseID() + "'>" + cVO.getCourseName() +"</a><br>");
+            }else if(cVO.getSoldPrice() > 0){
+            	count++;
+            	//html.append("<img style='width:300px;' src='cid:image'/><br>");
+            	//html.append("<img style='width:300px;' src='cid:image' alt='" + cVO.getCourseID() + "'/><br>");
+            	html.append("<h3 style=''><a href='http://localhost:8081/e-Look/onlineCourse-v2.jsp?CourseID="
+    			+ cVO.getCourseID() + "'>" + cVO.getCourseName() +"</a><br>");
             }
-            
+            System.out.println("count = " + count);
             // 圖檔部份，注意 html 用 cid:image，則header要設<image>
             MimeBodyPart picturePart = new MimeBodyPart();
-            //FileDataSource fds = new FileDataSource("src/main/webapp/body/img/001.jpg");
-            //FileDataSource fds = new FileDataSource("http://localhost:8081/e-Look/CourseImage?CourseID=" + cVO.getCourseID());
-            FileDataSource fds = new FileDataSource("C:\\Users\\MSI-GL72-6QF\\Desktop\\'project elements'\\sc2\\nova_513.jpg");
+    		URL url  = new URL("http://localhost:8081/e-Look/CourseImage?CourseID=" + cVO.getCourseID());
+            URLDataSource fds = new URLDataSource(url);
             //要找讀取遠端ulr路徑的方法
             picturePart.setDataHandler(new DataHandler(fds));
             picturePart.setFileName(fds.getName());
             picturePart.setHeader("Content-ID", "<image>");
 
-            multipart.addBodyPart(textPart);
             multipart.addBodyPart(picturePart);
-//            }
-
+            }
+            textPart.setContent(html.toString(), "text/html; charset=UTF-8");
+            multipart.addBodyPart(textPart);
             message.setContent(multipart);
-            
+
             /**/
  
             // 將multipart加到mail的message裡

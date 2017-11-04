@@ -69,7 +69,11 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
          <bean id="managerDAO" class="com.e_Look.backStage.login.model.ManagerDAO">
          <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>  
-         
+          <!-- buyCourseDAO -->   
+         <bean id="buyCourseDAO" class="com.e_Look.buyCourse.model.BuyCourseDAO">
+         <property name="hibernateTemplate" ref="hibernateTemplate"/>
+    </bean>  
+             
          
          
          

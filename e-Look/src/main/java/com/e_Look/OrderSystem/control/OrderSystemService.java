@@ -5,6 +5,9 @@ import java.text.SimpleDateFormat;
 import java.sql.Date;
 import java.util.List;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import com.e_Look.Course.CourseVO;
 import com.e_Look.CourseClassDetails.CourseClassDetailsDAO;
 import com.e_Look.CourseClassDetails.CourseClassDetailsVO;
@@ -32,7 +35,9 @@ public class OrderSystemService {
 	public OrderSystemService() {
 		orderDAO = new OrderDAO();
 		orderDetailsDAO = new OrderDetailsDAO();
-		buyCourseDAO = new BuyCourseDAO();
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config-jndi.xml");
+        // 建立DAO物件
+		buyCourseDAO =(BuyCourseDAO_interface) context.getBean("buyCourseDAO");
 		courseClassDAO =new CourseClassDAO();
 		courseClassDetailsDAO = new CourseClassDetailsDAO();
 	}

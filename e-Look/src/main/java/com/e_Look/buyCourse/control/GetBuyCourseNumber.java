@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.e_Look.buyCourse.model.BuyCourseDAO;
+import com.e_Look.buyCourse.model.BuyCourseService;
 import com.e_Look.buyCourse.model.BuyCourseVO;
 
 import net.minidev.json.JSONValue;
@@ -22,8 +22,8 @@ public class GetBuyCourseNumber extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=UTF-8");
-		BuyCourseDAO dao=new BuyCourseDAO();
-		List<BuyCourseVO>  list=dao.getByCourseID(Integer.valueOf(request.getParameter("courseID")));
+		BuyCourseService buyCourseService=new BuyCourseService();
+		List<BuyCourseVO>  list=buyCourseService.getByCourseID(Integer.valueOf(request.getParameter("courseID")));
 		String OrderVOJson= JSONValue.toJSONString(list);
 		response.getWriter().println(OrderVOJson);
 		

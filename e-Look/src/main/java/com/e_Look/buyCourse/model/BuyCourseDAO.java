@@ -1,276 +1,110 @@
 package com.e_Look.buyCourse.model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.LinkedList;
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+@Transactional(readOnly = true)
 public class BuyCourseDAO implements BuyCourseDAO_interface {
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/eLookDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
+	
+	public HibernateTemplate hibernateTemplate;
+	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+		this.hibernateTemplate = hibernateTemplate;
+	
 	}
-
-	private static final String INSERT_BUYCOURSE = "insert into BuyCourse (memberID,courseID) values (?,?)";
-	private static final String UPDATE_BUYCOURSE = "update BuyCourse set score=? where memberID=? and courseID=?";
-	private static final String DELETE_BUYCOURSE = "delete from BuyCourse where memberID=? and courseID=?";
-	private static final String SELECT_AVG_SCORE = "select avg(score) from BuyCourse where courseID=?";
-	private static final String SELECT_MEMBER_BUYCOURSE = "select memberID,courseID,score from BuyCourse where memberID=?";
-	private static final String SELECT_ALL = "select memberID,courseID,score from BuyCourse";
-	private static final String SELECT_BYCOURSEID = "select memberID,courseID,score from BuyCourse where courseID=?";
+	private static final String DELETE_BUYCOURSE = "delete from BuyCourseVO where memberID=? and courseID=?";
+	private static final String SELECT_AVG_SCORE = "select avg(score) from BuyCourseVO where courseID=?";
+	private static final String SELECT_MEMBER_BUYCOURSE = "from BuyCourseVO where memberID=?";
+	private static final String SELECT_ALL = "from BuyCourseVO";
+	private static final String SELECT_BYCOURSEID = " from BuyCourseVO where courseID=?";
 
 	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void insert(BuyCourseVO buyCourseVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_BUYCOURSE);
-			pstmt.setInt(1, buyCourseVO.getMemberID());
-			pstmt.setInt(2, buyCourseVO.getCourseID());
-			pstmt.executeUpdate();
-
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
+		hibernateTemplate.save(buyCourseVO);
 	}
 
 	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void update(BuyCourseVO buyCourseVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(UPDATE_BUYCOURSE);
-			pstmt.setInt(1, buyCourseVO.getScore());
-			pstmt.setInt(2, buyCourseVO.getMemberID());
-			pstmt.setInt(3, buyCourseVO.getCourseID());
-			pstmt.executeUpdate();
-
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
+		hibernateTemplate.update(buyCourseVO);
 	}
 
 	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void delete(BuyCourseVO buyCourseVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(DELETE_BUYCOURSE);
-			pstmt.setInt(1, buyCourseVO.getMemberID());
-			pstmt.setInt(2, buyCourseVO.getCourseID());
-			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
+		hibernateTemplate.bulkUpdate(DELETE_BUYCOURSE, buyCourseVO.getMemberID(),buyCourseVO.getCourseID());
 	}
 
 	@Override
 	public Double getAvgScore(Integer courseID) {
+		List<Double> AvgScore =(List<Double>) hibernateTemplate.find(SELECT_AVG_SCORE, courseID);
 		Double avg = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_AVG_SCORE);
-			pstmt.setInt(1, courseID);
-			ResultSet rs = pstmt.executeQuery();
-			if (rs.next()) {
-				avg = rs.getDouble(1);
-			}
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
+		if(AvgScore.size()>0){
+			avg=AvgScore.get(0);
 		}
 		return avg;
 	}
 
 	@Override
 	public List<BuyCourseVO> findByMemberID(Integer memberID) {
-		List<BuyCourseVO> list = new LinkedList<BuyCourseVO>();
-
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_MEMBER_BUYCOURSE);
-			pstmt.setInt(1, memberID);
-			ResultSet rs = pstmt.executeQuery();
-			while (rs.next()) {
-				BuyCourseVO buyCourseVO = new BuyCourseVO();
-				buyCourseVO.setMemberID(rs.getInt(1));
-				buyCourseVO.setCourseID(rs.getInt(2));
-				buyCourseVO.setScore(rs.getInt(3));
-				list.add(buyCourseVO);
-			}
-
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		return list;
+		
+		return (List<BuyCourseVO>) hibernateTemplate.find(SELECT_MEMBER_BUYCOURSE, memberID);
+		
 	}
 
 	@Override
 	public List<BuyCourseVO> getAll() {
-		List<BuyCourseVO> list = new LinkedList<BuyCourseVO>();
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_ALL);
-			ResultSet rs = pstmt.executeQuery();
-			while (rs.next()) {
-				BuyCourseVO buyCourseVO = new BuyCourseVO();
-				buyCourseVO.setMemberID(rs.getInt(1));
-				buyCourseVO.setCourseID(rs.getInt(2));
-				buyCourseVO.setScore(rs.getInt(3));
-				list.add(buyCourseVO);
-			}
-
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		return list;
+		return (List<BuyCourseVO>) hibernateTemplate.find(SELECT_ALL);
 	}
 
 	@Override
 	public List<BuyCourseVO> getByCourseID(Integer courseID) {
-		List<BuyCourseVO> list = new LinkedList<BuyCourseVO>();
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = ds.getConnection();
-			pstmt=con.prepareStatement(SELECT_BYCOURSEID);
-			pstmt.setInt(1, courseID);
-			ResultSet rs=pstmt.executeQuery();
-			while(rs.next()){
-				BuyCourseVO buyCourseVO = new BuyCourseVO();
-				buyCourseVO.setMemberID(rs.getInt(1));
-				buyCourseVO.setCourseID(rs.getInt(2));
-				buyCourseVO.setScore(rs.getInt(3));
-				list.add(buyCourseVO);
-			}
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		return list;
+		return (List<BuyCourseVO>) hibernateTemplate.find(SELECT_BYCOURSEID,courseID);
 	}
+	
+	public static void main(String[] args) {
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config.xml");
+
+        // 建立DAO物件
+		BuyCourseDAO_interface dao =(BuyCourseDAO_interface) context.getBean("buyCourseDAO");
+		// 新增一筆購買
+		 BuyCourseVO buyCourseVO1 = new BuyCourseVO();
+//		 buyCourseVO1.setMemberID(100002);
+//		 buyCourseVO1.setCourseID(200002);
+//		 dao.insert(buyCourseVO1);
+//		
+		//修改(本DAO修改僅修改score欄位)
+//		BuyCourseVO buyCourseVO2 = new BuyCourseVO();
+//		buyCourseVO2.setMemberID(100002);
+//		buyCourseVO2.setCourseID(200002);
+//		buyCourseVO2.setScore(3);
+//		dao.update(buyCourseVO2);
+//		
+		//計算課程平均分數
+		//System.out.println(dao.getAvgScore(200002));
+		
+		// 查詢該會員購買之課程
+//		List<BuyCourseVO> list1 = dao.findByMemberID(100001);
+//		for (BuyCourseVO buyCourseVO : list1) {
+//			System.out.print(buyCourseVO.getMemberID() + ",");
+//			System.out.print(buyCourseVO.getCourseID() + ",");
+//			System.out.println(buyCourseVO.getScore() + ",");
+//		}
+		// 查全部
+//		List<BuyCourseVO> list2 = dao.getAll();
+//		for (BuyCourseVO buyCourseVO : list2) {
+//			System.out.print(buyCourseVO.getMemberID() + ",");
+//			System.out.print(buyCourseVO.getCourseID() + ",");
+//			System.out.println(buyCourseVO.getScore() + ",");
+//		}
+
+	
+	
+	}
+	
+	
 }

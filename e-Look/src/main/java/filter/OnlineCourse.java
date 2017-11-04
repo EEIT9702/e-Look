@@ -15,17 +15,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.e_Look.Course.CourseDAO;
 import com.e_Look.Course.CourseService;
 import com.e_Look.Course.CourseVO;
-import com.e_Look.buyCourse.model.BuyCourseDAO;
 import com.e_Look.buyCourse.model.BuyCourseService;
 import com.e_Look.buyCourse.model.BuyCourseVO;
 import com.e_Look.member.model.MemberService;
 import com.e_Look.member.model.MemberVO;
 import com.e_Look.memberBookmarks.model.MemberBookmarksService;
 import com.e_Look.memberBookmarks.model.MemberBookmarksVO;
-
 import com.e_Look.memberSubscription.MemberSubscriptionService;
 import com.e_Look.memberSubscription.MemberSubscriptionVO;
 import com.e_Look.message.model.MessageService;
