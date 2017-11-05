@@ -1,7 +1,5 @@
 package com.e_Look.eLookEvent.control;
 
-import java.io.IOException;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Timer;
@@ -10,15 +8,9 @@ import java.util.TimerTask;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.scheduling.config.Task;
-
-import com.e_Look.courseClass.CourseClassDAO;
 import com.e_Look.courseClass.CourseClassService;
 import com.e_Look.courseClass.CourseClassVO;
-import com.e_Look.eLookEvent.eLookEventDAO;
 import com.e_Look.eLookEvent.eLookEventService;
 import com.e_Look.eLookEvent.eLookEventVO;
 
@@ -37,6 +29,7 @@ public class UpdateCourseClassEvent extends HttpServlet {
 		CourseClassService ccSvc = new CourseClassService();
 //		Date date = calendar.getTime();
 		Date date = new Date();
+
 		Timer timer = new Timer();
 		timer.scheduleAtFixedRate(new TimerTask() {
 			@Override

@@ -42,7 +42,7 @@ public class BuyCourseDAO implements BuyCourseDAO_interface {
 	@Override
 	public Double getAvgScore(Integer courseID) {
 		List<Double> AvgScore =(List<Double>) hibernateTemplate.find(SELECT_AVG_SCORE, courseID);
-		Double avg = null;
+		Double avg = 0.0;
 		if(AvgScore.size()>0){
 			avg=AvgScore.get(0);
 		}
