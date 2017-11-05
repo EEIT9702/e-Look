@@ -78,8 +78,7 @@ public class EdmMain extends java.lang.Thread {
  
             // 名單
             //測試時先用list.txt的mail測試,demo時再改用elist.txt,會取出當下所有會員並寄信
-            //fis = new java.io.FileReader("src\\main\\java\\edm\\list.txt");
-            fis = new java.io.FileReader("list.txt");
+            fis = new java.io.FileReader("src\\main\\java\\edm\\list.txt");
             bis = new java.io.BufferedReader(fis);
  
             while ((str = bis.readLine()) != null) {
@@ -149,9 +148,9 @@ public class EdmMain extends java.lang.Thread {
  
     }
  
-    //public static void main(String args[]) throws java.io.IOException {
-    	//EdmMain m = new EdmMain();
-        //m.start();
+    public static void main(String args[]) throws java.io.IOException {
+    	EdmMain m = new EdmMain();
+        m.start();
         //System.out.println("Mail Sent");
-    //}
+    }
 }

@@ -14,8 +14,8 @@ public class BuyCourseMailService {
 	private CourseDAO_interface cdao;
 
 	public BuyCourseMailService() {
-		dao = new BuyCourseDAO_JDBC();
-		cdao = new CourseDAO_JDBC();
+		dao = new BuyCourseDAO();
+		cdao = new CourseDAO();
 	}
 	public List<BuyCourseVO> getBuyCourse(Integer memberID){
 		

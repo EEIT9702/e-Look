@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class emailsent
  */
-@WebServlet("/SendEmail")
-public class SendEmail extends HttpServlet {
+@WebServlet("/SendEmailServlet")
+public class SendEmailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -19,9 +19,10 @@ public class SendEmail extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		EdmMain m = new EdmMain();
-        m.start();
-		
+//		EdmMain m = new EdmMain();
+//        m.start();
+		//EdmMailSend ems = new EdmMailSend();
+		EdmMailSend.sendmail();
 	}
 
 	/**

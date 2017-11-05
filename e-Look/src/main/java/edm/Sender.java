@@ -47,6 +47,7 @@ public class Sender extends java.lang.Thread {
  
             // 設定SMTP server
             props.put("mail.smtp.host", host);
+            props.put("mail.smtp.port", "465");
             // 是否需要認證
             props.put("mail.smtp.auth", "true");
             
