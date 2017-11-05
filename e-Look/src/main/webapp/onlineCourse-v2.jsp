@@ -709,10 +709,10 @@ a {
 					</div>
 					<div class="col-md-11 col-xs-10">
 						<div>
-							<span id="testMessage1"  class="text-left">${messageVO.memberVO.mName}</span>
+							<span id="testMessage1"  class="text-left" style="font-weight:900">${messageVO.memberVO.mName}</span>
 							<fmt:parseDate value="${messageVO.mTime}" pattern="yyyy-MM-dd HH:mm:ss" var="date"/>
 							<fmt:formatDate value="${date}" pattern="yyyy-MM-dd HH:mm:ss" var="messageDate"/>
-							<span>${messageDate}</span>
+							<span style="margin-left:20px">${messageDate}</span>
 							<div class="dropdown pull-right">
 								<button class="btn dropdown-toggle btn-default "
 									type="button" data-toggle="dropdown" style="height: 30px">
@@ -743,7 +743,7 @@ a {
 							</div>
 						</div>
 						<div style="border-bottom: 1px solid black">	
-							<p>${messageVO.mContent}+++${messageVO.messageID}</p>
+							<p>${messageVO.mContent}</p>
 						</div>
 						<input type="hidden"  value="${messageVO.messageID}" class="messageID">
 					<!--抓取messageID -->
@@ -1157,8 +1157,8 @@ a {
 					var img1=$('<img></img').addClass('img-thumbnail pull-left').attr({'src':'<%=request.getContextPath()%>/Image?MemberID='+response.memberID,'style':'padding-top:10px'});
 						div2.append(img1);
 					var div3=$('<div></div>').addClass('col-md-11 col-xs-10').attr('style','border-bottom: 1px solid black;padding-top:10px;margin-bottom:20px')
-					var span1=$('<span></span>').text(response.name)
-					var span2=$('<span></span>').text(response.mTime)
+					var span1=$('<span></span>').attr('style','font-weight:900').text(response.name)
+					var span2=$('<span></span>').attr('style','margin-left:20px').text(response.mTime)
 					
 					var div4=$('<div></div>').addClass('dropdown pull-right').attr('style','margin-right:-30px')
 							var button=$('<button></button>').addClass('btn dropdown-toggle btn-default').attr({'data-toggle':'dropdown','style':'height:30px'})
