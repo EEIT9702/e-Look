@@ -85,7 +85,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
 				<tr>
 					<th>廣告編號</th>
 					<th>廣告名稱</th>
-					<th>顯示( 0：顯示 / 1：隱藏 )</th>
+					<th>狀態</th>
 					<th>預覽</th>
 					<th>管理</th>
 				</tr>
@@ -95,7 +95,10 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
 					<tr id="tr1">
 						<td align="center">${AdVO.adID}</td>
 						<td align="center">${AdVO.fileName}</td>
-						<td align="center">${AdVO.status}</td>
+						<td align="center"><c:choose>
+						<c:when test="${AdVO.status == 0}">顯示</c:when>
+						<c:when test="${AdVO.status == 1}">隱藏</c:when>
+						</c:choose></td>
 						<td align="center"><div id="div2"
 								style="vertical-align: middle;">
 								<img
