@@ -2,15 +2,15 @@ package edm;
 
 import java.util.Properties;
  
-public class Main extends java.lang.Thread {
-    private org.apache.log4j.Logger log;
+public class EdmMain extends java.lang.Thread {
+    //private org.apache.log4j.Logger log;
     private java.util.ArrayList<String> toList;
  
     private Properties p;
     private String content;
     private String subject;
  
-    public Main() throws java.io.IOException {
+    public EdmMain() throws java.io.IOException {
         super();
  
         java.io.FileReader fis = null;
@@ -31,7 +31,8 @@ public class Main extends java.lang.Thread {
             fr.close();
  
             // 名單
-            fis = new java.io.FileReader("C:\\Users\\MSI-GL72-6QF\\Desktop\\list.txt");
+            //fis = new java.io.FileReader("C:\\Users\\MSI-GL72-6QF\\Desktop\\list.txt");
+            fis = new java.io.FileReader("src\\main\\java\\edm\\list.txt");
             bis = new java.io.BufferedReader(fis);
  
             while ((str = bis.readLine()) != null) {
@@ -101,7 +102,7 @@ public class Main extends java.lang.Thread {
     }
  
     public static void main(String args[]) throws java.io.IOException {
-    	Main m = new Main();
+    	EdmMain m = new EdmMain();
         m.start();
         //System.out.println("Mail Sent");
     }
