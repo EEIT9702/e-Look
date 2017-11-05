@@ -496,5 +496,11 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 		
 	}
 
+	@Override
+	public void updateStatus(Integer messageID, Byte status) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }
