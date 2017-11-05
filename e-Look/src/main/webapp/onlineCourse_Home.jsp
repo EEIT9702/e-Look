@@ -196,7 +196,7 @@ background-color: #f2fef1;
 }
 .minOutBorder{
 	width:130px;
-	height:30px;
+	height:40px;
 	border:3px solid orange;
 	border-radius:25px;
 	float:right;
@@ -217,6 +217,7 @@ background-color: #f2fef1;
 .minInputarea{
 	border:none !important;
 	width:75px !important;
+	height:35px !important;
 	float:left;
 }
 .searchImg{
@@ -228,12 +229,18 @@ background-color: #f2fef1;
 }
 
 .searchicon{
+	padding-top:4px;
+	float:left;
+	height:30px;
 	width:30px;
 	cursor: pointer;
 }
 
 .minSearchicon{
-/* 	margin-right:30px; */
+/*  margin-right:30px; */
+	padding-top:4px;
+	float:right;
+	height:30px;
 	width:30px;
 	cursor: pointer;
 }
@@ -458,7 +465,7 @@ $(function(){
 
 	</div><!-- /col-md-10 -->
 	<div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
-	<div class="col-md-12 col-sm-12 col-xs-12 col=lg-12">
+	<div class="col-md-12 col-sm-12 col-xs-6 col=lg-12">
 	<form class="navbar-form navbar-left" id="searchKey" method="get" action="">
 	
 		<div class="input-group outBorder" style="" id="ob">
