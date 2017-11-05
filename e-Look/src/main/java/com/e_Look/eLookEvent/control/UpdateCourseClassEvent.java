@@ -16,8 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.scheduling.config.Task;
 
 import com.e_Look.courseClass.CourseClassDAO;
+import com.e_Look.courseClass.CourseClassService;
 import com.e_Look.courseClass.CourseClassVO;
 import com.e_Look.eLookEvent.eLookEventDAO;
+import com.e_Look.eLookEvent.eLookEventService;
 import com.e_Look.eLookEvent.eLookEventVO;
 
 @WebServlet(urlPatterns = "/UpdateCourseClassEvent", loadOnStartup = 2)
@@ -27,33 +29,35 @@ public class UpdateCourseClassEvent extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		// 時間設定在當天的零點零分零秒
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.SECOND, 0);
-		eLookEventDAO eDao = new eLookEventDAO();
-		CourseClassDAO ccDAO = new CourseClassDAO();
-		Date date = calendar.getTime();
+//		Calendar calendar = Calendar.getInstance();
+//		calendar.set(Calendar.HOUR_OF_DAY, 0);
+//		calendar.set(Calendar.MINUTE, 0);
+//		calendar.set(Calendar.SECOND, 0);
+		eLookEventService eventSvc = new eLookEventService();
+		CourseClassService ccSvc = new CourseClassService();
+//		Date date = calendar.getTime();
+		Date date = new Date();
 		Timer timer = new Timer();
 		timer.scheduleAtFixedRate(new TimerTask() {
 			@Override
 			public void run() {
-				List<eLookEventVO> elookeventVOs = eDao.getAll();
+				//System.out.println("調整課程類別之活動!!!");
+				List<eLookEventVO> elookeventVOs = eventSvc.getAll();
 				for (eLookEventVO elookeventVO : elookeventVOs){
 					if(elookeventVO.geteStartDate().getTime()<=System.currentTimeMillis() && elookeventVO.geteEndDate().getTime()+1000*60*60*24 >= System.currentTimeMillis()){
-						List<CourseClassVO> ccVOs = ccDAO.getAll();
+						List<CourseClassVO> ccVOs = ccSvc.getAll();
 						for(CourseClassVO ccVO:ccVOs){
-							if(ccVO.equals(elookeventVO.getCourseClass1()) || ccVO.equals(elookeventVO.getCourseClass2()) || ccVO.equals(elookeventVO.getCourseClass3()) ){
+							//System.out.println(ccVO.getCcName()+"======"+elookeventVO.getCourseClass1());
+							if(ccVO.getCcName().equals(elookeventVO.getCourseClass1()) || ccVO.getCcName().equals(elookeventVO.getCourseClass2()) || ccVO.getCcName().equals(elookeventVO.getCourseClass3()) ){
 								ccVO.setEventVO(elookeventVO);
-								ccDAO.updateEventID(ccVO);
+								ccSvc.updateEventID(ccVO);
 							}
 						}
 						
 					}
 				}
 			}
-			// 於當日0點0分0秒開始計算 每一天做一次
-		}, date, 1000 * 60 * 60 * 24);
+		}, date, 1000 * 10);
 
 	}
 
