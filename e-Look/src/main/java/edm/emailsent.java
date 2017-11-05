@@ -19,7 +19,7 @@ public class emailsent extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Main m = new Main();
+		EdmMain m = new EdmMain();
         m.start();
 		
 	}
