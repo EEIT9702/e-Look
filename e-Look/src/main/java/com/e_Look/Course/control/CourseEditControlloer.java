@@ -3,7 +3,6 @@ package com.e_Look.Course.control;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -17,7 +16,7 @@ import com.e_Look.Course.CourseService;
 import com.e_Look.Course.CourseVO;
 import com.e_Look.CourseClassDetails.CourseClassDetailsDAO;
 import com.e_Look.buyCourse.model.BuyCourseService;
-import com.e_Look.courseClass.CourseClassDAO;
+import com.e_Look.courseClass.CourseClassService;
 import com.e_Look.courseClass.CourseClassVO;
 import com.e_Look.emailSystem.CourseReviewFailureEmail;
 import com.e_Look.member.model.MemberService;
@@ -215,13 +214,13 @@ public class CourseEditControlloer extends HttpServlet {
 		String[] CourseClass = request.getParameterValues("CourseClass");
 		if (CourseClass != null) {
 			if (CourseClass.length > 0) {
+				CourseClassService dao = new CourseClassService();//先載入課程類別CourseClassDAO，並建立dao物件
 				CourseClassDetailsDAO dao1 = new CourseClassDetailsDAO();//先載入課程類別清單CourseClassDetailsDAO，建立dao1物件
 					dao1.delete(courseID);
 				for (int i = 0; i < CourseClass.length; i++) {
 					CourseVO courseVO2 = new CourseVO();//建立CourseVO2物件
 					courseVO2.setCourseID(courseID);//將取到的courseID用set方法放到courseVO2
 					courseVO2.setCourseName(courseName);//將取到的courseName用set方法放到courseVO2
-					CourseClassDAO dao = new CourseClassDAO();//先載入課程類別CourseClassDAO，並建立dao物件
 					//先載入課程類別(CourseClassVO)的VO，使用CourseClassDAO的getByCourseClassID方法取得courseClassVO物件存入courseClassVO
 					CourseClassVO courseClassVO = dao.getByCourseClassID(Integer.valueOf(CourseClass[i]));
 					dao1.insert(courseVO2, courseClassVO);//使用CourseClassDetailsDAO的方法，存入課程類別明細

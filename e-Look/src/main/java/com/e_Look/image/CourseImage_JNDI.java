@@ -23,7 +23,7 @@ import javax.sql.DataSource;
 /**
  * Servlet implementation class CourseImage
  */
-@WebServlet("/CourseImage2")
+@WebServlet("/CourseImage")
 public class CourseImage_JNDI extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

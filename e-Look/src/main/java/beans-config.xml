@@ -85,6 +85,11 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
 
+	<!-- courseClassDAO -->
+	<bean id="courseClassDAO" class="com.e_Look.courseClass.CourseClassDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+
 
 
 

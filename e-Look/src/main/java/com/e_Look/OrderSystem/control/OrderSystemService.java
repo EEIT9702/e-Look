@@ -1,21 +1,24 @@
 package com.e_Look.OrderSystem.control;
 
 import java.io.UnsupportedEncodingException;
-import java.text.SimpleDateFormat;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.e_Look.Course.CourseVO;
 import com.e_Look.CourseClassDetails.CourseClassDetailsDAO;
 import com.e_Look.CourseClassDetails.CourseClassDetailsVO;
 import com.e_Look.CourseClassDetails.CourseClassDetails_interface;
-import com.e_Look.Order.model.*;
-import com.e_Look.OrderDetails.model.*;
-import com.e_Look.buyCourse.model.*;
-import com.e_Look.courseClass.CourseClassDAO;
+import com.e_Look.Order.model.OrderDAO;
+import com.e_Look.Order.model.OrderDAO_interface;
+import com.e_Look.Order.model.OrderVO;
+import com.e_Look.OrderDetails.model.OrderDetailsDAO;
+import com.e_Look.OrderDetails.model.OrderDetailsDAO_interface;
+import com.e_Look.OrderDetails.model.OrderDetailsVO;
+import com.e_Look.buyCourse.model.BuyCourseDAO_interface;
+import com.e_Look.buyCourse.model.BuyCourseVO;
 import com.e_Look.courseClass.CourseClassVO;
 import com.e_Look.courseClass.CourseClass_interface;
 import com.e_Look.tool.BuyingPrice;
@@ -33,12 +36,11 @@ public class OrderSystemService {
 	public static AllInOne all;
 
 	public OrderSystemService() {
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config-jndi.xml");
 		orderDAO = new OrderDAO();
 		orderDetailsDAO = new OrderDetailsDAO();
-		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config-jndi.xml");
-        // 建立DAO物件
 		buyCourseDAO =(BuyCourseDAO_interface) context.getBean("buyCourseDAO");
-		courseClassDAO =new CourseClassDAO();
+		courseClassDAO =(CourseClass_interface) context.getBean("courseClassDAO");
 		courseClassDetailsDAO = new CourseClassDetailsDAO();
 	}
 

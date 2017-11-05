@@ -11,10 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.e_Look.courseClass.CourseClassDAO;
-import com.e_Look.courseClass.CourseClassVO;
 import com.e_Look.eLookEvent.eLookEventDAO;
-import com.e_Look.eLookEvent.eLookEventService;
 import com.e_Look.eLookEvent.eLookEventVO;
 
 @WebServlet("/backstage/elookeventinsert")

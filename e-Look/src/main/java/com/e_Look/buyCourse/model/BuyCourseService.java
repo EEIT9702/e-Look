@@ -28,6 +28,7 @@ public class BuyCourseService {
 		
 	}
 	public Double avgScore(Integer courseID){
+		System.out.println(courseID);
 		return dao.getAvgScore(courseID); 
 	
 	}
