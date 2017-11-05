@@ -164,7 +164,7 @@ a:HOVER {
 <body id="body" style="margin-top: 50px">
 	<jsp:include page="/login.jsp" />
 	<jsp:useBean id="course" scope="page"
-		class="com.e_Look.Course.CourseDAO" />
+		class="com.e_Look.Course.CourseService" />
 
 	<div class="container-fluid"
 		style="background-color: black; margin: -50px">
@@ -267,7 +267,7 @@ a:HOVER {
 	</div>
 	
 	
-	<jsp:useBean id="fundcourse" scope="page" class="com.e_Look.Course.CourseDAO" />
+	<jsp:useBean id="fundcourse" scope="page" class="com.e_Look.Course.CourseService" />
 	
 	<div class="container">
 		<div class="row">

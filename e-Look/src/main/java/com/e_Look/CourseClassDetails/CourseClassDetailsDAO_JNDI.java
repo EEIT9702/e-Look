@@ -13,12 +13,11 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.e_Look.Course.CourseDAO;
-import com.e_Look.Course.CourseService;
 import com.e_Look.Course.CourseVO;
 import com.e_Look.courseClass.CourseClassDAO;
 import com.e_Look.courseClass.CourseClassVO;
 
-public class CourseClassDetailsDAO implements CourseClassDetails_interface {
+public class CourseClassDetailsDAO_JNDI implements CourseClassDetails_interface {
 	private static DataSource ds = null;
 	static {
 		try {
@@ -154,7 +153,7 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 		List<CourseClassDetailsVO> findBycourseClassID = new LinkedList<CourseClassDetailsVO>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		CourseService cdao = new CourseService();
+		CourseDAO cdao = new CourseDAO();
 		CourseClassDAO ccdao = new CourseClassDAO();
 		try {
 			con = ds.getConnection();
@@ -199,7 +198,7 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		CourseService cdao = new CourseService();
+		CourseDAO cdao = new CourseDAO();
 		CourseClassDAO ccdao = new CourseClassDAO();
 
 		try {
@@ -245,7 +244,7 @@ public class CourseClassDetailsDAO implements CourseClassDetails_interface {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		CourseService cdao = new CourseService();
+		CourseDAO cdao = new CourseDAO();
 		CourseClassDAO ccdao = new CourseClassDAO();
 		try {
 			con = ds.getConnection();

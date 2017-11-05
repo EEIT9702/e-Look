@@ -11,7 +11,7 @@ public class CourseVO implements Serializable {
 	
 	private Integer courseID;
 	private String courseName;
-	private InputStream cPhoto;
+	private byte[] cPhoto;
 	private String preTool;
 	private String background;
 	private String ability;
@@ -23,7 +23,7 @@ public class CourseVO implements Serializable {
 	private Date fundEndDate;
 	private Date courseStartDate;
 	private String courseVideopathway;
-	private InputStream paper;
+	private byte[] paper;
 	private Integer status;
 	private String courseContent;
 	private Integer memberID;
@@ -71,11 +71,11 @@ public class CourseVO implements Serializable {
 		this.courseName = courseName;
 	}	
 
-	public InputStream getcPhoto() {
+	public byte[] getcPhoto() {
 		return cPhoto;
 	}
 
-	public void setcPhoto(InputStream cPhoto) {
+	public void setcPhoto(byte[] cPhoto) {
 		this.cPhoto = cPhoto;
 	}
 
@@ -161,11 +161,11 @@ public class CourseVO implements Serializable {
 
 
 
-	public InputStream getPaper() {
+	public byte[] getPaper() {
 		return paper;
 	}
 
-	public void setPaper(InputStream paper) {
+	public void setPaper(byte[] paper) {
 		this.paper = paper;
 	}
 

@@ -12,10 +12,10 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.e_Look.Course.CourseService;
+import com.e_Look.Course.CourseDAO;
 import com.e_Look.Order.model.OrderDAO;
 
-public class OrderDetailsDAO implements OrderDetailsDAO_interface {
+public class OrderDetailsDAO_JNDI implements OrderDetailsDAO_interface {
 	private static DataSource ds = null;
 	static {
 		try {
@@ -134,7 +134,7 @@ public class OrderDetailsDAO implements OrderDetailsDAO_interface {
 	@Override
 	public List<OrderDetailsVO> findByOrderID(Integer orderID) {
 		List<OrderDetailsVO> list = new LinkedList<OrderDetailsVO>();
-		CourseService cdao = new CourseService();
+		CourseDAO cdao = new CourseDAO();
 		OrderDAO odao = new OrderDAO();
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -178,7 +178,7 @@ public class OrderDetailsDAO implements OrderDetailsDAO_interface {
 		List<OrderDetailsVO> list = new LinkedList<OrderDetailsVO>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		CourseService cdao = new CourseService();
+		CourseDAO cdao = new CourseDAO();
 		OrderDAO odao = new OrderDAO();
 		try {
 			con = ds.getConnection();
@@ -218,7 +218,7 @@ public class OrderDetailsDAO implements OrderDetailsDAO_interface {
 	public OrderDetailsVO findByPrimaryKey(OrderDetailsVO orderDetailsVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		CourseService cdao = new CourseService();
+		CourseDAO cdao = new CourseDAO();
 		OrderDAO odao = new OrderDAO();
 		OrderDetailsVO orderDetailsVO2 = null;
 		try {
@@ -260,7 +260,7 @@ public class OrderDetailsDAO implements OrderDetailsDAO_interface {
 		List<OrderDetailsVO> list = new LinkedList<OrderDetailsVO>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		CourseService cdao = new CourseService();
+		CourseDAO cdao = new CourseDAO();
 		OrderDAO odao = new OrderDAO();
 		try {
 			con = ds.getConnection();

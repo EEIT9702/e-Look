@@ -25,11 +25,11 @@
 
 </style>
 
-<jsp:useBean id="course" scope="page" class="com.e_Look.Course.CourseDAO"/>
-<jsp:useBean id="buycourse" scope="page" class="com.e_Look.buyCourse.model.BuyCourseDAO"/>
+<jsp:useBean id="course" scope="page" class="com.e_Look.Course.CourseService"/>
+<%-- <jsp:useBean id="buycourse" scope="page" class="com.e_Look.buyCourse.model.BuyCourseDAO"/> --%>
 	
 <!--線上課程forEach Star -->
-
+											
 <c:forEach var='fundCourse' items='${course.allFundRaiseCourse}' begin="${param.rowValueY}" end="${param.rowValueY + 3}" varStatus="status">
 	<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course" style="width:341px;margin-bottom:20px;">
 		<div class="card card-inverse" >

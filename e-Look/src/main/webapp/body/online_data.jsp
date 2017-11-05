@@ -9,7 +9,6 @@
 	String courseClass = request.getParameter("courseClass");
 	String keyWord = request.getParameter("keyWord");
 	CourseClassDetailsDAO ccddao = new CourseClassDetailsDAO();
-	CourseDAO cdao = new CourseDAO();
 	CourseService cServ=new CourseService();
 	CourseClassDetailsService ccdServ = new CourseClassDetailsService();
 	
@@ -25,7 +24,7 @@
 		List<CourseClassDetailsVO> ccdVOs = ccdServ.getOnlineCourse(ccID);
 		request.setAttribute("ccdVOs", ccdVOs);
 	} else {
-		List<CourseVO> courseVO = cdao.getAllOnlineCourseNotFree();
+		List<CourseVO> courseVO = cServ.getAllOnlineCourseNotFree();
 		request.setAttribute("courseVO", courseVO);
 	}
 %>
@@ -48,7 +47,7 @@ small, .small {
     font-size: 15px;
 }
 </style>
-<jsp:useBean id="course" scope="page" class="com.e_Look.Course.CourseDAO"/>
+<%-- <jsp:useBean id="course" scope="page" class="com.e_Look.Course.CourseDAO"/> --%>
 	
 <!--線上課程forEach Star -->
 <c:choose>

@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 
 import com.e_Look.Course.*;
 
-public class ShoppingCartDAO implements ShoppingCartDAO_interface {
+public class ShoppingCartDAO_JNDI implements ShoppingCartDAO_interface {
 	private static DataSource ds = null;
 	static {
 		try {
@@ -138,7 +138,7 @@ public class ShoppingCartDAO implements ShoppingCartDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			CourseService cdao = new CourseService();
+			CourseDAO cdao = new CourseDAO();
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_MEMBER_SHOPPINGCART);
 			pstmt.setInt(1, memberID);
@@ -176,7 +176,7 @@ public class ShoppingCartDAO implements ShoppingCartDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			CourseService cdao = new CourseService();
+			CourseDAO cdao = new CourseDAO();
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_ALL_SHOPPINGCART);
 			ResultSet rs = pstmt.executeQuery();
@@ -212,7 +212,7 @@ public class ShoppingCartDAO implements ShoppingCartDAO_interface {
 	@Override
 	public ShoppingCartVO findByPrimaryKey(ShoppingCartVO shoppingCartVO) {
 		ShoppingCartVO shoppingCartVO2 = null;
-		CourseService cdao = new CourseService();
+		CourseDAO cdao = new CourseDAO();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {

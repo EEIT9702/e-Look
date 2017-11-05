@@ -13,7 +13,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.e_Look.Course.CourseDAO;
 import com.e_Look.Course.CourseDAO_JDBC;
 import com.e_Look.Order.model.OrderDAO;
 import com.e_Look.Order.model.OrderDAO_JDBC;

@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.e_Look.Course.CourseDAO;
+
 import com.e_Look.Course.CourseDAO_JDBC;
 import com.e_Look.Course.CourseVO;
 import com.e_Look.courseClass.CourseClassDAO;

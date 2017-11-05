@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-import javax.mail.Session;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.e_Look.Course.CourseDAO;
+import com.e_Look.Course.CourseService;
 import com.e_Look.Course.CourseVO;
 import com.e_Look.Order.model.OrderDAO;
 import com.e_Look.Order.model.OrderVO;
@@ -36,7 +35,7 @@ public class OrderEdit extends HttpServlet {
 		MemberVO memberVO=(MemberVO) session.getAttribute("LoginOK");
 		
 		String action=request.getParameter("action");
-		CourseDAO cdao=new CourseDAO();
+		CourseService cdao = new CourseService();
 		OrderDAO odao=new OrderDAO();
 		OrderDetailsDAO oddao = new OrderDetailsDAO();
 		OrderVO orderVO = odao.findMemberUncheckOrder(memberVO.getMemberID());

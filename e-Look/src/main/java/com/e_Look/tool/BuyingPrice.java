@@ -2,7 +2,8 @@ package com.e_Look.tool;
 
 import java.sql.Date;
 import java.util.List;
-import com.e_Look.Course.CourseDAO;
+
+import com.e_Look.Course.CourseService;
 import com.e_Look.Course.CourseVO;
 import com.e_Look.CourseClassDetails.CourseClassDetailsDAO;
 import com.e_Look.CourseClassDetails.CourseClassDetailsVO;
@@ -11,7 +12,7 @@ public class BuyingPrice {
 
 	public static Integer getBuyingPrice(Integer courseID) {
 		Double discount = 1.0;
-		CourseDAO cdao = new CourseDAO();
+		CourseService cdao = new CourseService();
 		CourseVO courseVO = cdao.findByPrimaryKey(courseID);
 		Integer oPrice = courseVO.getSoldPrice();
 		Integer price = oPrice;

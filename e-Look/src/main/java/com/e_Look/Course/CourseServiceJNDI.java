@@ -1,25 +1,17 @@
 package com.e_Look.Course;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.http.Part;
 
 import org.apache.commons.io.IOUtils;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.e_Look.member.model.MemberVO;
-
-public class CourseService {
+public class CourseServiceJNDI {
 	private CourseDAO_interface dao;
-	public CourseService() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config-jndi.xml");
-
-        // 建立DAO物件
-		dao =(CourseDAO_interface) context.getBean("courseDAO");
+	public CourseServiceJNDI() {
+		dao = new CourseDAO();
 	}
 	public Integer CreateNewCourse(Integer memberID) {
 		CourseVO CourseVO1 = new CourseVO();
@@ -45,7 +37,7 @@ public class CourseService {
 			courseVO2.setCourseID(CourseID);
 			try {
 				byte[] bytes = IOUtils.toByteArray(part.getInputStream());
-				courseVO2.setPaper(bytes);
+				courseVO2.setcPhoto(bytes);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -103,17 +95,8 @@ public class CourseService {
 	public List<CourseVO> getAllReviewCourseData(){
 		return dao.getAllReviewCourse();
 	}
-	public List<CourseVO> getAllFreeCourse(){
-		return dao.getAllFreeCourse();
-	}                         
 	public List<CourseVO> getAllFundRaiseCourse(){
 		return dao.getAllFundRaiseCourse();
-	}
-	public List<CourseVO> getAllOnlineCourseNotFree(){
-		return dao.getAllOnlineCourseNotFree();
-	}
-	public List<CourseVO> getAllonlineCourse(){
-		return dao.getAllonlineCourse();
 	}
 	
 
@@ -122,9 +105,6 @@ public class CourseService {
 		courseVO.setCourseID(courseID);
 		courseVO.setAvgScore(avgScore);
 		dao.updateAVGScore(courseID, avgScore);
-	}
-	public CourseVO  findByPrimaryKey(Integer courseID) {
-		return dao.findByPrimaryKey(courseID);
 	}
 	
 	public Integer countdown(Integer courseID) {

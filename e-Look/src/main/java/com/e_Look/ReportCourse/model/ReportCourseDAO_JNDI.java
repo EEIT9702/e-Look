@@ -1,7 +1,6 @@
 package com.e_Look.ReportCourse.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,20 +10,27 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import org.json.simple.JSONValue;
 
-import com.e_Look.Course.CourseDAO_JDBC;
+import com.e_Look.Course.CourseDAO;
 import com.e_Look.Course.CourseVO;
 
 
-public class ReportCourseDAO_JDBC implements ReportCourseDAO_interface {
-	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=elook";
-	String userid = "sa";
-	//第一組密碼
-	String passwd = "P@ssw0rd";
-	//第二組密碼
-	//String passwd = "123456";
+public class ReportCourseDAO_JNDI implements ReportCourseDAO_interface {
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/eLookDB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private static final String INSERT_REPORTCOURSE =
 			"INSERT INTO ReportCourse (reportCourseID, reportMemberID, reportContent, reportTime,status ) VALUES (?,?,?,getDate(),0)";
@@ -32,24 +38,23 @@ public class ReportCourseDAO_JDBC implements ReportCourseDAO_interface {
 		    "UPDATE ReportCourse SET status=? WHERE reportId=?";	
 	private static final String DELETE_REPORTCOURSE =
 		    "DELETE FROM ReportCourse WHERE reportId =?";
-	private static final String SELECT_ONE_REPORT_COURSE =
+	private static final String SELECT_ONE_REPORT_MESSAGE =
 			"SELECT reportId,reportCourseID,reportMemberID,reportContent,reportTime,status FROM ReportCourse WHERE reportId=?";
 	private static final String SELECT_NOT_HANDLE_REPORT_COURSE =
-			"SELECT reportId,reportCourseID,reportMemberID,reportContent,reportTime,status FROM ReportCourse WHERE status=?";
+			"SELECT reportId,reportCourseID,reportMemberID,reportContent,reportTime,status FROM ReportCourse WHERE status=0";
 	private static final String SELECT_ALL_REPORT_COURSE =
 			"SELECT reportId,reportCourseID,reportMemberID,reportContent,reportTime,status FROM ReportCourse";	
 	
 	private static final String GET_JSON = "SELECT rc.reportID, rc.reportCourseID, rc.reportContent, rc.reportTime, rc.status,"
 			+ "rc.reportMemberID, c.courseID, c.soldPrice FROM Course c INNER JOIN ReportCourse rc "
 			+ "ON c.courseID = rc.reportCourseID WHERE rc.status=?";
-			
+	
 	@Override
 	public void insert(ReportCourseVO ReportCourseVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_REPORTCOURSE);
 
 			//pstmt.setInt(1, ReportCourseVO.getReportCourseID());
@@ -64,9 +69,6 @@ public class ReportCourseDAO_JDBC implements ReportCourseDAO_interface {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -91,8 +93,7 @@ public class ReportCourseDAO_JDBC implements ReportCourseDAO_interface {
 		PreparedStatement pstmt = null;
 		try {
 			//"UPDATE ReportMessage SET status=? WHERE reportId=?";
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_STATUS);
 			pstmt.setByte(1, reportCourseVO.getStatus());
 			pstmt.setInt(2, reportCourseVO.getReportId());
@@ -103,9 +104,6 @@ public class ReportCourseDAO_JDBC implements ReportCourseDAO_interface {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -131,8 +129,7 @@ public class ReportCourseDAO_JDBC implements ReportCourseDAO_interface {
 		PreparedStatement pstmt = null;
 		try {
 			//"DELETE FROM ReportMessage WHERE reportId =?";
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt=con.prepareStatement(DELETE_REPORTCOURSE);
 			pstmt.setInt(1, reportID);
 			pstmt.executeUpdate();
@@ -142,9 +139,6 @@ public class ReportCourseDAO_JDBC implements ReportCourseDAO_interface {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -175,9 +169,8 @@ public class ReportCourseDAO_JDBC implements ReportCourseDAO_interface {
 		
 		try {
 			//"SELECT reportId,reportCourseID,reportMemberID,reportContent,reportTime,status FROM ReportCourse WHERE reportId=?";
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(SELECT_ONE_REPORT_COURSE);
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(SELECT_ONE_REPORT_MESSAGE);
 
 			pstmt.setInt(1, reportId);
 
@@ -187,7 +180,7 @@ public class ReportCourseDAO_JDBC implements ReportCourseDAO_interface {
 				reportCourseVO = new ReportCourseVO();
 				courseVO = new CourseVO();
 				
-				CourseDAO_JDBC courseDAO = new CourseDAO_JDBC();
+				CourseDAO courseDAO = new CourseDAO();
 				Integer courseID = rs.getInt("reportCourseID");
 				courseVO = courseDAO.findByPrimaryKey(courseID);
 				
@@ -206,9 +199,6 @@ public class ReportCourseDAO_JDBC implements ReportCourseDAO_interface {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {
@@ -247,8 +237,7 @@ public class ReportCourseDAO_JDBC implements ReportCourseDAO_interface {
 			//SELECT rc.reportID, rc.reportCourseID, rc.reportContent, rc.reportTime, rc.status, 
 			//rc.reportMemberID, c.courseID, c.soldPrice
 			//FROM Course c INNER JOIN ReportCourse rc ON c.courseID = rc.reportCourseID
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_JSON);
 			pstmt.setInt(1, status);
 			rs = pstmt.executeQuery();
@@ -268,10 +257,6 @@ public class ReportCourseDAO_JDBC implements ReportCourseDAO_interface {
 			 }
 			 jsonString = JSONValue.toJSONString(l1);  
 			
-		// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
@@ -314,8 +299,7 @@ public class ReportCourseDAO_JDBC implements ReportCourseDAO_interface {
 		ResultSet rs = null;
 
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_NOT_HANDLE_REPORT_COURSE);
 			pstmt.setByte(1, status);
 			rs = pstmt.executeQuery();
@@ -324,7 +308,7 @@ public class ReportCourseDAO_JDBC implements ReportCourseDAO_interface {
 				reportCourseVO = new ReportCourseVO();
 				courseVO = new CourseVO();
 				
-				CourseDAO_JDBC courseDAO = new CourseDAO_JDBC();
+				CourseDAO courseDAO = new CourseDAO();
 				Integer courseID = rs.getInt("reportCourseID");
 				courseVO = courseDAO.findByPrimaryKey(courseID);
 				
@@ -344,9 +328,6 @@ public class ReportCourseDAO_JDBC implements ReportCourseDAO_interface {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {
@@ -384,8 +365,7 @@ public class ReportCourseDAO_JDBC implements ReportCourseDAO_interface {
 		ResultSet rs = null;
 
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_ALL_REPORT_COURSE);
 			rs = pstmt.executeQuery();
 
@@ -393,7 +373,7 @@ public class ReportCourseDAO_JDBC implements ReportCourseDAO_interface {
 				reportCourseVO = new ReportCourseVO();
 				courseVO = new CourseVO();
 				
-				CourseDAO_JDBC courseDAO = new CourseDAO_JDBC();
+				CourseDAO courseDAO = new CourseDAO();
 				Integer courseID = rs.getInt("reportCourseID");
 				courseVO = courseDAO.findByPrimaryKey(courseID);
 				
@@ -413,9 +393,6 @@ public class ReportCourseDAO_JDBC implements ReportCourseDAO_interface {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 			// Clean up JDBC resources
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} finally {
 			if (rs != null) {
 				try {
@@ -440,50 +417,6 @@ public class ReportCourseDAO_JDBC implements ReportCourseDAO_interface {
 			}
 		}
 		return list;
-	}
-
-	
-
-	public static void main(String[] args) {
-		
-		ReportCourseDAO_JDBC dao = new ReportCourseDAO_JDBC();
-		
-		
-		ReportCourseVO reportCourseVO = new ReportCourseVO();
-		
-		// 新增	
-//		reportCourseVO.setReportCourseID(200006);
-//		reportCourseVO.setReportMemberID(100005);
-//		reportCourseVO.setReportContent("太長了");
-//		dao.insert(reportCourseVO);
-		
-		//修改
-//		reportCourseVO.setReportId(1001);
-//		reportCourseVO.setStatus((byte) 1);
-//		dao.update(reportCourseVO);
-		
-		//查詢單一
-		//"SELECT reportId,reportCourseID,reportMemberID,reportContent,reportTime,status FROM ReportCourse WHERE reportId=?";
-		ReportCourseVO reportCourseVO2 = dao.findByReportId(1001);
-		System.out.println(reportCourseVO2.getReportId());
-		System.out.println(reportCourseVO2.getCourseVO().getCourseID());
-		System.out.println(reportCourseVO2.getReportMemberID());
-		System.out.println(reportCourseVO2.getReportContent());
-		System.out.println(reportCourseVO2.getReportTime());
-		System.out.println(reportCourseVO2.getStatus());
-		System.out.println("---------------------------");
-		
-		//查詢全部
-		List<ReportCourseVO> list = dao.getAll();
-		for(ReportCourseVO reportCourseVO1 : list) {
-			System.out.print(reportCourseVO1.getReportId() + "  ");
-			System.out.print(reportCourseVO1.getCourseVO().getCourseID() + "  ");
-			System.out.print(reportCourseVO1.getReportMemberID() + "  ");
-			System.out.print(reportCourseVO1.getReportContent() + "  ");
-			System.out.print(reportCourseVO1.getReportTime() + "  ");
-			System.out.print(reportCourseVO1.getStatus() + "\n");
-		}
-		
 	}
 
 }

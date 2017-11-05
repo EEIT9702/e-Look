@@ -1,13 +1,14 @@
 package com.e_Look.shoppingCart.control;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.e_Look.Course.CourseDAO;
+import com.e_Look.Course.CourseService;
 import com.e_Look.shoppingCart.model.jdbc.ShoppingCartDAO;
 import com.e_Look.shoppingCart.model.jdbc.ShoppingCartVO;
 
@@ -27,7 +28,7 @@ public class InsertShoppingCart extends HttpServlet {
 		Integer courseID=Integer.parseInt(request.getParameter("courseID"));
 		
 		ShoppingCartDAO scdao = new ShoppingCartDAO();
-		CourseDAO cdao = new CourseDAO();
+		CourseService cdao = new CourseService();
 		
 		ShoppingCartVO scVO = new ShoppingCartVO(memberID, cdao.findByPrimaryKey(courseID));
 		if(scdao.findByPrimaryKey(scVO)==null){

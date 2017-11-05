@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 
 import org.json.simple.JSONValue;
 
-import com.e_Look.Course.CourseDAO;
+import com.e_Look.Course.CourseService;
 import com.e_Look.Course.CourseVO;
 
 
@@ -180,7 +180,7 @@ public class ReportCourseDAO implements ReportCourseDAO_interface {
 				reportCourseVO = new ReportCourseVO();
 				courseVO = new CourseVO();
 				
-				CourseDAO courseDAO = new CourseDAO();
+				CourseService courseDAO = new CourseService();
 				Integer courseID = rs.getInt("reportCourseID");
 				courseVO = courseDAO.findByPrimaryKey(courseID);
 				
@@ -304,11 +304,11 @@ public class ReportCourseDAO implements ReportCourseDAO_interface {
 			pstmt.setByte(1, status);
 			rs = pstmt.executeQuery();
 
+			CourseService courseDAO = new CourseService();
 			while (rs.next()) {
 				reportCourseVO = new ReportCourseVO();
 				courseVO = new CourseVO();
 				
-				CourseDAO courseDAO = new CourseDAO();
 				Integer courseID = rs.getInt("reportCourseID");
 				courseVO = courseDAO.findByPrimaryKey(courseID);
 				
@@ -369,11 +369,11 @@ public class ReportCourseDAO implements ReportCourseDAO_interface {
 			pstmt = con.prepareStatement(SELECT_ALL_REPORT_COURSE);
 			rs = pstmt.executeQuery();
 
+			CourseService courseDAO = new CourseService();
 			while (rs.next()) {
 				reportCourseVO = new ReportCourseVO();
 				courseVO = new CourseVO();
 				
-				CourseDAO courseDAO = new CourseDAO();
 				Integer courseID = rs.getInt("reportCourseID");
 				courseVO = courseDAO.findByPrimaryKey(courseID);
 				

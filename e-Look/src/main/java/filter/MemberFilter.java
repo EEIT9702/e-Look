@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.e_Look.Course.CourseDAO;
 import com.e_Look.Course.CourseService;
 import com.e_Look.Course.CourseVO;
 import com.e_Look.buyCourse.model.BuyCourseService;
@@ -58,7 +57,7 @@ public class MemberFilter implements Filter {
 			HttpServletRequest request = (HttpServletRequest) req;
 			HttpServletResponse response = (HttpServletResponse) resp;
 
-			CourseDAO dao = new CourseDAO();
+			
 			CourseService courseService =new CourseService();
 			MemberService memberService = new MemberService();
 			BuyCourseService CourseService = new BuyCourseService();
@@ -87,7 +86,7 @@ public class MemberFilter implements Filter {
 						.findPrimaryMemberBookmarks(memberVO.getMemberID());
 
 				for (MemberBookmarksVO MemberBookmarksVO : mBookmarkList) {
-					list3.add(dao.findByPrimaryKey(MemberBookmarksVO.getCourseID()));
+					list3.add(courseService.findByPrimaryKey(MemberBookmarksVO.getCourseID()));
 				}
 				List<MemberSubscriptionVO> memberSubscriptionList = memberSubscriptionService
 						.findPrimaryMemberBookmarks(memberVO.getMemberID());

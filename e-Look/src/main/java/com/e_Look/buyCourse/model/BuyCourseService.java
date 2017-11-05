@@ -1,17 +1,9 @@
 package com.e_Look.buyCourse.model;
 
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import com.e_Look.Course.CourseDAO;
-import com.e_Look.Course.CourseDAO_JDBC;
-import com.e_Look.Course.CourseDAO_interface;
-import com.e_Look.Course.CourseVO;
-import com.e_Look.member.model.MemberDAO_interface;
 
 public class BuyCourseService {
 	private BuyCourseDAO_interface dao;

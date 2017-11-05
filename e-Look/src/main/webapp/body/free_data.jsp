@@ -13,7 +13,7 @@ String courseClass = request.getParameter("courseClass");
 CourseClassDetailsService ccdServ = new CourseClassDetailsService();
 CourseService cServ = new CourseService();
 CourseClassDetailsDAO ccddao = new CourseClassDetailsDAO();
-CourseDAO cdao = new CourseDAO();
+
 
 
 
@@ -29,7 +29,7 @@ if(courseClass.length() != 0  && keyWord.length() != 0){
 	List<CourseClassDetailsVO> ccdVOs = ccdServ.getFreeCourse(ccID);
 	request.setAttribute("ccdVOs", ccdVOs);
 } else {
-	List<CourseVO> courseVOs =cdao.getAllFreeCourse();
+	List<CourseVO> courseVOs =cServ.getAllFreeCourse();
 	request.setAttribute("courseVOs", courseVOs);
 }
 
@@ -58,7 +58,7 @@ small, .small {
 }
 </style>
 
-<jsp:useBean id="course" scope="page" class="com.e_Look.Course.CourseDAO"/>
+<%-- <jsp:useBean id="course" scope="page" class="com.e_Look.Course.CourseDAO"/> --%>
 
 <!--免費影片forEach Star -->
 <c:choose>
