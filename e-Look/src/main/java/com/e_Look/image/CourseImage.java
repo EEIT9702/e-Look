@@ -27,7 +27,7 @@ import com.e_Look.Course.CourseVO;
 /**
  * Servlet implementation class CourseImage
  */
-@WebServlet("/CourseImage")
+@WebServlet("/CourseImage2")
 public class CourseImage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

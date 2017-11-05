@@ -68,7 +68,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<bean id="memberDAO" class="com.e_Look.member.model.MemberDAO">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
-	
+
 	<!-- managerDAO -->
 	<bean id="managerDAO" class="com.e_Look.backStage.login.model.ManagerDAO">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
@@ -78,12 +78,16 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<bean id="buyCourseDAO" class="com.e_Look.buyCourse.model.BuyCourseDAO">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
-	
+
 	<!-- courseDAO -->
 	<bean id="courseDAO" class="com.e_Look.Course.CourseDAO">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
 
+	<!-- courseClassDAO -->
+	<bean id="courseClassDAO" class="com.e_Look.courseClass.CourseClassDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
 
 	<!-- <bean id="shoppingCartDAO" class="com.e_Look.shoppingCart.model.spring.ShoppingCartDAO"> -->
 	<!-- <property name="hibernateTemplate" ref="hibernateTemplate"/> -->

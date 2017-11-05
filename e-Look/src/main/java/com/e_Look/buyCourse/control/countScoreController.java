@@ -43,7 +43,9 @@ public class countScoreController extends HttpServlet {
 		
 		BuyCourseService buyCourseService = new BuyCourseService();
 		Double Score1=buyCourseService.avgScore(courseID);
-		
+		if(Score1==null){
+			Score1=0.0;
+		}
 		CourseService courseService = new CourseService();
 		courseService.updateAVGScore(courseID, Score1);
 		
