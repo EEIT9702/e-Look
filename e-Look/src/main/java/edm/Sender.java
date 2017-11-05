@@ -69,7 +69,7 @@ public class Sender extends java.lang.Thread {
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(
                     to));
             // 設定標題
-            message.setSubject("e-Look電子月刊tt");
+            message.setSubject("e-Look電子月刊");
  
             // 設定寄件日期
             message.setSentDate(new Date());
