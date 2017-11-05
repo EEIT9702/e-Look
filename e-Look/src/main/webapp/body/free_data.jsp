@@ -12,7 +12,7 @@ String keyWord = request.getParameter("keyWord");
 String courseClass = request.getParameter("courseClass");
 CourseClassDetailsService ccdServ = new CourseClassDetailsService();
 CourseService cServ = new CourseService();
-CourseClassDetailsDAO ccddao = new CourseClassDetailsDAO();
+// CourseClassDetailsDAO ccddao = new CourseClassDetailsDAO();
 
 
 

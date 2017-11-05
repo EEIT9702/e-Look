@@ -8,7 +8,7 @@
 <%
 	String courseClass = request.getParameter("courseClass");
 	String keyWord = request.getParameter("keyWord");
-	CourseClassDetailsDAO ccddao = new CourseClassDetailsDAO();
+// 	CourseClassDetailsDAO ccddao = new CourseClassDetailsDAO();
 	CourseService cServ=new CourseService();
 	CourseClassDetailsService ccdServ = new CourseClassDetailsService();
 	

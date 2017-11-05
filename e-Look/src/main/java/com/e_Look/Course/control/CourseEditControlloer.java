@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.e_Look.Course.CourseService;
 import com.e_Look.Course.CourseVO;
-import com.e_Look.CourseClassDetails.CourseClassDetailsDAO;
+import com.e_Look.CourseClassDetails.CourseClassDetailsService;
 import com.e_Look.buyCourse.model.BuyCourseService;
 import com.e_Look.courseClass.CourseClassService;
 import com.e_Look.courseClass.CourseClassVO;
@@ -92,7 +92,7 @@ public class CourseEditControlloer extends HttpServlet {
 		if(request.getParameter("member")!=null){
 		Integer courseID = Integer.valueOf(request.getParameter("courseID"));
 		
-		CourseClassDetailsDAO dao1 = new CourseClassDetailsDAO();
+		CourseClassDetailsService dao1 = new CourseClassDetailsService();
 		dao1.delete(courseID);
 		CourseService courseService = new CourseService();
 		courseService.deleteCourse(courseID);
@@ -215,7 +215,7 @@ public class CourseEditControlloer extends HttpServlet {
 		if (CourseClass != null) {
 			if (CourseClass.length > 0) {
 				CourseClassService dao = new CourseClassService();//先載入課程類別CourseClassDAO，並建立dao物件
-				CourseClassDetailsDAO dao1 = new CourseClassDetailsDAO();//先載入課程類別清單CourseClassDetailsDAO，建立dao1物件
+				CourseClassDetailsService dao1 = new CourseClassDetailsService();//先載入課程類別清單CourseClassDetailsDAO，建立dao1物件
 					dao1.delete(courseID);
 				for (int i = 0; i < CourseClass.length; i++) {
 					CourseVO courseVO2 = new CourseVO();//建立CourseVO2物件

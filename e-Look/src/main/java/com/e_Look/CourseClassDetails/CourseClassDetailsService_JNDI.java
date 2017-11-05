@@ -3,31 +3,13 @@ package com.e_Look.CourseClassDetails;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import com.e_Look.Course.CourseVO;
-import com.e_Look.courseClass.CourseClassVO;
-
-public class CourseClassDetailsService {
+public class CourseClassDetailsService_JNDI {
 	private CourseClassDetails_interface dao;
 	
-	public CourseClassDetailsService() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config-jndi.xml");
-		dao =(CourseClassDetails_interface) context.getBean("courseClassDetailsDAO");
+	public CourseClassDetailsService_JNDI() {
+		dao = new CourseClassDetailsDAO();
 	}
 	
-	public void delete(Integer courseID){
-		dao.delete(courseID);
-	}
-	public void insert(CourseVO courseVO, CourseClassVO courseClassVO){
-		dao.insert(courseVO, courseClassVO);
-	}
-	
-	public List<CourseClassDetailsVO> findBycourseID(Integer courseClassID){
-		
-		return dao.findBycourseID(courseClassID);
-	}
 	public List<CourseClassDetailsVO> getFreeCourse(Integer courseClassID){
 		List<CourseClassDetailsVO> ccdVOs = dao.getBycourseClassID(courseClassID);
 		List<CourseClassDetailsVO> freeccdVOs = new LinkedList<CourseClassDetailsVO>();
@@ -75,6 +57,10 @@ public class CourseClassDetailsService {
 		}
 		return onlineccdVOs;
 	}
+	
+	
+	
+	
 	
 	
 	public List<CourseClassDetailsVO> getFoundRaiseCourse(Integer courseClassID) {
