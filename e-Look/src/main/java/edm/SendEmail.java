@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class emailsent
  */
-@WebServlet("/emailsent")
-public class emailsent extends HttpServlet {
+@WebServlet("/SendEmail")
+public class SendEmail extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**

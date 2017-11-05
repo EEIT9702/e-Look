@@ -32,10 +32,10 @@ public class EdmMain extends java.lang.Thread {
 		
 		Date today = new Date();
 		Long tday = today.getTime();
-		System.out.println((tday - first)/1000/60/60);
+		//System.out.println((tday - first)/1000/60/60);
         //目前日期毫秒-當月第一天毫秒,若相差在24小時內就執行,demo時再打開並把日期調到下月
 //		if((tday - first) > 0 && ((tday - first)/1000/60/60) <= 24) {
-			System.out.println("1111");
+			//System.out.println("1111");
 			MemberDAO_JDBC mdao = new MemberDAO_JDBC();
 			List<MemberVO> mVOs = mdao.getAll();
 			
@@ -65,20 +65,21 @@ public class EdmMain extends java.lang.Thread {
  
         try {
             // 從外部取得設定檔資料
-            p = new Properties();
-            java.io.FileReader fr = new java.io.FileReader("src\\main\\java\\edm\\mail.properties");
-            java.io.BufferedReader br = new java.io.BufferedReader(fr);
+            //p = new Properties();
+            //java.io.FileReader fr = new java.io.FileReader("src\\main\\java\\edm\\mail.properties");
+            //java.io.BufferedReader br = new java.io.BufferedReader(fr);
             String str;
-            while ((str = br.readLine()) != null) {
-                String[] tmp = str.split("=");
-                p.setProperty(tmp[0], tmp[1]);
-            }
-            br.close();
-            fr.close();
+           // while ((str = br.readLine()) != null) {
+                //String[] tmp = str.split("=");
+                //p.setProperty(tmp[0], tmp[1]);
+            //}
+            //br.close();
+            //fr.close();
  
             // 名單
             //測試時先用list.txt的mail測試,demo時再改用elist.txt,會取出當下所有會員並寄信
-            fis = new java.io.FileReader("src\\main\\java\\edm\\list.txt");
+            //fis = new java.io.FileReader("src\\main\\java\\edm\\list.txt");
+            fis = new java.io.FileReader("list.txt");
             bis = new java.io.BufferedReader(fis);
  
             while ((str = bis.readLine()) != null) {
@@ -122,7 +123,8 @@ public class EdmMain extends java.lang.Thread {
                         toList.get(i), subject, content, p);
                 sender.start();
                 // 暫停數秒後再開始寄信
-                Thread.sleep(Integer.parseInt(p.getProperty("sleep")));
+                //Thread.sleep(Integer.parseInt(p.getProperty("sleep")));
+                Thread.sleep(1000);
  
                 if (fw != null) {
                     fw.flush();
@@ -147,9 +149,9 @@ public class EdmMain extends java.lang.Thread {
  
     }
  
-    public static void main(String args[]) throws java.io.IOException {
-    	EdmMain m = new EdmMain();
-        m.start();
+    //public static void main(String args[]) throws java.io.IOException {
+    	//EdmMain m = new EdmMain();
+        //m.start();
         //System.out.println("Mail Sent");
-    }
+    //}
 }
