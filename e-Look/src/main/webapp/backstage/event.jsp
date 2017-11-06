@@ -302,8 +302,8 @@ $("#update").jDialog({
 	
 		
 	  var today = new Date();
-	  var tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000);
-
+// 	  var tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000);
+	  var tomorrow = new Date(today.getTime());
 	  $('.thedate2').datepicker();
 	  $('.thedate').datepicker({
 	    //minDate: 0, //從今天後日期才可選
