@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -159,7 +160,11 @@ public class CourseClassDAO_JDBC implements CourseClass_interface{
 			
 			pstmt=conn.prepareStatement(UPDATE_EVENTID);
 			
-			pstmt.setInt(1,courseClassVO.getEventVO().getEventID());
+			if(courseClassVO.getEventVO()==null){
+				pstmt.setNull(1,Types.INTEGER);
+			}else{
+				pstmt.setInt(1,courseClassVO.getEventVO().getEventID());
+			}
 			pstmt.setInt(2,courseClassVO.getCourseClassID());
 			pstmt.executeUpdate();
 			

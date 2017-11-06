@@ -109,9 +109,8 @@
 						target="upload_iframe" enctype="multipart/form-data" role="form"
 						id="TotalContent" onsubmit="showStatus()">
 						<iframe name=upload_iframe width=0 height=0 style="display: none;"></iframe>
-						<input type="hidden" value="${CourseID}" name="CourseID"
-							id="courseID"> <input type="hidden"
-							value="${LoginOK.memberID}" name="memberID">
+						<input type="hidden" value="${CourseID}" name="CourseID" id="courseID"> 
+						<input type="hidden" value="${LoginOK.memberID}" name="memberID">
 						<div class="tab-content">
 							<!-- 整個step1頁面 -->
 							<div class="tab-pane active" role="tabpanel" id="step1"

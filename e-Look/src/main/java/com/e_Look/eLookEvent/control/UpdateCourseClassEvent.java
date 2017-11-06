@@ -21,32 +21,56 @@ public class UpdateCourseClassEvent extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		// 時間設定在當天的零點零分零秒
-//		Calendar calendar = Calendar.getInstance();
-//		calendar.set(Calendar.HOUR_OF_DAY, 0);
-//		calendar.set(Calendar.MINUTE, 0);
-//		calendar.set(Calendar.SECOND, 0);
+		// Calendar calendar = Calendar.getInstance();
+		// calendar.set(Calendar.HOUR_OF_DAY, 0);
+		// calendar.set(Calendar.MINUTE, 0);
+		// calendar.set(Calendar.SECOND, 0);
 		eLookEventService eventSvc = new eLookEventService();
 		CourseClassService ccSvc = new CourseClassService();
-//		Date date = calendar.getTime();
+		// Date date = calendar.getTime();
 		Date date = new Date();
 
-	Timer timer = new Timer();
+		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
-				//System.out.println("調整課程類別之活動!!!");
+				// System.out.println("調整課程類別之活動!!!");
 				List<eLookEventVO> elookeventVOs = eventSvc.getAll();
-				for (eLookEventVO elookeventVO : elookeventVOs){
-					if(elookeventVO.geteStartDate().getTime()<=System.currentTimeMillis() && elookeventVO.geteEndDate().getTime()+1000*60*60*24 >= System.currentTimeMillis()){
+				for (eLookEventVO elookeventVO : elookeventVOs) {
+					if (elookeventVO.geteStartDate().getTime() <= System.currentTimeMillis()
+							&& elookeventVO.geteEndDate().getTime() + 1000 * 60 * 60 * 24 >= System
+									.currentTimeMillis()) {
 						List<CourseClassVO> ccVOs = ccSvc.getAll();
-						for(CourseClassVO ccVO:ccVOs){
-							//System.out.println(ccVO.getCcName()+"======"+elookeventVO.getCourseClass1());
-							if("全部".equals(elookeventVO.getCourseClass1()) ||"全部".equals(elookeventVO.getCourseClass2()) ||"全部".equals(elookeventVO.getCourseClass3()) || ccVO.getCcName().equals(elookeventVO.getCourseClass1()) || ccVO.getCcName().equals(elookeventVO.getCourseClass2()) || ccVO.getCcName().equals(elookeventVO.getCourseClass3()) ){
+						for (CourseClassVO ccVO : ccVOs) {
+							// System.out.println(ccVO.getCcName()+"======"+elookeventVO.getCourseClass1());
+							if ("全部".equals(elookeventVO.getCourseClass1())
+									|| "全部".equals(elookeventVO.getCourseClass2())
+									|| "全部".equals(elookeventVO.getCourseClass3())
+									|| ccVO.getCcName().equals(elookeventVO.getCourseClass1())
+									|| ccVO.getCcName().equals(elookeventVO.getCourseClass2())
+									|| ccVO.getCcName().equals(elookeventVO.getCourseClass3())) {
 								ccVO.setEventVO(elookeventVO);
 								ccSvc.updateEventID(ccVO);
+							}else if(ccVO.getEventVO()!=null){
+								if(ccVO.getEventVO().getEventID().intValue()==elookeventVO.getEventID().intValue()){
+									ccVO.setEventVO(null);
+									ccSvc.updateEventID(ccVO);
+								}
 							}
 						}
-						
+
+					} else {
+						List<CourseClassVO> ccVOs = ccSvc.getAll();
+						for (CourseClassVO ccVO : ccVOs) {
+							if(ccVO.getEventVO()!=null){
+								if (ccVO.getEventVO().getEventID().intValue() == elookeventVO.getEventID().intValue()) {
+									ccVO.setEventVO(null);
+									ccSvc.updateEventID(ccVO);
+								}
+								
+							}
+						}
+
 					}
 				}
 			}
