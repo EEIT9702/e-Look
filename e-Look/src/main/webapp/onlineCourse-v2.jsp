@@ -701,7 +701,7 @@ a {
 				<c:if test="${!empty messageVOList}">		
 				<c:forEach items="${messageVOList}" var="messageVO">
 		<!--留言重複的地方開始 -->
-					<c:if test="${messageVO.messageID_response==0}">
+					<c:if test="${messageVO.messageID_response==null}">
 					
 					<div class="col-md-1 col-xs-2">
 						<img src="<%=request.getContextPath() %>/Image?MemberID=${messageVO.memberVO.memberID}"

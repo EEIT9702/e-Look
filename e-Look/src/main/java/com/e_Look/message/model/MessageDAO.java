@@ -59,8 +59,7 @@ public class MessageDAO implements MessageDAO_interface {
 	public void insert_re(MessageVO messageVO) {
 //UPDATE_MESSAGE_RESPONSE = "insert into Message ( mContent,mTime,messageID_response,memberID,
 //							 courseID,status) values (?, ?, ?, ?, ?,?)";
-		hibernateTemplate.bulkUpdate(UPDATE_MESSAGE_RESPONSE,messageVO.getmContent(),messageVO.getmTime(),
-							messageVO.getMessageID_response(),messageVO.getCourseID(),messageVO.getStatus());		
+		hibernateTemplate.save(messageVO);		
 	}
 
 	@Override

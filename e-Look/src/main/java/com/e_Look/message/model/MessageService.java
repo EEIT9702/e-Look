@@ -42,15 +42,14 @@ public class MessageService {
 	
 	public void addResponse(String mContent,Integer messageID_response,Integer memberID,Integer courseID, Byte status)
 	   {
-//		System.out.println(mContent);
-//		System.out.println(courseID);
-//		System.out.println(messageID_response);
-//		System.out.println(memberID);
-//		System.out.println(status);
+
 		MemberVO memberVO = memberDAO.findByPrimaryKey(memberID);
-		System.out.println(memberVO);
+		
 		MessageVO messageVO = new MessageVO();
 		messageVO.setmContent(mContent);
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		Timestamp mTime=Timestamp.valueOf(sdf.format(System.currentTimeMillis()));
+		messageVO.setmTime(mTime);
 		messageVO.setMessageID_response(messageID_response);
 		messageVO.setMemberVO(memberVO);
 		messageVO.setCourseID(courseID);
@@ -67,6 +66,7 @@ public class MessageService {
 //		return dao.findByPrimaryKey(messageID);
 	}
 	public List<MessageVO> findCourseRe(Integer courseID){
+		System.out.println(dao.findMessageByCourseID(courseID));
 		return dao.findMessageByCourseID(courseID);
 	} 
 	
