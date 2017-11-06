@@ -35,7 +35,7 @@ public class CourseDAO implements CourseDAO_interface {
 	private static final String UPDATE_AVG_SCORE = "UPDATE CourseVO SET avgScore=? WHERE courseID=?";
 	private static final String SELECT_ALL_FREE_COURSE = "FROM CourseVO WHERE status=2 AND soldPrice=0";
 	private static final String SELECT_ALL_ONLINE_COURSE = "FROM CourseVO WHERE status=2 AND soldPrice>0";
-	private static final String SELECT_ALL_FUNDRAISE_COURSE = "FROM CourseVO WHERE status=3 AND fundStartDate <= getDate()";
+	private static final String SELECT_ALL_FUNDRAISE_COURSE = "FROM CourseVO WHERE status=3 AND fundStartDate <= getDate() ORDER BY fundEndDate";
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)

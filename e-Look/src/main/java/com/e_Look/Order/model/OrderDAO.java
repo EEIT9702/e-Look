@@ -1,26 +1,13 @@
 package com.e_Look.Order.model;
 
-import java.sql.Connection;
 import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.LinkedList;
 import java.util.List;
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.e_Look.Order.model.OrderDAO_interface;
 @Transactional(readOnly = true)
 public class OrderDAO implements OrderDAO_interface {
 	public HibernateTemplate hibernateTemplate;
@@ -70,7 +57,14 @@ public class OrderDAO implements OrderDAO_interface {
 
 	@Override
 	public OrderVO findMemberUncheckOrder(Integer memberID) {
-		return (OrderVO)hibernateTemplate.find("from OrderVO where orderTime is null and memberID = ?",memberID).get(0);
+		
+		OrderVO OrderVO=null;
+			
+		List<OrderVO> list=(List<OrderVO>) hibernateTemplate.find("from OrderVO where orderTime is null and memberID = ?",memberID);
+		if(list.size()>0){
+			list.get(0);
+		}
+		return OrderVO;		
 	}
 
 	@Override

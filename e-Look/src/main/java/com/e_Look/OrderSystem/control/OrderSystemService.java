@@ -8,13 +8,10 @@ import java.util.List;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.e_Look.CourseClassDetails.CourseClassDetailsDAO;
 import com.e_Look.CourseClassDetails.CourseClassDetailsVO;
 import com.e_Look.CourseClassDetails.CourseClassDetails_interface;
-import com.e_Look.Order.model.OrderDAO;
 import com.e_Look.Order.model.OrderDAO_interface;
 import com.e_Look.Order.model.OrderVO;
-import com.e_Look.OrderDetails.model.OrderDetailsDAO;
 import com.e_Look.OrderDetails.model.OrderDetailsDAO_interface;
 import com.e_Look.OrderDetails.model.OrderDetailsVO;
 import com.e_Look.buyCourse.model.BuyCourseDAO_interface;
