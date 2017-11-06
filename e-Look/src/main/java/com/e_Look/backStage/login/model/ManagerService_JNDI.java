@@ -4,7 +4,7 @@ public class ManagerService_JNDI {
 private Manager_interface dao;
 
 public ManagerService_JNDI() {
-	dao=new ManagerDAO();
+	dao=new ManagerDAO_JNDI();
 }
 
 public ManagerVO findByManagerID(String managerID) {

@@ -1,6 +1,12 @@
 package com.e_Look.message.model;
 
+import java.text.SimpleDateFormat;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.e_Look.member.model.MemberDAO;
 import com.e_Look.member.model.MemberDAO_interface;
@@ -10,8 +16,12 @@ public class MessageService {
 	private MessageDAO_interface dao;    //多型多
 	private MemberDAO_interface memberDAO;
 	public MessageService() {
-		dao = new MessageDAO();
-		memberDAO= new MemberDAO();
+		
+		
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config-jndi.xml");
+        // 建立DAO物件
+		 dao =(MessageDAO_interface) context.getBean("MessageDAO");
+		 memberDAO =(MemberDAO_interface) context.getBean("memberDAO");
 	}
 	public void addMessage(String mContent,Integer memberID,Integer courseID, Byte status)
 	   {
@@ -20,6 +30,10 @@ public class MessageService {
 		MessageVO messageVO = new MessageVO();
 		messageVO.setmContent(mContent);
         //mTime時間由dao產生
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		Timestamp mTime=Timestamp.valueOf(sdf.format(System.currentTimeMillis()));
+		
+		messageVO.setmTime(mTime);
 		messageVO.setMemberVO(memberVO);
 		messageVO.setCourseID(courseID);
 		messageVO.setStatus(status);
@@ -28,15 +42,14 @@ public class MessageService {
 	
 	public void addResponse(String mContent,Integer messageID_response,Integer memberID,Integer courseID, Byte status)
 	   {
-//		System.out.println(mContent);
-//		System.out.println(courseID);
-//		System.out.println(messageID_response);
-//		System.out.println(memberID);
-//		System.out.println(status);
+
 		MemberVO memberVO = memberDAO.findByPrimaryKey(memberID);
-		System.out.println(memberVO);
+		
 		MessageVO messageVO = new MessageVO();
 		messageVO.setmContent(mContent);
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		Timestamp mTime=Timestamp.valueOf(sdf.format(System.currentTimeMillis()));
+		messageVO.setmTime(mTime);
 		messageVO.setMessageID_response(messageID_response);
 		messageVO.setMemberVO(memberVO);
 		messageVO.setCourseID(courseID);
@@ -53,6 +66,7 @@ public class MessageService {
 //		return dao.findByPrimaryKey(messageID);
 	}
 	public List<MessageVO> findCourseRe(Integer courseID){
+		System.out.println(dao.findMessageByCourseID(courseID));
 		return dao.findMessageByCourseID(courseID);
 	} 
 	
@@ -64,6 +78,5 @@ public class MessageService {
 		return dao.findAllResponse(messageID_response);
 	}
 
-	
 
 }

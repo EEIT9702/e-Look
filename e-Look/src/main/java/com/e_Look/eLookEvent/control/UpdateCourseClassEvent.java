@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 
 import com.e_Look.courseClass.CourseClassService;
 import com.e_Look.courseClass.CourseClassVO;
-import com.e_Look.eLookEvent.eLookEventService;
+import com.e_Look.eLookEvent.eLookEventService_JNDI;
 import com.e_Look.eLookEvent.eLookEventVO;
 
 @WebServlet(urlPatterns = "/UpdateCourseClassEvent", loadOnStartup = 2)
@@ -25,7 +25,7 @@ public class UpdateCourseClassEvent extends HttpServlet {
 //		calendar.set(Calendar.HOUR_OF_DAY, 0);
 //		calendar.set(Calendar.MINUTE, 0);
 //		calendar.set(Calendar.SECOND, 0);
-		eLookEventService eventSvc = new eLookEventService();
+		eLookEventService_JNDI eventSvc = new eLookEventService_JNDI();
 		CourseClassService ccSvc = new CourseClassService();
 //		Date date = calendar.getTime();
 		Date date = new Date();
