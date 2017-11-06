@@ -18,7 +18,7 @@ public class MemberVO implements Serializable {
 	private String hobby;
 	private Date registerDate;
 	private Byte status;
-	private Integer count;
+	private Integer counts;
 	private String address;
 	public MemberVO(){};
 	
@@ -111,12 +111,12 @@ public class MemberVO implements Serializable {
 		this.status = status;
 	}
 
-	public Integer getCount() {
-		return count;
+	public Integer getCounts() {
+		return counts;
 	}
 
-	public void setCount(Integer count) {
-		this.count = count;
+	public void setCounts(Integer counts) {
+		this.counts = counts;
 	}
 
 	public String getAddress() {
@@ -146,7 +146,7 @@ public class MemberVO implements Serializable {
 	public String toString() {
 		return "MemberVO [memberID=" + memberID + ", email=" + email + ", mPassword=" + mPassword + ", mName=" + mName
 				+ ", mPhoto=" + mPhoto + ", aboutme=" + aboutme + ", skill=" + skill + ", hobby=" + hobby
-				+ ", registerDate=" + registerDate + ", status=" + status + ", count=" + count + ", address=" + address
+				+ ", registerDate=" + registerDate + ", status=" + status + ", count=" + counts + ", address=" + address
 				+ "]";
 	}
 

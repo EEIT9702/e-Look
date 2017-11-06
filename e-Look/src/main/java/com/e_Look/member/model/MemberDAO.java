@@ -20,7 +20,7 @@ public class MemberDAO implements MemberDAO_interface {
 	private static final String UPDATE_MEMBER = "update MemberVO set email=?, mPassword=?, mName=?,aboutme=?, skill=?, hobby=?, address=? where memberID= ?";
 	private static final String UPDATE_MEMBER_IMAGE = "update MemberVO set mPhoto=? where memberID=?";
 	private static final String UPDATE_STATUS = "update MemberVO set status=? where memberID= ?";
-	private static final String UPDATE_COUNT = "update MemberVO set count=? where memberID= ?";
+	private static final String UPDATE_COUNT = "update MemberVO set counts=? where memberID= ?";
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
@@ -48,7 +48,7 @@ public class MemberDAO implements MemberDAO_interface {
 		} else if (update.equalsIgnoreCase("status")) {
 			hibernateTemplate.bulkUpdate(UPDATE_STATUS, memberVO.getStatus(), memberVO.getMemberID());
 		} else if (update.equalsIgnoreCase("count")) {
-			hibernateTemplate.bulkUpdate(UPDATE_COUNT, memberVO.getCount(), memberVO.getMemberID());
+			hibernateTemplate.bulkUpdate(UPDATE_COUNT, memberVO.getCounts(), memberVO.getMemberID());
 		}
 	}
 
@@ -135,20 +135,32 @@ public class MemberDAO implements MemberDAO_interface {
 //		System.out.println(memberVO4.getCount());
 //		System.out.println(memberVO4.getAddress());
 		
-		List<MemberVO> list=dao.getAll();
-		for(MemberVO memberVO :list){
-			System.out.print(memberVO.getMemberID()+"  ");
-			System.out.print(memberVO.getEmail()+"  ");
-			System.out.print(memberVO.getmPassword()+"  ");
-			System.out.print(memberVO.getmName()+"  ");
-			System.out.print(memberVO.getmPhoto()+"  ");
-			System.out.print(memberVO.getSkill()+"  ");
-			System.out.print(memberVO.getHobby()+"  ");
-			System.out.print(memberVO.getRegisterDate()+"  ");
-			System.out.print(memberVO.getStatus()+"  ");
-			System.out.print(memberVO.getCount()+"  ");
-			System.out.println(memberVO.getAddress());
-		}
+//		//更新會員count
+		MemberVO memberVO5=new MemberVO();
+		memberVO5.setMemberID(100001);
+		memberVO5.setCounts(1);
+		dao.update(memberVO5, "count");
+		
+//		//更新會員status
+//		MemberVO memberVO6=new MemberVO();
+//		memberVO6.setMemberID(100001);
+//		memberVO6.setStatus((byte)2);
+//		dao.update(memberVO6, "status");
+		
+//		List<MemberVO> list=dao.getAll();
+//		for(MemberVO memberVO :list){
+//			System.out.print(memberVO.getMemberID()+"  ");
+//			System.out.print(memberVO.getEmail()+"  ");
+//			System.out.print(memberVO.getmPassword()+"  ");
+//			System.out.print(memberVO.getmName()+"  ");
+//			System.out.print(memberVO.getmPhoto()+"  ");
+//			System.out.print(memberVO.getSkill()+"  ");
+//			System.out.print(memberVO.getHobby()+"  ");
+//			System.out.print(memberVO.getRegisterDate()+"  ");
+//			System.out.print(memberVO.getStatus()+"  ");
+//			System.out.print(memberVO.getCount()+"  ");
+//			System.out.println(memberVO.getAddress());
+//		}
 		
 	}
 
