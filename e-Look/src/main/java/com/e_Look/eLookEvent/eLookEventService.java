@@ -2,26 +2,19 @@ package com.e_Look.eLookEvent;
 
 import java.util.List;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.e_Look.ad.AdDAO_interface;
+
 public class eLookEventService {
 private eLookEvent_interface dao;
 public eLookEventService() {
-	dao=new eLookEventDAO();
+	ApplicationContext context = new ClassPathXmlApplicationContext("beans-config-jndi.xml");
+    // 建立DAO物件
+	 dao =(eLookEvent_interface) context.getBean("eLookEventDAO");
 }
-public eLookEventVO addeLookEvent(String eventName,java.sql.Date eStartDate, java.sql.Date eEndDate,
-		Double discount,String courseClass1,String courseClass2,String courseClass3) {
 
-	eLookEventVO eLookEventVO = new eLookEventVO();
-	eLookEventVO.setEventName(eventName);
-	eLookEventVO.seteStartDate(eStartDate);
-	eLookEventVO.seteEndDate(eEndDate);
-	eLookEventVO.setDiscount(discount);
-	eLookEventVO.setCourseClass1(courseClass1);
-	eLookEventVO.setCourseClass2(courseClass2);
-	eLookEventVO.setCourseClass3(courseClass3);
-	dao.insert(eLookEventVO);
-
-	return eLookEventVO;
-}
 public eLookEventVO getOneeLookEvent(Integer eventID) {
 	return dao.findByPrimaryKey(eventID);
 }
