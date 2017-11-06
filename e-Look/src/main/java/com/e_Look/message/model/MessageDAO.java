@@ -122,28 +122,26 @@ public class MessageDAO implements MessageDAO_interface {
 		MessageDAO_interface dao =(MessageDAO_interface) context.getBean("MessageDAO");
 		MessageVO messageVO1=new MessageVO();
 		MemberVO memberVO=new MemberVO();
-		memberVO.setMemberID(100004);
+//		memberVO.setMemberID(100004);
 //		新增
 //		messageVO1.setmContent("spring測試");
-//		messageVO1.setCourseID(200002);
+//		messageVO1.setCourseID(200003);
 //		messageVO1.setMemberVO(memberVO);
 //		messageVO1.setStatus((byte)0);
 //		Timestamp ts = new Timestamp(System.currentTimeMillis());		
 //		messageVO1.setmTime(ts);
 //		dao.insert(messageVO1);
 //      新增回應
-		messageVO1.setmContent("spring測試回應");
-		messageVO1.setCourseID(200002);
-		messageVO1.setMemberVO(memberVO);
-		messageVO1.setStatus((byte)0);
-		messageVO1.setMessageID_response(1006);
-		Timestamp ts = new Timestamp(System.currentTimeMillis());		
-		messageVO1.setmTime(ts);
-		dao.insert(messageVO1);
+//		messageVO1.setmContent("spring測試回應");
+//		messageVO1.setCourseID(200002);
+//		messageVO1.setMemberVO(memberVO);
+//		messageVO1.setStatus((byte)0);
+//		messageVO1.setMessageID_response(1006);
+//		Timestamp ts = new Timestamp(System.currentTimeMillis());		
+//		messageVO1.setmTime(ts);
+//		dao.insert(messageVO1);
 		
-		
-		
-		List<MessageVO> list=dao.getAll();
+		List<MessageVO> list=dao.findMessageByCourseID(200003);
 		for(MessageVO messageVO:list){
 			System.out.println(messageVO.getMessageID());
 			System.out.println(messageVO.getmTime());
@@ -153,5 +151,16 @@ public class MessageDAO implements MessageDAO_interface {
 			System.out.println(messageVO.getMemberVO());
 			
 		}
+		//查全部
+//		List<MessageVO> list=dao.getAll();
+//		for(MessageVO messageVO:list){
+//			System.out.println(messageVO.getMessageID());
+//			System.out.println(messageVO.getmTime());
+//			System.out.println(messageVO.getmContent());
+//			System.out.println(messageVO.getMessageID_response());
+//			System.out.println(messageVO.getCourseID());
+//			System.out.println(messageVO.getMemberVO());
+//			
+//		}
 	}
 }

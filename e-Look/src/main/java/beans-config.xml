@@ -96,7 +96,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
 	<!-- MessageDAO -->
-	<bean id="MessageDAO" class="com.e_Look.message.model.MessageDAO_spring">
+	<bean id="MessageDAO" class="com.e_Look.message.model.MessageDAO">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
 
