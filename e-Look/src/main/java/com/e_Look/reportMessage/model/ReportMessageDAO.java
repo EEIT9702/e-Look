@@ -68,7 +68,7 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 			+ " FROM Message m INNER JOIN ReportMessage rm ON m.messageID = "
 			+ "rm.reportMessageID WHERE rm.status=?";
 	@Override
-	public String getJSON(Integer status) {
+	public String getJSON(Byte status) {
 		String jsonString;
 		List <ReportMessageVO>l2 = (List<ReportMessageVO>) hibernateTemplate.find("from ReportMessageVO WHERE status=?", status);
 		

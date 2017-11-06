@@ -10,6 +10,6 @@ public interface ReportMessageDAO_interface {
 	public ReportMessageVO findByReportId(Integer reportId);
 	public List<ReportMessageVO> getNotHandle();
 	public List<ReportMessageVO> getAll();
-	public String getJSON(Integer status);
+	public String getJSON(Byte status);
 }
  

@@ -133,8 +133,8 @@
 		    //讀取到剛剛觸發帶入的值,並放入id
 		   function loadReportMessage(id){
 		    $.getJSON('ReportMessageControl',{"status":id},function(datas){
-		    	//console.log(datas)
-
+		    	console.log(datas);
+				console.log("11111");
 		    	//datas = [] array
 		    	//建一個fragment容器,並加上$()轉成jQuery物件去裝迴圈裡產生的物件
 		    	var fragment = $(document.createDocumentFragment());
