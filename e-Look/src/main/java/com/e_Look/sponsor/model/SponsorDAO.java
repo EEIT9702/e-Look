@@ -18,9 +18,11 @@ import javax.sql.DataSource;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.e_Look.Course.CourseDAO_interface;
-
+@Transactional(readOnly = true)
 public class SponsorDAO implements SponsorDAO_interface {
 	public HibernateTemplate hibernateTemplate;
 	public void setHibernateTemplate(HibernateTemplate hibernateTemplate){
@@ -33,12 +35,14 @@ public class SponsorDAO implements SponsorDAO_interface {
 	
 
 	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void insert(SponsorVO sponsorVO) {
 		 hibernateTemplate.saveOrUpdate(sponsorVO);	
 	}
 
 
 	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void delete(Integer courseID) {
 		SponsorVO sponsorVO = new SponsorVO();
 		sponsorVO.setCourseID(courseID);
