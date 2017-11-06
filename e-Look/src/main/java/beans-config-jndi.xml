@@ -100,15 +100,20 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
 
+	<!-- MemberBookmarksDAO -->
+	<bean id="MemberBookmarksDAO" class="com.e_Look.memberBookmarks.model.MemberBookmarksDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+
+
 
 	<!-- eLookEventDAO -->
-<bean id="eLookEventDAO" class="com.e_Look.eLookEvent.eLookEventDAO">
+	<bean id="eLookEventDAO" class="com.e_Look.eLookEvent.eLookEventDAO">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
 
 	<!-- MessageDAO -->
 	<bean id="MessageDAO" class="com.e_Look.message.model.MessageDAO">
-
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
 	
