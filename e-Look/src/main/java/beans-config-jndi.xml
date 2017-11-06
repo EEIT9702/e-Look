@@ -93,9 +93,16 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
 
+
 	<!-- sponsorDAO -->
 	<bean id="sponsorDAO"
 		class="com.e_Look.sponsor.model.SponsorDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+
+
+	<!-- eLookEventDAO -->
+<bean id="eLookEventDAO" class="com.e_Look.eLookEvent.eLookEventDAO">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
 
@@ -104,6 +111,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
+
 	<!-- <bean id="shoppingCartDAO" class="com.e_Look.shoppingCart.model.spring.ShoppingCartDAO"> -->
 	<!-- <property name="hibernateTemplate" ref="hibernateTemplate"/> -->
 	<!-- </bean> -->

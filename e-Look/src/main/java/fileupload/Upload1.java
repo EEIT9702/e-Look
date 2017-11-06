@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import com.e_Look.eLookEvent.eLookEventDAO;
+import com.e_Look.eLookEvent.eLookEventDAO_JNDI;
 import com.e_Look.eLookEvent.eLookEventVO;
 
 /*@MultipartConfig 之屬性設定
@@ -58,7 +58,7 @@ public class Upload1 extends HttpServlet {
 		vo.seteStartDate(da);
 		vo.seteEndDate(da1);
 		vo.setDiscount(d);
-		new eLookEventDAO().insert(vo);
+		new eLookEventDAO_JNDI().insert(vo);
 		
 		//建立資料夾		
 		//之後上傳檔案的路徑可以根據memberID和courseID動態變更		

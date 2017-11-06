@@ -13,7 +13,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.e_Look.eLookEvent.eLookEventDAO;
+import com.e_Look.eLookEvent.eLookEventDAO_JNDI;
 import com.e_Look.eLookEvent.eLookEventVO;
 
 
@@ -186,7 +186,7 @@ public class CourseClassDAO_JNDI implements CourseClass_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		eLookEventDAO eedao = new eLookEventDAO(); 
+		eLookEventDAO_JNDI eedao = new eLookEventDAO_JNDI(); 
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_COURSE_CLASS);
@@ -228,7 +228,7 @@ public class CourseClassDAO_JNDI implements CourseClass_interface{
 	public List<CourseClassVO> getByEventID(Integer eventID){
 		
 		List<CourseClassVO> event_courseClass = new LinkedList<CourseClassVO>();
-		eLookEventDAO eedao = new eLookEventDAO(); 
+		eLookEventDAO_JNDI eedao = new eLookEventDAO_JNDI(); 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -276,7 +276,7 @@ public class CourseClassDAO_JNDI implements CourseClass_interface{
 	public List<CourseClassVO> getAll() {
 		
 		List<CourseClassVO> event_courseClass = new LinkedList<CourseClassVO>();
-		eLookEventDAO eedao = new eLookEventDAO(); 
+		eLookEventDAO_JNDI eedao = new eLookEventDAO_JNDI(); 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

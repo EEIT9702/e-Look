@@ -85,7 +85,7 @@ small, .small {
 			<div class="card-footer">
 				<small style="font-size: 18px;">課程時間:${freeCourse.courseVO.courseLength}分鐘</small>
 				<br>
-				<small style="font-size: 18px;" class="number" alt="${freeCourse.courseVO.courseID}">購買人數:xxx人</small>
+				<small style="font-size: 18px;" class="number" alt="${freeCourse.courseVO.courseID}"></small>
 			</div>
 		</div>
 	</div>
@@ -114,7 +114,7 @@ small, .small {
 			<div class="card-footer">
 				<small style="font-size: 18px;">課程時間:${courseVO.courseLength}分鐘</small>
 				<br>
-				<small style="font-size: 18px;" class="number" alt="${courseVO.courseID}">購買人數:xxx人</small>
+				<small style="font-size: 18px;" class="number" alt="${courseVO.courseID}"></small>
 			</div>
 		</div>
 	</div>
