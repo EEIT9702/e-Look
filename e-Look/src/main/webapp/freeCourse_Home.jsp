@@ -397,7 +397,7 @@ function river(){
 }
 $(function(){
 	$(window).resize(function(){	
-		console.log($(window).width());
+		//console.log($(window).width());
 		if($(window).width() < 780) {
 			$("#ob").removeClass("outBorder").addClass("minOutBorder");
 			$("#keyWord").removeClass("inputarea").addClass("minInputarea");
