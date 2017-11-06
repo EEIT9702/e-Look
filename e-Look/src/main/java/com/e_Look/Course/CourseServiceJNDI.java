@@ -11,7 +11,7 @@ import org.apache.commons.io.IOUtils;
 public class CourseServiceJNDI {
 	private CourseDAO_interface dao;
 	public CourseServiceJNDI() {
-		dao = new CourseDAO();
+		dao = new CourseDAO_JNDI();
 	}
 	public Integer CreateNewCourse(Integer memberID) {
 		CourseVO CourseVO1 = new CourseVO();

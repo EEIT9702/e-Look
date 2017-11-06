@@ -14,7 +14,7 @@ public class BuyCourseService_JNDI {
 	//private CourseDAO_interface cdao;
 
 	public BuyCourseService_JNDI() {
-		dao = new BuyCourseDAO();
+		dao = new BuyCourseDAO_JNDI();
 		//cdao = new CourseDAO();
 	}
 	public List<BuyCourseVO> getBuyCourse(Integer memberID){
