@@ -9,7 +9,7 @@
         <composite-id>
             <key-property name="memberID" column="memberID" />
             <key-many-to-one name="courseVO" class="com.e_Look.Course.CourseVO" lazy="false">
-            	<column name="reportMessageID"/>
+            	<column name="courseID"/>
             </key-many-to-one>
         </composite-id>
         

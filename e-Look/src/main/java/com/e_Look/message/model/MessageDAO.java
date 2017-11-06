@@ -35,7 +35,7 @@ public class MessageDAO implements MessageDAO_interface {
 	//修改留言或回應的內容、時間
 	private static final String UPDATE_MESSAGE = "update Message set mContent=?, mTime=? where messageID= ?";
 	//變更留言或回應的狀態
-	private static final String UPDATE_STATUS = "update Message set status=? where messageID= ?";
+	private static final String UPDATE_STATUS = "update MessageVO set status=? where messageID= ?";
 	//刪除留言或回應
 	private static final String DELETE_MESSAGE = "delete from MessageVO where messageID= ?";
 	//選出某筆回應或留言內容
@@ -72,7 +72,7 @@ public class MessageDAO implements MessageDAO_interface {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void updateStatus(Integer messageID,Byte status) {
 		//"update Message set status=? where messageID= ?"
-		hibernateTemplate.bulkUpdate(UPDATE_STATUS, messageID,status);
+		hibernateTemplate.bulkUpdate(UPDATE_STATUS, status,messageID);
 				
 	}
 	@Override

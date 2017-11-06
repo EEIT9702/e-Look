@@ -31,7 +31,7 @@ public class LoadShoppingCart extends HttpServlet {
 			//刪購物車
 			Integer courseID = Integer.parseInt(request.getParameter("courseID"));
 			Integer memberID = Integer.parseInt(request.getParameter("memberID"));
-			ShoppingCartDAO dao = new ShoppingCartDAO();
+			ShoppingCartService dao = new ShoppingCartService();
 			ShoppingCartVO shoppingCartVO=new ShoppingCartVO();
 			CourseVO courseVO=new CourseVO();
 			
@@ -44,7 +44,7 @@ public class LoadShoppingCart extends HttpServlet {
 			//載入購物車
 			Integer memberID = Integer.parseInt(request.getParameter("memberID"));
 			response.setCharacterEncoding("UTF-8");
-			ShoppingCartDAO dao = new ShoppingCartDAO();
+			ShoppingCartService dao = new ShoppingCartService();
 			List<CourseVO> courseVOs = dao.findByMemberID(memberID);
 			String jsonString = JSONValue.toJSONString(courseVOs);  
 			PrintWriter rw = response.getWriter();

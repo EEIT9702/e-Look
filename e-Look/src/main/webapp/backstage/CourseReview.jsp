@@ -32,7 +32,7 @@ color:black;
     <div class="row">
             <div class="container">
                 <div class="navbar-header">
-                    <span class="navbar-brand">e-Look管理員您好80：</span>
+                    <span class="navbar-brand">e-Look管理員您好：</span>
                 </div>       
             </div>
             <div class="container-fluid">

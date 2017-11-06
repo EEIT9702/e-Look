@@ -23,6 +23,7 @@ import com.e_Look.OrderDetails.model.OrderDetailsDAO;
 import com.e_Look.OrderDetails.model.OrderDetailsVO;
 import com.e_Look.member.model.MemberVO;
 import com.e_Look.shoppingCart.model.jdbc.ShoppingCartDAO;
+import com.e_Look.shoppingCart.model.jdbc.ShoppingCartService;
 import com.e_Look.shoppingCart.model.jdbc.ShoppingCartVO;
 import com.e_Look.tool.BuyingPrice;
 
@@ -41,7 +42,7 @@ public class CheckOutFilter implements Filter {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter rw = response.getWriter();
 
-			ShoppingCartDAO scdao = new ShoppingCartDAO();
+			ShoppingCartService scdao = new ShoppingCartService();
 			OrderDAO orderDAO = new OrderDAO();
 			OrderDetailsDAO odDAO = new OrderDetailsDAO();
 

@@ -9,6 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.e_Look.member.model.MemberService;
 import com.e_Look.message.model.MessageDAO_JNDI;
+import com.e_Look.message.model.MessageService;
 import com.e_Look.message.model.MessageVO;
 
 public class ReportMessageService {
@@ -38,20 +39,23 @@ public class ReportMessageService {
 	
 	public void hideMessage(Integer reportID,int status) {
 		//使用Message欄位
-		MessageDAO_JNDI mdao = new MessageDAO_JNDI(); 
+		MessageService mdao = new MessageService(); 
 		//用reportID及ReportMessageDAO去拿出rmVO物件
 		ReportMessageVO rmVO = dao.findByReportId(reportID);
 		//將ReportMessage的狀態設為1,審核結果為遮蔽留言
-		rmVO.setStatus((byte) 1);
+		rmVO.setStatus((byte) status);
 		dao.update(rmVO);
 		
 		Integer memberID = rmVO.getMessageVO().getMemberVO().getMemberID();
+		Integer messageID = rmVO.getMessageVO().getMessageID();
 		
-		MessageVO mVO = rmVO.getMessageVO();		
+		//MessageVO mVO = rmVO.getMessageVO();		
 		//將傳進來的status訊息狀態設定進去Message裡
-		mVO.setStatus((byte)status);
+		//mVO.setStatus((byte)status);
+		
 		//DAO裡有判斷式,使用符合status的update
-		mdao.update(mVO);
+		//System.out.println("memberID = " + memberID + ", messageID = " + messageID);
+		mdao.updateStatus(messageID, (byte)status);
 		
 		MemberService mbServ = new MemberService();
 		mbServ.updateMemberCount(memberID);
