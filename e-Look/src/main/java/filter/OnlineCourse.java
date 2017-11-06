@@ -71,7 +71,7 @@ public class OnlineCourse implements Filter {
 					List<MessageVO> messageVOList = null;
 					
 					messageVOList=messageService.findCourseRe(courseVO.getCourseID());
-					
+					System.out.println("123");
 					//收藏影片
 					MemberBookmarksService memberBookmarksService = new MemberBookmarksService();
 					//收藏講師

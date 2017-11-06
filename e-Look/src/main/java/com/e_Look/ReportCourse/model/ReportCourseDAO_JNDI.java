@@ -226,7 +226,7 @@ public class ReportCourseDAO_JNDI implements ReportCourseDAO_interface {
 	}
 
 	@Override
-	public String getJSON(Integer status) {
+	public String getJSON(byte status) {
 		String jsonString;
 		
 		Connection con = null;

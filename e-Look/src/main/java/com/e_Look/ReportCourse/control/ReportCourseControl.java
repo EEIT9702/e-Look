@@ -65,7 +65,7 @@ public class ReportCourseControl extends HttpServlet {
 		}
 		
 		ReportCourseService rcService = new ReportCourseService();
-		String jsonObj = rcService.getJSON(status);
+		String jsonObj = rcService.getJSON((byte)status);
 		out.println(jsonObj);
 	}
 

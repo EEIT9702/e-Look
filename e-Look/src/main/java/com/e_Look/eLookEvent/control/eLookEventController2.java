@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.e_Look.eLookEvent.eLookEventDAO;
-import com.e_Look.eLookEvent.eLookEventService;
+import com.e_Look.eLookEvent.eLookEventDAO_JNDI;
+import com.e_Look.eLookEvent.eLookEventService_JNDI;
 import com.e_Look.eLookEvent.eLookEventVO;
 
 @WebServlet("/backstage/elookeventinsert2")
@@ -108,7 +108,7 @@ public class eLookEventController2 extends HttpServlet {
 				//eLookEventVO = eLookEventSvc.addeLookEvent(eventName, eStartDate, eEndDate, d, courseClass1, courseClass2,
 				//		courseClass3);
 
-				eLookEventDAO dao=new eLookEventDAO();
+				eLookEventDAO_JNDI dao=new eLookEventDAO_JNDI();
 				dao.insert(eLookEventVO);
 				
 				
@@ -195,7 +195,7 @@ public class eLookEventController2 extends HttpServlet {
 //			eLookEventService empSvc = new eLookEventService();
 //			eLookEventVO = empSvc.updateeLookEvent(empno, ename, job, hiredate, sal,comm, deptno);
 //				
-			eLookEventDAO dao=new eLookEventDAO();
+			eLookEventDAO_JNDI dao=new eLookEventDAO_JNDI();
 			dao.update(eLookEventVO);
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("eLookEventVO", eLookEventVO); // 資料庫update成功後,正確的的empVO物件,存入req
@@ -222,7 +222,7 @@ public class eLookEventController2 extends HttpServlet {
 			/***************************2.開始刪除資料***************************************/
 //			EmpService empSvc = new EmpService();
 //			empSvc.deleteEmp(empno);
-			eLookEventDAO dao=new eLookEventDAO();
+			eLookEventDAO_JNDI dao=new eLookEventDAO_JNDI();
 			dao.delete(eventID);
 			/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
 			String url = "event.jsp";
