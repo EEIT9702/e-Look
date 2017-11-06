@@ -93,13 +93,22 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
 
+
+	<!-- sponsorDAO -->
+	<bean id="sponsorDAO"
+		class="com.e_Look.sponsor.model.SponsorDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+
+
 	<!-- eLookEventDAO -->
 <bean id="eLookEventDAO" class="com.e_Look.eLookEvent.eLookEventDAO">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
-	
+
 	<!-- MessageDAO -->
 	<bean id="MessageDAO" class="com.e_Look.message.model.MessageDAO">
+
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
 	
@@ -116,6 +125,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
