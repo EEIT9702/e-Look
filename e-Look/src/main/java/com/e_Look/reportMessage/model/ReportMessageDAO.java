@@ -6,12 +6,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.json.simple.JSONValue;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import net.minidev.json.JSONValue;
 
 public class ReportMessageDAO implements ReportMessageDAO_interface {
 	public HibernateTemplate hibernateTemplate;
@@ -85,8 +86,9 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 				 m1.put("status", rVO.getStatus());
 				 l1.add(m1);
 			 }
+			 //System.out.println(l1);
 			 jsonString = JSONValue.toJSONString(l1);  
-
+			 			
 		return jsonString;
 	}
 	

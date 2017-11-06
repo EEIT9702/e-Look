@@ -68,7 +68,7 @@ public class ReportMessageControl extends HttpServlet {
 		//使用Service,取出資料庫包裝好的JSON資料並輸出
 		ReportMessageService rmService = new ReportMessageService();
 		String jsonObj = rmService.getJSON((byte)status);
-		System.out.println(jsonObj);
+		//System.out.println(jsonObj);
 		out.println(jsonObj);
 	}
 
