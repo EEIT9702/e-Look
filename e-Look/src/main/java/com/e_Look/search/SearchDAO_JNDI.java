@@ -25,8 +25,8 @@ public class SearchDAO_JNDI implements SearchDAO_interface {
 	}
 	private static final String INSERT_SEARCH = "insert into Search (keyWord,enterTime) values (?,getdate())";
 	// deprecated
-	private static final String UPDATE_SEARCH = "update Search set keyWord=? , enterTime=? where SearchID=?";
-	private static final String DELETE_SEARCH = "delete from Search where SearchID=?";
+	private static final String UPDATE_SEARCH = "update Search set keyWord=? , enterTime=? where keyWord=? and enterTime=?";
+	private static final String DELETE_SEARCH = "delete from Search where keyWord=? and enterTime=?";
 	private static final String DELETE_DATE_SEARCH = "delete from Search where enterTime < ?";
 	private static final String SELECT_ALL_SEARCH = "select keyWord,enterTime from Search";
 
@@ -61,15 +61,16 @@ public class SearchDAO_JNDI implements SearchDAO_interface {
 	}
 
 	@Override
-	public void update(SearchVO SearchVO) {
+	public void update(SearchVO oldSearchVO, SearchVO newSearchVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_SEARCH);
-			pstmt.setString(1, SearchVO.getKeyWord());
-			pstmt.setDate(2, SearchVO.getEnterTime());
-			pstmt.setInt(3, SearchVO.getSearchID());
+			pstmt.setString(1, oldSearchVO.getKeyWord());
+			pstmt.setDate(2, oldSearchVO.getEnterTime());
+			pstmt.setString(3, newSearchVO.getKeyWord());
+			pstmt.setDate(4, newSearchVO.getEnterTime());
 			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -93,13 +94,43 @@ public class SearchDAO_JNDI implements SearchDAO_interface {
 	}
 
 	@Override
-	public void delete(Integer searchID) {
+	public void delete(SearchVO searchVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE_SEARCH);
-			pstmt.setInt(1, searchID);
+			pstmt.setString(1, searchVO.getKeyWord());
+			pstmt.setDate(2, searchVO.getEnterTime());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+	}
+
+	@Override
+	public void dateDelete(Date date) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(DELETE_DATE_SEARCH);
+			pstmt.setDate(1, date);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());

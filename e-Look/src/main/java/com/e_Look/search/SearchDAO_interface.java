@@ -6,7 +6,8 @@ import java.util.List;
 public interface SearchDAO_interface {
 	
 	public void insert(SearchVO searchVO);
-	public void update(SearchVO searchVO);
-	public void delete(Integer searchID);
+	public void update(SearchVO oldSearchVO,SearchVO newSearchVO);
+	public void delete(SearchVO searchVO);
+	public void dateDelete(Date date);
 	public List<SearchVO> getAll();
 }
