@@ -1,4 +1,4 @@
-package init;
+package com.e_Look.tool;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,7 +12,7 @@ import com.google.gson.GsonBuilder;
 
 
 
-public class TestIntDouble {
+public class TestGsonByTimestamp {
 
 	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException {
 		List<MessageVO> list=  new LinkedList<MessageVO>(); 

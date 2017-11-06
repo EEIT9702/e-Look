@@ -10,9 +10,23 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class emailsent
  */
-@WebServlet("/SendEmailServlet")
+@WebServlet(urlPatterns={"/edm/SendEmailServlet"},loadOnStartup=1)
 public class SendEmailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	java.util.Timer time = null;	
+	@Override
+	public void init() throws ServletException {
+		
+		time= new java.util.Timer();
+		time.schedule(new java.util.TimerTask(){
+			@Override
+			public void run() {
+				
+				/*要DEMO時再把註解打開*/
+				//EdmMailSend.sendmail();
+			}	
+		}, new java.util.Date(2017/11/06),1000*60*60*24);
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -22,7 +36,7 @@ public class SendEmailServlet extends HttpServlet {
 //		EdmMain m = new EdmMain();
 //        m.start();
 		//EdmMailSend ems = new EdmMailSend();
-		EdmMailSend.sendmail();
+		//EdmMailSend.sendmail();
 	}
 
 	/**
