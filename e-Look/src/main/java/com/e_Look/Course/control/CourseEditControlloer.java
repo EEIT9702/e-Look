@@ -36,7 +36,7 @@ public class CourseEditControlloer extends HttpServlet {
 	java.util.Timer time = null;	
 	@Override
 	public void init() throws ServletException {
-	System.out.println("募資審核時間器測試");
+	//System.out.println("募資審核時間器測試");
 	time= new java.util.Timer();
 	time.schedule(new java.util.TimerTask(){
 	BuyCourseService BuyCourseService = new BuyCourseService();

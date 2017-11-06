@@ -9,13 +9,13 @@ import com.e_Look.Course.CourseDAO_JDBC;
 import com.e_Look.Course.CourseDAO_interface;
 import com.e_Look.Course.CourseVO;
 
-public class BuyCourseService {
+public class BuyCourseMailService {
 	private BuyCourseDAO_interface dao;
-	//private CourseDAO_interface cdao;
+	private CourseDAO_interface cdao;
 
-	public BuyCourseService() {
+	public BuyCourseMailService() {
 		dao = new BuyCourseDAO();
-		//cdao = new CourseDAO();
+		cdao = new CourseDAO();
 	}
 	public List<BuyCourseVO> getBuyCourse(Integer memberID){
 		
@@ -46,9 +46,9 @@ public class BuyCourseService {
 	}
 	
 	public List<CourseVO> getTopThreeBuyCourse(Integer topNum) {
-		BuyCourseDAO_JDBC bdao = new BuyCourseDAO_JDBC();
-		CourseDAO_JDBC cdao = new CourseDAO_JDBC();
-		List<BuyCourseVO> bcVOs = bdao.getAll();
+//		BuyCourseDAO_JDBC bdao = new BuyCourseDAO_JDBC();
+//		CourseDAO_JDBC cdao = new CourseDAO_JDBC();
+		List<BuyCourseVO> bcVOs = dao.getAll();
 		List<CourseVO> cVO = new LinkedList<CourseVO>();
 		//int[] cc = new int[topNum];
 		HashMap<Integer, Integer> courseIDMap = new HashMap<Integer, Integer>();

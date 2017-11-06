@@ -1,6 +1,7 @@
 package com.e_Look.courseClass;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,11 +30,13 @@ public class CourseClassDAO implements CourseClass_interface{
 	}
 
 	private static final String INSERT_COURSE_CLASS = "INSERT INTO courseClass (ccName) VALUES (?)"; 
-	private static final String UPDATE_COURSE_CLASS = "UPDATE courseClass SET ccName=? eventID=? WHERE CourseClassID=?"; 
-	private static final String DELETE_COURSE_CLASS = "DELETE FROM courseClass WHERE CourseClassID=?"; 
-	private static final String SELECT_COURSE_CLASS = "SELECT CourseClassID,ccName,eventID FROM courseClass WHERE CourseClassID=?";
-	private static final String SELECT_EVENT_COURSE_CLASS = "SELECT CourseClassID,ccName,eventID FROM courseClass WHERE eventID=?";
-	private static final String SELECT_ALL_COURSE_CLASS = "SELECT CourseClassID,ccName,eventID FROM courseClass";
+	private static final String UPDATE_COURSE_CLASS = "UPDATE courseClass SET ccName=? eventID=? WHERE courseClassID=?"; 
+	private static final String DELETE_COURSE_CLASS = "DELETE FROM courseClass WHERE courseClassID=?"; 
+	private static final String SELECT_COURSE_CLASS = "SELECT courseClassID,ccName,eventID FROM courseClass WHERE courseClassID=?";
+	private static final String SELECT_EVENT_COURSE_CLASS = "SELECT courseClassID,ccName,eventID FROM courseClass WHERE eventID=?";
+	private static final String SELECT_ALL_COURSE_CLASS = "SELECT courseClassID,ccName,eventID FROM courseClass";
+	private static final String UPDATE_EVENTID = "UPDATE courseClass SET eventID=? WHERE CourseClassID=?";
+	
 	@Override
 	public void insert(CourseClassVO courseClassVO) {
 		Connection con = null;
@@ -141,6 +144,40 @@ public class CourseClassDAO implements CourseClass_interface{
 		
 	}
 
+	@Override
+	public void updateEventID(CourseClassVO courseClassVO) {
+		Connection con =null;
+		PreparedStatement pstmt=null;
+		try {
+			con = ds.getConnection();
+			
+			pstmt=con.prepareStatement(UPDATE_EVENTID);
+			
+			pstmt.setInt(1,courseClassVO.getEventVO().getEventID());
+			pstmt.setInt(2,courseClassVO.getCourseClassID());
+			pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			throw new RuntimeException("A database error occured. " + e.getMessage());
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
 	
 	@Override
 	public CourseClassVO getByCourseClassID(Integer CourseClassID) {

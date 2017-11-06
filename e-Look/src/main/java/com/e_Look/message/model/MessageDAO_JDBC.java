@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.e_Look.member.model.MemberDAO;
+import com.e_Look.member.model.MemberDAO_JDBC;
+import com.e_Look.member.model.MemberDAO_interface;
+import com.e_Look.member.model.MemberVO;
 
 public class MessageDAO_JDBC implements MessageDAO_interface {
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
@@ -127,14 +130,14 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 	}
 
 	@Override
-	public void update(MessageVO messageVO, String update) {
+	public void update(MessageVO messageVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			if (update.equalsIgnoreCase("message")) {
+			
 				pstmt = con.prepareStatement(UPDATE_MESSAGE);
 				// "update Message set mContent=?, mTime=? where messageID= ?"
 				pstmt.setString(1, messageVO.getmContent());
@@ -142,21 +145,15 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 				pstmt.setTimestamp(2, ts);
 				pstmt.setInt(3, messageVO.getMessageID());
 				pstmt.executeUpdate();
-			} else if (update.equalsIgnoreCase("messageresponse")) {
-				pstmt = con.prepareStatement(UPDATE_MESSAGE_RESPONSE);
-				// "update Message set mContent=?, mTime=? where messageID=?"
-				pstmt.setString(1, messageVO.getmContent());
-				Timestamp ts = new Timestamp(System.currentTimeMillis());
-				pstmt.setTimestamp(2, ts);
-				pstmt.setInt(3, messageVO.getMessageID());
-				pstmt.executeUpdate();
-			} else if (update.equalsIgnoreCase("status")) {
+			
+				
+		
 				pstmt = con.prepareStatement(UPDATE_STATUS);
 				// "update Message set status=? where messageID= ?"
 				pstmt.setByte(1, messageVO.getStatus());
 				pstmt.setInt(2, messageVO.getMessageID());
 				pstmt.executeUpdate();
-			}
+			
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException e) {
@@ -411,12 +408,15 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 	}
 	public static void main(String[] args) {
 		MessageDAO_JDBC dao = new MessageDAO_JDBC();
-		//新增
+		MemberDAO_interface mDAO= new MemberDAO_JDBC();
+//		
+		MemberVO memberVO=mDAO.findByPrimaryKey(100002);
+//		//新增	
 //		MessageVO messageVO1 = new MessageVO();
-//		messageVO1.setmContent("第2筆留言");
+//		messageVO1.setmContent("第1筆留言");
 //		messageVO1.setmTime(new Timestamp(System.currentTimeMillis()));
-//		messageVO1.setMemberID(100002);
-//		messageVO1.setCourseID(200002);
+//		messageVO1.setMemberVO(memberVO);
+//		messageVO1.setCourseID(200003);
 //		messageVO1.setStatus((byte) 0);
 //		int id =dao.insert(messageVO1);
 //		System.out.println(id);
@@ -430,14 +430,14 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 		
 		
 		//新增回應
-//		MessageVO messageVO3 = new MessageVO();
-//		messageVO3.setmContent("第2筆回應");
-//		messageVO3.setmTime(new Timestamp(System.currentTimeMillis()));
-//		messageVO3.setMessageID_response(1002);//抓留言ID
-//		messageVO3.setMemberID(100003);
-//		messageVO3.setCourseID(200002);//抓課程ID與留言相同
-//		messageVO3.setStatus((byte)0);
-//		dao.insert_re(messageVO3);
+		MessageVO messageVO3 = new MessageVO();
+		messageVO3.setmContent("第3筆回應");
+		messageVO3.setmTime(new Timestamp(System.currentTimeMillis()));
+		messageVO3.setMessageID_response(1002);//抓留言ID
+		messageVO3.setMemberVO(memberVO);
+		messageVO3.setCourseID(200002);//抓課程ID與留言相同
+		messageVO3.setStatus((byte)0);
+		dao.insert_re(messageVO3);
 		
 		
 		//更新回應
@@ -460,25 +460,25 @@ public class MessageDAO_JDBC implements MessageDAO_interface {
 		
 		
 		//查詢多個回應
-//		List<MessageVO> messageVO=dao.findAllResponse(1002);
+//		List<MessageVO> messageVO=dao.findAllResponse(1001);
 //		for(MessageVO m:messageVO){
 //			System.out.print(m.getMessageID()+" ");
 //			System.out.print(m.getmTime()+" ");
 //			System.out.print(m.getmContent()+" ");
 //			System.out.print(m.getMessageID_response()+" ");
 //			System.out.print(m.getCourseID()+" ");
-//			System.out.print(m.getMemberID()+" ");
+//			System.out.print(m.getMemberVO().getMemberID()+" ");
 //			System.out.println(m.getStatus());
 //		}
 		//查詢該課程多筆留言
-//		List<MessageVO> messageVO=dao.findMessageByCourseID(200002);
+//		List<MessageVO> messageVO=dao.findMessageByCourseID(200003);
 //		for(MessageVO m:messageVO){
 //			System.out.print(m.getMessageID()+" ");
 //			System.out.print(m.getmTime()+" ");
 //			System.out.print(m.getmContent()+" ");
 //			System.out.print(m.getMessageID_response()+" ");
 //			System.out.print(m.getCourseID()+" ");
-//			System.out.print(m.getMemberID()+" ");
+//			System.out.print(m.getMemberVO().getMemberID()+" ");
 //			System.out.println(m.getStatus());
 //		}
 //		
