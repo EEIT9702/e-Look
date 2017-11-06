@@ -96,7 +96,10 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
 
-
+	<!-- ReportMessageDAO -->
+	<bean id="reportMessageDAO" class="com.e_Look.reportMessage.model.ReportMessageDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
 
 
 
