@@ -10,8 +10,8 @@
         <id name="courseID" column="courseID">
         	<generator class="identity"/>
         </id>
-            <property name="courseName" column="courseName" />
-            <property name="cPhoto" column="cPhoto" />
+            <property name="courseName" column="courseName"/>
+            <property name="cPhoto" column="cPhoto" type="binary"/>
             <property name="preTool" column="preTool" />
             <property name="background" column="background" />
             <property name="ability" column="ability" />
