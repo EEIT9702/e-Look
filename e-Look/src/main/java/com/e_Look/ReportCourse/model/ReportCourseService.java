@@ -4,6 +4,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.e_Look.Course.CourseDAO;
+import com.e_Look.Course.CourseService;
 import com.e_Look.Course.CourseVO;
 import com.e_Look.member.model.MemberService;
 
@@ -32,7 +33,7 @@ public class ReportCourseService {
 	}
 	
 	public void discontinuedCourse(Integer reportID,int status) {
-		CourseDAO cdao = new CourseDAO();
+		CourseService cdao = new CourseService();
 		ReportCourseVO rcVO = dao.findByReportId(reportID);
 		rcVO.setStatus((byte) 1);
 		dao.update(rcVO);

@@ -54,7 +54,7 @@ public class ReportMessageService {
 		//mVO.setStatus((byte)status);
 		
 		//DAO裡有判斷式,使用符合status的update
-		System.out.println("memberID = " + memberID + ", messageID = " + messageID);
+		//System.out.println("memberID = " + memberID + ", messageID = " + messageID);
 		mdao.updateStatus(messageID, (byte)status);
 		
 		MemberService mbServ = new MemberService();

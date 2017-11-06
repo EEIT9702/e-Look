@@ -46,13 +46,13 @@ public class ReportMessageControl extends HttpServlet {
 		//獲得點擊"遮蔽留言"或"不處理"所傳來的對應reportID
 		String reportIDSTR = request.getParameter("reportIDx");
 		if(status == 1){
-			System.out.println("status == 1");
+			//System.out.println("status == 1");
 			if(reportIDSTR != null){
 				//System.out.println("reportIDSTR = " + reportIDSTR);
 				reportID = Integer.parseInt(reportIDSTR);
 				//使用Service並傳入對應的reportID以及對 Message欄位所做出的判斷status
 				ReportMessageService rmServ = new ReportMessageService();
-				System.out.println(reportID+"*****"+status);
+				//System.out.println(reportID+"*****"+status);
 				rmServ.hideMessage(reportID,status);
 			}
 		}else if(status == 2){
