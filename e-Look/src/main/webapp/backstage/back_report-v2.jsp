@@ -4,13 +4,6 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.e_Look.reportMessage.model.*"%>
 <%@ page import="com.e_Look.message.model.*"%>
-<%
-	ReportMessageDAO dao = new ReportMessageDAO();
-
-    List<ReportMessageVO> list = dao.getNotHandle();
-    pageContext.setAttribute("list",list);
-
-%>
 <!DOCTYPE>
 <html>
 <head>
