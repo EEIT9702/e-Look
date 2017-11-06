@@ -132,7 +132,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	</bean>
 	
 	<!-- ReportCourseDAO -->
-	<bean id="reportCourseDAO" class="com.e_Look.ReportCourse.model.reportCourseDAO">
+	<bean id="reportCourseDAO" class="com.e_Look.ReportCourse.model.ReportCourseDAO">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
 

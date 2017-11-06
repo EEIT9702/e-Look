@@ -22,7 +22,7 @@ public class ReportCourseService_JNDI {
 			dao.insert(reportCourseVO);
 	}
 
-	public String getJSON(Integer status) {
+	public String getJSON(byte status) {
 		return dao.getJSON(status);
 	}
 	

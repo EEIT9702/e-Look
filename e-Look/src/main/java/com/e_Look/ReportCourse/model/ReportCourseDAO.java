@@ -74,7 +74,7 @@ public class ReportCourseDAO implements ReportCourseDAO_interface {
 			+ "rc.reportMemberID, c.courseID, c.soldPrice FROM Course c INNER JOIN ReportCourse rc "
 			+ "ON c.courseID = rc.reportCourseID WHERE rc.status=?";
 	@Override
-	public String getJSON(Integer status) {
+	public String getJSON(byte status) {
 		String jsonString;
 		List<ReportCourseVO> l2 = (List<ReportCourseVO>) hibernateTemplate.find("from ReportCourseVO WHERE status =?", status);
 		
@@ -132,13 +132,13 @@ public class ReportCourseDAO implements ReportCourseDAO_interface {
 		
 		//查詢全部
 		List<ReportCourseVO> list = dao.getAll();
-		for(ReportCourseVO reportCourseVO1 : list) {
-			System.out.print(reportCourseVO1.getReportId() + "  ");
-			System.out.print(reportCourseVO1.getCourseVO().getCourseID() + "  ");
-			System.out.print(reportCourseVO1.getReportMemberID() + "  ");
-			System.out.print(reportCourseVO1.getReportContent() + "  ");
-			System.out.print(reportCourseVO1.getReportTime() + "  ");
-			System.out.print(reportCourseVO1.getStatus() + "\n");
+		for(ReportCourseVO reportCourseVO4 : list) {
+			System.out.print(reportCourseVO4.getReportId() + "  ");
+			System.out.print(reportCourseVO4.getCourseVO().getCourseID() + "  ");
+			System.out.print(reportCourseVO4.getReportMemberID() + "  ");
+			System.out.print(reportCourseVO4.getReportContent() + "  ");
+			System.out.print(reportCourseVO4.getReportTime() + "  ");
+			System.out.print(reportCourseVO4.getStatus() + "\n");
 		}
 		
 	}
