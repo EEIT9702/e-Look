@@ -2,16 +2,11 @@ package com.e_Look.memberSubscription;
 
 import java.util.List;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-public class MemberSubscriptionService {
+public class MemberSubscriptionService_JNDI {
 	private MemberSubscriptionDAO_interface dao;
 
-	public MemberSubscriptionService() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config-jndi.xml");
-        // 建立DAO物件
-		dao = (MemberSubscriptionDAO_interface) context.getBean("memberSubscriptionDAO");
+	public MemberSubscriptionService_JNDI() {
+		dao = new MemberSubscriptionDAO();
 	}
 
 	public void insertMemberSubscription(Integer memberID,Integer memberTrackID) {

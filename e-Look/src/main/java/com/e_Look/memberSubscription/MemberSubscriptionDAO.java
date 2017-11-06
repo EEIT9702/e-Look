@@ -13,15 +13,17 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+@Transactional(readOnly=false)
 public class MemberSubscriptionDAO implements MemberSubscriptionDAO_interface {
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/eLookDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
+	public HibernateTemplate hibernateTemplate;
+	public void setHibernateTemplate(HibernateTemplate hibernateTemplate){
+		this.hibernateTemplate = hibernateTemplate;
 	}
 	
 	private static final String INSERT_MEMBERSUBSCRIPTION =
@@ -37,225 +39,74 @@ public class MemberSubscriptionDAO implements MemberSubscriptionDAO_interface {
 			"SELECT memberTrackID, memberID FROM MemberSubscription";
 	
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void insert(MemberSubscriptionVO memberSubscriptionVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_MEMBERSUBSCRIPTION);
-			pstmt.setInt(1, memberSubscriptionVO.getMemberID());
-			pstmt.setInt(2, memberSubscriptionVO.getMemberTrackID());
-			pstmt.executeUpdate();
-
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
+		hibernateTemplate.save(memberSubscriptionVO);
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void update(MemberSubscriptionVO memberSubscriptionVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			//"UPDATE MemberSubscription SET memberTrackID=? WHERE memberID=?";
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(UPDATE_MEMBERSUBSCRIPTION);
-			pstmt.setInt(1, memberSubscriptionVO.getMemberID());
-			pstmt.setInt(2, memberSubscriptionVO.getMemberTrackID());
-			pstmt.executeUpdate();
-
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-
+		hibernateTemplate.update(memberSubscriptionVO);
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void delete(Integer memberID, Integer memberTrackID) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			//"DELETE FROM MemberSubscription WHERE memberID=? and memberTrackID =?";
-			con = ds.getConnection();
-			pstmt=con.prepareStatement(DELETE_MEMBERSUBSCRIPTION);
-			pstmt.setInt(1, memberID);
-			pstmt.setInt(2, memberTrackID);
-			pstmt.executeUpdate();
-
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
+		//hibernateTemplate.delete(memberID);
+		hibernateTemplate.bulkUpdate("DELETE FROM MemberSubscriptionVO WHERE memberID=? and memberTrackID =?", memberID, memberTrackID);
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
 	public List<MemberSubscriptionVO> findByMemberID(Integer memberID) {
-		List<MemberSubscriptionVO> list = new ArrayList<MemberSubscriptionVO>();
-		MemberSubscriptionVO memberSubscriptionVO = null;
-		
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			//"SELECT memberTrackID, memberID FROM MemberSubscription WHERE memberID=?";
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_ONE_MEMBERSUBSCRIPTION);
-
-			pstmt.setInt(1, memberID);
-
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				// memberSubscriptionVO 也稱為 Domain objects
-				memberSubscriptionVO = new MemberSubscriptionVO();
-				memberSubscriptionVO.setMemberTrackID(rs.getInt("memberTrackID"));
-				memberSubscriptionVO.setMemberID(rs.getInt("memberID"));
-				list.add(memberSubscriptionVO); // Store the row in the list
-			}
-
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
+		List<MemberSubscriptionVO> list = (List<MemberSubscriptionVO>) hibernateTemplate.find("FROM MemberSubscriptionVO WHERE memberID=?", memberID);	
 		return list;
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
 	public List<MemberSubscriptionVO> getAll() {
-		List<MemberSubscriptionVO> list = new ArrayList<MemberSubscriptionVO>();
-		MemberSubscriptionVO memberSubscriptionVO = null;
-
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-			//"SELECT memberTrackID, memberID FROM MemberSubscription";
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_ALL_MEMBERSUBSCRIPTION);
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				// memberSubscriptionVO 也稱為 Domain objects
-				memberSubscriptionVO = new MemberSubscriptionVO();
-				memberSubscriptionVO.setMemberTrackID(rs.getInt("memberTrackID"));
-				memberSubscriptionVO.setMemberID(rs.getInt("memberID"));
-				list.add(memberSubscriptionVO); // Store the row in the list
-			}
-
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
+		List<MemberSubscriptionVO> list = (List<MemberSubscriptionVO>) hibernateTemplate.find("FROM MemberSubscriptionVO");
 		return list;
 	}
 
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config.xml");
+		
+		// 建立DAO物件
+		MemberSubscriptionDAO_interface dao = (MemberSubscriptionDAO_interface) context.getBean("memberSubscriptionDAO");
+		
+		//新增
+//		MemberSubscriptionVO msVO1 = new MemberSubscriptionVO();
+//		msVO1.setMemberID(100001);
+//		msVO1.setMemberTrackID(100002);
+//		dao.insert(msVO1);
+		
+		//修改 >>> 沒主鍵,所以修改只會新增,勿用
+//		MemberSubscriptionVO msVO2 = new MemberSubscriptionVO();
+//		msVO2.setMemberID(100001);
+//		msVO2.setMemberTrackID(100004);
+//		dao.insert(msVO2);
+		
+		//刪除
+//		MemberSubscriptionVO msVO3 = new MemberSubscriptionVO();
+//		dao.delete(100001,100004);
+		
+		//查詢單一
+//		List<MemberSubscriptionVO> list1 =  dao.findByMemberID(100001);
+//		for(MemberSubscriptionVO msVO4 : list1) {
+//			System.out.println(msVO4.getMemberID() + ", " + msVO4.getMemberTrackID());
+//		}
+//		System.out.println("-------------------------");
+		
+		//查詢全部
+		List<MemberSubscriptionVO> listAll = dao.getAll();
+		for(MemberSubscriptionVO msVO5 : listAll){
+			System.out.println(msVO5.getMemberID() + ", track: " + msVO5.getMemberTrackID());
+		}
 	}
 
 }

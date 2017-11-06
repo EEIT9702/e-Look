@@ -136,6 +136,10 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<bean id="orderDetailsDAO" class="com.e_Look.OrderDetails.model.OrderDetailsDAO">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
+	<!-- MemberSubscriptionDAO -->
+	<bean id="memberSubscriptionDAO" class="com.e_Look.memberSubscription.MemberSubscriptionDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
 
 
 	<!-- <bean id="shoppingCartDAO" class="com.e_Look.shoppingCart.model.spring.ShoppingCartDAO"> -->
