@@ -30,7 +30,7 @@ public class UpdateCourseClassEvent extends HttpServlet {
 //		Date date = calendar.getTime();
 		Date date = new Date();
 
-/*		Timer timer = new Timer();
+	Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
@@ -50,7 +50,7 @@ public class UpdateCourseClassEvent extends HttpServlet {
 					}
 				}
 			}
-		}, date, 1000 * 10);*/
+		}, date, 1000 * 10);
 
 	}
 

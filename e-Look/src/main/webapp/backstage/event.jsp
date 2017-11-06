@@ -155,7 +155,7 @@ padding-bottom: 5px;}
         </div>
         <footer><div id="div3">
         <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backstage/elookeventinsert" style="display: inline;">
-        <input type="submit"  value="刪除" > 
+        <input type="submit" name="delete1" value="刪除" > 
         <input	type="hidden" name="eventID" id="deleteEventID" value="">
 		<input type="hidden" name="action" value="delete"></FORM>
             <button type="button" data-dismiss="JDialog" class="btn primary" >取消</button></div>
@@ -292,29 +292,7 @@ $("#update").jDialog({
     allowOverlay: true,
     animationType: 'flip'
 });      
-		
 			
-		//抓取delete該行id	
-		$('tbody input[name="delete"]').on('click',function(){
-		var event1=$(this).parent().children('input:eq(1)').val();
-		$('#deleteEventID').val(event1);
-		})			
-
-		$('tbody input[name="update"]').on('click',function(){
-			var event2=$(this).parent().children('input:eq(1)').val();
-			var eventName=$(this).parents('#tr1').children('td:eq(1)').text();
-			var eStartDate=$(this).parents('#tr1').children('td:eq(2)').text();
-			var eEndDate=$(this).parents('#tr1').children('td:eq(3)').text();
-			var discount=$(this).parents('#tr1').children('td:eq(4)').text();
-			var discount=$(this).parents('#tr1').children('td:eq(4)').text();
-		$('#updateEventID').val(event2);
-		$('#td1').text(event2);
-		$('#eventName1').val(eventName);
-		$('#eStartDate1').val(eStartDate);
-		$('#eEndDate1').val(eEndDate);
-		$('#discount1').val(discount);
-		})	
-	
 		
 	  var today = new Date();
 // 	  var tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000);
@@ -327,9 +305,39 @@ $("#update").jDialog({
 	      $('.thedate2').datepicker('option', 'minDate', dat);
 	    }
 	  });
-
-
 	$.datepicker.setDefaults({ dateFormat: 'yy-mm-dd' }); //全局設置日期格式
+
+	var start;
+	var end;
+	//抓取delete該行id	
+	$('tbody input[name="delete"]').on('click',function(){
+		var event1=$(this).parent().children('input:eq(1)').val();
+	$('#deleteEventID').val(event1);
+	var datestart=$(this).parents('#tr1').children('td:eq(2)').text();
+	var dateend=$(this).parents('#tr1').children('td:eq(3)').text();
+	start = new Date(Date.parse(datestart.replace(/-/g,'/')));
+	end =new Date(Date.parse(dateend.replace(/-/g,'/')));
+	})			
+$('input[name="delete1"]').on('click',function(){
+		if(start<today&&end>today)
+			{
+			alert("活動期間內禁止刪除活動，保障客戶權益!");
+			}
+	})
+	
+	$('tbody input[name="update"]').on('click',function(){
+		var event2=$(this).parent().children('input:eq(1)').val();
+		var eventName=$(this).parents('#tr1').children('td:eq(1)').text();
+		var eStartDate=$(this).parents('#tr1').children('td:eq(2)').text();
+		var eEndDate=$(this).parents('#tr1').children('td:eq(3)').text();
+		var discount=$(this).parents('#tr1').children('td:eq(4)').text();
+	$('#updateEventID').val(event2);
+	$('#td1').text(event2);
+	$('#eventName1').val(eventName);
+	$('#eStartDate1').val(eStartDate);
+	$('#eEndDate1').val(eEndDate);
+	$('#discount1').val(discount);
+	})	
 
 	
 </script> 
