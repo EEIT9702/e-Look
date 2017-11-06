@@ -30,8 +30,8 @@ public class UpdateCourseClassEvent extends HttpServlet {
 //		Date date = calendar.getTime();
 		Date date = new Date();
 
-		Timer timer = new Timer();
-		timer.scheduleAtFixedRate(new TimerTask() {
+/*		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
 				//System.out.println("調整課程類別之活動!!!");
@@ -41,7 +41,7 @@ public class UpdateCourseClassEvent extends HttpServlet {
 						List<CourseClassVO> ccVOs = ccSvc.getAll();
 						for(CourseClassVO ccVO:ccVOs){
 							//System.out.println(ccVO.getCcName()+"======"+elookeventVO.getCourseClass1());
-							if(ccVO.getCcName().equals(elookeventVO.getCourseClass1()) || ccVO.getCcName().equals(elookeventVO.getCourseClass2()) || ccVO.getCcName().equals(elookeventVO.getCourseClass3()) ){
+							if("全部".equals(elookeventVO.getCourseClass1()) ||"全部".equals(elookeventVO.getCourseClass2()) ||"全部".equals(elookeventVO.getCourseClass3()) || ccVO.getCcName().equals(elookeventVO.getCourseClass1()) || ccVO.getCcName().equals(elookeventVO.getCourseClass2()) || ccVO.getCcName().equals(elookeventVO.getCourseClass3()) ){
 								ccVO.setEventVO(elookeventVO);
 								ccSvc.updateEventID(ccVO);
 							}
@@ -50,7 +50,7 @@ public class UpdateCourseClassEvent extends HttpServlet {
 					}
 				}
 			}
-		}, date, 1000 * 10);
+		}, date, 1000 * 10);*/
 
 	}
 
