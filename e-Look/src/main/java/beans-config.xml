@@ -31,7 +31,6 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 				<value>com/e_Look/Course/Course.hbm.xml</value>
 				<value>com/e_Look/courseClass/CourseClass.hbm.xml</value>
 				<value>com/e_Look/CourseClassDetails/CourseClassDetails.hbm.xml</value>
-				
 				<value>com/e_Look/eLookEvent/eLookEvent.hbm.xml</value>
 				<value>com/e_Look/member/model/Member.hbm.xml</value>
 				<value>com/e_Look/memberBookmarks/model/MemberBookmarks.hbm.xml
@@ -93,6 +92,10 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	
 	<!-- courseClassDetailsDAO -->
 	<bean id="courseClassDetailsDAO" class="com.e_Look.CourseClassDetails.CourseClassDetailsDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<!-- MessageDAO -->
+	<bean id="MessageDAO" class="com.e_Look.message.model.MessageDAO">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
 

@@ -13,8 +13,6 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.e_Look.message.model.MessageVO;
-
 public class ReportMessageDAO implements ReportMessageDAO_interface {
 	public HibernateTemplate hibernateTemplate;
 	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
@@ -153,6 +151,5 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 		}
 		
 	}
-	
-	
+
 }
