@@ -29,7 +29,7 @@ b{font-size: 20px;}
 <section id="wrapper">
 						<header>
 							<div class="inner">
-								<h2>類別圖表</h2>		
+								<h2>收益圖表</h2>		
 							</div>
 						</header>
 						</section> 

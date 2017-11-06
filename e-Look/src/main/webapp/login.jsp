@@ -273,36 +273,36 @@ margin:2px auto;
 						<div class="modal-header text-center">
 						<button type="button" class="close pull-right" data-dismiss="modal"
 							aria-hidden="true" style="font-size: 35px;">&times;</button>
-							<h2>Create account</h2>
+							<h2>建立帳戶</h2>
 					</div>
 						<div class="form-group">
-							<label class="control-label" for="signupName">Your name</label><br><font style="color: red;"  size="-1">${regerr.errname}</font>
+							<label class="control-label" for="signupName">姓名</label><br><font style="color: red;"  size="-1">${regerr.errname}</font>
 							<input id="signupName" type="text" maxlength="50" name="mName" value="${Name}" class="form-control">
 						</div>
 						<div class="form-group">
-							<label class="control-label" for="signupEmail">Email</label><br><font style="color: red;"  size="-1">${regerr.erremail}</font>
+							<label class="control-label" for="signupEmail">電子郵件</label><br><font style="color: red;"  size="-1">${regerr.erremail}</font>
 							<input id="signupEmail" type="text" maxlength="50" name="email" value="${mail}" class="form-control">
 						</div>
 						<div class="form-group">
-							<label class="control-label" for="signupPassword">Password</label><br><font style="color: red;"size="-1">${regerr.errpwd}</font>
+							<label class="control-label" for="signupPassword">密碼</label><br><font style="color: red;"size="-1">${regerr.errpwd}</font>
 							<input id="signupPassword" type="password" maxlength="10" name="mPassword"  class="form-control" placeholder="至少要含一個有數字及大小寫字母，密碼長度到8~10" >
 						</div>
 						<div class="form-group">
-							<label class="control-label" for="signupPasswordagain">Password again</label><br><font style="color: red;"  size="-1">${regerr.errpwd2}</font>
+							<label class="control-label" for="signupPasswordagain">確認密碼</label><br><font style="color: red;"  size="-1">${regerr.errpwd2}</font>
 							<input id="signupPasswordagain" type="password" maxlength="10" name="mPassword2" class="form-control">
 						</div>
 						<div class="form-group">
-							<label>verify code</label><br><font style="color: red;"  size="-1">${regerr.errcheck}</font><br>
+							<label>驗證碼</label><br><font style="color: red;"  size="-1">${regerr.errcheck}</font><br>
 							<input type="text" name="check"class="form-inline" />
 							<img align="middle"  src="<%=request.getContextPath()%>/CheckCodeServlet.jpg" border="1" />
 						</div>
 						
 						<div class="form-group">
-							<button id="signupSubmit" type="submit" class="btn btn-info btn-block">Create your account</button>
+							<button id="signupSubmit" type="submit" class="btn btn-info btn-block">建立帳戶</button>
 						</div>
 						
 						<hr>
-						<p>已經有帳號了 <a id="alogin"data-toggle="modal" data-target="${id2}"href="">Sign in</a></p>
+						<p>已經有帳號了 <a id="alogin"data-toggle="modal" data-target="${id2}"href="">登入</a></p>
 					</form>
 				</div>
 				</div>
