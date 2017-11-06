@@ -78,5 +78,12 @@ public class MessageService {
 		return dao.findAllResponse(messageID_response);
 	}
 
+	public void updateStatus(Integer messageID, byte status) {
+//		MessageVO messageVO = new MessageVO();
+//		messageVO.setMessageID_response(messageID);
+//		messageVO.setStatus(status);
+		//System.out.println("memberID = " + messageID + ", Status = " + status);
+		dao.updateStatus(messageID, status);
+	}
 
 }
