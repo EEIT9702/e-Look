@@ -34,7 +34,7 @@ public class MemberService_JNDI {
 		memberVO1.setmPassword("");
 		memberVO1.setRegisterDate(new Date(System.currentTimeMillis()));
 		memberVO1.setStatus((byte) 1);
-		memberVO1.setCount(0);
+		memberVO1.setCounts(0);
 		try {
 		HttpURLConnection con = (HttpURLConnection)(new URL(mPhoto).openConnection());
 		String location = con.getHeaderField("Location" );
@@ -60,7 +60,7 @@ public class MemberService_JNDI {
 		memberVO1.setmPassword("");
 		memberVO1.setRegisterDate(new Date(System.currentTimeMillis()));
 		memberVO1.setStatus((byte) 1);
-		memberVO1.setCount(0);
+		memberVO1.setCounts(0);
 		try {
 		URL url  = new URL(mPhoto);
 		byte[] bytes = IOUtils.toByteArray(url.openStream());
@@ -82,7 +82,7 @@ public class MemberService_JNDI {
 		memberVO1.setmPassword(password);
 		memberVO1.setRegisterDate(new Date(System.currentTimeMillis()));
 		memberVO1.setStatus((byte) 0);
-		memberVO1.setCount(0);
+		memberVO1.setCounts(0);
 		try {
 			byte[] bytes = IOUtils.toByteArray(new FileInputStream(new File(path+"/img/imember_image.png")));
 			memberVO1.setmPhoto(bytes);
@@ -126,12 +126,12 @@ public class MemberService_JNDI {
 	public void updateMemberCount(Integer memberID) {
 		MemberVO memberVO1= new MemberVO();
 		MemberVO mebVO = dao.findByPrimaryKey(memberID);
-		Integer countsum = mebVO.getCount();
+		Integer countsum = mebVO.getCounts();
 		countsum += 1;
 		
 		if(countsum == 3){
 			memberVO1.setMemberID(memberID);
-			memberVO1.setCount(countsum);
+			memberVO1.setCounts(countsum);
 			dao.update(memberVO1, "count");
 			
 			memberVO1.setMemberID(memberID);
@@ -139,7 +139,7 @@ public class MemberService_JNDI {
 			dao.update(memberVO1, "status");
 		}else{
 			memberVO1.setMemberID(memberID);
-			memberVO1.setCount(countsum);
+			memberVO1.setCounts(countsum);
 			dao.update(memberVO1, "count");
 		}
 	}

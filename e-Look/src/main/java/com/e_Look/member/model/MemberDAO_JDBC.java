@@ -60,7 +60,7 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 			pstmt.setString(7,memberVO.getHobby());
 			pstmt.setDate(8,memberVO.getRegisterDate());
 			pstmt.setByte(9,memberVO.getStatus());
-			pstmt.setInt(10,memberVO.getCount());
+			pstmt.setInt(10,memberVO.getCounts());
 			pstmt.setString(11,memberVO.getAddress());
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
@@ -150,7 +150,7 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 				pstmt.executeUpdate();
 			}else if(update.equalsIgnoreCase("count")){
 				pstmt = con.prepareStatement(UPDATE_COUNT);
-				pstmt.setInt(1,memberVO.getCount());
+				pstmt.setInt(1,memberVO.getCounts());
 				pstmt.setInt(2,memberVO.getMemberID());
 				pstmt.executeUpdate();
 			}
@@ -233,7 +233,7 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 				memberVO.setHobby(rs.getString(8));
 				memberVO.setRegisterDate(rs.getDate(9));
 				memberVO.setStatus(rs.getByte(10));
-				memberVO.setCount(rs.getInt(11));
+				memberVO.setCounts(rs.getInt(11));
 				memberVO.setAddress(rs.getString(12));
 			}
 		} catch (ClassNotFoundException e) {
@@ -282,7 +282,7 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 				memberVO.setHobby(rs.getString(8));
 				memberVO.setRegisterDate(rs.getDate(9));
 				memberVO.setStatus(rs.getByte(10));
-				memberVO.setCount(rs.getInt(11));
+				memberVO.setCounts(rs.getInt(11));
 				memberVO.setAddress(rs.getString(12));
 			}
 		} catch (ClassNotFoundException e) {
@@ -331,7 +331,7 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 				memberVO.setHobby(rs.getString(8));
 				memberVO.setRegisterDate(rs.getDate(9));
 				memberVO.setStatus(rs.getByte(10));
-				memberVO.setCount(rs.getInt(11));
+				memberVO.setCounts(rs.getInt(11));
 				memberVO.setAddress(rs.getString(12));
 				list.add(memberVO);
 			}
@@ -368,7 +368,7 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 		memberVO1.setmPassword("XXXX");
 		memberVO1.setRegisterDate(new Date(System.currentTimeMillis()));
 		memberVO1.setStatus((byte) 0);
-		memberVO1.setCount(1);
+		memberVO1.setCounts(1);
 		/*331行 是讀取硬碟路徑寫入資料庫方法*/
 		byte[] bytes = IOUtils.toByteArray(new FileInputStream(new File("src/main/webapp/img/imember_image.png")));
 		memberVO1.setmPhoto(bytes);
@@ -418,7 +418,7 @@ public class MemberDAO_JDBC implements MemberDAO_interface{
 		System.out.println(memberVO3.getHobby());
 		System.out.println(memberVO3.getRegisterDate());
 		System.out.println(memberVO3.getStatus());
-		System.out.println(memberVO3.getCount());
+		System.out.println(memberVO3.getCounts());
 		System.out.println(memberVO3.getAddress());
 		//查詢全部會員
 //		List<MemberVO> list=dao.getAll();
