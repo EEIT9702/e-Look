@@ -72,7 +72,7 @@ public class MessageDAO implements MessageDAO_interface {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void updateStatus(Integer messageID,Byte status) {
 		//"update Message set status=? where messageID= ?"
-		hibernateTemplate.bulkUpdate(UPDATE_STATUS, messageID,status);
+		hibernateTemplate.bulkUpdate(UPDATE_STATUS, status,messageID);
 				
 	}
 	@Override
