@@ -69,9 +69,9 @@ small, .small {
 					</a>
 				</div>
 				<div>
-					<p style="margin-top: 40px; font-size: 18px">課程售價：
-					<fmt:setLocale value="zh-TW" />
-					<fmt:formatNumber value="${onlineCourse.courseVO.soldPrice}" type="currency" maxFractionDigits="0"/>
+					<p class="sp" style="margin-top: 40px; font-size: 18px" alt="${onlineCourse.courseVO.courseID}">課程售價：
+<%-- 					<fmt:setLocale value="zh-TW" /> --%>
+<%-- 					<fmt:formatNumber value="${onlineCourse.courseVO.soldPrice}" type="currency" maxFractionDigits="0"/> --%>
 					</p>
 				</div>
 			</div>
@@ -101,9 +101,10 @@ small, .small {
 					</a>
 				</div>
 				<div>
-					<p style="margin-top: 40px; font-size: 18px">課程售價：
-					<fmt:setLocale value="zh-TW" />
-					<fmt:formatNumber value="${courseVO.soldPrice}" type="currency" maxFractionDigits="0"/>
+					<p class="sp" style="margin-top: 40px; font-size: 18px" alt="${courseVO.courseID}">
+<!-- 						課程售價： -->
+<%-- 					<fmt:setLocale value="zh-TW" /> --%>
+<%-- 					<fmt:formatNumber value="${courseVO.soldPrice}" type="currency" maxFractionDigits="0"/> --%>
 					</p>
 				</div>
 			</div>
@@ -125,6 +126,14 @@ $(function(){
 		$.getJSON('/e-Look/GetBuyCourseNumber',{'courseID':$(this).attr("alt")},function(datas){
 			//console.log($(this).html())
 			i.html("購買人數:"+datas.length+"人")
+		})
+	})
+	$('.sp').each(function(){
+	var sp = $(this);
+		
+		$.getJSON('/e-Look/GetBuyingPrice',{'courseID':$(this).attr("alt")},function(price){
+			//console.log($(this).html())
+			sp.html("課程售價：NT$" + price)
 		})
 	})
 	

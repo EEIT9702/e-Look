@@ -44,7 +44,7 @@ public class ReportMessageService {
 		//將傳進來的status訊息狀態設定進去Message裡
 		mVO.setStatus((byte)status);
 		//DAO裡有判斷式,使用符合status的update
-		mdao.update(mVO, "status");
+		mdao.update(mVO);
 		
 		MemberService mbServ = new MemberService();
 		mbServ.updateMemberCount(memberID);
