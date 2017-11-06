@@ -1,18 +1,13 @@
 package com.e_Look.ReportCourse.model;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import com.e_Look.Course.CourseDAO;
 import com.e_Look.Course.CourseVO;
 import com.e_Look.member.model.MemberService;
 
-public class ReportCourseService {
+public class ReportCourseService_JNDI {
 	private ReportCourseDAO_interface dao;
-	public ReportCourseService (){
-		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config-jndi.xml");
-        // 建立DAO物件
-		dao = (ReportCourseDAO_interface) context.getBean("reportCourseDAO");
+	public ReportCourseService_JNDI (){
+		dao= new ReportCourseDAO();
 	}
 	public void insertReportCourse(Integer courseID,Integer memberID,String reportContent){
 			ReportCourseVO reportCourseVO = new ReportCourseVO();

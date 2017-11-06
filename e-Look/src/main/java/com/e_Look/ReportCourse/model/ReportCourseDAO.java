@@ -1,422 +1,147 @@
 package com.e_Look.ReportCourse.model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
+import net.minidev.json.JSONValue;
 
-import org.json.simple.JSONValue;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.e_Look.Course.CourseService;
 import com.e_Look.Course.CourseVO;
 
-
 public class ReportCourseDAO implements ReportCourseDAO_interface {
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/eLookDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
+	public HibernateTemplate hibernateTemplate;
+	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+		this.hibernateTemplate = hibernateTemplate;
+	
 	}
 	
 	private static final String INSERT_REPORTCOURSE =
 			"INSERT INTO ReportCourse (reportCourseID, reportMemberID, reportContent, reportTime,status ) VALUES (?,?,?,getDate(),0)";
+	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+	public void insert(ReportCourseVO ReportCourseVO) {
+		hibernateTemplate.save(ReportCourseVO);
+	}
+	
 	private static final String UPDATE_STATUS =
-		    "UPDATE ReportCourse SET status=? WHERE reportId=?";	
-	private static final String DELETE_REPORTCOURSE =
-		    "DELETE FROM ReportCourse WHERE reportId =?";
+		    "UPDATE ReportCourseVO SET status=? WHERE reportId=?";	
+	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+	public void update(ReportCourseVO reportCourseVO) {
+		hibernateTemplate.bulkUpdate(UPDATE_STATUS, reportCourseVO.getStatus(), reportCourseVO.getReportId());
+	}
+	
+	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+	public void delete(Integer reportID) {
+		ReportCourseVO rcVO = new ReportCourseVO();
+		rcVO.getReportId();
+		hibernateTemplate.delete(rcVO);
+	}
+	
 	private static final String SELECT_ONE_REPORT_MESSAGE =
 			"SELECT reportId,reportCourseID,reportMemberID,reportContent,reportTime,status FROM ReportCourse WHERE reportId=?";
+	@Override
+	public ReportCourseVO findByReportId(Integer reportId) {
+		return hibernateTemplate.get(ReportCourseVO.class, reportId);
+	}
+	
+	
 	private static final String SELECT_NOT_HANDLE_REPORT_COURSE =
-			"SELECT reportId,reportCourseID,reportMemberID,reportContent,reportTime,status FROM ReportCourse WHERE status=0";
-	private static final String SELECT_ALL_REPORT_COURSE =
-			"SELECT reportId,reportCourseID,reportMemberID,reportContent,reportTime,status FROM ReportCourse";	
+			"FROM ReportCourseVO WHERE status=0";
+	@Override
+	public List<ReportCourseVO> getNotHandle(byte status) {
+		List<ReportCourseVO> notHandleList = (List<ReportCourseVO>) hibernateTemplate.find(SELECT_NOT_HANDLE_REPORT_COURSE);
+		return notHandleList;
+	}
+	
+	
+	@Override
+	public List<ReportCourseVO> getAll() {
+		List<ReportCourseVO> list = (List<ReportCourseVO>) hibernateTemplate.find("from ReportCourseVO");
+		return list;
+	}
 	
 	private static final String GET_JSON = "SELECT rc.reportID, rc.reportCourseID, rc.reportContent, rc.reportTime, rc.status,"
 			+ "rc.reportMemberID, c.courseID, c.soldPrice FROM Course c INNER JOIN ReportCourse rc "
 			+ "ON c.courseID = rc.reportCourseID WHERE rc.status=?";
-	
-	@Override
-	public void insert(ReportCourseVO ReportCourseVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_REPORTCOURSE);
-
-			//pstmt.setInt(1, ReportCourseVO.getReportCourseID());
-			pstmt.setInt(1, ReportCourseVO.getCourseVO().getCourseID());
-			pstmt.setInt(2,	ReportCourseVO.getReportMemberID());
-			pstmt.setString(3, ReportCourseVO.getReportContent());
-			
-			pstmt.executeUpdate();
-			
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-	}
-
-	@Override
-	public void update(ReportCourseVO reportCourseVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			//"UPDATE ReportMessage SET status=? WHERE reportId=?";
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(UPDATE_STATUS);
-			pstmt.setByte(1, reportCourseVO.getStatus());
-			pstmt.setInt(2, reportCourseVO.getReportId());
-			pstmt.executeUpdate();
-		
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-
-	}
-
-	@Override
-	public void delete(Integer reportID) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			//"DELETE FROM ReportMessage WHERE reportId =?";
-			con = ds.getConnection();
-			pstmt=con.prepareStatement(DELETE_REPORTCOURSE);
-			pstmt.setInt(1, reportID);
-			pstmt.executeUpdate();
-
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-	}
-
-
-	@Override
-	public ReportCourseVO findByReportId(Integer reportId) {
-		ReportCourseVO reportCourseVO = null;
-		CourseVO courseVO = null;
-		
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			//"SELECT reportId,reportCourseID,reportMemberID,reportContent,reportTime,status FROM ReportCourse WHERE reportId=?";
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_ONE_REPORT_MESSAGE);
-
-			pstmt.setInt(1, reportId);
-
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				reportCourseVO = new ReportCourseVO();
-				courseVO = new CourseVO();
-				
-				CourseService courseDAO = new CourseService();
-				Integer courseID = rs.getInt("reportCourseID");
-				courseVO = courseDAO.findByPrimaryKey(courseID);
-				
-				reportCourseVO.setCourseVO(courseVO);
-				
-				reportCourseVO.setReportId(rs.getInt("reportId"));
-				reportCourseVO.setReportMemberID(rs.getInt("reportMemberID"));
-				reportCourseVO.setReportContent(rs.getString("reportContent"));
-				reportCourseVO.setReportTime(rs.getDate("reportTime"));
-				reportCourseVO.setReportTime(rs.getDate("reportTime"));
-				reportCourseVO.setStatus(rs.getByte("status"));
-			}
-
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		return reportCourseVO;
-	}
-
 	@Override
 	public String getJSON(Integer status) {
 		String jsonString;
+		List<ReportCourseVO> l2 = (List<ReportCourseVO>) hibernateTemplate.find("from ReportCourseVO WHERE status =?", status);
 		
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		List l1 = new LinkedList();
 		
-		try {
-			//SELECT rc.reportID, rc.reportCourseID, rc.reportContent, rc.reportTime, rc.status, 
-			//rc.reportMemberID, c.courseID, c.soldPrice
-			//FROM Course c INNER JOIN ReportCourse rc ON c.courseID = rc.reportCourseID
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_JSON);
-			pstmt.setInt(1, status);
-			rs = pstmt.executeQuery();
+		for(ReportCourseVO rcVO : l2) {
+			 Map m1 = new HashMap();  
+			 m1.put("reportID", rcVO.getReportId());   
+			 m1.put("reportCourseID", rcVO.getCourseVO().getCourseID());  
+			 m1.put("reportContent", rcVO.getReportContent());   
+			 m1.put("reportTime", rcVO.getReportTime()); 
+			 m1.put("status", rcVO.getStatus()); 
+			 m1.put("reportMemberID", rcVO.getReportMemberID());
+			 m1.put("courseID", rcVO.getCourseVO().getCourseID());
+			 m1.put("soldPrice", rcVO.getCourseVO().getSoldPrice());
+			 l1.add(m1);
+		} 
+		 jsonString = JSONValue.toJSONString(l1);  
 			
-			 List l1 = new LinkedList();
-			 while (rs.next()) {
-				 Map m1 = new HashMap();  
-				 m1.put("reportID", rs.getString(1));   
-				 m1.put("reportCourseID", rs.getString(2));  
-				 m1.put("reportContent", rs.getString(3));   
-				 m1.put("reportTime", rs.getString(4)); 
-				 m1.put("status", rs.getString(5)); 
-				 m1.put("reportMemberID", rs.getString(6));
-				 m1.put("courseID", rs.getString(7));
-				 m1.put("soldPrice", rs.getString(8));
-				 l1.add(m1);
-			 }
-			 jsonString = JSONValue.toJSONString(l1);  
-			
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
 		return jsonString;
 	}
 	
-	@Override
-	public List<ReportCourseVO> getNotHandle(byte status) {
-		List<ReportCourseVO> list = new ArrayList<ReportCourseVO>();
-		ReportCourseVO reportCourseVO = null;
-		CourseVO courseVO = null;
+	public static void main(String[] args) {
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config.xml");
+	
+		// 建立DAO物件
+		ReportCourseDAO_interface dao = (ReportCourseDAO_interface) context.getBean("reportCourseDAO");
 		
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_NOT_HANDLE_REPORT_COURSE);
-			pstmt.setByte(1, status);
-			rs = pstmt.executeQuery();
-
-			CourseService courseDAO = new CourseService();
-			while (rs.next()) {
-				reportCourseVO = new ReportCourseVO();
-				courseVO = new CourseVO();
-				
-				Integer courseID = rs.getInt("reportCourseID");
-				courseVO = courseDAO.findByPrimaryKey(courseID);
-				
-				reportCourseVO.setCourseVO(courseVO);
-				
-				reportCourseVO.setReportId(rs.getInt("reportId"));
-				reportCourseVO.setReportMemberID(rs.getInt("reportMemberID"));
-				reportCourseVO.setReportContent(rs.getString("reportContent"));
-				reportCourseVO.setReportTime(rs.getDate("reportTime"));
-				reportCourseVO.setReportTime(rs.getDate("reportTime"));
-				reportCourseVO.setStatus(rs.getByte("status"));
-				list.add(reportCourseVO); // Store the row in the list
-			}
-
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
+		// 新增	
+//		ReportCourseVO reportCourseVO1 = new ReportCourseVO();
+//		CourseVO cvo1 = new CourseVO();
+//		cvo1.setCourseID(200001);
+//		reportCourseVO1.setCourseVO(cvo1);
+//		reportCourseVO1.setReportMemberID(100005);
+//		reportCourseVO1.setReportContent("惡意送頭");
+//		reportCourseVO1.setReportTime(new Date(System.currentTimeMillis()));
+//		reportCourseVO1.setStatus((byte)0);
+//		dao.insert(reportCourseVO1);
+		
+		//修改
+//		ReportCourseVO reportCourseVO2 = new ReportCourseVO();
+//		reportCourseVO2.setReportId(1001);
+//		reportCourseVO2.setStatus((byte) 1);
+//		dao.update(reportCourseVO2);
+		
+		//查詢單一
+//		ReportCourseVO reportCourseVO2 = dao.findByReportId(1001);
+//		System.out.println(reportCourseVO2.getReportId());
+//		System.out.println(reportCourseVO2.getCourseVO().getCourseID());
+//		System.out.println(reportCourseVO2.getReportMemberID());
+//		System.out.println(reportCourseVO2.getReportContent());
+//		System.out.println(reportCourseVO2.getReportTime());
+//		System.out.println(reportCourseVO2.getStatus());
+//		System.out.println("---------------------------");
+		
+		//查詢全部
+		List<ReportCourseVO> list = dao.getAll();
+		for(ReportCourseVO reportCourseVO1 : list) {
+			System.out.print(reportCourseVO1.getReportId() + "  ");
+			System.out.print(reportCourseVO1.getCourseVO().getCourseID() + "  ");
+			System.out.print(reportCourseVO1.getReportMemberID() + "  ");
+			System.out.print(reportCourseVO1.getReportContent() + "  ");
+			System.out.print(reportCourseVO1.getReportTime() + "  ");
+			System.out.print(reportCourseVO1.getStatus() + "\n");
 		}
-		return list;
+		
 	}
 
-	@Override
-	public List<ReportCourseVO> getAll() {
-		List<ReportCourseVO> list = new ArrayList<ReportCourseVO>();
-		ReportCourseVO reportCourseVO = null;
-		CourseVO courseVO = null;
-		
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_ALL_REPORT_COURSE);
-			rs = pstmt.executeQuery();
-
-			CourseService courseDAO = new CourseService();
-			while (rs.next()) {
-				reportCourseVO = new ReportCourseVO();
-				courseVO = new CourseVO();
-				
-				Integer courseID = rs.getInt("reportCourseID");
-				courseVO = courseDAO.findByPrimaryKey(courseID);
-				
-				reportCourseVO.setCourseVO(courseVO);
-				
-				reportCourseVO.setReportId(rs.getInt("reportId"));
-				reportCourseVO.setReportMemberID(rs.getInt("reportMemberID"));
-				reportCourseVO.setReportContent(rs.getString("reportContent"));
-				reportCourseVO.setReportTime(rs.getDate("reportTime"));
-				reportCourseVO.setReportTime(rs.getDate("reportTime"));
-				reportCourseVO.setStatus(rs.getByte("status"));
-				list.add(reportCourseVO); // Store the row in the list
-			}
-
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		return list;
-	}
-
+	
 }
