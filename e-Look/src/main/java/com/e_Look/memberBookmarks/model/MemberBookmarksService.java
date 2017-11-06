@@ -2,15 +2,22 @@ package com.e_Look.memberBookmarks.model;
 
 import java.util.List;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 public class MemberBookmarksService {
 	private MemberBookmarksDAO_interface dao;
 
 	public MemberBookmarksService() {
-		dao = new MemberBookmarksDAO();
+		ApplicationContext context=new ClassPathXmlApplicationContext("beans-config-jndi.xml");
+		dao = (MemberBookmarksDAO_interface) context.getBean("MemberBookmarksDAO");
 	}
 
 	public void insertMemberBookmarks(Integer memberID,Integer courseID) {
-		dao.insert(memberID,courseID);
+		MemberBookmarksVO memberBookmarksVO=new MemberBookmarksVO();
+		memberBookmarksVO.setCourseID(courseID);
+		memberBookmarksVO.setMemberID(memberID);
+		dao.insert(memberBookmarksVO);
 		
 	}
 

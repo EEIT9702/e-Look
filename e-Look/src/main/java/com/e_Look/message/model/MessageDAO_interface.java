@@ -3,6 +3,7 @@ package com.e_Look.message.model;
 import java.util.List;
 public interface MessageDAO_interface {
 	public Integer insert(MessageVO messageVO);
+	public void updateStatus(Integer messageID, Byte status);
 	public void insert_re(MessageVO messageVO);
 	public void update(MessageVO messageVO);
     public void delete(Integer messageID);
@@ -10,4 +11,5 @@ public interface MessageDAO_interface {
     public List<MessageVO> findAllResponse(Integer messageID_response);
     public List<MessageVO> findMessageByCourseID(Integer courseID);
     public List<MessageVO> getAll();
+	
 }

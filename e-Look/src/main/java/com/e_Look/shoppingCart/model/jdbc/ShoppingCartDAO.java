@@ -14,239 +14,92 @@ import javax.naming.NamingException;
 import javax.naming.spi.DirStateFactory.Result;
 import javax.sql.DataSource;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.e_Look.Course.*;
-
+import com.e_Look.sponsor.model.SponsorDAO_interface;
+import com.e_Look.sponsor.model.SponsorVO;
+@Transactional(readOnly = true)
 public class ShoppingCartDAO implements ShoppingCartDAO_interface {
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/eLookDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
+	public HibernateTemplate hibernateTemplate;
+	public void setHibernateTemplate(HibernateTemplate hibernateTemplate){
+		this.hibernateTemplate = hibernateTemplate;
 	}
-	private static final String INSERT_SHOPPINGCART = "insert into Shoppingcart (memberID,courseID) values (?,?)";
-	private static final String UPDATE_SHOPPINGCART = "update Shoppingcart set memberID=? , courseID=? where memberID=? and courseID=?";
-	private static final String DELETE_SHOPPINGCART = "delete from Shoppingcart where memberID=? and courseID=?";
-	private static final String SELECT_MEMBER_SHOPPINGCART = "select memberID,courseID from Shoppingcart where memberID=?";
-	private static final String SELECT_ALL_SHOPPINGCART = "select memberID,courseID from Shoppingcart";
-	private static final String SELECT_ONE_SHOPPINGCART = "select memberID,courseID from Shoppingcart where memberID=? and courseID=?";
+	
+	private static final String DELETE_SHOPPINGCART = "DELETE ShoppingCartVO where memberID=? and courseID=?";
+	private static final String SELECT_MEMBER_SHOPPINGCART = "from ShoppingCartVO where memberID=?";
+	private static final String SELECT_ALL_SHOPPINGCART = "from ShoppingCartVO";
+	private static final String SELECT_ONE_SHOPPINGCART = "from ShoppingCartVO where memberID=? and courseID=?";
 
 	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void insert(ShoppingCartVO shoppingCartVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_SHOPPINGCART);
-			pstmt.setInt(1, shoppingCartVO.getMemberID());
-			pstmt.setInt(2, shoppingCartVO.getCourseVO().getCourseID());
-			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
+		hibernateTemplate.saveOrUpdate(shoppingCartVO);
 	}
 
-	// shoppingCartVO 修改後
-	// shoppingCartVO2修改前
-	@Override
-	public void update(ShoppingCartVO shoppingCartVO, ShoppingCartVO shoppingCartVO2) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(UPDATE_SHOPPINGCART);
-			pstmt.setInt(1, shoppingCartVO.getMemberID());
-			pstmt.setInt(2, shoppingCartVO.getCourseVO().getCourseID());
-			pstmt.setInt(3, shoppingCartVO2.getMemberID());
-			pstmt.setInt(4, shoppingCartVO2.getCourseVO().getCourseID());
-			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-	}
 
 	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void delete(ShoppingCartVO shoppingCartVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(DELETE_SHOPPINGCART);
-			pstmt.setInt(1, shoppingCartVO.getMemberID());
-			pstmt.setInt(2, shoppingCartVO.getCourseVO().getCourseID());
-			pstmt.executeUpdate();
-
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
+		hibernateTemplate.bulkUpdate(DELETE_SHOPPINGCART, shoppingCartVO.getMemberID(),shoppingCartVO.getCourseVO().getCourseID());
 	}
 
 	@Override
 	public List<CourseVO> findByMemberID(Integer memberID) {
+		List<ShoppingCartVO> ShoppingCartVOlist = (List<ShoppingCartVO>) hibernateTemplate.find(SELECT_MEMBER_SHOPPINGCART,memberID);
 		List<CourseVO> list = new LinkedList<CourseVO>();
-
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			CourseService cdao = new CourseService();
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_MEMBER_SHOPPINGCART);
-			pstmt.setInt(1, memberID);
-			ResultSet rs = pstmt.executeQuery();
-			while (rs.next()) {
-				Integer courseID = rs.getInt(2);
-				CourseVO courseVO = cdao.findByPrimaryKey(courseID);
-				list.add(courseVO);
-			}
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
+		for(ShoppingCartVO shoppingCartVO: ShoppingCartVOlist){
+			list.add(shoppingCartVO.getCourseVO());
 		}
 		return list;
 	}
 
 	@Override
 	public List<ShoppingCartVO> getAll() {
-		List<ShoppingCartVO> list = new LinkedList<ShoppingCartVO>();
-
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			CourseService cdao = new CourseService();
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_ALL_SHOPPINGCART);
-			ResultSet rs = pstmt.executeQuery();
-			while (rs.next()) {
-				ShoppingCartVO shoppingCartVO = new ShoppingCartVO();
-				shoppingCartVO.setMemberID(rs.getInt(1));
-				Integer courseID = rs.getInt(2);
-				shoppingCartVO.setCourseVO(cdao.findByPrimaryKey(courseID));
-				list.add(shoppingCartVO);
-			}
-
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
+		List<ShoppingCartVO> list = (List<ShoppingCartVO>) hibernateTemplate.find(SELECT_ALL_SHOPPINGCART);
 		return list;
 	}
 
 	@Override
 	public ShoppingCartVO findByPrimaryKey(ShoppingCartVO shoppingCartVO) {
-		ShoppingCartVO shoppingCartVO2 = null;
-		CourseService cdao = new CourseService();
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = ds.getConnection();
-			pstmt=con.prepareStatement(SELECT_ONE_SHOPPINGCART);
-			pstmt.setInt(1, shoppingCartVO.getMemberID());
-			pstmt.setInt(2, shoppingCartVO.getCourseVO().getCourseID());
-			ResultSet rs=pstmt.executeQuery();
-			if(rs.next()){
-				shoppingCartVO2 = new ShoppingCartVO();
-				shoppingCartVO2.setMemberID(rs.getInt(1));
-				shoppingCartVO2.setCourseVO(cdao.findByPrimaryKey(rs.getInt(2)));
-			}
-
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
+		List<ShoppingCartVO> list = (List<ShoppingCartVO>) hibernateTemplate.find(SELECT_ONE_SHOPPINGCART,shoppingCartVO.getMemberID(),shoppingCartVO.getCourseVO().getCourseID());
+		ShoppingCartVO shoppingCartVO1=null;
+		if(list.size()>0){
+			shoppingCartVO1=list.get(0);	
+			return shoppingCartVO1;	
 		}
-
-		return shoppingCartVO2;
+		return shoppingCartVO1;
 	}
 
+
+	@Override
+	public void update(ShoppingCartVO shoppingCartVO, ShoppingCartVO shoppingCartVO2) {
+		// TODO Auto-generated method stub
+		
+	}
+	public static void main(String[] args) {
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config.xml");
+		ShoppingCartDAO_interface dao= (ShoppingCartDAO_interface) context.getBean("shoppingCartDAO");		
+	
+		
+		CourseVO courseVO = new CourseVO();
+		courseVO.setCourseID(200001);
+		ShoppingCartVO shoppingCartVO = new ShoppingCartVO();
+		shoppingCartVO.setCourseVO(courseVO);
+		shoppingCartVO.setMemberID(100005);
+		
+		ShoppingCartVO shoppingCartVO1=dao.findByPrimaryKey(shoppingCartVO);
+//		dao.insert(shoppingCartVO);
+		System.out.println(shoppingCartVO1);
+//		System.out.println(dao.getAll().size());
+		
+		
+		
+	}
+	
+	
 }

@@ -35,15 +35,15 @@ public class MemberBookmarksDAO_JDBC implements MemberBookmarksDAO_interface {
 	
 	
 	@Override
-	public void insert(Integer memberID,Integer courseID) {
+	public void insert(MemberBookmarksVO memberBookmarksVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_MEMBERBOOKMARKS);
-			pstmt.setInt(1,memberID);
-			pstmt.setInt(2,courseID);
+			pstmt.setInt(1,memberBookmarksVO.getMemberID());
+			pstmt.setInt(2,memberBookmarksVO.getCourseID());
 			
 			pstmt.executeUpdate();
 
@@ -277,8 +277,9 @@ public class MemberBookmarksDAO_JDBC implements MemberBookmarksDAO_interface {
 		
 		//"INSERT INTO MemberBookmarks (memberID, courseID) VALUES (?,?) ";
 		//新增
-
-		dao.insert(100002,200002);
+		MemberBookmarksVO.setCourseID(200002);
+		MemberBookmarksVO.setMemberID(100002);
+		dao.insert(MemberBookmarksVO);
 		
 		//"UPDATE MemberBookmarks SET courseID=? WHERE memberID=?";
 		//修改沒意義不寫了

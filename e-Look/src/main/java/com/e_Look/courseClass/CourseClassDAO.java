@@ -48,8 +48,11 @@ public class CourseClassDAO implements CourseClass_interface{
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void updateEventID(CourseClassVO courseClassVO) {
-		hibernateTemplate.bulkUpdate(UPDATE_EVENTID, courseClassVO.getEventVO().getEventID(),courseClassVO.getCourseClassID());
-		
+		if(courseClassVO.getEventVO()==null){
+			hibernateTemplate.update(courseClassVO);
+		}else{
+			hibernateTemplate.bulkUpdate(UPDATE_EVENTID, courseClassVO.getEventVO().getEventID(),courseClassVO.getCourseClassID());
+		}
 	}
 	
 	@Override

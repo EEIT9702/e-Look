@@ -7,7 +7,7 @@ public class AdService_JNDI {
 	private AdDAO_interface dao;
 
 	public AdService_JNDI() {
-		dao = new AdDAO();
+		dao = new AdDAO_JNDI();
 	}
 
 //	public AdVO addAd(String fileName, InputStream adFile, Byte status) {

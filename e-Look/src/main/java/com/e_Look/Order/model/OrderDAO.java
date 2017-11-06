@@ -14,17 +14,19 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.e_Look.Order.model.OrderDAO_interface;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.e_Look.Order.model.OrderDAO_interface;
+@Transactional(readOnly = true)
 public class OrderDAO implements OrderDAO_interface {
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/eLookDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
+	public HibernateTemplate hibernateTemplate;
+	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+		this.hibernateTemplate = hibernateTemplate;
+	
 	}
 
 	private static final String INSERT_Order = "insert into [Order] (memberID,orderTime) values (?,?)";
@@ -37,298 +39,67 @@ public class OrderDAO implements OrderDAO_interface {
 	private static final String SELECT_ORDER_OF_DATE = "select OrderID,memberID,orderTime from [Order] where orderTime>=? and orderTime <=?";
 
 	@Override
-	public void insert(OrderVO OrderVO) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		try {
-			conn = ds.getConnection();
-
-			pstmt = conn.prepareStatement(INSERT_Order);
-			pstmt.setInt(1, OrderVO.getMemberID());
-			pstmt.setDate(2, OrderVO.getOrderTime());
-			pstmt.executeUpdate();
-
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+	public void insert(OrderVO orderVO) {
+		hibernateTemplate.save(orderVO);		
 	}
 
 	@Override
-	public void delete(Integer OrderID) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		try {
-			conn = ds.getConnection();
-
-			pstmt = conn.prepareStatement(DELETE_Order);
-
-			pstmt.setInt(1, OrderID);
-
-			pstmt.executeUpdate();
-
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+	public void delete(Integer orderID) {
+		OrderVO orderVO=new OrderVO();
+		orderVO.setOrderID(orderID);
+		hibernateTemplate.delete(orderVO);
 	}
 
 	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void update(OrderVO OrderVO) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		try {
-			conn = ds.getConnection();
-
-			pstmt = conn.prepareStatement(UPDATE_Order);
-
-			pstmt.setInt(1, OrderVO.getMemberID());
-			pstmt.setDate(2, OrderVO.getOrderTime());
-			pstmt.setInt(3, OrderVO.getOrderID());
-			pstmt.executeUpdate();
-
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-
+		hibernateTemplate.update(OrderVO);
 	}
 
 	@Override
-	public OrderVO findByPrimaryKey(Integer OrderID) {
-		OrderVO OrderVO = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_Order);
-			pstmt.setInt(1, OrderID);
-			ResultSet rs = pstmt.executeQuery();
-			if (rs.next()) {
-				OrderVO = new OrderVO();
-				OrderVO.setOrderID(rs.getInt(1));
-				OrderVO.setMemberID(rs.getInt(2));
-				OrderVO.setOrderTime(rs.getDate(3));
-			}
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-
-		return OrderVO;
-
+	public OrderVO findByPrimaryKey(Integer orderID) {
+		return hibernateTemplate.get(OrderVO.class, orderID);
 	}
 
 	@Override
 	public List<OrderVO> getAll() {
-		List<OrderVO> list = new LinkedList<OrderVO>();
-
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		try {
-			conn = ds.getConnection();
-			pstmt = conn.prepareStatement(SELECT_ALL_Order);
-			ResultSet rs = pstmt.executeQuery();
-			while (rs.next()) {
-
-				OrderVO OrderVO = new OrderVO();
-				OrderVO.setOrderID(rs.getInt(1));
-				OrderVO.setMemberID(rs.getInt(2));
-				OrderVO.setOrderTime(rs.getDate(3));
-				list.add(OrderVO);
-			}
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		return list;
+		return (List<OrderVO>) hibernateTemplate.find("from OrderVO");
 	}
 
 	@Override
 	public OrderVO findMemberUncheckOrder(Integer memberID) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		OrderVO orderVO = null;
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_MEMBER_UNCHECK_Order);
-			pstmt.setInt(1, memberID);
-			ResultSet rs = pstmt.executeQuery();
-			if (rs.next()) {
-				orderVO = new OrderVO();
-				orderVO.setOrderID(rs.getInt(1));
-				orderVO.setMemberID(rs.getInt(2));
-				orderVO.setOrderTime(rs.getDate(3));
-			}
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-
-		return orderVO;
+		return (OrderVO)hibernateTemplate.find("from OrderVO where orderTime is null and memberID = ?",memberID).get(0);
 	}
 
 	@Override
 	public List<OrderVO> getMemberAllOrder(Integer memberID) {
-		List<OrderVO> list = new LinkedList<OrderVO>();
-
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		try {
-			conn = ds.getConnection();
-			pstmt = conn.prepareStatement(SELECT_MEMBER_ALL_Order);
-			pstmt.setInt(1, memberID);
-			ResultSet rs = pstmt.executeQuery();
-			while (rs.next()) {
-				OrderVO OrderVO = new OrderVO();
-				OrderVO.setOrderID(rs.getInt(1));
-				OrderVO.setMemberID(rs.getInt(2));
-				OrderVO.setOrderTime(rs.getDate(3));
-				list.add(OrderVO);
-			}
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		return list;
+		return (List<OrderVO>) hibernateTemplate.find("from OrderVO where memberID = ?", memberID);
 	}
 	@Override
 	public List<OrderVO> getOrderByDate(Date sDate, Date eDate) {
-		List<OrderVO> list = new LinkedList<OrderVO>();
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		try {
-			conn = ds.getConnection();
-			pstmt = conn.prepareStatement(SELECT_ORDER_OF_DATE);
-			pstmt.setDate(1, sDate);
-			pstmt.setDate(2, eDate);
-			ResultSet rs = pstmt.executeQuery();
-			while(rs.next()){
-				OrderVO orderVO = new OrderVO();
-				orderVO.setOrderID(rs.getInt(1));
-				orderVO.setMemberID(rs.getInt(2));
-				orderVO.setOrderTime(rs.getDate(3));
-				list.add(orderVO);
-			}
-
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
+		return (List<OrderVO>) hibernateTemplate.find("from OrderVO where orderTime=>? and orderTime<=?", sDate,eDate);
+	}
+	
+	public static void main(String[] args){
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config.xml");
+		OrderDAO_interface dao = (OrderDAO_interface) context.getBean("orderDAO");
+		
+//		OrderVO orderVO=new OrderVO();
+//		orderVO.setMemberID(100001);
+//		dao.insert(orderVO);
+//		dao.update(dao.findByPrimaryKey(1004));
+//		dao.findByPrimaryKey(1001);
+//		
+		
+		for(OrderVO vo:dao.getAll()){
+			System.out.print(vo.getOrderID());
+			System.out.print(vo.getMemberID());
+			System.out.println(vo.getOrderTime());
+			
 		}
-
-		return list;
+//		dao.delete(dao.findMemberUncheckOrder(100001).getOrderID());
+//		
 	}
 }

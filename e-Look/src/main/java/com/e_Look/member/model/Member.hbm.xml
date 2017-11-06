@@ -19,7 +19,7 @@
             <property name="hobby" column="hobby" />
             <property name="registerDate" column="registerDate" />
             <property name="status" column="status" />
-            <property name="count" column="count" />
+            <property name="counts" column="counts" />
             <property name="address" column="address" />
     </class>
 </hibernate-mapping>

@@ -41,7 +41,7 @@ public class OrderSystemService {
 		orderDetailsDAO = new OrderDetailsDAO();
 		buyCourseDAO =(BuyCourseDAO_interface) context.getBean("buyCourseDAO");
 		courseClassDAO =(CourseClass_interface) context.getBean("courseClassDAO");
-		courseClassDetailsDAO = new CourseClassDetailsDAO();
+		courseClassDetailsDAO = (CourseClassDetails_interface) context.getBean("courseClassDetailsDAO");
 	}
 
 	public void refreshOrderBuyingPrice(Integer memberID) {

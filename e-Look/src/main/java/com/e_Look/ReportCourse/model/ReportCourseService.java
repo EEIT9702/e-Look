@@ -1,13 +1,19 @@
 package com.e_Look.ReportCourse.model;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import com.e_Look.Course.CourseDAO;
+import com.e_Look.Course.CourseService;
 import com.e_Look.Course.CourseVO;
 import com.e_Look.member.model.MemberService;
 
 public class ReportCourseService {
 	private ReportCourseDAO_interface dao;
 	public ReportCourseService (){
-		dao= new ReportCourseDAO();
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config-jndi.xml");
+        // 建立DAO物件
+		dao = (ReportCourseDAO_interface) context.getBean("reportCourseDAO");
 	}
 	public void insertReportCourse(Integer courseID,Integer memberID,String reportContent){
 			ReportCourseVO reportCourseVO = new ReportCourseVO();
@@ -22,12 +28,12 @@ public class ReportCourseService {
 			dao.insert(reportCourseVO);
 	}
 
-	public String getJSON(Integer status) {
+	public String getJSON(byte status) {
 		return dao.getJSON(status);
 	}
 	
 	public void discontinuedCourse(Integer reportID,int status) {
-		CourseDAO cdao = new CourseDAO();
+		CourseService cdao = new CourseService();
 		ReportCourseVO rcVO = dao.findByReportId(reportID);
 		rcVO.setStatus((byte) 1);
 		dao.update(rcVO);

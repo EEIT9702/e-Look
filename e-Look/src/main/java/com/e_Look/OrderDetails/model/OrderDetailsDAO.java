@@ -12,18 +12,24 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.e_Look.Course.CourseService;
-import com.e_Look.Order.model.OrderDAO;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.e_Look.Course.CourseDAO;
+import com.e_Look.Course.CourseDAO_interface;
+import com.e_Look.Course.CourseService;
+import com.e_Look.Course.CourseVO;
+import com.e_Look.Order.model.OrderDAO;
+import com.e_Look.Order.model.OrderDAO_interface;
+import com.e_Look.tool.BuyingPrice;
+@Transactional(readOnly = true)
 public class OrderDetailsDAO implements OrderDetailsDAO_interface {
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/eLookDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
+	public HibernateTemplate hibernateTemplate;
+	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+		this.hibernateTemplate = hibernateTemplate;
 	}
 
 	private static final String INSERT_ORDERDETAILS = "insert into OrderDetails (orderID,courseID,buyingPrice,originalPrice) values(?,?,?,?)";
@@ -36,266 +42,61 @@ public class OrderDetailsDAO implements OrderDetailsDAO_interface {
 	
 	
 	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void insert(OrderDetailsVO orderDetailsVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_ORDERDETAILS);
-			pstmt.setInt(1, orderDetailsVO.getOrderVO().getOrderID());
-			pstmt.setInt(2, orderDetailsVO.getCourseVO().getCourseID());
-			pstmt.setInt(3, orderDetailsVO.getBuyingPrice());
-			pstmt.setInt(4, orderDetailsVO.getOriginalPrice());
-			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
+		hibernateTemplate.save(orderDetailsVO);
 	}
 
 	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void update(OrderDetailsVO orderDetailsVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(UPDATE_ORDERDETAILS);
-			pstmt.setInt(1, orderDetailsVO.getOrderVO().getOrderID());
-			pstmt.setInt(2, orderDetailsVO.getCourseVO().getCourseID());
-			pstmt.setInt(3, orderDetailsVO.getBuyingPrice());
-			pstmt.setInt(4, orderDetailsVO.getOriginalPrice());
-			pstmt.setInt(5, orderDetailsVO.getOrderVO().getOrderID());
-			pstmt.setInt(6, orderDetailsVO.getCourseVO().getCourseID());
-			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
+		hibernateTemplate.update(orderDetailsVO);
 	}
 
 	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void delete(OrderDetailsVO orderDetailsVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(DELETE_ORDERDETAILS);
-			pstmt.setInt(1, orderDetailsVO.getOrderVO().getOrderID());
-			pstmt.setInt(2, orderDetailsVO.getCourseVO().getCourseID());
-			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
+		hibernateTemplate.delete(orderDetailsVO);
 	}
 
 	@Override
 	public List<OrderDetailsVO> findByOrderID(Integer orderID) {
-		List<OrderDetailsVO> list = new LinkedList<OrderDetailsVO>();
-		CourseService cdao = new CourseService();
-		OrderDAO odao = new OrderDAO();
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_ORDER_ORDERDETAILS);
-			pstmt.setInt(1, orderID);
-			ResultSet rs = pstmt.executeQuery();
-			while (rs.next()) {
-				OrderDetailsVO vo = new OrderDetailsVO();
-				vo.setOrderVO(odao.findByPrimaryKey(rs.getInt(1)));
-				vo.setCourseVO(cdao.findByPrimaryKey(rs.getInt(2)));
-				vo.setBuyingPrice(rs.getInt(3));
-				vo.setOriginalPrice(rs.getInt(4));
-				list.add(vo);
-			}
-
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		return list;
+		return (List<OrderDetailsVO>) hibernateTemplate.find("from OrderDetailsVO where orderID = ?", orderID);
 	}
 
 	@Override
 	public List<OrderDetailsVO> getAll() {
-		List<OrderDetailsVO> list = new LinkedList<OrderDetailsVO>();
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		CourseService cdao = new CourseService();
-		OrderDAO odao = new OrderDAO();
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_ALL_ORDERDETAILS);
-			ResultSet rs = pstmt.executeQuery();
-			while (rs.next()) {
-				OrderDetailsVO vo = new OrderDetailsVO();
-				vo.setOrderVO(odao.findByPrimaryKey(rs.getInt(1)));
-				vo.setCourseVO(cdao.findByPrimaryKey(rs.getInt(2)));
-				vo.setBuyingPrice(rs.getInt(3));
-				vo.setOriginalPrice(rs.getInt(4));
-				list.add(vo);
-			}
-
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		return list;
+		return (List<OrderDetailsVO>) hibernateTemplate.find("from OrderDetailsVO");
 	}
 
 	@Override
 	public OrderDetailsVO findByPrimaryKey(OrderDetailsVO orderDetailsVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		CourseService cdao = new CourseService();
-		OrderDAO odao = new OrderDAO();
-		OrderDetailsVO orderDetailsVO2 = null;
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_ONE_ORDERDETAILS);
-			pstmt.setInt(1, orderDetailsVO.getOrderVO().getOrderID());
-			pstmt.setInt(2, orderDetailsVO.getCourseVO().getCourseID());
-			ResultSet rs = pstmt.executeQuery();
-			if (rs.next()) {
-				orderDetailsVO2 = new OrderDetailsVO();
-				orderDetailsVO2.setOrderVO(odao.findByPrimaryKey(rs.getInt(1)));
-				orderDetailsVO2.setCourseVO(cdao.findByPrimaryKey(rs.getInt(2)));
-				orderDetailsVO2.setBuyingPrice(rs.getInt(3));
-				orderDetailsVO2.setOriginalPrice(rs.getInt(4));
-			}
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		return orderDetailsVO2;
+		return (OrderDetailsVO) hibernateTemplate.find("from OrderdetailsVO where orderID= ? courseID = ? ",orderDetailsVO.getOrderVO().getOrderID(),orderDetailsVO.getCourseVO().getCourseID()); 
 	}
 
 	@Override
 	public List<OrderDetailsVO> findByCourseID(Integer courseID) {
-		List<OrderDetailsVO> list = new LinkedList<OrderDetailsVO>();
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		CourseService cdao = new CourseService();
-		OrderDAO odao = new OrderDAO();
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_ORDERDETAILS_BY_COURSEID);
-			pstmt.setInt(1, courseID);
-			ResultSet rs=pstmt.executeQuery();
-			while(rs.next()){
-				OrderDetailsVO odVO = new OrderDetailsVO();
-				odVO.setOrderVO(odao.findByPrimaryKey(rs.getInt(1)));
-				odVO.setCourseVO(cdao.findByPrimaryKey(rs.getInt(2)));
-				odVO.setBuyingPrice(rs.getInt(3));
-				odVO.setOriginalPrice(rs.getInt(4));
-				list.add(odVO);
-			}
-	} catch (SQLException e) {
-		throw new RuntimeException("A database error occured. " + e.getMessage());
-	} finally {
-		if (pstmt != null) {
-			try {
-				pstmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace(System.err);
-			}
-		}
-		if (con != null) {
-			try {
-				con.close();
-			} catch (Exception e) {
-				e.printStackTrace(System.err);
-			}
-		}
+		return (List<OrderDetailsVO>) hibernateTemplate.find("from OrderdetailsVO where courseID = ? ", courseID);
 	}
+	
+	public static void main(String[] args){
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config.xml");
+		OrderDetailsDAO_interface dao = (OrderDetailsDAO_interface) context.getBean("orderDetailsDAO");
+		
+//		OrderDAO_interface odao = (OrderDAO_interface) context.getBean("orderDAO");
+//		CourseDAO_interface cdao = (CourseDAO_interface) context.getBean("courseDAO");
+//		CourseVO courseVO=cdao.findByPrimaryKey(200001);
+//		OrderDetailsVO orderDetailsVO=new OrderDetailsVO();
+//		orderDetailsVO.setBuyingPrice(300);
+//		orderDetailsVO.setOrderVO(odao.findByPrimaryKey(1007));
+//		orderDetailsVO.setOriginalPrice(courseVO.getSoldPrice());
+//		orderDetailsVO.setCourseVO(courseVO);
+//		dao.insert(orderDetailsVO);
+//		
+//		for(OrderDetailsVO aa:dao.getAll()){
+//			System.out.println(aa.getCourseVO().getCourseName());
+//		}
 		
 		
-		return list;
 	}
-
 }

@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.e_Look.Course.CourseService;
 import com.e_Look.Course.CourseVO;
-import com.e_Look.CourseClassDetails.CourseClassDetailsDAO;
+import com.e_Look.CourseClassDetails.CourseClassDetailsService;
 import com.e_Look.CourseClassDetails.CourseClassDetailsVO;
 
 public class BuyingPrice {
@@ -21,7 +21,7 @@ public class BuyingPrice {
 					&& System.currentTimeMillis() <= courseVO.getFundEndDate().getTime() + 1000 * 3600 * 24) {
 				discount = 0.7;
 			}else{
-				CourseClassDetailsDAO ccddao = new CourseClassDetailsDAO();
+				CourseClassDetailsService ccddao = new CourseClassDetailsService();
 				List<CourseClassDetailsVO> ccdVOs = ccddao.findBycourseID(courseID);
 				for (CourseClassDetailsVO ccdVO : ccdVOs) {
 					if (ccdVO.getCourseClassVO().getEventVO() != null) {
@@ -39,7 +39,7 @@ public class BuyingPrice {
 
 			
 		} else {
-			CourseClassDetailsDAO ccddao = new CourseClassDetailsDAO();
+			CourseClassDetailsService ccddao = new CourseClassDetailsService();
 			List<CourseClassDetailsVO> ccdVOs = ccddao.findBycourseID(courseID);
 			for (CourseClassDetailsVO ccdVO : ccdVOs) {
 				if (ccdVO.getCourseClassVO().getEventVO() != null) {

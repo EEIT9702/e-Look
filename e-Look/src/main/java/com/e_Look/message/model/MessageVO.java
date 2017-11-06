@@ -98,12 +98,13 @@ public class MessageVO implements Serializable {
 	}
 
 
-//	@Override
-//	public String toString() {
-//		return "MessageVO [messageID=" + messageID + ", mContent=" + mContent + ", mTime=" + mTime
-//				+ ", messageID_response=" + messageID_response + ", memberID=" + memberID + ", courseID=" + courseID
-//				+ ", bought=" + bought + ", status=" + status + "]";
-//	};
-	
+	@Override
+	public String toString() {
+		return "MessageVO [messageID=" + messageID + ", mContent=" + mContent + ", mTime=" + mTime
+				+ ", messageID_response=" + messageID_response + ", memberVO=" + memberVO + ", courseID=" + courseID
+				+ ", bought=" + bought + ", status=" + status + "]";
+	}
+
+
 	
 }

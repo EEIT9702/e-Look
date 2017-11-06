@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.e_Look.eLookEvent.eLookEventDAO;
+import com.e_Look.eLookEvent.eLookEventDAO_JNDI;
 import com.e_Look.eLookEvent.eLookEventDAO_JDBC;
 import com.e_Look.eLookEvent.eLookEventVO;
 

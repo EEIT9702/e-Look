@@ -32,7 +32,7 @@ color:black;
     <div class="row">
             <div class="container">
                 <div class="navbar-header">
-                    <span class="navbar-brand">e-Look管理員您好80：</span>
+                    <span class="navbar-brand">e-Look管理員您好：</span>
                 </div>       
             </div>
             <div class="container-fluid">
@@ -220,6 +220,7 @@ $(function(){
 		$('#ReviewAllCourse>tbody').on('click','td>button:nth-child(1)',function(){
 	if(confirm("確定此課程審核通過嗎?")){
 			var id = $(this).parents('tr').find('td:nth-child(3)').text();
+			var memberID = $(this).parents('tr').find('td:nth-child(2)').text();
 			console.log(id+"此課程已審核通過");
 			$.each(ReviewDatas,function(idx,Course){
 				if(id==Course.courseID && Course.targetStudentNumber>0){
@@ -227,7 +228,7 @@ $(function(){
 						loadReviewData();
 					})
 				}else if(id==Course.courseID && Course.targetStudentNumber==0){
-					$.get('/e-Look/com.e_Look.Course.control/CourseEditControlloer',{'courseID':id,"changeStatustoOnlineStatus":"xxxxxxxxxx"},function(){
+					$.get('/e-Look/com.e_Look.Course.control/CourseEditControlloer',{'courseID':id,'memberID':memberID,"changeStatustoOnlineStatus":"xxxxxxxxxx"},function(){
 						loadReviewData();
 					})
 				}
