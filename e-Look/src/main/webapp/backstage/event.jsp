@@ -45,7 +45,7 @@ padding-bottom: 5px;}
 	<table class="container">
 	<thead>
 		<tr>
-			<th><h1>活動編號</h1></th>
+			<th nowrap="nowrap"><h1>活動編號</h1></th>
 			<th><h1>活動名稱</h1></th>
 			<th><h1>開始日期</h1></th>
 			<th><h1>結束日期</h1></th>
@@ -63,7 +63,7 @@ padding-bottom: 5px;}
 						<td>${eLookEventVO.eEndDate}</td>
 						<td>${eLookEventVO.discount}</td>
 						<td>${eLookEventVO.courseClass1}&ensp;${eLookEventVO.courseClass2}&ensp;${eLookEventVO.courseClass3}</td>
-						<td>
+						<td nowrap="nowrap">
 							<FORM METHOD="post"
 								ACTION="<%=request.getContextPath()%>/backstage/elookeventinsert"
 								style="display: inline;">
@@ -83,7 +83,7 @@ padding-bottom: 5px;}
 					<td><input type="text" name="eStartDate" id="thedate" value="${ErrMsg.errStartDate}" class="inputtext thedate" readonly="readonly"></td>
 					<td><input type="text" name="eEndDate" id="thedate2" value="${ErrMsg.errEndDate}" class="inputtext thedate2" readonly="readonly"> </td>
 					<td><input type="text" name="discount"value="${ErrMsg.errCount}" class="inputtext"></td>
-					<td><select class="font courseclass"
+					<td nowrap="nowrap"><select class="font courseclass"
 						name="courseClass1" id="e1">
 							<option value="null">無</option>
 							<option value="全部">全部</option>

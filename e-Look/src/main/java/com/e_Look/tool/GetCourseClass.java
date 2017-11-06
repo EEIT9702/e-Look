@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.e_Look.CourseClassDetails.CourseClassDetailsDAO;
+import com.e_Look.CourseClassDetails.CourseClassDetailsService;
 import com.e_Look.CourseClassDetails.CourseClassDetailsVO;
 
 /**
@@ -23,7 +23,7 @@ public class GetCourseClass extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		Integer courseID = Integer.parseInt(request.getParameter("courseID"));
-		CourseClassDetailsDAO ccddao = new CourseClassDetailsDAO();
+		CourseClassDetailsService ccddao = new CourseClassDetailsService();
 		List<CourseClassDetailsVO> ccdVOs = ccddao.findBycourseID(courseID);
 		String ccNames = "";
 		for (CourseClassDetailsVO ccdVO : ccdVOs) {

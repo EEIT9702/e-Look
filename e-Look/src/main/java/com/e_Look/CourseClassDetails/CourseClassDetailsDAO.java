@@ -1,287 +1,107 @@
 package com.e_Look.CourseClassDetails;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.LinkedList;
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.e_Look.Course.CourseDAO;
-import com.e_Look.Course.CourseService;
 import com.e_Look.Course.CourseVO;
-import com.e_Look.courseClass.CourseClassDAO;
 import com.e_Look.courseClass.CourseClassVO;
-
+@Transactional(readOnly = true)
 public class CourseClassDetailsDAO implements CourseClassDetails_interface {
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/eLookDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
+	public HibernateTemplate hibernateTemplate;
+	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+		this.hibernateTemplate = hibernateTemplate;
+	
 	}
 	
 	private static final String INSERT_COURSE_N_CLASS = 
-			"INSERT INTO CourseClassDetails (courseID,courseName,courseClassID,ccName) VALUES (?,?,?,?)";
+			"INSERT INTO CourseClassDetailsVO (courseID,courseName,courseClassID,ccName) VALUES (?,?,?,?)";
 	
 //	private static final String UPDATE_courseNClass = 
 //			"update CourseClassDetails set CourseClassID=? where courseID=?";
 	
 	private static final String DELETE_COURSE_N_CLASS = 
-			"DELETE FROM CourseClassDetails WHERE courseID=?";
+			"DELETE FROM CourseClassDetailsVO WHERE courseID=?";
 	
 	private static final String SELECT_BY_COURSE_CLASSID = 
-			"SELECT courseClassID,ccName,courseID,courseName FROM CourseClassDetails WHERE courseClassID=?";
+			"FROM CourseClassDetailsVO WHERE courseClassID=?";
 	
 	private static final String SELECT_BY_COURSEID = 
-			"SELECT courseID,courseName,courseClassID,ccName FROM CourseClassDetails WHERE courseID=?";
+			"FROM CourseClassDetailsVO WHERE courseID=?";
 	
 	private static final String SELECT_ALL = 
-			"SELECT courseClassID,ccName,courseID,courseName FROM CourseClassDetails";
+			"FROM CourseClassDetailsVO";
 
 	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void insert(CourseVO courseVO, CourseClassVO courseClassVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_COURSE_N_CLASS);
-			
-			pstmt.setInt(1, courseVO.getCourseID());
-			pstmt.setString(2, courseVO.getCourseName());
-			pstmt.setInt(3, courseClassVO.getCourseClassID());
-			pstmt.setString(4, courseClassVO.getCcName());
-			
-			pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-
+		CourseClassDetailsVO courseClassDetailsVO=new CourseClassDetailsVO();
+		courseClassDetailsVO.setCcName(courseClassVO.getCcName());
+		courseClassDetailsVO.setCourseClassVO(courseClassVO);
+		courseClassDetailsVO.setCourseVO(courseVO);
+		courseClassDetailsVO.setCourseName(courseVO.getCourseName());
+		hibernateTemplate.save(courseClassDetailsVO);
 	}
 
 	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void update(CourseClassVO courseClassVO, CourseVO courseVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = ds.getConnection();
-			
-//			pstmt = con.prepareStatement(UPDATE_courseNClass);
 
-//			pstmt.setInt(1, courseClassVO.getCourseClassID());
-//			pstmt.setInt(2, courseVO.getCourseID());
-//			pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
 
 	}
 	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void delete(Integer courseID) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		System.out.println(courseID);
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(DELETE_COURSE_N_CLASS);
-			pstmt.setInt(1,courseID);
-			pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-
+		
+//		CourseVO courseVO=new CourseVO();
+//		courseVO.setCourseID(courseID);
+//		CourseClassDetailsVO courseClassDetailsVO=new CourseClassDetailsVO();
+//		courseClassDetailsVO.setCourseVO(courseVO);
+		hibernateTemplate.bulkUpdate(DELETE_COURSE_N_CLASS, courseID);
 	}
 
 	@Override
 	public List<CourseClassDetailsVO> getBycourseClassID(Integer CourseClassID) {
-		
-		List<CourseClassDetailsVO> findBycourseClassID = new LinkedList<CourseClassDetailsVO>();
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		CourseService cdao = new CourseService();
-		CourseClassDAO ccdao = new CourseClassDAO();
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_BY_COURSE_CLASSID);
-		
-			pstmt.setInt(1, CourseClassID);
-			ResultSet rs = pstmt.executeQuery();
+		return (List<CourseClassDetailsVO>) hibernateTemplate.find(SELECT_BY_COURSE_CLASSID, CourseClassID);
 
-			while (rs.next()) {
-				CourseClassDetailsVO CourseClassDetailsVO = new CourseClassDetailsVO();
-				CourseClassDetailsVO.setCourseClassVO(ccdao.getByCourseClassID(rs.getInt(1)));
-				CourseClassDetailsVO.setCcName(rs.getString(2));
-				CourseClassDetailsVO.setCourseVO(cdao.findByPrimaryKey(rs.getInt(3)));
-				CourseClassDetailsVO.setCourseName(rs.getString(4));
-				findBycourseClassID.add(CourseClassDetailsVO);
-			}
-			
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		return findBycourseClassID;
 	}
 
 	@Override
 	public List<CourseClassDetailsVO> findBycourseID(Integer CourseID) {
-		List<CourseClassDetailsVO> findBycourseID = new LinkedList<CourseClassDetailsVO>();
-
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		CourseService cdao = new CourseService();
-		CourseClassDAO ccdao = new CourseClassDAO();
-
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_BY_COURSEID);
-			pstmt.setInt(1, CourseID);
-			ResultSet rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				CourseClassDetailsVO CourseClassDetailsVO = new CourseClassDetailsVO();
-				
-				CourseClassDetailsVO.setCourseVO(cdao.findByPrimaryKey(rs.getInt(1)));
-				CourseClassDetailsVO.setCourseName(rs.getString(2));
-				CourseClassDetailsVO.setCourseClassVO(ccdao.getByCourseClassID(rs.getInt(3)));
-				CourseClassDetailsVO.setCcName(rs.getString(4));
-				findBycourseID.add(CourseClassDetailsVO);
-			}
-			
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		return findBycourseID;
+		return (List<CourseClassDetailsVO>) hibernateTemplate.find(SELECT_BY_COURSEID, CourseID);
 	}
 
 	@Override
 	public List<CourseClassDetailsVO> getAll() {
-		List<CourseClassDetailsVO> getAll = new LinkedList<CourseClassDetailsVO>();
-
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		CourseService cdao = new CourseService();
-		CourseClassDAO ccdao = new CourseClassDAO();
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_ALL);
-
-			ResultSet rs = pstmt.executeQuery();
-			while (rs.next()) {
-				
-				CourseClassDetailsVO CourseClassDetailsVO = new CourseClassDetailsVO();
-				CourseClassDetailsVO.setCourseClassVO(ccdao.getByCourseClassID(rs.getInt(1)));
-				CourseClassDetailsVO.setCcName(rs.getString(2));
-				CourseClassDetailsVO.setCourseVO(cdao.findByPrimaryKey(rs.getInt(3)));
-				CourseClassDetailsVO.setCourseName(rs.getString(4));
-				
-				getAll.add(CourseClassDetailsVO);
-			}
-			
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		return getAll;
+		
+		return (List<CourseClassDetailsVO>) hibernateTemplate.find(SELECT_ALL);
 	}
+	public static void main(String[] args) {
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config.xml");
 
+        // 建立DAO物件
+		CourseClassDetails_interface dao =(CourseClassDetails_interface) context.getBean("courseClassDetailsDAO");
+		//新増
+//			CourseVO courseVO=new CourseVO();
+//			courseVO.setCourseID(200119);
+//			courseVO.setCourseName("輸入課程標題11");
+//			CourseClassVO courseClassVO =new CourseClassVO();
+//			courseClassVO.setCcName("影音");
+//			courseClassVO.setCourseClassID(104);
+//			dao.insert(courseVO, courseClassVO);
+		//刪除
+//		dao.delete(200119);
+		//查詢全部
+//		List<CourseClassDetailsVO> list = dao.getAll();
+//		for(CourseClassDetailsVO ccDetailsVO3 : list) {
+//			System.out.print(ccDetailsVO3.getCourseVO().getCourseID() + ", ");
+//			System.out.print(ccDetailsVO3.getCourseName() + ", ");
+//			System.out.print(ccDetailsVO3.getCourseClassVO().getCourseClassID() + ", ");
+//			System.out.print(ccDetailsVO3.getCcName() + "\n");
+//		}
+	}
 }
