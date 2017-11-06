@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 
 import org.json.simple.JSONValue;
 
-import com.e_Look.message.model.MessageDAO;
+import com.e_Look.message.model.MessageDAO_JNDI;
 import com.e_Look.message.model.MessageVO;
 
 public class ReportMessageDAO implements ReportMessageDAO_interface {
@@ -196,9 +196,9 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 				reportMessageVO = new ReportMessageVO();
 				messageVO = new MessageVO();
 				
-				MessageDAO messageDAO = new MessageDAO();
+				MessageDAO_JNDI messageDAO_JNDI = new MessageDAO_JNDI();
 				Integer messageID = rs.getInt("reportMessageID");
-				messageVO = (messageDAO.findByPrimaryKey(messageID));
+				messageVO = (messageDAO_JNDI.findByPrimaryKey(messageID));
 				
 				reportMessageVO.setMessageVO(messageVO);
 				
@@ -321,9 +321,9 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 				reportMessageVO = new ReportMessageVO();
 				messageVO = new MessageVO();
 				
-				MessageDAO messageDAO = new MessageDAO();
+				MessageDAO_JNDI messageDAO_JNDI = new MessageDAO_JNDI();
 				Integer messageID = rs.getInt("reportMessageID");
-				messageVO = (messageDAO.findByPrimaryKey(messageID));
+				messageVO = (messageDAO_JNDI.findByPrimaryKey(messageID));
 				
 				reportMessageVO.setMessageVO(messageVO);
 				
@@ -380,9 +380,9 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 				reportMessageVO = new ReportMessageVO();
 				messageVO = new MessageVO();
 				
-				MessageDAO messageDAO = new MessageDAO();
+				MessageDAO_JNDI messageDAO_JNDI = new MessageDAO_JNDI();
 				Integer messageID = rs.getInt("reportMessageID");
-				messageVO = (messageDAO.findByPrimaryKey(messageID));
+				messageVO = (messageDAO_JNDI.findByPrimaryKey(messageID));
 				
 				reportMessageVO.setMessageVO(messageVO);
 				

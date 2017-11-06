@@ -3,7 +3,7 @@ package com.e_Look.reportMessage.model;
 import java.util.List;
 
 import com.e_Look.member.model.MemberService;
-import com.e_Look.message.model.MessageDAO;
+import com.e_Look.message.model.MessageDAO_JNDI;
 import com.e_Look.message.model.MessageVO;
 
 public class ReportMessageService {
@@ -31,7 +31,7 @@ public class ReportMessageService {
 	
 	public void hideMessage(Integer reportID,int status) {
 		//使用Message欄位
-		MessageDAO mdao = new MessageDAO(); 
+		MessageDAO_JNDI mdao = new MessageDAO_JNDI(); 
 		//用reportID及ReportMessageDAO去拿出rmVO物件
 		ReportMessageVO rmVO = dao.findByReportId(reportID);
 		//將ReportMessage的狀態設為1,審核結果為遮蔽留言

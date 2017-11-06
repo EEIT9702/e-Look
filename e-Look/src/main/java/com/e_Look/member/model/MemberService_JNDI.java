@@ -19,7 +19,7 @@ import com.e_Look.emailSystem.MemberCheckEmail;
 public class MemberService_JNDI {
 	private MemberDAO_interface dao;
 	public MemberService_JNDI(){
-		dao=new MemberDAO();
+		dao=new MemberDAO_JNDI();
 	}
 	public MemberVO getMemberMail(String email){ 
 		return dao.findByPrimaryKey(email);
