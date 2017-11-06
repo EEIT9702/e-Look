@@ -38,7 +38,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 				<!-- <value>com/e_Look/ReportCourse/model/ReportCourse.hbm.xml</value> -->
 				<value>com/e_Look/reportMessage/model/ReportMessage.hbm.xml</value>
 				<value>com/e_Look/search/Search.hbm.xml</value>
-				<!-- <value>com/e_Look/shoppingCart/model/jdbc/ShoppingCart.hbm.xml</value> -->
+				<value>com/e_Look/shoppingCart/model/jdbc/ShoppingCart.hbm.xml</value>
 				<value>com/e_Look/sponsor/model/Sponsor.hbm.xml</value>
 			</list>
 		</property>
@@ -112,9 +112,9 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
 
-	<!-- <bean id="shoppingCartDAO" class="com.e_Look.shoppingCart.model.spring.ShoppingCartDAO"> -->
-	<!-- <property name="hibernateTemplate" ref="hibernateTemplate"/> -->
-	<!-- </bean> -->
+	<bean id="shoppingCartDAO" class="com.e_Look.shoppingCart.model.jdbc.ShoppingCartDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate"/>
+	</bean>
 
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
