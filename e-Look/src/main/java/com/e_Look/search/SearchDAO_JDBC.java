@@ -20,8 +20,8 @@ public class SearchDAO_JDBC implements SearchDAO_interface {
 	// String passwd = "123456";
 	private static final String INSERT_SEARCH = "insert into Search (keyWord,enterTime) values (?,getdate())";
 	// deprecated
-	private static final String UPDATE_SEARCH = "update Search set keyWord=? , enterTime=? where keyWord=? and enterTime=?";
-	private static final String DELETE_SEARCH = "delete from Search where keyWord=? and enterTime=?";
+	private static final String UPDATE_SEARCH = "update Search set keyWord=? , enterTime=? where searchID=?";
+	private static final String DELETE_SEARCH = "delete from Search where searchID=?";
 	private static final String DELETE_DATE_SEARCH = "delete from Search where enterTime < ?";
 	private static final String SELECT_ALL_SEARCH = "select keyWord,enterTime from Search";
 
@@ -59,17 +59,17 @@ public class SearchDAO_JDBC implements SearchDAO_interface {
 	}
 
 	@Override
-	public void update(SearchVO oldSearchVO, SearchVO newSearchVO) {
+	public void update(SearchVO searchVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE_SEARCH);
-			pstmt.setString(1, oldSearchVO.getKeyWord());
-			pstmt.setDate(2, oldSearchVO.getEnterTime());
-			pstmt.setString(3, newSearchVO.getKeyWord());
-			pstmt.setDate(4, newSearchVO.getEnterTime());
+			pstmt.setString(1, searchVO.getKeyWord());
+			pstmt.setDate(2, searchVO.getEnterTime());
+			pstmt.setInt(3, searchVO.getSearchID());
+		
 			pstmt.executeUpdate();
 
 		} catch (ClassNotFoundException e) {
@@ -95,15 +95,14 @@ public class SearchDAO_JDBC implements SearchDAO_interface {
 	}
 
 	@Override
-	public void delete(SearchVO searchVO) {
+	public void delete(Integer searchID) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(DELETE_SEARCH);
-			pstmt.setString(1, searchVO.getKeyWord());
-			pstmt.setDate(2, searchVO.getEnterTime());
+			pstmt.setInt(1,searchID);
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
@@ -127,37 +126,6 @@ public class SearchDAO_JDBC implements SearchDAO_interface {
 		}
 	}
 
-	@Override
-	public void dateDelete(Date date) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(DELETE_DATE_SEARCH);
-			pstmt.setDate(1, date);
-			pstmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-	}
 
 
 	@Override
