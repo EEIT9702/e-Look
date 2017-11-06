@@ -208,7 +208,7 @@ background-color: #f2fef1;
 /* 	padding-bottom:3px; */
 }
 .minMiddle{
-	padding-left:1px;
+	padding-left:12px;
 }
 .inputarea{
 	border:none !important;
@@ -401,12 +401,12 @@ $(function(){
 		if($(window).width() < 780) {
 			$("#ob").removeClass("outBorder").addClass("minOutBorder");
 			$("#keyWord").removeClass("inputarea").addClass("minInputarea");
-			$("#mm").removeClass("outBorder").addClass("minOutBorder");
+			$("#mm").removeClass("middleborder").addClass("minMiddle");
 			$("#si").removeClass("searchicon").addClass("minSearchicon");
 		}else{
 			$("#ob").removeClass("minOutBorder").addClass("outBorder");
 			$("#keyWord").removeClass("minInputarea").addClass("inputarea");
-			$("#mm").removeClass("minOutBorder").addClass("outBorder");
+			$("#mm").removeClass("minMiddle").addClass("middleborder");
 			$("#si").removeClass("minSearchicon").addClass("searchicon");
 		}
 	})
@@ -466,7 +466,7 @@ $(function(){
 
 	</div><!-- /col-md-10 -->
 	<div class="col-md-4 col-sm-12 col-xs-12 col-lg-4">
-	<div class="col-md-12 col-sm-12 col-xs-6 col=lg-12">
+	<div class="col-md-12 col-sm-12 col-xs-12 col=lg-12">
 	<form class="navbar-form navbar-left" id="searchKey" method="get" action="">
 	
 		<div class="input-group outBorder" style="" id="ob">
