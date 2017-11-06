@@ -56,8 +56,6 @@ public class MessageController_v2 extends HttpServlet {
 		String messageJSON=JSONValue.toJSONString(list);
 		System.out.println(messageJSON);
 		out.print(messageJSON);
-		
-		
 	}
 
 	
