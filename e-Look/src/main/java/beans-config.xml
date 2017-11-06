@@ -30,7 +30,8 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 				<value>com/e_Look/buyCourse/model/BuyCourse.hbm.xml</value>
 				<value>com/e_Look/Course/Course.hbm.xml</value>
 				<value>com/e_Look/courseClass/CourseClass.hbm.xml</value>
-				<value>com/e_Look/CourseClassDetails/CourseClassDetails.hbm.xml</value>
+				<value>com/e_Look/CourseClassDetails/CourseClassDetails.hbm.xml
+				</value>
 				<value>com/e_Look/eLookEvent/eLookEvent.hbm.xml</value>
 				<value>com/e_Look/member/model/Member.hbm.xml</value>
 				<value>com/e_Look/memberBookmarks/model/MemberBookmarks.hbm.xml
@@ -39,7 +40,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 				</value>
 				<value>com/e_Look/message/model/Message.hbm.xml</value>
 				<value>com/e_Look/Order/model/Order.hbm.xml</value>
-				<!-- <value>com/e_Look/OrderDetails/model/OrderDetails.hbm.xml</value> -->
+				<value>com/e_Look/OrderDetails/model/OrderDetails.hbm.xml</value>
 				<value>com/e_Look/ReportCourse/model/ReportCourse.hbm.xml</value>
 				<value>com/e_Look/reportMessage/model/ReportMessage.hbm.xml</value>
 				<value>com/e_Look/search/Search.hbm.xml</value>
@@ -89,14 +90,14 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<bean id="courseClassDAO" class="com.e_Look.courseClass.CourseClassDAO">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
-	
+
 	<!-- courseClassDetailsDAO -->
 	<bean id="courseClassDetailsDAO" class="com.e_Look.CourseClassDetails.CourseClassDetailsDAO">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
 
-<!-- eLookEventDAO -->
-<bean id="eLookEventDAO" class="com.e_Look.eLookEvent.eLookEventDAO">
+	<!-- eLookEventDAO -->
+	<bean id="eLookEventDAO" class="com.e_Look.eLookEvent.eLookEventDAO">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
 
@@ -105,8 +106,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
 	<!-- sponsorDAO -->
-	<bean id="sponsorDAO"
-		class="com.e_Look.sponsor.model.SponsorDAO">
+	<bean id="sponsorDAO" class="com.e_Look.sponsor.model.SponsorDAO">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
 
@@ -121,14 +121,19 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<bean id="reportMessageDAO" class="com.e_Look.reportMessage.model.ReportMessageDAO">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
-	
 	<!-- ReportCourseDAO -->
 	<bean id="reportCourseDAO" class="com.e_Look.ReportCourse.model.ReportCourseDAO">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
 
-
-
+	<!-- OrderDAO -->
+	<bean id="orderDAO" class="com.e_Look.Order.model.OrderDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<!-- OrderDetailsDAO -->
+	<bean id="orderDetailsDAO" class="com.e_Look.OrderDetails.model.OrderDetailsDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
 
 
 	<!-- <bean id="shoppingCartDAO" class="com.e_Look.shoppingCart.model.spring.ShoppingCartDAO"> -->

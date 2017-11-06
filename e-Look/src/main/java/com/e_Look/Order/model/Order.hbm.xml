@@ -4,7 +4,7 @@
 
 
 <hibernate-mapping>
-    <class name="com.e_Look.Order.model.OrderVO" table="Order" >
+    <class name="com.e_Look.Order.model.OrderVO" table="Orders" >
         <id name="orderID" column="orderID">
         	<generator class="identity"/>
         </id>
