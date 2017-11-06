@@ -1,26 +1,12 @@
 package com.e_Look.search;
 
-import java.sql.Date;
 import java.util.*;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.e_Look.ad.AdVO;
-
-
-
-public class SearchService {
+public class SearchService_JNDI {
 	private SearchDAO_interface sdao;
-
-	public SearchService() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config-jndi.xml");
-        // 建立DAO物件
-		 sdao =(SearchDAO_interface) context.getBean("searchDAO");
+	public SearchService_JNDI(){
+		sdao = new SearchDAO(); 
 	}
-
 	public String[] getKeyWordRank(){
 		List<SearchVO> list2 =sdao.getAll();
 		HashMap<String, Integer> map = new HashMap<String,Integer>();	
@@ -50,8 +36,8 @@ public class SearchService {
 		return ss;
 	}
 	
-	public void addSearch(SearchVO searchVO) {
-		sdao.insert(searchVO);
-	}
+	
+	
+	
 	
 }
