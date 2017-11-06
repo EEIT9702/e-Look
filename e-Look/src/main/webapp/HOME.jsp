@@ -355,7 +355,7 @@ a:HOVER {
 				$('.progress-bar').removeAttr('style');
 				$('.progress-bar').each(function(){
 					//console.log($(this).text());
-					console.log($(this).val());
+					//console.log($(this).val());
 					$(this).attr('style','width:'+$(this).text());
 				})	
 			})
@@ -365,14 +365,14 @@ a:HOVER {
 		//var endVal = $('.fundend').val();
 		var endVal = $('.fundend').attr("alt");
 		$('.fundend').each(function(){
-			console.log($(this).attr("alt"));
+			//console.log($(this).attr("alt"));
 			var ed = new Date($(this).attr("alt"));
 			var now = new Date();
 			var time = ed.getTime() - now.getTime();
 			time /= 1000;
 			var ntime = time / (24*60*60);
 			ntime = Math.floor(ntime);
-			console.log(ntime);
+			//console.log(ntime);
 			$(this).text("倒數" + ntime + "天")
 		})
 		
