@@ -95,8 +95,10 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<bean id="courseClassDetailsDAO" class="com.e_Look.CourseClassDetails.CourseClassDetailsDAO">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
-
-
+<!-- eLookEventDAO -->
+<bean id="eLookEventDAO" class="com.e_Look.eLookEvent.eLookEventDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
 
 
 
