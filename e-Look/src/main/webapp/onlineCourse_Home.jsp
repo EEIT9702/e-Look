@@ -164,6 +164,15 @@ background-color: #f2fef1;
   	cursor: pointer;
   	color:#9F35FF;
 }
+.minpstyle{
+ 	text-align:center;
+    line-height: 20px; 
+    line-width:50px;
+	font-size: 20px;
+  	font-family:微軟正黑體;
+  	cursor: pointer;
+  	color:#9F35FF;
+}
 .iconWidth{
 	width:50px;
 }
@@ -402,11 +411,13 @@ $(function(){
 			$("#keyWord").removeClass("inputarea").addClass("minInputarea");
 			$("#mm").removeClass("middleborder").addClass("minMiddle");
 			$("#si").removeClass("searchicon").addClass("minSearchicon");
+			$(".ccicon p").removeClass("pstyle").addClass("minpstyle");
 		}else{
 			$("#ob").removeClass("minOutBorder").addClass("outBorder");
 			$("#keyWord").removeClass("minInputarea").addClass("inputarea");
 			$("#mm").removeClass("minMiddle").addClass("middleborder");
 			$("#si").removeClass("minSearchicon").addClass("searchicon");
+			$(".ccicon p").removeClass("minpstyle").addClass("pstyle");
 		}
 	})
 })
