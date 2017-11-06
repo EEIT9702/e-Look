@@ -9,12 +9,6 @@
    	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap-3.3.7-dist/css/bootstrap.css">
    	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/jquery-ui.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/backstage/css/CourseReview.css">
-<style>
-a:hover{
-color:black;
-}
-
-</style>
 </head>
 
 <body>
