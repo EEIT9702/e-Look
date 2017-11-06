@@ -56,7 +56,7 @@ public class ShoppingCartDAO implements ShoppingCartDAO_interface {
 		vo.setMemberID(100001);
 		vo.setCourseID(200001);
 		
-		//dao.insert(vo);
+		dao.insert(vo);
 		//dao.delete(vo);
 		
 		

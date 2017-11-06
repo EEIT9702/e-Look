@@ -242,6 +242,7 @@ public class eLookEventController extends HttpServlet {
 			RequestDispatcher failureView = req
 					.getRequestDispatcher("event.jsp");
 			failureView.forward(req, res);
+			
 		}
 	}
 		
