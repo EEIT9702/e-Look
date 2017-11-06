@@ -1148,11 +1148,13 @@ a {
 			function message(){
 			$('.mess').empty()
 			$(".messageID").each(function(){
+				var gg
 				$.getJSON('/e-Look/MessageController_v2',{'messageID':$(this).val()},function(responses){
 					var fg = $(document.createDocumentFragment());
+					
 					$.each(responses,function(index,response){
 					console.log(response);
-					var div1=$('<div></div>')
+					var div1=$('<div></div>').addClass('response')
 					var div2=$('<div></div>').addClass('col-md-1 col-xs-2');
 					var img1=$('<img></img').addClass('img-thumbnail pull-left').attr({'src':'<%=request.getContextPath()%>/Image?MemberID='+response.memberID,'style':'padding-top:10px'});
 						div2.append(img1);
@@ -1163,9 +1165,9 @@ a {
 					var div4=$('<div></div>').addClass('dropdown pull-right').attr('style','margin-right:-30px')
 							var button=$('<button></button>').addClass('btn dropdown-toggle btn-default').attr({'data-toggle':'dropdown','style':'height:30px'})
 							var	span3=$('<span></span>').addClass('glyphicon glyphicon-option-horizontal')
-					var ul=$('<ul></ul>').addClass("dropdown-menu")
+					var ul=$('<ul></ul>').addClass("dropdown-menu").attr('id',response.messageID)
 					var li1=$('<li></li>')
-					var a1=$('<a></a>').addClass("reportM").attr({'href':'#','data-toggle':'modal','data-target':'#myModal2'}).text('檢舉')					
+					var a1=$('<a></a>').text('檢舉')							
 					var li2=$('<li></li>')
 					var a2=$('<a></a>').attr('href','#').text('修改')
 					var p =$('<p></p>').text(response.mContent)
@@ -1178,11 +1180,18 @@ a {
  					div1.append([div2,div3])
 					fg.append(div1)
 					$('#'+response.messageID_response).append(fg);
+// 							$('.response #'+response.messageID+'>li:nth-child(1)').on('click','a',function(){
+// 								var $this=$('.response #'+response.messageID+'>li:nth-child(1)')
+// 								$this.
+// 								alert($(this).html())
+// 							})
+				
+						})
 					})
-				});
-			})	
-			}
+				})	
+			}	
 		});
+
 		//輸入留言
 		$("#inputMessage>div>button").on('click',function(){
 // 			alert($(this).parents('#inputMessage').find('.inputMessage').val());
