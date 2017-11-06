@@ -40,7 +40,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 				<value>com/e_Look/message/model/Message.hbm.xml</value>
 				<value>com/e_Look/Order/model/Order.hbm.xml</value>
 				<!-- <value>com/e_Look/OrderDetails/model/OrderDetails.hbm.xml</value> -->
-				<!-- <value>com/e_Look/ReportCourse/model/ReportCourse.hbm.xml</value> -->
+				<value>com/e_Look/ReportCourse/model/ReportCourse.hbm.xml</value>
 				<value>com/e_Look/reportMessage/model/ReportMessage.hbm.xml</value>
 				<value>com/e_Look/search/Search.hbm.xml</value>
 				<value>com/e_Look/shoppingCart/model/jdbc/ShoppingCart.hbm.xml</value>
@@ -110,14 +110,28 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
 
+
+	<!-- searchDAO -->
+	<bean id="searchDAO" class="com.e_Look.search.SearchDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+
+
 	<!-- ReportMessageDAO -->
 	<bean id="reportMessageDAO" class="com.e_Look.reportMessage.model.ReportMessageDAO">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
 	
-		<bean id="shoppingCartDAO" class="com.e_Look.shoppingCart.model.jdbc.ShoppingCartDAO">
+	<!-- ReportCourseDAO -->
+	<bean id="reportCourseDAO" class="com.e_Look.ReportCourse.model.ReportCourseDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="shoppingCartDAO" class="com.e_Look.shoppingCart.model.jdbc.ShoppingCartDAO">
 		<property name="hibernateTemplate" ref="hibernateTemplate"/>
 	</bean>
+
+
+
 
 
 

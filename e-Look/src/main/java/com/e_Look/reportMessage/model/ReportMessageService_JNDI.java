@@ -25,7 +25,7 @@ public class ReportMessageService_JNDI {
 		
 	}
 	
-	public String getJSON(Integer status) {
+	public String getJSON(Byte status) {
 		return dao.getJSON(status);
 	}
 	

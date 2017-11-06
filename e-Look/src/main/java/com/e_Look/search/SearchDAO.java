@@ -1,5 +1,7 @@
 package com.e_Look.search;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -13,181 +15,96 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.e_Look.ad.AdDAO_interface;
+import com.e_Look.ad.AdVO;
+
+@Transactional(readOnly = true)
 public class SearchDAO implements SearchDAO_interface {
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/eLookDB");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
+	
+	public HibernateTemplate hibernateTemplate;
+	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+		this.hibernateTemplate = hibernateTemplate;
+	
 	}
-	private static final String INSERT_SEARCH = "insert into Search (keyWord,enterTime) values (?,getdate())";
+	
+	private static final String INSERT_SEARCH = "insert into SearchVO (keyWord,enterTime) values (?,?)";
 	// deprecated
-	private static final String UPDATE_SEARCH = "update Search set keyWord=? , enterTime=? where keyWord=? and enterTime=?";
-	private static final String DELETE_SEARCH = "delete from Search where keyWord=? and enterTime=?";
-	private static final String DELETE_DATE_SEARCH = "delete from Search where enterTime < ?";
+	private static final String UPDATE_SEARCH = "update SearchVO set keyWord=? , enterTime=? where keyWord=? and enterTime=?";
+	private static final String DELETE_SEARCH = "delete from SearchVO where keyWord=? and enterTime=?";
+	private static final String DELETE_DATE_SEARCH = "delete from SearchVO where enterTime < ?";
 	private static final String SELECT_ALL_SEARCH = "select keyWord,enterTime from Search";
 
 	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void insert(SearchVO searchVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_SEARCH);
-			pstmt.setString(1, searchVO.getKeyWord());
-			pstmt.executeUpdate();
-
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
+		hibernateTemplate.save(searchVO);
 	}
 
 	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void update(SearchVO oldSearchVO, SearchVO newSearchVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(UPDATE_SEARCH);
-			pstmt.setString(1, oldSearchVO.getKeyWord());
-			pstmt.setDate(2, oldSearchVO.getEnterTime());
-			pstmt.setString(3, newSearchVO.getKeyWord());
-			pstmt.setDate(4, newSearchVO.getEnterTime());
-			pstmt.executeUpdate();
-
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
+		hibernateTemplate.bulkUpdate(UPDATE_SEARCH,oldSearchVO.getKeyWord(),oldSearchVO.getEnterTime(),newSearchVO.getKeyWord(),newSearchVO.getEnterTime());
 	}
 
 	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void delete(SearchVO searchVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(DELETE_SEARCH);
-			pstmt.setString(1, searchVO.getKeyWord());
-			pstmt.setDate(2, searchVO.getEnterTime());
-			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
+		SearchVO searchVO1 = new SearchVO();
+//		searchVO1.setKeyWord(KeyWord);
+//		searchVO1.setEnterTime(enterTime);
+		
+		hibernateTemplate.delete(searchVO1);
 	}
 
 	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void dateDelete(Date date) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(DELETE_DATE_SEARCH);
-			pstmt.setDate(1, date);
-			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
+		SearchVO searchVO1 = new SearchVO();
+		searchVO1.setEnterTime(date);
+		
+		hibernateTemplate.delete(searchVO1);
 	}
 
 	@Override
 	public List<SearchVO> getAll() {
-		List<SearchVO> list = new ArrayList<SearchVO>();
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT_ALL_SEARCH);
-			ResultSet rs=pstmt.executeQuery();
-			while(rs.next()){
-				SearchVO searchVO=new SearchVO();
-				searchVO.setKeyWord(rs.getString("keyWord"));
-				searchVO.setEnterTime(rs.getDate("enterTime"));
-				list.add(searchVO);
-			}
-			
-		} catch (SQLException e) {
-			throw new RuntimeException("A database error occured. " + e.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		return list;
+		return (List<SearchVO>) hibernateTemplate.find("from SearchVO");
+		
 	}
+	public static void main(String[] args) throws FileNotFoundException, IOException {
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config.xml");
+
+		 // 建立DAO物件
+		SearchDAO_interface dao =(SearchDAO_interface) context.getBean("searchDAO");
+		// 新增
+		SearchVO searchVO=new SearchVO();
+		searchVO.setKeyWord("Java");
+		searchVO.setEnterTime(new Date(System.currentTimeMillis()));
+		dao.insert(searchVO);
+		
+
+//		List<SearchVO> list = dao.getAll();
+//		for(SearchVO searchVO2:list){
+//			System.out.print(searchVO2.getKeyWord()+"\t");
+//			System.out.println(searchVO2.getEnterTime());
+//			
+//		}
+//		
+		
+	
+
+		
+
+		
+		
+
+	}
+
 
 
 }
