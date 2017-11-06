@@ -2,6 +2,8 @@ package com.e_Look.message.control;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -41,7 +43,9 @@ public class MessageController_v2 extends HttpServlet {
 			Map<String,Object> messageMap=new LinkedHashMap<String,Object>();
 			messageMap.put("messageID", message.getMessageID());
 			messageMap.put("mContent", message.getmContent());
-			messageMap.put("mTime", message.getmTime());
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			String mtime=sdf.format(message.getmTime());
+			messageMap.put("mTime", mtime);
 			messageMap.put("messageID_response", message.getMessageID_response());
 			messageMap.put("memberID", message.getMemberVO().getMemberID());
 			messageMap.put("name", message.getMemberVO().getmName());
@@ -50,10 +54,8 @@ public class MessageController_v2 extends HttpServlet {
 			list.add(messageMap);
 		}
 		String messageJSON=JSONValue.toJSONString(list);
-//		System.out.println(messageJSON);
+		System.out.println(messageJSON);
 		out.print(messageJSON);
-		
-		
 	}
 
 	
@@ -64,10 +66,10 @@ public class MessageController_v2 extends HttpServlet {
 		Integer courseID=Integer.parseInt(request.getParameter("courseID"));
 		Integer memberID=Integer.parseInt(request.getParameter("memberID"));
 		Byte status=0;
-		System.out.println(mContent);
-		System.out.println(courseID);
-
-		System.out.println(memberID);
+//		System.out.println(mContent);
+//		System.out.println(courseID);
+//
+//		System.out.println(memberID);
 		MessageService messageService = new MessageService();
 		messageService.addMessage(mContent, memberID, courseID, status);
 		

@@ -1,5 +1,7 @@
 package com.e_Look.message.model;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import com.e_Look.member.model.MemberDAO;
@@ -20,6 +22,10 @@ public class MessageService {
 		MessageVO messageVO = new MessageVO();
 		messageVO.setmContent(mContent);
         //mTime時間由dao產生
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		Timestamp mTime=Timestamp.valueOf(sdf.format(System.currentTimeMillis()));
+		messageVO.setmTime(mTime);
+		
 		messageVO.setMemberVO(memberVO);
 		messageVO.setCourseID(courseID);
 		messageVO.setStatus(status);
@@ -37,6 +43,9 @@ public class MessageService {
 		System.out.println(memberVO);
 		MessageVO messageVO = new MessageVO();
 		messageVO.setmContent(mContent);
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		Timestamp mTime=Timestamp.valueOf(sdf.format(System.currentTimeMillis()));
+		messageVO.setmTime(mTime);
 		messageVO.setMessageID_response(messageID_response);
 		messageVO.setMemberVO(memberVO);
 		messageVO.setCourseID(courseID);
@@ -48,6 +57,9 @@ public class MessageService {
 
 		MessageVO messageVO = new MessageVO();
 		messageVO.setMessageID(messageID);
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		Timestamp mTime=Timestamp.valueOf(sdf.format(System.currentTimeMillis()));
+		messageVO.setmTime(mTime);
 		messageVO.setmContent(mContent);
 		dao.update(messageVO);
 //		return dao.findByPrimaryKey(messageID);

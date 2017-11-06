@@ -53,8 +53,7 @@ public class MessageDAO implements MessageDAO_interface {
 					Statement.RETURN_GENERATED_KEYS);
 //"insert into Message ( mContent,mTime,memberID,courseID,status) values ( ?, ?, ?, ?,?)";
 			pstmt.setString(1, messageVO.getmContent());
-			Timestamp ts = new Timestamp(System.currentTimeMillis());
-			pstmt.setTimestamp(2, ts);
+			pstmt.setTimestamp(2, messageVO.getmTime());
 			pstmt.setInt(3, messageVO.getMemberVO().getMemberID());
 			pstmt.setInt(4, messageVO.getCourseID());
 			pstmt.setByte(5, messageVO.getStatus());
@@ -99,8 +98,7 @@ public class MessageDAO implements MessageDAO_interface {
 			pstmt = con.prepareStatement(INSERT_MESSAGE_RESPONSE);
 			// "insert into Message (mContent,mTime,messageID_response,memberID,courseID,status)values (?, ?, ?, ?, ?, ?)"
 						pstmt.setString(1, messageVO.getmContent());
-						Timestamp ts = new Timestamp(System.currentTimeMillis());
-						pstmt.setTimestamp(2, ts);
+						pstmt.setTimestamp(2, messageVO.getmTime());;
 						pstmt.setInt(3, messageVO.getMessageID_response());
 						pstmt.setInt(4, messageVO.getMemberVO().getMemberID());
 						pstmt.setInt(5, messageVO.getCourseID());
@@ -137,8 +135,7 @@ public class MessageDAO implements MessageDAO_interface {
 				pstmt = con.prepareStatement(UPDATE_MESSAGE);
 //"update Message set mContent=?, mTime=? where messageID= ?";
 				pstmt.setString(1, messageVO.getmContent());
-				Timestamp ts = new Timestamp(System.currentTimeMillis()/1000);
-				pstmt.setTimestamp(2, ts);
+				pstmt.setTimestamp(2, messageVO.getmTime());
 				pstmt.setInt(3, messageVO.getMessageID());	
 				
 				pstmt.executeUpdate();

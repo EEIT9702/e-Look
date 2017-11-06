@@ -22,6 +22,13 @@ public class BuyCourseService {
 		return dao.findByMemberID(memberID);
 		
 	}
+	public void insertBuyCourse(Integer memberID,Integer courseID){
+		BuyCourseVO buyCourseVO=new BuyCourseVO();
+		buyCourseVO.setMemberID(memberID);
+		buyCourseVO.setCourseID(courseID);
+		dao.insert(buyCourseVO);
+	}
+	
 	public void updateScore(Integer scoreStar,Integer memberID,Integer courseID){
 		BuyCourseVO buyCourseVO=new BuyCourseVO();
 		buyCourseVO.setScore(scoreStar);
