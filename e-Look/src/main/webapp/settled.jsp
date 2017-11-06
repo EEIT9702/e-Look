@@ -133,6 +133,11 @@ ul {
 	float: right;
 	font-weight: bold;
 }
+.courseName{
+	overflow:hidden;
+      text-overflow:ellipsis;
+      white-space: nowrap;
+}
 </style>
 
 <script type="text/javascript"
@@ -237,7 +242,7 @@ ul {
 						var cell3 = $('<img>').addClass('pull-left span2 clearfix').css('margin-right','10px').attr({'alt':'','src':'<%=request.getContextPath()%>/CourseImage?CourseID='+orderVO.courseVO.courseID});
 						var cell4 = $('<div>').addClass('caption');
 						var cell5 = $('<button>').addClass('btn btn-danger icon  pull-right').text('刪除').val(orderVO.courseVO.courseID).attr('type','button');
-						var cell6 = $('<h4>')
+						var cell6 = $('<h4>').addClass('courseName');
 						var cell7 = $('<a>').attr('href','<%=request.getContextPath()%>/onlineCourse-v2.jsp?courseID='+orderVO.courseVO.courseID).text(orderVO.courseVO.courseName);
 						var cell8 = $('<small>');
 						var cell9 = $('<b>').text(courseClass);
