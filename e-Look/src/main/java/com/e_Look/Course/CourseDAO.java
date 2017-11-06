@@ -19,7 +19,6 @@ public class CourseDAO implements CourseDAO_interface {
 
 	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
 		this.hibernateTemplate = hibernateTemplate;
-
 	}
 	private static final String UPDATE_Course = "update CourseVO set courseName=?,preTool=?,background=?,ability=?,targetgroup=?,soldPrice=?,courseLength=?,targetStudentNumber=?,fundStartDate=?,fundEndDate=?,courseStartDate=?,courseContent=? where courseID= ?";
 	private static final String UPDATE_Course_IMAGE = "update CourseVO set cPhoto=? where courseID= ?";
