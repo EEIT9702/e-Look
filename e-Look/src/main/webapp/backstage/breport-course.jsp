@@ -81,16 +81,6 @@
                  </thead>
                  <tbody>
                  </tbody>
-<!--                   <tfoot style="border-top:none"> -->
-<!-- 	                 <tr> -->
-<!-- 	                  <td><button type="button" value="hideHistory" onclick="self.location.href='back_report-v2.jsp'" class="btn btn-info">檢舉留言管理</button></td> -->
-<!-- 	                  <td><input type="hidden" id="" name=""><span></span></td> -->
-<!-- 	                  <td><input type="hidden" id="" name=""><span></span></td> -->
-<!-- 	                  <td><input type="hidden" id="" name=""><span></span></td> -->
-<!-- 	                  <td><input type="hidden" id="" name=""><span></span></td> -->
-<!-- 	                  <td><button type="button" value="hideHistory" onclick="self.location.href='breport_course_history.jsp'" class="btn btn-success">查詢下架影片記錄</button></td> -->
-<!-- 	                 </tr> -->
-<!--                   </tfoot> -->
 			</table>
 			<div class="col-md-4" style="float:right;margin-bottom:30px;">
 				<button type="button" value="hideHistory" onclick="self.location.href='back_report-v2.jsp'" class="btn btn-info" style="margin-right:22px;">檢舉留言管理</button>
@@ -128,7 +118,7 @@
 		    //讀取檢舉
 		    //讀取到剛剛觸發帶入的值,並放入id
 		   function loadReportCourse(id){
-		    $.getJSON('ReportCourseControl',{"status":id},function(datas){
+		    $.get('ReportCourseControl',{"status":id},function(datas){
 		    	//console.log(datas)
 
 		    	//datas = [] array
@@ -162,7 +152,7 @@
 		    		fragment.append(row);
 		    	})
 		    	$('#reportTable>tbody').html(fragment);
-		     })
+		     },'json')
 	    	}
 
 			

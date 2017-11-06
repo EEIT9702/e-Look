@@ -256,7 +256,7 @@ public class ReportMessageDAO_JDBC implements ReportMessageDAO_interface {
 	}
 
 	@Override
-	public String getJSON(Integer status) {
+	public String getJSON(Byte status) {
 		//List<ReportMessageVO> list = new ArrayList<ReportMessageVO>();
 		String jsonString;
 		//ReportMessageVO reportMessageVO = null;

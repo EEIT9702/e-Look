@@ -1,6 +1,11 @@
 package com.e_Look.reportMessage.model;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.e_Look.member.model.MemberService;
 import com.e_Look.message.model.MessageDAO_JNDI;
@@ -9,7 +14,9 @@ import com.e_Look.message.model.MessageVO;
 public class ReportMessageService {
 	private ReportMessageDAO_interface dao;
 	public ReportMessageService() {
-		dao = new ReportMessageDAO();
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config-jndi.xml");
+        // 建立DAO物件
+		dao = (ReportMessageDAO_interface) context.getBean("reportMessageDAO");
 	}
 	public void insertReportMessage(Integer messageID, Integer reportMemberID,
 			String reportContent) {
@@ -25,7 +32,7 @@ public class ReportMessageService {
 		
 	}
 	
-	public String getJSON(Integer status) {
+	public String getJSON(Byte status) {
 		return dao.getJSON(status);
 	}
 	

@@ -104,7 +104,6 @@
 </div>
 <script>
 		$(function(){
-			
 			//帶入0到loadReportMessage方法裡
 		    loadReportMessage(0);
 		
@@ -132,19 +131,16 @@
 		    //讀取檢舉
 		    //讀取到剛剛觸發帶入的值,並放入id
 		   function loadReportMessage(id){
-		    $.getJSON('ReportMessageControl',{"status":id},function(datas){
-		    	//console.log(datas)
-
+		    $.get('ReportMessageControl',{"status":id},function(datas){
+ 		    	//console.log(datas);
 		    	//datas = [] array
 		    	//建一個fragment容器,並加上$()轉成jQuery物件去裝迴圈裡產生的物件
 		    	var fragment = $(document.createDocumentFragment());
 		    	$.each(datas,function(idx,report){
-		    		//product = {}
 		    		var cell1 = $('<td></td>').text(report.reportID);
 		    		var cell2 = $('<td></td>').text(report.reportContent);
 		    		var cell3 = $('<td></td>').text(report.mContent);
 		    		var cell4 = $('<td></td>').text(report.reportTime);
-		    		//var cell5 = $('<td></td>').text(report.status);
 		    		if(report.status == 0){
 		    			var cell5 = $('<td></td>').text("待處理");
 		    		}else if(report.status == 1){
@@ -153,20 +149,13 @@
 		    			var cell5 = $('<td></td>').text("不處理");
 		    		}
 		    		var cell6 = $('<td></td>').html('<button class="btn btn-primary" style="margin-right:10px;">遮蔽內容</button>&nbsp;<button class="btn btn-warning">不處理</button></td>');
-// 		    		var cell7 = $('<td></td>').html('<input type="hidden" id="" name=""><span></span>');
-// 		    		var cell8 = $('<td></td>').html('<input type="hidden" id="" name=""><span></span>');
-// 		    		var cell9 = $('<td></td>').html('<input type="hidden" id="" name=""><span></span>');
-// 		    		var cell10 = $('<td></td>').html('<input type="hidden" id="" name=""><span></span>');
-// 		    		var cell11 = $('<td></td>').html('<input type="hidden" id="" name=""><span></span>');
-// 		    		var cell12 = $('<td></td>').html('<button type="button" value="hideHistory" onclick="self.location.href="back_report_history-v2.jsp"" class="btn btn-success">查詢遮蔽留言紀錄</button>');
 		    		//<tr><td>
 		    		var row1 = $('<tr></tr>').append([cell1,cell2,cell3,cell4,cell5,cell6]);
-		    		//var row2 = $('<tr></tr>').append([cell7,cell8,cell9,cell10,cell11,cell12]);
 		    		//放到容器裡
 		    		fragment.append(row1);
 		    	})
 		    	$('#reportTable>tbody').html(fragment);
-		     })
+		     },'json')
 	    	}
 
 			

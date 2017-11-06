@@ -234,7 +234,7 @@ public class ReportMessageDAO_JNDI implements ReportMessageDAO_interface {
 	}
 
 	@Override
-	public String getJSON(Integer status) {
+	public String getJSON(Byte status) {
 		//List<ReportMessageVO> list = new ArrayList<ReportMessageVO>();
 		String jsonString;
 		//ReportMessageVO reportMessageVO = null;
