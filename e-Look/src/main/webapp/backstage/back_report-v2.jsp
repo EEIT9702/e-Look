@@ -76,7 +76,12 @@
 </section> 
 <div class="container cbox" style="">
 		<div class="row">
-
+			<div class="col-md-12" style="margin-bottom:30px;" >
+<!-- 				<button type="button" value="hideHistory" onclick="self.location.href='breport-course.jsp'" class="btn btn-info" style="margin-right:21px;">檢舉課程管理</button> -->
+<!-- 				<button type="button" value="hideHistory" onclick="self.location.href='back_report_history-v2.jsp'" class="btn btn-success" style="margin-right:7px;">查詢遮蔽留言紀錄</button> -->
+				<button type="button" value="hideHistory" onclick="self.location.href='back_report_history-v2.jsp'" class="btn btn-success" style="float:right;">查詢遮蔽留言紀錄</button>
+				<button type="button" value="hideHistory" onclick="self.location.href='breport-course.jsp'" class="btn btn-info" style="float:right;margin-right:5px;">檢舉課程管理</button>
+			</div>
 		  <table id="reportTable" class="table table-bordered tstyle" style="">
                  <thead>
                     <tr>
@@ -103,10 +108,7 @@
 <!-- 	                 </form> -->
 <!--                   </tfoot> -->
 			</table>
-			<div class="col-md-4" style="float:right;margin-bottom:30px;">
-				<button type="button" value="hideHistory" onclick="self.location.href='breport-course.jsp'" class="btn btn-info" style="margin-right:21px;">檢舉課程管理</button>
-				<button type="button" value="hideHistory" onclick="self.location.href='back_report_history-v2.jsp'" class="btn btn-success" style="margin-right:7px;">查詢遮蔽留言紀錄</button>
-			</div>
+
 		</div>
 </div>
 <script>

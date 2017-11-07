@@ -64,7 +64,9 @@
 </section> 
 <div class="container cbox" style="">
 		<div class="row">
-
+   			<div class="col-md-12" style="float:right;margin-bottom:30px;">
+				<button type="button" value="hideHistory" onclick="self.location.href='breport-course.jsp'" class="btn btn-success" style="float:right;">檢舉課程管理</button>
+			</div>
 		  <table id="reportTable" class="table table-bordered tstyle" style="">
                  <thead>
                     <tr>
@@ -87,9 +89,7 @@
 <!-- 	                 </form> -->
 <!--                   </tfoot> -->
             </table>
-   			<div class="col-md-3" style="float:right;margin-bottom:30px;">
-				<button type="button" value="hideHistory" onclick="self.location.href='breport-course.jsp'" class="btn btn-success" style="margin-right:68px;">檢舉課程管理</button>
-			</div>
+
 		</div>
 
 </div>
