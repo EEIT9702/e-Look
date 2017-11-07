@@ -1227,8 +1227,14 @@ $('#starttime,#endtime').change(function(e) {
 						$('#fundDateDurationJSON').text("募資起迄時間：無須填寫");
 	 					$('#fundDateDurationJSON').css( "color", "black" );
 					}else{
-					$('#fundDateDurationJSON').text("募資起迄時間："+datas.fundStartDate+" ~ "+datas.fundEndDate);
- 					$('#fundDateDurationJSON').css( "color", "black" );}
+						if(datas.fundStartDate !=null){
+							$('#fundDateDurationJSON').text("募資起迄時間："+datas.fundStartDate+" ~ "+datas.fundEndDate);
+		 					$('#fundDateDurationJSON').css( "color", "black" );
+						}else{
+							$('#fundDateDurationJSON').text("募資起迄時間：填寫資訊不完整");
+		 					$('#fundDateDurationJSON').css( "color", "red" );
+						}
+					}
 				}else{
 					if(datas.targetStudentNumber ==0){
 						$('#fundDateDurationJSON').text("募資起迄時間：無須填寫");

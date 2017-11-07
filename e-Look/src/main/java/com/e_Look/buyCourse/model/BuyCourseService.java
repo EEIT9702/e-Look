@@ -27,6 +27,12 @@ public class BuyCourseService {
 		dao.update(buyCourseVO);
 		
 	}
+	public void insertBuyCourse(Integer memberID,Integer courseID){
+		BuyCourseVO buyCourseVO=new BuyCourseVO();
+		buyCourseVO.setMemberID(memberID);
+		buyCourseVO.setCourseID(courseID);
+		dao.insert(buyCourseVO);
+	}
 	public Double avgScore(Integer courseID){
 		System.out.println(courseID);
 		return dao.getAvgScore(courseID); 
