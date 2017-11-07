@@ -283,7 +283,7 @@
 
 								<ul class="list-inline col-md-6 pull-right"
 									style="margin-top: 50px; margin-bottom: 80px;">
-									<li class="pull-right"><button type="button"
+									<li class="pull-right"><button type="button" disabled id="button2"
 											class="btn btn-primary btn-lg btn3d next-step">儲存並前往下一步</button></li>
 									<li class="pull-right"><button type="button"
 											class="btn3d btn btn-default btn-lg prev-step">上一步</button></li>
@@ -405,7 +405,7 @@
 
 										<div class="form-group col-lg-4" style="font-size: 20px;">
 											<label>預計課程長度(以分鐘為單位)</label> <input type="text"
-												name="courseLength" class="form-control" id=""
+												name="courseLength" class="form-control" id="courseLength"
 												value="${CoursedData.courseLength}" style="font-size: 18px;">
 										</div>
 									</div>
@@ -455,7 +455,7 @@
 								<ul class="list-inline pull-right" style="margin-bottom: 80px">
 									<li><button type="button"
 											class="btn3d btn btn-default btn-lg prev-step">上一步</button></li>
-									<li><button type="button"
+									<li><button type="button" disabled id="button4"
 											class="btn btn-primary btn-lg btn3d next-step">儲存並前往下一步</button></li>
 								</ul>
 
@@ -802,19 +802,8 @@
 			}
 		}
 
-		$(document)
-				.ready(
-						function() {
-							$('input[type=checkbox]')
-									.click(
-											function() {
-												$("input[name='CourseClass']")
-														.attr('disabled', true);
-												if ($("input[name='CourseClass']:checked").length >= 3) {
-													$(
-															"input[name='CourseClass']:checked")
-															.attr('disabled',
-																	false);
+		$(document).ready(function() {$('input[type=checkbox]').click(function() {$("input[name='CourseClass']").attr('disabled', true);
+																					if ($("input[name='CourseClass']:checked").length >= 3) {$("input[name='CourseClass']:checked").attr('disabled',false);
 												} else {
 													$(
 															"input[name='CourseClass']")
@@ -921,6 +910,7 @@
 			var selectr = document.querySelector("#CourseList input:checked").value;
 			if (selectr === "radio1") {
 				$("#soldPrice").val("0");
+				$('#soldPricewarning').text("");
 				document.querySelector("#soldPrice").setAttribute("readonly",
 						"readonly");
 				document.querySelector("#ProposalCourse").style = "opacity: 0.4;font-size: 18px;margin-top: 2em;";
@@ -931,24 +921,31 @@
 						})
 				var formData = new FormData($('form')[3]);
 				console.log("課程銷售方式(免費)送到資料庫囉!");
-				$
-						.ajax({
-							type : 'POST',
-							url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
-							data : formData,
-							processData : false,
-							contentType : false,
-							success : function() {
-								delay_till_last('id', function() {
-									$('#updateConfirm').text("變更已儲存至草稿");
-									$("#updateConfirm").fadeIn(1200);
-
-									$("#updateConfirm").fadeOut(1500);
-
-								}, 1000);
-							}
-						})
-
+				$.ajax({type : 'POST',
+						url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
+						data : formData,
+						processData : false,
+						contentType : false,
+						success : function() {
+						delay_till_last('id', function(){$('#updateConfirm').text("變更已儲存至草稿");
+														 $("#updateConfirm").fadeIn(1200);
+														 $("#updateConfirm").fadeOut(1500);
+														}, 1000);
+											}
+						});
+				if($('#courseLength').val()>0){
+					$('#button4').removeAttr("disabled");
+				}else{
+					$('#button4').attr("disabled","disabled");
+				};
+				$('input[type!="file"],input[type!="radio"]').keyup(function(){
+					if($('#courseLength').val()>0){
+						$('#button4').removeAttr("disabled");
+					}else{
+						$('#button4').attr("disabled","disabled");
+					}
+				});
+						
 			}
 			if (selectr === "radio3") {
 				$("#soldPrice").val("10");
@@ -980,7 +977,19 @@
 
 								}, 1000);
 							}
-						})
+						});
+				if($('#soldPrice').val()>=10 && $('#courseLength').val()>0){
+					$('#button4').removeAttr("disabled");
+				}else{
+					$('#button4').attr("disabled","disabled");
+				};
+				$('input[type!="file"],input[type!="radio"]').keyup(function(){
+					if($('#soldPrice').val()>=10 && $('#courseLength').val()>0){
+						$('#button4').removeAttr("disabled");
+					}else{
+						$('#button4').attr("disabled","disabled");
+					}
+				});
 			}
 			if (selectr === "radio2") {
 				$("#soldPrice").val("10");
@@ -1011,7 +1020,19 @@
 
 								}, 1000);
 							}
-						})
+						});
+				if($('#soldPrice').val()>=10 && $('#courseLength').val()>0 && $('#targetStudentNumber').val()>=10 && $('#starttime').val()!="" && $('#endtime').val()!="" && $('#prepareDate').val()>=1){
+					$('#button4').removeAttr("disabled");
+				}else{
+					$('#button4').attr("disabled","disabled");
+				};
+				$('input[type!="file"],input[type!="radio"]').keyup(function(){
+					if($('#soldPrice').val()>=10 && $('#courseLength').val()>0 && $('#targetStudentNumber').val()>=10 && $('#starttime').val()!="" && $('#endtime').val()!="" && $('#prepareDate').val()>=1){
+						$('#button4').removeAttr("disabled");
+					}else{
+						$('#button4').attr("disabled","disabled");
+					}
+				});
 			}
 		};
 
@@ -1226,8 +1247,14 @@ $('#starttime,#endtime').change(function(e) {
 						$('#fundDateDurationJSON').text("募資起迄時間：無須填寫");
 	 					$('#fundDateDurationJSON').css( "color", "black" );
 					}else{
-					$('#fundDateDurationJSON').text("募資起迄時間："+datas.fundStartDate+" ~ "+datas.fundEndDate);
- 					$('#fundDateDurationJSON').css( "color", "black" );}
+						if(datas.fundStartDate !=null){
+							$('#fundDateDurationJSON').text("募資起迄時間："+datas.fundStartDate+" ~ "+datas.fundEndDate);
+		 					$('#fundDateDurationJSON').css( "color", "black" );
+						}else{
+							$('#fundDateDurationJSON').text("募資起迄時間：填寫資訊不完整");
+		 					$('#fundDateDurationJSON').css( "color", "red" );
+						}
+					}
 				}else{
 					if(datas.targetStudentNumber ==0){
 						$('#fundDateDurationJSON').text("募資起迄時間：無須填寫");
@@ -1302,32 +1329,26 @@ $('#starttime,#endtime').change(function(e) {
 		//===============================================================
 			
 			//當checkbox改變傳送表單
-			$(':checkbox')
-				.change(
-						function(e) {
-
-							var formData = new FormData($('form')[3]);
-							console.log("從checkbox送課程類別送到資料庫囉!");
-							$
-									.ajax({
-										type : 'POST',
-										url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
-										data : formData,
-										processData : false,
-										contentType : false,
-										success : function() {
-											delay_till_last('id', function() {
-												$('#updateConfirm').text(
-														"變更已儲存至草稿");
-												$("#updateConfirm")
-														.fadeIn(1200);
-
-												$("#updateConfirm").fadeOut(
-														1500);
-
-											}, 1000);
-										}
-									})
+			$(':checkbox').change(function(e) {
+					if ($("input[name='CourseClass']:checked").length >= 1){
+						$('#button2').removeAttr("disabled");
+						var formData = new FormData($('form')[3]);
+						console.log("從checkbox送課程類別送到資料庫囉!");
+						$.ajax({type : 'POST',
+								url : '/e-Look/com.e_Look.Course.control/CourseEditControlloer',
+								data : formData,
+								processData : false,
+								contentType : false,
+								success : function() {delay_till_last('id', function() {$('#updateConfirm').text("變更已儲存至草稿");
+																						$("#updateConfirm").fadeIn(1200);
+																						$("#updateConfirm").fadeOut(1500);
+																						}, 1000);
+													}
+								});
+					}else{
+						$('#button2').attr("disabled","disabled");
+					}
+							
 						})
 //===============================================================
 	

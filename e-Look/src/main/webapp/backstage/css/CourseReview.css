@@ -1,3 +1,5 @@
+h1{text-align: center;}
+
 .btn-group .btn {
     transition: background-color .3s ease;
 }

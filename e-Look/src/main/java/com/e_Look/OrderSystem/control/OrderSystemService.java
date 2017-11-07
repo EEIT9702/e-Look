@@ -66,8 +66,16 @@ public class OrderSystemService {
 		oPayObj.setMerchantTradeDate(oPayDate);
 		oPayObj.setTotalAmount(totalBuyingPrice);
 		oPayObj.setTradeDesc("感謝您的購買!");
+		
+		//oPayObj.setReturnURL("http://localhost:8081/e-Look/OrderFinishController");
 		oPayObj.setReturnURL("http://211.23.128.214:5000");
+		
+		//oPayObj.setClientBackURL("http://localhost:8081/e-Look/member/member.jsp");
 		oPayObj.setClientBackURL("http://localhost:8081/e-Look/OrderFinishController");
+		
+		
+		//oPayObj.setOrderResultURL("http://localhost:8081/e-Look/OrderFinishController");
+		
 		oPayObj.setNeedExtraPaidInfo("N");
 		oPayObj.setHoldTradeAMT("0");
 		oPayObj.setUseRedeem("N");

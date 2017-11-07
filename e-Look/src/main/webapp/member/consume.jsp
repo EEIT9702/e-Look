@@ -508,7 +508,7 @@ $(function(){
 	 var fragment3 = $(document.createDocumentFragment());//pendiente
 	 var fragment4 = $(document.createDocumentFragment());//cancelado
 		$.getJSON('/e-Look/MemberIncomeController',{'MemberID':memberID},function(datas){
-		   console.log(datas);
+		   //console.log(datas);
 		   freeCourses=datas.freeCourse;
 		   onlineCourses=datas.onlineCourse;
 		   fundraisingCourses=datas.fundraisingCourse;

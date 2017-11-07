@@ -19,7 +19,7 @@ nav{z-index: 10;}
 			<body>
 <!-- Header -->
 					<header id="header">
-						<h1><a href="backHome1.jsp">eLook後台管理系統</a></h1>
+						<h1><a href="backHome1.jsp" id="header1">eLook後台管理系統</a></h1>
 						<nav>
 							<a href="#menu">Menu</a>
 						</nav>

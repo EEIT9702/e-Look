@@ -67,7 +67,10 @@
 </section> 
 <div class="container cbox" style="">
 		<div class="row">
-
+			<div class="col-md-12" style="float:right;margin-bottom:30px;">
+				<button type="button" onclick="self.location.href='back_report-v2.jsp'" class="btn btn-info" style="font-size:17px;float:right;">檢舉留言管理</button>
+				<button type="button" onclick="self.location.href='breport_course_history.jsp'" class="btn btn-primary" style="font-size:17px;float:right;margin-right:5px;">查詢下架影片記錄</button>
+			</div>
 		  <table id="reportTable" class="table table-bordered tstyle" style="">
                  <thead>
                     <tr>
@@ -92,10 +95,7 @@
 <!-- 	                 </tr> -->
 <!--                   </tfoot> -->
 			</table>
-			<div class="col-md-4" style="float:right;margin-bottom:30px;">
-				<button type="button" value="hideHistory" onclick="self.location.href='back_report-v2.jsp'" class="btn btn-info" style="margin-right:22px;">檢舉留言管理</button>
-				<button type="button" value="hideHistory" onclick="self.location.href='breport_course_history.jsp'" class="btn btn-success" style="margin-right:6px;">查詢下架影片記錄</button>
-			</div>
+
 		</div>
 
 </div>
@@ -155,7 +155,7 @@
 		    		}else{
 		    			var cell5 = $('<td></td>').text("不處理");
 		    		}
-		    		var cell6 = $('<td></td>').html('<button class="btn btn-primary" style="margin-right:10px;">下架影片</button>&nbsp;<button class="btn btn-warning">不處理</button></td>');
+		    		var cell6 = $('<td></td>').html('<button class="btn btn-primary" style="margin-right:10px;">下架影片</button>&nbsp;<button class="btn btn-success">不處理</button></td>');
 		    		//<tr><td>
 		    		var row = $('<tr></tr>').append([cell0,cell2,cell3,cell4,cell5,cell6]);
 		    		//放到容器裡
