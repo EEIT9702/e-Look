@@ -255,7 +255,8 @@ a:HOVER {
 		</div>
 		<div class="card-footer">
 			
-			<small style="font-size: 18px;" >課程時間:${listcourse.courseLength}分鐘</small> <br> <small style="font-size: 18px;" class="number" alt="${listcourse.courseID}">購買人數:zzz人</small>
+			<small style="font-size: 18px;" >課程時間:${listcourse.courseLength}分鐘</small> <br> 
+			<small style="font-size: 18px;color:#f2fef1;" class="" alt="${listcourse.courseID}">購買人數:zzz人</small>
 		</div>
 	</div>
 	</div>
