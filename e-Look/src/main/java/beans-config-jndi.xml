@@ -113,8 +113,10 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<bean id="MemberBookmarksDAO" class="com.e_Look.memberBookmarks.model.MemberBookmarksDAO">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
-
-
+	<!-- MemberSubscriptionDAO -->
+	<bean id="memberSubscriptionDAO" class="com.e_Look.memberSubscription.MemberSubscriptionDAO">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
 
 	<!-- eLookEventDAO -->
 	<bean id="eLookEventDAO" class="com.e_Look.eLookEvent.eLookEventDAO">

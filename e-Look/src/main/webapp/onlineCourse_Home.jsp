@@ -165,7 +165,12 @@ background-color: #f2fef1;
   	color:#9F35FF;
 }
 .minpstyle{
+/*     display:  flex; */
+/*     align-items: center; */
+/*     justify-content:  center; */
+ 	display:inline-block; 
  	text-align:center;
+    vertical-align:middle; 
     line-height: 20px; 
     line-width:50px;
 	font-size: 20px;
