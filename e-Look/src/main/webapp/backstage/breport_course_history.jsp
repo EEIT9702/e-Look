@@ -65,7 +65,7 @@
 <div class="container cbox" style="">
 		<div class="row">
    			<div class="col-md-12" style="float:right;margin-bottom:30px;">
-				<button type="button" value="hideHistory" onclick="self.location.href='breport-course.jsp'" class="btn btn-success" style="float:right;">檢舉課程管理</button>
+				<button type="button" value="hideHistory" onclick="self.location.href='breport-course.jsp'" class="btn btn-primary" style="font-size:17px;float:right;">檢舉課程管理</button>
 			</div>
 		  <table id="reportTable" class="table table-bordered tstyle" style="">
                  <thead>
