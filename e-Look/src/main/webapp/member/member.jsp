@@ -1333,7 +1333,7 @@ $(document).on('click','.panel-heading span.clickable',
 // 			})
 });
 		   $('#click3 button:nth-child(1)').on('click',function(){
-			   console.log("123")
+			   //console.log("123")
 			   if( confirm("確定取消訂閱嗎?")){
 				   $(this).parents('#click3').css("display","none")
 				    $.get('/e-Look/MemberSubcriptionInsert_DeleteController', {

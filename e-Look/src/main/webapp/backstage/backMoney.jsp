@@ -20,6 +20,9 @@
 .container{font-family:inherit;
 }
 b{font-size: 20px;}
+h1{
+text-align: center;
+}
 </style>
 
 </head>

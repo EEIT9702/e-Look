@@ -118,10 +118,11 @@ public class CourseService {
 		}
 	}
 	public List<CourseVO> getOnlineCourseByCourseName(String keyWord){
+		keyWord=keyWord.toLowerCase();
 		List<CourseVO> courseVOs = dao.getAllOnlineCourseNotFree();
 		List<CourseVO> courseVOs2 = new LinkedList<CourseVO>();
 		for(CourseVO courseVO:courseVOs){
-			if(courseVO.getCourseName().indexOf(keyWord)!=-1){
+			if(courseVO.getCourseName().toLowerCase().indexOf(keyWord)!=-1){
 				courseVOs2.add(courseVO);
 			}
 			
@@ -130,10 +131,11 @@ public class CourseService {
 	}
 	
 	public List<CourseVO> getFreeCourseByCourseName(String keyWord){
+		keyWord=keyWord.toLowerCase();
 		List<CourseVO> courseVOs = dao.getAllFreeCourse();
 		List<CourseVO> courseVOs2 = new LinkedList<CourseVO>();
 		for(CourseVO courseVO:courseVOs){
-			if(courseVO.getCourseName().indexOf(keyWord)!=-1){
+			if(courseVO.getCourseName().toLowerCase().indexOf(keyWord)!=-1){
 				courseVOs2.add(courseVO);
 			}
 			
