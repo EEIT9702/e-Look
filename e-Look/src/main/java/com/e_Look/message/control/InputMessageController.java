@@ -29,11 +29,11 @@ public class InputMessageController extends HttpServlet {
 		Integer messageID_response=Integer.parseInt(request.getParameter("messageID_response"));
 		Integer memberID=Integer.parseInt(request.getParameter("memberID"));
 		Byte status=0;
-		System.out.println(mContent);
-		System.out.println(courseID);
-		System.out.println(messageID_response);
-		System.out.println(memberID);
-		System.out.println(status);
+//		System.out.println(mContent);
+//		System.out.println(courseID);
+//		System.out.println(messageID_response);
+//		System.out.println(memberID);
+//		System.out.println(status);
 		
 		MessageService messageService = new MessageService();
 		messageService.addResponse(mContent, messageID_response, memberID, courseID, status);

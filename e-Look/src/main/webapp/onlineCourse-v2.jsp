@@ -202,7 +202,7 @@ a {
 </style>
 </head>
 <!-- 影片區 -->
-<body oncontextmenu="window.event.returnValue=false">
+<body >
 	<jsp:include page="/login.jsp" flush="true" />
 	<div class="container-fluid">
 		<div class="container">
@@ -823,8 +823,10 @@ a {
 						</div>
 						</c:if>
 					</div>
+					
 						<!-- 回應輸入表格結束-->
 						</c:if>
+						<hr>
 					</c:forEach>
 					<!-- 重複結束 -->
 					<c:if test="${!empty LoginOK}">
