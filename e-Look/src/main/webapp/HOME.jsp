@@ -250,7 +250,7 @@ a:HOVER {
 						</div>
 			</a>
 			<div>
-				<p style="margin-top: 40px; font-size: 18px">課程售價：${listcourse.soldPrice}</p>
+				<p style="margin-top: 40px; font-size: 18px">課程售價：<b style="color:red;">免費</b></p>
 			</div>
 		</div>
 		<div class="card-footer">
