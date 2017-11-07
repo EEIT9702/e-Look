@@ -40,13 +40,12 @@ public class ReportMessageService {
 		dao.update(rmVO);
 		
 		Integer memberID = rmVO.getMessageVO().getMemberVO().getMemberID();
-		
 		MessageVO mVO = rmVO.getMessageVO();		
 		//將傳進來的status訊息狀態設定進去Message裡
 		mVO.setStatus((byte)status);
 		//DAO裡有判斷式,使用符合status的update
-		mdao.update(mVO);
-		
+		mdao.updateStatus(mVO.getMessageID(), mVO.getStatus());
+
 		MemberService mbServ = new MemberService();
 		mbServ.updateMemberCount(memberID);
 		
