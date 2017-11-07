@@ -17,12 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.e_Look.Course.CourseVO;
-import com.e_Look.Order.model.OrderDAO;
+import com.e_Look.Order.model.OrderService;
 import com.e_Look.Order.model.OrderVO;
-import com.e_Look.OrderDetails.model.OrderDetailsDAO;
+import com.e_Look.OrderDetails.model.OrderDetailsService;
 import com.e_Look.OrderDetails.model.OrderDetailsVO;
 import com.e_Look.member.model.MemberVO;
-import com.e_Look.shoppingCart.model.jdbc.ShoppingCartDAO;
 import com.e_Look.shoppingCart.model.jdbc.ShoppingCartService;
 import com.e_Look.shoppingCart.model.jdbc.ShoppingCartVO;
 import com.e_Look.tool.BuyingPrice;
@@ -43,8 +42,8 @@ public class CheckOutFilter implements Filter {
 			PrintWriter rw = response.getWriter();
 
 			ShoppingCartService scdao = new ShoppingCartService();
-			OrderDAO orderDAO = new OrderDAO();
-			OrderDetailsDAO odDAO = new OrderDetailsDAO();
+			OrderService orderDAO = new OrderService();
+			OrderDetailsService odDAO = new OrderDetailsService();
 
 			HttpSession session = request.getSession();
 			MemberVO memberVO = (MemberVO) session.getAttribute("LoginOK");

@@ -1,30 +1,12 @@
 package com.e_Look.OrderDetails.model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.LinkedList;
 import java.util.List;
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.e_Look.Course.CourseDAO;
-import com.e_Look.Course.CourseDAO_interface;
-import com.e_Look.Course.CourseService;
-import com.e_Look.Course.CourseVO;
-import com.e_Look.Order.model.OrderDAO;
-import com.e_Look.Order.model.OrderDAO_interface;
-import com.e_Look.tool.BuyingPrice;
 @Transactional(readOnly = true)
 public class OrderDetailsDAO implements OrderDetailsDAO_interface {
 	public HibernateTemplate hibernateTemplate;
@@ -71,12 +53,12 @@ public class OrderDetailsDAO implements OrderDetailsDAO_interface {
 
 	@Override
 	public OrderDetailsVO findByPrimaryKey(OrderDetailsVO orderDetailsVO) {
-		return (OrderDetailsVO) hibernateTemplate.find("from OrderdetailsVO where orderID= ? courseID = ? ",orderDetailsVO.getOrderVO().getOrderID(),orderDetailsVO.getCourseVO().getCourseID()); 
+		return (OrderDetailsVO) hibernateTemplate.find("from OrderDetailsVO where orderID= ? courseID = ? ",orderDetailsVO.getOrderVO().getOrderID(),orderDetailsVO.getCourseVO().getCourseID()); 
 	}
 
 	@Override
 	public List<OrderDetailsVO> findByCourseID(Integer courseID) {
-		return (List<OrderDetailsVO>) hibernateTemplate.find("from OrderdetailsVO where courseID = ? ", courseID);
+		return (List<OrderDetailsVO>) hibernateTemplate.find("from OrderDetailsVO where courseID = ? ", courseID);
 	}
 	
 	public static void main(String[] args){

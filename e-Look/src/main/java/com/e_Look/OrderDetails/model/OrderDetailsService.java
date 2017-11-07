@@ -2,13 +2,17 @@ package com.e_Look.OrderDetails.model;
 
 import java.util.List;
 
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
 public class OrderDetailsService {
  private OrderDetailsDAO_interface dao;
 	public OrderDetailsService(){
-	 dao = (OrderDetailsDAO_interface) new ClassPathXmlApplicationContext("beans-config-jndi.xml").getBean("orderDetailsDAO");
+		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config-jndi.xml");
+        // 建立DAO物件
+		 dao =(OrderDetailsDAO_interface) context.getBean("orderDetailsDAO");
+	 
  }
 	public List<OrderDetailsVO> findByOrderID(Integer orderID){
 		return dao.findByOrderID(orderID);
@@ -25,5 +29,8 @@ public class OrderDetailsService {
 	
 	public void insert(OrderDetailsVO orderDetailsVO){
 		dao.insert(orderDetailsVO);
+	}
+	public OrderDetailsVO  findByPrimaryKey(OrderDetailsVO odVO) {
+		return dao.findByPrimaryKey(odVO);
 	}
 }
