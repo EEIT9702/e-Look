@@ -67,7 +67,10 @@
 </section> 
 <div class="container cbox" style="">
 		<div class="row">
-
+			<div class="col-md-12" style="float:right;margin-bottom:30px;">
+				<button type="button" value="hideHistory" onclick="self.location.href='breport_course_history.jsp'" class="btn btn-success" style="float:right;">查詢下架影片記錄</button>
+				<button type="button" value="hideHistory" onclick="self.location.href='back_report-v2.jsp'" class="btn btn-info" style="float:right;margin-right:5px;">檢舉留言管理</button>
+			</div>
 		  <table id="reportTable" class="table table-bordered tstyle" style="">
                  <thead>
                     <tr>
@@ -92,10 +95,7 @@
 <!-- 	                 </tr> -->
 <!--                   </tfoot> -->
 			</table>
-			<div class="col-md-4" style="float:right;margin-bottom:30px;">
-				<button type="button" value="hideHistory" onclick="self.location.href='back_report-v2.jsp'" class="btn btn-info" style="margin-right:22px;">檢舉留言管理</button>
-				<button type="button" value="hideHistory" onclick="self.location.href='breport_course_history.jsp'" class="btn btn-success" style="margin-right:6px;">查詢下架影片記錄</button>
-			</div>
+
 		</div>
 
 </div>
