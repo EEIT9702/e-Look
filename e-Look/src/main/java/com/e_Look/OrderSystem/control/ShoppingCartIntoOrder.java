@@ -12,12 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.e_Look.Course.CourseVO;
-import com.e_Look.Order.model.OrderDAO;
+import com.e_Look.Order.model.OrderService;
 import com.e_Look.Order.model.OrderVO;
-import com.e_Look.OrderDetails.model.OrderDetailsDAO;
+import com.e_Look.OrderDetails.model.OrderDetailsService;
 import com.e_Look.OrderDetails.model.OrderDetailsVO;
 import com.e_Look.member.model.MemberVO;
-import com.e_Look.shoppingCart.model.jdbc.ShoppingCartDAO;
 import com.e_Look.shoppingCart.model.jdbc.ShoppingCartService;
 import com.e_Look.shoppingCart.model.jdbc.ShoppingCartVO;
 
@@ -28,9 +27,9 @@ public class ShoppingCartIntoOrder extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter rw = response.getWriter();
 		
-		ShoppingCartService scdao = new ShoppingCartService();
-		OrderDAO orderDAO = new OrderDAO();
-		OrderDetailsDAO odDAO=new OrderDetailsDAO();
+		ShoppingCartService scSvc = new ShoppingCartService();
+		OrderService orderSvc = new OrderService();
+		OrderDetailsService odSvc=new OrderDetailsService();
 		
 		
 		HttpSession session = request.getSession();
@@ -38,8 +37,8 @@ public class ShoppingCartIntoOrder extends HttpServlet {
 		Integer memberID = memberVO.getMemberID();
 		
 		
-		OrderVO orderVO = orderDAO.findMemberUncheckOrder(memberID);
-		List<CourseVO> list = scdao.findByMemberID(memberID);
+		OrderVO orderVO = orderSvc.findMemberUncheckOrder(memberID);
+		List<CourseVO> list = scSvc.findByMemberID(memberID);
 		if(orderVO==null && list.size()==0){
 			rw.write("<script>alert('請先選購商品'); location.href='"+request.getHeader("Referer")+"'</script>");
 			return;
@@ -47,12 +46,12 @@ public class ShoppingCartIntoOrder extends HttpServlet {
 			if(orderVO==null){
 				orderVO=new OrderVO();
 				orderVO.setMemberID(memberID);
-				orderDAO.insert(orderVO);
-				orderVO=orderDAO.findMemberUncheckOrder(memberID);
+				orderSvc.insert(orderVO);
+				orderVO=orderSvc.findMemberUncheckOrder(memberID);
 			}
 				for(CourseVO courseVO:list){
 					ShoppingCartVO scVO = new ShoppingCartVO(memberID, courseVO);
-					scdao.delete(scVO);
+					scSvc.delete(scVO);
 					OrderDetailsVO odVO=new OrderDetailsVO();
 					odVO.setCourseVO(courseVO);
 					odVO.setOrderVO(orderVO);
@@ -60,7 +59,7 @@ public class ShoppingCartIntoOrder extends HttpServlet {
 					//記得調整成特價後的價格
 					odVO.setBuyingPrice(courseVO.getSoldPrice());
 					
-					odDAO.insert(odVO);
+					odSvc.insert(odVO);
 				}
 				response.sendRedirect(request.getContextPath()+"/settled/settled.jsp");
 				return;
