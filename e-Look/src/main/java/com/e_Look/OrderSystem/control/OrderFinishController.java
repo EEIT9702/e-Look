@@ -23,6 +23,8 @@ public class OrderFinishController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		//System.out.println(request.getParameter("RtnCode"));
+		//System.out.println(request.getParameter("RtnMsg"));
 		HttpSession session = request.getSession();
 		OrderVO orderVO = (OrderVO) session.getAttribute("orderVO");
 		
