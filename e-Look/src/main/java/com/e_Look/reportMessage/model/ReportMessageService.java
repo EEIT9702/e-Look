@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.e_Look.member.model.MemberService;
 import com.e_Look.message.model.MessageDAO;
+import com.e_Look.message.model.MessageService;
 import com.e_Look.message.model.MessageVO;
 
 public class ReportMessageService {
@@ -48,6 +49,9 @@ public class ReportMessageService {
 		
 		MemberService mbServ = new MemberService();
 		mbServ.updateMemberCount(memberID);
+		
+		MessageService msgServ = new MessageService();
+		msgServ.updateMessage(mVO.getMessageID(), "此留言違反社群規範，已屏蔽");
 	}
 	
 	public void jugeMessage(Integer reportID,int status) {
