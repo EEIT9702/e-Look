@@ -795,9 +795,9 @@ a {
 											<c:forEach items="${list2}" var="buycourse1" varStatus="varStatus1">
 												<c:choose>
 <%-- 												<c:when test="${!empty msage1}"></c:when> --%>
-												<c:when test="${buycourse1.courseID!=courseVO.courseID}">
+												<c:when test="${buycourse1.courseID==courseVO.courseID}">
 													<a data-toggle="collapse" href="#${messageVO.messageID+messageVO.messageID}">我要回應</a>		
-													
+<%-- 													<c:set var="msage1" value="true"/> --%>
 												</c:when>
 												<c:when test="${varStatus1.last && empty msage1}">
 											
