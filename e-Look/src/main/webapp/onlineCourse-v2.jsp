@@ -885,10 +885,11 @@ a {
 			//點擊檢舉留言
 			$('.reportMe').on('click', function() {
 				alert($(this).parents('.dropdown').parent('div').nextAll('input').val())
-				warning();
+				var mess2=$(this).parents('.dropdown').parent('div').nextAll('input').val())
+				warning(mess2);
 			})
 			//選取檢舉留言功能
-			function warning() {
+			function warning(mess2) {
 				swal({
 					title : '檢舉留言',
 					input : 'select',
@@ -1131,10 +1132,10 @@ a {
 		$(function(){
 			message();	
 					$('.panel-collapse>div').on('click','.text-right>.btn-default',function(){
-	 				alert($(this).html());
+// 	 				alert($(this).html());
 					var $this=$(this)
-	 				alert($this.parents('div').children('input').val())
-	 				alert($this.parents('.panel-collapse').find('textarea').val())
+// 	 				alert($this.parents('div').children('input').val())
+// 	 				alert($this.parents('.panel-collapse').find('textarea').val())
 						$.post('/e-Look/InputMessageController',
 								{'mContent':$this.parents('.panel-collapse').find('textarea').val(),
 								 'courseID':$('#mbcourseID').val(),
