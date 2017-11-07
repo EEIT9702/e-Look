@@ -43,7 +43,7 @@ public class MessageController_v2 extends HttpServlet {
 			Map<String,Object> messageMap=new LinkedHashMap<String,Object>();
 			messageMap.put("messageID", message.getMessageID());
 			messageMap.put("mContent", message.getmContent());
-			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String mtime=sdf.format(message.getmTime());
 			messageMap.put("mTime", mtime);
 			messageMap.put("messageID_response", message.getMessageID_response());
