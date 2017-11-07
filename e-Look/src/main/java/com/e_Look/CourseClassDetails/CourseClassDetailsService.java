@@ -23,11 +23,12 @@ public class CourseClassDetailsService {
 	}
 	
 	public List<CourseClassDetailsVO> getFreeCourse(Integer courseClassID,String keyWord){
+		keyWord=keyWord.toLowerCase();
 		List<CourseClassDetailsVO> ccdVOs = dao.getBycourseClassID(courseClassID);
 		List<CourseClassDetailsVO> freeccdVOs = new LinkedList<CourseClassDetailsVO>();
 		
 		for(CourseClassDetailsVO ccdVO : ccdVOs){
-			if(ccdVO.getCourseVO().getSoldPrice() == 0 && ccdVO.getCourseVO().getStatus() == 2 && ccdVO.getCourseVO().getCourseName().indexOf(keyWord)>=0){
+			if(ccdVO.getCourseVO().getSoldPrice() == 0 && ccdVO.getCourseVO().getStatus() == 2 && ccdVO.getCourseVO().getCourseName().toLowerCase().indexOf(keyWord)>=0){
 				freeccdVOs.add(ccdVO);
 			}
 		}
@@ -48,10 +49,11 @@ public class CourseClassDetailsService {
 	}
 	
 	public List<CourseClassDetailsVO> getOnlineCourse(Integer courseClassID,String keyWord) {
+		keyWord=keyWord.toLowerCase();
 		List<CourseClassDetailsVO> ccdVOs = dao.getBycourseClassID(courseClassID);
 		List<CourseClassDetailsVO> onlineccdVOs = new LinkedList<CourseClassDetailsVO>();
 		for(CourseClassDetailsVO ccdVO : ccdVOs) {
-			if(ccdVO.getCourseVO().getSoldPrice() > 0 && ccdVO.getCourseVO().getStatus() == 2 && ccdVO.getCourseVO().getCourseName().indexOf(keyWord)>=0 ) {
+			if(ccdVO.getCourseVO().getSoldPrice() > 0 && ccdVO.getCourseVO().getStatus() == 2 && ccdVO.getCourseVO().getCourseName().toLowerCase().indexOf(keyWord)>=0 ) {
 				onlineccdVOs.add(ccdVO);
 			}
 		}
