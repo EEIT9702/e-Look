@@ -736,7 +736,7 @@ a {
 										</c:choose>
 									</c:if>
 									<c:if test="${!empty LoginOK}">
-										<li><a class="reportM" href="#">檢舉</a></li>
+										<li><a class="reportMe" href="#">檢舉</a></li>
 									</c:if>
 									<li><a href="#">修改</a></li>
 								</ul>
@@ -883,7 +883,8 @@ a {
 	<script>
 		$(function() {
 			//點擊檢舉留言
-			$('.reportM').on('click', function() {
+			$('.reportMe').on('click', function() {
+				alert($(this).parents('.dropdown').parent('div').nextAll('input').val())
 				warning();
 			})
 			//選取檢舉留言功能
@@ -1128,7 +1129,6 @@ a {
 		<script>
 // 	留言版專區
 		$(function(){
-			
 			message();	
 					$('.panel-collapse>div').on('click','.text-right>.btn-default',function(){
 	 				alert($(this).html());
