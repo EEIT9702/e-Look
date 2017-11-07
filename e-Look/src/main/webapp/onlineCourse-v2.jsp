@@ -791,7 +791,20 @@ a {
 								<div class="panel">
 									<div class="panel-heading">
 										<h4 class="panel-title ">
-											<a data-toggle="collapse" href="#${messageVO.messageID+messageVO.messageID}">我要回應</a>	
+									
+											<c:forEach items="${list2}" var="buycourse1" varStatus="varStatus1">
+												<c:choose>
+<%-- 												<c:when test="${!empty msage1}"></c:when> --%>
+												<c:when test="${buycourse1.courseID!=courseVO.courseID}">
+													<a data-toggle="collapse" href="#${messageVO.messageID+messageVO.messageID}">我要回應</a>		
+													
+												</c:when>
+												<c:when test="${varStatus1.last && empty msage1}">
+											
+												</c:when>
+												</c:choose>
+											</c:forEach>
+<!-- 											<a data-toggle="collapse" href="#${messageVO.messageID+messageVO.messageID}">我要回應</a>	 -->
 										</h4>
 									</div>
 									<div id="${messageVO.messageID+messageVO.messageID}" class="panel-collapse collapse">
@@ -850,8 +863,6 @@ a {
 						</c:if>
 					</c:if>
 					</div>
-					
-					
 				</div>
 			<!-- 留言板結束-->
 							<!-- 點評收藏 -->
@@ -884,7 +895,7 @@ a {
 		$(function() {
 			//點擊檢舉留言
 			$('.reportMe').on('click', function() {
-				alert($(this).parents('.dropdown').parent('div').nextAll('input').val())
+// 				alert($(this).parents('.dropdown').parent('div').nextAll('input').val())
 				var mess2=$(this).parents('.dropdown').parent('div').nextAll('input').val()
 				warning(mess2);
 			})
@@ -922,7 +933,7 @@ a {
 									confirmButtonText : '確認',
 									type : 'success',
 									html : '檢舉 ' + result + ' 成功，管理員會盡快審核 '
-								});
+							});
 						}
 				});
 			}
@@ -985,7 +996,7 @@ a {
 								confirmButtonText : '確認',
 								type : 'success',
 								html : '檢舉 ' + result + ' 成功，管理員會盡快審核 '
-							});
+						});
 					}
 				});
 			}	
@@ -1130,10 +1141,10 @@ a {
 		$(function(){
 			message();	
 					$('.panel-collapse>div').on('click','.text-right>.btn-default',function(){
-	 				alert($(this).html());
+// 	 				alert($(this).html());
 					var $this=$(this)
-	 				alert($this.parents('div').children('input').val())
-	 				alert($this.parents('.panel-collapse').find('textarea').val())
+// 	 				alert($this.parents('div').children('input').val())
+// 	 				alert($this.parents('.panel-collapse').find('textarea').val())
 						$.post('/e-Look/InputMessageController',
 								{'mContent':$this.parents('.panel-collapse').find('textarea').val(),
 								 'courseID':$('#mbcourseID').val(),
@@ -1146,9 +1157,8 @@ a {
 						})
 					})
 					$('#Section3').on('click','.reportM',function() {
-							
 							var mess=$(this).parents('ul').attr('id')
-							alert(mess);
+// 							alert(mess);
 							warning(mess);
 							//選取檢舉留言功能
 							function warning(mess) {
@@ -1189,8 +1199,6 @@ a {
 										}
 								});
 							}
-								
-								
 						})
 			function message(){
 			$('.mess').empty()
@@ -1233,14 +1241,6 @@ a {
  					div1.append([div2,div3])
 					fg.append(div1)
 					$('#'+response.messageID_response).append(fg);
-// 							$('.response #'+response.messageID+'>li:nth-child(1)').on('click','a',function(){
-// 								var $this=$('.response #'+response.messageID+'>li:nth-child(1)')
-// 								$this.children('a').
-// 								alert($(this).html())
-// 							})
-
-						
-						
 						})
 					})
 				})	
