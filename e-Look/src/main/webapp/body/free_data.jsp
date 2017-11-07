@@ -85,7 +85,7 @@ small, .small {
 			<div class="card-footer">
 				<small style="font-size: 18px;">課程時間:${freeCourse.courseVO.courseLength}分鐘</small>
 				<br>
-				<small style="font-size: 18px;" class="number" alt="${freeCourse.courseVO.courseID}">購買人數:xxx人</small>
+				<small style="font-size: 18px;color:#f2fef1;" class="" alt="${freeCourse.courseVO.courseID}">購買人數:0人</small>
 			</div>
 		</div>
 	</div>
@@ -114,7 +114,7 @@ small, .small {
 			<div class="card-footer">
 				<small style="font-size: 18px;">課程時間:${courseVO.courseLength}分鐘</small>
 				<br>
-				<small style="font-size: 18px;" class="number" alt="${courseVO.courseID}">購買人數:xxx人</small>
+				<small style="font-size: 18px;color:#f2fef1;" class="" alt="${courseVO.courseID}">購買人數:0人</small>
 			</div>
 		</div>
 	</div>
@@ -125,14 +125,14 @@ small, .small {
 
 <script>
 $(function(){
-	$('.number').each(function(){
-	var i=$(this);
+// 	$('.number').each(function(){
+// 	var i=$(this);
 		
-		$.getJSON('/e-Look/GetBuyCourseNumber',{'courseID':$(this).attr("alt")},function(datas){
-			//console.log($(this).html())
-			i.html("購買人數:"+datas.length+"人")
-		})
-	})
+// 		$.getJSON('/e-Look/GetBuyCourseNumber',{'courseID':$(this).attr("alt")},function(datas){
+// 			//console.log($(this).html())
+// 			i.html("購買人數:"+datas.length+"人")
+// 		})
+// 	})
 	
 })
 
