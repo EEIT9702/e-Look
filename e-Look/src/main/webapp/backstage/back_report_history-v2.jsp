@@ -73,7 +73,9 @@
 </section> 
 <div class="container cbox" style="">
 		<div class="row">
-
+   			<div class="col-md-12" style="float:right;margin-bottom:30px;">
+				<button type="button" value="hideHistory" onclick="self.location.href='back_report-v2.jsp'" class="btn btn-success" style="float:right;">檢舉留言管理</button>
+			</div>
 		  <table id="reportTable" class="table table-bordered tstyle" style="">
                  <thead>
                     <tr>
@@ -98,9 +100,7 @@
 <!-- 	                 </form> -->
 <!--                   </tfoot> -->
             </table>
-   			<div class="col-md-3" style="float:right;margin-bottom:30px;">
-				<button type="button" value="hideHistory" onclick="self.location.href='back_report-v2.jsp'" class="btn btn-success" style="margin-right:68px;">檢舉留言管理</button>
-			</div>
+
 		</div>
 
 </div>
