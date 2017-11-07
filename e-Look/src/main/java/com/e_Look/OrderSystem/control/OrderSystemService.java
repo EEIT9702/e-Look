@@ -37,8 +37,8 @@ public class OrderSystemService {
 
 	public OrderSystemService() {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans-config-jndi.xml");
-		orderDAO = new OrderDAO();
-		orderDetailsDAO = new OrderDetailsDAO();
+		orderDAO = (OrderDAO_interface) context.getBean("orderDAO");
+		orderDetailsDAO = (OrderDetailsDAO_interface) context.getBean("orderDetailsDAO");
 		buyCourseDAO =(BuyCourseDAO_interface) context.getBean("buyCourseDAO");
 		courseClassDAO =(CourseClass_interface) context.getBean("courseClassDAO");
 		courseClassDetailsDAO = (CourseClassDetails_interface) context.getBean("courseClassDetailsDAO");

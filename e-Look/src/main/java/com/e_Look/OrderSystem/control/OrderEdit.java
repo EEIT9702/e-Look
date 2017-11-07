@@ -13,9 +13,9 @@ import javax.servlet.http.HttpSession;
 
 import com.e_Look.Course.CourseService;
 import com.e_Look.Course.CourseVO;
-import com.e_Look.Order.model.OrderDAO;
+import com.e_Look.Order.model.OrderService;
 import com.e_Look.Order.model.OrderVO;
-import com.e_Look.OrderDetails.model.OrderDetailsDAO;
+import com.e_Look.OrderDetails.model.OrderDetailsService;
 import com.e_Look.OrderDetails.model.OrderDetailsVO;
 import com.e_Look.member.model.MemberVO;
 import com.e_Look.tool.BuyingPrice;
@@ -35,24 +35,24 @@ public class OrderEdit extends HttpServlet {
 		MemberVO memberVO=(MemberVO) session.getAttribute("LoginOK");
 		
 		String action=request.getParameter("action");
-		CourseService cdao = new CourseService();
-		OrderDAO odao=new OrderDAO();
-		OrderDetailsDAO oddao = new OrderDetailsDAO();
-		OrderVO orderVO = odao.findMemberUncheckOrder(memberVO.getMemberID());
+		CourseService cSvc = new CourseService();
+		OrderService orderSvc=new OrderService();
+		OrderDetailsService odSvc = new OrderDetailsService();
+		OrderVO orderVO = orderSvc.findMemberUncheckOrder(memberVO.getMemberID());
 		if("loading".equals(action)){
-			List<OrderDetailsVO> odVOs= oddao.findByOrderID(orderVO.getOrderID());
+			List<OrderDetailsVO> odVOs= odSvc.findByOrderID(orderVO.getOrderID());
 			for(OrderDetailsVO odVO:odVOs){
 				odVO.setBuyingPrice(BuyingPrice.getBuyingPrice(odVO.getCourseVO().getCourseID()));
-				oddao.update(odVO);
+				odSvc.update(odVO);
 			}
 			
-			String jsonString = JSONValue.toJSONString(oddao.findByOrderID(orderVO.getOrderID()));  
+			String jsonString = JSONValue.toJSONString(odSvc.findByOrderID(orderVO.getOrderID()));  
 			response.getWriter().print(jsonString);
 		}else{
 			Integer courseID=Integer.parseInt(request.getParameter("courseID"));
-			CourseVO courseVO=cdao.findByPrimaryKey(courseID);
+			CourseVO courseVO=cSvc.findByPrimaryKey(courseID);
 			OrderDetailsVO odVO = new OrderDetailsVO(orderVO,courseVO , BuyingPrice.getBuyingPrice(courseID), courseVO.getSoldPrice());
-			oddao.delete(odVO);
+			odSvc.delete(odVO);
 		}
 		
 		

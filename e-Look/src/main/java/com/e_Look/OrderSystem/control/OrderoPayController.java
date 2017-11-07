@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.e_Look.Order.model.OrderDAO;
+import com.e_Look.Order.model.OrderService;
 import com.e_Look.Order.model.OrderVO;
 import com.e_Look.member.model.MemberVO;
 
@@ -23,11 +23,11 @@ public class OrderoPayController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		OrderDAO orderdao = new OrderDAO();
+		OrderService orderSvc = new OrderService();
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("LoginOK");
 
-		OrderVO orderVO = orderdao.findMemberUncheckOrder(memberVO.getMemberID());
+		OrderVO orderVO = orderSvc.findMemberUncheckOrder(memberVO.getMemberID());
 		session.setAttribute("orderVO", orderVO);
 		
 		OrderSystemService oss = new OrderSystemService();
