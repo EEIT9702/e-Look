@@ -1049,10 +1049,10 @@ a {
 						},
 						'success' : function(datas) {
 							var datasJson = JSON.parse(datas);
-							console.log(datasJson.length)
-							console.log(datas);
-							console.log($('#reportMemberID').val());
-							console.log($('#starMemberID').val());
+// 							console.log(datasJson.length)
+// 							console.log(datas);
+// 							console.log($('#reportMemberID').val());
+// 							console.log($('#starMemberID').val());
 							if ($('#starMemberID').val() == $('#reportMemberID')
 									.val()) {
 								$("#noLogin").text("")
@@ -1128,6 +1128,7 @@ a {
 		<script>
 // 	留言版專區
 		$(function(){
+			
 			message();	
 					$('.panel-collapse>div').on('click','.text-right>.btn-default',function(){
 	 				alert($(this).html());
@@ -1145,15 +1146,62 @@ a {
 								 $('#'+name).addClass("in");
 						})
 					})
+					$('#Section3').on('click','.reportM',function() {
+							
+							var mess=$(this).parents('ul').attr('id')
+							alert(mess);
+							warning(mess);
+							//選取檢舉留言功能
+							function warning(mess) {
+								swal({
+									title : '檢舉留言',
+									input : 'select',
+									inputOptions : {
+										'含有仇恨言論' : '含有仇恨言論',
+										'不雅內容' : '不雅內容',
+										'垃圾訊息' : '垃圾訊息'
+									},
+									inputPlaceholder : '請選擇檢舉事項',
+									confirmButtonText : '確認',
+									cancelButtonText : '取消',
+									showCancelButton : true,
+									inputValidator : function(value) {
+										return new Promise(function(resolve) {
+											resolve();
+										});
+									}
+								}).then(
+										function(result) {
+											if (result) {
+												
+												console.log(mess);
+												console.log($('#reportMemberID').val());
+												console.log(result);
+												$.post('InsertReportMessageController', {
+													'reportContent' : result,
+													'reportMemberID' : $('#reportMemberID').val(),
+													'reportMessageID' : mess
+												})
+												swal({
+													confirmButtonText : '確認',
+													type : 'success',
+													html : '檢舉 ' + result + ' 成功，管理員會盡快審核 '
+												});
+										}
+								});
+							}
+								
+								
+						})
 			function message(){
 			$('.mess').empty()
 			$(".messageID").each(function(){
-				var gg
+			
 				$.getJSON('/e-Look/MessageController_v2',{'messageID':$(this).val()},function(responses){
 					var fg = $(document.createDocumentFragment());
 					
 					$.each(responses,function(index,response){
-					console.log(response);
+// 					console.log(response);
 					var div1=$('<div></div>').addClass('response')
 					var div2=$('<div></div>').addClass('col-md-1 col-xs-2');
 					var img1=$('<img></img').addClass('img-thumbnail pull-left').attr({'src':'<%=request.getContextPath()%>/Image?MemberID='+response.memberID,'style':'padding-top:10px'});
@@ -1168,13 +1216,12 @@ a {
 					var ul=$('<ul></ul>').addClass("dropdown-menu").attr('id',response.messageID)
 					var li1=$('<li></li>')
 						
-					if($('#mbmemberID').val()===''){
+						if($('#mbmemberID').val()===''){
 							var a1=$('<a></a>').attr('href','#').text('檢舉').attr({'data-toggle':'modal','data-target':'#myModal'})
 						}else{
 							var a1=$('<a></a>').attr('href','#').text('檢舉').addClass('reportM')
 						}
-					
-// 					var a1=$('<a></a>').attr('href','#').text('檢舉')							
+							
 					var li2=$('<li></li>')
 					var a2=$('<a></a>').attr('href','#').text('修改')
 					var p =$('<p></p>').text(response.mContent+"+"+response.messageID)
@@ -1192,51 +1239,9 @@ a {
 // 								$this.children('a').
 // 								alert($(this).html())
 // 							})
-						$('.reportM').on('click', function() {
-							warning();
-						})
-						//選取檢舉留言功能
-						function warning() {
-							swal({
-								title : '檢舉留言',
-								input : 'select',
-								inputOptions : {
-									'含有仇恨言論' : '含有仇恨言論',
-									'不雅內容' : '不雅內容',
-									'垃圾訊息' : '垃圾訊息'
-								},
-								inputPlaceholder : '請選擇檢舉事項',
-								confirmButtonText : '確認',
-								cancelButtonText : '取消',
-								showCancelButton : true,
-								inputValidator : function(value) {
-									return new Promise(function(resolve) {
-										resolve();
-									});
-								}
-							}).then(
-									function(result) {
-										if (result) {
-											console.log(response.messageID)
-											console.log($('.response #'+response.messageID).attr('id'));
-											console.log($('#reportMemberID').val());
-											console.log(result);
-											$.post('InsertReportMessageController', {
-												'reportContent' : result,
-												'reportMemberID' : $('#reportMemberID')
-														.val(),
-												'reportMessageID' : response.messageID
-											})
-											swal({
-												confirmButtonText : '確認',
-												type : 'success',
-												html : '檢舉 ' + result + ' 成功，管理員會盡快審核 '
-											});
-									}
-							});
-						}
-							
-							
+
+						
+						
 						})
 					})
 				})	
