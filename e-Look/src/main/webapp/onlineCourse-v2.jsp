@@ -908,15 +908,15 @@ a {
 				}).then(
 						function(result) {
 							if (result) {
-								console.log($('#testMessage1').attr('value'));
+								console.log($('.messageID').val());
 								console.log($('#reportMemberID').val());
 								console.log(result);
 								$.post('InsertReportMessageController', {
 									'reportContent' : result,
 									'reportMemberID' : $('#reportMemberID')
 											.val(),
-									'reportMessageID' : $('#testMessage1')
-											.attr('value')
+									'reportMessageID' : $('#messageID')
+											.val()
 								})
 								swal({
 									confirmButtonText : '確認',
@@ -1167,10 +1167,17 @@ a {
 							var	span3=$('<span></span>').addClass('glyphicon glyphicon-option-horizontal')
 					var ul=$('<ul></ul>').addClass("dropdown-menu").attr('id',response.messageID)
 					var li1=$('<li></li>')
-					var a1=$('<a></a>').text('檢舉')							
+						
+					if($('#mbmemberID').val()===''){
+							var a1=$('<a></a>').attr('href','#').text('檢舉').attr({'data-toggle':'modal','data-target':'#myModal'})
+						}else{
+							var a1=$('<a></a>').attr('href','#').text('檢舉').addClass('reportM')
+						}
+					
+// 					var a1=$('<a></a>').attr('href','#').text('檢舉')							
 					var li2=$('<li></li>')
 					var a2=$('<a></a>').attr('href','#').text('修改')
-					var p =$('<p></p>').text(response.mContent)
+					var p =$('<p></p>').text(response.mContent+"+"+response.messageID)
 								li1.append(a1)
 		 						li2.append(a2)
 		 					ul.append([li1,li2])
@@ -1182,10 +1189,54 @@ a {
 					$('#'+response.messageID_response).append(fg);
 // 							$('.response #'+response.messageID+'>li:nth-child(1)').on('click','a',function(){
 // 								var $this=$('.response #'+response.messageID+'>li:nth-child(1)')
-// 								$this.
+// 								$this.children('a').
 // 								alert($(this).html())
 // 							})
-				
+						$('.reportM').on('click', function() {
+							warning();
+						})
+						//選取檢舉留言功能
+						function warning() {
+							swal({
+								title : '檢舉留言',
+								input : 'select',
+								inputOptions : {
+									'含有仇恨言論' : '含有仇恨言論',
+									'不雅內容' : '不雅內容',
+									'垃圾訊息' : '垃圾訊息'
+								},
+								inputPlaceholder : '請選擇檢舉事項',
+								confirmButtonText : '確認',
+								cancelButtonText : '取消',
+								showCancelButton : true,
+								inputValidator : function(value) {
+									return new Promise(function(resolve) {
+										resolve();
+									});
+								}
+							}).then(
+									function(result) {
+										if (result) {
+											console.log(response.messageID)
+											console.log($('.response #'+response.messageID).attr('id'));
+											console.log($('#reportMemberID').val());
+											console.log(result);
+											$.post('InsertReportMessageController', {
+												'reportContent' : result,
+												'reportMemberID' : $('#reportMemberID')
+														.val(),
+												'reportMessageID' : response.messageID
+											})
+											swal({
+												confirmButtonText : '確認',
+												type : 'success',
+												html : '檢舉 ' + result + ' 成功，管理員會盡快審核 '
+											});
+									}
+							});
+						}
+							
+							
 						})
 					})
 				})	
@@ -1201,7 +1252,7 @@ a {
 			}else{
 				$.post('/e-Look/MessageController_v2',{'mContent':valueText,'memberID':$('#mbmemberID').val(),'courseID':$('#mbcourseID').val()},function(){
 					$(this).parents('#inputMessage').find('.inputMessage').val("");
-					document.location.href=location.href;
+					window.location.replace(window.location.href);
 			})
 			}
 		})
