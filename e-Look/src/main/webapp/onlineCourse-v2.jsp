@@ -27,13 +27,15 @@
 <script type="text/javascript"src="<%=request.getContextPath()%>/_Lyy/jquery.raty.min.js"></script>
 <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
 <link rel="Short Icon" type="image/x-icon" href="${initParam.icon}" />
-
+<!-- video.js -->
+<script src="<%=request.getContextPath()%>/js/video.js"></script> 
+<link href="<%=request.getContextPath()%>/css/video-js.css"rel="stylesheet">
 <style>
-/* 影片區塊 */
-video {
+/*  影片區塊  */
+ video {
 	width: 100%;
-	height: 100%;
-}
+ 	height: 100%; 
+} 
 
 #videoArea {
 	background-size: cover;
@@ -208,55 +210,40 @@ a {
 		<div class="container">
 			<div class="row">
 				<h1 align="center" id="videoTitle">${courseVO.courseName}</h1>
-				<div class="col-md-12 " id="videoArea"
-					style="background-image: url('<%=request.getContextPath() %>/CourseImage?CourseID=${courseVO.courseID}')">
+				<div class="col-md-12 " id="videoArea"style="background-image: url('<%=request.getContextPath() %>/CourseImage?CourseID=${courseVO.courseID}')">
 
 					<input type="hidden" value="${courseVO.courseID}">
 					<div class="col-md-12" style="z-index: 10">
-						<div class="col-md-8 col-xs-12"
-							style="margin-right: -15px; z-index: 10">
-							<c:choose>
-								<c:when test="${LoginOK.memberID==courseVO.memberID}">
-									<video controls="controls" id="vidoeControl">
-										<source
-											src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}"
-											type="video/mp4">
-									</video>
-
-								</c:when>
-								<c:when test="${!empty LoginOK && !empty list2}">
-									<video
-										<c:forEach var="buycourse"  items='${list2}'>
-							<c:choose>
-								<c:when test="${courseVO.courseID==buycourse.courseID}">
-										<c:set var="control" value="controls=controls" />
-										<c:set var="poster" value="" />
-										<c:set var="boo" value="true" />
-								</c:when>
-								<c:when test="${!empty boo}">
-								</c:when>
-								<c:otherwise> 
-									<c:set var="poster" value="poster=_Lyy/poster.png" />
-									<c:set var="control" value=""/>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-										<c:out value="${poster}"/> <c:out value="${control}"/>
-										id="vidoeControl">
-										<source
-											src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}"
-											type="video/mp4">
-									</video>
-								</c:when>
-								<c:otherwise>
-									<video poster="<%=request.getContextPath()%>/_Lyy/poster.png"
-										id="vidoeControl">
-										<source
-											src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}"
-											type="video/mp4">
-									</video>
-								</c:otherwise>
-							</c:choose>
+						<div class="col-md-8 col-xs-12" style="margin-right: -15px; z-index: 10">
+								<c:if test="${!empty LoginOK && !empty list2}">
+									<c:if test="${LoginOK.memberID==courseVO.memberID}">
+										<c:set var="bo" value="true"/>
+									</c:if>
+									<c:forEach var="buycourse"  items='${list2}' varStatus="varStatus">
+										<c:choose>
+											<c:when test="${!empty boo}"></c:when>
+											<c:when test="${courseVO.courseID==buycourse.courseID || !empty bo}">
+													<video id="my-video" class="video-js" data-setup="{}"  controls width="922%">
+													<c:if test="${!empty courseVO.courseVideopathway}">
+													    <source src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}" type='video/mp4'>
+													</c:if>
+													</video>
+													<c:set var="boo" value="true" />
+											</c:when>
+										
+											<c:when test="${empty boo && varStatus.last}">
+												<video poster="<%=request.getContextPath()%>/_Lyy/poster.png"> 
+				 									    <source src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}" type='video/mp4'> 
+				 								</video>
+											</c:when>
+										</c:choose>
+									</c:forEach>
+								</c:if>
+								<c:if test="${empty LoginOK}">
+									<video poster="<%=request.getContextPath()%>/_Lyy/poster.png"> 
+	 									    <source src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}" type='video/mp4'> 
+	 								</video>
+								</c:if>
 						</div>
 						<div class="col-md-4 col-xs-12" id="videoDivListStyle">
 							<div>
