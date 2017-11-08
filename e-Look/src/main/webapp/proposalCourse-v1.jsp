@@ -603,14 +603,13 @@ video::-webkit-media-controls-panel {
 		</div>
 	</div>
 </div>
-		<input type="hidden" id="reportMemberID"
-									value="${LoginOK.memberID}" /> <input type="hidden"
-									id="reportCourseID" value="${courseVO.courseID}" />						
+	<input type="hidden" id="reportMemberID"value="${LoginOK.memberID}" />
+	<input type="hidden"id="reportCourseID" value="${courseVO.courseID}" />						
 	<input type="hidden" value="${courseVO.courseID}" id="mbcourseID">
 	<input type="hidden" value="${courseVO.fundEndDate}" id="fundEndDate">
 	<input type="hidden" value="${LoginOK.memberID}" id="mbmemberID">
-	<input type="hidden" value="${courseVO.targetStudentNumber}"
-		id="targetStudentNumber">
+	<input type="hidden" value="${courseVO.targetStudentNumber}"id="targetStudentNumber">
+	<input type="hidden" value="${LoginOK.status}"id="statusMemberVO">
 	<c:remove var="err" scope="session" />
 	<c:remove var="loginerr" scope="session" />
 	<jsp:include page="/footer.jsp" />
@@ -619,9 +618,12 @@ video::-webkit-media-controls-panel {
 		$(function() {
 			//點擊檢舉留言
 			$('.reportMe').on('click', function() {
+				if($('#statusMemberVO').val()==2){
+					alert("此帳號已被凍結該功能");
+				}else{
 				var mess2=$(this).parents('.dropdown').parent('div').nextAll('input').val()
 				warning(mess2);
-				
+				}
 			})
 			//選取檢舉留言功能
 			function warning(mess2) {
@@ -738,26 +740,38 @@ $(function(){
 					var $this=$(this)
 // 	 				alert($this.parents('div').children('input').val())
 // 	 				alert($this.parents('.panel-collapse').find('textarea').val())
-					if($this.parents('.panel-collapse').find('textarea').val()==''){
-						alert('請輸入留言')
+					if($('#statusMemberVO').val()==2){
+						alert("此帳號已被凍結該功能");
 					}else{
-						$.post('/e-Look/InputMessageController',
-								{'mContent':$this.parents('.panel-collapse').find('textarea').val(),
-								 'courseID':$('#mbcourseID').val(),
-								 'messageID_response':$this.parents('div').children('input').val(),
-								 'memberID':$('#mbmemberID').val()},function(){				
-								 message();	
-								 $this.parents('.panel-collapse').find('textarea').val("")
-								 var name=$this.attr('name');
-								 $('#'+name).addClass("in");
-						})
+							if($this.parents('.panel-collapse').find('textarea').val()==''){
+								alert('請輸入留言')
+							}else{
+								$.post('/e-Look/InputMessageController',
+										{'mContent':$this.parents('.panel-collapse').find('textarea').val(),
+										 'courseID':$('#mbcourseID').val(),
+										 'messageID_response':$this.parents('div').children('input').val(),
+										 'memberID':$('#mbmemberID').val()},function(){				
+										 message();	
+										 $this.parents('.panel-collapse').find('textarea').val("")
+										 var name=$this.attr('name');
+										 $('#'+name).addClass("in");
+								})
+							}
 					}
+					
+					
 					})
 					$('#Section3').on('click','.reportM',function() {
-							var mess=$(this).parents('ul').attr('id')
+						if($('#statusMemberVO').val()==2){
+							alert("此帳號已被凍結該功能");
+						}else{
+						
+						var mess=$(this).parents('ul').attr('id')
 // 							alert(mess);
 							warning(mess);
 							//選取檢舉留言功能
+						}	
+							
 							function warning(mess) {
 								swal({
 									title : '檢舉留言',
@@ -826,16 +840,13 @@ $(function(){
 							var a1=$('<a></a>').attr('href','#').text('檢舉').addClass('reportM')
 						}
 							
-// 					var li2=$('<li></li>')
-// 					var a2=$('<a></a>').attr('href','#').text('修改')
 					if(response.status==1){
 						var p =$('<p></p>').text('(注意:此留言違反社群規範，已屏蔽)').attr('style','font-style:oblique')
 					}else{
 						var p =$('<p></p>').text(response.mContent)
 					}
 					
-								li1.append(a1)
-// 		 						li2.append(a2)
+							li1.append(a1)
 		 					ul.append(li1)
 		 					button.append(span3)
  					div4.append([ul,button,p])
@@ -851,8 +862,10 @@ $(function(){
 
 		//輸入留言
 		$("#inputMessage>div>button").on('click',function(){
-// 			alert($(this).parents('#inputMessage').find('.inputMessage').val());
 			var valueText=$(this).parents('#inputMessage').find('.inputMessage').val()
+			if($('#statusMemberVO').val()==2){
+				alert("此帳號已被凍結該功能");
+			}else{
 			if(valueText==null||valueText==""){	
 				alert("請輸入留言");
 			}else{
@@ -860,6 +873,7 @@ $(function(){
 					$(this).parents('#inputMessage').find('.inputMessage').val("");
 					window.location.replace(window.location.href);  
 			})
+			}
 			}
 		})
 		</script>
