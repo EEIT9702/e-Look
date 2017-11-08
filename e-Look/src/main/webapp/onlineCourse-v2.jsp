@@ -820,7 +820,7 @@ a {
 												<textarea class="form-control" rows="5" id="comment"></textarea>
 											</div>
 											<div class="text-right">
-												<button class="btn-default" id="inpContent" name="${messageVO.messageID}">送出</button>
+												<button class="btn-default " id="inpContent" name="${messageVO.messageID}">送出</button>
 											</div>
 										</div>
 									</div>
@@ -954,8 +954,8 @@ a {
 			alert('已經加入過囉');
 		})
 		$("#favoriteclick2").click(function() {
-			console.log($("#mbcourseID").val())
-			console.log($("#mbmemberID").val())
+// 			console.log($("#mbcourseID").val())
+// 			console.log($("#mbmemberID").val())
 			if (count1 == 0) {
 				$('#favoriteclick2').attr("id", "favoriteclick1")
 				$.post('MemberBookmarksInsertController', {
@@ -1131,19 +1131,7 @@ a {
 			})
 	})
 	</script>
-	<script>
-// 影片點擊控制
-		var b=true;
- 		$('video').click(function(){
- 			if(b){
-			this.play();
-			b=false;
- 			}else{
- 				this.pause();
-				b=true;
- 			}
-		})
-		</script>
+
 		<script>
 // 	留言版專區
 		$(function(){
@@ -1153,6 +1141,9 @@ a {
 					var $this=$(this)
 // 	 				alert($this.parents('div').children('input').val())
 // 	 				alert($this.parents('.panel-collapse').find('textarea').val())
+					if($this.parents('.panel-collapse').find('textarea').val()==''){
+						alert('請輸入留言')
+					}else{
 						$.post('/e-Look/InputMessageController',
 								{'mContent':$this.parents('.panel-collapse').find('textarea').val(),
 								 'courseID':$('#mbcourseID').val(),
@@ -1163,6 +1154,7 @@ a {
 								 var name=$this.attr('name');
 								 $('#'+name).addClass("in");
 						})
+					}
 					})
 					$('#Section3').on('click','.reportM',function() {
 							var mess=$(this).parents('ul').attr('id')
@@ -1232,7 +1224,7 @@ a {
 					var li1=$('<li></li>')
 						
 						if($('#mbmemberID').val()===''){
-							var a1=$('<a></a>').attr('href','#').text('(注意:此留言違反社群規範，已屏蔽)').attr({'data-toggle':'modal','data-target':'#myModal'})
+							var a1=$('<a></a>').attr('href','#').text('檢舉').attr({'data-toggle':'modal','data-target':'#myModal'})
 						}else{
 							var a1=$('<a></a>').attr('href','#').text('檢舉').addClass('reportM')
 						}
@@ -1240,7 +1232,7 @@ a {
 // 					var li2=$('<li></li>')
 // 					var a2=$('<a></a>').attr('href','#').text('修改')
 					if(response.status==1){
-						var p =$('<p></p>').text(response.mContent).attr('style','font-style:oblique')
+						var p =$('<p></p>').text('(注意:此留言違反社群規範，已屏蔽)').attr('style','font-style:oblique')
 					}else{
 						var p =$('<p></p>').text(response.mContent)
 					}
