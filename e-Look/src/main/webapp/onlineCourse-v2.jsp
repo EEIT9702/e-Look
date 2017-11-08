@@ -8,7 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>收費課程</title>
+<title>${courseVO.courseName}</title>
 <link href="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.css"
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/bootstrap.css"
@@ -40,7 +40,7 @@
 #videoArea {
 	background-size: cover;
 	background-position: center;
-	height: 520px;
+	height: 519px;
 	padding-left: 0;
 }
 
@@ -74,7 +74,7 @@ video::-webkit-media-controls-panel {
 }
 
 #videoTitle {
-	background-color: rgba(0%, 10%, 20%, 0.3);
+	background-color: rgba(0%, 10%, 20%, 0.6);
 	color: white;
 }
 
@@ -209,7 +209,7 @@ a {
 	<div class="container-fluid">
 		<div class="container">
 			<div class="row">
-				<h1 align="center" id="videoTitle">${courseVO.courseName}</h1>
+				<h1 align="center" style="font-size:50px" id="videoTitle">${courseVO.courseName}</h1>
 				<div class="col-md-12 " id="videoArea"style="background-image: url('<%=request.getContextPath() %>/CourseImage?CourseID=${courseVO.courseID}')">
 
 					<input type="hidden" value="${courseVO.courseID}">
@@ -1045,7 +1045,7 @@ a {
 							'memberID' : $('#reportMemberID').val(),
 							'courseID' : $('#reportCourseID').val()
 						})
-						alert("感謝你的評分!" + "\nscore: " + score);
+						alert("感謝你的評分!");
 					}
 				});
 		});
