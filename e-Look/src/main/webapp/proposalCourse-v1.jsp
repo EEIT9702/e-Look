@@ -89,7 +89,7 @@ video::-webkit-media-controls-panel {
 
 .tab .nav-tabs li {
 	text-align: center;
-	margin-right: 10px;
+/* 	margin-right: 10px; */
 }
 
 .tab .nav-tabs li a {
