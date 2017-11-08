@@ -49,8 +49,8 @@ public class ReportMessageService {
 		MemberService mbServ = new MemberService();
 		mbServ.updateMemberCount(memberID);
 		
-		MessageService msgServ = new MessageService();
-		msgServ.updateMessage(mVO.getMessageID(), "(注意:此留言違反社群規範，已屏蔽)");
+//		MessageService msgServ = new MessageService();
+//		msgServ.updateMessage(mVO.getMessageID(), "(注意:此留言違反社群規範，已屏蔽)");
 	}
 	
 	public void jugeMessage(Integer reportID,int status) {

@@ -19,7 +19,7 @@
 <title>檢舉留言管理畫面</title>
 <script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script>
 <!-- <script type="text/javascript" src="css/jquery.mmenu.js"></script> -->
-<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/table2.css">
 
 <style>
@@ -77,8 +77,10 @@
 <div class="container cbox" style="">
 		<div class="row">
 			<div class="col-md-12" style="margin-bottom:30px;" >
-				<button type="button" value="" onclick="self.location.href='breport-course.jsp'" class="btn btn-primary" style="font-size:17px;float:right;">檢舉課程管理</button>
-				<button type="button" value="" onclick="self.location.href='back_report_history-v2.jsp'" class="btn btn-info" style="font-size:17px;float:right;margin-right:5px;">查詢遮蔽留言紀錄</button>
+				
+				<button type="button" onclick="self.location.href='breport-course.jsp'" class="btn btn-primary btn-sm" style="font-size:17px;float:left;margin-left:-38px;"><i class="fa fa-exchange"></i>切換檢舉課程管理</button>
+<!-- 				<button type="button" onclick="self.location.href='breport-course.jsp'" class="btn btn-primary btn-sm" style="font-size:17px;float:left;margin-left:-38px;"><span class="glyphicon glyphicon-transfer"></span>切換檢舉課程管理</button> -->
+				<button type="button" onclick="self.location.href='back_report_history-v2.jsp'" class="btn btn-success" style="font-size:17px;float:right;"><i class="fa fa-list-ul"></i>查詢遮蔽留言紀錄</button>
 			</div>
 		
 			  <table id="reportTable" class="table table-bordered tstyle" style="">
