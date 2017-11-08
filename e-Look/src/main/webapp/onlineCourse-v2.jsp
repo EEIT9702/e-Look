@@ -653,10 +653,13 @@ a {
 							<div style="text-align:center"><h4>(需登入且有購買該課程者)</h4></div>
 						</c:if>
 						<c:if test="${!empty LoginOK}">
+							<c:if test="${LoginOK.memberID==courseVO.memberID}">
+								<c:set var="bo" value="true"/>
+							</c:if>
 							<c:forEach items="${list2}" var="buycourse" varStatus="varStatus">
 								<c:choose>
 								<c:when test="${!empty flag}"></c:when>
-								<c:when test="${buycourse.courseID==courseVO.courseID}">
+								<c:when test="${buycourse.courseID==courseVO.courseID||!empty bo}">
 									<div class="col-md-12" id="inputMessage">
 										<div style="text-align:center"><h4>尚未有留言</h4></div>
 										<div style="text-align:center"><h4>成為第一個發文的人吧！</h4></div>
@@ -665,7 +668,6 @@ a {
 										<div class="text-right"><button class="text-right" style="margin:15px">送出</button></div>					
 									</div>		
 									<c:set var="flag" value="true"></c:set>
-									
 								</c:when>
 								<c:when test="${varStatus.last && empty flag}">  
 									<div style="text-align:center"><h4>尚未有留言</h4></div>
@@ -681,6 +683,7 @@ a {
 									<div style="text-align:center"><img src="<%=request.getContextPath() %>/_Lyy/chat.png"></div>
 									<div style="text-align:center"><h4>(你還沒有購買該課程唷)</h4></div>
 							</c:if>
+							
 						</c:if>				
 				</c:if>
 				
