@@ -738,14 +738,20 @@ a {
 									<c:if test="${!empty LoginOK}">
 										<li><a class="reportMe" href="#">檢舉</a></li>
 									</c:if>
-									<li><a href="#">修改</a></li>
+									
 								</ul>
 							</div>
 						</div>
-						<div style="border-bottom: 1px solid black">	
+						<div style="border-bottom: 1px solid black;padding-top:17px">	 
+							<c:if test="${messageVO.status==1}">
+							<p style="font-style:oblique">(注意:此留言違反社群規範，已屏蔽)</p>
+							</c:if>
+							<c:if test="${messageVO.status==0}">
 							<p>${messageVO.mContent}</p>
+							</c:if>
 						</div>
 						<input type="hidden"  value="${messageVO.messageID}" class="messageID">
+						<input type="hidden"  value="${messageVO.status}" class="status">
 					<!--抓取messageID -->
 						
 					<!--第一個回應 開始-->
@@ -796,7 +802,7 @@ a {
 												<c:choose>
 <%-- 												<c:when test="${!empty msage1}"></c:when> --%>
 												<c:when test="${buycourse1.courseID==courseVO.courseID}">
-													<a data-toggle="collapse" href="#${messageVO.messageID+messageVO.messageID}">我要回應</a>		
+													<a data-toggle="collapse" href="#${messageVO.messageID+messageVO.messageID}" >回應<span class="glyphicon glyphicon-share-alt" style="margin-left:5px"></span></a>		
 <%-- 													<c:set var="msage1" value="true"/> --%>
 												</c:when>
 												<c:when test="${varStatus1.last && empty msage1}">
@@ -826,7 +832,7 @@ a {
 					
 						<!-- 回應輸入表格結束-->
 						</c:if>
-						<hr>
+					
 					</c:forEach>
 					<!-- 重複結束 -->
 					<c:if test="${!empty LoginOK}">
@@ -1226,17 +1232,22 @@ a {
 					var li1=$('<li></li>')
 						
 						if($('#mbmemberID').val()===''){
-							var a1=$('<a></a>').attr('href','#').text('檢舉').attr({'data-toggle':'modal','data-target':'#myModal'})
+							var a1=$('<a></a>').attr('href','#').text('(注意:此留言違反社群規範，已屏蔽)').attr({'data-toggle':'modal','data-target':'#myModal'})
 						}else{
 							var a1=$('<a></a>').attr('href','#').text('檢舉').addClass('reportM')
 						}
 							
-					var li2=$('<li></li>')
-					var a2=$('<a></a>').attr('href','#').text('修改')
-					var p =$('<p></p>').text(response.mContent+"+"+response.messageID)
+// 					var li2=$('<li></li>')
+// 					var a2=$('<a></a>').attr('href','#').text('修改')
+					if(response.status==1){
+						var p =$('<p></p>').text(response.mContent).attr('style','font-style:oblique')
+					}else{
+						var p =$('<p></p>').text(response.mContent)
+					}
+					
 								li1.append(a1)
-		 						li2.append(a2)
-		 					ul.append([li1,li2])
+// 		 						li2.append(a2)
+		 					ul.append(li1)
 		 					button.append(span3)
  					div4.append([ul,button,p])
  					div3.append([div4,span1,span2,p])
