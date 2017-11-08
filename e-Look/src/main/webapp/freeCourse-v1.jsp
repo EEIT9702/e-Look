@@ -8,7 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>免費課程</title>
+<title>${courseVO.courseName}</title>
 <link href="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.css"
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/bootstrap.css"
@@ -76,7 +76,7 @@ video::-webkit-media-controls-panel {
 }
 
 #videoTitle {
-	background-color: rgba(0%, 10%, 20%, 0.3);
+	background-color: rgba(0%, 10%, 20%, 0.6);
 	color: white;
 }
 
@@ -203,16 +203,16 @@ a{text-decoration:none}
 </style>
 </head>
 <!-- 影片區 -->
-<body  style="margin-top:20px"> 
+<body > 
 	<jsp:include page="/login.jsp" flush="true" />
 	<div class="container-fluid">
 		<div class="container">
 			<div class="row">
-				<h1 align="center" id="videoTitle">${courseVO.courseName}</h1>
+				<h1 align="center" style="font-size:50px" id="videoTitle">${courseVO.courseName}</h1>
 				<div class="col-md-12 " id="videoArea"
 					style="background-image: url('<%=request.getContextPath() %>/CourseImage?CourseID=${courseVO.courseID}')">
 					<div class="col-md-12">
-						<div class="col-md-8 col-xs-12" style="margin-right: -15px">
+						<div class="col-md-8 col-xs-12" style="margin-right: -12px">  
 
 							<video id="my-video" class="video-js" data-setup="{}"  controls width="924%">
 							    <c:if test="${!empty courseVO.courseVideopathway}">
@@ -1060,7 +1060,7 @@ a{text-decoration:none}
 							'memberID' : $('#reportMemberID').val(),
 							'courseID' : $('#reportCourseID').val()
 						})
-						alert("感謝你的評分!" + "\nscore: " + score);
+						alert("感謝你的評分!");
 					}
 				});
 		});

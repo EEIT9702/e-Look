@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>募資課程</title>
+<title>${courseVO.courseName}</title>
 <link href="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.css"
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/bootstrap.css"
@@ -170,7 +170,7 @@ video::-webkit-media-controls-panel {
 }
 
 #videoTitle {
-	background-color: rgba(0%, 10%, 20%, 0.3);
+	background-color: rgba(0%, 10%, 20%, 0.6);
 	color: white;
 }
 </style>
@@ -181,7 +181,7 @@ video::-webkit-media-controls-panel {
 	<div class="container-fluid">
 		<div class="container">
 			<div class="row">
-				<h1 align="center" id="videoTitle">${courseVO.courseName}</h1>
+				<h1 align="center" style="font-size:50px" id="videoTitle">${courseVO.courseName}</h1>
 				<div class="col-md-12 " id="videoArea"
 					style="background-image: url('<%=request.getContextPath() %>/CourseImage?CourseID=${courseVO.courseID}')">
 					<div class="col-md-12">
@@ -221,7 +221,7 @@ video::-webkit-media-controls-panel {
 									<div class="col-md-6 ">
 										<div class="text-left" style="font-size: 22px">原始價格</div>
 										<div class="text-right"
-											style="text-decoration: line-through; font-size: 22px">${courseVO.soldPrice}</div>
+											style="font-size: 22px">NT<span style="text-decoration: line-through;font-size: 22px">${courseVO.soldPrice}</span></div>
 									</div>
 									<div class="col-md-6">
 										<div class="text-left" style="font-size: 22px">募資價格</div>
@@ -281,6 +281,7 @@ video::-webkit-media-controls-panel {
 										</c:otherwise>
 									</c:choose>
 								</c:if>
+								<div style="color:white;font-size:20px;text-align:center">預計課程上架時間${courseVO.courseStartDate}</div> 
 							</div>
 						</div>
 					</div>
@@ -704,7 +705,7 @@ $(function(){
 <script>
 $(function(){
 	$.getJSON('/e-Look/GetBuyingPrice',{'courseID':$('#mbcourseID').val()},function(price){
-		$('#price').text(price)
+		$('#price').text("NT "+price)
 	})
 })
 </script>
