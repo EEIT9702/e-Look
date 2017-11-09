@@ -596,13 +596,32 @@ video::-webkit-media-controls-panel {
 								</div>
 							</div>
 			<!-- 留言板結束-->
-									
+			<!--違規訊息 -->
+							<div class="modal fade" id="registerP" tabindex="-1"
+								role="dialog" aria-labelledby="myModalLabel"  aria-hidden="true" >
+								<div class="modal-dialog" style="width: 350px">
+									<div class="modal-content text-center">
+										<!-- 			右上角X -->
+										<div class="modal-header">
+											<button type="button" class="close pull-right"
+												data-dismiss="modal" aria-hidden="true"
+												style="font-size: 30px;">&times;</button>
+										</div>
+										<h4>該用戶違規次數達三次以上無法使用該功能</h4>
+										<div id="butfooter">
+											<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
 	<input type="hidden" id="reportMemberID"value="${LoginOK.memberID}" />
 	<input type="hidden"id="reportCourseID" value="${courseVO.courseID}" />						
 	<input type="hidden" value="${courseVO.courseID}" id="mbcourseID">
@@ -612,6 +631,7 @@ video::-webkit-media-controls-panel {
 	<input type="hidden" value="${LoginOK.status}"id="statusMemberVO">
 	<c:remove var="err" scope="session" />
 	<c:remove var="loginerr" scope="session" />
+	<c:remove var="registerP" scope="session"/>
 	<jsp:include page="/footer.jsp" />
 </body>
 <script>
@@ -619,10 +639,11 @@ video::-webkit-media-controls-panel {
 			//點擊檢舉留言
 			$('.reportMe').on('click', function() {
 				if($('#statusMemberVO').val()==2){
-					alert("此帳號已被凍結該功能");
+// 					alert("此帳號已被凍結該功能");
+					$('#registerP').modal('show')
 				}else{
-				var mess2=$(this).parents('.dropdown').parent('div').nextAll('input').val()
-				warning(mess2);
+						var mess2=$(this).parents('.dropdown').parent('div').nextAll('input').val()
+						warning(mess2);
 				}
 			})
 			//選取檢舉留言功能
@@ -741,7 +762,7 @@ $(function(){
 // 	 				alert($this.parents('div').children('input').val())
 // 	 				alert($this.parents('.panel-collapse').find('textarea').val())
 					if($('#statusMemberVO').val()==2){
-						alert("此帳號已被凍結該功能");
+						$('#registerP').modal('show')
 					}else{
 							if($this.parents('.panel-collapse').find('textarea').val()==''){
 								alert('請輸入留言')
@@ -763,7 +784,8 @@ $(function(){
 					})
 					$('#Section3').on('click','.reportM',function() {
 						if($('#statusMemberVO').val()==2){
-							alert("此帳號已被凍結該功能");
+// 							alert("此帳號已被凍結該功能");
+							$('#registerP').modal('show')
 						}else{
 						
 						var mess=$(this).parents('ul').attr('id')
@@ -864,7 +886,8 @@ $(function(){
 		$("#inputMessage>div>button").on('click',function(){
 			var valueText=$(this).parents('#inputMessage').find('.inputMessage').val()
 			if($('#statusMemberVO').val()==2){
-				alert("此帳號已被凍結該功能");
+// 				alert("此帳號已被凍結該功能");
+				$('#registerP').modal('show')
 			}else{
 			if(valueText==null||valueText==""){	
 				alert("請輸入留言");
