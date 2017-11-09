@@ -221,7 +221,7 @@ video::-webkit-media-controls-panel {
 									<div class="col-md-6 ">
 										<div class="text-left" style="font-size: 22px">原始價格</div>
 										<div class="text-right"
-											style="font-size: 22px">NT<span style="text-decoration: line-through;font-size: 22px">${courseVO.soldPrice}</span></div>
+											style="font-size: 22px">售價   :  <span style="text-decoration: line-through;font-size: 22px">${courseVO.soldPrice}</span>元</div>
 									</div>
 									<div class="col-md-6">
 										<div class="text-left" style="font-size: 22px">募資價格</div>
@@ -727,8 +727,8 @@ $(function(){
 </script>
 <script>
 $(function(){
-	$.getJSON('/e-Look/GetBuyingPrice',{'courseID':$('#mbcourseID').val()},function(price){
-		$('#price').text("NT "+price)
+	$.get('/e-Look/GetBuyingPrice',{'courseID':$('#mbcourseID').val()},function(price){
+		$('#price').html(price)
 	})
 })
 </script>
