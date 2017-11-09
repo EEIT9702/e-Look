@@ -7,6 +7,8 @@ import java.sql.Date;
 public class CourseVO implements Serializable {
 	
 
+
+
 	private static final long serialVersionUID = 1L;
 	
 	private Integer courseID;
@@ -28,8 +30,6 @@ public class CourseVO implements Serializable {
 	private String courseContent;
 	private Integer memberID;
 	private Double avgScore;
-	
-	
 	public CourseVO(){
 		
 	};		
