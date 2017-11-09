@@ -81,12 +81,17 @@ public class OnlineCourse implements Filter {
 					MemberSubscriptionService memberSubscriptionService =new MemberSubscriptionService();
 
 					if (memberVoOK != null) {
-
+							
 						list2 = CourseService.getBuyCourse(memberVoOK.getMemberID());
 						mBookmarkList = memberBookmarksService.findPrimaryMemberBookmarks(memberVoOK.getMemberID());
 						memberSubscriptionVO=memberSubscriptionService.findPrimaryMemberBookmarks(memberVoOK.getMemberID());
+						for(BuyCourseVO BuyCourseVO:list2){
+							if(Integer.valueOf(courseID)==BuyCourseVO.getCourseID().intValue()){
+								request.setAttribute("buy", BuyCourseVO.getCourseID());
+							}
+						}
 					}
-
+					
 					if (mBookmarkList != null) {
 						request.setAttribute("mBookmarkList", mBookmarkList);
 
