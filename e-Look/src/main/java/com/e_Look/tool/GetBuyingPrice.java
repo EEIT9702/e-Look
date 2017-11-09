@@ -26,13 +26,13 @@ public class GetBuyingPrice extends HttpServlet {
 			CourseService cSvc = new CourseService();
 			CourseVO courseVO=cSvc.findByPrimaryKey(courseID);
 			
-			Integer soldPrice=courseVO.getSoldPrice();
-			Integer buyingPrice=BuyingPrice.getBuyingPrice(courseID);
+			int soldPrice=courseVO.getSoldPrice();
+			int buyingPrice=BuyingPrice.getBuyingPrice(courseID);
 			
 			if(buyingPrice!=soldPrice && courseVO.getStatus()!=3){
-				rw.write("<span class='"+buyingPrice+"' style='color:red' >特價："+buyingPrice.toString()+" 元</span>");
+				rw.write("<span class='"+buyingPrice+"' style='color:red' >特價："+buyingPrice+" 元</span>");
 			}else{
-				rw.write("<span class='"+buyingPrice+"' > 售價："+buyingPrice.toString()+" 元</span>");
+				rw.write("<span class='"+buyingPrice+"' > 售價："+buyingPrice+" 元</span>");
 			}
 			
 		}catch(NumberFormatException e){

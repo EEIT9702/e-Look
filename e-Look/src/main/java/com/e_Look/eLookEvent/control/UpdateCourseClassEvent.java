@@ -34,7 +34,6 @@ public class UpdateCourseClassEvent extends HttpServlet {
 		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
-				// System.out.println("調整課程類別之活動!!!");
 				List<eLookEventVO> elookeventVOs = eventSvc.getAll();
 				for (eLookEventVO elookeventVO : elookeventVOs) {
 					if (elookeventVO.geteStartDate().getTime() <= System.currentTimeMillis()
