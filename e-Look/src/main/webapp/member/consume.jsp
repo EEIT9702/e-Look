@@ -403,7 +403,7 @@ $(function(){
 	  		  	var cell2 = $('<td></td>').text(Order.courseVO.courseName)
 	  		  	var cell3 = $('<td></td>').text("")
 	  		 	var cell4 = $('<td></td>').text(Order.buyingPrice)
-	  		  	var row = $('<tr class="data1" style="background-color:#acecfb"></tr>').append([cell1,cell2,cell3,cell4]);   			
+	  		  	var row = $('<tr class="data1" style="background-color:#e8ebff"></tr>').append([cell1,cell2,cell3,cell4]);   			
 	  		  	fragment.append(row);	
 	   		 }  
 	      	  });
@@ -443,7 +443,7 @@ $(function(){
    				count=OrderDetails.buyingPrice+count
    			})
   		  	var cell4 = $('<td></td>').text(count)
-  		  	var row = $('<tr class="parent" style="background-color:#f3ffc4"></tr>').append([cell1,cell2,cell3,cell4]);
+  		  	var row = $('<tr class="parent" style="background-color:#f6f9ea"></tr>').append([cell1,cell2,cell3,cell4]);
 					fragment.append(row);
    		 		//console.log(idx);
 	   		 }

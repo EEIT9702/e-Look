@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>募資課程</title>
+<title>${courseVO.courseName}</title>
 <link href="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.css"
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/bootstrap.css"
@@ -170,7 +170,7 @@ video::-webkit-media-controls-panel {
 }
 
 #videoTitle {
-	background-color: rgba(0%, 10%, 20%, 0.3);
+	background-color: rgba(0%, 10%, 20%, 0.6);
 	color: white;
 }
 </style>
@@ -181,7 +181,7 @@ video::-webkit-media-controls-panel {
 	<div class="container-fluid">
 		<div class="container">
 			<div class="row">
-				<h1 align="center" id="videoTitle">${courseVO.courseName}</h1>
+				<h1 align="center" style="font-size:50px" id="videoTitle">${courseVO.courseName}</h1>
 				<div class="col-md-12 " id="videoArea"
 					style="background-image: url('<%=request.getContextPath() %>/CourseImage?CourseID=${courseVO.courseID}')">
 					<div class="col-md-12">
@@ -221,7 +221,7 @@ video::-webkit-media-controls-panel {
 									<div class="col-md-6 ">
 										<div class="text-left" style="font-size: 22px">原始價格</div>
 										<div class="text-right"
-											style="text-decoration: line-through; font-size: 22px">${courseVO.soldPrice}</div>
+											style="font-size: 22px">NT<span style="text-decoration: line-through;font-size: 22px">${courseVO.soldPrice}</span></div>
 									</div>
 									<div class="col-md-6">
 										<div class="text-left" style="font-size: 22px">募資價格</div>
@@ -281,6 +281,7 @@ video::-webkit-media-controls-panel {
 										</c:otherwise>
 									</c:choose>
 								</c:if>
+								<div style="color:white;font-size:20px;text-align:center">預計課程上架時間${courseVO.courseStartDate}</div> 
 							</div>
 						</div>
 					</div>
@@ -595,32 +596,55 @@ video::-webkit-media-controls-panel {
 								</div>
 							</div>
 			<!-- 留言板結束-->
-									
+			<!--違規訊息 -->
+							<div class="modal fade" id="registerP" tabindex="-1"
+								role="dialog" aria-labelledby="myModalLabel"  aria-hidden="true" >
+								<div class="modal-dialog" style="width: 350px">
+									<div class="modal-content text-center">
+										<!-- 			右上角X -->
+										<div class="modal-header">
+											<button type="button" class="close pull-right"
+												data-dismiss="modal" aria-hidden="true"
+												style="font-size: 30px;">&times;</button>
+										</div>
+										<h4>該用戶違規次數達三次以上無法使用該功能</h4>
+										<div id="butfooter">
+											<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-		<input type="hidden" id="reportMemberID"
-									value="${LoginOK.memberID}" /> <input type="hidden"
-									id="reportCourseID" value="${courseVO.courseID}" />						
+
+	<input type="hidden" id="reportMemberID"value="${LoginOK.memberID}" />
+	<input type="hidden"id="reportCourseID" value="${courseVO.courseID}" />						
 	<input type="hidden" value="${courseVO.courseID}" id="mbcourseID">
 	<input type="hidden" value="${courseVO.fundEndDate}" id="fundEndDate">
 	<input type="hidden" value="${LoginOK.memberID}" id="mbmemberID">
-	<input type="hidden" value="${courseVO.targetStudentNumber}"
-		id="targetStudentNumber">
+	<input type="hidden" value="${courseVO.targetStudentNumber}"id="targetStudentNumber">
+	<input type="hidden" value="${LoginOK.status}"id="statusMemberVO">
 	<c:remove var="err" scope="session" />
 	<c:remove var="loginerr" scope="session" />
+	<c:remove var="registerP" scope="session"/>
 	<jsp:include page="/footer.jsp" />
 </body>
 <script>
 		$(function() {
 			//點擊檢舉留言
 			$('.reportMe').on('click', function() {
-				var mess2=$(this).parents('.dropdown').parent('div').nextAll('input').val()
-				warning(mess2);
-				
+				if($('#statusMemberVO').val()==2){
+// 					alert("此帳號已被凍結該功能");
+					$('#registerP').modal('show')
+				}else{
+						var mess2=$(this).parents('.dropdown').parent('div').nextAll('input').val()
+						warning(mess2);
+				}
 			})
 			//選取檢舉留言功能
 			function warning(mess2) {
@@ -704,7 +728,7 @@ $(function(){
 <script>
 $(function(){
 	$.getJSON('/e-Look/GetBuyingPrice',{'courseID':$('#mbcourseID').val()},function(price){
-		$('#price').text(price)
+		$('#price').text("NT "+price)
 	})
 })
 </script>
@@ -737,26 +761,39 @@ $(function(){
 					var $this=$(this)
 // 	 				alert($this.parents('div').children('input').val())
 // 	 				alert($this.parents('.panel-collapse').find('textarea').val())
-					if($this.parents('.panel-collapse').find('textarea').val()==''){
-						alert('請輸入留言')
+					if($('#statusMemberVO').val()==2){
+						$('#registerP').modal('show')
 					}else{
-						$.post('/e-Look/InputMessageController',
-								{'mContent':$this.parents('.panel-collapse').find('textarea').val(),
-								 'courseID':$('#mbcourseID').val(),
-								 'messageID_response':$this.parents('div').children('input').val(),
-								 'memberID':$('#mbmemberID').val()},function(){				
-								 message();	
-								 $this.parents('.panel-collapse').find('textarea').val("")
-								 var name=$this.attr('name');
-								 $('#'+name).addClass("in");
-						})
+							if($this.parents('.panel-collapse').find('textarea').val()==''){
+								alert('請輸入留言')
+							}else{
+								$.post('/e-Look/InputMessageController',
+										{'mContent':$this.parents('.panel-collapse').find('textarea').val(),
+										 'courseID':$('#mbcourseID').val(),
+										 'messageID_response':$this.parents('div').children('input').val(),
+										 'memberID':$('#mbmemberID').val()},function(){				
+										 message();	
+										 $this.parents('.panel-collapse').find('textarea').val("")
+										 var name=$this.attr('name');
+										 $('#'+name).addClass("in");
+								})
+							}
 					}
+					
+					
 					})
 					$('#Section3').on('click','.reportM',function() {
-							var mess=$(this).parents('ul').attr('id')
+						if($('#statusMemberVO').val()==2){
+// 							alert("此帳號已被凍結該功能");
+							$('#registerP').modal('show')
+						}else{
+						
+						var mess=$(this).parents('ul').attr('id')
 // 							alert(mess);
 							warning(mess);
 							//選取檢舉留言功能
+						}	
+							
 							function warning(mess) {
 								swal({
 									title : '檢舉留言',
@@ -825,16 +862,13 @@ $(function(){
 							var a1=$('<a></a>').attr('href','#').text('檢舉').addClass('reportM')
 						}
 							
-// 					var li2=$('<li></li>')
-// 					var a2=$('<a></a>').attr('href','#').text('修改')
 					if(response.status==1){
 						var p =$('<p></p>').text('(注意:此留言違反社群規範，已屏蔽)').attr('style','font-style:oblique')
 					}else{
 						var p =$('<p></p>').text(response.mContent)
 					}
 					
-								li1.append(a1)
-// 		 						li2.append(a2)
+							li1.append(a1)
 		 					ul.append(li1)
 		 					button.append(span3)
  					div4.append([ul,button,p])
@@ -850,8 +884,11 @@ $(function(){
 
 		//輸入留言
 		$("#inputMessage>div>button").on('click',function(){
-// 			alert($(this).parents('#inputMessage').find('.inputMessage').val());
 			var valueText=$(this).parents('#inputMessage').find('.inputMessage').val()
+			if($('#statusMemberVO').val()==2){
+// 				alert("此帳號已被凍結該功能");
+				$('#registerP').modal('show')
+			}else{
 			if(valueText==null||valueText==""){	
 				alert("請輸入留言");
 			}else{
@@ -859,6 +896,7 @@ $(function(){
 					$(this).parents('#inputMessage').find('.inputMessage').val("");
 					window.location.replace(window.location.href);  
 			})
+			}
 			}
 		})
 		</script>

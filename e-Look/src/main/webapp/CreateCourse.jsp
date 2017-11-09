@@ -849,6 +849,7 @@
 				language : 'zh-TW',
 				weekStart : 1,
 				todayBtn : 1,
+				startDate: new Date(),
 				autoclose : 1,
 				todayHighlight : 1,
 				startView : 2,

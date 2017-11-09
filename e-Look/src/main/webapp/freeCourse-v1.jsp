@@ -8,7 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>免費課程</title>
+<title>${courseVO.courseName}</title>
 <link href="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.css"
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/bootstrap.css"
@@ -76,7 +76,7 @@ video::-webkit-media-controls-panel {
 }
 
 #videoTitle {
-	background-color: rgba(0%, 10%, 20%, 0.3);
+	background-color: rgba(0%, 10%, 20%, 0.6);
 	color: white;
 }
 
@@ -203,16 +203,16 @@ a{text-decoration:none}
 </style>
 </head>
 <!-- 影片區 -->
-<body  style="margin-top:20px"> 
+<body > 
 	<jsp:include page="/login.jsp" flush="true" />
 	<div class="container-fluid">
 		<div class="container">
 			<div class="row">
-				<h1 align="center" id="videoTitle">${courseVO.courseName}</h1>
+				<h1 align="center" style="font-size:50px" id="videoTitle">${courseVO.courseName}</h1>
 				<div class="col-md-12 " id="videoArea"
 					style="background-image: url('<%=request.getContextPath() %>/CourseImage?CourseID=${courseVO.courseID}')">
 					<div class="col-md-12">
-						<div class="col-md-8 col-xs-12" style="margin-right: -15px">
+						<div class="col-md-8 col-xs-12" style="margin-right: -12px">  
 
 							<video id="my-video" class="video-js" data-setup="{}"  controls width="924%">
 							    <c:if test="${!empty courseVO.courseVideopathway}">
@@ -803,12 +803,31 @@ a{text-decoration:none}
 								<input type="hidden" value="${courseVO.memberID}"
 									id="starMemberID">
 							</div>
+							<!--違規訊息 -->
+							<div class="modal fade" id="registerP" tabindex="-1"
+								role="dialog" aria-labelledby="myModalLabel"  aria-hidden="true" >
+								<div class="modal-dialog" style="width: 350px">
+									<div class="modal-content text-center">
+										<!-- 			右上角X -->
+										<div class="modal-header">
+											<button type="button" class="close pull-right"
+												data-dismiss="modal" aria-hidden="true"
+												style="font-size: 30px;">&times;</button>
+										</div>
+										<h4>該用戶違規次數達三次以上無法使用該功能</h4>
+										<div id="butfooter">
+											<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+		<input type="hidden" value="${LoginOK.status}"id="statusMemberVO">
 	<c:remove var="err" scope="session" />
 	<c:remove var="loginerr" scope="session" />
 	<jsp:include page="/footer.jsp" />
@@ -823,9 +842,13 @@ a{text-decoration:none}
 		$(function() {
 			//點擊檢舉留言
 			$('.reportMe').on('click', function() {
+				if($('#statusMemberVO').val()==2){
+//	 				alert("此帳號已被凍結該功能");
+					$('#registerP').modal('show')
+				}else{
 				var mess2=$(this).parents('.dropdown').parent('div').nextAll('input').val()
 				warning(mess2);
-				
+				}
 			})
 			//選取檢舉留言功能
 			function warning(mess2) {
@@ -849,9 +872,9 @@ a{text-decoration:none}
 				}).then(
 						function(result) {
 							if (result) {
-								console.log($('#testMessage1').attr('value'));
-								console.log($('#reportMemberID').val());
-								console.log(result);
+// 								console.log($('#testMessage1').attr('value'));
+// 								console.log($('#reportMemberID').val());
+// 								console.log(result);
 								$.post('InsertReportMessageController', {
 									'reportContent' : result,
 									'reportMemberID' : $('#reportMemberID')
@@ -948,33 +971,15 @@ a{text-decoration:none}
 		})
 	</script>
 	<script>
-// 	$('#reportAction').click(function() {
-// 		if ($('#radioReporterCon:checked').val() == null) {
-// 			$("#myModalReportVideo").modal('hide');
-// 			return;
-// 		} else {
-// 			$.post("ReportCourseInsertController", {
-// 				'reportMemberID' : $('#reportMemberID').val(),
-// 				'reportCourseID' : $('#reportCourseID').val(),
-// 				'radioReporterCon' : $('#radioReporterCon:checked').val()
-// 			})
-// 			$("#myModalReportVideo").modal('hide');
-// 			warning();
-// 		}
-		
-// 		function warning() {
-// 			swal({
 
-// 				confirmButtonText : '確認',
-// 				type : 'success',
-// 				html : '檢舉成功，管理員會盡快審核 '
-
-// 			});
-// 		}
-// 	})
 	$(function() {
 		$('.reportAction').click(function() {
+			if($('#statusMemberVO').val()==2){
+// 				alert("此帳號已被凍結該功能");
+				$('#registerP').modal('show')
+			}else{
 				warningV();
+			}
 			})
 
 			function warningV() {
@@ -1060,7 +1065,7 @@ a{text-decoration:none}
 							'memberID' : $('#reportMemberID').val(),
 							'courseID' : $('#reportCourseID').val()
 						})
-						alert("感謝你的評分!" + "\nscore: " + score);
+						alert("感謝你的評分!");
 					}
 				});
 		});
@@ -1127,6 +1132,10 @@ a{text-decoration:none}
 					var $this=$(this)
 // 	 				alert($this.parents('div').children('input').val())
 // 	 				alert($this.parents('.panel-collapse').find('textarea').val())
+					if($('#statusMemberVO').val()==2){
+//		 				alert("此帳號已被凍結該功能");
+						$('#registerP').modal('show')
+					}else{
 					if($this.parents('.panel-collapse').find('textarea').val()==''){
 						alert('請輸入留言')
 					}else{
@@ -1141,11 +1150,17 @@ a{text-decoration:none}
 								 $('#'+name).addClass("in");
 						})
 					}
+					}
 					})
 					$('#Section3').on('click','.reportM',function() {
 							var mess=$(this).parents('ul').attr('id')
 // 							alert(mess);
+							if($('#statusMemberVO').val()==2){
+//				 				alert("此帳號已被凍結該功能");
+								$('#registerP').modal('show')
+							}else{
 							warning(mess);
+							}
 							//選取檢舉留言功能
 							function warning(mess) {
 								swal({
@@ -1169,9 +1184,9 @@ a{text-decoration:none}
 										function(result) {
 											if (result) {
 												
-												console.log(mess);
-												console.log($('#reportMemberID').val());
-												console.log(result);
+// 												console.log(mess);
+// 												console.log($('#reportMemberID').val());
+// 												console.log(result);
 												$.post('InsertReportMessageController', {
 													'reportContent' : result,
 													'reportMemberID' : $('#reportMemberID').val(),
@@ -1242,6 +1257,10 @@ a{text-decoration:none}
 		$("#inputMessage>div>button").on('click',function(){
 // 			alert($(this).parents('#inputMessage').find('.inputMessage').val());
 			var valueText=$(this).parents('#inputMessage').find('.inputMessage').val()
+			if($('#statusMemberVO').val()==2){
+// 				alert("此帳號已被凍結該功能");
+				$('#registerP').modal('show') 
+			}else{
 			if(valueText==null||valueText==""){	
 				alert("請輸入留言");
 			}else{
@@ -1250,21 +1269,8 @@ a{text-decoration:none}
 					window.location.replace(window.location.href);  
 			})
 			}
+			}
 		})
 		</script>
-		<script>
-		var b=true;
- 		$('video').click(function(){
- 			if(b){
-			this.play();
-			b=false;
- 			}else{
- 				this.pause();
-				b=true;
- 			}
-		})
-		</script>
-		
-		
 </body>
 </html>
