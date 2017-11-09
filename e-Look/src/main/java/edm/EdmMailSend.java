@@ -124,26 +124,32 @@ public class EdmMailSend {
         MimeBodyPart textPart = new MimeBodyPart();
         StringBuffer html = new StringBuffer();
         //original
-        html.append("<h1 style='color:black'>親愛的會員您好，</h1>");
-        html.append("<h1 style='color:black'>推薦您前三名熱門課程：</h1>");
+        html.append("<h1 style='color:black;width:100%'>親愛的會員您好 :</h1>");
+        
+        String CourseClass1 = "", CourseClass2 = "", CourseClass3 = "";
+        if(eeVOs.get((eeVOs.size()-1)).getCourseClass1() != null) {
+        	CourseClass1 = eeVOs.get((eeVOs.size()-1)).getCourseClass1() + " ";
+        }
+        if(eeVOs.get((eeVOs.size()-1)).getCourseClass2() != null) {
+        	CourseClass2 = eeVOs.get((eeVOs.size()-1)).getCourseClass2() + " ";
+        }
+        if(eeVOs.get((eeVOs.size()-1)).getCourseClass2() != null) {
+        	CourseClass3 = eeVOs.get((eeVOs.size()-1)).getCourseClass3();
+        }
+        String event = eeVOs.get(eeVOs.size()-1).getEventName();
+        Integer discount = (int)(eeVOs.get(eeVOs.size()-1).getDiscount()*100);
+        html.append("<h2 style='width:100%;color:red;font-size:45px'>" + event
+        	+ "&nbsp;活動期間，" + CourseClass1 + CourseClass2 
+        	+ CourseClass3 + " 類別課程享" + discount + "折優惠！！！</h2>");
+        
+        html.append("<h1 style='color:black;'>推薦您前三名熱門課程：</h1>");
         for( CourseVO cVO:cVOs){
-    	html.append("<img style='width:500px;' src='cid:" + cVO.getCourseID() + "'/><br>");
-        if(cVO.getSoldPrice() == 0) {
-        	//System.out.println("free");
-        	html.append("<h2 style='width:500px;text-align:center;'><a href='http://localhost:8081/e-Look/freeCourse-v1.jsp?CourseID="
-			+ cVO.getCourseID() + "'>" + cVO.getCourseName() +"</a></h2><br><br>");
-        }else if(cVO.getSoldPrice() > 0){
-        	//System.out.println("buy");
-        	html.append("<h2 style='width:500px;text-align:center;'><a href='http://localhost:8081/e-Look/onlineCourse-v2.jsp?CourseID="
-			+ cVO.getCourseID() + "'>" + cVO.getCourseName() +"</a></h2><br><br>");
-        }
-        /*
-        for(eLookEventVO eeVO : eeVOs) {
-        	html.append("<h2 style='width:500px;text-align:center;color:red'>" + eeVO.getEventName() 
-        	+ "&nbsp;活動期間，" + eeVO.getCourseClass1()+ " " + eeVO.getCourseClass2() 
-        	+ " " + eeVO.getCourseClass3()+ " 類別課程享折優惠！！！</h2>");
-        }
-        */
+    	html.append("<div style='display:inlineblock;float:left;width:400px;height:350px'>");
+    	html.append("<img width='400px' height='300px' style='padding-right:5px;' src='cid:" + cVO.getCourseID() + "'/></br>");
+
+        html.append("<h2 style='width:405px;text-align:center'><a href='http://localhost:8081/e-Look/onlineCourse-v2.jsp?CourseID="+ cVO.getCourseID() + "'>" + cVO.getCourseName() +"</a></h2><br><br>");
+        html.append("</div>");
+       
         // 圖檔部份，注意 html 用 cid:image，則header要設<image>
         MimeBodyPart picturePart = new MimeBodyPart();
 		URL url  = new URL("http://localhost:8081/e-Look/CourseImage?CourseID=" + cVO.getCourseID());
@@ -156,6 +162,7 @@ public class EdmMailSend {
 
         multipart.addBodyPart(picturePart);
         } //for迴圈結束括號
+     
         textPart.setContent(html.toString(), "text/html; charset=UTF-8");
         multipart.addBodyPart(textPart);
         //message.setContent(multipart);
