@@ -237,7 +237,7 @@ span.cancelado {
 							<div class="btn-group" >
 								<button style="font-size: 16px;" type="button" class="btn btn-default btn-filter" data-target="all">ALL</button>
 								<button style="font-size: 16px" type="button" class="btn btn-success btn-filter" data-target="pagado">線上課程</button>
-								<button style="font-size: 16px" type="button" class="btn btn-warning btn-filter" data-target="pendiente">免費課程</button>
+								<button style="font-size: 16px" type="button" class="btn btn-warning btn-filter" data-target="pendiente">被贊助課程</button>
 								<button style="font-size: 16px" type="button" class="btn btn-danger btn-filter" data-target="cancelado">募資課程</button>
 							</div>
 						</div>
@@ -515,19 +515,19 @@ $(function(){
 		   CoursesNames=datas.CourseName;
 	 		if (freeCourses.length == 0 && fundraisingCourses.length==0&& onlineCourses.length==0) {
 			$('#all').html("沒有課程收益");
-			$('#pendiente').html("沒有免費課程收益");
+			$('#pendiente').html("沒有贊助收益");
 			$('#cancelado').html("沒有募資課程收益");
 			$('#pagado').html("沒有線上課程收益");
 		} else {
 				//免費課程
 				if (freeCourses.length == 0) {
-					$('#pendiente').html("沒有免費課程收益");
+					$('#pendiente').html("沒有贊助收益");
 				} else {
 					var count=0;
 					$.each(freeCourses,function(idx,freeCourse){
-						//console.log(freeCourse)
+						console.log(freeCourses)
 						
-						$.each(freeCourse,function(idx,free){
+						$.each(freeCourse,function(idx1,free){
 							var cell1 = $('<td></td>').text(CoursesNames[idx])
 							var cell2 = $('<td></td>').text(free.SponsorName)
 				  		  	var cell3 = $('<td></td>').text(free.dateSponsor)
