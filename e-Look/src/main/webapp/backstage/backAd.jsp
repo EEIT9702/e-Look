@@ -96,8 +96,8 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
 						<td align="center">${AdVO.adID}</td>
 						<td align="center">${AdVO.fileName}</td>
 						<td align="center"><c:choose>
-						<c:when test="${AdVO.status == 0}">顯示</c:when>
-						<c:when test="${AdVO.status == 1}">隱藏</c:when>
+						<c:when test="${AdVO.status == 0}"><select id="selectStatus"><option value="0">顯示</option><option value="1">隱藏</option></select></c:when>
+						<c:when test="${AdVO.status == 1}"><select id="selectStatus"><option value="1">隱藏</option><option value="0">顯示</option></select></c:when>
 						</c:choose></td>
 						<td align="center"><div id="div2"
 								style="vertical-align: middle;">
@@ -208,10 +208,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
 							<td id="td1"></td>
 							<td><input type="text" name="fileName" id="adName"></td>
 							<td><input type="file" name="adFile"id="adFile"></td>
-							<td><select name="status">
-									<option value="0">展示</option>
-									<option value="1">隱藏</option>
-							</select></td>
+							<td id="updatestatus1"></td>
 						</tr>
 
 						<tfoot>
@@ -281,12 +278,28 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
 			animationType : 'flip'
 		});
 
+		$('#selectStatus').on('change',function(){
+			var select=$(this).parents('#tr1').children('td:eq(0)').text();
+			var status=$(this).val();
+			console.log(status);
+			$.post('<%=request.getContextPath()%>/backstage/adControl',{'action':'updatestatus','adID':select,'status':status},function(data){
+				
+ 			})
+		})
+		
 		$('tbody input[name="update"]').on('click', function() {
 			var event1 = $(this).parent().children('input:eq(1)').val();
 			var adName=$(this).parents('#tr1').children('td:eq(1)').text();
+			var status=$(this).parents('#tr1').find('#selectStatus').val();
 			$('#updateAdID').val(event1);
 			$('#td1').text(event1);
-		   $('#adName').val(adName);	 
+		   $('#adName').val(adName);	
+		   if(status==0){
+			   $('#updatestatus1').text("顯示");
+		   }
+		   else if(status==1){
+			   $('#updatestatus1').text("隱藏");
+		   }
 		})
 		$('tbody input[name="delete"]').on('click', function() {
 			var event2 = $(this).parent().children('input:eq(1)').val();
