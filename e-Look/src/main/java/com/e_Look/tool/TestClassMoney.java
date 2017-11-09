@@ -20,14 +20,8 @@ public class TestClassMoney extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		OrderSystemService oss = new OrderSystemService();
 		Integer[] mm=oss.getMoneyOfCourseClass();
-		
-		for(int i = 0 ; i<mm.length;i++){
-//			System.out.println(mm[i]);
-		}
 		String xxx = JSONValue.toJSONString(mm);
-		
 		response.getWriter().write(xxx);
-		System.out.println(xxx);
 	}
 	
 
