@@ -424,7 +424,7 @@ a {
 				<!--課程售價 -->
 				<div class="col-md-2 col-xs-6 " id="soldPrice">
 					<h4>課程售價</h4>
-					<h2 style="text-align: center; font-weight: bold;">NT${courseVO.soldPrice}</h2>
+					<h2 style="text-align: center; font-weight: bold" id="price"></h2>
 				</div>
 				<!--星星 -->
 				<div class="col-md-2 col-xs-6"
@@ -872,13 +872,49 @@ a {
 								<input type="hidden" value="${courseVO.memberID}"
 									id="starMemberID">
 							</div>
+							<!--違規訊息 -->
+							<div class="modal fade" id="registerP" tabindex="-1"
+								role="dialog" aria-labelledby="myModalLabel"  aria-hidden="true" >
+								<div class="modal-dialog" style="width: 350px">
+									<div class="modal-content text-center">
+										<!-- 			右上角X -->
+										<div class="modal-header">
+											<button type="button" class="close pull-right"
+												data-dismiss="modal" aria-hidden="true"
+												style="font-size: 30px;">&times;</button>
+										</div>
+										<h4>該用戶違規次數達三次以上無法使用該功能</h4>
+										<div id="butfooter">
+											<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--違規訊息 -->
+							<div class="modal fade" id="registerP" tabindex="-1"
+								role="dialog" aria-labelledby="myModalLabel"  aria-hidden="true" >
+								<div class="modal-dialog" style="width: 350px">
+									<div class="modal-content text-center">
+										<!-- 			右上角X -->
+										<div class="modal-header">
+											<button type="button" class="close pull-right"
+												data-dismiss="modal" aria-hidden="true"
+												style="font-size: 30px;">&times;</button>
+										</div>
+										<h4>該用戶違規次數達三次以上無法使用該功能</h4>
+										<div id="butfooter">
+											<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div id="star"></div>
+	<input type="hidden" value="${LoginOK.status}"id="statusMemberVO">
 	<c:remove var="err" scope="session" />
 	<c:remove var="loginerr" scope="session" />
 	<jsp:include page="/footer.jsp" />
@@ -894,8 +930,14 @@ a {
 			//點擊檢舉留言
 			$('.reportMe').on('click', function() {
 // 				alert($(this).parents('.dropdown').parent('div').nextAll('input').val())
-				var mess2=$(this).parents('.dropdown').parent('div').nextAll('input').val()
+				if($('#statusMemberVO').val()==2){
+//	 				alert("此帳號已被凍結該功能");
+					$('#registerP').modal('show')
+				}else{
+					var mess2=$(this).parents('.dropdown').parent('div').nextAll('input').val()
+				
 				warning(mess2);
+				}
 			})
 			//選取檢舉留言功能
 			function warning(mess2) {
@@ -963,7 +1005,12 @@ a {
 	<script>
 	$(function() {
 		$('.reportAction').click(function() {
+			if($('#statusMemberVO').val()==2){
+// 				alert("此帳號已被凍結該功能");
+				$('#registerP').modal('show')
+			}else{
 				warningV();
+			}
 			})
 			function warningV() {
 				swal({
@@ -1131,6 +1178,10 @@ a {
 					var $this=$(this)
 // 	 				alert($this.parents('div').children('input').val())
 // 	 				alert($this.parents('.panel-collapse').find('textarea').val())
+					if($('#statusMemberVO').val()==2){
+//		 				alert("此帳號已被凍結該功能");
+						$('#registerP').modal('show')
+					}else{
 					if($this.parents('.panel-collapse').find('textarea').val()==''){
 						alert('請輸入留言')
 					}else{
@@ -1145,11 +1196,17 @@ a {
 								 $('#'+name).addClass("in");
 						})
 					}
+					}
 					})
 					$('#Section3').on('click','.reportM',function() {
 							var mess=$(this).parents('ul').attr('id')
 // 							alert(mess);
+							if($('#statusMemberVO').val()==2){
+//				 				alert("此帳號已被凍結該功能");
+								$('#registerP').modal('show')
+							}else{
 							warning(mess);
+							}
 							//選取檢舉留言功能
 							function warning(mess) {
 								swal({
@@ -1245,6 +1302,10 @@ a {
 		//輸入留言
 		$("#inputMessage>div>button").on('click',function(){
 // 			alert($(this).parents('#inputMessage').find('.inputMessage').val());
+			if($('#statusMemberVO').val()==2){
+// 				alert("此帳號已被凍結該功能");
+				$('#registerP').modal('show')
+			}else{
 			var valueText=$(this).parents('#inputMessage').find('.inputMessage').val()
 			if(valueText==null||valueText==""){	
 				alert("請輸入留言");
@@ -1253,6 +1314,7 @@ a {
 					$(this).parents('#inputMessage').find('.inputMessage').val("");
 					window.location.replace(window.location.href);  
 			})
+			}
 			}
 		})
 		</script>
@@ -1268,5 +1330,12 @@ a {
 			   });
 		})
 		</script>
+		<script>
+$(function(){
+	$.getJSON('/e-Look/GetBuyingPrice',{'courseID':$('#mbcourseID').val()},function(price){
+		$('#price').text("NT "+price)
+	})
+})
+</script>
 	</body>
 </html>
