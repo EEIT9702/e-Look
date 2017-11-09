@@ -232,18 +232,18 @@
 											<div>
 												<div style="font-size: 15pt" id="CourseClasscheckbox">
 
-													<INPUT TYPE="checkbox" NAME="CourseClass" value="101">生活
-													<INPUT TYPE="checkbox" NAME="CourseClass" value="102">藝術
-													<INPUT TYPE="checkbox" NAME="CourseClass" value="103">運動
-													<INPUT TYPE="checkbox" NAME="CourseClass" value="104">影音<br>
-													<INPUT TYPE="checkbox" NAME="CourseClass" value="105">手作
-													<INPUT TYPE="checkbox" NAME="CourseClass" value="106">其他
-													<INPUT TYPE="checkbox" NAME="CourseClass" value="107">設計
-													<INPUT TYPE="checkbox" NAME="CourseClass" value="108">科技<br>
-													<INPUT TYPE="checkbox" NAME="CourseClass" value="109">商業
-													<INPUT TYPE="checkbox" NAME="CourseClass" value="110">語言
-													<INPUT TYPE="checkbox" NAME="CourseClass" value="111">烹飪
-													<INPUT TYPE="checkbox" NAME="CourseClass" value="112">程式
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="101" data="生活">生活
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="102" data="藝術">藝術
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="103" data="運動">運動
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="104" data="影音">影音<br>
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="105" data="手作">手作
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="106" data="其他">其他
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="107" data="設計">設計
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="108" data="科技">科技<br>
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="109" data="商業">商業
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="110" data="語言">語言
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="111" data="烹飪">烹飪
+													<INPUT TYPE="checkbox" NAME="CourseClass" value="112" data="程式">程式
 
 												</div>
 											</div>
@@ -283,8 +283,11 @@
 
 								<ul class="list-inline col-md-6 pull-right"
 									style="margin-top: 50px; margin-bottom: 80px;">
-									<li class="pull-right"><button type="button" disabled id="button2"
-											class="btn btn-primary btn-lg btn3d next-step">儲存並前往下一步</button></li>
+									<c:if test="${!empty CoursedData}"><li class="pull-right"><button type="button" id="button2"
+											class="btn btn-primary btn-lg btn3d next-step">儲存並前往下一步</button></li></c:if>
+									<c:if test="${empty CoursedData}"><li class="pull-right"><button type="button" disabled id="button2"
+											class="btn btn-primary btn-lg btn3d next-step">儲存並前往下一步</button></li></c:if>
+									
 									<li class="pull-right"><button type="button"
 											class="btn3d btn btn-default btn-lg prev-step">上一步</button></li>
 								</ul>
@@ -1451,6 +1454,29 @@ $('#targetStudentNumber,#soldPrice').keyup(function(){
 		
 		
 		});
+		
+//======================================================================
+	$(document).ready(function(){
+		CourseClass();
+		function CourseClass(){
+			$.get('/e-Look/GetCourseClass?courseID='+$('#courseID').val(),function(data){
+				var Course= data.split(" ");
+				var NClass=$("input[type='checkbox']");
+				$.each(NClass,function(index,value){
+// 					console.log(value.getAttribute('data'));
+					for(i=0;i<=Course.length;i++){
+// 						console.log(Course[i]);
+						if(value.getAttribute('data')==Course[i]){
+							value.checked=true;
+						}
+					}
+					});
+				
+// 				console.log(Course);
+			});
+			
+		}
+	});
 	</script>
 
 
