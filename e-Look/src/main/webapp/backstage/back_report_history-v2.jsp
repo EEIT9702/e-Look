@@ -19,7 +19,7 @@
 <title>遮蔽留言紀錄</title>
 <script src="<%=request.getContextPath()%>/HeaderCssJs/jquery.js"></script>
 <!-- <script type="text/javascript" src="css/jquery.mmenu.js"></script> -->
-<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/table2.css">
 
 <style>
@@ -74,7 +74,8 @@
 <div class="container cbox" style="">
 		<div class="row">
    			<div class="col-md-12" style="float:right;margin-bottom:30px;">
-				<button type="button" value="hideHistory" onclick="self.location.href='back_report-v2.jsp'" class="btn btn-info" style="font-size:17px;float:right;">檢舉留言管理</button>
+   				<button type="button" onclick="self.location.href='breport-course.jsp'" class="btn btn-primary" style="font-size:17px;float:left;margin-left:-38px;"><i class="fa fa-exchange"></i>切換檢舉課程管理</button>
+				<button type="button" value="hideHistory" onclick="self.location.href='back_report-v2.jsp'" class="btn btn-success" style="font-size:17px;float:right;"><i class="fa fa-level-up"></i>&nbsp;回到檢舉留言管理</button>
 			</div>
 		  <table id="reportTable" class="table table-bordered tstyle" style="">
                  <thead>

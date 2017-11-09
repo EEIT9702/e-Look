@@ -37,6 +37,10 @@ public class CreateCourseCotroller extends HttpServlet {
 			session.setAttribute("loginerr", "123");
 			response.sendRedirect(request.getHeader("referer"));
 		} else {
+			if(memberVO.getStatus()==2){
+				session.setAttribute("registerOK", "違規次數達三次以上無法開課");
+				response.sendRedirect(request.getHeader("referer"));
+			}else{
 			CourseService courseService = new CourseService();
 			Integer CourseID = courseService.CreateNewCourse(memberVO.getMemberID());
 			
@@ -45,6 +49,7 @@ public class CreateCourseCotroller extends HttpServlet {
 			
 			rd.forward(request, response);
 			return;//表示中斷點
+			}
 		}
 		
 		

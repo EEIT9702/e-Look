@@ -8,7 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>收費課程</title>
+<title>${courseVO.courseName}</title>
 <link href="<%=request.getContextPath()%>/HeaderCssJs/bootstrap.min.css"
 	rel="stylesheet">
 <link href="<%=request.getContextPath()%>/css/bootstrap.css"
@@ -27,18 +27,20 @@
 <script type="text/javascript"src="<%=request.getContextPath()%>/_Lyy/jquery.raty.min.js"></script>
 <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
 <link rel="Short Icon" type="image/x-icon" href="${initParam.icon}" />
-
+<!-- video.js -->
+<script src="<%=request.getContextPath()%>/js/video.js"></script> 
+<link href="<%=request.getContextPath()%>/css/video-js.css"rel="stylesheet">
 <style>
-/* 影片區塊 */
-video {
+/*  影片區塊  */
+ video {
 	width: 100%;
-	height: 100%;
-}
+ 	height: 100%; 
+} 
 
 #videoArea {
 	background-size: cover;
 	background-position: center;
-	height: 520px;
+	height: 519px;
 	padding-left: 0;
 }
 
@@ -72,7 +74,7 @@ video::-webkit-media-controls-panel {
 }
 
 #videoTitle {
-	background-color: rgba(0%, 10%, 20%, 0.3);
+	background-color: rgba(0%, 10%, 20%, 0.6);
 	color: white;
 }
 
@@ -207,56 +209,41 @@ a {
 	<div class="container-fluid">
 		<div class="container">
 			<div class="row">
-				<h1 align="center" id="videoTitle">${courseVO.courseName}</h1>
-				<div class="col-md-12 " id="videoArea"
-					style="background-image: url('<%=request.getContextPath() %>/CourseImage?CourseID=${courseVO.courseID}')">
+				<h1 align="center" style="font-size:50px" id="videoTitle">${courseVO.courseName}</h1>
+				<div class="col-md-12 " id="videoArea"style="background-image: url('<%=request.getContextPath() %>/CourseImage?CourseID=${courseVO.courseID}')">
 
 					<input type="hidden" value="${courseVO.courseID}">
 					<div class="col-md-12" style="z-index: 10">
-						<div class="col-md-8 col-xs-12"
-							style="margin-right: -15px; z-index: 10">
-							<c:choose>
-								<c:when test="${LoginOK.memberID==courseVO.memberID}">
-									<video controls="controls" id="vidoeControl">
-										<source
-											src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}"
-											type="video/mp4">
-									</video>
-
-								</c:when>
-								<c:when test="${!empty LoginOK && !empty list2}">
-									<video
-										<c:forEach var="buycourse"  items='${list2}'>
-							<c:choose>
-								<c:when test="${courseVO.courseID==buycourse.courseID}">
-										<c:set var="control" value="controls=controls" />
-										<c:set var="poster" value="" />
-										<c:set var="boo" value="true" />
-								</c:when>
-								<c:when test="${!empty boo}">
-								</c:when>
-								<c:otherwise> 
-									<c:set var="poster" value="poster=_Lyy/poster.png" />
-									<c:set var="control" value=""/>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-										<c:out value="${poster}"/> <c:out value="${control}"/>
-										id="vidoeControl">
-										<source
-											src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}"
-											type="video/mp4">
-									</video>
-								</c:when>
-								<c:otherwise>
-									<video poster="<%=request.getContextPath()%>/_Lyy/poster.png"
-										id="vidoeControl">
-										<source
-											src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}"
-											type="video/mp4">
-									</video>
-								</c:otherwise>
-							</c:choose>
+						<div class="col-md-8 col-xs-12" style="margin-right: -15px; z-index: 10">
+								<c:if test="${!empty LoginOK && !empty list2}">
+									<c:if test="${LoginOK.memberID==courseVO.memberID}">
+										<c:set var="bo" value="true"/>
+									</c:if>
+									<c:forEach var="buycourse"  items='${list2}' varStatus="varStatus">
+										<c:choose>
+											<c:when test="${!empty boo}"></c:when>
+											<c:when test="${courseVO.courseID==buycourse.courseID || !empty bo}">
+													<video id="my-video" class="video-js" data-setup="{}"  controls width="922%">
+													<c:if test="${!empty courseVO.courseVideopathway}">
+													    <source src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}" type='video/mp4'>
+													</c:if>
+													</video>
+													<c:set var="boo" value="true" />
+											</c:when>
+										
+											<c:when test="${empty boo && varStatus.last}">
+												<video poster="<%=request.getContextPath()%>/_Lyy/poster.png"> 
+				 									    <source src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}" type='video/mp4'> 
+				 								</video>
+											</c:when>
+										</c:choose>
+									</c:forEach>
+								</c:if>
+								<c:if test="${empty LoginOK}">
+									<video poster="<%=request.getContextPath()%>/_Lyy/poster.png"> 
+	 									    <source src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}" type='video/mp4'> 
+	 								</video>
+								</c:if>
 						</div>
 						<div class="col-md-4 col-xs-12" id="videoDivListStyle">
 							<div>
@@ -666,10 +653,13 @@ a {
 							<div style="text-align:center"><h4>(需登入且有購買該課程者)</h4></div>
 						</c:if>
 						<c:if test="${!empty LoginOK}">
+							<c:if test="${LoginOK.memberID==courseVO.memberID}">
+								<c:set var="bo" value="true"/>
+							</c:if>
 							<c:forEach items="${list2}" var="buycourse" varStatus="varStatus">
 								<c:choose>
 								<c:when test="${!empty flag}"></c:when>
-								<c:when test="${buycourse.courseID==courseVO.courseID}">
+								<c:when test="${buycourse.courseID==courseVO.courseID||!empty bo}">
 									<div class="col-md-12" id="inputMessage">
 										<div style="text-align:center"><h4>尚未有留言</h4></div>
 										<div style="text-align:center"><h4>成為第一個發文的人吧！</h4></div>
@@ -678,7 +668,6 @@ a {
 										<div class="text-right"><button class="text-right" style="margin:15px">送出</button></div>					
 									</div>		
 									<c:set var="flag" value="true"></c:set>
-									
 								</c:when>
 								<c:when test="${varStatus.last && empty flag}">  
 									<div style="text-align:center"><h4>尚未有留言</h4></div>
@@ -694,6 +683,7 @@ a {
 									<div style="text-align:center"><img src="<%=request.getContextPath() %>/_Lyy/chat.png"></div>
 									<div style="text-align:center"><h4>(你還沒有購買該課程唷)</h4></div>
 							</c:if>
+							
 						</c:if>				
 				</c:if>
 				
@@ -738,14 +728,20 @@ a {
 									<c:if test="${!empty LoginOK}">
 										<li><a class="reportMe" href="#">檢舉</a></li>
 									</c:if>
-									<li><a href="#">修改</a></li>
+									
 								</ul>
 							</div>
 						</div>
-						<div style="border-bottom: 1px solid black">	
+						<div style="border-bottom: 1px solid black;padding-top:17px">	 
+							<c:if test="${messageVO.status==1}">
+							<p style="font-style:oblique">(注意:此留言違反社群規範，已屏蔽)</p>
+							</c:if>
+							<c:if test="${messageVO.status==0}">
 							<p>${messageVO.mContent}</p>
+							</c:if>
 						</div>
 						<input type="hidden"  value="${messageVO.messageID}" class="messageID">
+						<input type="hidden"  value="${messageVO.status}" class="status">
 					<!--抓取messageID -->
 						
 					<!--第一個回應 開始-->
@@ -796,7 +792,7 @@ a {
 												<c:choose>
 <%-- 												<c:when test="${!empty msage1}"></c:when> --%>
 												<c:when test="${buycourse1.courseID==courseVO.courseID}">
-													<a data-toggle="collapse" href="#${messageVO.messageID+messageVO.messageID}">我要回應</a>		
+													<a data-toggle="collapse" href="#${messageVO.messageID+messageVO.messageID}" >回應<span class="glyphicon glyphicon-share-alt" style="margin-left:5px"></span></a>		
 <%-- 													<c:set var="msage1" value="true"/> --%>
 												</c:when>
 												<c:when test="${varStatus1.last && empty msage1}">
@@ -814,7 +810,7 @@ a {
 												<textarea class="form-control" rows="5" id="comment"></textarea>
 											</div>
 											<div class="text-right">
-												<button class="btn-default" id="inpContent" name="${messageVO.messageID}">送出</button>
+												<button class="btn-default " id="inpContent" name="${messageVO.messageID}">送出</button>
 											</div>
 										</div>
 									</div>
@@ -826,7 +822,7 @@ a {
 					
 						<!-- 回應輸入表格結束-->
 						</c:if>
-						<hr>
+					
 					</c:forEach>
 					<!-- 重複結束 -->
 					<c:if test="${!empty LoginOK}">
@@ -948,8 +944,8 @@ a {
 			alert('已經加入過囉');
 		})
 		$("#favoriteclick2").click(function() {
-			console.log($("#mbcourseID").val())
-			console.log($("#mbmemberID").val())
+// 			console.log($("#mbcourseID").val())
+// 			console.log($("#mbmemberID").val())
 			if (count1 == 0) {
 				$('#favoriteclick2').attr("id", "favoriteclick1")
 				$.post('MemberBookmarksInsertController', {
@@ -1049,7 +1045,7 @@ a {
 							'memberID' : $('#reportMemberID').val(),
 							'courseID' : $('#reportCourseID').val()
 						})
-						alert("感謝你的評分!" + "\nscore: " + score);
+						alert("感謝你的評分!");
 					}
 				});
 		});
@@ -1125,19 +1121,7 @@ a {
 			})
 	})
 	</script>
-	<script>
-// 影片點擊控制
-		var b=true;
- 		$('video').click(function(){
- 			if(b){
-			this.play();
-			b=false;
- 			}else{
- 				this.pause();
-				b=true;
- 			}
-		})
-		</script>
+
 		<script>
 // 	留言版專區
 		$(function(){
@@ -1147,6 +1131,9 @@ a {
 					var $this=$(this)
 // 	 				alert($this.parents('div').children('input').val())
 // 	 				alert($this.parents('.panel-collapse').find('textarea').val())
+					if($this.parents('.panel-collapse').find('textarea').val()==''){
+						alert('請輸入留言')
+					}else{
 						$.post('/e-Look/InputMessageController',
 								{'mContent':$this.parents('.panel-collapse').find('textarea').val(),
 								 'courseID':$('#mbcourseID').val(),
@@ -1157,6 +1144,7 @@ a {
 								 var name=$this.attr('name');
 								 $('#'+name).addClass("in");
 						})
+					}
 					})
 					$('#Section3').on('click','.reportM',function() {
 							var mess=$(this).parents('ul').attr('id')
@@ -1231,12 +1219,17 @@ a {
 							var a1=$('<a></a>').attr('href','#').text('檢舉').addClass('reportM')
 						}
 							
-					var li2=$('<li></li>')
-					var a2=$('<a></a>').attr('href','#').text('修改')
-					var p =$('<p></p>').text(response.mContent+"+"+response.messageID)
+// 					var li2=$('<li></li>')
+// 					var a2=$('<a></a>').attr('href','#').text('修改')
+					if(response.status==1){
+						var p =$('<p></p>').text('(注意:此留言違反社群規範，已屏蔽)').attr('style','font-style:oblique')
+					}else{
+						var p =$('<p></p>').text(response.mContent)
+					}
+					
 								li1.append(a1)
-		 						li2.append(a2)
-		 					ul.append([li1,li2])
+// 		 						li2.append(a2)
+		 					ul.append(li1)
 		 					button.append(span3)
  					div4.append([ul,button,p])
  					div3.append([div4,span1,span2,p])

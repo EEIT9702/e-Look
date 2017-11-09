@@ -90,7 +90,7 @@ public class LoginController extends HttpServlet {
 			if(memberVO==null){
 				service.insertFBMember(email, mName, mPhoto);
 				memberVO = service.getMemberMail(email);
-				System.out.println(memberVO);
+//				System.out.println(memberVO);
 			}
 			
 		}else if(status.equals("google")){
@@ -101,7 +101,7 @@ public class LoginController extends HttpServlet {
 				
 				service.insertGoogleMember(email, mName, mPhoto);
 				memberVO = service.getMemberMail(email);
-				System.out.println(memberVO);
+//				System.out.println(memberVO);
 			}
 		}
 		session.setAttribute("LoginOK", memberVO);
