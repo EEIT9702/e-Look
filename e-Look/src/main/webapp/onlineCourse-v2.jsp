@@ -1342,8 +1342,8 @@ a {
 		</script>
 		<script>
 $(function(){
-	$.getJSON('/e-Look/GetBuyingPrice',{'courseID':$('#mbcourseID').val()},function(price){
-		$('#price').text("NT "+price)
+	$.get('/e-Look/GetBuyingPrice',{'courseID':$('#mbcourseID').val()},function(price){
+		$('#price').html(price);
 	})
 })
 </script>
