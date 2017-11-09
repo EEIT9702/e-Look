@@ -33,6 +33,8 @@ public class AdService {
 	public List<AdVO> findByStatus() {
 		return dao.findByStatus();
 	}
-	
+	public void updatestatus(Byte status, Integer adID) {
+	 dao.updateStatus(status, adID);
+	}
 	
 }

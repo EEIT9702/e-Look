@@ -70,7 +70,6 @@ public class adControl extends HttpServlet {
 				AdVO adVO = new AdVO();
 				adVO.setFileName(fileName);
 				adVO.setAdFile(adFile);
-				adVO.setStatus(Byte.parseByte(req.getParameter("status")));
 				adVO.setAdID(adID);
 				AdDAO dao = new AdDAO();
 				dao.update(adVO);
@@ -85,6 +84,26 @@ public class adControl extends HttpServlet {
 			}
 	
 }
+		
+		if("updatestatus".equals(action))
+		{System.out.println("123");
+			try {Integer adID=new Integer(req.getParameter("adID"));
+			     Byte status=new Byte(req.getParameter("status"));
+			AdVO adVO=new AdVO();
+			adVO.setAdID(adID);
+			adVO.setStatus(status);
+			AdDAO dao=new AdDAO();
+			dao.updateStatus(status, adID);
+			RequestDispatcher successView=req.getRequestDispatcher("backAd.jsp");
+			successView.forward(req, res);
+			}
+			catch(Exception e){
+				 RequestDispatcher failureView = req
+							.getRequestDispatcher("backAd.jsp");
+					failureView.forward(req, res);
+			}
+			
+		}
 	if("delete".equals(action)) {
 	   try { Integer adID=new Integer(req.getParameter("adID").trim());
 	    System.out.println(adID);

@@ -26,7 +26,7 @@ public class AdDAO implements AdDAO_interface {
 	private static final String INSERT_AD =
 			"INSERT INTO Ad (fileName, adFile, status) VALUES (?,?,?) ";
 	private static final String UPDATE_AD =
-			"UPDATE Ad SET fileName=?, adFile=?, status=? WHERE adID=?";
+			"UPDATE Ad SET fileName=?, adFile=? WHERE adID=?";
 	private static final String UPDATE_STATUS =
 		    "UPDATE Ad SET status=? WHERE adID=?";
 	private static final String DELETE_AD =
@@ -84,8 +84,7 @@ public class AdDAO implements AdDAO_interface {
 			pstmt = con.prepareStatement(UPDATE_AD);
 			pstmt.setString(1, adVO.getFileName());
 			pstmt.setBlob(2, adVO.getAdFile());
-			pstmt.setByte(3, adVO.getStatus());
-			pstmt.setInt(4, adVO.getAdID());
+			pstmt.setInt(3, adVO.getAdID());
 			pstmt.executeUpdate();
 		
 			// Handle any SQL errors

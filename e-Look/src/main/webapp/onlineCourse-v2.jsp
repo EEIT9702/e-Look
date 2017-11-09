@@ -433,7 +433,7 @@ a {
 				</c:if>
 				<!--課程售價 -->
 				<div class="col-md-2 col-xs-6 " id="soldPrice">
-					<h4>課程售價</h4>
+					<h4>課程價格</h4>
 					<h2 style="text-align: center; font-weight: bold" id="price"></h2>
 				</div>
 				<!--星星 -->
