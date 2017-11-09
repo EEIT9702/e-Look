@@ -30,9 +30,9 @@ public class GetBuyingPrice extends HttpServlet {
 			Integer buyingPrice=BuyingPrice.getBuyingPrice(courseID);
 			
 			if(buyingPrice!=soldPrice && courseVO.getStatus()!=3){
-				rw.write("<span style='color:red'>特價："+buyingPrice.toString()+" 元</span>");
+				rw.write("<span class='"+buyingPrice+"' style='color:red' >特價："+buyingPrice.toString()+" 元</span>");
 			}else{
-				rw.write("售價："+buyingPrice.toString()+" 元");
+				rw.write("<span class='"+buyingPrice+"' > 售價："+buyingPrice.toString()+" 元</span>");
 			}
 			
 		}catch(NumberFormatException e){

@@ -32,7 +32,7 @@ public class OrderFinishController extends HttpServlet {
 		oss.setOrderFinish(orderVO);
 		
 		session.removeAttribute("orderVO");
-		response.sendRedirect(request.getContextPath()+"/member/member.jsp");
+		response.sendRedirect(request.getContextPath()+"/member/consume.jsp");
 
 		
 	}

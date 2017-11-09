@@ -306,15 +306,17 @@ $(function(){
 				var cell7 = $('<br>')
 				var cell8 = $('<span></span>').addClass('courseSubtitle').text(courseClass);
 				var cell9 = $('<span></span>').addClass('courseDelete')
-				var cell10 = $('<br>');				var cell11 = $('<span></span>').addClass('courseDelete').text('$' + buyingPrice+'元');
+				var cell10 = $('<br>');				var cell11 = $('<span></span>').addClass('courseDelete buyingPrice').html(buyingPrice);
 				cell2.append([cell3,cell4])
 				cell6.append([cell7,cell8,cell9,cell10,cell11])
 				cell1.append([cell2,cell5,cell6])
 				fg.append(cell1)
-				totalPrice+=buyingPrice;
 				courseCount++;
 			})
 			$('.cartrows').append(fg);
+			$('.cartrows').find('.buyingPrice').children('span').each(function(){
+				totalPrice+=parseInt($(this).attr('class'));
+			})
 			$('#totalPrice').text('總金額：'+totalPrice+'元');
 			$('#courseCount').text('共'+courseCount+'筆課程');
 			$('.cartcount').text(courseCount);
@@ -339,7 +341,7 @@ $(function(){
 				'async':false,
 				'data':{'courseID':courseID},
 				'success':function(result){
-					buyingPrice = parseInt(result);
+					buyingPrice = result;
 				}
 		});//$.ajax end
 		return buyingPrice;
