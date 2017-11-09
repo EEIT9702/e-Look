@@ -364,12 +364,22 @@ a {
 				<!--講義下載 -->
 				<div class="col-md-1 col-xs-4 ">
 					<c:if test="${!empty courseVO.paper}">
+						<c:if test="${!empty buy}">
 						<a
 							href="<%=request.getContextPath()%>/Paper?CourseID=${courseVO.courseID}">
 							<img src="<%=request.getContextPath()%>/_Lyy/001-download.png"
 							class="img-responsive center-block img-circle">
 							<h5 class="text-center" style="font-size: 18px">講義下載</h5>
 						</a>
+						</c:if>
+						<c:if test="${empty buy}">
+						<a
+							href="#" onclick="alert('請先購買課程');"> 
+							<img src="<%=request.getContextPath()%>/_Lyy/001-download.png"
+							class="img-responsive center-block img-circle">
+							<h5 class="text-center" style="font-size: 18px">講義下載</h5>
+						</a>
+						</c:if>
 					</c:if>
 					<c:if test="${empty courseVO.paper}">
 						<img src="<%=request.getContextPath()%>/_Lyy/001-download.png"
