@@ -131,9 +131,9 @@ $(function(){
 	$('.sp').each(function(){
 	var sp = $(this);
 		
-		$.getJSON('/e-Look/GetBuyingPrice',{'courseID':$(this).attr("alt")},function(price){
-			//console.log($(this).html())
-			sp.html("課程售價：NT$" + price)
+		$.get('/e-Look/GetBuyingPrice',{'courseID':$(this).attr("alt")},function(price){
+			//console.log(price)
+			sp.html(price);
 		})
 	})
 	

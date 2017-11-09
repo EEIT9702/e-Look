@@ -384,7 +384,7 @@ function river(){
 		lastRow=false;
 		console.log(courseClass+"river()"+keyWord);
 		$.get("<%= request.getContextPath() %>/body/online_data.jsp",{"rowValueY":rowValueX,"keyWord":keyWord,"courseClass":courseClass},function(data){
-			$('#river').append(data)
+			$('#river').append(data);
 			rowValueX+=4;
 			lastRow=true;
 			if(rowValueX<=4){

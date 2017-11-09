@@ -143,4 +143,7 @@ public class CourseService {
 		return courseVOs2;
 	}
 	
+	public CourseVO findByPrimaryKey(Integer courseID){
+		return dao.findByPrimaryKey(courseID);
+	}
 }
