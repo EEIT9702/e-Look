@@ -239,7 +239,7 @@ a {
 										</c:choose>
 									</c:forEach>
 								</c:if>
-								<c:if test="${empty LoginOK}">
+								<c:if test="${empty LoginOK||empty list2}">
 									<video poster="<%=request.getContextPath()%>/_Lyy/poster.png"> 
 	 									    <source src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}" type='video/mp4'> 
 	 								</video>
