@@ -49,7 +49,7 @@ public class Paper extends HttpServlet {
 			if(rs.next()){
 				 is= rs.getBinaryStream(1);
 				 if(is!=null){
-					 response.setContentType("application/x-compressed");
+					 response.setContentType("application/zip");
 					 os = response.getOutputStream();
 					 int count = 0;
 					byte[] bytes = new byte[16384];

@@ -498,7 +498,7 @@ a:HOVER {
 							</div>
 							<div class="col-md-8"></div>
 						</div>
-						<div class=" col-md-12 ">
+						<div class=" col-md-12 " style="display: none;">
 							<div class="col-md-8">
 							<div class="form-group ">
 								 <label>地址</label><label style="margin:10px "></label><input type="text" name="address" class="form-control"	id="" value="${LoginOK.address}">
