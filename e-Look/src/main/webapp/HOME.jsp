@@ -214,7 +214,7 @@ a:HOVER {
 									</div>
 						</a>
 						<div>
-							<p style="margin-top: 40px; font-size: 18px">課程售價：${listcourse.soldPrice}</p>
+							<p class="sp"  style="margin-top: 40px; font-size: 18px"  alt="${listcourse.courseID}" ></p>
 						</div>
 					</div>
 					<div class="card-footer">
@@ -396,7 +396,14 @@ a:HOVER {
 
 		})
 		
-			
+			$('.sp').each(function(){
+			var sp = $(this);
+		
+				$.get('/e-Look/GetBuyingPrice',{'courseID':$(this).attr("alt")},function(price){
+				//console.log(price)
+				sp.html(price);
+			})
+	})	
 
 	
 	})
