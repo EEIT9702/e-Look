@@ -123,7 +123,7 @@
 													<i class="glyphicon glyphicon-list"></i>
 												</div>
 												<div class="update-text">
-													<strong>步驟一444、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
+													<strong>步驟一、</strong> 介紹建立課程有哪些流程?<a href="#"></a>
 												</div>
 											</div>
 										</div>
@@ -422,6 +422,11 @@
 												value="${CoursedData.targetStudentNumber}"
 												style="font-size: 18px;">
 											<p id="targetStudentNumberwarning" style="color: red"></p>
+										</div>
+										<div class="form-group col-lg-8" style="font-size: 20px;">
+											<br>
+											<p id="targetStudentNumberwarning1" style="color: #444444"></p>
+											<p id="targetStudentNumberwarning2" style="color: #444444"></p>
 										</div>
 									</div>
 									<div class="form-group col-md-12 date" style="margin-top: 2em;" data-date=""
@@ -946,6 +951,8 @@ $(function() {
 				$("#soldPrice").val("10");
 				$('#targetStudentNumber').val("0");
 				$('#targetStudentNumberwarning').empty();
+				$('#targetStudentNumberwarning1').empty();
+				$('#targetStudentNumberwarning2').empty();
 				document.querySelector("#soldPrice")
 						.removeAttribute("readonly");
 				document.querySelector("#ProposalCourse").style = "opacity: 0.4;font-size: 18px;margin-top: 2em;";
@@ -1362,11 +1369,17 @@ $('#targetStudentNumber,#soldPrice').keyup(function(){
 		}
 		else{
 			$('#targetStudentNumberwarning').css( "color", "black" );
-			$('#targetStudentNumberwarning').text(("當達到開課門檻人數，講師可獲得："+parseInt($('#targetStudentNumber').val()*0.56*($('#soldPrice').val()))+"元，    作為開課的資金成本"));
+			$('#targetStudentNumberwarning').text(("當達到開課門檻人數，講師可獲得："+parseInt($('#targetStudentNumber').val()*0.56*($('#soldPrice').val())+"元，    作為開課的資金成本")));
+			$('#targetStudentNumberwarning1').text("計算方式：");
+			$('#targetStudentNumberwarning2').text("(定價*募資期間7折優惠)*募資人數*(80%作為講師收益)");
 		}
 	}else {
 		$('#targetStudentNumberwarning').text("");
 		$('#targetStudentNumberwarning').empty();
+		$('#targetStudentNumberwarning1').text("");
+		$('#targetStudentNumberwarning1').empty();
+		$('#targetStudentNumberwarning2').text("");
+		$('#targetStudentNumberwarning2').empty();
 	}
 		
 	})
