@@ -369,8 +369,8 @@
 								<ul class="list-inline pull-right" style="margin-bottom: 80px">
 									<li><button type="button"
 											class="btn3d btn btn-default btn-lg prev-step">上一步</button></li>
-									<li><button type="button"
-											class="btn3d btn btn-default btn-lg next-step">跳過此步驟</button></li>
+<!-- 									<li><button type="button" -->
+<!-- 											class="btn3d btn btn-default btn-lg next-step">跳過此步驟</button></li> -->
 									<li><button type="button"
 											class="btn btn-primary btn-lg btn3d next-step">儲存並前往下一步</button></li>
 								</ul>
