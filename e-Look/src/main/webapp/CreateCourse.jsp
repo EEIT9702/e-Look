@@ -793,7 +793,7 @@ $("#wizard-picture").change(function() {
 function readURL(input) {
 	if (input.files && input.files[0]) {//console.log(input.files)讀取所有的input標籤;(input.files[0]);讀取第一個input標籤
 		var reader = new FileReader();//JavaScript的方法，可以使用 File或 Blob物件指定要讀取的資料。File 物件通常是從使用者於 <input>元素選擇之檔案所回傳的 FileList 物件當中取得，File 物件是一種特殊的 Blob
-		reader.onload = function(e) {//load事件處理器，於讀取完成時觸發。console.log(e);用F12可以觀察到這是一個ProgressEvent
+		reader.onprogress = function(e) {//load事件處理器，於讀取完成時觸發。console.log(e);用F12可以觀察到這是一個ProgressEvent
 			$('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');//console.log(e.target.result);這邊意外的發現，這個讀出來的結果是Base64的格式，其實將這個字串直接存入資料庫，取出用src="字串"就可以顯示圖片!
 		};				
 		reader.readAsDataURL(input.files[0]);//重點!上述的e.target.result要透過reader.readAsDataURL，開始讀取指定的 Blob，讀取完成後屬性 result 將以 data: URL 格式（base64 編碼）的字串來表示讀入的資料內容。所以e.target.result的result結果是透過此行程式碼取得
