@@ -26,7 +26,7 @@ public class updateScoreController extends HttpServlet {
 		Integer score=Integer.parseInt(request.getParameter("score"));
 		Integer memberID=Integer.parseInt(request.getParameter("memberID"));
 		Integer courseID=Integer.parseInt(request.getParameter("courseID"));
-		System.out.println(score+","+memberID+","+courseID);
+//		System.out.println(score+","+memberID+","+courseID);
 		
 		BuyCourseService buyCourseService=new BuyCourseService();
 		buyCourseService.updateScore(score, memberID, courseID);
