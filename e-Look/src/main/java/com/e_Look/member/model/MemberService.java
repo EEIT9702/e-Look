@@ -130,7 +130,7 @@ public class MemberService {
 			memberVO1.setStatus((byte) 2);
 			dao.update(memberVO1, "status");
 			
-			//BlockMemberFunction.sendmail(memberVO1);
+			BlockMemberFunction.sendmail(mebVO);
 		}else{
 			memberVO1.setMemberID(memberID);
 			memberVO1.setCount(countsum);
