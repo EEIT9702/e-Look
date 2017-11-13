@@ -25,7 +25,7 @@ public class SendEmailServlet extends HttpServlet {
 				/*要DEMO時再把註解打開*/
 				//EdmMailSend.sendmail();
 			}	
-		}, new java.util.Date(2017/11/10),1000*60*60*12);
+		}, new java.util.Date(2017/11/17),1000*60*60*12);
 	}
 
 	/**

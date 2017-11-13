@@ -93,15 +93,16 @@ public class EdmMailSend {
         MimeMessage message = new MimeMessage(mailSession);
 
         // 設定寄件人                                          Java是收件人顯示寄件人的名稱
-        message.setFrom(new InternetAddress(from,"e-Look學習平台"));
+        message.setFrom(new InternetAddress(from,"e-Look線上學習網"));
 
         // 設定收件人
         //message.addRecipient(Message.RecipientType.TO,
         //        new InternetAddress(to));
-        for(MemberVO mVO : mVOs) {
-            message.addRecipient(Message.RecipientType.TO,
-                    new InternetAddress(mVO.getEmail()));
-        }
+        //for(MemberVO mVO : mVOs) {
+            //message.addRecipient(Message.RecipientType.TO, new InternetAddress(mVO.getEmail()));
+        	//改寫成固定mail,避免擾人luke710130@yahoo.com.tw
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress("janhsu36@gmail.com"));
+        //}
 
         // 設定主旨
         message.setSubject("e-Look電子月刊");
@@ -133,7 +134,7 @@ public class EdmMailSend {
         if(eeVOs.get((eeVOs.size()-1)).getCourseClass2() != null) {
         	CourseClass2 = eeVOs.get((eeVOs.size()-1)).getCourseClass2() + " ";
         }
-        if(eeVOs.get((eeVOs.size()-1)).getCourseClass2() != null) {
+        if(eeVOs.get((eeVOs.size()-1)).getCourseClass3() != null) {
         	CourseClass3 = eeVOs.get((eeVOs.size()-1)).getCourseClass3();
         }
         String event = eeVOs.get(eeVOs.size()-1).getEventName();
@@ -177,15 +178,18 @@ public class EdmMailSend {
         transport.connect(host, user, pwd);
         transport.sendMessage(message, message.getAllRecipients());
         transport.close();
-        for(MemberVO mVO : mVOs) {
-        	System.out.println(mVO.getEmail() + ",寄送完成");
-        }
+        //for(MemberVO mVO : mVOs) {
+        	
+        	//System.out.println(mVO.getEmail() + ",寄送完成");
+        	System.out.println("janhsu36@gmail.com ,寄送完成");
+        //}
     } catch (MessagingException | UnsupportedEncodingException mex) {
     	System.out.println(mex.getMessage());
     } catch (Exception e) {
-    	for(MemberVO mVO : mVOs) {
-    	System.out.println(mVO.getEmail() + "-" + e.getMessage());
-    	}
+    	//for(MemberVO mVO : mVOs) {
+    	//System.out.println(mVO.getEmail() + "-" + e.getMessage());
+    	System.out.println("janhsu36@gmail.com-" + e.getMessage());
+    	//}
         e.printStackTrace();
         
     }
