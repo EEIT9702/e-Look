@@ -5,8 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.e_Look.Course.CourseDAO;
-import com.e_Look.Course.CourseDAO_JDBC;
-import com.e_Look.Course.CourseDAO_interface;
 import com.e_Look.Course.CourseVO;
 
 public class BuyCourseService {
@@ -118,7 +116,10 @@ public class BuyCourseService {
 					count = courseIDMap.get(key);
 				}
 			}
-			cVO.add(cdao.findByPrimaryKey(topBought));
+			CourseVO courseVO=cdao.findByPrimaryKey(topBought);
+			if(courseVO.getStatus()==2){
+				cVO.add(courseVO);
+			}
 			courseIDMap.remove(topBought);
 		}
 		

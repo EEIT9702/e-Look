@@ -233,6 +233,7 @@ span.cancelado {
                 <div class="bhoechie-tab-content">
                     <div>
                     <h1>課程收益</h1>
+                    <p style="font-size:20px;color: red;" id="info"></p>
 					<div class="pull-right">
 							<div class="btn-group" >
 								<button style="font-size: 16px;" type="button" class="btn btn-default btn-filter" data-target="all">ALL</button>
@@ -269,7 +270,7 @@ span.cancelado {
 										<tr>
 											<th>課程名稱</th>
 											<th>定價</th>
-											<th>人數</th>
+											<th>募資人數</th>
 											<th>募資金額</th>
 										</tr>
 									</thead>
@@ -464,17 +465,20 @@ $(function(){
       
       if($target==="pagado"){
 //     	  $('.table2 tbody tr').css('display', 'none');
+  		$("#info").html("線上收益=定價*購買人數*(80%作為講師收益)")
  		$('.table2 tbody[data-status!="' + $target + '"]').css('display', 'none');
           $('.table2 tbody[data-status="' + $target + '"]').fadeIn('slow');
           $('.table2 thead[data-status="' + $target + '"]').fadeIn('slow');
           $('.table2 thead[data-status!="' + $target + '"]').css('display', 'none');
       }else if($target==="pendiente"){
+    	  $("#info").html("")
     	 // $('.table2 tbody tr').css('display', 'none');
     	  $('.table2 tbody[data-status!="' + $target + '"]').css('display', 'none');
           $('.table2 tbody[data-status="' + $target + '"]').fadeIn('slow');
           $('.table2 thead[data-status="' + $target + '"]').fadeIn('slow');
           $('.table2 thead[data-status!="' + $target + '"]').css('display', 'none');
       }else if($target==="cancelado"){
+    	  $("#info").html("募資收益=(定價*募資期間7折優惠)*募資人數*(80%作為講師收益)")
 //     	  $('.table2  tbody tr').css('display', 'none');
           $('.table2 tbody[data-status="' + $target + '"]').fadeIn('slow');
           $('.table2 tbody[data-status!="' + $target + '"]').css('display', 'none');
@@ -482,6 +486,7 @@ $(function(){
           $('.table2 thead[data-status!="' + $target + '"]').css('display', 'none');
     }else if($target==="all"){
   	  //$('.table2 tbody').css('display', 'none');
+  	  $("#info").html("")
   	   $('.table2 tbody[data-status!="' + $target + '"]').css('display', 'none');
         $('.table2 tbody[data-status="' + $target + '"]').fadeIn('slow');
         $('.table2 thead[data-status="' + $target + '"]').fadeIn('slow');
