@@ -283,7 +283,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
 			var status=$(this).val();
 			console.log(status);
 			$.post('<%=request.getContextPath()%>/backstage/adControl',{'action':'updatestatus','adID':select,'status':status},function(data){
-				
+				alert("廣告狀態已變更");
  			})
 		})
 		

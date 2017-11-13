@@ -369,8 +369,8 @@
 								<ul class="list-inline pull-right" style="margin-bottom: 80px">
 									<li><button type="button"
 											class="btn3d btn btn-default btn-lg prev-step">上一步</button></li>
-									<li><button type="button"
-											class="btn3d btn btn-default btn-lg next-step">跳過此步驟</button></li>
+<!-- 									<li><button type="button" -->
+<!-- 											class="btn3d btn btn-default btn-lg next-step">跳過此步驟</button></li> -->
 									<li><button type="button"
 											class="btn btn-primary btn-lg btn3d next-step">儲存並前往下一步</button></li>
 								</ul>
@@ -422,6 +422,11 @@
 												value="${CoursedData.targetStudentNumber}"
 												style="font-size: 18px;">
 											<p id="targetStudentNumberwarning" style="color: red"></p>
+										</div>
+										<div class="form-group col-lg-8" style="font-size: 20px;">
+											<br>
+											<p id="targetStudentNumberwarning1" style="color: #444444"></p>
+											<p id="targetStudentNumberwarning2" style="color: #444444"></p>
 										</div>
 									</div>
 									<div class="form-group col-md-12 date" style="margin-top: 2em;" data-date=""
@@ -708,192 +713,183 @@
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <!-- ====================================================================================================================================== -->
+<script>
+//設定如果沒有點擊過前往下一步的按鈕，上面的step1~step7的圖示icon不能點擊(避免使用者跳步驟填寫)
+$(document).ready(function() {
+	//Initialize tooltips
+	$('.nav-tabs > li a[title]').tooltip();
+	//Wizard
+	$('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
 
-	<script>
-		$(document).ready(function() {
-			//Initialize tooltips
-			$('.nav-tabs > li a[title]').tooltip();
+		var $target = $(e.target);
 
-			//Wizard
-			$('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
-
-				var $target = $(e.target);
-
-				if ($target.parent().hasClass('disabled')) {
-					return false;
-				}
-			});
-
-			$(".next-step").click(function(e) {
-
-				var $active = $('.wizard .nav-tabs li.active');
-				$active.next().removeClass('disabled');
-				nextTab($active);
-
-			});
-			$(".prev-step").click(function(e) {
-
-				var $active = $('.wizard .nav-tabs li.active');
-				prevTab($active);
-
-			});
-		});
-
-		function nextTab(elem) {
-			$(elem).next().find('a[data-toggle="tab"]').click();
+		if ($target.parent().hasClass('disabled')) {
+			return false;
 		}
-		function prevTab(elem) {
-			$(elem).prev().find('a[data-toggle="tab"]').click();
-		}
+	});
+	$(".next-step").click(function(e) {
+		var $active = $('.wizard .nav-tabs li.active');
+		$active.next().removeClass('disabled');
+		nextTab($active);
+	});
+	$(".prev-step").click(function(e) {
+		var $active = $('.wizard .nav-tabs li.active');
+		prevTab($active);
+	});
+});
 
+function nextTab(elem) {
+	$(elem).next().find('a[data-toggle="tab"]').click();
+}
+function prevTab(elem) {
+	$(elem).prev().find('a[data-toggle="tab"]').click();
+}
 		//according menu
+$(document).ready(function() {
+			//Add Inactive Class To All Accordion Headers
+			$('.accordion-header').toggleClass('inactive-header');
 
-		$(document).ready(
-				function() {
-					//Add Inactive Class To All Accordion Headers
-					$('.accordion-header').toggleClass('inactive-header');
+			//Set The Accordion Content Width
+			var contentwidth = $('.accordion-header').width();
+			$('.accordion-content').css({});
 
-					//Set The Accordion Content Width
-					var contentwidth = $('.accordion-header').width();
-					$('.accordion-content').css({});
+			//Open The First Accordion Section When Page Loads
+			$('.accordion-header').first().toggleClass('active-header')
+					.toggleClass('inactive-header');
+			$('.accordion-content').first().slideDown().toggleClass(
+					'open-content');
 
-					//Open The First Accordion Section When Page Loads
-					$('.accordion-header').first().toggleClass('active-header')
-							.toggleClass('inactive-header');
-					$('.accordion-content').first().slideDown().toggleClass(
-							'open-content');
-
-					// The Accordion Effect
-					$('.accordion-header').click(
-							function() {
-								if ($(this).is('.inactive-header')) {
-									$('.active-header').toggleClass(
-											'active-header').toggleClass(
-											'inactive-header').next()
-											.slideToggle().toggleClass(
-													'open-content');
-									$(this).toggleClass('active-header')
-											.toggleClass('inactive-header');
-									$(this).next().slideToggle().toggleClass(
+			// The Accordion Effect
+			$('.accordion-header').click(
+					function() {
+						if ($(this).is('.inactive-header')) {
+							$('.active-header').toggleClass(
+									'active-header').toggleClass(
+									'inactive-header').next()
+									.slideToggle().toggleClass(
 											'open-content');
-								}
+							$(this).toggleClass('active-header')
+									.toggleClass('inactive-header');
+							$(this).next().slideToggle().toggleClass(
+									'open-content');
+						}
 
-								else {
-									$(this).toggleClass('active-header')
-											.toggleClass('inactive-header');
-									$(this).next().slideToggle().toggleClass(
-											'open-content');
-								}
-							});
-
-					return false;
-				});
-
-		$("#wizard-picture").change(function() {
-			readURL(this);
-		});
-
-		function readURL(input) {
-			if (input.files && input.files[0]) {
-				var reader = new FileReader();
-
-				reader.onload = function(e) {
-					$('#wizardPicturePreview').attr('src', e.target.result)
-							.fadeIn('slow');
-				}
-				reader.readAsDataURL(input.files[0]);
-			}
-		}
-
-		$(document).ready(function() {$('input[type=checkbox]').click(function() {$("input[name='CourseClass']").attr('disabled', true);
-																					if ($("input[name='CourseClass']:checked").length >= 3) {$("input[name='CourseClass']:checked").attr('disabled',false);
-												} else {
-													$(
-															"input[name='CourseClass']")
-															.attr('disabled',
-																	false);
-												}
-											});
-
-						})
-
-		$("#CourseInput").keyup(function() {
-			var value = $(this).val();
-			$("#title").text(value);
-		});
-
-		$(document).ready(
-				function() {
-					// Floating Labels
-					//==============================================================
-					$('[data-toggle="floatLabel"]').attr('data-value',
-							$(this).val()).on('keyup change', function() {
-						$(this).attr('data-value', $(this).val());
+						else {
+							$(this).toggleClass('active-header')
+									.toggleClass('inactive-header');
+							$(this).next().slideToggle().toggleClass(
+									'open-content');
+						}
 					});
-				});
 
-		$('textarea').each(function() {
-			autosize(this);
-		}).on('autosize:resized');
-//募資選擇日期，避免起始日期大於結束日期=====================================================================
-		function checkEndTime(starttime, endtime) {
-			var starttime = $("#starttime").val();
-			var endtime = $("#endtime").val();
-			if (endtime < starttime && starttime+30 < endtime) {
-				return false;
-			} else {
-				return true;
-			}
-		};
-//========================================================================================================
-//日曆選擇器(起始日期、結束日期)=============================================================================		
-	$(function() {
-			$('#starttime').datetimepicker({
-				language : 'zh-TW',
-				weekStart : 1,
-				todayBtn : 1,
-				startDate: new Date(),
-				autoclose : 1,
-				todayHighlight : 1,
-				startView : 2,
-				minView : 2,
-				forceParse : 0,
-				defaultDate:new Date() ,
-				format : 'yyyy-mm-dd'
-			}).on('changeDate', function(ev) {
-				var starttime = $('#starttime').val();
-				$('#endtime').datetimepicker('setStartDate', starttime);
-				$('#starttime').datetimepicker('hide');
-			});
-
-			$('#endtime').datetimepicker({
-				language : 'zh-TW',
-				weekStart : 1,
-				todayBtn : 1,
-				autoclose : 1,
-				todayHighlight : 1,
-				startView : 2,
-				minView : 2,
-				forceParse : 0,
-				format : 'yyyy-mm-dd'
-			}).on('changeDate', function(ev) {
-				var starttime = $('#starttime').val();
-				var endtime = $('#endtime').val();
-
-				if (starttime != "" && endtime != "") {
-					if (!checkEndTime(starttime, endtime)) {
-						$('#endtime').val('');
-						alert("請輸入正確的日期範圍");
-						return;
-					}
-				}
-				$('#starttime').datetimepicker('setEndDate', endtime);
-				$('#starttime').datetimepicker('hide');
-			});
-
+			return false;
 		});
+//===============================================================================================
+//當上傳課程封面的時候，這個input標籤發生change時，會啟動readURL這個方法
+$("#wizard-picture").change(function() {
+	readURL(this);
+});
+//啟動readURL這個方法，參數設定為input標籤
+function readURL(input) {
+	if (input.files && input.files[0]) {//console.log(input.files)讀取所有的input標籤;(input.files[0]);讀取第一個input標籤
+		var reader = new FileReader();//JavaScript的方法，可以使用 File或 Blob物件指定要讀取的資料。File 物件通常是從使用者於 <input>元素選擇之檔案所回傳的 FileList 物件當中取得，File 物件是一種特殊的 Blob
+		reader.onprogress = function(e) {//load事件處理器，於讀取完成時觸發。console.log(e);用F12可以觀察到這是一個ProgressEvent
+			$('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');//console.log(e.target.result);這邊意外的發現，這個讀出來的結果是Base64的格式，其實將這個字串直接存入資料庫，取出用src="字串"就可以顯示圖片!
+		};				
+		reader.readAsDataURL(input.files[0]);//重點!上述的e.target.result要透過reader.readAsDataURL，開始讀取指定的 Blob，讀取完成後屬性 result 將以 data: URL 格式（base64 編碼）的字串來表示讀入的資料內容。所以e.target.result的result結果是透過此行程式碼取得
+	}
+}
+//========================================================================================================================================
+//設定如果選擇課程類別屬性超過3種以上，將checkbox的功能隱藏
+$(document).ready(function(){
+	$('input[type=checkbox]').click(function(){
+		$("input[name='CourseClass']").attr('disabled',true);
+		if ($("input[name='CourseClass']:checked").length>=3){
+			$("input[name='CourseClass']:checked").attr('disabled',false);
+		}else{
+			$("input[name='CourseClass']").attr('disabled',false);
+			}
+	});
+})
+//===============================================================================================
+//輸入課程標題，同時顯示課程名稱在預覽的畫面
+$("#CourseInput").keyup(function() {
+	var value = $(this).val();
+	$("#title").text(value);
+});
+//===============================================================================================
+//設定Step3，當輸入資訊時，輸入框內會顯示範例，告訴使用者應該填寫什麼資訊
+$(document).ready(function() {
+			// Floating Labels
+			$('[data-toggle="floatLabel"]').attr('data-value',
+				$(this).val()).on('keyup change',function(){
+					$(this).attr('data-value', $(this).val());
+				});
+});
+//===============================================================================================
+//設定Step3的輸入框會自動根據輸入的內容多寡，調整輸入框的大小
+$('textarea').each(function() {
+	autosize(this);
+});
+//募資選擇日期，避免起始日期大於結束日期=====================================================================
+function checkEndTime(starttime, endtime) {
+	var starttime = $("#starttime").val();
+	var endtime = $("#endtime").val();
+	if (endtime < starttime && starttime+30 < endtime) {
+		return false;
+	} else {
+		return true;
+	}
+};
+//========================================================================================================
+//日曆選擇器(起始日期、結束日期)		
+$(function() {
+		$('#starttime').datetimepicker({
+			language : 'zh-TW',
+			weekStart : 1,
+			todayBtn : 1,
+			startDate: new Date(),
+			autoclose : 1,
+			todayHighlight : 1,
+			startView : 2,
+			minView : 2,
+			forceParse : 0,
+			defaultDate:new Date() ,
+			format : 'yyyy-mm-dd'
+		}).on('changeDate', function(ev) {
+			var starttime = $('#starttime').val();
+			$('#endtime').datetimepicker('setStartDate', starttime);
+			$('#starttime').datetimepicker('hide');
+		});
+
+		$('#endtime').datetimepicker({
+			language : 'zh-TW',
+			weekStart : 1,
+			todayBtn : 1,
+			autoclose : 1,
+			todayHighlight : 1,
+			startView : 2,
+			minView : 2,
+			forceParse : 0,
+			format : 'yyyy-mm-dd'
+		}).on('changeDate', function(ev) {
+			var starttime = $('#starttime').val();
+			var endtime = $('#endtime').val();
+
+			if (starttime != "" && endtime != "") {
+				if (!checkEndTime(starttime, endtime)) {
+					$('#endtime').val('');
+					alert("請輸入正確的日期範圍");
+					return;
+				}
+			}
+			$('#starttime').datetimepicker('setEndDate', endtime);
+			$('#starttime').datetimepicker('hide');
+		});
+
+	});
 //=============================================================================================================
-//自動計算出備課天數加上結束日期後，換算日期是幾號==================================================================
+//自動計算出備課天數加上結束日期後，換算日期是幾號
 	$("#prepareDate").keyup(
 				function() {
 					var endtime = $('#endtime').val();
@@ -955,6 +951,8 @@
 				$("#soldPrice").val("10");
 				$('#targetStudentNumber').val("0");
 				$('#targetStudentNumberwarning').empty();
+				$('#targetStudentNumberwarning1').empty();
+				$('#targetStudentNumberwarning2').empty();
 				document.querySelector("#soldPrice")
 						.removeAttribute("readonly");
 				document.querySelector("#ProposalCourse").style = "opacity: 0.4;font-size: 18px;margin-top: 2em;";
@@ -1371,11 +1369,17 @@ $('#targetStudentNumber,#soldPrice').keyup(function(){
 		}
 		else{
 			$('#targetStudentNumberwarning').css( "color", "black" );
-			$('#targetStudentNumberwarning').text(("當達到開課門檻人數，講師可獲得："+parseInt($('#targetStudentNumber').val()*0.56*($('#soldPrice').val()))+"元，    作為開課的資金成本"));
+			$('#targetStudentNumberwarning').text(("當達到開課門檻人數，講師可獲得："+parseInt($('#targetStudentNumber').val()*0.56*($('#soldPrice').val()))+"元，作為開課的資金成本"));
+			$('#targetStudentNumberwarning1').text("計算方式：");
+			$('#targetStudentNumberwarning2').text("(定價*募資期間7折優惠)*募資人數*(80%作為講師收益)");
 		}
 	}else {
 		$('#targetStudentNumberwarning').text("");
 		$('#targetStudentNumberwarning').empty();
+		$('#targetStudentNumberwarning1').text("");
+		$('#targetStudentNumberwarning1').empty();
+		$('#targetStudentNumberwarning2').text("");
+		$('#targetStudentNumberwarning2').empty();
 	}
 		
 	})
