@@ -539,7 +539,7 @@ $(function(){
 						})						
 					})
 				$('#pendiente').html(fragment3);
-					var cell1 = $('<td></td>').text("免費課程")
+					var cell1 = $('<td></td>').text("贊助收益")
 		  		  	var cell2 = $('<td></td>').text(count)
 		  		 	var row1 =$('<tr></tr>').append([cell1,cell2]);
 					fragment1.append(row1)
