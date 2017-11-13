@@ -35,7 +35,7 @@ public class LoginControler extends HttpServlet {
 			errorMsgs.put("errID", "請輸入帳號及密碼");
 		} else {
 			loginVO = service.findByManagerID(managerID);
-			if (loginVO == null) {System.out.println("123");
+			if (loginVO == null) {
 				errorMsgs.put("erreID", "帳號錯誤");
 			} else if (loginVO != null && !managerID.equals(loginVO.getManagerID())) {System.out.println("122");
 				errorMsgs.put("errID", "帳號錯誤");
@@ -50,7 +50,7 @@ public class LoginControler extends HttpServlet {
 				}
 			}
 		}
-		if (!errorMsgs.isEmpty()) {System.out.println("****");
+		if (!errorMsgs.isEmpty()) {
 			req.setAttribute("LoginVO", loginVO); // 含有輸入格式錯誤的empVO物件,也存入req
 			RequestDispatcher failureView = req
 					.getRequestDispatcher("backLogin.jsp");

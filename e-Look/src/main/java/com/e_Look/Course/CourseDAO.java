@@ -13,8 +13,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.e_Look.member.model.MemberVO;
-
 public class CourseDAO implements CourseDAO_interface {
 	private static DataSource ds = null;
 	static {
@@ -42,9 +40,9 @@ public class CourseDAO implements CourseDAO_interface {
 	private static final String SELECT_ALL_ONLINECourse = "select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore from Course where  status= 2 ";
 	private static final String UPDATE_AVG_SCORE = "UPDATE Course SET avgScore=? WHERE courseID=?";
 	private static final String SELECT_ALL_FREE_COURSE = "SELECT courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore FROM Course WHERE status=2 AND soldPrice=0";
-	private static final String SELECT_ALL_ONLINE_COURSE = "SELECT courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore FROM Course WHERE status=2 AND soldPrice>0";
+	private static final String SELECT_ALL_ONLINE_COURSE = "SELECT courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore FROM Course WHERE status=2 AND soldPrice>0 ORDER BY soldPrice DESC";
 	private static final String SELECT_ALL_FUNDRAISE_COURSE = "SELECT courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore FROM Course WHERE status=3 AND fundStartDate <= getDate() ORDER BY fundEndDate";
-	
+	private static final String SELECT_ONE_ONlINE_Course = "select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore from Course where courseID= ? and status= 2 ";
 	@Override
 	public Integer insert(CourseVO courseVO) {
 		Connection con = null;
@@ -859,6 +857,59 @@ public class CourseDAO implements CourseDAO_interface {
 				}
 			}
 			return CourseList;
+		}
+		@Override
+		public CourseVO findByOnlinePrimaryKey(Integer courseID) {
+			CourseVO courseVO = null;
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			try {
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(SELECT_ONE_ONlINE_Course);
+				pstmt.setInt(1, courseID);
+				ResultSet rs = pstmt.executeQuery();
+				if (rs.next()) {
+					courseVO = new CourseVO();
+					courseVO.setCourseID(rs.getInt(1));
+					courseVO.setCourseName(rs.getString(2));
+					courseVO.setcPhoto(rs.getBinaryStream(3));
+					courseVO.setPreTool(rs.getString(4));
+					courseVO.setBackground(rs.getString(5));
+					courseVO.setAbility(rs.getString(6));
+					courseVO.setTargetgroup(rs.getString(7));
+					courseVO.setSoldPrice(rs.getInt(8));
+					courseVO.setCourseLength(rs.getInt(9));
+					courseVO.setTargetStudentNumber(rs.getInt(10));
+					courseVO.setFundStartDate(rs.getDate(11));
+					courseVO.setFundEndDate(rs.getDate(12));
+					courseVO.setCourseStartDate(rs.getDate(13));
+					courseVO.setCourseVideopathway(rs.getString(14));
+					courseVO.setPaper(rs.getBinaryStream(15));
+					courseVO.setStatus(rs.getInt(16));
+					courseVO.setCourseContent(rs.getString(17));
+					courseVO.setMemberID(rs.getInt(18));
+					courseVO.setAvgScore(rs.getDouble(19));
+				}
+			} catch (SQLException e) {
+				throw new RuntimeException("A database error occured. " + e.getMessage());
+			} finally {
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException e) {
+						e.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			return courseVO;
+			
 		}
 	
 	

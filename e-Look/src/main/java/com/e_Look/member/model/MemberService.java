@@ -12,6 +12,7 @@ import java.sql.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 
+import com.e_Look.emailSystem.BlockMemberFunction;
 import com.e_Look.emailSystem.MemberCheckEmail;
 
 public class MemberService {
@@ -128,6 +129,8 @@ public class MemberService {
 			memberVO1.setMemberID(memberID);
 			memberVO1.setStatus((byte) 2);
 			dao.update(memberVO1, "status");
+			
+			BlockMemberFunction.sendmail(mebVO);
 		}else{
 			memberVO1.setMemberID(memberID);
 			memberVO1.setCount(countsum);
