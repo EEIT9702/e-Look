@@ -1,4 +1,4 @@
-﻿package edm;
+package edm;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
@@ -30,26 +30,9 @@ import com.e_Look.member.model.MemberDAO;
 import com.e_Look.member.model.MemberDAO_JDBC;
 import com.e_Look.member.model.MemberVO;
 
-public class EdmMailSend {
+public class EdmMailSend2 {
 
 	public static void sendmail() {
-		
-        //計算時間是否在每月1日,並擷取目前最新的會員名單email
-        Calendar firstday = Calendar.getInstance();
-		
-		firstday.set(Calendar.DATE, firstday.getActualMinimum(Calendar.DATE));
-		Long first = firstday.getTimeInMillis();
-		
-		Date today = new Date();
-		Long tday = today.getTime();
-		//System.out.println((tday - first)/1000/60/60);
-        //目前日期毫秒-當月第一天毫秒,若相差在24小時內就執行,demo時再打開並把日期調到下月
-//		if((tday - first) > 0 && ((tday - first)/1000/60/60) <= 24) {
-			//System.out.println("1111");
-			MemberDAO mdao = new MemberDAO();
-			List<MemberVO> mVOs = mdao.getAll();
-			
-//		}//判斷式-每月第一天的結尾
 		
 		//Transport transport=null;
    try {
@@ -80,13 +63,6 @@ public class EdmMailSend {
         props.put("mail.smtp.ssl.enable", true);
         props.put("mail.smtp.starttls.enable", true);
 
-        //帳號，密碼
-//        SmtpAuthenticator authentication = 
-//                new SmtpAuthenticator(user, pwd);
-
-        // 建立一個Session物件，並把properties傳進去
-//        Session mailSession = Session.
-//                getDefaultInstance(props, authentication);
         Session mailSession = Session.getInstance(props, null);
      
         //建立一個 MimeMessage object.
@@ -96,19 +72,13 @@ public class EdmMailSend {
         message.setFrom(new InternetAddress(from,"e-Look線上學習網"));
 
         // 設定收件人
-        //message.addRecipient(Message.RecipientType.TO,
-        //        new InternetAddress(to));
-        //for(MemberVO mVO : mVOs) {
-            //message.addRecipient(Message.RecipientType.TO, new InternetAddress(mVO.getEmail()));
-        	//改寫成固定mail,避免擾人luke710130@yahoo.com.tw
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress("janhsu36@gmail.com"));
-        //}
+        message.addRecipient(Message.RecipientType.TO, new InternetAddress("money11258@gmail.com"));
 
         // 設定主旨
         message.setSubject("e-Look電子月刊");
         
         // 設定寄件日期
-        //message.setSentDate(new Date());
+        message.setSentDate(new Date("2017/11/18"));
 
         // 建立郵件本文內容
         Multipart multipart = new MimeMultipart();
@@ -127,21 +97,7 @@ public class EdmMailSend {
         //original
         html.append("<h1 style='color:black;width:100%'>親愛的會員您好 :</h1>");
         
-        String CourseClass1 = "", CourseClass2 = "", CourseClass3 = "";
-        if(eeVOs.get((eeVOs.size()-1)).getCourseClass1() != null) {
-        	CourseClass1 = eeVOs.get((eeVOs.size()-1)).getCourseClass1() + " ";
-        }
-        if(eeVOs.get((eeVOs.size()-1)).getCourseClass2() != null) {
-        	CourseClass2 = eeVOs.get((eeVOs.size()-1)).getCourseClass2() + " ";
-        }
-        if(eeVOs.get((eeVOs.size()-1)).getCourseClass3() != null) {
-        	CourseClass3 = eeVOs.get((eeVOs.size()-1)).getCourseClass3();
-        }
-        String event = eeVOs.get(eeVOs.size()-1).getEventName();
-        Integer discount = (int)(eeVOs.get(eeVOs.size()-1).getDiscount()*100);
-        html.append("<h2 style='width:100%;color:red;font-size:45px'>" + event
-        	+ "&nbsp;活動期間，" + CourseClass1 + CourseClass2 
-        	+ CourseClass3 + " 類別課程享" + discount + "折優惠！！！</h2>");
+        html.append("<h2 style='width:100%;color:red;font-size:45px'>感恩節優惠，生活與烹飪類課程全部85折!!!</h2>");
         
         html.append("<h1 style='color:black;'>推薦您前三名熱門課程：</h1>");
         for( CourseVO cVO:cVOs){
@@ -158,7 +114,6 @@ public class EdmMailSend {
         //要找讀取遠端ulr路徑的方法
         picturePart.setDataHandler(new DataHandler(fds));
         picturePart.setFileName(fds.getName());
-        //picturePart.setHeader("Content-ID", "<image>");
         picturePart.setHeader("Content-ID", "<" + cVO.getCourseID() + ">");
 
         multipart.addBodyPart(picturePart);
@@ -166,7 +121,6 @@ public class EdmMailSend {
      
         textPart.setContent(html.toString(), "text/html; charset=UTF-8");
         multipart.addBodyPart(textPart);
-        //message.setContent(multipart);
 
         // 將multipart加到mail的message裡
         message.setContent(multipart);
@@ -178,18 +132,13 @@ public class EdmMailSend {
         transport.connect(host, user, pwd);
         transport.sendMessage(message, message.getAllRecipients());
         transport.close();
-        //for(MemberVO mVO : mVOs) {
-        	
-        	//System.out.println(mVO.getEmail() + ",寄送完成");
-        	System.out.println("janhsu36@gmail.com ,寄送完成");
-        //}
+
+    	System.out.println("janhsu36@gmail.com ,寄送完成");
+
     } catch (MessagingException | UnsupportedEncodingException mex) {
     	System.out.println(mex.getMessage());
     } catch (Exception e) {
-    	//for(MemberVO mVO : mVOs) {
-    	//System.out.println(mVO.getEmail() + "-" + e.getMessage());
     	System.out.println("janhsu36@gmail.com-" + e.getMessage());
-    	//}
         e.printStackTrace();
         
     }
