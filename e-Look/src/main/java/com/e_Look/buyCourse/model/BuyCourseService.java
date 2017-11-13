@@ -5,8 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.e_Look.Course.CourseDAO;
-import com.e_Look.Course.CourseDAO_JDBC;
-import com.e_Look.Course.CourseDAO_interface;
 import com.e_Look.Course.CourseVO;
 
 public class BuyCourseService {
@@ -51,10 +49,10 @@ public class BuyCourseService {
 		//System.out.println("bsize = " + bsize);
 		return bsize;
 	}
-	
+	//電子月刊前三名熱名課程
 	public List<CourseVO> getTopThreeBuyCourse(Integer topNum) {
-		BuyCourseDAO_JDBC bdao = new BuyCourseDAO_JDBC();
-		CourseDAO_JDBC cdao = new CourseDAO_JDBC();
+		BuyCourseDAO bdao = new BuyCourseDAO();
+		CourseDAO cdao = new CourseDAO();
 		List<BuyCourseVO> bcVOs = bdao.getAll();
 		List<CourseVO> cVO = new LinkedList<CourseVO>();
 		//int[] cc = new int[topNum];
@@ -88,4 +86,45 @@ public class BuyCourseService {
 		
 		return cVO;
 	}
+	//首頁購買人數排序	
+	public List<CourseVO> getTopEightBuyCourse() {
+		BuyCourseDAO bdao = new BuyCourseDAO();
+		CourseDAO cdao = new CourseDAO();
+		List<BuyCourseVO> bcVOs = bdao.getAll();
+		List<CourseVO> cVO = new LinkedList<CourseVO>();
+		//int[] cc = new int[topNum];
+		HashMap<Integer, Integer> courseIDMap = new HashMap<Integer, Integer>();
+		
+		//Integer buyCourseID[] = null;
+		for(BuyCourseVO bcVO : bcVOs){
+			if(courseIDMap.containsKey(bcVO.getCourseID())) {
+				courseIDMap.replace(bcVO.getCourseID(), courseIDMap.get(bcVO.getCourseID())+1);
+			}else{
+				courseIDMap.put(bcVO.getCourseID(), 1);
+			}
+		}
+		
+		//buyCourseID = new Integer[courseIDMap.size()];
+//		buyCourseID = new Integer[topNum];
+		
+		while( cVO.size()<8 && !courseIDMap.isEmpty()) {
+			int count = 0;
+			Integer topBought = null;
+			for(Integer key : courseIDMap.keySet()) {
+				if(courseIDMap.get(key) > count) {
+					topBought = key;
+					count = courseIDMap.get(key);
+				}
+			}
+			CourseVO courseVO=cdao.findByPrimaryKey(topBought);
+			if(courseVO.getStatus()==2){
+				cVO.add(courseVO);
+			}
+			courseIDMap.remove(topBought);
+		}
+		
+		
+		return cVO;
+	}
+	
 }

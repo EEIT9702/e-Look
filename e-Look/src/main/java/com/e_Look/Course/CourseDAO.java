@@ -13,8 +13,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.e_Look.member.model.MemberVO;
-
 public class CourseDAO implements CourseDAO_interface {
 	private static DataSource ds = null;
 	static {
@@ -42,7 +40,7 @@ public class CourseDAO implements CourseDAO_interface {
 	private static final String SELECT_ALL_ONLINECourse = "select courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore from Course where  status= 2 ";
 	private static final String UPDATE_AVG_SCORE = "UPDATE Course SET avgScore=? WHERE courseID=?";
 	private static final String SELECT_ALL_FREE_COURSE = "SELECT courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore FROM Course WHERE status=2 AND soldPrice=0";
-	private static final String SELECT_ALL_ONLINE_COURSE = "SELECT courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore FROM Course WHERE status=2 AND soldPrice>0";
+	private static final String SELECT_ALL_ONLINE_COURSE = "SELECT courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore FROM Course WHERE status=2 AND soldPrice>0 ORDER BY soldPrice DESC";
 	private static final String SELECT_ALL_FUNDRAISE_COURSE = "SELECT courseID,courseName,cPhoto,preTool,background,ability,targetgroup,soldPrice,courseLength,targetStudentNumber,fundStartDate,fundEndDate,courseStartDate,courseVideopathway,paper,status,courseContent,memberID,avgScore FROM Course WHERE status=3 AND fundStartDate <= getDate() ORDER BY fundEndDate";
 	
 	@Override
@@ -860,6 +858,7 @@ public class CourseDAO implements CourseDAO_interface {
 			}
 			return CourseList;
 		}
+	
 	
 	
 }
