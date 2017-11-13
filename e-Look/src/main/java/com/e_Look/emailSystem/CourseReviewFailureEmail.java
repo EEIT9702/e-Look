@@ -29,7 +29,7 @@ public class CourseReviewFailureEmail {
         // 主旨
         String subject = "會員認證信";
         //內文
-        String body = "請愛的"+memberVO.getmName()+"您好，\n您送審的課程:"+courseVO.getCourseName()+"，經審核後發現內容有不適當之處，以將該課程退回為草稿狀態，請至會員中心修改該課程不當之處，修改完成後請再次送審。";
+        String body = "親愛的"+memberVO.getmName()+"您好，\n您送審的課程:"+courseVO.getCourseName()+"，經審核後發現內容有不適當之處，以將該課程退回為草稿狀態，請至會員中心修改該課程不當之處，修改完成後請再次送審。";
  
         // 建立一個Properties來設定Properties
         Properties properties = System.getProperties();
