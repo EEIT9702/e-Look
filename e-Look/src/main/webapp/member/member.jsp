@@ -492,7 +492,7 @@ a:HOVER {
 									<label style="font-size: 18px">密碼</label> <input type="password" class="form-control"
 										id="mPassword" name="mPassword" readonly value="${LoginOK.mPassword}">
 										<span  class="input-group-btn" style="padding-top: 27px">
-            <button data-toggle="modal" data-target="#ChangePassword" class="btn  btn-info reveal" type="button"  <c:if test="${LoginOK.mPassword==''}">disabled="disabled"</c:if>><i class="glyphicon glyphicon-pencil"></i></button>
+            <button data-toggle="modal" data-target="#ChangePassword" class="btn  btn-info reveal" type="button"  disabled="disabled"><i class="glyphicon glyphicon-pencil"></i></button>
         			 </span>      
 								</div>
 							</div>
