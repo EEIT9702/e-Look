@@ -29,7 +29,7 @@ public class BlockMemberFunction {
         // 主旨
         String subject = "會員通知信";
         //內文
-        String body = "請愛的" + memberVO.getmName()+"您好，\n您因為課程、留言內容不適當，被檢舉且經審核屬實達三次，"
+        String body = "親愛的" + memberVO.getmName()+"您好，\n您因為課程、留言內容不適當，被檢舉且經審核屬實達三次，"
         		+ "所以依照e-Look會員規範將您的開課、留言權限予以撤銷，請知悉。";
  
         // 建立一個Properties來設定Properties

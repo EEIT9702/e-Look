@@ -97,7 +97,7 @@ public class EdmMailSend2 {
         //original
         html.append("<h1 style='color:black;width:100%'>親愛的會員您好 :</h1>");
         
-        html.append("<h2 style='width:100%;color:red;font-size:45px'>感恩節優惠，生活與烹飪類課程全部85折!!!</h2>");
+        html.append("<h2 style='width:100%;color:red;font-size:45px'>感恩節優惠，11/21 ~ 11/30生活與烹飪類課程全部85折!!!</h2>");
         
         html.append("<h1 style='color:black;'>推薦您前三名熱門課程：</h1>");
         for( CourseVO cVO:cVOs){

@@ -481,7 +481,7 @@ a:HOVER {
 							<div class=" col-md-8 " style="margin: 10px 0;">
 								<div class="form-group">
 									<label style="font-size: 18px">帳號(信箱)</label> <input type="text" class="form-control"
-										id="" name="email" value="${LoginOK.email}"<c:if test="${LoginOK.mPassword==''}">readonly</c:if>  >
+										id="" name="email" value="${LoginOK.email}"readonly >
 								</div>
 							</div>
 							<div class="col-md-4"></div>
