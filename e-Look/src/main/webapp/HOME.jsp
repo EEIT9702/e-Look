@@ -164,7 +164,7 @@ a:HOVER {
 <body id="body" style="margin-top: 50px">
 	<jsp:include page="/login.jsp" />
 	<jsp:useBean id="course" scope="page"
-		class="com.e_Look.Course.CourseDAO" />
+		class="com.e_Look.buyCourse.model.BuyCourseService" />
 
 	<div class="container-fluid"
 		style="background-color: black; margin: -50px">
@@ -193,7 +193,7 @@ a:HOVER {
 	<div class="container">
 		<div class="row" style="padding-left: 40px">
 			<!--for each  -->
-			<c:forEach var='listcourse' items='${course.allonlineCourse}' begin="0" end="7">
+			<c:forEach var='listcourse' items='${course.topEightBuyCourse}' begin="0" end="7">
 				<c:if test="${listcourse.soldPrice>0}">
 					<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course"
 						style="width: 341px">
@@ -225,42 +225,6 @@ a:HOVER {
 				</div>
 			</div>
 			</c:if>
-			
-
-	
-
-
-	<c:if test="${listcourse.soldPrice==0}">
-		<div class="col-md-6 col-sm-6 col-lg-4 col-xs-6" id="course"
-			style="width: 341px">
-			<a style="text-decoration: none; color: black"
-				 href="<%=request.getContextPath() %>/freeCourse-v1.jsp?CourseID=${listcourse.courseID}">
-				<div class="card card-inverse" >
-					<img class="card-img-top img-rounded center-block"
-									src="<%=request.getContextPath() %>/CourseImage?CourseID=${listcourse.courseID}"
-									alt="course" id="wizardPicturePreview" title="" style="width:98%">
-					<div class="card-block">
-						<figure class="profile">
-							<img
-								src="<%=request.getContextPath() %>/Image?MemberID=${listcourse.memberID}"
-								class="profile-avatar" alt="">
-						</figure>
-						<div class="card-text">
-							<p id="title" class="card-title mt-3 multi_ellipsis">${listcourse.courseName}</p>
-						</div>
-			</a>
-			<div>
-				<p style="margin-top: 40px; font-size: 18px">課程售價：<b style="color:red;">免費</b></p>
-			</div>
-		</div>
-		<div class="card-footer">
-			
-			<small style="font-size: 18px;" >課程時間:${listcourse.courseLength}分鐘</small> <br> 
-			<small style="font-size: 18px;color:#f2fef1;" class="" alt="${listcourse.courseID}">購買人數:0人</small>
-		</div>
-	</div>
-	</div>
-	</c:if>
 	</c:forEach>
 	<!--for each  -->
 
