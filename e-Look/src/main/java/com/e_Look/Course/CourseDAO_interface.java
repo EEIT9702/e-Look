@@ -24,5 +24,5 @@ public interface CourseDAO_interface {
 	public void changeStatustoEditor(Integer courseID);
 	public void changeStatustoOnline(Integer courseID);
 	public void changeStatustoFund(Integer courseID);
-	public CourseVO findByOnlinePrimaryKey(Integer courseID);
+	
 }
