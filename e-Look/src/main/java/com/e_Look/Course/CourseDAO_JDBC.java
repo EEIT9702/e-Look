@@ -885,6 +885,18 @@ public class CourseDAO_JDBC implements CourseDAO_interface {
 
 
 
+	@Override
+	public CourseVO findByOnlinePrimaryKey(Integer courseID) {
+		return null;
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+
+
 
 
 

@@ -118,7 +118,7 @@ public class BuyCourseService {
 					count = courseIDMap.get(key);
 				}
 			}
-			cVO.add(cdao.findByPrimaryKey(topBought));
+			cVO.add(cdao.findByOnlinePrimaryKey(topBought));
 			courseIDMap.remove(topBought);
 		}
 		
