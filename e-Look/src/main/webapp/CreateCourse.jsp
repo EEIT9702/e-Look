@@ -1369,7 +1369,7 @@ $('#targetStudentNumber,#soldPrice').keyup(function(){
 		}
 		else{
 			$('#targetStudentNumberwarning').css( "color", "black" );
-			$('#targetStudentNumberwarning').text(("當達到開課門檻人數，講師可獲得："+parseInt($('#targetStudentNumber').val()*0.56*($('#soldPrice').val())+"元，    作為開課的資金成本")));
+			$('#targetStudentNumberwarning').text(("當達到開課門檻人數，講師可獲得："+parseInt($('#targetStudentNumber').val()*0.56*($('#soldPrice').val()))+"元，作為開課的資金成本"));
 			$('#targetStudentNumberwarning1').text("計算方式：");
 			$('#targetStudentNumberwarning2').text("(定價*募資期間7折優惠)*募資人數*(80%作為講師收益)");
 		}
