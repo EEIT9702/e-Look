@@ -434,7 +434,7 @@ a:HOVER {
 							<div class="panel-body text-center">
 								<p class="lead">
 								<p id="keyupaboutme"
-									style="word-break: break-all; word-wrap: break-word">${empty Submembervo?LoginOK.aboutme:Submembervo.aboutme}
+									style="word-break: break-all; word-wrap: break-word;font-size: 22px">${empty Submembervo?LoginOK.aboutme:Submembervo.aboutme}
 								<p></p>
 							</div>
 						</div>
@@ -446,7 +446,7 @@ a:HOVER {
 							</div>
 							<div class="panel-body text-center">
 								<p class="lead">
-								<p style="word-break: break-all; word-wrap: break-word" id="keyupskill">${empty Submembervo?LoginOK.skill:Submembervo.skill}</p>
+								<p style="word-break: break-all; word-wrap: break-word;font-size: 22px;" id="keyupskill">${empty Submembervo?LoginOK.skill:Submembervo.skill}</p>
 								<p></p>
 							</div>
 						</div>
@@ -457,7 +457,7 @@ a:HOVER {
 							</div>
 							<div class="panel-body text-center">
 								<p class="lead">
-								<p style="word-break: break-all; word-wrap: break-word" id="keyuphobby">${empty Submembervo?LoginOK.hobby:Submembervo.hobby}
+								<p style="word-break: break-all; word-wrap: break-word;font-size: 22px;" id="keyuphobby">${empty Submembervo?LoginOK.hobby:Submembervo.hobby}
 								<p></p>
 							</div>
 						</div>
@@ -471,7 +471,7 @@ a:HOVER {
 						
 							<div class=" col-md-4 " style="margin: 10px 0;">
 								<div class="form-group">
-									<label>名字</label> <input type="text" class="form-control" 
+									<label style="font-size: 18px">名字</label> <input type="text" class="form-control" 
 										id="keyupname" name="mName" value="${LoginOK.mName}">
 								</div>
 							</div>
@@ -480,7 +480,7 @@ a:HOVER {
 						<div class=" col-md-12 ">
 							<div class=" col-md-8 " style="margin: 10px 0;">
 								<div class="form-group">
-									<label>帳號(信箱)</label> <input type="text" class="form-control"
+									<label style="font-size: 18px">帳號(信箱)</label> <input type="text" class="form-control"
 										id="" name="email" value="${LoginOK.email}"<c:if test="${LoginOK.mPassword==''}">readonly</c:if>  >
 								</div>
 							</div>
@@ -489,7 +489,7 @@ a:HOVER {
 						<div class=" col-md-12 ">
 							<div class=" col-md-4 " style="margin: 10px 0;">
 								<div class="form-group input-group">
-									<label>密碼</label> <input type="password" class="form-control"
+									<label style="font-size: 18px">密碼</label> <input type="password" class="form-control"
 										id="mPassword" name="mPassword" readonly value="${LoginOK.mPassword}">
 										<span  class="input-group-btn" style="padding-top: 27px">
             <button data-toggle="modal" data-target="#ChangePassword" class="btn  btn-info reveal" type="button"  <c:if test="${LoginOK.mPassword==''}">disabled="disabled"</c:if>><i class="glyphicon glyphicon-pencil"></i></button>
@@ -509,7 +509,7 @@ a:HOVER {
 
 					<div class=" col-ms-12 " style="margin: 30px 0 10px 0;">
 						<div class="panel panel-success">
-							<div class="panel-heading">關於我</div>
+							<div class="panel-heading" style="font-size: 18px">關於我</div>
 							<div class=" form-group  form-group-textarea ">
 								<textarea id="customStyle" name="aboutme" form="formData"
 									class="form-control" data-toggle="floatLabel"
@@ -519,7 +519,7 @@ a:HOVER {
 					</div>
 					<div class=" col-ms-12 " style="margin: 20px 0;">
 						<div class="panel panel-info">
-							<div class="panel-heading">專長</div>
+							<div class="panel-heading" style="font-size: 18px">專長</div>
 							<div class=" form-group  form-group-textarea ">
 								<textarea id="customStyle1" name="skill" form="formData"
 									class="form-control" data-toggle="floatLabel"
@@ -530,7 +530,7 @@ a:HOVER {
 
 					<div class=" col-ms-12 " style="margin: 20px 0;">
 						<div class="panel panel-warning">
-							<div class="panel-heading">興趣</div>
+							<div class="panel-heading" style="font-size: 18px">興趣</div>
 							<div class=" form-group  form-group-textarea ">
 								<textarea id="customStyle2" name="hobby" form="formData"
 									class="form-control" data-toggle="floatLabel"
@@ -1001,7 +1001,7 @@ a:HOVER {
     </div>
 			<div class="modal fade" id="ChangePassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top:100px ">
 	<div class="modal-dialog" style="width: 318px;">
-		<div class="modal-content">
+		<div class="modal-content" style="font-size: 18px">
 
 			<div class="modal-header">
 				<button type="button" class="close pull-right" data-dismiss="modal" aria-hidden="true">×</button>
