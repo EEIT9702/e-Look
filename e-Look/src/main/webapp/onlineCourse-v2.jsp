@@ -1323,6 +1323,7 @@ a {
 				$.post('/e-Look/MessageController_v2',{'mContent':valueText,'memberID':$('#mbmemberID').val(),'courseID':$('#mbcourseID').val()},function(){
 					$(this).parents('#inputMessage').find('.inputMessage').val("");
 					window.location.replace(window.location.href);  
+					
 			})
 			}
 			}
