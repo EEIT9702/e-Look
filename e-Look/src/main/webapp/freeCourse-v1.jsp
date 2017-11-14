@@ -214,7 +214,7 @@ a{text-decoration:none}
 					<div class="col-md-12">
 						<div class="col-md-8 col-xs-12" style="margin-right: -12px">  
 
-							<video id="my-video" class="video-js" data-setup="{}"  controls width="924%">
+							<video id="my-video" class="video-js vjs-big-play-centered" data-setup="{}"  controls width="924%">
 							    <c:if test="${!empty courseVO.courseVideopathway}">
 								    <source src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}" type='video/mp4'>
 								</c:if>
