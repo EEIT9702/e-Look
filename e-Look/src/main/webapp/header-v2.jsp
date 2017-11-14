@@ -175,10 +175,12 @@ font-size: 18px;
 								href="<%=request.getContextPath()%>/CreateCourseCotroller"><img
 									src="<%=request.getContextPath()%>/HeaderCssJs/001-book.png"
 									height="28">我要開課</a></li>
- 							<li style="padding-top:12px" class="tt"><a -->
- 								href="<%=request.getContextPath()%>/backstage/backHome1.jsp"><img --%>
-									src="<%=request.getContextPath()%>/_Lyy/175x175bb.jpg" --%>
- 									height="28">暗黑破壞神</a></li> -->
+
+<!-- 							<li style="padding-top:12px" class="tt"><a 
+								href="<%=request.getContextPath()%>/backstage/backHome1.jsp"><img
+									src="<%=request.getContextPath()%>/_Lyy/175x175bb.jpg"
+									height="28">暗黑破壞神</a></li> -->
+
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<c:choose>

@@ -50,10 +50,9 @@ public class BuyCourseMailService {
 //		CourseDAO_JDBC cdao = new CourseDAO_JDBC();
 		List<BuyCourseVO> bcVOs = dao.getAll();
 		List<CourseVO> cVO = new LinkedList<CourseVO>();
-		//int[] cc = new int[topNum];
+		
 		HashMap<Integer, Integer> courseIDMap = new HashMap<Integer, Integer>();
 		
-		//Integer buyCourseID[] = null;
 		for(BuyCourseVO bcVO : bcVOs){
 			if(courseIDMap.containsKey(bcVO.getCourseID())) {
 				courseIDMap.replace(bcVO.getCourseID(), courseIDMap.get(bcVO.getCourseID())+1);
@@ -61,9 +60,6 @@ public class BuyCourseMailService {
 				courseIDMap.put(bcVO.getCourseID(), 1);
 			}
 		}
-		
-		//buyCourseID = new Integer[courseIDMap.size()];
-//		buyCourseID = new Integer[topNum];
 		
 		while( cVO.size()<topNum && !courseIDMap.isEmpty()) {
 			int count = 0;
@@ -74,7 +70,10 @@ public class BuyCourseMailService {
 					count = courseIDMap.get(key);
 				}
 			}
-			cVO.add(cdao.findByPrimaryKey(topBought));
+			CourseVO courseVO=cdao.findByPrimaryKey(topBought);
+			if(courseVO.getStatus()==2){
+				cVO.add(courseVO);
+			}
 			courseIDMap.remove(topBought);
 		}
 		
