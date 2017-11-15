@@ -62,6 +62,12 @@
 #reportTable>tbody td{
 	vertical-align:middle;
 }
+#reportTable>tbody td a:hover{
+	text-decoration: none;
+}
+#reportTable>tbody td a:visited{
+	text-decoration: none;
+}
 </style>
 </head>
 <body>
@@ -141,7 +147,13 @@
 		    		//product = {}
 		    		var cell1 = $('<td></td>').text(report.reportID);
 		    		var cell2 = $('<td></td>').text(report.reportContent);
-		    		var cell3 = $('<td></td>').text(report.mContent);
+		    		if(report.soldPrice == 0){
+		    			var cell3_1 = $('<a></a>').attr('target', '_blank').attr('href','<%=request.getContextPath()%>/freeCourse-v1.jsp?CourseID='+report.courseID);
+		    		}else{
+		    			var cell3_1 = $('<a></a>').attr('target', '_blank').attr('href','<%=request.getContextPath()%>/onlineCourse-v2.jsp?CourseID='+report.courseID);
+		    		}
+		    		var cell3_2 = cell3_1.text(report.mContent);
+		    		var cell3 = $('<td></td>').append(cell3_2);
 		    		var cell4 = $('<td></td>').text(report.reportTime);
 		    		if(report.status == 0){
 		    			var cell5 = $('<td></td>').text("待處理");

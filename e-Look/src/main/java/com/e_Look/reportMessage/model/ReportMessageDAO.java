@@ -47,10 +47,10 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 	private static final String SELECT_ALL_REPORT_MESSAGE =
 			"SELECT reportId, reportMessageID, reportMemberID, reportContent, reportTime, status FROM ReportMessage";
 	
-	private static final String GET_JSON = "SELECT m.messageID, m.mContent, rm.reportID, rm.reportMessageID,"
-			+ " rm.reportMemberID, rm.reportContent, rm.reportTime, rm.status"
+	private static final String GET_JSON = "SELECT m.messageID, m.mContent, m.courseID, rm.reportID, rm.reportMessageID,"
+			+ " rm.reportMemberID, rm.reportContent, rm.reportTime, rm.status, c.soldPrice"
 			+ " FROM Message m INNER JOIN ReportMessage rm ON m.messageID = "
-			+ "rm.reportMessageID WHERE rm.status=?";
+			+ "rm.reportMessageID JOIN Course c ON m.courseID = c.courseID WHERE rm.status=?";
 	
 	/*
 	private static final String SELECT_ONE_REPORT_MESSAGE =
@@ -258,13 +258,15 @@ public class ReportMessageDAO implements ReportMessageDAO_interface {
 			 while (rs.next()) {
 				 Map m1 = new HashMap();  
 				 m1.put("messageID", rs.getString(1));   
-				 m1.put("mContent", rs.getString(2));  
-				 m1.put("reportID", rs.getString(3));   
-				 m1.put("reportMessageID", rs.getString(4)); 
-				 m1.put("reportMemberID", rs.getString(5)); 
-				 m1.put("reportContent", rs.getString(6));
-				 m1.put("reportTime", rs.getString(7));
-				 m1.put("status", rs.getString(8));
+				 m1.put("mContent", rs.getString(2)); 
+				 m1.put("courseID", rs.getString(3)); 
+				 m1.put("reportID", rs.getString(4));   
+				 m1.put("reportMessageID", rs.getString(5)); 
+				 m1.put("reportMemberID", rs.getString(6)); 
+				 m1.put("reportContent", rs.getString(7));
+				 m1.put("reportTime", rs.getString(8));
+				 m1.put("status", rs.getString(9));
+				 m1.put("soldPrice", rs.getString(10));
 				 l1.add(m1);
 			 }
 			 jsonString = JSONValue.toJSONString(l1);  
