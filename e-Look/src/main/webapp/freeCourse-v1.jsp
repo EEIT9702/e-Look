@@ -1264,10 +1264,16 @@ a{text-decoration:none}
 			if(valueText==null||valueText==""){	
 				alert("請輸入留言");
 			}else{
-				$.post('/e-Look/MessageController_v2',{'mContent':valueText,'memberID':$('#mbmemberID').val(),'courseID':$('#mbcourseID').val()},function(){
-					$(this).parents('#inputMessage').find('.inputMessage').val("");
-					window.location.replace(window.location.href);  
-			})
+				$.ajax({ 
+			          type : "post", 
+			          url : "/e-Look/MessageController_v2", 
+			          data :  {'mContent':valueText,'memberID':$('#mbmemberID').val(),'courseID':$('#mbcourseID').val()},
+			          async : false, 
+			          success : function(){ 
+			        	  $(this).parents('#inputMessage').find('.inputMessage').val("");
+							window.location.replace(window.location.href);
+			          } 
+			        });
 			}
 			}
 		})

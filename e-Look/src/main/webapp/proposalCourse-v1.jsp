@@ -186,7 +186,7 @@ video::-webkit-media-controls-panel {
 					style="background-image: url('<%=request.getContextPath() %>/CourseImage?CourseID=${courseVO.courseID}')">
 					<div class="col-md-12">
 						<div class="col-md-8 col-xs-12" style="margin-right:-1px">
-							<video id="my-video" class="video-js" data-setup="{}"  controls width="924%">
+							<video id="my-video" class="video-js vjs-big-play-centered" data-setup="{}"  controls width="924%">
 							    <c:if test="${!empty courseVO.courseVideopathway}">
 								    <source src="<%=request.getContextPath()%>/${courseVO.courseVideopathway}" type='video/mp4'>
 								</c:if>
@@ -892,10 +892,16 @@ $(function(){
 			if(valueText==null||valueText==""){	
 				alert("請輸入留言");
 			}else{
-				$.post('/e-Look/MessageController_v2',{'mContent':valueText,'memberID':$('#mbmemberID').val(),'courseID':$('#mbcourseID').val()},function(){
-					$(this).parents('#inputMessage').find('.inputMessage').val("");
-					window.location.replace(window.location.href);  
-			})
+				$.ajax({ 
+			          type : "post", 
+			          url : "/e-Look/MessageController_v2", 
+			          data :  {'mContent':valueText,'memberID':$('#mbmemberID').val(),'courseID':$('#mbcourseID').val()},
+			          async : false, 
+			          success : function(){ 
+			        	  $(this).parents('#inputMessage').find('.inputMessage').val("");
+							window.location.replace(window.location.href);
+			          } 
+			        });
 			}
 			}
 		})
