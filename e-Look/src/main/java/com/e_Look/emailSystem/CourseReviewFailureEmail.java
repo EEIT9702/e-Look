@@ -27,7 +27,7 @@ public class CourseReviewFailureEmail {
         // 寄件的smtp伺服器
         String host = "smtp.gmail.com";
         // 主旨
-        String subject = "會員認證信";
+        String subject = "課程審查失敗通知";
         //內文
         String body = "親愛的"+memberVO.getmName()+"您好，\n您送審的課程:"+courseVO.getCourseName()+"，經審核後發現內容有不適當之處，以將該課程退回為草稿狀態，請至會員中心修改該課程不當之處，修改完成後請再次送審。";
  
@@ -58,7 +58,7 @@ public class CourseReviewFailureEmail {
             MimeMessage message = new MimeMessage(mailSession);
 
             // 設定寄件人                                          Java是收件人顯示寄件人的名稱
-            message.setFrom(new InternetAddress(from,"e-Look學習平台"));
+            message.setFrom(new InternetAddress(from,"e-Look線上學習網"));
 
             // 設定收件人
             message.addRecipient(Message.RecipientType.TO,

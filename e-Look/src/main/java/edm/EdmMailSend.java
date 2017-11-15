@@ -102,6 +102,7 @@ public class EdmMailSend {
             //message.addRecipient(Message.RecipientType.TO, new InternetAddress(mVO.getEmail()));
         	//改寫成固定mail,避免擾人luke710130@yahoo.com.tw
             message.addRecipient(Message.RecipientType.TO, new InternetAddress("janhsu36@gmail.com"));
+            //message.addRecipient(Message.RecipientType.TO, new InternetAddress("x6111161111@hotmail.com"));
         //}
 
         // 設定主旨
@@ -138,7 +139,7 @@ public class EdmMailSend {
         	CourseClass3 = eeVOs.get((eeVOs.size()-1)).getCourseClass3();
         }
         String event = eeVOs.get(eeVOs.size()-1).getEventName();
-        Integer discount = (int)(eeVOs.get(eeVOs.size()-1).getDiscount()*100);
+        Integer discount = (int)(eeVOs.get(eeVOs.size()-1).getDiscount()*10);
         html.append("<h2 style='width:100%;color:red;font-size:45px'>" + event
         	+ "&nbsp;活動期間，" + CourseClass1 + CourseClass2 
         	+ CourseClass3 + " 類別課程享" + discount + "折優惠！！！</h2>");
@@ -182,6 +183,7 @@ public class EdmMailSend {
         	
         	//System.out.println(mVO.getEmail() + ",寄送完成");
         	System.out.println("janhsu36@gmail.com ,寄送完成");
+        	//System.out.println("x6111161111@hotmail.com ,寄送完成");
         //}
     } catch (MessagingException | UnsupportedEncodingException mex) {
     	System.out.println(mex.getMessage());
@@ -189,6 +191,7 @@ public class EdmMailSend {
     	//for(MemberVO mVO : mVOs) {
     	//System.out.println(mVO.getEmail() + "-" + e.getMessage());
     	System.out.println("janhsu36@gmail.com-" + e.getMessage());
+    	//System.out.println("x6111161111@hotmail.com-" + e.getMessage());
     	//}
         e.printStackTrace();
         

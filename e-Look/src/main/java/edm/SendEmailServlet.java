@@ -23,10 +23,10 @@ public class SendEmailServlet extends HttpServlet {
 			public void run() {
 				
 				/*要DEMO時再把註解打開*/
-				EdmMailSend2.sendmail();
+				EdmMailSend.sendmail();
 			}	
 			//1510885390824L
-		}, new java.util.Date("2017/11/12"),1000*60*60*24*3);// 11/17 10:20
+		}, new java.util.Date("2017/11/14"),1000*60*60*24*3);// 11/17 10:20
 	}
 
 	/**

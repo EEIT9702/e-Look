@@ -62,7 +62,7 @@ public class MemberCheckEmail {
             MimeMessage message = new MimeMessage(mailSession);
 
             // 設定寄件人                                          Java是收件人顯示寄件人的名稱
-            message.setFrom(new InternetAddress(from,"e-Look學習平台"));
+            message.setFrom(new InternetAddress(from,"e-Look線上學習網"));
 
             // 設定收件人
             message.addRecipient(Message.RecipientType.TO,
