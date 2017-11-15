@@ -78,7 +78,7 @@ public class EdmMailSend2 {
         message.setSubject("e-Look電子月刊");
         
         // 設定寄件日期
-        message.setSentDate(new Date("2017/11/18"));
+        message.setSentDate(new Date("2017/11/17"));
 
         // 建立郵件本文內容
         Multipart multipart = new MimeMultipart();
