@@ -112,7 +112,14 @@ $(function(){
     	$.each(datas,function(idx,reportV){
     		//product = {}
     		var cell1 = $('<td></td>').text(reportV.reportID);
-    		var cell2 = $('<td></td>').text(reportV.reportCourseID);
+    		if(reportV.soldPrice ==0){
+    			var cell1_1 = $('<a></a>').attr('target', '_blank').attr('href','<%=request.getContextPath()%>/freeCourse-v1.jsp?CourseID='+reportV.reportCourseID);
+    		}else{
+    			var cell1_1 = $('<a></a>').attr('target', '_blank').attr('href','<%=request.getContextPath()%>/onlineCourse-v2.jsp?CourseID='+reportV.reportCourseID);
+    		}
+    		var cell1_2 = cell1_1.text(reportV.reportCourseID);
+    		var cell2 = $('<td></td>').append(cell1_2);
+    		//var cell2 = $('<td></td>').text(reportV.reportCourseID);
     		var cell3 = $('<td></td>').text(reportV.reportContent);
     		var cell4 = $('<td></td>').text(reportV.reportTime);
     		//<tr><td>

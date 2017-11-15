@@ -126,8 +126,8 @@ video::-webkit-media-controls-panel {
 	<div class="container">
 		<div style="margin: 0px auto" id="abgneBlock">
 			<ul class="list">
-				<li><video autoplay="autoplay" controls
-						src="<%=request.getContextPath()%>/img/EEIT97廣告測試用LOGO1.mp4"></video></li>				
+				<li><video autoplay="autoplay" controls muted
+						src="<%=request.getContextPath()%>/img/EEIT97(e_Look)第一版.mp4"></video></li>				
 				<c:forEach var="AdVO" items="${list}">
 					<li><img
 						src="<%=request.getContextPath()%>/adImages?adID=${AdVO.adID}" />

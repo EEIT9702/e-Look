@@ -16,16 +16,17 @@ public class SendEmailServlet extends HttpServlet {
 	java.util.Timer time = null;	
 	@Override
 	public void init() throws ServletException {
-		
+		//System.out.println(new java.util.Date(1510885390824L));
 		time= new java.util.Timer();
-		time.schedule(new java.util.TimerTask(){
+		time.scheduleAtFixedRate(new java.util.TimerTask(){
 			@Override
 			public void run() {
 				
 				/*要DEMO時再把註解打開*/
-				//EdmMailSend.sendmail();
+				EdmMailSend2.sendmail();
 			}	
-		}, new java.util.Date(2017/11/17),1000*60*60*12);
+			//1510885390824L
+		}, new java.util.Date("2017/11/12"),1000*60*60*24*3);// 11/17 10:20
 	}
 
 	/**
