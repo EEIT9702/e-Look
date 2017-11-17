@@ -101,7 +101,7 @@ public class EdmMailSend {
         //for(MemberVO mVO : mVOs) {
             //message.addRecipient(Message.RecipientType.TO, new InternetAddress(mVO.getEmail()));
         	//改寫成固定mail,避免擾人luke710130@yahoo.com.tw
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress("janhsu36@gmail.com"));
+            //message.addRecipient(Message.RecipientType.TO, new InternetAddress("janhsu36@gmail.com"));
             //message.addRecipient(Message.RecipientType.TO, new InternetAddress("x6111161111@hotmail.com"));
         //}
 
