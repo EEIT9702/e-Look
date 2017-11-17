@@ -63,7 +63,7 @@ public class Sender extends java.lang.Thread {
             MimeMessage message = new MimeMessage(mailSession);
             
             // 設定mail From
-            message.setFrom(new InternetAddress(from, "e-Look學習平台"));
+            message.setFrom(new InternetAddress(from, "e-Look線上學習網"));
             // 設定mail To
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(
                     to));
