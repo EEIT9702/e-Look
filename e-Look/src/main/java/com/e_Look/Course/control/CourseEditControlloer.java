@@ -66,7 +66,7 @@ public class CourseEditControlloer extends HttpServlet {
 						//System.out.println("課程募資時間已到，募資失敗的狀態");
 					}
 				}else{
-					System.out.println("募資尚未結束，不做任何動作");
+					//System.out.println("募資尚未結束，不做任何動作");
 				}
 				}
 			 //第二種取值的方式
