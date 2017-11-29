@@ -1,8 +1,6 @@
 package com.e_Look.message.model;
 
 import java.io.Serializable;
-import java.io.InputStream;
-import java.sql.Date;
 import java.sql.Timestamp;
 
 public class MessageVO implements Serializable {
@@ -98,12 +96,12 @@ public class MessageVO implements Serializable {
 	}
 
 
-	@Override
-	public String toString() {
-		return "MessageVO [messageID=" + messageID + ", mContent=" + mContent + ", mTime=" + mTime
-				+ ", messageID_response=" + messageID_response + ", memberID=" + memberID + ", courseID=" + courseID
-				+ ", bought=" + bought + ", status=" + status + "]";
-	};
+//	@Override
+//	public String toString() {
+//		return "MessageVO [messageID=" + messageID + ", mContent=" + mContent + ", mTime=" + mTime
+//				+ ", messageID_response=" + messageID_response + ", memberID=" + memberID + ", courseID=" + courseID
+//				+ ", bought=" + bought + ", status=" + status + "]";
+//	};
 	
 	
 }
