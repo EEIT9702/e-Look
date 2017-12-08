@@ -1,0 +1,22 @@
+﻿/**************非正式的假資料==>> 也就是很醜的假資料**************/
+/**************僅限資料庫還沒有正式的假資料時使用**************/
+/**************使用前請先註冊第一筆會員、新增第一筆課程資料*******/
+USE eLook
+
+INSERT INTO Message (mContent,mTime,memberID,courseID,bought,status) VALUES ('留言1',getDate(),100001,200001,0,0)
+INSERT INTO Message (mContent,mTime,memberID,courseID,bought,status) VALUES ('留言2',getDate(),100002,200002,0,0)
+INSERT INTO Message (mContent,mTime,memberID,courseID,bought,status) VALUES ('留言3',getDate(),100003,200003,0,0)
+INSERT INTO Message (mContent,mTime,memberID,courseID,bought,status) VALUES ('留言4',getDate(),100004,200004,0,0)
+INSERT INTO Message (mContent,mTime,memberID,courseID,bought,status) VALUES ('留言5',getDate(),100005,200005,0,0)
+INSERT INTO Message (mContent,mTime,memberID,courseID,bought,status) VALUES ('留言6',getDate(),100006,200006,0,0)
+
+INSERT INTO ReportMessage (reportMessageID,reportMemberID,reportContent,reportTime,status) VALUES (1001,100001,'檢舉1',getDate(),0)
+INSERT INTO ReportMessage (reportMessageID,reportMemberID,reportContent,reportTime,status) VALUES (1002,100002,'檢舉2',getDate(),0)
+INSERT INTO ReportMessage (reportMessageID,reportMemberID,reportContent,reportTime,status) VALUES (1003,100003,'檢舉3',getDate(),0)
+INSERT INTO ReportMessage (reportMessageID,reportMemberID,reportContent,reportTime,status) VALUES (1004,100004,'檢舉4',getDate(),0)
+INSERT INTO ReportMessage (reportMessageID,reportMemberID,reportContent,reportTime,status) VALUES (1005,100005,'檢舉5',getDate(),0)
+INSERT INTO ReportMessage (reportMessageID,reportMemberID,reportContent,reportTime,status) VALUES (1006,100006,'檢舉6',getDate(),0)
+INSERT INTO ReportMessage (reportMessageID,reportMemberID,reportContent,reportTime,status) VALUES (1001,100007,'檢舉7',getDate(),0)
+INSERT INTO ReportMessage (reportMessageID,reportMemberID,reportContent,reportTime,status) VALUES (1002,100001,'檢舉8',getDate(),0)
+INSERT INTO ReportMessage (reportMessageID,reportMemberID,reportContent,reportTime,status) VALUES (1003,100002,'檢舉9',getDate(),0)
+INSERT INTO ReportMessage (reportMessageID,reportMemberID,reportContent,reportTime,status) VALUES (1004,100003,'檢舉10',getDate(),0)
